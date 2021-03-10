@@ -1,0 +1,64 @@
+{
+  "id": "/mip/unicom-design/",
+  "cmd": null,
+  "cpus": 2,
+  "mem": 8196,
+  "disk": 0,
+  "instances": 1,
+  "acceptedResourceRoles": [
+    "*"
+  ],
+  "container": {
+    "type": "DOCKER",
+    "volumes": [],
+    "docker": {
+      "image": "test.mesos/mip/unicom-design/:2",
+      "network": "BRIDGE",
+      "portMappings": [
+        {
+          "containerPort": 80,
+          "hostPort": 0,
+          "servicePort": 10010,
+          "protocol": "tcp",
+          "labels": {}
+        }
+      ],
+      "privileged": false,
+      "parameters": [
+        {
+          "key": "add-host",
+          "value": "sit5.portal.unicom.local:10.0.3.156"
+        },
+        {
+          "key": "add-host",
+          "value": "sit3.portal.unicom.local:10.0.3.154"
+        }
+      ],
+      "forcePullImage": false
+    }
+  },
+  "healthChecks": [
+    {
+      "protocol": "TCP",
+      "portIndex": 0,
+      "gracePeriodSeconds": 300,
+      "intervalSeconds": 60,
+      "timeoutSeconds": 20,
+      "maxConsecutiveFailures": 3,
+      "ignoreHttp1xx": false
+    }
+  ],
+  "labels": {
+    "HAPROXY_GROUP": "mip",
+    "HAPROXY_0_VHOST": "10.124.210.86",
+    "HAPROXY_0_PATH": "-i /unicom-design/",
+    "HAPROXY_0_STICKY": "true"
+  },
+  "portDefinitions": [
+    {
+      "port": 10010,
+      "protocol": "tcp",
+      "labels": {}
+    }
+  ]
+}
