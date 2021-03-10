@@ -1,0 +1,11 @@
+node_modules/
+lib/
+es/
+dist/
+.idea/
+.DS_Store
+site/src/docs/
+site/src/demos/
+site/dist
+.DS_Store
+
