@@ -1,0 +1,169 @@
+@import "../../style/themes/index";
+@import "../../style/mixins/index";
+
+@container: ~'@{uni-prefix}-modal';
+
+.@{container} {
+  display: none;
+  width: 0px;
+  height: 0px;
+  &-show {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+  &-mask {
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1000;
+    display: block;
+    background-color: rgba(0,0,0,.45);
+    &-hidden {
+      display: none;
+    }
+  }
+  &-centered {
+    text-align: center;
+    &::before {
+      display: inline-block;
+    width: 0;
+    height: 100%;
+    vertical-align: middle;
+    content: '';
+    }
+    .@{container}-wrapper-content {
+      top: 0;
+      display: inline-block;
+      text-align: left;
+      vertical-align: middle;
+    }
+  }
+  &-wrapper {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+    overflow: auto;
+    &-content {
+      position: relative;
+      width: 511px;
+      background-color: #fff;
+      box-shadow: 0 12px 48px 16px rgba(0,0,0,0.03), 0 9px 4px 0 rgba(0,0,0,0.05), 0 6px 16px 0 rgba(0,0,0,0.08);
+      border-radius: 2px;
+      margin: 0 auto;
+      top: 100px;
+      transform-origin: 0px;
+      animation: fadein 0.3s linear;
+      &-hidden {
+        animation: fadeout 0.3s linear;
+      }
+      &-header {
+        padding: 9px 14px 9px 16px;
+        background-color: @tag-default-bg;
+        border-radius: 2px 2px 0 0;
+        position: relative;
+        &-title {
+          font-size: 16px;
+          color: rgba(0,0,0,0.85);
+        }
+        &-close {
+          position: absolute;
+          top: 9px;
+          right: 14px;
+          cursor: pointer;
+        }
+      }
+      &-body {
+        padding: 25px 54px;
+      }
+      &-methodBody {
+        padding: 42px 43px;
+        position: relative;
+        &-icon {
+          position: absolute;
+          top: 42px;
+          left: 43px;
+        }
+        &-success {
+          color: @success-color;
+        }
+        &-error {
+          color: @alert-error-icon-color;
+        }
+        &-info {
+          color: @alert-info-icon-color;
+        }
+        &-warning, &-confirm {
+          color: @alert-warning-icon-color;
+        }
+        &-title {
+          padding-left: 32px;
+          font-size: 16px;
+          line-height: 24px;
+          font-weight: bold;
+        }
+        &-content {
+          display: block;
+          margin-top: 12px;
+          margin-left: 32px;
+        }
+      }
+      &-footer {
+        text-align: right;
+        padding: 10px 54px 25px 54px;
+      }
+    }
+  }
+}
+
+@keyframes fadein {
+  0% {
+   transform: scale(0);
+   opacity: 0.0;
+  }
+  25% {
+   transform: scale(0);
+   opacity: 0.1;
+  }
+  50% {
+   transform: scale(0.1);
+   opacity: 0.3;
+  }
+  75% {
+   transform: scale(0.5);
+   opacity: 0.5;
+  }
+  100% {
+   transform: scale(1);
+   opacity: 1;
+  }
+ }
+
+ @keyframes fadeout {
+  0% {
+   transform: scale(1);
+   opacity: 1;
+  }
+  25% {
+   transform: scale(0.5);
+   opacity: 0.5;
+  }
+  50% {
+   transform: scale(0.1);
+   opacity: 0.3;
+  }
+  75% {
+   transform: scale(0);
+   opacity: 0.1;
+  }
+  100% {
+   transform: scale(0);
+   opacity: 0.0;
+  }
+ }
