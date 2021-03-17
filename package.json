@@ -23,9 +23,14 @@
     "init:commit": "npx commitizen init cz-conventional-changelog --yarn --dev --exact",
     "version": "conventional-changelog -p angular -i CHANGELOG.md -s && git add CHANGELOG.md",
     "predev": "yarn demo",
-    "demo": "npx gulp md",
-    "precommit": "union-tool run lint",
+    "demo": "npx gulp md"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "union-tool run lint",
+      "pre-push": "npm test"
+    }
+  }
   "dependencies": {
     "@types/classnames": "^2.2.11",
     "@types/enquire.js": "^2.1.2",
