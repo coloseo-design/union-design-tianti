@@ -23,7 +23,8 @@
     "init:commit": "npx commitizen init cz-conventional-changelog --yarn --dev --exact",
     "version": "conventional-changelog -p angular -i CHANGELOG.md -s && git add CHANGELOG.md",
     "predev": "yarn demo",
-    "demo": "npx gulp md"
+    "demo": "npx gulp md",
+    "precommit": "union-tool run lint",
   },
   "dependencies": {
     "@types/classnames": "^2.2.11",
@@ -56,6 +57,7 @@
     "eslint-plugin-react-hooks": "^4.2.0",
     "git-cz": "^4.7.0",
     "gulp": "^4.0.2",
+    "husky": "^5.1.3",
     "mark-twain": "^2.0.3",
     "react": "^16.13.1",
     "react-dom": "^17.0.1",
