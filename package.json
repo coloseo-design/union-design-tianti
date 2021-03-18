@@ -10,6 +10,7 @@
   "module": "es/index.js",
   "typings": "lib/index.d.ts",
   "scripts": {
+    "prepare": "husky install",
     "es": "union-tool run es",
     "lib": "union-tool run lib",
     "clean": "union-tool run clean",
@@ -25,12 +26,6 @@
     "predev": "yarn demo",
     "demo": "npx gulp md"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "union-tool run lint",
-      "pre-push": "npm test"
-    }
-  }
   "dependencies": {
     "@types/classnames": "^2.2.11",
     "@types/enquire.js": "^2.1.2",
