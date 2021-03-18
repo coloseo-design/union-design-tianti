@@ -5431,6 +5431,11 @@ https-browserify@^1.0.0:
   resolved "http://10.236.18.95:4873/https-browserify/-/https-browserify-1.0.0.tgz#ec06c10e0a34c0f2faf199f7fd7fc78fffd03c73"
   integrity sha1-7AbBDgo0wPL68Zn3/X/Hj//QPHM=
 
+husky@^5.1.3:
+  version "5.1.3"
+  resolved "http://10.236.18.95:4873/husky/-/husky-5.1.3.tgz#1a0645a4fe3ffc006c4d0d8bd0bcb4c98787cc9d"
+  integrity sha1-GgZFpP4//ABsTQ2L0Ly0yYeHzJ0=
+
 iconv-lite@0.4.24, iconv-lite@^0.4.13, iconv-lite@^0.4.24:
   version "0.4.24"
   resolved "http://10.236.18.95:4873/iconv-lite/-/iconv-lite-0.4.24.tgz#2022b4b25fbddc21d2f524974a474aafe733908b"
@@ -10343,10 +10348,10 @@ union-icons@^1.2.2:
   resolved "http://10.236.18.95:4873/union-icons/-/union-icons-1.2.2.tgz#5ddeb6e21dee7bf35b11f7eb2cd597c7934039a8"
   integrity sha512-zHdmnKfi3D7uzw/T332aSlmPxUamA21TQBHwPS4xkCF71tT1zNY91OwIrGXlm+Lr3loTOr8vUQ+uCNOIm2LOjQ==
 
-union-tool@^1.0.8:
-  version "1.0.8"
-  resolved "http://10.236.18.95:4873/union-tool/-/union-tool-1.0.8.tgz#3f95766cd3d14f03e92f15acb0d9c9958c7438ec"
-  integrity sha512-rXBe/f1gZYkt3NO8K31XteqwVBY//ucYo2gqWieYNvsiCPrfihq2jfIfJCmx+42CeSZvQftnY8N/rWtcuzTODg==
+union-tool@1.1.2:
+  version "1.1.2"
+  resolved "http://10.236.18.95:4873/union-tool/-/union-tool-1.1.2.tgz#b21453f3006422a0f3c02a66e0490f8d27a718df"
+  integrity sha512-o/Wauwt75n62VjVNGnHAVSzFojXW7sfqtY01IEFstDtXP9rVMpA0BzCyzulDxF7jl8WLE+T4hyzz6Oeng2/uGg==
   dependencies:
     "@babel/cli" "^7.8.4"
     "@babel/core" "^7.9.0"

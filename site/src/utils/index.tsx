@@ -26,6 +26,7 @@ export interface PageProps {
 }
 
 function rename(name: string, sparator = '-') {
+  /* eslint prefer-const: 0 */
   const arr = name.split(sparator).map((item) => {
     let [first, ...reset] = item;
     const codepoint = first.codePointAt(0);
@@ -39,10 +40,9 @@ function rename(name: string, sparator = '-') {
   return arr;
 }
 
-export const BasePageComponent: React.FC<PageProps> = (props) => {
+export const BasePageComponent: React.FC<PageProps> = (props: PageProps) => {
   const { name } = props;
   const componentName: string = rename(name);
-  console.log('componentName', componentName);
   const data = PageComponents[componentName];
   const CurrentComponent = DemoComponents[componentName];
   return (

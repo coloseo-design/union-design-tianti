@@ -15,11 +15,9 @@ interface MenuFCProps {
   routeConfig: object,
 }
 
-const Menus: React.FC<MenuFCProps> = (props) => {
+const Menus: React.FC<MenuFCProps> = (props: MenuFCProps) => {
   const { menus, routeConfig } = props;
-  const subMenusCls = classname('sub-menu-box', {
-    [`sub-menu-open`]: false,
-  });
+  const subMenusCls = classname('sub-menu-box');
   const menuCls = classname('menu-box');
 
   const toggleMenus = useCallback((evt: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
@@ -39,48 +37,48 @@ const Menus: React.FC<MenuFCProps> = (props) => {
     history.push(`/develop/${key}/${subKey}`);
   }, []);
 
-  const menuNodes = useMemo(() => {
-    return menus.map(item => {
-      return (
-        <div className={menuCls} key={item.title}>
-          <div className="menu" onClick={toggleMenus} style={{ padding: '0px 30px' }}>
-            <div className="title">
-              {item.title}
-            </div>
-            <div className="icon">
-              <Icon type="down" />
-            </div>
-          </div>
-          <div className={subMenusCls}>
-            {
-              (item.children || []).map(sub => {
-                const selected = routeConfig.path === `/develop/${item.key}/${sub.key}`;
-                const color = selected ? `${routeConfig.themeColor}` : 'rgba(0, 0, 0, 0.85)';
-                return (
-                  <div className='menu' key={sub.title} style={{ padding: '0px 30px 0px 45px' }}  onClick={onRouteChange(item.key, sub.key)}>
-                    {/* <Link style={{ color }} className="title" to={`/pages/${item.key}/${sub.key}`} >
-                      {sub.title}
-                    </Link> */}
-                    <div style={{ color }} className="title">
-                      {sub.title}
-                    </div>
-                  </div>
-                )
-              })
-            }
-          </div>
+  const menuNodes = useMemo(() => menus.map((item) => (
+    <div className={menuCls} key={item.title}>
+      <div
+        className="menu"
+        onClick={toggleMenus}
+        style={{ padding: '0px 30px' }}
+      >
+        <div className="title">
+          {item.title}
         </div>
-      );
-    });
-  }, [menus, menuCls, routeConfig]);
+        <div className="icon">
+          <Icon type="down" />
+        </div>
+      </div>
+      <div className={subMenusCls}>
+        {
+          (item.children || []).map((sub) => {
+            const selected = routeConfig.path === `/develop/${item.key}/${sub.key}`;
+            const color = selected ? `${routeConfig.themeColor}` : 'rgba(0, 0, 0, 0.85)';
+            return (
+              <div
+                className="menu"
+                key={sub.title}
+                style={{ padding: '0px 30px 0px 45px' }}
+                onClick={onRouteChange(item.key, sub.key)}
+              >
+                <div style={{ color }} className="title">
+                  {sub.title}
+                </div>
+              </div>
+            );
+          })
+        }
+      </div>
+    </div>)), [menus, menuCls, routeConfig]);
   return (
     <div className="g-menus">
       {
         menuNodes
       }
     </div>
-  )
+  );
 };
-
 
 export default Menus;

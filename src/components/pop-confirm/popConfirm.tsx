@@ -1,20 +1,15 @@
 import React from 'react';
-import Pop, { PopProps} from './pop';
+import Pop, { PopProps } from './pop';
 
-
-class PopConfim extends React.Component<PopProps> {
-  render() {
-    const { trigger } = this.props;
-    return (
-      <Pop
-        {...this.props}
-        componentType="pop-confirm"
-        trigger={trigger ? trigger : 'click'}
-      />
-    );
-  }
-}
+const PopConfim: React.FC<PopProps> = (props: PopProps) => {
+  const { trigger = 'click', ...rest } = props;
+  return (
+    <Pop
+      {...rest}
+      componentType="pop-confirm"
+      trigger={trigger}
+    />
+  );
+};
 
 export default PopConfim;
-
-
