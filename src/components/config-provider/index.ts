@@ -1,2 +1,2 @@
-export { ConfigConsumer,  } from './context'
+export { ConfigConsumer, withGlobalConfig } from './context';
 export type { ConfigConsumerProps } from './context';

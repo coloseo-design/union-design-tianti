@@ -229,8 +229,24 @@
 }
 // link button style
 .btn-link() {
-  .button-variant-other(@link-color, transparent, transparent);
+  @link-color: #207EEA;
+  // .button-variant-other(@link-color, transparent, transparent);
   box-shadow: none;
+  .button-color(@link-color; transparent; transparent);
+  &:hover,
+  &:focus {
+    .button-color(
+      ~`colorPalette('@{link-color}', 5) `; transparent; ~`colorPalette('@{btn-primary-bg}', 5)
+        `
+    );
+  }
+  &:active,
+  &.active {
+    .button-color(
+      ~`colorPalette('@{link-color}', 7) `; transparent; ~`colorPalette('@{btn-primary-bg}', 7)
+        `
+    );
+  }
   &:hover,
   &:focus,
   &:active {
