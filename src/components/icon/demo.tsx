@@ -1,5 +1,4 @@
 import React from 'react';
-/* eslint import/no-extraneous-dependencies: 0 */
 import * as icons from 'union-icons';
 import Icon from './index';
 import './demo.less';
