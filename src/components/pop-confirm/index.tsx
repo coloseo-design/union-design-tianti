@@ -1,2 +1,3 @@
-export { default } from './popConfirm';
 import './styles/index.less';
+
+export { default } from './popConfirm';

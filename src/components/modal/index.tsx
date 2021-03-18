@@ -1,2 +1,3 @@
-export { default } from './modal';
 import './styles/index.less';
+
+export { default } from './modal';

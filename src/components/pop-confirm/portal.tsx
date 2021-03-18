@@ -7,6 +7,7 @@ export interface PortalProps {
 
 class Portal extends React.Component<PortalProps> {
   root: HTMLDivElement;
+
   constructor(props: PortalProps) {
     super(props);
     // root为根目录
@@ -20,18 +21,20 @@ class Portal extends React.Component<PortalProps> {
   componentDidMount() {
     const { getPopupContainer = () => document.body } = this.props;
     const popupContaier = getPopupContainer();
-    popupContaier && popupContaier.appendChild(this.root);
+    popupContaier?.appendChild(this.root);
   }
+
   componentWillUnmount() {
     const { getPopupContainer = () => document.body } = this.props;
     const popupContaier = getPopupContainer();
-    popupContaier && popupContaier.removeChild(this.root);
+    popupContaier?.removeChild(this.root);
   }
+
   render() {
     const { children } = this.props;
     return ReactDOM.createPortal(
       children,
-      this.root
+      this.root,
     );
   }
 }

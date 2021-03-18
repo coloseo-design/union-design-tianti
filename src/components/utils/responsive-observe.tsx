@@ -17,7 +17,7 @@ export const responsiveMap: BreakpointMap = {
 };
 
 let subscribers: Array<SubscribeFunc> = [];
-
+/* eslint no-unused-vars: 0 */
 type SubscribeFunc = (pointMap: BreakpointMap) => void;
 
 let screen: BreakpointMap = {};
@@ -41,34 +41,33 @@ const responsiveObserve = {
     listener(screen);
   },
   unsubscribe(listener: SubscribeFunc) {
-    subscribers = subscribers.filter(item => item !== listener);
+    subscribers = subscribers.filter((item) => item !== listener);
     if (!subscribers.length) {
       this.unregister();
     }
   },
   unregister() {
-    (Object.keys(responsiveMap) as Breakpoint[]).map((screen: Breakpoint) =>
-      enquire.unregister(responsiveMap[screen]!),
-    );
+    (Object.keys(responsiveMap) as Breakpoint[])
+      .map((screenItem: Breakpoint) => enquire.unregister(responsiveMap[screenItem]!));
   },
-  register() {
-    (Object.keys(responsiveMap) as Breakpoint[]).forEach((screen: Breakpoint) => {
-      enquire.register(responsiveMap[screen]!, {
+  register() : void {
+    (Object.keys(responsiveMap) as Breakpoint[]).forEach((screenItem: Breakpoint) => {
+      enquire.register(responsiveMap[screenItem]!, {
         match: () => {
           const pointMap = {
-            [screen]: true,
+            [screenItem]: true,
           };
           this.dispatch(pointMap);
         },
         unmatch: () => {
           const pointMap = {
-            [screen]: false,
+            [screenItem]: false,
           };
           this.dispatch(pointMap);
-        }
+        },
       });
     });
-  }
+  },
 };
 
 export default responsiveObserve;

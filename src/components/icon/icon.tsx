@@ -20,7 +20,7 @@ const Icon = (props: Omit<IconProps, 'ref'>, ref: React.ForwardedRef<HTMLSpanEle
       spin: true,
     });
   }
-  return <ReactIcon {...rest} ref={ref} name={type} />
-}
+  return <ReactIcon {...rest} ref={ref} name={type} />;
+};
 
 export default React.forwardRef(Icon);
