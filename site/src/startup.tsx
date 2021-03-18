@@ -9,9 +9,9 @@ import {
 import { BasePageComponent } from './utils';
 import Layout, { menus } from './layout';
 
-const BaseComponent: React.FC<RouteComponentProps<any>> = (props) => {
-  const { match } = props;
-  const { name } = match.params;
+const BaseComponent: React.FC<RouteComponentProps<{}>> = (props) => {
+  /* eslint react/prop-types: 0 */
+  const { match: { params: { name } } } = props;
   return <BasePageComponent name={name} />;
 };
 
