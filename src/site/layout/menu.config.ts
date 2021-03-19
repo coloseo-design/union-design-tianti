@@ -24,7 +24,7 @@ export default [
         key: 'grid',
       },
       {
-        title: 'Layout 布局',
+        title: 'Layout 栅格',
         key: 'layout',
       },
     ],

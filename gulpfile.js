@@ -41,7 +41,7 @@ function transform(data) {
 }
 
 function markdown() {
-  return src(path.resolve('src', '**/*.md'), { base: './src/components' })
+  return src(path.resolve('src/components', '**/*.md'))
     // TODO: 可以配置
     .pipe(through2.obj(function (chunk, encoding, callback) {
       if (chunk.isBuffer()) {
@@ -51,7 +51,7 @@ function markdown() {
           content: transform(['div', data.content]),
         })
         const jsonstring = JSON.stringify(data);
-        const formatted = `
+        const formatted = `/* eslint-disable */
 export default ${jsonstring}
         `
         chunk.contents = Buffer.from(formatted);
@@ -60,21 +60,21 @@ export default ${jsonstring}
       callback(null, chunk);
     }))
     // TODO: 可以配置
-    .pipe(dest(path.resolve('site', 'src/docs')));
+    .pipe(dest(path.resolve('src', 'site/docs')));
 }
 
 const clean = (directories) => () => del(directories);
 
 function entry() {
-  return src([path.resolve('site', 'src/docs/**/*.ts'), path.resolve('site', 'src/docs/**/*.tsx')])
+  return src([path.resolve('src', 'site/docs/**/*.ts'), path.resolve('src', 'site/docs/**/*.tsx')])
   .pipe(through2.obj(function(file, encoding, callback) {
-    const content = `export { default as #{ComponentTitle} } from './#{title}/#{title}';`
+    const content = `/* eslint-disable */\nexport { default as #{ComponentTitle} } from './#{title}/#{title}';`
     const result =  content.replace(/#{title}/g, file.stem).replace(/#{ComponentTitle}/g, rename(file.stem));
     file.contents = Buffer.from(result);
     callback(null, file);
   }))
   .pipe(concat('index.ts'))
-  .pipe(dest(path.resolve('site', 'src/docs')))
+  .pipe(dest(path.resolve('src', 'site/docs')));
 }
 
 function demoEntry() {
@@ -83,14 +83,14 @@ function demoEntry() {
     const splited = file.path.split(path.sep);
     const current = splited[splited.length - 2];
     const ComponentName = rename(current);
-    const content = `export { default as #{ComponentName} } from '../../../src/components/#{title}/demo';`
+    const content = `/* eslint-disable */export { default as #{ComponentName} } from '../../components/#{title}/demo';`
     const result =  content.replace(/#{title}/g, current)
       .replace(/#{ComponentName}/g, ComponentName);
     file.contents = Buffer.from(result);
     callback(null, file);
   }))
   .pipe(concat('index.ts'))
-  .pipe(dest(path.resolve('site', 'src/demos')));
+  .pipe(dest(path.resolve('src', 'site/demos')));
 }
 
-exports.md = series([clean('site/src/docs'), markdown, entry, demoEntry]);
+exports.md = series([clean('src/site/docs'), clean('src/site/demos'), markdown, entry, demoEntry]);

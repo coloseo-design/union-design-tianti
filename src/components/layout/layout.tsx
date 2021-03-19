@@ -1,6 +1,6 @@
-import React, { Component, CSSProperties } from 'react';
-import { ConfigConsumer, ConfigConsumerProps } from './../config-provider';
+import React, { Component, CSSProperties, ReactNode } from 'react';
 import classNames from 'classnames';
+import { ConfigConsumer, ConfigConsumerProps } from '../config-provider';
 import Header from './header';
 import Content from './content';
 import Footer from './footer';
@@ -13,37 +13,38 @@ export interface LayoutProps {
   className?: string;
   /* 指定样式 */
   style?: CSSProperties;
-  children?: any;
 }
 
 class Layout extends Component<LayoutProps> {
   static defaultProps: LayoutProps = {
-    className: ''
+    className: '',
   };
 
   static Header: typeof Header;
+
   static Content: typeof Content;
+
   static Footer: typeof Footer;
+
   static Sider: typeof Sider;
 
-  constructor(props: LayoutProps) {
-    super(props);
-  }
-
   renderLayout = ({ getPrefixCls }: ConfigConsumerProps) => {
-    const { prefixCls, className, children, style } = this.props;
-    const childrenProps = React.Children.toArray(children).map(child => child.props);
-    const siders = childrenProps.filter(i => i.children === 'Sider');
+    const {
+      prefixCls, className, children, style,
+    } = this.props;
+    // eslint-disable-next-line max-len
+    const childrenProps = React.Children.toArray(children).map((child: ReactNode) => (React.isValidElement(child) ? child.props : {}));
+    const siders = childrenProps.filter((i) => i.children === 'Sider');
     const prefix = getPrefixCls('layout', prefixCls);
     const mainClass = classNames(prefix, {
       [`${prefix}-has-sider`]: siders.length > 0,
     });
-    
+
     return (
       <section className={`${className} ${mainClass}`} style={style}>
         {children}
       </section>
-    )
+    );
   }
 
   render() {
@@ -51,7 +52,7 @@ class Layout extends Component<LayoutProps> {
       <ConfigConsumer>
         {this.renderLayout}
       </ConfigConsumer>
-    )
+    );
   }
 }
 

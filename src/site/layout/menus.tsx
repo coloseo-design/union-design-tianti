@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useCallback, useMemo } from 'react';
 import classname from 'classnames';
 import Icon from '../../../src/components/icon';
