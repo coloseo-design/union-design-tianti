@@ -1,7 +1,7 @@
 import React, { Component, CSSProperties } from 'react';
-import { ConfigConsumer, ConfigConsumerProps } from './../config-provider';
 import classNames from 'classnames';
-import Icon from './../icon';
+import { ConfigConsumer, ConfigConsumerProps } from '../config-provider';
+import Icon from '../icon';
 
 export interface SiderProps {
   /* 用户自定义类前缀，默认uni-layout */
@@ -24,7 +24,7 @@ export interface SiderProps {
   onCollapse?: (collapsed: boolean) => void;
   /* 指定样式 */
   style?: CSSProperties;
-  children?: any;
+  // children?: any;
 }
 
 export interface SiderState {
@@ -39,20 +39,23 @@ class Sider extends Component<SiderProps, SiderState> {
     defaultCollapsed: false,
     theme: 'dark',
     width: 200,
-    className: ''
+    className: '',
   };
 
   constructor(props: SiderProps) {
     super(props);
     this.state = {
-      collapsed: props.collapsed || props.defaultCollapsed
+      collapsed: props.collapsed || props.defaultCollapsed,
     };
   }
 
+  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
   renderSider = ({ getPrefixCls }: ConfigConsumerProps) => {
-    const { prefixCls, className, children, style, width, collapsedWidth, theme, collapsible, onCollapse } = this.props;
+    const {
+      prefixCls, className, children, style, width, collapsedWidth, theme, collapsible, onCollapse,
+    } = this.props;
     const { collapsed } = this.state;
-    
+
     const prefix = getPrefixCls('layout-sider', prefixCls);
     const mainClass = classNames(prefix, {
       [`${prefix}-${theme}`]: theme,
@@ -62,12 +65,13 @@ class Sider extends Component<SiderProps, SiderState> {
     const onClick = () => {
       this.setState({ collapsed: !collapsed });
       if (onCollapse) {
-        onCollapse(!collapsed)
+        onCollapse(!collapsed);
       }
     };
 
+    // eslint-disable-next-line no-underscore-dangle
     const _width = collapsed ? collapsedWidth : width;
-    
+
     return (
       <aside className={`${className} ${mainClass}`} style={{ width: _width, flex: `0 0 ${_width}`, ...style }}>
         <div className={`${prefix}-children`}>
@@ -76,21 +80,21 @@ class Sider extends Component<SiderProps, SiderState> {
         {collapsedWidth && collapsible && (
           <div className={`${prefix}-trigger`} style={{ left: collapsed ? collapsedWidth : width }} onClick={onClick}>
             {collapsed
-              ? <Icon type='right' />
-              : <Icon type='left' />
-            }
+              ? <Icon type="right" />
+              : <Icon type="left" />}
           </div>
         )}
       </aside>
-    )
+    );
   }
 
+  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
   render() {
     return (
       <ConfigConsumer>
         {this.renderSider}
       </ConfigConsumer>
-    )
+    );
   }
 }
 

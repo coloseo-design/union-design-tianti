@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from 'react';
 import * as PageComponents from '../docs';
 import * as DemoComponents from '../demos';

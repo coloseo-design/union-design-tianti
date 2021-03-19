@@ -11,15 +11,9 @@
   "typings": "lib/index.d.ts",
   "scripts": {
     "postinstall": "husky install",
-    "es": "union-tool run es",
-    "lib": "union-tool run lib",
-    "clean": "union-tool run clean",
-    "lint": "union-tool run lint",
-    "less": "union-tool run less",
-    "compile": "union-tool run compile",
-    "dev": "union-tool run dev site",
-    "prebuild": "yarn demo",
-    "build": "union-tool run build site",
+    "lint": "union-tool run lint source=src/components",
+    "compile": "union-tool run compile source=src/components",
+    "dev": "union-tool run dev",
     "commit": "npx git-cz",
     "init:commit": "npx commitizen init cz-conventional-changelog --yarn --dev --exact",
     "version": "conventional-changelog -p angular -i CHANGELOG.md -s && git add CHANGELOG.md",
@@ -41,7 +35,7 @@
     "react-app-polyfill": "^2.0.0",
     "react-router-dom": "5.2.0",
     "union-icons-react": "^1.1.2",
-    "union-tool": "1.1.2"
+    "union-tool": "1.1.4"
   },
   "devDependencies": {
     "@types/react-router-dom": "^5.1.7",
