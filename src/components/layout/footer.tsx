@@ -1,21 +1,15 @@
 import React, { Component, CSSProperties } from 'react';
-import { ConfigConsumer, ConfigConsumerProps } from './../config-provider';
 import classNames from 'classnames';
+import { ConfigConsumer, ConfigConsumerProps } from '../config-provider';
 
 export interface FooterProps {
   /* 用户自定义类前缀，默认uni-layout */
   prefixCls?: string;
   /* 指定样式 */
   style?: CSSProperties;
-  children?: any;
 }
 
 class Footer extends Component<FooterProps> {
-
-  constructor(props: FooterProps) {
-    super(props);
-  }
-
   renderFooter = ({ getPrefixCls }: ConfigConsumerProps) => {
     const { prefixCls, children } = this.props;
 
@@ -23,12 +17,12 @@ class Footer extends Component<FooterProps> {
     const mainClass = classNames(prefix, {
       // [`${prefix}-bordered`]: bordered,
     });
-    
+
     return (
       <footer className={mainClass}>
         {children}
       </footer>
-    )
+    );
   }
 
   render() {
@@ -36,7 +30,7 @@ class Footer extends Component<FooterProps> {
       <ConfigConsumer>
         {this.renderFooter}
       </ConfigConsumer>
-    )
+    );
   }
 }
 
