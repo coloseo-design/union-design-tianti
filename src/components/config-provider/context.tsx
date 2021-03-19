@@ -1,7 +1,7 @@
 import React, { createContext } from 'react';
 
 export interface ConfigConsumerProps {
-  getPrefixCls?: (cls: string, customizePrefix?: string) => string;
+  getPrefixCls: (cls: string, customizePrefix?: string) => string;
 }
 
 /**

@@ -2,6 +2,6 @@
 import 'core-js/stable';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Startup from './startup';
+import Startup from './site/startup';
 
 ReactDOM.render(<Startup />, document.querySelector('#root'));

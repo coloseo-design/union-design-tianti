@@ -23,6 +23,10 @@ export default [
         title: 'Grid 栅格',
         key: 'grid',
       },
+      {
+        title: 'Layout 栅格',
+        key: 'layout',
+      },
     ],
   },
   {
