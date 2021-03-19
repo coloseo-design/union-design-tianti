@@ -287,14 +287,17 @@
 @layout-header-padding: 0 50px;
 @layout-footer-padding: 24px 50px;
 @layout-sider-background: @layout-header-background;
-@layout-trigger-height: 48px;
-@layout-trigger-background: #002140;
-@layout-trigger-color: #fff;
+@layout-sider-box-shadow: 2px 0 4px 0 rgba(147,147,147,0.35);
+@layout-trigger-height: 80px;
+@layout-trigger-width: 16px;
+@layout-trigger-border-radius: 0 20px 20px 0;
+@layout-trigger-background: #2E3343;
+@layout-trigger-color: #444A5E;
 @layout-zero-trigger-width: 36px;
 @layout-zero-trigger-height: 42px;
 // Layout light theme
-@layout-sider-background-light: #fff;
-@layout-trigger-background-light: #fff;
+@layout-sider-background-light: #E9EBF0;
+@layout-trigger-background-light: #E9EBF0;
 @layout-trigger-color-light: @text-color;
 
 // z-index list, order by `z-index`
@@ -441,10 +444,13 @@
 
 // Progress
 // --
-@progress-default-color: @processing-color;
-@progress-remaining-color: @background-color-base;
-@progress-text-color: @text-color;
+@progress-default-color: #207EEA;
+@progress-remaining-color: #E9EBF0;
+@progress-text-color: rgba(0,0,0,.35);
 @progress-radius: 100px;
+@progress-status-exception-color: #FF4D4F;
+@progress-status-success-color: #44BF30;
+
 
 // Menu
 // ---
