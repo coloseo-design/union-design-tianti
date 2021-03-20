@@ -11,7 +11,7 @@ export interface CardProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 't
   width?: number;
   height?: number;
   titleHeight?: number;
-  onClick?:React.MouseEventHandler<HTMLDivElement>;
+  onClick?: React.MouseEventHandler<HTMLDivElement>;
 }
 
 const Card: React.FC<CardProps> = (props: CardProps) => {
