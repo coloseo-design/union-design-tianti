@@ -146,33 +146,33 @@ const Layout: React.FC<LayoutProps> = (props) => {
         <footer className="g-footer" style={{ backgroundColor: routeConfig.themeColor }}>
           <div className="item" onClick={navigateToPrev}>
             {
-                  routeConfig.pre && (
-                    <>
-                      <div>
-                        <Icon type="arrow-left" />
-                      </div>
-                      <div className="action">
-                        <div className="title">下一页</div>
-                        <div className="sub-title">{routeConfig.pre?.subTitle}</div>
-                      </div>
-                    </>
-                  )
-                }
+              routeConfig.pre && (
+                <>
+                  <div>
+                    <Icon type="arrow-left" />
+                  </div>
+                  <div className="action">
+                    <div className="title">下一页</div>
+                    <div className="sub-title">{routeConfig.pre?.subTitle}</div>
+                  </div>
+                </>
+              )
+            }
           </div>
           <div className="item" onClick={navigateToNext}>
             {
-                  routeConfig.next && (
-                    <>
-                      <div className="action">
-                        <div className="title">下一页</div>
-                        <div className="sub-title">{routeConfig.next?.subTitle}</div>
-                      </div>
-                      <div>
-                        <Icon type="arrow-right" />
-                      </div>
-                    </>
-                  )
-                }
+              routeConfig.next && (
+                <>
+                  <div className="action">
+                    <div className="title">下一页</div>
+                    <div className="sub-title">{routeConfig.next?.subTitle}</div>
+                  </div>
+                  <div>
+                    <Icon type="arrow-right" />
+                  </div>
+                </>
+              )
+            }
           </div>
         </footer>
       </div>

@@ -35,7 +35,7 @@ export interface ModalProps {
 
   content?: string | React.ReactNode,
   methodType?: string, // 代表modal.method方法（method不需要header)
-  icon?: string| React.ReactNode,
+  icon?: string | React.ReactNode,
   okCancel?: boolean, // modal提示框不需要展示 OK按钮
 }
 export interface ModalState {
@@ -215,7 +215,7 @@ class Modal extends React.Component<ModalProps, ModalState> {
                   )}
                 </div>
               )}
-              { methodType ? (
+              {methodType ? (
                 <div className={`${wrapperContent}-methodBody`}>
                   <span className={`${wrapperContent}-methodBody-icon`} style={{ transform: `raote(${methodType === 'info' ? '180deg' : '0deg'})` }}>
                     {icon && React.isValidElement(icon) ? icon : <Icon type={icon && typeof icon === 'string' ? icon : IconMapping[methodType]} className={iconStyle} style={{ fontSize: 24 }} />}
