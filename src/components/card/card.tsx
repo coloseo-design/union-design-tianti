@@ -9,9 +9,9 @@ export interface CardProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 't
   title?: React.ReactNode;
   children?: React.ReactNode;
   className?: string;
-  width?:number;
-  height?:number;
-  titleHeight?:number;
+  width?: number;
+  height?: number;
+  titleHeight?: number;
 }
 
 
@@ -34,18 +34,18 @@ const Card: React.FC<CardProps> = props => {
 
   prefixCls = getPrefixCls('card', prefixCls);
 
-  const titleDom = <div className={`${prefixCls}-title`} style={{height:titleHeight}}>{title}</div>;
+  const titleDom = <div className={`${prefixCls}-title`} style={{ height: titleHeight }}>{title}</div>;
   const contentDom = <div className={`${prefixCls}-content`}>{children}</div>;
 
   const cardClassName = classNames(prefixCls, className)
   const cardStyle = {
-      ...style,
-      width,
-      height,
+    ...style,
+    width,
+    height,
   }
- 
+
   return (
-    <div  className={cardClassName} style={cardStyle} {...others} >
+    <div className={cardClassName} style={cardStyle} {...others} >
       {titleDom}
       {contentDom}
     </div>
