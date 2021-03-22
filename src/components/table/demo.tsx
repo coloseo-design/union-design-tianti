@@ -46,12 +46,14 @@ const columns = [
     dataIndex: 'name',
     key: 'name',
     width: 150,
+    fixed: true,
   },
   {
     title: '年龄',
     dataIndex: 'age',
     key: 'age',
     width: 150,
+    fixed: 'left',
   },
   {
     title: '住址',
@@ -76,7 +78,7 @@ const TableDemo: React.FC<unknown> = () => (
       rowKey="key"
       bordered
       // loading
-      scroll={{ y: 200 }}
+      scroll={{ y: 200, x: 1500 }}
     />
   </div>
 );

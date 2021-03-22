@@ -4,7 +4,7 @@ import { ConfigConsumerProps, withGlobalConfig } from '../config-provider';
 import Icon from '../icon';
 
 type ColumnsAlign = 'left' | 'right' | 'center';
-
+type FixedType = 'left' | 'right';
 interface ColumnsProps {
   /** 设置列的对齐方式 */
   align?: ColumnsAlign;
@@ -15,7 +15,7 @@ interface ColumnsProps {
   /** key */
   dataIndex?: string;
   /** 固定列 */
-  fixed?: boolean|string;
+  fixed?: boolean | FixedType;
   /** key React 需要的 key，如果已经设置了唯一的 dataIndex，可以忽略这个属性 */
   key?: string;
   /** 列渲染函数 */
@@ -79,6 +79,11 @@ export default class Table extends React.Component<TableProps, TableState> {
       [`${prefix}-bordered`]: bordered,
       [`${prefix}-fixed`]: scroll.x || scroll.y,
     });
+
+    const tableStyle = {};
+    if (scroll.x) {
+      Object.assign(tableStyle, { width: scroll.x });
+    }
     return (
       <div className={`${prefix}-container`}>
         <div className={`${prefix}-container-with-spin`}>
@@ -93,7 +98,7 @@ export default class Table extends React.Component<TableProps, TableState> {
             {
               scroll.y && (
                 <div className={`${prefix}-header`}>
-                  <table className={tableCls}>
+                  <table className={tableCls} style={tableStyle}>
                     <colgroup>
                       {
                         columns.map((item) => (
@@ -119,9 +124,8 @@ export default class Table extends React.Component<TableProps, TableState> {
                 </div>
               )
             }
-
             <div className={`${prefix}-body`} style={{ maxHeight: typeof scroll.y === 'boolean' ? 0 : scroll.y, overflow: 'scroll' }}>
-              <table className={tableCls}>
+              <table className={tableCls} style={tableStyle}>
                 <colgroup>
                   {
                     columns.map((item) => (item.width ? (
@@ -169,12 +173,13 @@ export default class Table extends React.Component<TableProps, TableState> {
                               const tdCls = classnames(`${prefix}-td`, {
                                 [`${prefix}-td-${align}`]: align,
                               });
-                              let rendered: React.ReactNode = '';
+                              let rendered: React.ReactNode | string = '';
                               if (dataIndex) {
-                                rendered = data[dataIndex];
+                                // eslint-disable-next-line max-len
+                                rendered = (data as ({[key: string]: unknown}))[dataIndex] as string;
                               }
                               if (render) {
-                                rendered = render(rendered, data);
+                                rendered = render(rendered as string, data);
                               }
                               return (
                                 <td key={column.key} className={tdCls}>{rendered}</td>
