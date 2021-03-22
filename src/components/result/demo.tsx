@@ -1,6 +1,7 @@
 import React from 'react';
 import Result from './index';
 import Icon from '../icon';
+import Button from '../button';
 
 const ResultDemo: React.FC<unknown> = () => (
   <div style={{ padding: 100 }}>
@@ -9,8 +10,8 @@ const ResultDemo: React.FC<unknown> = () => (
       title="项目创建成功"
       subTitle="这是一句创建成功的描述这是一句创建成功的描述"
       extra={[
-        <button type="button" key="1">创建应用</button>,
-        <button type="button" key="2">返回列表</button>,
+        <Button type="primary" key="1">创建应用</Button>,
+        <Button key="2">返回列表</Button>,
       ]}
     />
     <Result
@@ -18,8 +19,8 @@ const ResultDemo: React.FC<unknown> = () => (
       title="项目创建失败"
       subTitle="这是一句创建成功的描述这是一句创建成功的描述"
       extra={[
-        <button type="button" key="1">创建应用</button>,
-        <button type="button" key="2">返回列表</button>,
+        <Button type="primary" key="1">创建应用</Button>,
+        <Button key="2">返回列表</Button>,
       ]}
     />
     <Result
@@ -27,8 +28,8 @@ const ResultDemo: React.FC<unknown> = () => (
       title="应用创建成功"
       subTitle="这是一句创建成功的描述这是一句创建成功的描述"
       extra={[
-        <button type="button" key="1">创建应用</button>,
-        <button type="button" key="2">返回列表</button>,
+        <Button type="primary" key="1">创建应用</Button>,
+        <Button key="2">返回列表</Button>,
       ]}
     />
     <Result
@@ -36,8 +37,8 @@ const ResultDemo: React.FC<unknown> = () => (
       title="应用创建失败"
       subTitle="这是一句创建成功的描述这是一句创建成功的描述"
       extra={[
-        <button type="button" key="1">创建应用</button>,
-        <button type="button" key="2">返回列表</button>,
+        <Button type="primary" key="1">创建应用</Button>,
+        <Button key="2">返回列表</Button>,
       ]}
     />
     <Result
@@ -45,8 +46,8 @@ const ResultDemo: React.FC<unknown> = () => (
       title="自定义icon"
       subTitle="这是一句创建成功的描述这是一句创建成功的描述"
       extra={[
-        <button type="button" key="1">创建应用</button>,
-        <button type="button" key="2">返回列表</button>,
+        <Button type="primary" key="1">创建应用</Button>,
+        <Button key="2">返回列表</Button>,
       ]}
     />
   </div>
