@@ -22,6 +22,8 @@ interface ColumnsProps {
   render?: (text: string, record: unknown) => React.ReactNode;
   /** 标题 */
   title: string;
+  /** 宽度 */
+  width: string | number;
 }
 
 interface TableProps extends ConfigConsumerProps {
@@ -61,9 +63,13 @@ interface TableState {
 export default class Table extends React.Component<TableProps, TableState> {
   render() {
     const {
-      getPrefixCls, prefixCls, columns = [], dataSource = [], rowKey,
+      getPrefixCls, prefixCls,
+      columns = [],
+      dataSource = [],
+      rowKey,
       bordered = false,
       loading = false,
+      scroll = { x: 0, y: 0, scrollToFirstRowOnChange: false },
     } = this.props;
     const prefix = getPrefixCls('table', prefixCls);
     const tableContainerCls = classnames(`${prefix}-spain-container`, {
@@ -71,6 +77,7 @@ export default class Table extends React.Component<TableProps, TableState> {
     });
     const tableCls = classnames(prefix, {
       [`${prefix}-bordered`]: bordered,
+      [`${prefix}-fixed`]: scroll.x || scroll.y,
     });
     return (
       <div className={`${prefix}-container`}>
@@ -83,58 +90,104 @@ export default class Table extends React.Component<TableProps, TableState> {
             )
           }
           <div className={tableContainerCls}>
-            <table className={tableCls}>
-              <thead>
-                <tr>
-                  {
-                    columns.map((column) => (
-                      <th key={column.key || column.dataIndex}>
-                        <span>{column.title}</span>
-                      </th>
-                    ))
-                  }
-                </tr>
-              </thead>
-              <tbody>
-                {
-                  dataSource.map((data) => {
-                    let key = '';
-                    if (rowKey && typeof rowKey === 'string') {
-                      key = (data as ({[key: string]: unknown}))[rowKey] as string;
-                    }
-                    if (rowKey && typeof rowKey === 'function') {
-                      key = rowKey(rowKey);
-                    }
-                    return (
-                      <tr key={key}>
+            {
+              scroll.y && (
+                <div className={`${prefix}-header`}>
+                  <table className={tableCls}>
+                    <colgroup>
+                      {
+                        columns.map((item) => (
+                          <col
+                            key={item.key || item.dataIndex}
+                            style={{ width: item.width, minWidth: item.width }}
+                          />
+                        ))
+                      }
+                    </colgroup>
+                    <thead>
+                      <tr>
                         {
-                          columns.map((column) => {
-                            const {
-                              align = 'left',
-                              render,
-                              dataIndex,
-                            } = column;
-                            const tdCls = classnames(`${prefix}-td`, {
-                              [`${prefix}-td-${align}`]: align,
-                            });
-                            let rendered: React.ReactNode = '';
-                            if (dataIndex) {
-                              rendered = data[dataIndex];
-                            }
-                            if (render) {
-                              rendered = render(rendered, data);
-                            }
-                            return (
-                              <td key={column.key} className={tdCls}>{rendered}</td>
-                            );
-                          })
+                          columns.map((column) => (
+                            <th key={column.key || column.dataIndex}>
+                              <span>{column.title}</span>
+                            </th>
+                          ))
                         }
                       </tr>
-                    );
-                  })
+                    </thead>
+                  </table>
+                </div>
+              )
+            }
+
+            <div className={`${prefix}-body`} style={{ maxHeight: typeof scroll.y === 'boolean' ? 0 : scroll.y, overflow: 'scroll' }}>
+              <table className={tableCls}>
+                <colgroup>
+                  {
+                    columns.map((item) => (item.width ? (
+                      <col
+                        key={item.key || item.dataIndex}
+                        style={{ width: item.width, minWidth: item.width }}
+                      />
+                    ) : null))
+                  }
+                </colgroup>
+                {
+                  !scroll.y && (
+                    <thead>
+                      <tr>
+                        {
+                          columns.map((column) => (
+                            <th key={column.key || column.dataIndex}>
+                              <span>{column.title}</span>
+                            </th>
+                          ))
+                        }
+                      </tr>
+                    </thead>
+                  )
                 }
-              </tbody>
-            </table>
+                <tbody>
+                  {
+                    dataSource.map((data) => {
+                      let key = '';
+                      if (rowKey && typeof rowKey === 'string') {
+                        key = (data as ({[key: string]: unknown}))[rowKey] as string;
+                      }
+                      if (rowKey && typeof rowKey === 'function') {
+                        key = rowKey(rowKey);
+                      }
+                      return (
+                        <tr key={key}>
+                          {
+                            columns.map((column) => {
+                              const {
+                                align = 'left',
+                                render,
+                                dataIndex,
+                              } = column;
+                              const tdCls = classnames(`${prefix}-td`, {
+                                [`${prefix}-td-${align}`]: align,
+                              });
+                              let rendered: React.ReactNode = '';
+                              if (dataIndex) {
+                                rendered = data[dataIndex];
+                              }
+                              if (render) {
+                                rendered = render(rendered, data);
+                              }
+                              return (
+                                <td key={column.key} className={tdCls}>{rendered}</td>
+                              );
+                            })
+                          }
+                        </tr>
+                      );
+                    })
+                  }
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>

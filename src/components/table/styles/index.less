@@ -57,3 +57,14 @@
 }
 
 
+.@{table-prefix-cls}-header {
+  table.@{table-prefix-cls}-fixed {
+    border-bottom: 0;
+  }
+}
+// 当出现固定头的时候, header的border-bottom& body的table的border-top设置为0
+.@{table-prefix-cls}-header + .@{table-prefix-cls}-body > table {
+  border-top: 0;
+}
+
+

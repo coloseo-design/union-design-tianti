@@ -26,6 +26,18 @@ const dataSource = [
     age: 42,
     address: '西湖区湖底公园2号',
   },
+  {
+    key: '5',
+    name: '胡彦祖2',
+    age: 42,
+    address: '西湖区湖底公园2号',
+  },
+  {
+    key: '6',
+    name: '胡彦祖2',
+    age: 42,
+    address: '西湖区湖底公园2号',
+  },
 ];
 
 const columns = [
@@ -33,11 +45,13 @@ const columns = [
     title: '姓名',
     dataIndex: 'name',
     key: 'name',
+    width: 150,
   },
   {
     title: '年龄',
     dataIndex: 'age',
     key: 'age',
+    width: 150,
   },
   {
     title: '住址',
@@ -62,6 +76,7 @@ const TableDemo: React.FC<unknown> = () => (
       rowKey="key"
       bordered
       // loading
+      scroll={{ y: 200 }}
     />
   </div>
 );
