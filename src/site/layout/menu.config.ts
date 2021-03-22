@@ -145,6 +145,10 @@ export default [
         title: 'Tabs 标签页',
         key: 'tabs',
       },
+      {
+        title: 'Statistic 统计数值',
+        key: 'statistic',
+      },
     ],
   },
   {
