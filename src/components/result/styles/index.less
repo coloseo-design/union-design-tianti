@@ -1,0 +1,54 @@
+@import '../../style/themes/index';
+
+
+@result : ~'@{uni-prefix}-result';
+
+
+.@{result}{
+
+  padding:48px 32px;
+
+  &-icon{
+    font-size: 72px;
+    text-align: center;
+  }
+
+  &-success{
+    color: #44BF30;
+  }
+
+  &-error{
+    color: #FF4D4F;
+  }
+
+  &-image{
+     height:100px;
+  }
+
+  &-title{
+    text-align: center;
+    color: rgba(0,0,0,.85);
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 32px;
+  }
+
+  &-subTitle{
+    text-align: center;
+    margin-top: 8px;
+    color: rgba(0,0,0,.45);
+  }
+
+  &-extra{
+    text-align: center;
+    margin-top: 29px;
+
+    > * {
+      margin-right: 8px;
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+}
