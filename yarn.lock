@@ -10348,10 +10348,10 @@ union-icons@^1.2.2:
   resolved "http://10.236.18.95:4873/union-icons/-/union-icons-1.2.2.tgz#5ddeb6e21dee7bf35b11f7eb2cd597c7934039a8"
   integrity sha512-zHdmnKfi3D7uzw/T332aSlmPxUamA21TQBHwPS4xkCF71tT1zNY91OwIrGXlm+Lr3loTOr8vUQ+uCNOIm2LOjQ==
 
-union-tool@1.1.4:
-  version "1.1.4"
-  resolved "http://10.236.18.95:4873/union-tool/-/union-tool-1.1.4.tgz#d7e8503f50ebf949472790c1963e6a5982517e9d"
-  integrity sha512-4cEVOyBItcQmhGdJA8GXqx39HdiwkynAKX3oYQT3+F6JAsXSMAS8JvxoNt4WHfopA0iIaR+WuBfoDUXpIf3J0A==
+union-tool@1.1.5:
+  version "1.1.5"
+  resolved "http://10.236.18.95:4873/union-tool/-/union-tool-1.1.5.tgz#51655b042b97d8733f0418d3c55c2d50e28a139f"
+  integrity sha512-AUtWlF/SaDBGULJ5eoTmW49e8cb18CvgH6ShLQ6bFkQZkAsN669dlIln9u9FR3rHdCogrAP12Ra/aXd5n5zkIA==
   dependencies:
     "@babel/cli" "^7.8.4"
     "@babel/core" "^7.9.0"
