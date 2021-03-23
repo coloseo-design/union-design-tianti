@@ -43,6 +43,7 @@ const Affix: React.FC<AffixProps> = (props: AffixProps) => {
   console.log('target', targetProp);
 
   const getOffset = () => {
+    console.log('getOffset');
     if (offsetTop === undefined && offsetBottom === undefined) {
       offsetTop = 0;
     }
@@ -52,16 +53,18 @@ const Affix: React.FC<AffixProps> = (props: AffixProps) => {
       : { top: 0, bottom: document.body.clientHeight, height: document.body.clientHeight };
     const scrolldown = placeholderRect.bottom - targetRect.bottom
     + targetDom.scrollTop + offsetBottom;
-    console.log('底部', targetDom, targetRect.bottom, targetRect.height, placeholderRect.height);
+    console.log('顶部', targetDom, targetRect.top, placeholderRect.top, targetRect.height, placeholderRect.height);
     return {
       scrollTop: offsetTop !== undefined
         ? (placeholderRect.top - targetRect.top + targetDom.scrollTop - offsetTop) : null,
       scrollBottom: offsetBottom !== undefined
       && scrolldown > 0 ? scrolldown : null,
       left: placeholderRect.left,
-      top: offsetTop !== undefined ? (targetRect.top + offsetTop) : null,
+      top: offsetTop !== undefined
+        ? (targetRect.top + offsetTop) : null,
       bottom: offsetBottom !== undefined
-        ? (targetRect.bottom - offsetBottom - placeholderRect.height) : null,
+        ? (targetRect.bottom - offsetBottom - placeholderRect.height)
+        : null,
       width: placeholderRect.width,
       height: placeholderRect.height,
     };
@@ -109,10 +112,17 @@ const Affix: React.FC<AffixProps> = (props: AffixProps) => {
     scrollFix();
   }, [targetDom]);
 
+  const rerender = () => { offset.current = getOffset(); scrollFix(); };
+
   useEffect(() => {
     console.log('渲染完毕');
+    placeholderElmentDom = placeholderRef.current;
+    window.addEventListener('scroll', rerender);
+    targetProp.addEventListener('resize', rerender);
     targetProp.addEventListener('scroll', scrollFix);
     return () => {
+      window.removeEventListener('scroll', rerender);
+      targetProp.removeEventListener('resize', rerender);
       targetProp.removeEventListener('scroll', scrollFix);
     };
   });
