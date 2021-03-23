@@ -218,12 +218,11 @@ const findChild = (AllData: any[]) => {
 export const translateDataToTree = (data: any) => {
   const parents = data.filter((value: any) => !value.parentValue);
   const childrens = data.filter((value: any) => value.parentValue);
-  // eslint-disable-next-line no-shadow
-  const translator = (parents: any, childrens: any) => {
-    parents.forEach((parent: any) => {
-      childrens.forEach((current: any, index: number) => {
+  const translator = (parentsT: any[], childrensT: any[]) => {
+    parentsT.forEach((parent: any) => {
+      childrensT.forEach((current: any, index: number) => {
         if (current.parentValue === parent.value) {
-          const temp = [...childrens];
+          const temp = [...childrensT];
           temp.splice(index, 1);
           translator([current], temp);
           // eslint-disable-next-line no-param-reassign

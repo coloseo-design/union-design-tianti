@@ -13,8 +13,12 @@ export { default as Modal } from './modal/modal';
 /* eslint-disable */
 export { default as PopConfirm } from './pop-confirm/pop-confirm';
 /* eslint-disable */
+export { default as Result } from './result/result';
+/* eslint-disable */
 export { default as Statistic } from './statistic/statistic';
 /* eslint-disable */
 export { default as Table } from './table/table';
+/* eslint-disable */
+export { default as Tree } from './tree/tree';
 /* eslint-disable */
 export { default as TreeSelect } from './tree-select/tree-select';
