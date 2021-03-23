@@ -1,3 +1,3 @@
 import './styles/index';
-export { default } from './card';
 
+export { default } from './card';
