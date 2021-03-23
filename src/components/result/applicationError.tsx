@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 const applicationError = () => (
-  <svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 121 150" preserveAspectRatio="xMidYMid meet">
+  <svg version="1.0" width="1em" height="1em" viewBox="0 0 121 150" preserveAspectRatio="xMidYMid meet">
     <g fill="#393d65">
       <path d="M29.4 147.5 c-0.5 -1.2 -2.9 -1.5 -12.9 -1.5 -10 0 -12.5 -0.3 -13.6 -1.6 -0.9 -1.1 -1 -2 -0.2 -3.2 0.8 -1.4 3.1 -1.7 13.4 -2 9.6 -0.2 12.5 -0.6 13.2 -1.7 1.7 -3.1 2.7 -1.3 2.7 5 0 6.1 -1.3 8.5 -2.6 5z" />
       <path d="M53 142.5 c0 -6.1 1.3 -8.5 2.6 -5 0.5 1.2 2.9 1.5 13.3 1.5 13 0 15.1 0.6 15.1 4.1 0 2.5 -2 2.9 -15.6 2.9 -10.4 0 -12.4 0.2 -12.4 1.5 0 0.8 -0.7 1.5 -1.5 1.5 -1.2 0 -1.5 -1.4 -1.5 -6.5z" />

@@ -50,6 +50,15 @@ const ResultDemo: React.FC<unknown> = () => (
         <Button key="2">返回列表</Button>,
       ]}
     />
+    <Result
+      status="success"
+      title="项目创建成功"
+      subTitle="这是一句创建成功的描述这是一句创建成功的描述"
+      extra={[
+        <Button type="primary" key="1">创建应用</Button>,
+        <Button key="2">返回列表</Button>,
+      ]}
+    />
   </div>
 );
 

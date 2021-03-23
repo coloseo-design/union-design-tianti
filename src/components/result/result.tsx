@@ -41,15 +41,9 @@ class Result extends React.Component<ResultProps> {
       const clazzName = classNames(prefix, className);
       return (
         <div className={clazzName} style={{ ...style }}>
-          {
-            icon ? <div className={`${prefix}-icon`}>{icon}</div> : this.renderIcon(prefix, { status })
-          }
-          {
-            title && <div className={`${prefix}-title`}>{title}</div>
-          }
-          {
-            subTitle && <div className={`${prefix}-subTitle`}>{subTitle}</div>
-          }
+          { icon ? <div className={`${prefix}-icon`}>{icon}</div> : this.renderIcon(prefix, { status })}
+          {title && <div className={`${prefix}-title`}>{title}</div>}
+          {subTitle && <div className={`${prefix}-subTitle`}>{subTitle}</div>}
           {
             extra && <div className={`${prefix}-extra`}>{extra}</div>
           }
