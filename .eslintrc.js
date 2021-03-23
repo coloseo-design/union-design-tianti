@@ -35,6 +35,8 @@ module.exports = {
     'react/no-did-update-set-state': 'off',
     'import/no-extraneous-dependencies': 'off',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
+    'linebreak-style': 'off',
+
   },
   settings: {
     'import/resolver': {
