@@ -1,0 +1,58 @@
+@import '../../style/themes/index';
+@import '../../style/mixins/index';
+
+@card-prefix-cls: ~'@{uni-prefix}-card';
+
+.@{card-prefix-cls} {
+  .reset-component();
+
+  display: inline-block;
+  border-radius: 3px;
+  box-shadow: 0 2px 4px 0 rgba(147,147,147,0.35);
+  overflow: hidden;
+
+
+  &-title {
+    border-radius:  3px  3px 0 0 ;
+    background-color: #E9EBF0;
+    min-width: 100px;
+    min-height: 36px;
+    padding: 8px 16px;
+    font-weight: bold;
+    overflow: hidden;
+
+
+
+  }
+
+  &-content {
+    border-radius:  0 0 3px  3px;
+    background-color: #F9FAFB ;
+    min-width: 100px;
+    min-height: 48px;
+    padding: 8px 16px;
+
+
+  }
+}
+
+.test{
+    display: inline-block;
+    min-width: 40px;
+    min-height: 20px;
+    background-color: green;
+    &-title {
+        border-radius: 3px  3px 0 0;
+        background-color: yellowgreen;
+        min-width: 40px;
+        min-height: 20px;
+
+      }
+
+      &-content {
+        border-radius:  0 0 3px  3px;
+        background-color: green;
+        min-width: 40px;
+        min-height: 20px;
+      }
+}

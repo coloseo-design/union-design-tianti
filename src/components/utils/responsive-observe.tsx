@@ -50,7 +50,7 @@ const responsiveObserve = {
     (Object.keys(responsiveMap) as Breakpoint[])
       .map((screenItem: Breakpoint) => enquire.unregister(responsiveMap[screenItem]!));
   },
-  register() : void {
+  register(): void {
     (Object.keys(responsiveMap) as Breakpoint[]).forEach((screenItem: Breakpoint) => {
       enquire.register(responsiveMap[screenItem]!, {
         match: () => {

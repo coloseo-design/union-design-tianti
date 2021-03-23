@@ -67,30 +67,30 @@ const clean = (directories) => () => del(directories);
 
 function entry() {
   return src([path.resolve('src', 'site/docs/**/*.ts'), path.resolve('src', 'site/docs/**/*.tsx')])
-  .pipe(through2.obj(function(file, encoding, callback) {
-    const content = `/* eslint-disable */\nexport { default as #{ComponentTitle} } from './#{title}/#{title}';`
-    const result =  content.replace(/#{title}/g, file.stem).replace(/#{ComponentTitle}/g, rename(file.stem));
-    file.contents = Buffer.from(result);
-    callback(null, file);
-  }))
-  .pipe(concat('index.ts'))
-  .pipe(dest(path.resolve('src', 'site/docs')));
+    .pipe(through2.obj(function (file, encoding, callback) {
+      const content = `/* eslint-disable */\nexport { default as #{ComponentTitle} } from './#{title}/#{title}';`
+      const result = content.replace(/#{title}/g, file.stem).replace(/#{ComponentTitle}/g, rename(file.stem));
+      file.contents = Buffer.from(result);
+      callback(null, file);
+    }))
+    .pipe(concat('index.ts'))
+    .pipe(dest(path.resolve('src', 'site/docs')));
 }
 
 function demoEntry() {
   return src('src/components/**/demo.tsx')
-  .pipe(through2.obj(function(file, encoding, callback) {
-    const splited = file.path.split(path.sep);
-    const current = splited[splited.length - 2];
-    const ComponentName = rename(current);
-    const content = `/* eslint-disable */export { default as #{ComponentName} } from '../../components/#{title}/demo';`
-    const result =  content.replace(/#{title}/g, current)
-      .replace(/#{ComponentName}/g, ComponentName);
-    file.contents = Buffer.from(result);
-    callback(null, file);
-  }))
-  .pipe(concat('index.ts'))
-  .pipe(dest(path.resolve('src', 'site/demos')));
+    .pipe(through2.obj(function (file, encoding, callback) {
+      const splited = file.path.split(path.sep);
+      const current = splited[splited.length - 2];
+      const ComponentName = rename(current);
+      const content = `/* eslint-disable */export { default as #{ComponentName} } from '../../components/#{title}/demo';`
+      const result = content.replace(/#{title}/g, current)
+        .replace(/#{ComponentName}/g, ComponentName);
+      file.contents = Buffer.from(result);
+      callback(null, file);
+    }))
+    .pipe(concat('index.ts'))
+    .pipe(dest(path.resolve('src', 'site/demos')));
 }
 
 exports.md = series([clean('src/site/docs'), clean('src/site/demos'), markdown, entry, demoEntry]);
