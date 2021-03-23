@@ -1,9 +1,12 @@
 import React from 'react';
 import classNames from 'classnames';
-import { ConfigConsumer, ConfigConsumerProps } from '../config-provider';
 import Icon from '../icon';
-import Button, { BaseButtonProps } from '../button/button';
 import Portal from '../pop-confirm/portal';
+import Button, { BaseButtonProps } from '../button/button';
+import { ConfigConsumer, ConfigConsumerProps } from '../config-provider';
+import {
+  renderMethod, success, error, info, warning, confirm, ModalMethodProps,
+} from './method';
 
 export interface ModalProps {
   title?: React.ReactNode | string
@@ -35,7 +38,7 @@ export interface ModalProps {
 
   content?: string | React.ReactNode,
   methodType?: string, // 代表modal.method方法（method不需要header)
-  icon?: string | React.ReactNode,
+  icon?: string| React.ReactNode,
   okCancel?: boolean, // modal提示框不需要展示 OK按钮
 }
 export interface ModalState {
@@ -55,7 +58,21 @@ const IconMapping: MappString = {
   info: 'exclamation-circle',
 };
 
-class Modal extends React.Component<ModalProps, ModalState> {
+class Modal extends React.Component<ModalProps, ModalState, ModalMethodProps> {
+  static info: (props: ModalMethodProps) => void;
+
+  static success: (props: ModalMethodProps) => void;
+
+  static error: (props: ModalMethodProps) => void;
+
+  static warning: (props: ModalMethodProps) => void;
+
+  static confirm: (props: ModalMethodProps) => void;
+
+  // state: ModalState = {
+  //   visible: this.props.visible || false,
+  //   modalTransition: false,
+  // }
   constructor(props: ModalProps) {
     super(props);
     const { visible } = props;
@@ -66,10 +83,10 @@ class Modal extends React.Component<ModalProps, ModalState> {
   }
 
   componentDidMount() {
-    document.onkeydown = (ev: KeyboardEvent) => {
+    document.onkeydown = (evt: KeyboardEvent) => {
       const { onCancel, keyboard = true, methodType } = this.props;
-      if (ev.keyCode === 27 && keyboard && !methodType) {
-        onCancel && onCancel(ev);
+      if (evt.key === 'Escape' && keyboard && !methodType) {
+        onCancel && onCancel(evt);
       }
     };
   }
@@ -98,19 +115,6 @@ class Modal extends React.Component<ModalProps, ModalState> {
       onCancel && onCancel(e);
     } else {
       this.setState({ modalTransition: true });
-      const timer = setTimeout(() => {
-        clearTimeout(timer);
-        this.setState({ modalTransition: false, visible: false });
-      }, 300);
-    }
-  }
-
-  handleOk = (e: React.MouseEvent<HTMLElement>) => {
-    const { onOk, methodType } = this.props;
-    if (onOk && !methodType) {
-      onOk && onOk(e);
-    } else {
-      this.setState({ modalTransition: true });
       setTimeout(() => {
         this.setState({ modalTransition: false, visible: false });
       }, 300);
@@ -131,6 +135,18 @@ class Modal extends React.Component<ModalProps, ModalState> {
     }
   }
 
+  handleOk = (e: React.MouseEvent<HTMLElement>) => {
+    const { onOk, methodType } = this.props;
+    if (onOk && !methodType) {
+      onOk && onOk(e);
+    } else {
+      this.setState({ modalTransition: true });
+      setTimeout(() => {
+        this.setState({ modalTransition: false, visible: false });
+      }, 300);
+    }
+  }
+
   renderModal = ({ getPrefixCls }: ConfigConsumerProps) => {
     const {
       prefixCls,
@@ -138,15 +154,15 @@ class Modal extends React.Component<ModalProps, ModalState> {
       children,
       title,
       footer,
-      style = {},
+      style,
       bodyStyle,
-      cancelText = '退出',
+      cancelText,
       closable = true,
       closeIcon,
       confirmLoading,
       mask = true,
-      maskStyle = {},
-      okText = '确定',
+      maskStyle,
+      okText,
       okType = 'primary',
       width = 511,
       zIndex = 1000,
@@ -160,12 +176,13 @@ class Modal extends React.Component<ModalProps, ModalState> {
       getPopupContainer,
     } = this.props;
     const { visible, modalTransition } = this.state;
-    const prefix = getPrefixCls!('modal', prefixCls);
+    const prefix = getPrefixCls('modal', prefixCls);
     const container = classNames(prefix, className, {
       [`${prefix}-show`]: visible,
     });
     const maskCalss = classNames(`${prefix}-mask`, {
       [`${prefix}-mask-hidden`]: !mask,
+      [`${prefix}-mask-transition`]: modalTransition,
     });
     const wrapper = classNames(`${prefix}-wrapper`, wrapClassName, {
       [`${prefix}-centered`]: centered,
@@ -173,25 +190,12 @@ class Modal extends React.Component<ModalProps, ModalState> {
     const wrapperContent = classNames(`${prefix}-wrapper-content`, {
       [`${prefix}-wrapper-content-hidden`]: modalTransition,
     });
-    const iconStyle = classNames(`${wrapper}-content-methodBody-${methodType}`);
+    const iconStyle = classNames(`${prefix}-wrapper-content-methodBody-${methodType}`);
 
     const operationBtn = (
       <div>
-        <Button
-          {...cancelButtonProps}
-          style={{ marginRight: 8 }}
-          onClick={this.handleCancel}
-        >
-          {cancelText}
-        </Button>
-        <Button
-          {...okButtonProps}
-          type={okType}
-          onClick={this.handleOk}
-        >
-          {confirmLoading && <Icon type="loading" />}
-          {okText}
-        </Button>
+        <Button {...cancelButtonProps} style={{ marginRight: 8 }} onClick={this.handleCancel}>{cancelText || '退出'}</Button>
+        <Button {...okButtonProps} type={okType} loading={confirmLoading} onClick={this.handleOk}>{okText || '确定'}</Button>
       </div>
     );
 
@@ -205,19 +209,22 @@ class Modal extends React.Component<ModalProps, ModalState> {
               style={{ ...style, width }}
               onClick={(evt: React.MouseEvent<HTMLDivElement, MouseEvent>) => evt.stopPropagation()}
             >
-              {!methodType && (
+              {!methodType
+                && (
                 <div className={`${wrapperContent}-header`}>
                   <div className={`${wrapperContent}-header-title`}>{title}</div>
-                  {closable && (
+                  {closable
+                    && (
                     <div className={`${wrapperContent}-header-close`} onClick={this.handleCancel}>
                       {closeIcon || <Icon type="close" style={{ fontSize: 16 }} />}
                     </div>
-                  )}
+                    )}
                 </div>
-              )}
+                )}
+
               {methodType ? (
                 <div className={`${wrapperContent}-methodBody`}>
-                  <span className={`${wrapperContent}-methodBody-icon`} style={{ transform: `raote(${methodType === 'info' ? '180deg' : '0deg'})` }}>
+                  <span className={`${wrapperContent}-methodBody-icon`} style={{ transform: methodType === 'info' ? 'rotate(180deg)' : 'rotate(0deg)' }}>
                     {icon && React.isValidElement(icon) ? icon : <Icon type={icon && typeof icon === 'string' ? icon : IconMapping[methodType]} className={iconStyle} style={{ fontSize: 24 }} />}
                   </span>
                   <span className={`${wrapperContent}-methodBody-title`}>{title}</span>
@@ -226,17 +233,21 @@ class Modal extends React.Component<ModalProps, ModalState> {
               ) : (
                 <div className={`${wrapperContent}-body`} style={bodyStyle}>{children}</div>
               )}
-              {footer !== null && (
+
+              {footer !== null
+                && (
                 <div className={`${wrapperContent}-footer`}>
                   {footer || operationBtn}
                 </div>
-              )}
-              {methodType && (
+                )}
+              {
+                methodType && (
                 <div className={`${wrapperContent}-footer`}>
                   {methodType !== 'confirm' && <Button type="primary" onClick={this.handleCancel}>知道了</Button>}
                   {methodType === 'confirm' && operationBtn}
                 </div>
-              )}
+                )
+              }
             </div>
           </div>
         </div>
@@ -252,5 +263,10 @@ class Modal extends React.Component<ModalProps, ModalState> {
     );
   }
 }
+Modal.success = (props: ModalMethodProps) => renderMethod(success(props));
+Modal.info = (props: ModalMethodProps) => renderMethod(info(props));
+Modal.error = (props: ModalMethodProps) => renderMethod(error(props));
+Modal.warning = (props: ModalMethodProps) => renderMethod(warning(props));
+Modal.confirm = (props: ModalMethodProps) => renderMethod(confirm(props));
 
 export default Modal;
