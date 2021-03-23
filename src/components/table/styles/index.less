@@ -1,0 +1,70 @@
+@import '../../style/themes/index';
+@import '../../style/mixins/index';
+
+@table-prefix-cls: ~'@{uni-prefix}-table';
+
+@td-aligns: left, right, center;
+
+
+// loading动画效果
+.@{table-prefix-cls}-container-with-spin {
+  position: relative;
+  & > .@{table-prefix-cls}-spin {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+// 表格遮罩
+.@{table-prefix-cls}-spain-container-blur {
+  opacity: .5;
+  user-select: none;
+  pointer-events: none;
+}
+// 表格基础样式
+.@{table-prefix-cls} {
+  width: 100%;
+  td, th {
+    padding: 12px 8px;
+    overflow-wrap: break-word;
+    border-bottom: 1px solid #e8e8e8;
+  }
+  th {
+    color: rgba(0, 0, 0, 0.85);
+    font-weight: 500;
+    background: #fafafa;
+    transition: background 0.3s ease;
+  }
+  td {
+    transition: all 0.3s, border 0s;
+  }
+  tr:hover>td {
+    background: #e6f7ff;
+  }
+  each(@td-aligns, {
+    &-td-@{value} {
+      text-align: @value;
+    }
+  });
+}
+
+.@{table-prefix-cls}-bordered {
+  border: 1px solid #e8e8e8;
+  td, th {
+    border-right: 1px solid #e8e8e8;
+  }
+}
+
+
+.@{table-prefix-cls}-header {
+  table.@{table-prefix-cls}-fixed {
+    border-bottom: 0;
+  }
+}
+// 当出现固定头的时候, header的border-bottom& body的table的border-top设置为0
+.@{table-prefix-cls}-header + .@{table-prefix-cls}-body > table {
+  border-top: 0;
+}
+
+

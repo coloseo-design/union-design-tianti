@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import Affix from './index';
 import Button from '../button';
 
-const Demo = () => {
+const AffixDemo = () => {
   // const [target, setTarget] = React.useState(window);
   const t = React.useRef(window);
   useEffect(() => {
@@ -92,4 +92,4 @@ const Demo = () => {
   );
 };
 
-export default Demo;
+export default AffixDemo;

@@ -1,8 +1,9 @@
+/* eslint-disable no-alert */
 import React from 'react';
 import Card from './index';
 import Icon from '../icon';
 
-const Demo = () => (
+const CardDemo = () => (
   <>
     <div style={{ margin: 20 }}>
       <Card title="card1 点我试一试" onClick={() => { alert('点击card'); }}>
@@ -62,4 +63,4 @@ const Demo = () => (
   </>
 );
 
-export default Demo;
+export default CardDemo;

@@ -160,6 +160,10 @@ export default [
         title: 'Statistic 统计数值',
         key: 'statistic',
       },
+      {
+        title: 'Tree 树形控件',
+        key: 'tree',
+      },
     ],
   },
   {

@@ -1,0 +1,123 @@
+@import "../../style/themes/index";
+@import "../../style/mixins/index";
+
+
+@tree_select: ~'@{uni-prefix}-tree-select';
+
+.@{tree_select} {
+  position: relative;
+  display: inline-block;
+  outline: 0;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  &-selection {
+    display: block;
+    width: 100%;
+    min-height: @input-height-base;
+    background: @input-bg;
+    padding: 3px @input-padding-horizontal-base;
+    border-radius: @border-radius-base;
+    position: relative;
+    border: @border-width-base @border-style-base @input-border-color;
+    outline: none;
+    transition: all 0.3s linear;
+    cursor: text;
+    &:hover {
+      border-color: @input-hover-border-color;
+    }
+    &-focus {
+      border-color: @input-hover-border-color;
+      outline: none;
+    }
+    &-placholder {
+      color: rgba(0,0,0,0.35);
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      left: 12px;
+      border: none;
+    }
+    &-tag {
+      height: 22px;
+      max-width: 100px;
+      border-radius: 3px; background: #E9EBF0;
+      display: inline-block;
+      vertical-align: middle;
+      border: 1px solid #C8CAD1;
+      margin-right: 8px;
+      padding: 0px 8px;
+      &-value {
+        display: inline-block;
+        max-width: 60px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        word-break: break-all;
+        font-size: 12px;
+        line-height: 20px;
+        padding-right: 8px;
+      }
+      &-close {
+        cursor: pointer;
+        color: #ACAFB9;
+        font-size: 12px;
+        display: inline-block;
+        vertical-align: text-top;
+      }
+    }
+  }
+  &-icon {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+  }
+  &-drop {
+    position: absolute;
+    background-color: #fff;
+    border-radius: 3px;
+    box-shadow: 0 1px 4px 1px rgba(147,147,147,0.35);
+    z-index: 1000;
+    display: none;
+    &-show {
+      display: block;
+    }
+  }
+}
+.@{tree_select} {
+  & .@{tree_select} {
+    padding-left: 28px;
+  }
+  width: 100%;
+  &-node {
+    margin: 3px 0px;
+    padding: 0px 12px;
+    height: 28px;
+    line-height: 28px;
+    &:hover {
+      background-color: @item-hover-bg;
+    }
+    &-switch {
+      display: inline-block;
+      margin-right: 8px;
+      cursor: pointer;
+    }
+    &-title {
+      display: inline-block;
+      cursor: pointer;
+      width: calc(100% - 24px);
+      padding: 0px 3px;
+      border-radius: 2px;
+      &-selected {
+        color: #B30000;
+      }
+      &-disabled {
+        cursor: not-allowed;
+        color: @disabled-color;
+      }
+    }
+  }
+
+}
