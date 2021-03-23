@@ -1,0 +1,21 @@
+@import '../../style/themes/index';
+
+
+@page-header : ~'@{uni-prefix}-page-header';
+
+.@{page-header}{
+  background-color: @tabs-card-head-background;
+  height: 36px;
+  width: 100%;
+  padding-left: 16px;
+  overflow: hidden;
+  font-size: @font-size-base;
+  font-weight: 600;
+  line-height: 36px;
+  color: rgba(0,0,0,0.85);
+
+  &-subTitle{
+    margin-left: 4px;
+    font-weight: 400;
+  }
+}
