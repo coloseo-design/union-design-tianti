@@ -34,6 +34,7 @@
     "rc-tabs": "^11.7.3",
     "react-app-polyfill": "^2.0.0",
     "react-router-dom": "5.2.0",
+    "shallowequal": "^1.1.0",
     "union-icons-react": "^1.1.2",
     "union-tool": "1.1.4"
   },

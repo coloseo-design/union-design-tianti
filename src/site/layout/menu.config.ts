@@ -30,6 +30,17 @@ export default [
     ],
   },
   {
+    title: '导航',
+    key: 'components',
+    themeColor: '#AA3FA8',
+    children: [
+      {
+        title: 'Affix 固钉',
+        key: 'affix',
+      },
+    ],
+  },
+  {
     title: '数据录入',
     key: 'components',
     themeColor: '#3B5ED9',

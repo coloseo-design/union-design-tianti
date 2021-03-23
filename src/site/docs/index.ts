@@ -1,4 +1,6 @@
 /* eslint-disable */
+export { default as Affix } from './affix/affix';
+/* eslint-disable */
 export { default as Button } from './button/button';
 /* eslint-disable */
 export { default as Card } from './card/card';
