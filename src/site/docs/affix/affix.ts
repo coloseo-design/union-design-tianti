@@ -1,0 +1,3 @@
+/* eslint-disable */
+export default {"content":{"tag":"div","children":[{"tag":"article","children":[{"tag":"h1","children":"字段和功能简单说明"},{"tag":"h2","children":"Affix"},{"tag":"table","children":[{"tag":"thead","children":[{"tag":"tr","children":[{"tag":"th","children":"属性"},{"tag":"th","children":"说明"},{"tag":"th","children":"类型"},{"tag":"th","children":"默认值"},{"tag":"th","children":"版本"}]}]},{"tag":"tbody","children":[]}]}]}]},"meta":{"category":"FunctionComponent","type":"通用","title":"Affix","subtitle":"固钉"}}
+        
