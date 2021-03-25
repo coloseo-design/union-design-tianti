@@ -48,17 +48,17 @@ class Link extends Component<LinkProps> {
       return;
     }
     const { scrollTop, scrollHeight } = document.documentElement || document.body;
-    const headerElement = document.querySelector('header');
-    const headerHeight = headerElement ? headerElement.clientHeight : 0;
+    // const headerElement = document.querySelector('header');
+    // const headerHeight = headerElement ? headerElement.clientHeight : 0;
     const { updateHref, onChange } = this.context;
     const { href = '' } = this.props;
     const element = document.querySelector(href);
     const nextElement = element?.nextElementSibling;
     const elementScrollTop = element
-      ? element.getBoundingClientRect().top + window.pageYOffset - headerHeight
+      ? element.getBoundingClientRect().top + window.pageYOffset
       : 0;
     const nextElementScrollTop = nextElement
-      ? nextElement.getBoundingClientRect().top + window.pageYOffset - headerHeight
+      ? nextElement.getBoundingClientRect().top + window.pageYOffset
       : scrollHeight;
 
     if (scrollTop >= (Math.floor(elementScrollTop))
