@@ -22,6 +22,40 @@
   user-select: none;
   pointer-events: none;
 }
+
+.@{table-prefix-cls}-container {
+  &::before, &::after {
+    content: ' ';
+    display: table;
+  }
+  &::after {
+    clear: both;
+  }
+}
+
+.@{table-prefix-cls}-item-fixed {
+  position: absolute;
+  top: 0;
+  background-color: #fff;
+  .@{table-prefix-cls} {
+    width: auto;
+  }
+  overflow: hidden;
+  &-left {
+    left: 0;
+    box-shadow: 6px 0 6px -4px rgba(0, 0, 0, 0.15);
+    .@{table-prefix-cls}-body {
+      padding-right: 0;
+      // 隐藏掉scrollbar
+      margin-right: -20px;
+    }
+  }
+  &-right {
+    box-shadow: -6px 0 6px -4px rgba(0, 0, 0, 0.15);
+    right: 0;
+  }
+}
+
 // 表格基础样式
 .@{table-prefix-cls} {
   width: 100%;
@@ -58,6 +92,12 @@
 
 
 .@{table-prefix-cls}-header {
+  // TODO: 隐藏滚动条
+  // margin-bottom: -16px;
+  padding-bottom: 0;
+  min-width: 0px;
+  opacity: 0.999;
+  overflow: scroll hidden;
   table.@{table-prefix-cls}-fixed {
     border-bottom: 0;
   }
