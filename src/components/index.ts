@@ -18,6 +18,7 @@ if (
 export { default as Affix } from './affix';
 export { default as Button } from './button';
 export { default as Card } from './card';
+export { default as Tag } from './tag';
 
 export { default as Layout } from './layout';
 export { default as Modal } from './modal';

@@ -11,5 +11,6 @@
 /* eslint-disable */export { default as Result } from '../../components/result/demo';
 /* eslint-disable */export { default as Statistic } from '../../components/statistic/demo';
 /* eslint-disable */export { default as Table } from '../../components/table/demo';
+/* eslint-disable */export { default as Tag } from '../../components/tag/demo';
 /* eslint-disable */export { default as Tree } from '../../components/tree/demo';
 /* eslint-disable */export { default as TreeSelect } from '../../components/tree-select/demo';
