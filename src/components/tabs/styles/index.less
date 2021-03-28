@@ -1,0 +1,129 @@
+@import '../../style/themes/index';
+@import '../../style/mixins/index';
+
+@tab-prefix-cls: ~'@{uni-prefix}-tabs';
+
+.@{tab-prefix-cls} {
+  .reset-component();
+
+  &-nav {
+    display: flex;
+    justify-content: flex-start;
+    position: relative;
+    height: 36px;
+  }
+
+  &-tab {
+    display: inline-block;
+    height: 32px;
+    padding: 5px 20px;
+    &-active {
+      .@{tab-prefix-cls}-title {
+        color: rgba(179,0,0,1);
+      }
+    }
+    &:hover {
+      .@{tab-prefix-cls}-title {
+        color: rgba(179,0,0,1);
+      }
+    }
+  }
+
+  &-bar {
+    position: absolute;
+    bottom: 0;
+    height: 4px;
+    background-color: rgba(179,0,0,1);
+    transition: width 500ms, left 500ms;
+  }
+
+  &-card {
+    .@{tab-prefix-cls}-nav {
+      background-color: rgba(233,235,240,1);
+      border-top: 1px solid rgba(199,202,205,1);
+      border-bottom: 1px solid rgba(199,202,205,1);
+
+      .@{tab-prefix-cls}-tab {
+        margin-top: -1px;
+        height: 36px;
+        border-top: 1px solid rgba(199,202,205,1);
+        border-bottom: 1px solid rgba(199,202,205,1);
+
+          &-active {
+            border-bottom: 1px solid rgba(249,250,251,1);
+            border-right: 1px solid rgba(199,202,205,1);
+            border-left: 1px solid rgba(199,202,205,1);
+            background-color: rgba(249,250,251,1);
+          }
+      }
+    }
+    .@{tab-prefix-cls}-bar {
+      display: none;
+    }
+  }
+
+  &-page {
+    .@{tab-prefix-cls}-nav {
+      background-color: #F9FAFB;
+      height: 40px;
+      box-shadow: 0 2px 2px 0 rgba(147,147,147,0.35);
+
+      .@{tab-prefix-cls}-tab {
+        height: 40px;
+        padding: 10px 16px;
+        position: relative;
+          &-active {
+            background-color: rgba(255,241,240,1);
+            .@{tab-prefix-cls}-title {
+              color: @text-color;
+            }
+          }
+          &:hover {
+            background-color: rgba(255,241,240,1);
+            .@{tab-prefix-cls}-title {
+              color: @text-color;
+            }
+          }
+          .@{tab-prefix-cls}-closeIcon {
+            margin-left:10px;
+            &:hover {
+              color: rgba(179,0,0,1);
+            }
+
+          }
+          .@{tab-prefix-cls}-page-fence {
+            display: inline-block;
+            position: absolute;
+            right: 0;
+            height: 24px;
+            width: 1px;
+            background-color: rgba(216,216,216,1);
+          }
+      }
+    }
+    .@{tab-prefix-cls}-bar {
+      display: none;
+    }
+  }
+
+
+
+
+}
+
+
+.a{
+  width: 100px;
+  height: 100px;
+  background-color: turquoise;
+  border: 10px solid yellow;
+  .b{
+    width: 100px;
+    height: 100px;
+    background-color: pink;
+    border: 10px solid transparent;
+    margin-top: -10px;
+  }
+}
+
+
