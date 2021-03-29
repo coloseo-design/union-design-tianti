@@ -2,6 +2,7 @@ import React from 'react';
 import classnames from 'classnames';
 import { ConfigConsumerProps, withGlobalConfig } from '../config-provider';
 import Icon from '../icon';
+import Checkbox from '../checkbox';
 
 type ColumnsAlign = 'left' | 'right' | 'center';
 type FixedType = 'left' | 'right';
@@ -31,9 +32,9 @@ interface ColumnsProps {
   key?: string;
   /** 列渲染函数 */
   // eslint-disable-next-line max-len
-  render?: (text: string, record: unknown, index: number) => React.ReactNode | RenderReturnObjectType;
+  render?: (text: React.ReactNode | string, record: unknown, index: number) => React.ReactNode | RenderReturnObjectType;
   /** 标题 */
-  title: string;
+  title: React.ReactNode;
   /** 宽度 */
   width: string | number;
 }
@@ -57,7 +58,18 @@ interface TableProps extends ConfigConsumerProps {
     /** 用户手动选择/取消选择所有行的回调 */
     onSelectAll: () => void;
     /** 选中项发生变化时的回调 */
-    onChange: () => void;
+    onChange: (selectedRowKeys: unknown[], selectedRows: unknown[]) => void;
+    /** 列宽 */
+    columnWidth?: number;
+    /** 列标题 */
+    columnTitle?: React.ReactNode;
+    /** checkbox默认设置 */
+    getCheckboxProps: (record: unknown) => {
+      disabled?: boolean;
+      name?: React.ReactNode;
+    };
+    /** 默认选中 */
+    selectedRowKeys: unknown[];
   }
   scroll: {
     /** 设置横向滚动，也可用于指定滚动区域的宽 */
@@ -70,8 +82,12 @@ interface TableProps extends ConfigConsumerProps {
 }
 
 interface TableState {
-  scrollTop: number;
-  scrollLeft: number;
+  /** 数据源 */
+  // dataSource: unknown[];
+  /** 列 */
+  // columns: ColumnsProps[];
+  /** 选中的列 */
+  selectedRowKeys: unknown[];
 }
 
 interface ColProps {
@@ -107,6 +123,19 @@ export default class Table extends React.Component<TableProps, TableState> {
     this.rightTableBodyRef = React.createRef<HTMLDivElement>();
     this.mainTableHeaderRef = React.createRef<HTMLDivElement>();
     this.mainTableBodyRef = React.createRef<HTMLDivElement>();
+    const { rowSelection: { selectedRowKeys = [] } = {} } = props;
+    this.state = {
+      selectedRowKeys: [...selectedRowKeys] || [],
+    };
+  }
+
+  componentDidUpdate(props: TableProps) {
+    const { rowSelection: { selectedRowKeys } } = this.props;
+    if (props.rowSelection.selectedRowKeys !== selectedRowKeys) {
+      this.setState({
+        selectedRowKeys,
+      });
+    }
   }
 
   // 渲染colgroup
@@ -144,17 +173,20 @@ export default class Table extends React.Component<TableProps, TableState> {
     </thead>
   );
 
-  formateDataSource = (dataSource: unknown[], columns: ColumnsProps[]): RowProps[] => {
+  rowKey = (data: unknown) => {
     const { rowKey } = this.props;
+    let key = '';
+    if (rowKey && typeof rowKey === 'string') {
+      key = (data as ({[key: string]: unknown}))[rowKey] as string;
+    }
+    if (rowKey && typeof rowKey === 'function') {
+      key = rowKey(data);
+    }
+    return key;
+  }
+
+  formateDataSource = (dataSource: unknown[], columns: ColumnsProps[]): RowProps[] => {
     const transformData = dataSource.map((data, index) => {
-      let key = '';
-      if (rowKey && typeof rowKey === 'string') {
-        key = (data as ({[key: string]: unknown}))[rowKey] as string;
-      }
-      if (rowKey && typeof rowKey === 'function') {
-        key = rowKey(data);
-      }
-      const row = { key };
       const cols = columns.map((column) => {
         const {
           align = 'left',
@@ -168,7 +200,7 @@ export default class Table extends React.Component<TableProps, TableState> {
           rendered = (data as ({[key: string]: unknown}))[dataIndex] as string;
         }
         if (render) {
-          rendered = render(rendered as string, data, index);
+          rendered = render(rendered as React.ReactNode, data, index);
         }
         const objectRendered = rendered as RenderReturnObjectType;
         let ext = {};
@@ -184,10 +216,7 @@ export default class Table extends React.Component<TableProps, TableState> {
           props: ext,
         };
       });
-      Object.assign(row, {
-        children: cols,
-      });
-      return row as RowProps;
+      return { key: this.rowKey(data), children: cols } as RowProps;
     });
     return transformData;
   }
@@ -280,9 +309,128 @@ export default class Table extends React.Component<TableProps, TableState> {
     }
   }
 
+  selectAllCheckbox = () => {
+    const {
+      dataSource,
+      rowSelection,
+    } = this.props;
+    const { selectedRowKeys } = this.state;
+    const {
+      onChange,
+      getCheckboxProps,
+      selectedRowKeys: defaultSelectdRowKeys = [],
+    } = rowSelection;
+    // 冻结不可操作的数据
+    const disabledKeys = dataSource.filter((item) => {
+      const props = getCheckboxProps(item);
+      return props.disabled && defaultSelectdRowKeys.indexOf(this.rowKey(item)) >= 0;
+    }).map(this.rowKey);
+    // 检查是否全都选中
+    const selectedAll = dataSource.reduce((composed, item) => {
+      const key = this.rowKey(item);
+      const props = getCheckboxProps(item);
+      let result = true;
+
+      if (!props.disabled) {
+        result = selectedRowKeys.indexOf(key) >= 0;
+      }
+      return result && composed;
+    }, true);
+    const someoneChecked = selectedRowKeys.length > defaultSelectdRowKeys.length;
+    // eslint-disable-next-line max-len
+    const allCheckboxProps = {
+      indeterminate: !selectedAll,
+      checked: someoneChecked,
+      onChange: (checked: boolean) => {
+        let currentSelectedRowKeys: unknown[] = [];
+        if (!selectedAll || checked) {
+          const allcheckableKeys = dataSource.filter((item) => {
+            const props = getCheckboxProps(item);
+            return !props.disabled;
+          }).map(this.rowKey);
+          currentSelectedRowKeys = allcheckableKeys;
+        }
+        // 将冻结的数据还原回去
+        const newState = {
+          selectedRowKeys: [...currentSelectedRowKeys, ...disabledKeys],
+        };
+        this.setState(newState);
+        onChange && onChange(
+          newState.selectedRowKeys,
+          dataSource.filter((item) => newState.selectedRowKeys.indexOf(this.rowKey(item)) >= 0),
+        );
+      },
+    };
+    return (<Checkbox {...allCheckboxProps} />);
+  }
+
+  /**
+   * 初始化可选择列
+   * @returns
+   */
+  selectionColumn = () => {
+    const { rowSelection = {}, dataSource } = this.props;
+    const { selectedRowKeys } = this.state;
+    const {
+      getCheckboxProps,
+      columnTitle,
+      columnWidth,
+      onChange,
+      selectedRowKeys: defaultSelectdRowKeys = [],
+    } = rowSelection;
+    return {
+      title: columnTitle || this.selectAllCheckbox(),
+      dataIndex: 'selected',
+      key: 'selected',
+      width: columnWidth || 20,
+      render: (_: unknown, record: unknown) => {
+        const props = {};
+        if (getCheckboxProps) {
+          Object.assign(props, getCheckboxProps(record));
+        }
+        const key = this.rowKey(record);
+        const index = selectedRowKeys.indexOf(key);
+        const checked = index >= 0;
+        const onCheckboxChange = (isChecked: boolean) => {
+          if (!isChecked) {
+            (checked && selectedRowKeys.splice(index, 1));
+          } else {
+            (!checked && selectedRowKeys.push(key));
+          }
+          const newSelectedRowKeys = [...selectedRowKeys];
+          this.setState({
+            selectedRowKeys: newSelectedRowKeys,
+          });
+          onChange(
+            newSelectedRowKeys,
+            dataSource.filter((item) => newSelectedRowKeys.indexOf(this.rowKey(item)) >= 0),
+          );
+        };
+        Object.assign(props, {
+          checked,
+        });
+        if (props.disabled) {
+          Object.assign(props, {
+            checked: defaultSelectdRowKeys.indexOf(key) >= 0,
+          });
+        }
+        return (
+          <Checkbox
+            {...props}
+            onChange={onCheckboxChange}
+          />
+        );
+      },
+    };
+  }
+
   renderSideTable = (position: FixedType, ref: React.RefObject<HTMLDivElement>) => {
     const {
-      columns, scroll, dataSource, bordered,
+      columns,
+      scroll,
+      dataSource,
+      bordered,
+      rowSelection,
     } = this.props;
     const prefix = this.getPrefixCls();
     const filteredColumns = this.groupColums(columns, position);
@@ -297,6 +445,9 @@ export default class Table extends React.Component<TableProps, TableState> {
 
     // eslint-disable-next-line no-nested-ternary
     const maxHeight = scroll ? (typeof scroll.y === 'boolean' ? 'auto' : scroll.y) : 'auto';
+    if (rowSelection && position === 'left') {
+      filteredColumns.unshift(this.selectionColumn());
+    }
     if (!filteredColumns.length) return null;
     return (
       <div className={tableOuterCls}>
@@ -328,6 +479,31 @@ export default class Table extends React.Component<TableProps, TableState> {
     return getPrefixCls('table', prefixCls);
   };
 
+  /**
+   * 对内容标的列进行排序
+   * @param columns
+   * @returns
+   */
+  getMainColums = (columns: ColumnsProps[]) => {
+    const { rowSelection } = this.props;
+    const all = columns.reduce<ColumnsProps[][]>((composed, item) => {
+      const [leftColumns, mainColumns, rightColumns] = composed;
+      if (item.fixed === 'left' || item.fixed === true) {
+        leftColumns.push(item);
+      } else if (item.fixed === 'right') {
+        rightColumns.push(item);
+      } else {
+        mainColumns.push(item);
+      }
+      return composed;
+    }, [[/* left  */], [/* center  */], [/* right  */]]);
+    const result = [...all[0], ...all[1], ...all[2]];
+    if (rowSelection) {
+      result.unshift(this.selectionColumn());
+    }
+    return result;
+  }
+
   render() {
     const {
       getPrefixCls,
@@ -353,6 +529,7 @@ export default class Table extends React.Component<TableProps, TableState> {
       [`${prefix}-fixed`]: scroll && (scroll.x || scroll.y),
     });
 
+    const mainColumns = columns.slice();
     // eslint-disable-next-line no-nested-ternary
     const maxHeight = scroll ? (typeof scroll.y === 'boolean' ? 'auto' : scroll.y) : 'auto';
     return (
@@ -370,7 +547,11 @@ export default class Table extends React.Component<TableProps, TableState> {
               {
                 // 固定头
                 this.renderFixedHeader(
-                  prefix, columns, tableStyle, this.mainTableHeaderRef, this.onScroll,
+                  prefix,
+                  this.getMainColums(columns),
+                  tableStyle,
+                  this.mainTableHeaderRef,
+                  this.onScroll,
                 )
               }
               <div
@@ -380,12 +561,12 @@ export default class Table extends React.Component<TableProps, TableState> {
                 ref={this.mainTableBodyRef}
               >
                 <table className={tableCls} style={tableStyle}>
-                  {this.renderColgroup(columns)}
+                  {this.renderColgroup(this.getMainColums(columns))}
                   {
-                    !scroll || scroll.y === 0 ? this.renderHeader(columns) : null
+                    !scroll || scroll.y === 0 ? this.renderHeader(mainColumns) : null
                   }
                   {
-                    this.renderBody(prefix, columns, dataSource)
+                    this.renderBody(prefix, this.getMainColums(columns), dataSource)
                   }
                 </table>
               </div>

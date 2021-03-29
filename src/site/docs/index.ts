@@ -1,9 +1,9 @@
 /* eslint-disable */
 export { default as Button } from './button/button';
 /* eslint-disable */
-export { default as Checkbox } from './checkbox/checkbox';
-/* eslint-disable */
 export { default as Card } from './card/card';
+/* eslint-disable */
+export { default as Checkbox } from './checkbox/checkbox';
 /* eslint-disable */
 export { default as Icon } from './icon/icon';
 /* eslint-disable */

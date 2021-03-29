@@ -221,6 +221,17 @@ const data = [
   },
 ];
 
+const rowSelection = {
+  onChange: (selectedRowKeys, selectedRows) => {
+    console.log(`selectedRowKeys: ${selectedRowKeys}`, selectedRowKeys, 'selectedRows: ', selectedRows);
+  },
+  getCheckboxProps: (record) => ({
+    disabled: record.name === 'Jim Red', // Column configuration not to be checked
+    name: record.name,
+  }),
+  selectedRowKeys: ['4'],
+};
+
 const TableDemo: React.FC<unknown> = () => (
   <div style={{ padding: 32, background: '#fff' }}>
     <div>
@@ -252,6 +263,18 @@ const TableDemo: React.FC<unknown> = () => (
       <h4>合并行列</h4>
       <div>
         <Table columns={spanColumns} dataSource={data} rowKey="key" bordered />
+      </div>
+    </div>
+    <div>
+      <h4>可选择行</h4>
+      <div>
+        <Table rowSelection={rowSelection} columns={columns} dataSource={data} rowKey="key" scroll={{ y: 200, x: 1500 }} />,
+      </div>
+    </div>
+    <div>
+      <h4>可编辑行</h4>
+      <div>
+        <Table rowSelection={rowSelection} columns={columns} dataSource={data} rowKey="key" scroll={{ y: 200, x: 1500 }} />,
       </div>
     </div>
   </div>
