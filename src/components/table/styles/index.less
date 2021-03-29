@@ -73,8 +73,8 @@
   td {
     transition: all 0.3s, border 0s;
   }
-  tr:hover>td {
-    background: #e6f7ff;
+  tr:hover>td, .@{table-prefix-cls}-row-hover>td {
+    background: #FFF1F0;
   }
   each(@td-aligns, {
     &-td-@{value} {

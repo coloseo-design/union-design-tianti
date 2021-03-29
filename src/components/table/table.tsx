@@ -88,6 +88,7 @@ interface TableState {
   // columns: ColumnsProps[];
   /** 选中的列 */
   selectedRowKeys: unknown[];
+  selectedRowKey: string,
 }
 
 interface ColProps {
@@ -126,6 +127,7 @@ export default class Table extends React.Component<TableProps, TableState> {
     const { rowSelection: { selectedRowKeys = [] } = {} } = props;
     this.state = {
       selectedRowKeys: [...selectedRowKeys] || [],
+      selectedRowKey: '',
     };
   }
 
@@ -221,14 +223,33 @@ export default class Table extends React.Component<TableProps, TableState> {
     return transformData;
   }
 
+  onMouseOver = (rowKey: string) => () => {
+    this.setState({
+      selectedRowKey: rowKey,
+    });
+  }
+
+  onMouseOut = () => {
+    this.setState({
+      selectedRowKey: '',
+    });
+  }
+
   // 渲染表内容
   renderBody = (
     prefix: string,
     columns: ColumnsProps[],
     dataSource: unknown[],
   ) => {
+    const { selectedRowKey } = this.state;
     const results = this.formateDataSource(dataSource, columns).map((row) => (
-      <tr key={row.key} data-tr-key={row.key}>
+      <tr
+        key={row.key}
+        data-tr-key={row.key}
+        onMouseOver={this.onMouseOver(row.key)}
+        onMouseOut={this.onMouseOut}
+        className={classnames({ [`${prefix}-row-hover`]: row.key === selectedRowKey })}
+      >
         {
           row.children.map((col) => {
             const {
