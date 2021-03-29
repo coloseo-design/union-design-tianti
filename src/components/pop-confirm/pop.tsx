@@ -196,11 +196,15 @@ class PopComponent extends React.Component<PopProps, PopconfirmState> {
   };
 
   handleOut = () => {
-    const { mouseLeaveDelay = 0, trigger } = this.props;
+    const { mouseLeaveDelay = 0, trigger, onVisibleChange } = this.props;
+    const { visible } = this.state;
     if (trigger === 'hover') {
-      setTimeout(() => {
-        this.setState({ visible: false });
-      }, mouseLeaveDelay);
+      if (visible) {
+        setTimeout(() => {
+          this.setState({ visible: false });
+          onVisibleChange && onVisibleChange(false);
+        }, mouseLeaveDelay);
+      }
     }
   };
 
@@ -233,6 +237,16 @@ class PopComponent extends React.Component<PopProps, PopconfirmState> {
     this.node = node;
   }
 
+  showPop = () => {
+    const { trigger = 'hover' } = this.props;
+    trigger === 'hover' && this.setState({ visible: true });
+  };
+
+  hidePop = () => {
+    const { trigger = 'hover' } = this.props;
+    trigger === 'hover' && this.setState({ visible: false });
+  }
+
   renderPopConfirm = ({ getPrefixCls }: ConfigConsumerProps) => {
     const {
       prefixCls,
@@ -249,12 +263,11 @@ class PopComponent extends React.Component<PopProps, PopconfirmState> {
       overlayStyle = {},
       okButtonProps,
       cancelButtonProps,
-      trigger = 'hover',
     } = this.props;
     const {
       visible, x, y, direction,
     } = this.state;
-    const prefix = getPrefixCls!(`${componentType}`, prefixCls);
+    const prefix = getPrefixCls(`${componentType}`, prefixCls);
     const popContainter = classnames(prefix, className, {
       [`${prefix}-show`]: visible,
     });
@@ -263,19 +276,25 @@ class PopComponent extends React.Component<PopProps, PopconfirmState> {
     const arrow = classnames(`${prefix}-content-arrow`, {
       [`${prefix}-content-arrow-${direction}`]: direction,
     });
-    /* eslint no-mixed-operators: 0 */
-    const Tchildren = React.isValidElement(children) && React.Children.toArray(children) || [];
-    const lastChild = React.Children.map(
-      Tchildren,
-      (child) => React.cloneElement(child, { id: this.tag }),
-    );
+
+    let Tchildren;
+    if (React.isValidElement(children)) {
+      Tchildren = React.cloneElement(children, { id: this.tag });
+    } else {
+      throw new Error(' props children must bu ReactNode');
+    }
+
+    const btnStyle = classnames(`${contentStyle}-inner-btn`, {
+      [`${contentStyle}-inner-btn-show`]: visible,
+    });
+
     const confirmContent = (
       <div className={`${contentStyle}-inner`}>
         <div>
           <div style={{ display: 'inline-block' }}>{icon || <Icon type="exclamation-circle" className={`${contentStyle}-inner-icon`} />}</div>
           <div style={{ display: 'inline-block' }}>{title}</div>
         </div>
-        <div className={`${contentStyle}-inner-btn`}>
+        <div className={btnStyle}>
           <Button size="small" style={{ marginRight: 8 }} {...cancelButtonProps} onClick={this.handleCancel}>{cancelText}</Button>
           <Button type={okType} {...okButtonProps} size="small" onClick={this.handleOk}>{okText}</Button>
         </div>
@@ -297,16 +316,21 @@ class PopComponent extends React.Component<PopProps, PopconfirmState> {
           onFocus={this.handleFocus}
           // style={{ margin: 0, padding: 0, display: 'inline-block' }}
           data-tag={this.tag}
-          id={React.isValidElement(children) ? this.tag : undefined}
+          id={this.tag}
         >
-          {React.isValidElement(children) ? lastChild : children}
+          {Tchildren}
         </span>
         <Portal {...({ getPopupContainer })}>
           <div
             className={popContainter}
             style={{ left: x, top: y, ...overlayStyle }}
             ref={this.getNode}
-            onClick={(e: React.MouseEvent<HTMLDivElement, MouseEvent>) => e.stopPropagation()}
+            onClick={(e) => {
+              e.stopPropagation();
+              e.nativeEvent.stopPropagation();
+            }}
+            onMouseOver={this.showPop}
+            onMouseOut={this.hidePop}
           >
             <div className={contentStyle}>
               <div className={arrow} />

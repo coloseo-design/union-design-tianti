@@ -1,9 +1,14 @@
 /* eslint-disable */
+<<<<<<< HEAD
 export { default as Affix } from './affix/affix';
 /* eslint-disable */
 export { default as Anchor } from './anchor/anchor';
 /* eslint-disable */
+=======
+>>>>>>> feat: 🎸 pop ,modalupdate
 export { default as Button } from './button/button';
+/* eslint-disable */
+export { default as Affix } from './affix/affix';
 /* eslint-disable */
 export { default as Card } from './card/card';
 /* eslint-disable */
@@ -13,11 +18,10 @@ export { default as DropDown } from './drop-down/drop-down';
 /* eslint-disable */
 export { default as Icon } from './icon/icon';
 /* eslint-disable */
-export { default as Layout } from './layout/layout';
-/* eslint-disable */
 export { default as Modal } from './modal/modal';
 /* eslint-disable */
 export { default as PageHeader } from './pageHeader/pageHeader';
+export { default as Layout } from './layout/layout';
 /* eslint-disable */
 export { default as PopConfirm } from './pop-confirm/pop-confirm';
 /* eslint-disable */

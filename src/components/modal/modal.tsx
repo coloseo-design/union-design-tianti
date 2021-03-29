@@ -181,7 +181,7 @@ class Modal extends React.Component<ModalProps, ModalState, ModalMethodProps> {
       [`${prefix}-show`]: visible,
     });
     const maskCalss = classNames(`${prefix}-mask`, {
-      [`${prefix}-mask-hidden`]: !mask,
+      [`${prefix}-mask-hidden`]: !mask || !visible,
       [`${prefix}-mask-transition`]: modalTransition,
     });
     const wrapper = classNames(`${prefix}-wrapper`, wrapClassName, {
@@ -199,55 +199,52 @@ class Modal extends React.Component<ModalProps, ModalState, ModalMethodProps> {
       </div>
     );
 
+    const normalRender = (
+      <>
+        <div className={`${wrapperContent}-header`}>
+          <div className={`${wrapperContent}-header-title`}>{title}</div>
+          {closable && (
+            <div className={`${wrapperContent}-header-close`} onClick={this.handleCancel}>
+              {closeIcon || <Icon type="close" style={{ fontSize: 16 }} />}
+            </div>
+          )}
+        </div>
+        <div className={`${wrapperContent}-body`} style={bodyStyle}>{children}</div>
+        {footer !== null && (
+          <div className={`${wrapperContent}-footer`}>
+            {footer || operationBtn}
+          </div>
+        )}
+      </>
+    );
+    const methodRender = (
+      <>
+        <div className={`${wrapperContent}-methodBody`}>
+          <span className={`${wrapperContent}-methodBody-icon`} style={{ transform: methodType === 'info' ? 'rotate(180deg)' : 'rotate(0deg)' }}>
+            {icon && React.isValidElement(icon) ? icon : <Icon type={icon && typeof icon === 'string' ? icon : IconMapping[methodType]} className={iconStyle} style={{ fontSize: 24 }} />}
+          </span>
+          <span className={`${wrapperContent}-methodBody-title`}>{title}</span>
+          <span className={`${wrapperContent}-methodBody-content`}>{content}</span>
+        </div>
+        <div className={`${wrapperContent}-footer`}>
+          {methodType !== 'confirm' && <Button type="primary" onClick={this.handleCancel}>知道了</Button>}
+          {methodType === 'confirm' && operationBtn}
+        </div>
+      </>
+    );
+
     return (
       <Portal {...({ getPopupContainer })}>
         <div className={container}>
           <div className={maskCalss} style={{ ...maskStyle, zIndex }} />
-          <div className={wrapper} onClick={this.handleMask} style={{ zIndex }}>
+          <div className={wrapper} onClick={this.handleMask} style={{ zIndex, display: visible ? 'block' : 'none' }}>
             <div
               className={wrapperContent}
-              style={{ ...style, width }}
+              style={{ ...style, width, transformOrigin: 'center' }}
               onClick={(evt: React.MouseEvent<HTMLDivElement, MouseEvent>) => evt.stopPropagation()}
             >
-              {!methodType
-                && (
-                <div className={`${wrapperContent}-header`}>
-                  <div className={`${wrapperContent}-header-title`}>{title}</div>
-                  {closable
-                    && (
-                    <div className={`${wrapperContent}-header-close`} onClick={this.handleCancel}>
-                      {closeIcon || <Icon type="close" style={{ fontSize: 16 }} />}
-                    </div>
-                    )}
-                </div>
-                )}
-
-              {methodType ? (
-                <div className={`${wrapperContent}-methodBody`}>
-                  <span className={`${wrapperContent}-methodBody-icon`} style={{ transform: methodType === 'info' ? 'rotate(180deg)' : 'rotate(0deg)' }}>
-                    {icon && React.isValidElement(icon) ? icon : <Icon type={icon && typeof icon === 'string' ? icon : IconMapping[methodType]} className={iconStyle} style={{ fontSize: 24 }} />}
-                  </span>
-                  <span className={`${wrapperContent}-methodBody-title`}>{title}</span>
-                  <span className={`${wrapperContent}-methodBody-content`}>{content}</span>
-                </div>
-              ) : (
-                <div className={`${wrapperContent}-body`} style={bodyStyle}>{children}</div>
-              )}
-
-              {footer !== null
-                && (
-                <div className={`${wrapperContent}-footer`}>
-                  {footer || operationBtn}
-                </div>
-                )}
-              {
-                methodType && (
-                <div className={`${wrapperContent}-footer`}>
-                  {methodType !== 'confirm' && <Button type="primary" onClick={this.handleCancel}>知道了</Button>}
-                  {methodType === 'confirm' && operationBtn}
-                </div>
-                )
-              }
+              {!methodType && normalRender}
+              {methodType && methodRender}
             </div>
           </div>
         </div>
