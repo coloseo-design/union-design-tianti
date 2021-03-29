@@ -10,7 +10,7 @@ import {
 
 export interface ModalProps {
   title?: React.ReactNode | string
-  visible?: boolean
+  visible: boolean
   onOk?: (e: React.MouseEvent<HTMLElement>) => void
   onCancel?: (e: React.MouseEvent<HTMLElement> | KeyboardEvent) => void
   okText?: React.ReactNode | string

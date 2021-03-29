@@ -129,7 +129,7 @@ export const initValues = (init: string[] | string, allData: any[], backFill: st
   let checkedValues: string[] = [];
   const initAllInfo = allData.filter((i: any) => init.indexOf(i.value) >= 0);
   if (backFill === 'SHOW_CHILD') {
-    const { parentC, parentV } = findParent(initAllInfo, typeof init === 'string' ? [] : init);
+    const { parentC } = findParent(initAllInfo, typeof init === 'string' ? [] : init);
     const { childC, childV } = findChild(initAllInfo);
     values = values.concat(childV);
     checkedValues = checkedValues.concat(parentC).concat(childC);

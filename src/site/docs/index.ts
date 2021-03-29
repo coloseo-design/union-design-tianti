@@ -9,6 +9,8 @@ export { default as Card } from './card/card';
 /* eslint-disable */
 export { default as Checkbox } from './checkbox/checkbox';
 /* eslint-disable */
+export { default as DropDown } from './drop-down/drop-down';
+/* eslint-disable */
 export { default as Icon } from './icon/icon';
 /* eslint-disable */
 export { default as Layout } from './layout/layout';
