@@ -38,6 +38,10 @@ export default [
         title: 'Affix 固钉',
         key: 'affix',
       },
+      {
+        title: 'Dropdown 下拉菜单',
+        key: 'drop-down',
+      },
     ],
   },
   {

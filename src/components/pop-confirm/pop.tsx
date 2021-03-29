@@ -249,6 +249,7 @@ class PopComponent extends React.Component<PopProps, PopconfirmState> {
       overlayStyle = {},
       okButtonProps,
       cancelButtonProps,
+      trigger = 'hover',
     } = this.props;
     const {
       visible, x, y, direction,

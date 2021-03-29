@@ -27,6 +27,7 @@ export interface ModalMethodProps {
   methodType?: string, // 代表modal.method方法（method不需要header)
   icon?: string| React.ReactNode,
   okCancel?: boolean, // modal提示框（除confirm外）不需要展示 OK按钮
+  visible: boolean,
 }
 
 export function success(props: ModalMethodProps) {
