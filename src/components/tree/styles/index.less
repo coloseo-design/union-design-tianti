@@ -1,0 +1,48 @@
+@import '../../style/themes/index';
+@import '../../style/mixins/index';
+
+@treePrex: ~'@{uni-prefix}-tree';
+
+.@{treePrex}-wrapper {
+  width: 100%;
+  background-color: #fff;
+  border-radius: 3px;
+  box-shadow: 0 1px 4px 1px rgba(147,147,147,0.35);
+  transition: all 0.3s linear;
+}
+
+.@{treePrex} {
+  & .@{treePrex} {
+    padding-left: 28px;
+  }
+  width: 100%;
+  &-node {
+    margin: 3px 0px;
+    padding: 0px 12px;
+    height: 28px;
+    line-height: 28px;
+    &:hover {
+      background-color: @item-hover-bg;
+    }
+    &-switch {
+      display: inline-block;
+      margin-right: 8px;
+      cursor: pointer;
+    }
+    &-title {
+      display: inline-block;
+      cursor: pointer;
+      width: calc(100% - 24px);
+      padding: 0px 3px;
+      border-radius: 2px;
+      &-selected {
+        color: #B30000;
+      }
+      &-disabled {
+        cursor: not-allowed;
+        color: @disabled-color;
+      }
+    }
+  }
+
+}

@@ -15,6 +15,7 @@ if (
 }
 
 // 请在此处导出所有组件
+export { default as Affix } from './affix';
 export { default as Button } from './button';
 export { default as Card } from './card';
 
@@ -23,3 +24,4 @@ export { default as Modal } from './modal';
 export { default as Icon } from './icon';
 export { default as Popconfirm } from './pop-confirm';
 export { default as Result } from './result';
+export { default as PageHeader } from './pageHeader';

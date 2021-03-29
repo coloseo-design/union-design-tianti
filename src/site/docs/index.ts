@@ -1,4 +1,8 @@
 /* eslint-disable */
+export { default as Affix } from './affix/affix';
+/* eslint-disable */
+export { default as Anchor } from './anchor/anchor';
+/* eslint-disable */
 export { default as Button } from './button/button';
 /* eslint-disable */
 export { default as Card } from './card/card';
@@ -11,6 +15,8 @@ export { default as Layout } from './layout/layout';
 /* eslint-disable */
 export { default as Modal } from './modal/modal';
 /* eslint-disable */
+export { default as PageHeader } from './pageHeader/pageHeader';
+/* eslint-disable */
 export { default as PopConfirm } from './pop-confirm/pop-confirm';
 /* eslint-disable */
 export { default as Result } from './result/result';
@@ -18,5 +24,7 @@ export { default as Result } from './result/result';
 export { default as Statistic } from './statistic/statistic';
 /* eslint-disable */
 export { default as Table } from './table/table';
+/* eslint-disable */
+export { default as Tree } from './tree/tree';
 /* eslint-disable */
 export { default as TreeSelect } from './tree-select/tree-select';

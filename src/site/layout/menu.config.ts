@@ -30,6 +30,17 @@ export default [
     ],
   },
   {
+    title: '导航',
+    key: 'components',
+    themeColor: '#AA3FA8',
+    children: [
+      {
+        title: 'Affix 固钉',
+        key: 'affix',
+      },
+    ],
+  },
+  {
     title: '数据录入',
     key: 'components',
     themeColor: '#3B5ED9',
@@ -149,6 +160,10 @@ export default [
         title: 'Statistic 统计数值',
         key: 'statistic',
       },
+      {
+        title: 'Tree 树形控件',
+        key: 'tree',
+      },
     ],
   },
   {
@@ -179,6 +194,17 @@ export default [
       {
         title: 'Popconfirm 气泡确认框',
         key: 'pop-confirm',
+      },
+    ],
+  },
+  {
+    title: '其他',
+    key: 'components',
+    themeColor: '#5C57F2',
+    children: [
+      {
+        title: 'Anchor 锚点',
+        key: 'anchor',
       },
     ],
   },
