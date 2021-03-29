@@ -86,6 +86,22 @@
     }
   }
 }
+// 设置为未决状态的显示
+.@{checkbox-prefix-cls}-indeterminate {
+  .@{checkbox-inner-prefix-cls} {
+    background-color: #fff;
+    &::after {
+      top: 50%;
+      left: 50%;
+      width: 8px;
+      height: 8px;
+      background-color: @checkbox-color;
+      border: 0;
+      transform: translate(-50%,-50%) scale(1);
+      content: ""
+    }
+  }
+}
 
 .@{checkbox-prefix-cls} {
   font-size: @font-size-base;

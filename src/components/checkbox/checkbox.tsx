@@ -16,6 +16,8 @@ export interface CheckboxProps extends Omit<React.InputHTMLAttributes<any>, 'onC
   onChange: (checkedValue: boolean) => void;
   /** checkbox选中的值(为了将来兼容form， 所以输入组件必须对value和onChange进行处理) */
   value?: string;
+  /** 设置 indeterminate 状态，只负责样式控制 */
+  indeterminate: boolean;
 }
 
 export interface CheckboxState {
@@ -28,6 +30,7 @@ class Checkbox extends React.Component<CheckboxProps, CheckboxState> {
     autoFocus: false,
     disabled: false,
     defaultChecked: false,
+    indeterminate: false,
     onChange: () => {},
   };
 
@@ -68,6 +71,7 @@ class Checkbox extends React.Component<CheckboxProps, CheckboxState> {
       disabled,
       className,
       value,
+      indeterminate, // 是否是未确定状态
     } = this.props;
     let { checked } = this.state;
     // eslint-disable-next-line no-underscore-dangle
@@ -82,6 +86,7 @@ class Checkbox extends React.Component<CheckboxProps, CheckboxState> {
       [`${prefix}-wrapper-disabled`]: disabled,
     }, className);
     const mainClass = classnames(prefix, {
+      [`${prefix}-indeterminate`]: indeterminate,
       [`${prefix}-checked`]: checked,
       [`${prefix}-disabled`]: disabled,
     });
