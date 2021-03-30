@@ -4,7 +4,7 @@ import Button from '../button';
 
 const PopconfirmDemo: React.FC<unknown> = () => {
   const handleVisibleChange = (visible: boolean) => {
-    console.log('-visible-', visible);
+    // console.log('-visible-', visible);
   };
   const [loading, setLoading] = React.useState(false);
   const [visible, setVisible] = React.useState(false);
@@ -36,6 +36,7 @@ const PopconfirmDemo: React.FC<unknown> = () => {
           title="你是否确定这是一个气泡确认框？"
           placement="top"
           onVisibleChange={handleVisibleChange}
+          trigger="hover"
         >
           <Button style={{ margin: 24 }}>top</Button>
         </PopConfirm>

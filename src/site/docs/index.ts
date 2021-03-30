@@ -27,6 +27,8 @@ export { default as DatePicker } from './date-picker/date-picker';
 /* eslint-disable */
 export { default as Descriptions } from './descriptions/descriptions';
 /* eslint-disable */
+export { default as DropDown } from './drop-down/drop-down';
+/* eslint-disable */
 export { default as Form } from './form/form';
 /* eslint-disable */
 export { default as Grid } from './grid/grid';
@@ -62,6 +64,10 @@ export { default as Statistic } from './statistic/statistic';
 export { default as Switch } from './switch/switch';
 /* eslint-disable */
 export { default as Table } from './table/table';
+/* eslint-disable */
+export { default as Tabs } from './tabs/tabs';
+/* eslint-disable */
+export { default as Tag } from './tag/tag';
 /* eslint-disable */
 export { default as Tooltip } from './tooltip/tooltip';
 /* eslint-disable */

@@ -93,6 +93,7 @@ const ModalDemo: React.FC<unknown> = () => {
         onOk={() => setVisible(false)}
         title="对话框"
         bodyStyle={{ height: 500, overflow: 'auto' }}
+        cancelText="取消"
         centered
       >
         <div>modal基本样式</div>
