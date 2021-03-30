@@ -21,26 +21,26 @@
 
 // menu style
 
-.@{dropMenu}-container {
-  & :first-child {
-    box-shadow: none !important;
-  }
-  .light {
-    background-color: #fff !important;
-    .item, .sub-menu {
-      &:hover {
-        background-color: @item-hover-bg !important;
-        color: rgba(0,0,0,0.85) !important;
-      }
-    }
-  }
-}
-.@{dropMenu}-popup {
-  .vertical {
-    box-shadow: 0 1px 4px 1px rgba(147,147,147,0.35) !important;
-    border-radius: 3px !important;
-  }
-}
+// .@{dropMenu}-container {
+//   & :first-child {
+//     box-shadow: none !important;
+//   }
+//   .light {
+//     background-color: #fff !important;
+//     .item, .sub-menu {
+//       &:hover {
+//         background-color: @item-hover-bg !important;
+//         color: rgba(0,0,0,0.85) !important;
+//       }
+//     }
+//   }
+// }
+// .@{dropMenu}-popup {
+//   .vertical {
+//     box-shadow: 0 1px 4px 1px rgba(147,147,147,0.35) !important;
+//     border-radius: 3px !important;
+//   }
+// }
 
 // 所有的下拉style
 .@{dropDown} {
@@ -252,5 +252,79 @@
         border-color: @btn-disable-border;
       }
     }
+  }
+}
+
+@menu: ~"@{uni-prefix}-menu";
+
+.abcdefg() {
+  .vertical {
+    height: 100%;
+    box-shadow: unset;
+    padding: 3px 0 7px 0;
+    overflow: auto;
+    background-color: #fff;
+
+  .light,
+  .dark {
+      color: rgba(0, 0, 0, 0.85);
+      background-color: #fff;
+
+      &:hover{
+          background-color: @item-hover-bg;
+      }
+  }
+
+  div.sub-menu,
+  div.item,
+  div.item-group {
+      height: 28px;
+      padding-right: 8px;
+      font-size: 14px;
+      line-height: 28px;
+
+      .left-icon {
+        float: left;
+        margin-right: -6px;
+    }
+
+      .title {
+          line-height: 28px;
+          color: rgba(0, 0, 0, 0.85);
+          letter-spacing: 0.46px;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow:ellipsis;
+      } 
+    }
+
+      div.item-selected,
+      div.item-selected.dark,
+      div.item-selected.light,
+      div.sub-menu-selected.dark,
+      div.sub-menu-selected.light {
+      color: unset;
+      background-color: unset;
+
+      &::after {
+          width: 0;
+      }
+    }
+  }
+}
+
+.@{dropDown} {
+  &-containter {
+    .@{menu}-container,
+    .@{menu}-popup {
+      .abcdefg();
+    }
+  }
+}
+
+.@{dropDown}-menu.@{menu}-container.@{menu}-popup {
+  .abcdefg();
+  .vertical {
+    box-shadow: 2px 0 4px 0 rgba(147,147,147,0.35);
   }
 }

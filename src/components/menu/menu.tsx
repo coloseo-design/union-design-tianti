@@ -48,6 +48,8 @@ export type MenuProps = BasePropsV2<{
   onSelect: (key: string, keyPath: string[]) => void;
   /** 取消选中时调用，仅在 multiple 生效 */
   onDeselect: (key: string, keyPath: string[]) => void;
+
+  popupClassName: string;
 }>;
 
 export type MenuState = BaseStateV2<{
@@ -242,7 +244,7 @@ export default class Menu extends MenuBase<MenuProps, MenuState> {
     children?: ReactNode,
   ) => {
     const { menuPopups } = this.state;
-    const { mode } = this.props;
+    const { mode, popupClassName } = this.props;
     const newKey = `${level}-${key}`;
 
     if (!dom) {
@@ -260,6 +262,7 @@ export default class Menu extends MenuBase<MenuProps, MenuState> {
     if (mode === 'horizontal' && level === 0) {
       newMenuPopups[level] = [newKey,
         <MenuPopup
+          className={popupClassName}
           data={[]}
           key={newKey}
           top={bottom}
@@ -270,6 +273,7 @@ export default class Menu extends MenuBase<MenuProps, MenuState> {
     } else {
       newMenuPopups[level] = [newKey,
         <MenuPopup
+          className={popupClassName}
           data={[]}
           key={newKey}
           top={top}

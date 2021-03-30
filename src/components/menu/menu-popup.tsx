@@ -13,7 +13,8 @@ export type MenuPopupProps = BasePropsV2<{
     left: number;
     right: number;
     bottom: number;
-    data: MenuPopupData | MenuPopupData[]
+    data: MenuPopupData | MenuPopupData[];
+    className: string;
 }>;
 
 export class MenuPopup extends MenuBase<MenuPopupProps> {
@@ -37,7 +38,7 @@ export class MenuPopup extends MenuBase<MenuPopupProps> {
 
     protected getView = () => {
       const {
-        top, left, right, bottom, data, children,
+        top, left, right, bottom, data, children, className,
       } = this.props;
       const { theme } = this.menuCtx;
 
@@ -52,6 +53,7 @@ export class MenuPopup extends MenuBase<MenuPopupProps> {
               ...bottom && { bottom },
             }}
             className={this.classNames(
+              className,
               this.getPrefixClass('container'),
               this.getPrefixClass('popup'),
             )}

@@ -202,7 +202,10 @@ class Dropdown extends React.Component<DropdownProps, DropdownState> {
           >
             {arrow && <div className={arrowStyle} />}
             <div className={containter}>
-              {overlay}
+              {React.cloneElement(
+                overlay,
+                { popupClassName: `${prefix}-menu` },
+              )}
             </div>
           </div>
         </Portal>
