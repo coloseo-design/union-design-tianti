@@ -43,12 +43,12 @@ const DropdownDemo = () => (
   <div style={{ padding: 32 }}>
     <div style={{ display: 'flex', justifyContent: 'space-between' }}>
       <div>
-        <Dropdown placement="bottomLeft" overlayStyle={{ width: 320 }} overlay={menu1} arrow={true} trigger={['click']}>
+        <Dropdown placement="bottomLeft" overlayStyle={{ width: 220 }} overlay={menu1} arrow={true} trigger={['click']}>
           <Button>click bottomLeft</Button>
         </Dropdown>
       </div>
       <div>
-        <Dropdown placement="bottomCenter" trigger={['click']} overlay={menu} arrow={true}>
+        <Dropdown placement="bottomCenter" trigger={['click']} overlayStyle={{ maxWidth: 240 }} overlay={menu} arrow={true}>
           <Button>click bottomCenter</Button>
         </Dropdown>
       </div>

@@ -4,10 +4,12 @@
 @container: ~'@{uni-prefix}-modal';
 
 .@{container} {
-  // display: none;
-  // &-show {
-  //   display: block;
-  // }
+  padding: 0;
+  margin: 0;
+  display: none;
+  &-show {
+    display: block;
+  }
   &-mask {
     height: 100%;
     position: fixed;
@@ -19,9 +21,10 @@
     display: block;
     background-color: rgba(0,0,0,.45);
     opacity: 1;
+    transition: opacity 0.3s linear;
     &-transition {
       opacity: 0;
-      transition: all 0.3s linear;
+      transition: opacity 0.3s linear;
     }
     &-hidden {
       display: none;
@@ -59,15 +62,12 @@
       border-radius: 2px;
       margin: 0 auto;
       top: 100px;
-      transform: scale(1);
-      transition: all 0.3s linear;
-      // animation: fadein 0.3s linear;
+      transform-origin: center;
+      animation: fadein 0.3s linear;
       &-hidden {
+        transform-origin: center;
         transform: scale(0);
         transition: all 0.3s linear;
-        // transform-origin: center;
-        // transform-origin: center;
-        // animation: fadeout 0.3s linear;
       }
       &-header {
         position: relative;
@@ -133,19 +133,16 @@
    transform: scale(0);
    opacity: 0.0;
   }
+  25% {
+    transform: scale(0.25);
+    opacity: 0.25;
+   }
+   50% {
+    transform: scale(0.5);
+    opacity: 0.5;
+   }
   100% {
    transform: scale(1);
    opacity: 1;
-  }
- }
-
- @keyframes fadeout {
-  0% {
-   transform: scale(1);
-   opacity: 1;
-  }
-  100% {
-   transform: scale(0);
-   opacity: 0.0;
   }
  }

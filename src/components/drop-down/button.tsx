@@ -1,5 +1,4 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable max-len */
 import React from 'react';
 import classNames from 'classnames';
@@ -14,7 +13,7 @@ export interface DropMenuProps {
   type?: 'default' | 'primary' | 'ghost' | 'dashed' | 'danger'| 'link',
   visible?: boolean;
   disabled?: boolean;
-  overlay?: any;
+  overlay: React.ReactNode;
   overlayStyle?: React.CSSProperties;
   placement?: 'bottomLeft' | 'bottomCenter' | 'bottomRight' | 'topLeft' | 'topCenter' | 'topRight' ;
   trigger?: ['hover' | 'click' | 'contextMenu'],
