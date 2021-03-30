@@ -41,7 +41,11 @@
   user-select: none;
   &:hover, &:focus {
     border: @border-width-base @border-style-base @primary-color;
-    box-shadow: 0 0 0 1px @box-shadow;
+    border-color: @input-hover-border-color;
+    border-right-width: @border-width-base;
+  }
+  &:focus {
+    box-shadow: @input-box-shadow-base;
   }
   &-iconWrapper {
     position: absolute;
@@ -55,7 +59,8 @@
 
 .@{select-prefix-cls}-active {
   border: @border-width-base @border-style-base @primary-color;
-  box-shadow: 0 0 0 1px @box-shadow;
+  border-color: @input-hover-border-color;
+  box-shadow: @input-box-shadow-base;
 }
 
 .@{select-prefix-cls}-disabled {
