@@ -1,7 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
 import DropButton from './button';
-import DropMenu from './menu';
 import Portal from '../pop-confirm/portal';
 import { ConfigConsumer, ConfigConsumerProps } from '../config-provider';
 
@@ -27,8 +26,6 @@ export interface DropdownState {
 
 class Dropdown extends React.Component<DropdownProps, DropdownState> {
   static Button: typeof DropButton;
-
-  static Menu: typeof DropMenu;
 
   node: HTMLSpanElement | undefined;
 
@@ -58,9 +55,12 @@ class Dropdown extends React.Component<DropdownProps, DropdownState> {
   }
 
   dropHidden = () => {
-    this.setState({ visible: false });
-    const { onVisibleChange } = this.props;
-    onVisibleChange && onVisibleChange(false);
+    const { visible: propsVisible } = this.props;
+    if (propsVisible === undefined) {
+      this.setState({ visible: false });
+      const { onVisibleChange } = this.props;
+      onVisibleChange && onVisibleChange(false);
+    }
   };
 
   getNode = (node: HTMLDivElement) => {
@@ -83,7 +83,9 @@ class Dropdown extends React.Component<DropdownProps, DropdownState> {
   };
 
   click = (evt: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
-    const { trigger = ['hover'], onVisibleChange, disabled } = this.props;
+    const {
+      trigger = ['hover'], onVisibleChange, disabled,
+    } = this.props;
     const { visible } = this.state;
     if (trigger.indexOf('click') >= 0 && !disabled) {
       if (!visible) {
@@ -106,7 +108,9 @@ class Dropdown extends React.Component<DropdownProps, DropdownState> {
   compute = (evt: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
     evt.stopPropagation();
     const { visible } = this.state;
-    const { placement = 'bottomCenter', arrow = false, onVisibleChange } = this.props;
+    const {
+      placement = 'bottomCenter', arrow = false, onVisibleChange,
+    } = this.props;
     const target = evt.nativeEvent.target as HTMLSpanElement;
     if (!visible) {
       if (target && this.node) {
@@ -216,7 +220,5 @@ class Dropdown extends React.Component<DropdownProps, DropdownState> {
 }
 
 Dropdown.Button = DropButton;
-Dropdown.Menu = DropMenu;
-Dropdown.Menu.isMenu = true;
 
 export default Dropdown;

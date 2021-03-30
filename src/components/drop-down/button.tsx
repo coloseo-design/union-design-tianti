@@ -44,6 +44,10 @@ class DropButton extends React.Component<DropMenuProps, DropMenuState> {
   }
 
   componentDidMount() {
+    const { visible } = this.props;
+    if (visible) {
+      this.compute(true);
+    }
     document.addEventListener('click', this.dropHidden);
   }
 
@@ -59,9 +63,12 @@ class DropButton extends React.Component<DropMenuProps, DropMenuState> {
   }
 
   dropHidden = () => {
-    this.setState({ visible: false });
-    const { onVisibleChange } = this.props;
-    onVisibleChange && onVisibleChange(false);
+    const { visible: propsVisible } = this.props;
+    if (propsVisible === undefined) { // 没有传值visible时候， visisble由自己改变
+      this.setState({ visible: false });
+      const { onVisibleChange } = this.props;
+      onVisibleChange && onVisibleChange(false);
+    }
   };
 
   getNodeC = (nodeC: HTMLDivElement) => {
@@ -75,7 +82,7 @@ class DropButton extends React.Component<DropMenuProps, DropMenuState> {
   over = (evt: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
     const { trigger = ['hover'], disabled } = this.props;
     if (trigger.indexOf('hover') >= 0 && !disabled) {
-      this.compute(evt);
+      this.compute(false, evt);
     }
   };
 
@@ -90,7 +97,7 @@ class DropButton extends React.Component<DropMenuProps, DropMenuState> {
   click = (evt: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
     const { trigger = ['hover'], disabled } = this.props;
     if (trigger.indexOf('click') >= 0 && !disabled) {
-      this.compute(evt);
+      this.compute(false, evt);
     }
   };
 
@@ -98,20 +105,23 @@ class DropButton extends React.Component<DropMenuProps, DropMenuState> {
     const { trigger = ['hover'], disabled } = this.props;
     if (trigger.indexOf('contextMenu') >= 0 && !disabled) {
       evt.preventDefault();
-      this.compute(evt);
+      this.compute(false, evt);
     }
   };
 
   handleClick = (evt: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
-    const { onClick } = this.props;
+    const { onClick, visible: propsVisible } = this.props;
     onClick && onClick(evt);
+    if (propsVisible !== undefined) {
+      this.click(evt);
+    }
   };
 
-  compute = (evt: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
-    evt.stopPropagation();
+  compute = (first: boolean, evt?: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
+    evt && evt.stopPropagation();
     const { visible } = this.state;
     const { placement = 'bottomRight', onVisibleChange } = this.props;
-    if (!visible) {
+    if (!visible || first) {
       if (this.nodeB && this.nodeC) {
         const { height: contentHeight, width: contentWidth } = this.nodeC.getBoundingClientRect();
         const {
