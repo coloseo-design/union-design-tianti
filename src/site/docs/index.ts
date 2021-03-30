@@ -1,9 +1,9 @@
 /* eslint-disable */
 export { default as Affix } from './affix/affix';
 /* eslint-disable */
-export { default as Alert } from './alert/alert';
-/* eslint-disable */
 export { default as Anchor } from './anchor/anchor';
+/* eslint-disable */
+export { default as Alert } from './alert/alert';
 /* eslint-disable */
 export { default as AutoComplete } from './auto-complete/auto-complete';
 /* eslint-disable */
@@ -32,6 +32,8 @@ export { default as Collapse } from './collapse/collapse';
 export { default as DatePicker } from './date-picker/date-picker';
 /* eslint-disable */
 export { default as Descriptions } from './descriptions/descriptions';
+/* eslint-disable */
+export { default as Divider } from './divider/divider';
 /* eslint-disable */
 export { default as Drawer } from './drawer/drawer';
 /* eslint-disable */

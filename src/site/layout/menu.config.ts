@@ -27,6 +27,10 @@ export default [
         title: 'Layout 布局',
         key: 'layout',
       },
+      {
+        title: 'Divider 分割线',
+        key: 'divider',
+      },
     ],
   },
   {

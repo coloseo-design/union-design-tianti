@@ -63,3 +63,4 @@ export { default as Popover } from './pop-over';
 export { default as Drawer } from './drawer';
 export { default as Progress } from './progress';
 export { default as Spin } from './spin';
+export { default as Divider } from './divider';

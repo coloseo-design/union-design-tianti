@@ -15,6 +15,7 @@
 /* eslint-disable */export { default as Collapse } from '../../components/collapse/demo';
 /* eslint-disable */export { default as DatePicker } from '../../components/date-picker/demo';
 /* eslint-disable */export { default as Descriptions } from '../../components/descriptions/demo';
+/* eslint-disable */export { default as Divider } from '../../components/divider/demo';
 /* eslint-disable */export { default as Drawer } from '../../components/drawer/demo';
 /* eslint-disable */export { default as DropDown } from '../../components/drop-down/demo';
 /* eslint-disable */export { default as Form } from '../../components/form/demo';
