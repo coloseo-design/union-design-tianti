@@ -24,7 +24,7 @@ export default [
         key: 'grid',
       },
       {
-        title: 'Layout 栅格',
+        title: 'Layout 布局',
         key: 'layout',
       },
     ],
@@ -209,6 +209,10 @@ export default [
       {
         title: 'Anchor 锚点',
         key: 'anchor',
+      },
+      {
+        title: 'BackTop 回到顶部',
+        key: 'backTop',
       },
     ],
   },
