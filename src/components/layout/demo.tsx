@@ -1,5 +1,6 @@
 import React from 'react';
 import Layout from './index';
+import Menu from '../menu';
 
 const {
   Header, Footer, Sider, Content,
@@ -35,7 +36,51 @@ const LayoutDemo = () => (
     <br />
     <br />
     <Layout>
-      <Sider collapsible theme="light">Sider</Sider>
+      <Sider collapsible theme="light">
+        logo
+        <Menu theme="light" mode="vertical">
+          <Menu.Item icon="image">
+            工作台1
+          </Menu.Item>
+          <Menu.SubMenu icon="image" title="工作台3">
+            <Menu.Item icon="image">
+              工作台1
+            </Menu.Item>
+            <Menu.Item icon="image">
+              工作台2
+            </Menu.Item>
+            <Menu.ItemGroup title="工作台3">
+              <Menu.Item icon="image">
+                工作台1
+              </Menu.Item>
+              <Menu.Item icon="image">
+                工作台2
+              </Menu.Item>
+            </Menu.ItemGroup>
+          </Menu.SubMenu>
+          <Menu.SubMenu title="工作台4">
+            <Menu.Item>
+              工作台1
+            </Menu.Item>
+            <Menu.SubMenu title="工作台2">
+              <Menu.Item>
+                工作台1
+              </Menu.Item>
+              <Menu.Item>
+                工作台2
+              </Menu.Item>
+            </Menu.SubMenu>
+          </Menu.SubMenu>
+          <Menu.SubMenu icon="image" title="工作台5">
+            <Menu.Item>
+              工作台1
+            </Menu.Item>
+            <Menu.Item icon="image">
+              工作台2
+            </Menu.Item>
+          </Menu.SubMenu>
+        </Menu>
+      </Sider>
       <Layout>
         <Header>Header</Header>
         <Content>Content</Content>
