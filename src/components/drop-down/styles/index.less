@@ -2,6 +2,7 @@
 @import "../../style/mixins/index";
 
 @dropDown: ~'@{uni-prefix}-drop-down';
+@dropMenu: ~'@{uni-prefix}-menu';
 
 .btn(@padding, @border-radius) {
   padding: @padding;
@@ -17,6 +18,30 @@
   touch-action: manipulation;
   height: 32px;
 }
+
+// menu style
+
+.@{dropMenu}-container {
+  & :first-child {
+    box-shadow: none !important;
+  }
+  .light {
+    background-color: #fff !important;
+    .item, .sub-menu {
+      &:hover {
+        background-color: @item-hover-bg !important;
+        color: rgba(0,0,0,0.85) !important;
+      }
+    }
+  }
+}
+.@{dropMenu}-popup {
+  .vertical {
+    box-shadow: 0 1px 4px 1px rgba(147,147,147,0.35) !important;
+    border-radius: 3px !important;
+  }
+}
+
 // 所有的下拉style
 .@{dropDown} {
   position: absolute;
@@ -156,7 +181,7 @@
       font-size: @btn-font-size-sm;
     }
     &-type-dashed {
-      border: 1px dashed #ACAFB9;
+      border: 1px dashed @btn-default-border;
       border-right: none;
       &:hover {
         border-right: 1px dashed ~`colorPalette('@{btn-primary-bg}', 5)`;
