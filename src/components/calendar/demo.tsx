@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React from 'react';
 
 import Calendar from './index';
@@ -30,7 +31,7 @@ const CalendarDemo = () => (
     <h1>dateCellRender</h1>
     <Calendar
       mode="year"
-      dateCellRender={(date) => (
+      dateCellRender={() => (
         <div style={{
           position: 'absolute',
           top: 1,

@@ -20,7 +20,7 @@ export type SelectState = {
 } & BaseState;
 
 export class Select<T extends SelectBaseData> extends BaseComponent<SelectProps<T>, SelectState> {
-    public static defaultProps: Omit<SelectProps<unknown>, 'data' | 'value'> = {
+    public static defaultProps: Omit<SelectProps<SelectBaseData>, 'data' | 'value'> = {
       onChange: () => ({ }),
     };
 

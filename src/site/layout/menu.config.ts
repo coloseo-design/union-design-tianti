@@ -50,6 +50,10 @@ export default [
         title: 'Breadcrumb 面包屑',
         key: 'breadcrumb',
       },
+      {
+        title: 'Pagination 分页',
+        key: 'pagination',
+      },
     ],
   },
   {

@@ -4,8 +4,8 @@ es/
 dist/
 .idea/
 .DS_Store
-src/site/docs
-src/site/demos
-src/site/dist
+src/site/docs/
+src/site/demos/
+src/site/dist/
 .DS_Store
 
