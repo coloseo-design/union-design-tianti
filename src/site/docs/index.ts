@@ -11,6 +11,8 @@ export { default as Avatar } from './avatar/avatar';
 /* eslint-disable */
 export { default as Badge } from './badge/badge';
 /* eslint-disable */
+export { default as Breadcrumb } from './breadcrumb/breadcrumb';
+/* eslint-disable */
 export { default as Button } from './button/button';
 /* eslint-disable */
 export { default as Calendar } from './calendar/calendar';
@@ -19,9 +21,9 @@ export { default as Card } from './card/card';
 /* eslint-disable */
 export { default as Carousel } from './carousel/carousel';
 /* eslint-disable */
-export { default as Cascader } from './cascader/cascader';
-/* eslint-disable */
 export { default as Checkbox } from './checkbox/checkbox';
+/* eslint-disable */
+export { default as Cascader } from './cascader/cascader';
 /* eslint-disable */
 export { default as Collapse } from './collapse/collapse';
 /* eslint-disable */
@@ -38,6 +40,8 @@ export { default as Form } from './form/form';
 export { default as Grid } from './grid/grid';
 /* eslint-disable */
 export { default as Icon } from './icon/icon';
+/* eslint-disable */
+export { default as Image } from './image/image';
 /* eslint-disable */
 export { default as Input } from './input/input';
 /* eslint-disable */
@@ -69,9 +73,9 @@ export { default as Select } from './select/select';
 /* eslint-disable */
 export { default as Slider } from './slider/slider';
 /* eslint-disable */
-export { default as Statistic } from './statistic/statistic';
-/* eslint-disable */
 export { default as Switch } from './switch/switch';
+/* eslint-disable */
+export { default as Statistic } from './statistic/statistic';
 /* eslint-disable */
 export { default as Table } from './table/table';
 /* eslint-disable */

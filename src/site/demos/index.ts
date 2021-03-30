@@ -4,6 +4,7 @@
 /* eslint-disable */export { default as AutoComplete } from '../../components/auto-complete/demo';
 /* eslint-disable */export { default as Avatar } from '../../components/avatar/demo';
 /* eslint-disable */export { default as Badge } from '../../components/badge/demo';
+/* eslint-disable */export { default as Breadcrumb } from '../../components/breadcrumb/demo';
 /* eslint-disable */export { default as Button } from '../../components/button/demo';
 /* eslint-disable */export { default as Calendar } from '../../components/calendar/demo';
 /* eslint-disable */export { default as Card } from '../../components/card/demo';
@@ -18,6 +19,7 @@
 /* eslint-disable */export { default as Form } from '../../components/form/demo';
 /* eslint-disable */export { default as Grid } from '../../components/grid/demo';
 /* eslint-disable */export { default as Icon } from '../../components/icon/demo';
+/* eslint-disable */export { default as Image } from '../../components/image/demo';
 /* eslint-disable */export { default as Input } from '../../components/input/demo';
 /* eslint-disable */export { default as InputNumber } from '../../components/input-number/demo';
 /* eslint-disable */export { default as Layout } from '../../components/layout/demo';
