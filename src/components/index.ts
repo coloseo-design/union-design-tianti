@@ -57,3 +57,7 @@ export { default as Tree } from './tree';
 export { default as TreeSelect } from './tree-select';
 export { default as Upload } from './upload';
 export { default as Dropdown } from './drop-down';
+export { default as Notification } from './notification';
+export { default as Message } from './message';
+export { default as Popover } from './pop-over';
+export { default as Drawer } from './drawer';
