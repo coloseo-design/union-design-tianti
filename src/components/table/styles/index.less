@@ -56,6 +56,26 @@
   }
 }
 
+// 过滤器
+.@{table-prefix-cls}-filter {
+  padding: 12px;
+  .@{table-prefix-cls}-filter-item + .@{table-prefix-cls}-filter-item {
+    margin-top: 8px;
+  }
+  .@{table-prefix-cls}-filter-footer {
+    margin-top: 15px;
+    .clearfix();
+    button {
+      &:first-child {
+        float: left;
+      }
+      &:last-child {
+        float: right;
+      }
+    }
+  }
+}
+
 // 表格基础样式
 .@{table-prefix-cls} {
   width: 100%;
@@ -73,8 +93,8 @@
   td {
     transition: all 0.3s, border 0s;
   }
-  tr:hover>td {
-    background: #e6f7ff;
+  tr:hover>td, .@{table-prefix-cls}-row-hover>td {
+    background: #FFF1F0;
   }
   each(@td-aligns, {
     &-td-@{value} {

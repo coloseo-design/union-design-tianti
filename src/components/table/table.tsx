@@ -1,8 +1,12 @@
 import React from 'react';
 import classnames from 'classnames';
 import { ConfigConsumerProps, withGlobalConfig } from '../config-provider';
-import Icon from '../icon';
-import Checkbox from '../checkbox';
+import {
+  Icon,
+  Dropdown,
+  Checkbox,
+} from '..';
+import Filter from './filter';
 
 type ColumnsAlign = 'left' | 'right' | 'center';
 type FixedType = 'left' | 'right';
@@ -37,6 +41,14 @@ interface ColumnsProps {
   title: React.ReactNode;
   /** 宽度 */
   width: string | number;
+  /** filter数据列表 */
+  filters?: {text: React.ReactNode; value: string }[];
+  /** 过滤器 */
+  onFilter?: (value: unknown, record: unknown) => boolean;
+  /** 筛选控制 */
+  filteredValue: string[];
+  /** 筛选控制 */
+  defaultFilteredValue: string[];
 }
 
 type RowKeyType = string | ((record: unknown) => string);
@@ -88,6 +100,10 @@ interface TableState {
   // columns: ColumnsProps[];
   /** 选中的列 */
   selectedRowKeys: unknown[];
+  selectedRowKey: string;
+  filters: {
+    [key: string]: string[]
+  }
 }
 
 interface ColProps {
@@ -123,9 +139,18 @@ export default class Table extends React.Component<TableProps, TableState> {
     this.rightTableBodyRef = React.createRef<HTMLDivElement>();
     this.mainTableHeaderRef = React.createRef<HTMLDivElement>();
     this.mainTableBodyRef = React.createRef<HTMLDivElement>();
-    const { rowSelection: { selectedRowKeys = [] } = {} } = props;
+    const { rowSelection: { selectedRowKeys = [] } = {}, columns } = props;
+    const filters = columns.reduce<{[key: string]: string[]}>((c, i) => {
+      // if (i.filteredValue || i.defaultFilteredValue) {
+      const key = i.dataIndex || i.key || '';
+      Object.assign(c, { [key]: i.filteredValue || i.defaultFilteredValue || [] });
+      // }
+      return c;
+    }, {});
     this.state = {
       selectedRowKeys: [...selectedRowKeys] || [],
+      selectedRowKey: '',
+      filters,
     };
   }
 
@@ -152,6 +177,36 @@ export default class Table extends React.Component<TableProps, TableState> {
     </colgroup>
   )
 
+  getOveray = (filters, column: ColumnsProps) => {
+    const { dataIndex, key } = column;
+    const name = dataIndex || key || '';
+    const mappedFilters = filters.map((item) => ({
+      ...item,
+      label: item.text,
+    }));
+    const { filters: filtersFromState } = this.state;
+    const onSubmit = (values: string[]) => {
+      this.setState({
+        filters: {
+          ...filtersFromState,
+          [name]: values,
+        },
+      });
+    };
+    const onReset = () => {
+      onSubmit([]);
+    };
+    return (
+      <Filter
+        dataSource={mappedFilters}
+        onSubmit={onSubmit}
+        onReset={onReset}
+        prefix={this.getPrefixCls()}
+        values={filtersFromState[name]}
+      />
+    );
+  };
+
   // 渲染表头
   renderHeader = (columns: ColumnsProps[]) => (
     <thead>
@@ -164,7 +219,18 @@ export default class Table extends React.Component<TableProps, TableState> {
             }
             return (
               <th key={column.key || column.dataIndex} colSpan={column.colSpan}>
-                <span>{column.title}</span>
+                <span>
+                  {column.title}
+                  { column.filters?.length && (
+                    <Dropdown
+                      placement="bottomCenter"
+                      overlay={this.getOveray(column.filters, column)}
+                      trigger={['click']}
+                    >
+                      <Icon type="sizer" style={{ marginLeft: 5, display: 'inline-block', width: 20 }} />
+                    </Dropdown>
+                  )}
+                </span>
               </th>
             );
           })
@@ -185,40 +251,79 @@ export default class Table extends React.Component<TableProps, TableState> {
     return key;
   }
 
+  /**
+   * 构造筛选器
+   * @returns
+   */
+  filterDataSourceFilter = () => {
+    const { columns } = this.props;
+    const { filters } = this.state;
+    return columns.reduce((composed, column) => {
+      const { onFilter, dataIndex, key } = column;
+      const name = dataIndex || key || '';
+      const values = filters[name];
+      let filter = (row: unknown) => (!values.length
+        ? true
+        : values.reduce((c, i) => {
+          const r = onFilter ? onFilter(i, row) : true;
+          return c || r;
+        }, false));
+      if (!values.length) {
+        filter = () => true;
+      }
+      return (value: unknown, ...rest) => filter(value, ...rest) && composed(value, ...rest);
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    }, (value: unknown) => true);
+  }
+
   formateDataSource = (dataSource: unknown[], columns: ColumnsProps[]): RowProps[] => {
-    const transformData = dataSource.map((data, index) => {
-      const cols = columns.map((column) => {
-        const {
-          align = 'left',
-          render,
-          dataIndex,
-          key: columnKey,
-        } = column;
-        let rendered: React.ReactNode | string = '';
-        if (dataIndex) {
-          // eslint-disable-next-line max-len
-          rendered = (data as ({[key: string]: unknown}))[dataIndex] as string;
-        }
-        if (render) {
-          rendered = render(rendered as React.ReactNode, data, index);
-        }
-        const objectRendered = rendered as RenderReturnObjectType;
-        let ext = {};
-        if (typeof objectRendered === 'object' && 'children' in objectRendered) {
-          const { children, props } = objectRendered;
-          rendered = children;
-          props && (ext = props);
-        }
-        return {
-          children: rendered,
-          align,
-          key: columnKey || dataIndex,
-          props: ext,
-        };
+    const transformData = dataSource
+      .filter(this.filterDataSourceFilter())
+      .map((data, index) => {
+        const cols = columns.map((column) => {
+          const {
+            align = 'left',
+            render,
+            dataIndex,
+            key: columnKey,
+          } = column;
+          let rendered: React.ReactNode | string = '';
+          if (dataIndex) {
+            // eslint-disable-next-line max-len
+            rendered = (data as ({[key: string]: unknown}))[dataIndex] as string;
+          }
+          if (render) {
+            rendered = render(rendered as React.ReactNode, data, index);
+          }
+          const objectRendered = rendered as RenderReturnObjectType;
+          let ext = {};
+          if (typeof objectRendered === 'object' && 'children' in objectRendered) {
+            const { children, props } = objectRendered;
+            rendered = children;
+            props && (ext = props);
+          }
+          return {
+            children: rendered,
+            align,
+            key: columnKey || dataIndex,
+            props: ext,
+          };
+        });
+        return { key: this.rowKey(data), children: cols } as RowProps;
       });
-      return { key: this.rowKey(data), children: cols } as RowProps;
-    });
     return transformData;
+  }
+
+  onMouseOver = (rowKey: string) => () => {
+    this.setState({
+      selectedRowKey: rowKey,
+    });
+  }
+
+  onMouseOut = () => {
+    this.setState({
+      selectedRowKey: '',
+    });
   }
 
   // 渲染表内容
@@ -227,8 +332,15 @@ export default class Table extends React.Component<TableProps, TableState> {
     columns: ColumnsProps[],
     dataSource: unknown[],
   ) => {
+    const { selectedRowKey } = this.state;
     const results = this.formateDataSource(dataSource, columns).map((row) => (
-      <tr key={row.key} data-tr-key={row.key}>
+      <tr
+        key={row.key}
+        data-tr-key={row.key}
+        onMouseOver={this.onMouseOver(row.key)}
+        onMouseOut={this.onMouseOut}
+        className={classnames({ [`${prefix}-row-hover`]: row.key === selectedRowKey })}
+      >
         {
           row.children.map((col) => {
             const {
@@ -337,13 +449,12 @@ export default class Table extends React.Component<TableProps, TableState> {
       return result && composed;
     }, true);
     const someoneChecked = selectedRowKeys.length > defaultSelectdRowKeys.length;
-    // eslint-disable-next-line max-len
     const allCheckboxProps = {
-      indeterminate: !selectedAll,
-      checked: someoneChecked,
-      onChange: (checked: boolean) => {
+      indeterminate: someoneChecked && !selectedAll,
+      checked: selectedAll,
+      onChange: () => {
         let currentSelectedRowKeys: unknown[] = [];
-        if (!selectedAll || checked) {
+        if (!selectedAll) {
           const allcheckableKeys = dataSource.filter((item) => {
             const props = getCheckboxProps(item);
             return !props.disabled;
