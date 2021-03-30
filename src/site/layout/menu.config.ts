@@ -117,6 +117,10 @@ export default [
         title: 'Upload 上传',
         key: 'upload',
       },
+      {
+        title: 'Form 表单',
+        key: 'form',
+      },
     ],
   },
   {

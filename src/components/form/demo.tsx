@@ -288,6 +288,7 @@ export default () => {
           <FormItem
             name="test3"
             label="评分"
+            initialValue={3}
           >
             <Rate onChange={(e) => console.log('e', e)} />
           </FormItem>

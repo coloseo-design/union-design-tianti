@@ -12,8 +12,8 @@ export default () => {
       <Radio checked disabled>A</Radio>
       <Radio disabled>B</Radio>
 
-      <Radio.Group options={options} value="Apple" name="radio-wapper" onChange={(e) => { console.log('value', e.target.value); }} />
-      <Radio.Group value="D" name="radio-radio">
+      <Radio.Group options={options} defaultValue="Apple" name="radio1" onChange={(e) => { console.log('value', e.target.value); }} />
+      <Radio.Group defaultValue="D" name="radio2">
         <Radio value="A" style={{ display: 'block' }}>A</Radio>
         <Radio value="B" style={{ display: 'block' }}>B</Radio>
         <Radio value="C" style={{ display: 'block' }}>C</Radio>
