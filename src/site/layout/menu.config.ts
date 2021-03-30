@@ -199,6 +199,14 @@ export default [
         title: 'Popconfirm 气泡确认框',
         key: 'pop-confirm',
       },
+      {
+        title: 'Spin 加载中',
+        key: 'spin',
+      },
+      {
+        title: 'Progress 进度条',
+        key: 'progress',
+      },
     ],
   },
   {

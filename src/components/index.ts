@@ -61,3 +61,5 @@ export { default as Notification } from './notification';
 export { default as Message } from './message';
 export { default as Popover } from './pop-over';
 export { default as Drawer } from './drawer';
+export { default as Progress } from './progress';
+export { default as Spin } from './spin';

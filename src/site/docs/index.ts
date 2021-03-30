@@ -59,6 +59,8 @@ export { default as PopConfirm } from './pop-confirm/pop-confirm';
 /* eslint-disable */
 export { default as PopOver } from './pop-over/pop-over';
 /* eslint-disable */
+export { default as Progress } from './progress/progress';
+/* eslint-disable */
 export { default as Radio } from './radio/radio';
 /* eslint-disable */
 export { default as Rate } from './rate/rate';
@@ -68,6 +70,8 @@ export { default as Result } from './result/result';
 export { default as Select } from './select/select';
 /* eslint-disable */
 export { default as Slider } from './slider/slider';
+/* eslint-disable */
+export { default as Spin } from './spin/spin';
 /* eslint-disable */
 export { default as Statistic } from './statistic/statistic';
 /* eslint-disable */

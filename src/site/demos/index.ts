@@ -28,11 +28,13 @@
 /* eslint-disable */export { default as PageHeader } from '../../components/pageHeader/demo';
 /* eslint-disable */export { default as PopConfirm } from '../../components/pop-confirm/demo';
 /* eslint-disable */export { default as PopOver } from '../../components/pop-over/demo';
+/* eslint-disable */export { default as Progress } from '../../components/progress/demo';
 /* eslint-disable */export { default as Radio } from '../../components/radio/demo';
 /* eslint-disable */export { default as Rate } from '../../components/rate/demo';
 /* eslint-disable */export { default as Result } from '../../components/result/demo';
 /* eslint-disable */export { default as Select } from '../../components/select/demo';
 /* eslint-disable */export { default as Slider } from '../../components/slider/demo';
+/* eslint-disable */export { default as Spin } from '../../components/spin/demo';
 /* eslint-disable */export { default as Statistic } from '../../components/statistic/demo';
 /* eslint-disable */export { default as Switch } from '../../components/switch/demo';
 /* eslint-disable */export { default as Table } from '../../components/table/demo';
