@@ -13,6 +13,7 @@
 /* eslint-disable */export { default as Collapse } from '../../components/collapse/demo';
 /* eslint-disable */export { default as DatePicker } from '../../components/date-picker/demo';
 /* eslint-disable */export { default as Descriptions } from '../../components/descriptions/demo';
+/* eslint-disable */export { default as Drawer } from '../../components/drawer/demo';
 /* eslint-disable */export { default as DropDown } from '../../components/drop-down/demo';
 /* eslint-disable */export { default as Form } from '../../components/form/demo';
 /* eslint-disable */export { default as Grid } from '../../components/grid/demo';
@@ -21,9 +22,12 @@
 /* eslint-disable */export { default as InputNumber } from '../../components/input-number/demo';
 /* eslint-disable */export { default as Layout } from '../../components/layout/demo';
 /* eslint-disable */export { default as List } from '../../components/list/demo';
+/* eslint-disable */export { default as Message } from '../../components/message/demo';
 /* eslint-disable */export { default as Modal } from '../../components/modal/demo';
+/* eslint-disable */export { default as Notification } from '../../components/notification/demo';
 /* eslint-disable */export { default as PageHeader } from '../../components/pageHeader/demo';
 /* eslint-disable */export { default as PopConfirm } from '../../components/pop-confirm/demo';
+/* eslint-disable */export { default as PopOver } from '../../components/pop-over/demo';
 /* eslint-disable */export { default as Radio } from '../../components/radio/demo';
 /* eslint-disable */export { default as Rate } from '../../components/rate/demo';
 /* eslint-disable */export { default as Result } from '../../components/result/demo';

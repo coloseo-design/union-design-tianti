@@ -1,0 +1,81 @@
+@import "../../style/themes/index";
+@import "../../style/mixins/index";
+
+@message: ~"@{uni-prefix}-notification";
+
+.@{message}-wrap {
+    padding: 0 40px 0 0;
+    animation: in 0.2s linear;
+
+    & > .container {
+        display: inline-block;
+        width: 384px;
+        margin: 10px auto;
+        padding: 16px 24px;
+        box-shadow: @shadow-2;
+        background-color: @white;
+        border-radius: @border-radius-base;
+        pointer-events: auto;
+
+        & > .head {
+            position: relative;
+            width: 100%;
+
+            & > .icon,
+            & > .title,
+            & > .close {
+                display: inline-block;
+                vertical-align: middle;
+            }
+
+            & > .icon,
+            & > .close{
+                width: 24px;
+            }
+
+            & > .icon {
+                margin-right: 10px;
+            }
+
+            & > .close {
+                margin-left: 10px;
+            }
+
+            & > .title {
+                font-size: 16px;
+                line-height: 24px;
+                font-weight: bold;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+
+            & > .icon,
+            & > .close {
+                font-size: 24px;
+                user-select: none;
+                cursor: pointer;
+            }
+        }
+
+        & > .content {
+            font-size: 14px;
+            line-height: 22px;
+            color: rgba(0, 0, 0, 0.65);
+        }
+    }
+}
+
+@keyframes in {
+    from { 
+        opacity: 0; 
+        z-index: -1;
+        transform: translateX(20%);
+    }
+
+    to { 
+        opacity: 1; 
+        z-index: 0;
+        transform: translateX(0);
+    }
+}

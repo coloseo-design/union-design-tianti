@@ -1,0 +1,62 @@
+@import "../../style/themes/index";
+@import "../../style/mixins/index";
+
+@drawer: ~"@{uni-prefix}-drawer";
+
+@drawer-head-color: #E9EBF0;
+@drawer-bg-color: #F9FAFB;
+
+.@{drawer}-mask {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.@{drawer}-content {
+    position: fixed;
+    background: @drawer-bg-color;
+
+    & > div {
+        width: 100%;
+        height: 100%;
+        position: relative;
+
+        & > .head,
+        & > .body,
+        & > .footer {
+            position: absolute;
+            width: 100%;
+        }
+
+        & > .head{
+            top: 0;
+            & > .default {
+                height: 34px;
+                line-height: 34px;
+                background-color: @drawer-head-color;
+                padding: 0 16px;
+                font-weight: bold;
+
+                & > .close {
+                    float: right;
+                    cursor: pointer;
+                }
+            }
+        }
+
+        & > .body{
+            overflow: auto;
+        }
+
+        & > .footer{
+            bottom: 0;
+            & > .default {
+                height: 48px;
+                box-shadow: -2px 2px 6px 0 rgba(147,147,147,0.35);
+            }
+        }
+    }
+}
