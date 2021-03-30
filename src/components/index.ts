@@ -66,3 +66,4 @@ export { default as Spin } from './spin';
 export { default as Divider } from './divider';
 export { default as Pagination } from './pagination';
 export { default as Menu } from './menu';
+export { default as BackTop } from './backTop';
