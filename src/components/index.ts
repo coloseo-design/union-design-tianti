@@ -24,3 +24,4 @@ export { default as Modal } from './modal';
 export { default as Icon } from './icon';
 export { default as Popconfirm } from './pop-confirm';
 export { default as Result } from './result';
+export { default as PageHeader } from './pageHeader';
