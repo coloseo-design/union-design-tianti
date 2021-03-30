@@ -37,6 +37,14 @@ interface ColumnsProps {
   title: React.ReactNode;
   /** 宽度 */
   width: string | number;
+  /** filter数据列表 */
+  filters?: {text: React.ReactNode; value: string }[];
+  /** 过滤器 */
+  onFilter?: (value: unknown, record: unknown) => boolean;
+  /** 筛选控制 */
+  filteredValue: string[];
+  /** 筛选控制 */
+  defaultFilteredValue: string[];
 }
 
 type RowKeyType = string | ((record: unknown) => string);
@@ -187,39 +195,59 @@ export default class Table extends React.Component<TableProps, TableState> {
     return key;
   }
 
+  /**
+   * 构造筛选器
+   * @returns
+   */
+  filterDataSourceFilter = () => {
+    const { columns } = this.props;
+    const reducer = columns.reduce((composed, column) => {
+      const { filteredValue, defaultFilteredValue, onFilter } = column;
+      const values = (filteredValue || defaultFilteredValue || []);
+      const filter = (row: unknown) => values.reduce((c, i) => {
+        const r = onFilter ? onFilter(i, row) : true;
+        return c && r;
+      }, true);
+      return (value: unknown, ...rest) => filter(value, ...rest) && composed(value, ...rest);
+    }, (a: unknown) => a);
+    return reducer;
+  }
+
   formateDataSource = (dataSource: unknown[], columns: ColumnsProps[]): RowProps[] => {
-    const transformData = dataSource.map((data, index) => {
-      const cols = columns.map((column) => {
-        const {
-          align = 'left',
-          render,
-          dataIndex,
-          key: columnKey,
-        } = column;
-        let rendered: React.ReactNode | string = '';
-        if (dataIndex) {
-          // eslint-disable-next-line max-len
-          rendered = (data as ({[key: string]: unknown}))[dataIndex] as string;
-        }
-        if (render) {
-          rendered = render(rendered as React.ReactNode, data, index);
-        }
-        const objectRendered = rendered as RenderReturnObjectType;
-        let ext = {};
-        if (typeof objectRendered === 'object' && 'children' in objectRendered) {
-          const { children, props } = objectRendered;
-          rendered = children;
-          props && (ext = props);
-        }
-        return {
-          children: rendered,
-          align,
-          key: columnKey || dataIndex,
-          props: ext,
-        };
+    const transformData = dataSource
+      .filter(this.filterDataSourceFilter())
+      .map((data, index) => {
+        const cols = columns.map((column) => {
+          const {
+            align = 'left',
+            render,
+            dataIndex,
+            key: columnKey,
+          } = column;
+          let rendered: React.ReactNode | string = '';
+          if (dataIndex) {
+            // eslint-disable-next-line max-len
+            rendered = (data as ({[key: string]: unknown}))[dataIndex] as string;
+          }
+          if (render) {
+            rendered = render(rendered as React.ReactNode, data, index);
+          }
+          const objectRendered = rendered as RenderReturnObjectType;
+          let ext = {};
+          if (typeof objectRendered === 'object' && 'children' in objectRendered) {
+            const { children, props } = objectRendered;
+            rendered = children;
+            props && (ext = props);
+          }
+          return {
+            children: rendered,
+            align,
+            key: columnKey || dataIndex,
+            props: ext,
+          };
+        });
+        return { key: this.rowKey(data), children: cols } as RowProps;
       });
-      return { key: this.rowKey(data), children: cols } as RowProps;
-    });
     return transformData;
   }
 
@@ -358,13 +386,12 @@ export default class Table extends React.Component<TableProps, TableState> {
       return result && composed;
     }, true);
     const someoneChecked = selectedRowKeys.length > defaultSelectdRowKeys.length;
-    // eslint-disable-next-line max-len
     const allCheckboxProps = {
-      indeterminate: !selectedAll,
-      checked: someoneChecked,
-      onChange: (checked: boolean) => {
+      indeterminate: someoneChecked && !selectedAll,
+      checked: selectedAll,
+      onChange: () => {
         let currentSelectedRowKeys: unknown[] = [];
-        if (!selectedAll || checked) {
+        if (!selectedAll) {
           const allcheckableKeys = dataSource.filter((item) => {
             const props = getCheckboxProps(item);
             return !props.disabled;

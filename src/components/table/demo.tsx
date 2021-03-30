@@ -75,6 +75,8 @@ const columns = [
     key: 'name',
     width: 150,
     fixed: true,
+    filteredValue: ['Jim'],
+    onFilter: (value, record) => record.name.includes(value),
   },
   {
     title: '年龄',
@@ -87,6 +89,8 @@ const columns = [
     title: '住址',
     dataIndex: 'address',
     key: 'address',
+    filteredValue: ['London No. 2 Lake Park'],
+    onFilter: (value, record) => record.address.includes(value),
     // eslint-disable-next-line react/display-name
     render: (k: string, row: any) => (
       <div>
@@ -234,7 +238,7 @@ const rowSelection = {
 
 const TableDemo: React.FC<unknown> = () => (
   <div style={{ padding: 32, background: '#fff' }}>
-    <div>
+    {/* <div>
       <h4>基础表格</h4>
       <div>
         <Table
@@ -270,7 +274,7 @@ const TableDemo: React.FC<unknown> = () => (
       <div>
         <Table rowSelection={rowSelection} columns={columns} dataSource={data} rowKey="key" scroll={{ y: 200, x: 1500 }} />,
       </div>
-    </div>
+    </div> */}
     <div>
       <h4>可编辑行</h4>
       <div>

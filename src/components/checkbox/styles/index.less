@@ -90,6 +90,8 @@
 .@{checkbox-prefix-cls}-indeterminate {
   .@{checkbox-inner-prefix-cls} {
     background-color: #fff;
+    // background-color: @checkbox-color;
+    border-color: @checkbox-color;
     &::after {
       top: 50%;
       left: 50%;
@@ -97,6 +99,7 @@
       height: 8px;
       background-color: @checkbox-color;
       border: 0;
+      opacity: 1;
       transform: translate(-50%,-50%) scale(1);
       content: ""
     }
