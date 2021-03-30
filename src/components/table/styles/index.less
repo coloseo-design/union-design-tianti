@@ -56,6 +56,26 @@
   }
 }
 
+// 过滤器
+.@{table-prefix-cls}-filter {
+  padding: 12px;
+  .@{table-prefix-cls}-filter-item + .@{table-prefix-cls}-filter-item {
+    margin-top: 8px;
+  }
+  .@{table-prefix-cls}-filter-footer {
+    margin-top: 15px;
+    .clearfix();
+    button {
+      &:first-child {
+        float: left;
+      }
+      &:last-child {
+        float: right;
+      }
+    }
+  }
+}
+
 // 表格基础样式
 .@{table-prefix-cls} {
   width: 100%;

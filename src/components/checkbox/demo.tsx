@@ -20,9 +20,9 @@ export default () => {
   return (
     <>
       <Group style={{ padding: 20 }} onChange={onChange} value={['a']} options={options} />
-      <Group style={{ padding: 20 }} onChange={onChange} value={['hello']}>
-        <Checkbox>hello</Checkbox>
-        <Checkbox>hello2</Checkbox>
+      <Group style={{ padding: 20 }} onChange={onChange} value={['hello', 'hello2']}>
+        <Checkbox value="hello">hello</Checkbox>
+        <Checkbox value="hello2">hello2</Checkbox>
       </Group>
       <Checkbox onChange={onChecked} checked={checked}>abc</Checkbox>
       <Checkbox indeterminate />

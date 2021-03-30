@@ -77,7 +77,7 @@ class Checkbox extends React.Component<CheckboxProps, CheckboxState> {
     // eslint-disable-next-line no-underscore-dangle
     const _value = value || children;
     // 如果是来自于group的values
-    if (groupContextProps && 'values' in groupContextProps) {
+    if (groupContextProps && 'value' in groupContextProps) {
       checked = values.includes(_value as string);
     }
     const prefix = getPrefixCls('checkbox', customizePrefixCls);

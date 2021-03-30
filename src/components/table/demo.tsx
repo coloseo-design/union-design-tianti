@@ -75,7 +75,17 @@ const columns = [
     key: 'name',
     width: 150,
     fixed: true,
-    filteredValue: ['Jim'],
+    filteredValue: ['Jim', 'Joe'],
+    filters: [
+      {
+        text: 'Jim family',
+        value: 'Jim',
+      },
+      {
+        text: 'Joe family',
+        value: 'Joe',
+      },
+    ],
     onFilter: (value, record) => record.name.includes(value),
   },
   {
@@ -89,7 +99,17 @@ const columns = [
     title: '住址',
     dataIndex: 'address',
     key: 'address',
-    filteredValue: ['London No. 2 Lake Park'],
+    filteredValue: ['No. 1'],
+    filters: [
+      {
+        text: 'Jim family',
+        value: 'No. 1',
+      },
+      {
+        text: 'Joe family',
+        value: 'No. 2',
+      },
+    ],
     onFilter: (value, record) => record.address.includes(value),
     // eslint-disable-next-line react/display-name
     render: (k: string, row: any) => (

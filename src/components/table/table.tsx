@@ -1,8 +1,12 @@
 import React from 'react';
 import classnames from 'classnames';
 import { ConfigConsumerProps, withGlobalConfig } from '../config-provider';
-import Icon from '../icon';
-import Checkbox from '../checkbox';
+import {
+  Icon,
+  Dropdown,
+  Checkbox,
+} from '..';
+import Filter from './filter';
 
 type ColumnsAlign = 'left' | 'right' | 'center';
 type FixedType = 'left' | 'right';
@@ -96,7 +100,10 @@ interface TableState {
   // columns: ColumnsProps[];
   /** 选中的列 */
   selectedRowKeys: unknown[];
-  selectedRowKey: string,
+  selectedRowKey: string;
+  filters: {
+    [key: string]: string[]
+  }
 }
 
 interface ColProps {
@@ -132,10 +139,18 @@ export default class Table extends React.Component<TableProps, TableState> {
     this.rightTableBodyRef = React.createRef<HTMLDivElement>();
     this.mainTableHeaderRef = React.createRef<HTMLDivElement>();
     this.mainTableBodyRef = React.createRef<HTMLDivElement>();
-    const { rowSelection: { selectedRowKeys = [] } = {} } = props;
+    const { rowSelection: { selectedRowKeys = [] } = {}, columns } = props;
+    const filters = columns.reduce<{[key: string]: string[]}>((c, i) => {
+      // if (i.filteredValue || i.defaultFilteredValue) {
+      const key = i.dataIndex || i.key || '';
+      Object.assign(c, { [key]: i.filteredValue || i.defaultFilteredValue || [] });
+      // }
+      return c;
+    }, {});
     this.state = {
       selectedRowKeys: [...selectedRowKeys] || [],
       selectedRowKey: '',
+      filters,
     };
   }
 
@@ -162,6 +177,36 @@ export default class Table extends React.Component<TableProps, TableState> {
     </colgroup>
   )
 
+  getOveray = (filters, column: ColumnsProps) => {
+    const { dataIndex, key } = column;
+    const name = dataIndex || key || '';
+    const mappedFilters = filters.map((item) => ({
+      ...item,
+      label: item.text,
+    }));
+    const { filters: filtersFromState } = this.state;
+    const onSubmit = (values: string[]) => {
+      this.setState({
+        filters: {
+          ...filtersFromState,
+          [name]: values,
+        },
+      });
+    };
+    const onReset = () => {
+      onSubmit([]);
+    };
+    return (
+      <Filter
+        dataSource={mappedFilters}
+        onSubmit={onSubmit}
+        onReset={onReset}
+        prefix={this.getPrefixCls()}
+        values={filtersFromState[name]}
+      />
+    );
+  };
+
   // 渲染表头
   renderHeader = (columns: ColumnsProps[]) => (
     <thead>
@@ -174,7 +219,18 @@ export default class Table extends React.Component<TableProps, TableState> {
             }
             return (
               <th key={column.key || column.dataIndex} colSpan={column.colSpan}>
-                <span>{column.title}</span>
+                <span>
+                  {column.title}
+                  { column.filters?.length && (
+                    <Dropdown
+                      placement="bottomCenter"
+                      overlay={this.getOveray(column.filters, column)}
+                      trigger={['click']}
+                    >
+                      <Icon type="sizer" style={{ marginLeft: 5, display: 'inline-block', width: 20 }} />
+                    </Dropdown>
+                  )}
+                </span>
               </th>
             );
           })
@@ -201,16 +257,23 @@ export default class Table extends React.Component<TableProps, TableState> {
    */
   filterDataSourceFilter = () => {
     const { columns } = this.props;
-    const reducer = columns.reduce((composed, column) => {
-      const { filteredValue, defaultFilteredValue, onFilter } = column;
-      const values = (filteredValue || defaultFilteredValue || []);
-      const filter = (row: unknown) => values.reduce((c, i) => {
-        const r = onFilter ? onFilter(i, row) : true;
-        return c && r;
-      }, true);
+    const { filters } = this.state;
+    return columns.reduce((composed, column) => {
+      const { onFilter, dataIndex, key } = column;
+      const name = dataIndex || key || '';
+      const values = filters[name];
+      let filter = (row: unknown) => (!values.length
+        ? true
+        : values.reduce((c, i) => {
+          const r = onFilter ? onFilter(i, row) : true;
+          return c || r;
+        }, false));
+      if (!values.length) {
+        filter = () => true;
+      }
       return (value: unknown, ...rest) => filter(value, ...rest) && composed(value, ...rest);
-    }, (a: unknown) => a);
-    return reducer;
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    }, (value: unknown) => true);
   }
 
   formateDataSource = (dataSource: unknown[], columns: ColumnsProps[]): RowProps[] => {
