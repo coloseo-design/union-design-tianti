@@ -27,6 +27,8 @@ export { default as DatePicker } from './date-picker/date-picker';
 /* eslint-disable */
 export { default as Descriptions } from './descriptions/descriptions';
 /* eslint-disable */
+export { default as Drawer } from './drawer/drawer';
+/* eslint-disable */
 export { default as DropDown } from './drop-down/drop-down';
 /* eslint-disable */
 export { default as Form } from './form/form';
@@ -41,13 +43,19 @@ export { default as InputNumber } from './input-number/input-number';
 /* eslint-disable */
 export { default as Layout } from './layout/layout';
 /* eslint-disable */
+export { default as Message } from './message/message';
+/* eslint-disable */
 export { default as List } from './list/list';
 /* eslint-disable */
 export { default as Modal } from './modal/modal';
 /* eslint-disable */
+export { default as Notification } from './notification/notification';
+/* eslint-disable */
 export { default as PageHeader } from './pageHeader/pageHeader';
 /* eslint-disable */
 export { default as PopConfirm } from './pop-confirm/pop-confirm';
+/* eslint-disable */
+export { default as PopOver } from './pop-over/pop-over';
 /* eslint-disable */
 export { default as Radio } from './radio/radio';
 /* eslint-disable */
