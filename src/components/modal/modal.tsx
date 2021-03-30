@@ -69,10 +69,6 @@ class Modal extends React.Component<ModalProps, ModalState, ModalMethodProps> {
 
   static confirm: (props: ModalMethodProps) => void;
 
-  // state: ModalState = {
-  //   visible: this.props.visible || false,
-  //   modalTransition: false,
-  // }
   constructor(props: ModalProps) {
     super(props);
     const { visible } = props;
@@ -181,15 +177,16 @@ class Modal extends React.Component<ModalProps, ModalState, ModalMethodProps> {
       [`${prefix}-show`]: visible,
     });
     const maskCalss = classNames(`${prefix}-mask`, {
-      [`${prefix}-mask-hidden`]: !mask || !visible,
+      [`${prefix}-mask-hidden`]: !mask,
       [`${prefix}-mask-transition`]: modalTransition,
     });
     const wrapper = classNames(`${prefix}-wrapper`, wrapClassName, {
       [`${prefix}-centered`]: centered,
     });
-    const wrapperContent = classNames(`${prefix}-wrapper-content`, {
+    const wrapperContent1 = classNames(`${prefix}-wrapper-content`, {
       [`${prefix}-wrapper-content-hidden`]: modalTransition,
     });
+    const wrapperContent = classNames(`${prefix}-wrapper-content`);
     const iconStyle = classNames(`${prefix}-wrapper-content-methodBody-${methodType}`);
 
     const operationBtn = (
@@ -221,7 +218,7 @@ class Modal extends React.Component<ModalProps, ModalState, ModalMethodProps> {
       <>
         <div className={`${wrapperContent}-methodBody`}>
           <span className={`${wrapperContent}-methodBody-icon`} style={{ transform: methodType === 'info' ? 'rotate(180deg)' : 'rotate(0deg)' }}>
-            {icon && React.isValidElement(icon) ? icon : <Icon type={icon && typeof icon === 'string' ? icon : IconMapping[methodType]} className={iconStyle} style={{ fontSize: 24 }} />}
+            {icon && React.isValidElement(icon) ? icon : <Icon type={icon && typeof icon === 'string' ? icon : methodType && IconMapping[methodType]} className={iconStyle} style={{ fontSize: 24 }} />}
           </span>
           <span className={`${wrapperContent}-methodBody-title`}>{title}</span>
           <span className={`${wrapperContent}-methodBody-content`}>{content}</span>
@@ -237,10 +234,10 @@ class Modal extends React.Component<ModalProps, ModalState, ModalMethodProps> {
       <Portal {...({ getPopupContainer })}>
         <div className={container}>
           <div className={maskCalss} style={{ ...maskStyle, zIndex }} />
-          <div className={wrapper} onClick={this.handleMask} style={{ zIndex, display: visible ? 'block' : 'none' }}>
+          <div className={wrapper} onClick={this.handleMask} style={{ zIndex }}>
             <div
-              className={wrapperContent}
-              style={{ ...style, width, transformOrigin: 'center' }}
+              className={wrapperContent1}
+              style={{ ...style, width }}
               onClick={(evt: React.MouseEvent<HTMLDivElement, MouseEvent>) => evt.stopPropagation()}
             >
               {!methodType && normalRender}
