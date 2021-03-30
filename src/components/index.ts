@@ -65,3 +65,4 @@ export { default as Progress } from './progress';
 export { default as Spin } from './spin';
 export { default as Divider } from './divider';
 export { default as Pagination } from './pagination';
+export { default as Menu } from './menu';

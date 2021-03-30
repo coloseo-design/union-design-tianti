@@ -54,6 +54,10 @@ export default [
         title: 'Pagination 分页',
         key: 'pagination',
       },
+      {
+        title: 'Menu 菜单',
+        key: 'menu',
+      },
     ],
   },
   {
