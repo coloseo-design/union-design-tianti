@@ -3,6 +3,7 @@
 /* eslint-disable */export { default as Button } from '../../components/button/demo';
 /* eslint-disable */export { default as Card } from '../../components/card/demo';
 /* eslint-disable */export { default as Checkbox } from '../../components/checkbox/demo';
+/* eslint-disable */export { default as DropDown } from '../../components/drop-down/demo';
 /* eslint-disable */export { default as Icon } from '../../components/icon/demo';
 /* eslint-disable */export { default as Layout } from '../../components/layout/demo';
 /* eslint-disable */export { default as Modal } from '../../components/modal/demo';

@@ -4,6 +4,8 @@
 @container: ~'@{uni-prefix}-modal';
 
 .@{container} {
+  padding: 0;
+  margin: 0;
   display: none;
   &-show {
     display: block;
@@ -19,9 +21,10 @@
     display: block;
     background-color: rgba(0,0,0,.45);
     opacity: 1;
+    transition: opacity 0.3s linear;
     &-transition {
       opacity: 0;
-      transition: all 0.3s linear;
+      transition: opacity 0.3s linear;
     }
     &-hidden {
       display: none;
@@ -62,13 +65,15 @@
       transform-origin: center;
       animation: fadein 0.3s linear;
       &-hidden {
-        animation: fadeout 0.3s linear;
+        transform-origin: center;
+        transform: scale(0);
+        transition: all 0.3s linear;
       }
       &-header {
+        position: relative;
         padding: 9px 14px 9px 16px;
         background-color: @tag-default-bg;
         border-radius: 2px 2px 0 0;
-        position: relative;
         &-title {
           font-size: 16px;
           color: rgba(0,0,0,0.85);
@@ -128,19 +133,16 @@
    transform: scale(0);
    opacity: 0.0;
   }
+  25% {
+    transform: scale(0.25);
+    opacity: 0.25;
+   }
+   50% {
+    transform: scale(0.5);
+    opacity: 0.5;
+   }
   100% {
    transform: scale(1);
    opacity: 1;
-  }
- }
-
- @keyframes fadeout {
-  0% {
-   transform: scale(1);
-   opacity: 1;
-  }
-  100% {
-   transform: scale(0);
-   opacity: 0.0;
   }
  }
