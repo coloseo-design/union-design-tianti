@@ -1,5 +1,6 @@
 /* eslint-disable */export { default as Affix } from '../../components/affix/demo';
 /* eslint-disable */export { default as Anchor } from '../../components/anchor/demo';
+/* eslint-disable */export { default as BackTop } from '../../components/backTop/demo';
 /* eslint-disable */export { default as Button } from '../../components/button/demo';
 /* eslint-disable */export { default as Card } from '../../components/card/demo';
 /* eslint-disable */export { default as Checkbox } from '../../components/checkbox/demo';
