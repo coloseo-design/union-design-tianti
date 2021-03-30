@@ -1,0 +1,50 @@
+@import '../../style/themes/index';
+@import '../../style/mixins/index';
+
+@rate-prefix-cls: ~'@{uni-prefix}-rate';
+
+.@{rate-prefix-cls} {
+  transform: rotateZ(180deg);
+  display: inline-block;
+  div[aria-name="rate"] {
+    transform: rotateZ(180deg);
+    cursor: pointer;
+    display: inline-block;
+    padding-right: 5px;
+    font-size: @rate-star-font-size;
+    transition: all 0.3s;
+    color: @rate-star-bg;
+
+    &:checked,
+    &:hover {
+      color:@rate-star-color;
+      opacity: 1;
+
+      // 兄弟元素一起高亮
+      &~div[aria-name="rate"] {
+        color:@rate-star-color;
+      }
+    }
+
+    &:hover {
+      transform: scale(1.2) rotateZ(180deg);
+    }
+  }
+
+  div[area-type="left"] {
+    opacity: 0;
+    .uniicon-half-star {
+      svg {
+        width: 0.5em;
+      }
+    }
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  div[aria-checked=true] {
+    color:@rate-star-color;
+    opacity: 1;
+  }
+}

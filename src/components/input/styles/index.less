@@ -1,0 +1,128 @@
+@import '../../style/themes/index';
+@import '../../style/mixins/index';
+@import './mixin';
+
+@input-prefix-cls: ~'@{uni-prefix}-input';
+@textarea-prefix-cls: ~'@{uni-prefix}-textarea';
+
+.@{input-prefix-cls} {
+  .input(100%);
+}
+
+.@{textarea-prefix-cls} {
+  .input(none; none);
+}
+
+.@{input-prefix-cls}-search {
+  .input(none);
+  position: relative;
+  padding: 0;
+  display: inline-block;
+  height: none;
+  border: none;
+  .@{input-prefix-cls}:not(:last-child) {
+    padding-right: 30px;
+    height: 100%;
+  }
+  .uniicon {
+    .uniicon();
+  }
+}
+
+.@{input-prefix-cls}-group {
+  display: inline-block;
+  >.@{uni-prefix}-input:not(:first-child):not(:last-child) {
+    border-radius: 0;
+  }
+  >.@{uni-prefix}-input:first-child {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+  >.@{uni-prefix}-input:last-child {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+  .addon{
+    display: inline-block;
+    font-size: @font-size-base;
+    padding: @input-padding-vertical-base @input-padding-horizontal-base;
+    box-sizing: border-box;
+    background: @input-disabled-bg;
+    height: 100%;
+  }
+  .addon:first-child {
+    border: @border-width-base @border-style-base @input-border-color;
+    border-radius: @border-radius-base 0 0 @border-radius-base;
+    border-right: none;
+  }
+  .addon:last-child {
+    border-radius: 0 @border-radius-base @border-radius-base 0;
+    border: @border-width-base @border-style-base @input-border-color;
+    border-left: none;
+  }
+}
+
+.@{input-prefix-cls}-wapper {
+  display: inline-flex;
+  align-items: center;
+  >.@{uni-prefix}-input:not(:first-child):not(:last-child) {
+    border-radius: 0;
+  }
+  >.@{uni-prefix}-input:first-child {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+  >.@{uni-prefix}-input:last-child {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+  .addon{
+    display: inline-block;
+    font-size: @font-size-base;
+    padding: @input-padding-vertical-base @input-padding-horizontal-base;
+    box-sizing: border-box;
+    background: @primary-color;
+    height: 100%;
+    color: @white;
+    cursor: pointer;
+    border-radius: 0 @border-radius-base @border-radius-base 0;
+    &:hover,
+    &:hover {
+      background: @input-search-button-hover-base;
+    }
+
+    &:active,
+    &.active {
+      background: @input-search-button-active-base;
+    }
+  }
+  .@{input-prefix-cls}:not(:last-child) {
+    padding-right: @input-padding-horizontal-base;
+    border-right: none;
+  }
+}
+
+.@{input-prefix-cls}-allowClear {
+  .input(none);
+  padding: 0;
+  display: inline-block;
+  border: none;
+  position: relative;
+  .uniicon {
+    .uniicon();
+  }
+}
+
+.@{textarea-prefix-cls}-allowClear {
+  position: relative;
+  display: inline-block;
+  box-sizing: border-box;
+  .@{textarea-prefix-cls}:not(:last-child) {
+    padding-right: 30px;
+  }
+  .uniicon {
+    .uniicon();
+    top: @input-padding-vertical-base;
+    transform: translateY(@input-padding-vertical-base);
+  }
+}

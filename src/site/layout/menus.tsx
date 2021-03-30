@@ -13,7 +13,7 @@ export interface Menu {
 
 interface MenuFCProps {
   menus: Menu[];
-  routeConfig: object,
+  routeConfig: {[key: string] : unknown},
 }
 
 const Menus: React.FC<MenuFCProps> = (props: MenuFCProps) => {

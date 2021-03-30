@@ -1,0 +1,37 @@
+@import "./common.less";
+
+.@{dpalias-popupyear}-normal {
+  position: relative;
+  width: @dpsize-popupyear-width;
+  height: @dpsize-popupyear-height;
+  padding: 12px;
+
+  & [data-class*="row"] {
+    position: relative;
+    height: 100% / 4;
+  }
+
+  & [data-class*="col"] {
+    .dp-v-center();
+    display: inline-block;
+    width: 100% / 3;
+    user-select: none;
+    cursor: pointer;
+  }
+
+  & .item-range-year-hover{
+    &:hover::before {
+      border-radius: @dpborder-radius;
+      background-color: @dpcolor-bg-hover;
+    }
+  }
+
+  .item-base(.dp-px-to-em(24px) [ @value]);
+  .item-cur-base(.dp-px-to-em(60px) [ @value]);
+  .item-notcur-base();
+  .item-disabled-base();
+  .item-hover-base(.dp-px-to-em(60px) [ @value]);
+  .item-selected-base(.dp-px-to-em(60px) [ @value]);
+  .item-border-range-base();
+  .item-bg-range-base();
+}

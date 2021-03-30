@@ -8,7 +8,7 @@ interface contextProps {
   currentHref?: string;
   getContainer?: () => HTMLElement;
   onChange?: (currentActiveLink: string) => void;
-  onClick?: (e: unknown, link: object) => void;
+  onClick?: (e: unknown, link: {[key: string] : unknown}) => void;
 }
 
 export const AnchorContext = React.createContext<contextProps>({

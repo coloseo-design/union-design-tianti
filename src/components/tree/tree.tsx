@@ -116,7 +116,7 @@ class Tree extends React.Component<TreeProps, TreeState> {
     this.setState({ expandKeys: lastkeys });
   };
 
-  handleSelect = (key: string, node: any, other: object) => {
+  handleSelect = (key: string, node: any, other: {[key: string] : unknown}) => {
     const { selectedKeys, smooth, multiple } = this.state;
     const {
       onSelect,
@@ -140,7 +140,7 @@ class Tree extends React.Component<TreeProps, TreeState> {
     this.setState({ selectedKeys: lastSelected });
   };
 
-  handleChecked = (key: string, checked: boolean, other: object) => {
+  handleChecked = (key: string, checked: boolean, other: {[key: string] : unknown}) => {
     const { smooth, checkedKeys } = this.state;
     const { onCheck, checkStrictly = false, children } = this.props;
     if (checkStrictly) { // 父子节点各选各的

@@ -1,0 +1,103 @@
+@import "./common.less";
+
+.@{dpalias-popupdate}-normal {
+  position: relative;
+  width: @dpsize-popupdate-width;
+  height: @dpsize-popupdate-height;
+  padding: 12px;
+
+  & [data-class*="row"] {
+    position: relative;
+    height: 100% / 7;
+  }
+
+  & [data-class*="col"] {
+    .dp-v-center();
+    display: inline-block;
+    width: 100% / 7;
+  }
+
+  & [data-class="head col"] {
+    cursor: default;
+    user-select: none;
+    font-weight: 500;
+  }
+
+  & [data-class="content col"] {
+    cursor: pointer;
+    user-select: none;
+    color: @dpcolor-text-65;
+    line-height: @dpsize-popupdate-item;
+  }
+
+  .item-base(.dp-px-to-em(24px) [ @value]);
+  .item-cur-base(.dp-px-to-em(24px) [ @value]);
+  .item-notcur-base();
+  .item-disabled-base();
+  .item-hover-base(.dp-px-to-em(24px) [ @value]);
+  .item-selected-base(.dp-px-to-em(24px) [ @value]);
+  .item-border-range-base();
+  .item-bg-range-base();
+}
+
+.@{dpalias-popupdate}-normal-footer {
+  height: @dpsize-popupfooter-height;
+  padding: 4px 12px;
+  position: relative;
+  box-sizing: border-box;
+  border-top: @dpborder-split-line;
+
+  & > button {
+    .dp-vh-center();
+    font-size: inherit;
+  }
+}
+
+.@{dpalias-popupdate}-showtime {
+  & > div:nth-of-type(1),
+  & > div:nth-of-type(2) {
+    vertical-align: top;
+    display: inline-block;
+  }
+
+  & > div:nth-of-type(2) {
+    border-left: @dpborder-split-line;
+
+    & > div:nth-of-type(1) {
+      height: @dpsize-popuphead-height;
+      line-height: @dpsize-popuphead-height;
+      border-bottom: @dpborder-split-line;
+      font-weight: 500;
+      user-select: none;
+    }
+  }
+
+  & > div:last-of-type {
+    height: @dpsize-popupfooter-height;
+    border-top: @dpborder-split-line;
+  }
+}
+
+.@{dpalias-popupdate}-range {
+  & > div:nth-of-type(1) {
+    display: inline-block;
+  }
+
+  & > div:nth-of-type(2) {
+    display: inline-block;
+  }
+}
+
+// & [data-claa="item"]:hover::after {
+//   content: attr(data-tip);
+//   background-color: black;
+//   color: @white;
+//   transform: scale(0.8);
+//   position: absolute;
+//   display: block;
+//   z-index: 100;
+//   border-radius: @border-radius-base;
+//   width: 90px;
+//   bottom: 30px;
+//   left: -30px;
+// }

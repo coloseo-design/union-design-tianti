@@ -1,0 +1,44 @@
+@col-cls: ~'@{uni-prefix}-col';
+@cols: range(@grid-columns);
+
+// Media queries breakpoints
+@med-query-map : {
+  // Extra small screen / phone
+  480px: -xs;
+  // Small screen / tablet
+  576px: -sm;
+  // Medium screen / desktop
+  768px: -md;
+  // Large screen / wide desktop
+  992px: -lg;
+  // Extra large screen / full hd
+  1200px: -xl;
+  // Extra extra large screen / large desktop
+  1600px: -xxl;
+};
+
+.generate-cols();
+each(@med-query-map, {
+  @media (min-width: @key) {
+    .generate-cols(@value);
+  }
+});
+
+.generate-cols(@class: ~'') {
+  each(@cols, {
+    @col-width: percentage(@index / @grid-columns);
+    .@{col-cls}@{class}-@{index} {
+      flex: 0 0 auto;
+      float: left;
+      display: block;
+      width: @col-width;
+    }
+    .@{col-cls}@{class}-offset-@{index} {
+      margin-left: @col-width;
+    }
+    .@{col-cls}@{class}-order-@{index} {
+      order: @index;
+    }
+  });
+};
+

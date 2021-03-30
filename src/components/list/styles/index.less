@@ -1,0 +1,49 @@
+@import '../../style/themes/index';
+@import '../../style/mixins/index';
+
+@list-prefix-cls: ~'@{uni-prefix}-list';
+
+.@{list-prefix-cls} {
+  color: @descriptions-content;
+  background: @white;
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+  &-items {
+    .@{list-prefix-cls}-item {
+      padding: @list-item-padding;
+      border-bottom: 1px solid @border-color-split;
+      clear: both;
+      overflow: auto;
+      position: relative;
+      &-meta {
+        float: left;
+        &-title {
+          color: @descriptions-content;
+        }
+        &-description {
+          color: @descriptions-label;
+        }
+      }
+      &-actions {
+        margin-left: 48px;
+        float: right;
+        position: absolute;
+        top: 50%;
+        right: @list-item-padding-horizontal-padding;
+        transform: translateY(-50%);
+        li {
+          display: inline-block;
+          &:not(:last-child) {
+            ::after {
+              content: '|';
+              padding: 0 @list-item-actions-split-padding;
+              color: @list-item-actions-split-color;
+            }
+          }
+        }
+      }
+    }
+  }
+}

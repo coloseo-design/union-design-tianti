@@ -1,0 +1,47 @@
+@import '../../style/themes/index';
+@import '../../style/mixins/index';
+
+@tooltip-cls: ~'@{uni-prefix}-tooltip';
+
+
+.@{tooltip-cls} {
+  position: absolute;
+  visibility: hidden;
+  transition: visibility .3s ease-in-out;
+  &-content {
+    &-inner{
+      background-color: black;
+      color: #fff;
+      border-radius: 2px;
+      padding: 6px;
+      min-width: 30px;
+      min-height: 32px;
+    }
+    &-arrow {
+      width: 5px;
+      height: 5px;
+      background: black;
+      position: absolute;
+      transform: translate(-50%, -2.5px) rotate(45deg);
+    }
+    &-arrow-top {
+      bottom: -5px;
+      left: 50%;
+    }
+    &-arrow-bottom {
+      top: 0px;
+      left: 50%;
+    }
+    &-arrow-left {
+      right: -5px;
+      top: 50%;
+    }
+    &-arrow-right {
+      left: 0px;
+      top: 50%;
+    }
+  }
+}
+.@{tooltip-cls}-visible {
+  visibility: visible;
+}

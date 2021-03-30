@@ -1,0 +1,62 @@
+@import '../../style/themes/index';
+@import '../../style/mixins/index';
+
+@radio-prefix-cls: ~'@{uni-prefix}-radio';
+
+.@{radio-prefix-cls} {
+  position: relative;
+  transition: all .3s;
+  display: inline-block;
+  margin-right: 8px;
+  input[type="radio"] {
+    opacity: 0; //设置透明度，隐藏原有input样式
+    width: @radio-size;
+    height: @radio-size;
+    vertical-align: middle;
+    margin-top: -2px;
+    margin-bottom: 1px;
+    &[disabled]+span {
+      background: @disabled-background-color;
+    }
+    &[disabled]~span:last-child {
+      color: @disabled-color;
+    }
+  }
+  span:last-child {
+    padding-left: @radio-size / 2px;
+  }
+  input+span {
+    position: absolute;
+    left: 0;
+    top: 2px;
+    bottom: -1px;
+    width: @radio-size;
+    height: @radio-size;
+    border: @border-width-base @border-style-base @border;
+    border-radius: 50%;
+    &:hover {
+      border: @border-width-base @border-style-base @radio-dot-color;
+    }
+  }
+  input:checked+span {
+    background-color: @radio-button-bg;
+    border: @border-width-base @border-style-base @radio-dot-color;
+    border-radius: 50%;
+  }
+  input:checked,input:disabled+span {
+    border: @border-width-base @border-style-base @border;
+  }
+  input:checked+span::after {
+    position: absolute;
+    content: '';
+    width: @radio-center-button-width;
+    height: @radio-center-button-width;
+    border-radius: 50%;
+    top: (@radio-center-button-width - @border-width-base * 2) / 2px;
+    left: (@radio-center-button-width - @border-width-base * 2) / 2px;
+    background-color: @radio-dot-color;
+  }
+  input:checked,input:disabled+span::after {
+    background-color: @border;
+  }
+}

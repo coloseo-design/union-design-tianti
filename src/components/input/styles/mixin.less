@@ -1,0 +1,56 @@
+.input(@width: @input-width-base, @height: @input-height-base) {
+  position: relative;
+  width: @width;
+  height: @height;
+  background: @input-bg;
+  border: @border-width-base @border-style-base @input-border-color;
+  border-radius: @border-radius-base;
+  padding: @input-padding-vertical-base @input-padding-horizontal-base;
+  transition: all .3s;
+  color: @input-color;
+  box-sizing: border-box;
+  margin: 0;
+  font-variant: tabular-nums;
+  list-style: none;
+  font-feature-settings: "tnum";
+  font-size: @font-size-base;
+  vertical-align: bottom;
+  &:focus,
+  &:not([disabled]):not(.@{input-prefix-cls}-group):hover {
+    border-color: @input-hover-border-color;
+    border-right-width: @border-width-base;
+  }
+  &:focus {
+    outline: none;
+    border-color: @input-hover-border-color;
+    box-shadow: @input-box-shadow-base;
+    border-right-width: @border-width-base;
+  }
+  &:placeholder-shown {
+    text-overflow: ellipsis;
+  }
+  &::placeholder {
+    font-size: @font-size-base;
+    color: @input-placeholder-color;
+  }
+  &[disabled] {
+    background: @input-disabled-bg;
+    cursor: not-allowed;
+  }
+}
+
+.uniicon() {
+  position: absolute;
+  top: 50%;
+  z-index: 2;
+  transform: translateY(-50%);
+  right: @input-padding-horizontal-base;
+  color: @input-border-color;
+  &:hover {
+    cursor: pointer;
+    color: @gray-7;
+  }
+  &:active {
+    color: @input-border-color;
+  }
+}

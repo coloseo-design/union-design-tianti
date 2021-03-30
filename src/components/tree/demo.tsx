@@ -125,13 +125,13 @@ const data = [
   },
 ];
 const TreeDemo = () => {
-  const onExpand = (keys: string[], obj: object) => {
+  const onExpand = (keys: string[], obj: {[key: string] : unknown}) => {
     console.log('---keys', keys, obj);
   };
   const onSelect = (selectedKeys: string[], other: any) => {
     console.log('---selectedKeys', selectedKeys, other);
   };
-  const onCheck = (keys: string[], other: object) => {
+  const onCheck = (keys: string[], other: {[key: string] : unknown}) => {
     console.log('keys', keys, other);
   };
   return (
