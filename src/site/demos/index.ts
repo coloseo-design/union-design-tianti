@@ -3,6 +3,7 @@
 /* eslint-disable */export { default as Anchor } from '../../components/anchor/demo';
 /* eslint-disable */export { default as AutoComplete } from '../../components/auto-complete/demo';
 /* eslint-disable */export { default as Avatar } from '../../components/avatar/demo';
+/* eslint-disable */export { default as BackTop } from '../../components/backTop/demo';
 /* eslint-disable */export { default as Badge } from '../../components/badge/demo';
 /* eslint-disable */export { default as Breadcrumb } from '../../components/breadcrumb/demo';
 /* eslint-disable */export { default as Button } from '../../components/button/demo';

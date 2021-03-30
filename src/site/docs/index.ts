@@ -9,6 +9,8 @@ export { default as AutoComplete } from './auto-complete/auto-complete';
 /* eslint-disable */
 export { default as Avatar } from './avatar/avatar';
 /* eslint-disable */
+export { default as BackTop } from './backTop/backTop';
+/* eslint-disable */
 export { default as Badge } from './badge/badge';
 /* eslint-disable */
 export { default as Breadcrumb } from './breadcrumb/breadcrumb';
