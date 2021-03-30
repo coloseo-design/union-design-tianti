@@ -1,4 +1,5 @@
 /* eslint-disable */export { default as Affix } from '../../components/affix/demo';
+/* eslint-disable */export { default as Alert } from '../../components/alert/demo';
 /* eslint-disable */export { default as Anchor } from '../../components/anchor/demo';
 /* eslint-disable */export { default as AutoComplete } from '../../components/auto-complete/demo';
 /* eslint-disable */export { default as Avatar } from '../../components/avatar/demo';
