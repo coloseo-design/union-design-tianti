@@ -1,9 +1,9 @@
 /* eslint-disable */
 export { default as Affix } from './affix/affix';
 /* eslint-disable */
-export { default as Anchor } from './anchor/anchor';
-/* eslint-disable */
 export { default as Alert } from './alert/alert';
+/* eslint-disable */
+export { default as Anchor } from './anchor/anchor';
 /* eslint-disable */
 export { default as AutoComplete } from './auto-complete/auto-complete';
 /* eslint-disable */
@@ -62,6 +62,8 @@ export { default as Modal } from './modal/modal';
 export { default as Notification } from './notification/notification';
 /* eslint-disable */
 export { default as PageHeader } from './pageHeader/pageHeader';
+/* eslint-disable */
+export { default as Pagination } from './pagination/pagination';
 /* eslint-disable */
 export { default as PopConfirm } from './pop-confirm/pop-confirm';
 /* eslint-disable */

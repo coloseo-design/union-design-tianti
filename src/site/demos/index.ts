@@ -30,6 +30,7 @@
 /* eslint-disable */export { default as Modal } from '../../components/modal/demo';
 /* eslint-disable */export { default as Notification } from '../../components/notification/demo';
 /* eslint-disable */export { default as PageHeader } from '../../components/pageHeader/demo';
+/* eslint-disable */export { default as Pagination } from '../../components/pagination/demo';
 /* eslint-disable */export { default as PopConfirm } from '../../components/pop-confirm/demo';
 /* eslint-disable */export { default as PopOver } from '../../components/pop-over/demo';
 /* eslint-disable */export { default as Progress } from '../../components/progress/demo';

@@ -61,10 +61,7 @@ export { default as Notification } from './notification';
 export { default as Message } from './message';
 export { default as Popover } from './pop-over';
 export { default as Drawer } from './drawer';
-<<<<<<< HEAD
 export { default as Progress } from './progress';
 export { default as Spin } from './spin';
 export { default as Divider } from './divider';
-=======
 export { default as Pagination } from './pagination';
->>>>>>> 0a6321f (feat: 🎸 pagination)
