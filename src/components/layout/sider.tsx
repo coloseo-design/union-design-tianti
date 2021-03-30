@@ -73,7 +73,7 @@ class Sider extends Component<SiderProps, SiderState> {
     const _width = collapsed ? collapsedWidth : width;
 
     return (
-      <aside className={`${className} ${mainClass}`} style={{ width: _width, flex: `0 0 ${_width}`, ...style }}>
+      <aside className={`${className} ${mainClass}`} style={{ width: _width, flex: `0 0 ${_width}px`, ...style }}>
         <div className={`${prefix}-children`}>
           {children}
         </div>
