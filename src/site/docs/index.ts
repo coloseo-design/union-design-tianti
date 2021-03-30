@@ -11,6 +11,8 @@ export { default as Avatar } from './avatar/avatar';
 /* eslint-disable */
 export { default as Badge } from './badge/badge';
 /* eslint-disable */
+export { default as Breadcrumb } from './breadcrumb/breadcrumb';
+/* eslint-disable */
 export { default as Button } from './button/button';
 /* eslint-disable */
 export { default as Calendar } from './calendar/calendar';
@@ -38,6 +40,8 @@ export { default as Form } from './form/form';
 export { default as Grid } from './grid/grid';
 /* eslint-disable */
 export { default as Icon } from './icon/icon';
+/* eslint-disable */
+export { default as Image } from './image/image';
 /* eslint-disable */
 export { default as Input } from './input/input';
 /* eslint-disable */

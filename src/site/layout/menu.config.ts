@@ -42,6 +42,10 @@ export default [
         title: 'Dropdown 下拉菜单',
         key: 'drop-down',
       },
+      {
+        title: 'Breadcrumb 面包屑',
+        key: 'breadcrumb',
+      },
     ],
   },
   {
@@ -167,6 +171,10 @@ export default [
       {
         title: 'Tree 树形控件',
         key: 'tree',
+      },
+      {
+        title: 'Image 图片',
+        key: 'image',
       },
     ],
   },
