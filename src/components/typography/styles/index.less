@@ -1,0 +1,74 @@
+@import "../../style/themes/index";
+@import "../../style/mixins/index";
+
+@typography: ~"@{uni-prefix}-typography";
+
+.@{typography}-level1 {
+    font-size: 16px;
+    color: rgba(0, 0, 0, 0.85);
+    font-weight: bold;
+}
+
+.@{typography}-level2 {
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.85);
+    font-weight: bold;
+}
+
+.@{typography}-level3 {
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.85);
+    font-weight: normal;
+}
+
+.@{typography}-level4 {
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.65);
+    font-weight: normal;
+}
+
+.@{typography}-level5 {
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.45);
+    font-weight: normal;
+}
+
+.@{typography}-deleteline {
+    text-decoration: line-through;
+}
+
+.@{typography}-underline {
+    text-decoration: underline;
+}
+
+.@{typography}-strong {
+    font-weight: bold;
+}
+
+.@{typography}-success {
+    color: #44BF30;
+}
+
+.@{typography}-warning {
+    color: #FAAD14;
+}
+
+.@{typography}-danger {
+    color: #FF4D4F;
+}
+
+.@{typography}-link {
+    color: rgb(64, 124, 226);
+
+    &:link {
+        color: rgb(64, 124, 226);
+    }
+  
+    &:visited {
+        color: rgb(62, 109, 195);
+    }
+
+    &:hover {
+        color: rgb(107, 165, 241);
+    }
+}

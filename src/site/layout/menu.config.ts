@@ -12,6 +12,10 @@ export default [
         title: 'Icon 图标',
         key: 'icon',
       },
+      {
+        title: 'Typography 文字排版',
+        key: 'typography',
+      },
     ],
   },
   {
@@ -57,6 +61,10 @@ export default [
       {
         title: 'Menu 菜单',
         key: 'menu',
+      },
+      {
+        title: 'Steps 步骤条',
+        key: 'steps',
       },
     ],
   },
