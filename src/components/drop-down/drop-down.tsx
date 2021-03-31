@@ -11,7 +11,7 @@ export interface DropdownProps {
   trigger?: ['hover' | 'click' | 'contextMenu'],
   onVisibleChange?: (visible: boolean) => void;
   overlayStyle?: React.CSSProperties;
-  overlay: React.ReactNode;
+  overlay: any;
   disabled?: boolean;
   prefixCls?: string;
   overlayClassName?: string;
@@ -75,24 +75,28 @@ class Dropdown extends React.Component<DropdownProps, DropdownState> {
   };
 
   out = () => {
-    const { trigger = ['hover'], onVisibleChange } = this.props;
+    const { trigger = ['hover'], onVisibleChange, visible: propsVisible } = this.props;
     if (trigger.indexOf('hover') >= 0) {
-      this.setState({ visible: false });
+      if (propsVisible === undefined) {
+        this.setState({ visible: false });
+      }
       onVisibleChange && onVisibleChange(false);
     }
   };
 
   click = (evt: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
     const {
-      trigger = ['hover'], onVisibleChange, disabled,
+      trigger = ['hover'], onVisibleChange, disabled, visible: propsVisible,
     } = this.props;
     const { visible } = this.state;
     if (trigger.indexOf('click') >= 0 && !disabled) {
       if (!visible) {
         this.compute(evt);
-      } else {
+      } else { // 传了visible之后 visible完全由外面控制
         onVisibleChange && onVisibleChange(false);
-        this.setState({ visible: false });
+        if (propsVisible === undefined) {
+          this.setState({ visible: false });
+        }
       }
     }
   };
@@ -202,10 +206,10 @@ class Dropdown extends React.Component<DropdownProps, DropdownState> {
           >
             {arrow && <div className={arrowStyle} />}
             <div className={containter}>
-              {React.cloneElement(
+              {overlay && React.isValidElement(overlay) ? React.cloneElement(
                 overlay,
                 { popupClassName: `${prefix}-menu` },
-              )}
+              ) : ''}
             </div>
           </div>
         </Portal>

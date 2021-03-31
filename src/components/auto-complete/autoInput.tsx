@@ -1,11 +1,5 @@
-/* eslint-disable @typescript-eslint/no-this-alias */
-/* eslint-disable no-underscore-dangle */
-/* eslint-disable no-mixed-operators */
 /* eslint-disable max-len */
 /* eslint-disable no-nested-ternary */
-/* eslint-disable react/destructuring-assignment */
-/* eslint-disable react/state-in-constructor */
-/* eslint-disable @typescript-eslint/ban-types */
 import React, { ChangeEvent } from 'react';
 import classNames from 'classnames';
 import { ConfigConsumer, ConfigConsumerProps } from '../config-provider/context';
@@ -27,22 +21,28 @@ interface autoState {
   searchChildren?: React.ReactNode;
   isSearch?: boolean;
   searchData?: DataSourceItemType;
-  dropStyleP?: {[key: string] : unknown};
+  dropStyleP?: React.CSSProperties;
 }
-function isSelectOptionOrSelectOptGroup(child: unknown): Boolean {
+function isSelectOptionOrSelectOptGroup(child: unknown): boolean {
   return child && child.type && (child.type.isSelectOption || child.type.isSelectOptGroup);
 }
 
 class AutoComplete extends React.Component<AutoCompleteProps, autoState> {
   static Option: typeof Option;
 
-  state: autoState = {
-    showDrop: this.props.open || this.props.defaultOpen || false,
-    inputValue: this.props.value || this.props.defaultValue || '',
-    searchChildren: [],
-    searchData: [],
-    isSearch: false,
-    dropStyleP: this.props.dropdownMenuStyle ? { ...this.props.dropdownMenuStyle } : {},
+  constructor(props: AutoCompleteProps) {
+    super(props);
+    const {
+      open, defaultOpen, value, defaultValue, dropdownMenuStyle,
+    } = props;
+    this.state = {
+      showDrop: open || defaultOpen || false,
+      inputValue: value || defaultValue || '',
+      searchChildren: [],
+      searchData: [],
+      isSearch: false,
+      dropStyleP: dropdownMenuStyle || {},
+    };
   }
 
   componentDidUpdate(prevProps: AutoCompleteProps) {
@@ -73,7 +73,9 @@ class AutoComplete extends React.Component<AutoCompleteProps, autoState> {
           });
           this.setState({ isSearch: true, searchData: data });
         } else if (children) {
-          const searchChild = (children || []).filter((i: { props: { children: string | string[]; }; }) => i.props.children.indexOf(e.target.value) >= 0);
+          const searchChild = (children || []).filter(
+            (i: { props: { children: string | string[]; }; }) => i.props.children.indexOf(e.target.value) >= 0,
+          );
           this.setState({ isSearch: true, searchChildren: searchChild });
         }
       } else {
@@ -86,14 +88,16 @@ class AutoComplete extends React.Component<AutoCompleteProps, autoState> {
     const { children, dataSource, onFocus } = this.props;
     onFocus && onFocus();
     const len = React.Children.toArray(children);
-    if (dataSource && dataSource.length > 0 || React.Children.count(len) > 0) {
+    if ((dataSource && dataSource.length > 0) || React.Children.count(len) > 0) {
       this.setState({ showDrop: true });
     }
   };
 
   onSelect = (value: string, option: any) => {
-    const { onSelect } = this.props;
+    const { onSelect, onChange } = this.props;
     onSelect && onSelect(value, option);
+    onChange && onChange(Object.prototype.toString.call(option) === '[object String]' ? option
+      : Object.prototype.toString.call(option) === '[object Array]' ? option[0] : value);
     this.setState({
       inputValue: Object.prototype.toString.call(option) === '[object String]' ? option
         : Object.prototype.toString.call(option) === '[object Array]' ? option[0] : value,
@@ -102,19 +106,16 @@ class AutoComplete extends React.Component<AutoCompleteProps, autoState> {
     });
   };
 
-  documentBodyOnClick = (self: any) => (e: Event) => {
-    e.preventDefault();
-    self.setState({ showDrop: false });
+  documentBodyOnClick = () => {
+    this.setState({ showDrop: false });
   }
 
   componentDidMount = () => {
-    const _this = this;
-    document.body.addEventListener('click', this.documentBodyOnClick(_this));
+    document.body.addEventListener('click', this.documentBodyOnClick);
   };
 
   componentWillUnmount = () => {
-    const _this = this;
-    document.body.removeEventListener('click', this.documentBodyOnClick(_this));
+    document.body.removeEventListener('click', this.documentBodyOnClick);
   }
 
   handleClick = (event: React.MouseEvent<HTMLDivElement, MouseEvent>): void => {

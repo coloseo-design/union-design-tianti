@@ -20,8 +20,7 @@
     z-index: 1000;
     display: block;
     background-color: rgba(0,0,0,.45);
-    opacity: 1;
-    transition: opacity 0.3s linear;
+    animation: maskin 0.3s linear;
     &-transition {
       opacity: 0;
       transition: opacity 0.3s linear;
@@ -145,4 +144,13 @@
    transform: scale(1);
    opacity: 1;
   }
+ }
+
+ @keyframes maskin {
+   0% {
+     opacity: 0;
+   }
+   100% {
+    opacity: 1;
+   }
  }

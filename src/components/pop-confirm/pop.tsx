@@ -63,13 +63,15 @@ class PopComponent extends React.Component<PopProps, PopconfirmState> {
   }
 
   visibleOnClick = (target: HTMLElement) => {
-    const { onVisibleChange } = this.props;
+    const { onVisibleChange, visible: propsVisible } = this.props;
     if (target.nodeName !== '#document' && target.getAttribute('data-tag') === this.tag) return;
     if (target.nodeName === 'BODY') {
       const { visible } = this.state;
       if (visible) {
+        if (propsVisible === undefined) {
+          this.setState({ visible: false });
+        }
         onVisibleChange && onVisibleChange(false);
-        this.setState({ visible: false });
       }
     }
     target.parentNode && this.visibleOnClick(target.parentNode as HTMLElement);
@@ -127,13 +129,6 @@ class PopComponent extends React.Component<PopProps, PopconfirmState> {
           if (autoAdjustOverflow && direction.indexOf('bottom') >= 0 && (bodyH - offsetTop) < contentHeight + 10) {
             dT = changeBottomDir[direction];
           }
-          // dT = autoAdjustOverflow
-          // ? (direction.indexOf('top') >=0 && offsetTop < contentHeight + 10?
-          // changeTopDir[direction] :
-          // direction.indexOf('bottom') >= 0 && (bodyH - offsetTop) < contentHeight + 10 ?
-          // changeBottomDir[direction] :
-          // direction) :
-          // direction;
           const xT: number = dT.indexOf('Left') >= 0 ? offsetLeft : dT.indexOf('Right') >= 0 ? (offsetLeft - contentWidth + width) : (offsetLeft + (width - contentWidth) / 2);
           const yT: number = dT.indexOf('top') >= 0 ? (offsetTop - contentHeight - 10) : offsetTop + height + 10;
           this.setState({
@@ -151,14 +146,6 @@ class PopComponent extends React.Component<PopProps, PopconfirmState> {
           if (autoAdjustOverflow && direction.indexOf('right') >= 0 && (bodyW - offsetLeft) < contentWidth + 10) {
             dT = changeRightDir[direction];
           }
-          // 你的
-          // dT = autoAdjustOverflow
-          //   ? (direction.indexOf('left') >= 0 && offsetLeft < contentWidth + 10 ?
-          //     changeLeftDir[direction] :
-          //     direction.indexOf('right') >= 0 && (bodyW - offsetLeft) < contentWidth + 10 ?
-          //     changeRightDir[direction] :
-          //     direction)
-          //   : direction;
           const xT: number = dT.indexOf('left') >= 0 ? offsetLeft - contentWidth - 10 : offsetLeft + width + 10;
           /* eslint no-nested-ternary: 0 */
           const yT: number = dT.indexOf('Top') >= 0 ? offsetTop : dT.indexOf('Bottom') >= 0 ? (offsetTop - contentHeight + height) : offsetTop + (height - contentHeight) / 2;
@@ -171,37 +158,56 @@ class PopComponent extends React.Component<PopProps, PopconfirmState> {
         }
         onVisibleChange && onVisibleChange(true);
       }
-    } else {
-      onVisibleChange && onVisibleChange(false);
-      this.setState({ visible: false });
     }
   }
 
   handleClick = (evt: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
-    const { trigger } = this.props;
+    const { trigger, visible: popupVisible, onVisibleChange } = this.props;
+    const { visible } = this.state;
     const target = evt.nativeEvent.target as HTMLSpanElement;
     if (trigger === 'click' && target) {
-      this.compute(target, false);
+      if (!visible) {
+        this.compute(target, false);
+      } else {
+        onVisibleChange && onVisibleChange(false);
+        if (popupVisible === undefined) {
+          this.setState({ visible: false });
+        }
+      }
     }
   };
 
   handleOver = (evt: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
-    const { trigger, mouseEnterDelay = 0 } = this.props;
+    const {
+      trigger, mouseEnterDelay = 0, onVisibleChange, visible: popupVisible,
+    } = this.props;
+    const { visible } = this.state;
     const target = evt.nativeEvent.target as HTMLSpanElement;
     if (trigger === 'hover' && target) {
-      setTimeout(() => {
-        this.compute(target, false);
-      }, mouseEnterDelay);
+      if (!visible) {
+        setTimeout(() => {
+          this.compute(target, false);
+        }, mouseEnterDelay);
+      } else {
+        onVisibleChange && onVisibleChange(false);
+        if (popupVisible === undefined) {
+          this.setState({ visible: false });
+        }
+      }
     }
   };
 
   handleOut = () => {
-    const { mouseLeaveDelay = 0, trigger, onVisibleChange } = this.props;
+    const {
+      mouseLeaveDelay = 0, trigger, onVisibleChange, visible: propsVisible,
+    } = this.props;
     const { visible } = this.state;
     if (trigger === 'hover') {
       if (visible) {
         setTimeout(() => {
-          this.setState({ visible: false });
+          if (propsVisible === undefined) {
+            this.setState({ visible: false });
+          }
           onVisibleChange && onVisibleChange(false);
         }, mouseLeaveDelay);
       }

@@ -40,8 +40,12 @@ const menu = (
 );
 
 const DropdownDemo = () => {
+  const [visible, setVisible] = React.useState(false);
   const handleButtonClick = () => {
-    // setVisible1(true);
+    setVisible(true);
+  };
+  const onVisibleChange = (vis: boolean) => {
+    console.log('--change', vis);
   };
   return (
     <div style={{ padding: 32 }}>
@@ -52,9 +56,10 @@ const DropdownDemo = () => {
             overlay={menu}
             arrow={true}
             // visible={visible}
+            onVisibleChange={onVisibleChange}
             trigger={['click']}
           >
-            <Button>click bottomLeft</Button>
+            <Button onClick={handleButtonClick}>open bottomLeft</Button>
           </Dropdown>
         </div>
         <div>
@@ -89,12 +94,13 @@ const DropdownDemo = () => {
           overlay={menu}
           type="primary"
           icon={<Icon style={{ fontSize: 14 }} type="zoomout" />}
-          // visible={visible1}
+          visible={visible}
           onClick={handleButtonClick}
+          onVisibleChange={onVisibleChange}
           trigger={['click']}
           // onClick={() => setVisible1(true)}
         >
-          default dropdown
+          primary dropdown
         </Dropdown.Button>
       </div>
       <div style={{ marginTop: 32 }}>

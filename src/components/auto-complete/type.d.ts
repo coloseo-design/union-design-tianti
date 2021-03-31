@@ -7,9 +7,9 @@ export type DataSourceItemType = string | DataSourceItemObject;
 
 export interface AutoCompleteProps {
   // 行内样式
-  style?: {[x: string]: any};
+  style?: React.CSSProperties;
   // 下拉框样式
-  dropdownMenuStyle?: {[key: string] : unknown};
+  dropdownMenuStyle?: React.CSSProperties;
   // 搜索框
   showSearch?: boolean;
   // 是否禁用 默认false
@@ -20,21 +20,22 @@ export interface AutoCompleteProps {
   // 默认值
   defaultValue?: string;
   // 输入值
-  value?: any;
+  value?: unknown;
   // 是否展开下拉菜单
   open?: boolean;
   // 是否默认展开下拉菜单
   defaultOpen?: boolean;
   // class前缀
   prefixCls?: string;
+
   placeholder?: string;
   // ref
   forwardedRef?: React.MutableRefObject<HTMLInputElement>;
   onSearch?: (value: string) => void;
   onChange?: (value: string) => void;
-  // TODO:  应该给dataSource指定格式
+
   dataSource?: any;
-  onSelect?: (value: string, option: any) => void;
+  onSelect?: (value: string, option: unknown) => void;
   // 多行输入
   multiInput?: boolean;
   className?: string;
