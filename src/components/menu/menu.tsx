@@ -9,6 +9,8 @@ import { ItemGroup } from './menu-item-group';
 import { MenuPopup } from './menu-popup';
 import { MENU_TAG_SUB_MENU, SubMenu } from './menu-sub-menu';
 
+export const MENU_TAG_MENU = 'MENU_TAG_MENU';
+
 export type MenuMode = 'vertical' | 'horizontal' | 'inline';
 
 export type MenuTheme = 'light' | 'dark';
@@ -50,6 +52,10 @@ export type MenuProps = BasePropsV2<{
   onDeselect: (key: string, keyPath: string[]) => void;
 
   popupClassName: string;
+  inlineCollapsedMinWidth: number;
+  inlineCollapsedMaxWidth: number;
+
+  onCollapsed: (collapsed: boolean) => void;
 }>;
 
 export type MenuState = BaseStateV2<{
@@ -67,6 +73,8 @@ export type MenuState = BaseStateV2<{
 }>;
 
 export default class Menu extends MenuBase<MenuProps, MenuState> {
+  public static tag = MENU_TAG_MENU;
+
   public static Item = Item;
 
   public static SubMenu = SubMenu;
@@ -180,14 +188,25 @@ export default class Menu extends MenuBase<MenuProps, MenuState> {
   protected getView = () => {
     const {
       mode, className, style, theme,
+      inlineCollapsedMinWidth = 62,
+      inlineCollapsedMaxWidth = 206,
     } = this.props;
+
     let { inlineCollapsedIcon } = this.props;
     const { inlineCollapsed, menuPopups } = this.state;
 
     inlineCollapsedIcon = mode !== 'horizontal' && inlineCollapsedIcon;
 
+    const newStyle = {
+      ...style,
+      width: (() => {
+        if (mode === 'horizontal') return 'auto';
+        return inlineCollapsed ? inlineCollapsedMinWidth : inlineCollapsedMaxWidth;
+      })(),
+    };
+
     return (
-      <div style={style} className={this.classNames(className, this.getPrefixClass('container'))}>
+      <div style={newStyle} className={this.classNames(className, this.getPrefixClass('container'))}>
         {inlineCollapsedIcon && (
           <div
             onClick={this.inlineCollapsedIconOnClick}
@@ -199,7 +218,7 @@ export default class Menu extends MenuBase<MenuProps, MenuState> {
             <Icon type={inlineCollapsed ? 'right' : 'left'} />
           </div>
         )}
-        <div data-menu-tag="menu" className={this.classNames('children', `${mode}`, `${theme}`, `inline-collapsed-${inlineCollapsed}`)}>
+        <div data-menu-tag="menu" className={this.classNames('children', `${mode}`, `${theme}`)}>
           {this.handleChildren()}
         </div>
         {menuPopups!.map((item) => item[1])}
@@ -208,7 +227,9 @@ export default class Menu extends MenuBase<MenuProps, MenuState> {
   };
 
   private inlineCollapsedIconOnClick = () => {
-    this.setState(({ inlineCollapsed }) => ({ inlineCollapsed: !inlineCollapsed }));
+    const { inlineCollapsed } = this.state;
+    this.setState({ inlineCollapsed: !inlineCollapsed });
+    this.props.onCollapsed?.(!inlineCollapsed!);
   }
 
   private handleChildren = () => {
