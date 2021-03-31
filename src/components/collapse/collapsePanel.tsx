@@ -74,7 +74,6 @@ class CollapsePanel extends React.Component<CollapsePanelProps, CollapsePanelSta
 
     getRef = () => {
       const { current } = this.contentRef;
-      console.log(this.contentRef);
       if (current) {
         this.setState({ height: current.scrollHeight });
       }
@@ -102,7 +101,6 @@ class CollapsePanel extends React.Component<CollapsePanelProps, CollapsePanelSta
         [`${prefix}-content-active`]: show,
         [`${prefix}-content-visibility`]: !show,
       });
-      console.log(height);
       return (
         <div className={clazzName} style={{ ...styles }}>
           <div className={headerClass} onClick={this.headClick}>

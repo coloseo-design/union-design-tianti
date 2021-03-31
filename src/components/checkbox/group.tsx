@@ -38,7 +38,6 @@ class Group extends React.Component<CheckboxGroupProps, CheckboxGroupState> {
 
   constructor(props: CheckboxGroupProps) {
     super(props);
-    console.log('props.value', props.value, props.defaultValue, props.value || props.defaultValue || []);
     this.state = {
       value: props.value || props.defaultValue || [],
     };
@@ -46,9 +45,7 @@ class Group extends React.Component<CheckboxGroupProps, CheckboxGroupState> {
 
   // 托管value
   static getDerivedStateFromProps(nextProps: CheckboxGroupProps) {
-    console.log('nextProps', nextProps);
     if ('value' in nextProps) {
-      console.log('xxx');
       return {
         value: nextProps.value,
       };
@@ -74,7 +71,6 @@ class Group extends React.Component<CheckboxGroupProps, CheckboxGroupState> {
     const value = _value || label;
     const { onChange } = this.props;
     const { value: valueOfState = [] } = this.state;
-    console.log('valueOfState', valueOfState);
     const index = valueOfState.findIndex((item) => item === value);
     if (valueOfState.indexOf(value) >= 0) {
       valueOfState.splice(index, 1);

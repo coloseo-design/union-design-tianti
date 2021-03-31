@@ -204,7 +204,6 @@ class Cascader extends React.Component<CascaderProps, CascaderState> {
   };
 
   handleMenuSelect = (targetOption: CascaderOptionType, index: number, e: React.MouseEvent<HTMLElement>) => {
-    console.log('e:', e);
     if (targetOption.disabled) return;
     const childrenKeyName = getFieldName('children', this.props.fieldNames);
     const valueKeyName = getFieldName('value', this.props.fieldNames);

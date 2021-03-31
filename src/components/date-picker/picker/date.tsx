@@ -20,7 +20,6 @@ export class PickerSingleDate extends PickerSingle {
         modeType, selectedDate, viewDate, date,
       } = this.state;
       this.initModeType ??= modeType;
-      console.log(modeType);
       if (modeType === 'year-single') {
         return (
           <PopupSingleYear
