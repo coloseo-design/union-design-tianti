@@ -37,6 +37,7 @@ const InputDemo = () => {
         placehollder="多行输入"
         rows={3}
         onChange={({ target: { value } }) => { console.log('value', value); }}
+        style={{ width: 500 }}
       />
       <br />
     </div>

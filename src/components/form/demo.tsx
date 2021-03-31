@@ -176,6 +176,25 @@ export default () => {
             <Input placeholder="请输入" onChange={(e, v) => console.log('change', e, v)} />
           </FormItem>
           <FormItem
+            name="textarea"
+            label="多行输入"
+            validateFirst
+            initialValue="哈哈哈哈哈哈哈"
+            rules={[
+              { required: true, message: '请输入用户名' },
+              {
+                validator: (rule, value) => {
+                  if (!value || value.length < 2) {
+                    return Promise.reject(new Error('长度必须大于2'));
+                    // callback('长度必须大于2');
+                  }
+                },
+              },
+            ]}
+          >
+            <Input.TextArea placeholder="请输入" style={{ width: '100%' }} onChange={(e, v) => console.log('change', e, v)} />
+          </FormItem>
+          <FormItem
             name="sex"
             label="性别"
             validateFirst

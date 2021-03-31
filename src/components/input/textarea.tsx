@@ -126,8 +126,8 @@ class TextArea extends Component<BaseTextAreaProps, TextAreaState> {
 
     if (allowClear) {
       return (
-        <span className={containerClasses} style={style}>
-          <textarea {...rest} value={value} className={classes} ref={this.deletgateRef} onChange={onchange} />
+        <span className={containerClasses}>
+          <textarea {...rest} value={value} style={style} className={classes} ref={this.deletgateRef} onChange={onchange} />
           <span onClick={handleDelete} style={{ visibility: value ? 'visible' : 'hidden' }}>
             <Icon type="delete" />
           </span>
