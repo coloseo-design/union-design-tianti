@@ -5,10 +5,9 @@ import {
   Button,
 } from '..';
 
-interface FilterProps {
+export interface FilterProps {
   dataSource: {text: React.ReactNode; value: string}[];
-  onSubmit?: (values: string[]) => void;
-  onReset?: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  onChange?: (values: string[]) => void;
   values: string[];
   prefix?: string;
 }
@@ -38,14 +37,14 @@ export default class Filter extends React.Component<FilterProps, FilterState> {
 
   onSubmit = (evt: React.MouseEvent<HTMLButtonElement>) => {
     evt.preventDefault();
-    const { onSubmit } = this.props;
+    const { onChange } = this.props;
     const { values } = this.state;
-    onSubmit && onSubmit(values);
+    onChange && onChange(values);
   }
 
   onReset = (evt: React.MouseEvent<HTMLButtonElement>) => {
-    const { onReset } = this.props;
-    onReset && onReset(evt);
+    const { onChange } = this.props;
+    onChange && onChange([]);
   }
 
   render() {

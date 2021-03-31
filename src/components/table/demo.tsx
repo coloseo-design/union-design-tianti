@@ -298,7 +298,15 @@ const TableDemo: React.FC<unknown> = () => (
     <div>
       <h4>可编辑行</h4>
       <div>
-        <Table rowSelection={rowSelection} columns={columns} dataSource={data} rowKey="key" scroll={{ y: 200, x: 1500 }} />,
+        <Table
+          rowSelection={rowSelection}
+          columns={columns}
+          pagination={{ pageSize: 2 }}
+          // pagination={false}
+          dataSource={data}
+          rowKey="key"
+          scroll={{ y: 200, x: 1500 }}
+        />,
       </div>
     </div>
   </div>
