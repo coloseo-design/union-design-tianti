@@ -152,7 +152,7 @@ export default () => {
         <Form
           {...layout}
           name="test"
-          formRef={formRef}
+          ref={formRef}
           onFinish={onSubmit}
           onFinishFailed={onFinishFailed}
           style={{ padding: 20 }}
