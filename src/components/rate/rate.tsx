@@ -50,11 +50,11 @@ class Rate extends Component<RateProps, RateState> {
   }
 
   componentDidUpdate(prevProps: RateProps) {
-    const { value } = this.props;
+    const { value = 0 } = this.props;
     const { props } = this;
     if (value !== prevProps.value) {
       const arr = Array.from(Array(props.allowHalf ? props.count * 2 : props.count), (v, k) => k + 1);
-      const _value = props.allowHalf ? (props.value || props.defaultValue) * 2 : props.value || props.defaultValue;
+      const _value = props.allowHalf ? (props.value) * 2 : props.value;
       this.setState({
         value: [...arr].reverse()[_value - 1],
       });

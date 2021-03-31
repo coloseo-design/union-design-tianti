@@ -138,7 +138,7 @@ const Demo = () => {
 
       <div style={{ height: 20 }} />
 
-      <Menu mode="horizontal" style={{ width: '100%' }} onSelect={console.log}>
+      <Menu mode="horizontal" style={{ width: '100%', position: 'relative' }} onSelect={console.log}>
         <Menu.Item>
           工作台1
         </Menu.Item>

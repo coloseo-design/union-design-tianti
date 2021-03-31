@@ -41,6 +41,16 @@
     position: relative;
     background: @layout-trigger-background;
     text-align: center;
+
+    div.inline,
+    div.vertical {
+      box-shadow: unset;
+    }
+
+    div.inline-collapsed-icon {
+      box-shadow: inset @layout-sider-box-shadow, @layout-sider-box-shadow;
+    }
+
     &-children {
       height: 100%;
     }

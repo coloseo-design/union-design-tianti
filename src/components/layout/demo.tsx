@@ -38,7 +38,7 @@ const LayoutDemo = () => (
     <Layout>
       <Sider collapsible theme="light">
         logo
-        <Menu theme="light" mode="vertical">
+        <Menu>
           <Menu.Item icon="image">
             工作台1
           </Menu.Item>

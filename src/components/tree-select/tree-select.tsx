@@ -246,6 +246,7 @@ class TreeSelect extends React.Component<TreeSelectProps, TreeSelectStates> {
     if (!multiple) { // 单选
       // eslint-disable-next-line no-param-reassign
       delete nodeInfo.parent;
+      console.log('value===>', value, nodeInfo);
       onSelect && onSelect(value, nodeInfo);
       onChange && onChange(value, nodeInfo);
       this.setState({ selectValues: [value], border: false, values: [value] });

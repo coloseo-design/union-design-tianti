@@ -55,9 +55,9 @@ export { default as Layout } from './layout/layout';
 /* eslint-disable */
 export { default as List } from './list/list';
 /* eslint-disable */
-export { default as Message } from './message/message';
-/* eslint-disable */
 export { default as Menu } from './menu/menu';
+/* eslint-disable */
+export { default as Message } from './message/message';
 /* eslint-disable */
 export { default as Modal } from './modal/modal';
 /* eslint-disable */
@@ -73,19 +73,21 @@ export { default as PopOver } from './pop-over/pop-over';
 /* eslint-disable */
 export { default as Progress } from './progress/progress';
 /* eslint-disable */
-export { default as Result } from './result/result';
+export { default as Radio } from './radio/radio';
 /* eslint-disable */
 export { default as Rate } from './rate/rate';
 /* eslint-disable */
-export { default as Slider } from './slider/slider';
+export { default as Result } from './result/result';
 /* eslint-disable */
 export { default as Select } from './select/select';
 /* eslint-disable */
+export { default as Slider } from './slider/slider';
+/* eslint-disable */
 export { default as Spin } from './spin/spin';
 /* eslint-disable */
-export { default as Steps } from './steps/steps';
-/* eslint-disable */
 export { default as Statistic } from './statistic/statistic';
+/* eslint-disable */
+export { default as Steps } from './steps/steps';
 /* eslint-disable */
 export { default as Switch } from './switch/switch';
 /* eslint-disable */
@@ -97,14 +99,12 @@ export { default as Tag } from './tag/tag';
 /* eslint-disable */
 export { default as Tooltip } from './tooltip/tooltip';
 /* eslint-disable */
-export { default as Tree } from './tree/tree';
-/* eslint-disable */
 export { default as Transfer } from './transfer/transfer';
 /* eslint-disable */
-export { default as Typography } from './typography/typography';
+export { default as Tree } from './tree/tree';
 /* eslint-disable */
 export { default as TreeSelect } from './tree-select/tree-select';
 /* eslint-disable */
-export { default as Upload } from './upload/upload';
+export { default as Typography } from './typography/typography';
 /* eslint-disable */
-export { default as Radio } from './radio/radio';
+export { default as Upload } from './upload/upload';

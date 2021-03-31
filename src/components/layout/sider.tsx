@@ -1,9 +1,10 @@
-import React, { Component, CSSProperties } from 'react';
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
+import React, { Component, CSSProperties, ReactElement } from 'react';
 import classNames from 'classnames';
 import { ConfigConsumer, ConfigConsumerProps } from '../config-provider';
-import Icon from '../icon';
+import { MenuTheme, MENU_TAG_MENU } from '../menu/menu';
 
-export interface SiderProps {
+export type SiderProps = {
   /* 用户自定义类前缀，默认uni-layout */
   prefixCls?: string;
   /* 容器 className */
@@ -17,7 +18,7 @@ export interface SiderProps {
   /* 是否默认收起 */
   defaultCollapsed?: boolean;
   /* 主题颜色 */
-  theme?: string;
+  theme?: MenuTheme;
   /* 宽度 */
   width?: number;
   /* 展开-收起时的回调函数 */
@@ -27,16 +28,13 @@ export interface SiderProps {
   // children?: any;
 }
 
-export interface SiderState {
-  /* 当前收起状态 */
-  collapsed?: boolean;
-}
+export type SiderState = {
+  collapsed: boolean;
+};
 
 class Sider extends Component<SiderProps, SiderState> {
   static defaultProps: SiderProps = {
     collapsedWidth: 80,
-    collapsible: false,
-    defaultCollapsed: false,
     theme: 'dark',
     width: 200,
     className: '',
@@ -45,15 +43,15 @@ class Sider extends Component<SiderProps, SiderState> {
   constructor(props: SiderProps) {
     super(props);
     this.state = {
-      collapsed: props.collapsed || props.defaultCollapsed,
+      collapsed: props.defaultCollapsed ?? false,
     };
   }
 
-  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
   renderSider = ({ getPrefixCls }: ConfigConsumerProps) => {
     const {
-      prefixCls, className, children, style, width, collapsedWidth, theme, collapsible, onCollapse,
+      prefixCls, className, children, style, width, collapsedWidth, theme, collapsible,
     } = this.props;
+
     const { collapsed } = this.state;
 
     const prefix = getPrefixCls('layout-sider', prefixCls);
@@ -62,33 +60,36 @@ class Sider extends Component<SiderProps, SiderState> {
       [`${prefix}-collapsible`]: collapsible,
     });
 
-    const onClick = () => {
-      this.setState({ collapsed: !collapsed });
-      if (onCollapse) {
-        onCollapse(!collapsed);
-      }
+    const tempWidth = collapsed! ? collapsedWidth! : width!;
+
+    const newStyle = {
+      ...style,
+      flex: `0 0 ${tempWidth}px`,
+      width: tempWidth,
     };
 
-    // eslint-disable-next-line no-underscore-dangle
-    const _width = collapsed ? collapsedWidth : width;
-
     return (
-      <aside className={`${className} ${mainClass}`} style={{ width: _width, flex: `0 0 ${_width}px`, ...style }}>
-        <div className={`${prefix}-children`}>
-          {children}
-        </div>
-        {collapsedWidth && collapsible && (
-          <div className={`${prefix}-trigger`} style={{ left: collapsed ? collapsedWidth : width }} onClick={onClick}>
-            {collapsed
-              ? <Icon type="right" />
-              : <Icon type="left" />}
-          </div>
-        )}
+      <aside className={`${className} ${mainClass}`} style={newStyle}>
+        {React.Children.map(children, (child) => {
+          const type = (child as ReactElement)?.type ?? {};
+          const tag = (type as unknown as { [key: string]: unknown }).tag as string;
+
+          if (React.isValidElement(child) && tag === MENU_TAG_MENU) {
+            return React.cloneElement(child, {
+              theme,
+              inlineCollapsed: collapsed,
+              inlineCollapsedIcon: collapsible,
+              inlineCollapsedMinWidth: collapsedWidth!,
+              inlineCollapsedMaxWidth: width,
+              onCollapsed: (c: boolean) => this.setState({ collapsed: c }),
+            });
+          }
+          return child;
+        })}
       </aside>
     );
   }
 
-  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
   render() {
     return (
       <ConfigConsumer>
