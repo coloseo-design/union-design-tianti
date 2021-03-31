@@ -78,13 +78,12 @@ class Sider extends Component<SiderProps, SiderState> {
             return React.cloneElement(child, {
               theme,
               inlineCollapsed: collapsed,
-              inlineCollapsedIcon: true,
+              inlineCollapsedIcon: collapsible,
               inlineCollapsedMinWidth: collapsedWidth!,
               inlineCollapsedMaxWidth: width,
               onCollapsed: (c: boolean) => this.setState({ collapsed: c }),
             });
           }
-
           return child;
         })}
       </aside>
