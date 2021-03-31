@@ -52,7 +52,7 @@ export interface BaseTextAreaProps {
   defaultValue?: string;
   // 输入框内容
   value?: string;
-  forwardedRef?: React.MutableRefObject<HTMLTextAreaElement>;
+  forwardedRef?: React.ForwardedRef<HTMLTextAreaElement>;
   // 可以点击清除图标删除内容
   allowClear?: boolean;
 }
@@ -92,7 +92,14 @@ class TextArea extends Component<BaseTextAreaProps, TextAreaState> {
 
   renderTextArea = ({ getPrefixCls }: ConfigConsumerProps) => {
     const {
-      allowClear, forwardedRef, style, onChange, prefixCls: customizedPrefixCls, className, ...rest
+      allowClear,
+      forwardedRef,
+      style,
+      onChange,
+      prefixCls: customizedPrefixCls,
+      className,
+      defaultValue,
+      ...rest
     } = this.props;
     const { value } = this.state;
     const prefixCls = getPrefixCls('textarea', customizedPrefixCls);
@@ -127,7 +134,7 @@ class TextArea extends Component<BaseTextAreaProps, TextAreaState> {
     if (allowClear) {
       return (
         <span className={containerClasses}>
-          <textarea {...rest} value={value} style={style} className={classes} ref={this.deletgateRef} onChange={onchange} />
+          <textarea value={value} style={style} className={classes} ref={this.deletgateRef} onChange={onchange} />
           <span onClick={handleDelete} style={{ visibility: value ? 'visible' : 'hidden' }}>
             <Icon type="delete" />
           </span>
@@ -136,7 +143,14 @@ class TextArea extends Component<BaseTextAreaProps, TextAreaState> {
     }
 
     return (
-      <textarea {...rest} value={value} style={style} className={classes} ref={forwardedRef} onChange={onchange} />
+      <textarea
+        {...rest}
+        value={value}
+        style={style}
+        className={classes}
+        ref={forwardedRef}
+        onChange={onchange}
+      />
     );
   };
 
@@ -149,6 +163,6 @@ class TextArea extends Component<BaseTextAreaProps, TextAreaState> {
   }
 }
 
-export default React.forwardRef((props: BaseTextAreaProps, ref: React.MutableRefObject<HTMLTextAreaElement>) => (
+export default React.forwardRef((props: BaseTextAreaProps, ref: React.ForwardedRef<HTMLTextAreaElement>) => (
   <TextArea {...props} forwardedRef={ref} />
 ));
