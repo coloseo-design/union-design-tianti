@@ -1,50 +1,75 @@
-/* eslint-disable no-shadow */
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-/* eslint-disable camelcase */
 /* eslint-disable max-len */
-/* eslint-disable react/sort-comp */
-import React, { ReactText } from 'react';
+/* eslint-disable camelcase */
+
+import React from 'react';
 import classNames from 'classnames';
 import { ConfigConsumer } from '../config-provider';
 import Icon from '../icon';
 import getPrefixCls from '../utils/getPrefixCls';
 import { InputNumberProps } from './types';
 
-// const InputNumber = (props: InputNumberProps) => {
-class InputNumber extends React.Component<InputNumberProps, { value: ReactText }> {
+class InputNumber extends React.Component<InputNumberProps, { value: string | number }> {
   static defaultProps = {
     size: 'default',
     step: 1,
   }
 
+  private inputNumberRef = React.createRef<HTMLInputElement>();
+
   constructor(props: InputNumberProps) {
     super(props);
     const { defaultValue, value, formatter } = props;
-    const formaterValue: ReactText = formatter ? formatter(defaultValue ?? value ?? '') : defaultValue ?? value ?? '';
+    const formaterValue = formatter ? formatter(defaultValue ?? value ?? '') : defaultValue ?? value ?? '';
     this.state = {
       value: formaterValue,
     };
   }
 
-  private inputNumberRef = React.createRef<HTMLInputElement>();
+  componentDidUpdate(prevProps: InputNumberProps) {
+    const { value } = this.props;
+    if (value !== prevProps.value) {
+      this.setState({ value: value || '' });
+    }
+  }
 
-  foucs() {
+  foucs = () => {
     this.inputNumberRef.current?.focus();
   }
 
-  blur() {
+  changeNumber = (currentValue: string | number) => {
+    let result;
+    const reg = /\d+(\.\d+)?/g; // 提取数字
+    const numberval = currentValue && currentValue !== '' ? currentValue.toString().match(reg) : undefined;
+    if (numberval) {
+      const str = numberval.join(',');
+      result = str.replace(/,/g, ''); // 去掉逗号
+    }
+    return result;
+  };
+
+  blur = () => {
+    const { onChange, precision } = this.props;
+    const { value } = this.state;
+    const res = this.changeNumber(value);
+    const result = res && precision ? Number(res).toFixed(precision) : res || '';
+    onChange && onChange(result);
+    this.setState({ value: result });
     this.inputNumberRef.current?.blur();
   }
 
   component = (): React.ReactNode => {
     const {
-      value, disabled, max, min, size, step, readOnly, className, precision, style, onPressEnter, onChange, onStep, formatter, parser,
+      value,
+      disabled,
+      max,
+      min,
+      size, step, className, precision, style, onPressEnter, onChange, onStep, formatter, parser,
     } = this.props;
     // 将传递给input的属性组合
     const compse = {
-      disabled, step, max, min, readOnly,
+      disabled, step, max, min,
     };
-    let { value: val } = this.state;
+    const { value: val } = this.state;
     // 自定义高度
     const prefix: string = getPrefixCls('number');
     const input_wrap: string = getPrefixCls('number-input-wrap');
@@ -65,12 +90,8 @@ class InputNumber extends React.Component<InputNumberProps, { value: ReactText }
     const handleStep = (type: 'up' | 'down'): void => {
       // step必须是数字且类型为number
       const isStep: number = step ?? 0;
-      let result: ReactText = val;
-      // 解析值
-      if (parser) {
-        val = +parser(val);
-      }
-      result = type === 'up' ? +val + isStep : +val - isStep;
+      let result = this.changeNumber(val) || 0;
+      result = type === 'up' ? +result + isStep : +result - isStep;
       if (min && typeof (min) === 'number' && result < min && result >= Number.MIN_SAFE_INTEGER) {
         result = min;
       }
@@ -80,55 +101,54 @@ class InputNumber extends React.Component<InputNumberProps, { value: ReactText }
       // todo 小数精度问题
       result = +result.toFixed(precision);
       this.setState({
-        value: formatter ? formatter(result) : result,
+        value: result,
       });
       if (onStep) {
         onStep(result, { offset: isStep, type });
       }
-    };
-    const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>): void => {
-      event.preventDefault();
-      this.inputNumberRef.current?.blur();
+      onChange && onChange(result);
     };
     /**
      * 上下箭头， enter
      * @param event
      */
     const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>): void => {
-      event.preventDefault();
-      // @ts-ignore
-      const { key, target: { value } } = event;
+      const { key } = event;
       if (key === 'ArrowUp' || key === 'ArrowDown') {
         handleStep(key === 'ArrowUp' ? 'up' : 'down');
       }
       if (key === 'Enter' && onPressEnter) {
-        onPressEnter(value, { offset: step ?? 0, key });
+        onPressEnter(event);
       }
     };
     /**
      * 输入框change
      * @param event
      */
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
-      const { target: { value: val } } = event;
-      const parserValue: number = parser ? +parser(val) : +val;
-      const formatValue: string = formatter ? formatter(parserValue) : val;
-      this.setState({ value: formatValue });
-      if (onChange) {
-        onChange(parserValue);
-      }
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+      this.setState({ value: event.target.value });
+      console.log('dewdw2222222222', event.target.value);
+      onChange && onChange(event.target.value);
     };
+    let last = val;
+    if (parser) {
+      last = parser(last.toString());
+    }
+    if (formatter) {
+      last = formatter(last);
+    }
     return (
       <div style={style} className={prefixSize}>
         <div className={input_wrap_size}>
           <input
             {...compse}
-            value={val}
+            value={last}
             ref={this.inputNumberRef}
             onChange={handleChange}
-            onKeyDown={handleKeyDown}
             onKeyUp={handleKeyPress}
             className={input_diable}
+            onFocus={this.foucs}
+            onBlur={this.blur}
           />
         </div>
         {
@@ -165,4 +185,4 @@ class InputNumber extends React.Component<InputNumberProps, { value: ReactText }
   }
 }
 
-export default React.forwardRef((props: InputNumberProps, ref: React.MutableRefObject<HTMLInputElement>) => <InputNumber {...props} ref={ref} />);
+export default React.forwardRef((props: InputNumberProps, ref: React.ForwardedRef<HTMLInputElement>) => <InputNumber {...props} ref={ref} />);

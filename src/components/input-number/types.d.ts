@@ -1,12 +1,8 @@
-import { ReactText } from 'react';
-
 export interface InputNumberProps {
   // 行内样式
   style?: React.CSSProperties;
   // 是否禁用 默认false
   disabled?: boolean;
-  // 是否只读
-  readOnly?: boolean;
   // 输入框大小
   size?: 'large' | 'small' | 'default';
   // 是否自动获得焦点
@@ -25,15 +21,15 @@ export interface InputNumberProps {
   value?: number;
   // 保留小数位数
   precision?: number;
-  ref?: React.MutableRefObject<HTMLInputElement>;
+  ref?: React.forwardRef<HTMLInputElement>;
   // 输入框内容改变
-  onChange?: (value: number) => void;
+  onChange?: (value: number | string) => void;
   // 上下箭头回调
   onStep?: (value: number, info?: { offset: number, type: string }) => void;
   // 回车键
   onPressEnter?: (value, info?: { offset: number, key: string }) => void;
   // 规定展示格式
-  formatter?: (value: ReactText) => string;
+  formatter?: (value: string | number) => string;
   // 解析配合formatter
-  parser?: (value: ReactText) => string;
+  parser?: (value: string | number) => string;
 }
