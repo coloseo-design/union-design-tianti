@@ -144,7 +144,7 @@ class Input extends Component<BaseInputProps, InputState> {
 
   renderInput = ({ getPrefixCls }: ConfigConsumerProps) => {
     const {
-      allowClear, forwardedRef, style, addonAfter, addonBefore, onChange, prefixCls: customizedPrefixCls, className, type, ...rest
+      allowClear, forwardedRef, style, addonAfter, addonBefore, onChange, prefixCls: customizedPrefixCls, className, type, defaultValue, ...rest
     } = this.props;
     const { value } = this.state;
     const group: string = (addonAfter || addonBefore) ? 'group' : '';
