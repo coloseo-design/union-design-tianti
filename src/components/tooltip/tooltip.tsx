@@ -135,7 +135,7 @@ class Tooltip extends React.Component<TooltipProps, TooltipState> {
         onFocus: this.onMouseOver,
       },
     };
-    let component = (<span {...normalEventMap[trigger]} onMouseMove={(e) => console.log('e', e)}>{children}</span>);
+    let component = (<span {...normalEventMap[trigger]}>{children}</span>);
     if (React.isValidElement(children)) {
       const delegateEventMap = {
         click: {

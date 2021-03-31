@@ -33,6 +33,15 @@ class Group extends Component<RadioGroupProps, RadioGroupState> {
     onChange: () => {},
   };
 
+  static getDerivedStateFromProps(props: RadioGroupProps, state: RadioGroupState) {
+    if (props.value !== state.value) {
+      return {
+        value: props.value,
+      };
+    }
+    return null;
+  }
+
   constructor(props: RadioGroupProps) {
     super(props);
     // 劫持value

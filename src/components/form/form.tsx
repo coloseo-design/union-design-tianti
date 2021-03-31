@@ -165,14 +165,6 @@ class Form extends React.Component<FormProps, FormState> {
     }
   }
 
-  componentDidMount() {
-    this.props.formRef?.current = {
-      resetFields: this.resetFields,
-      onSubmit: this.onSubmit,
-      setFieldsValue: this.setFieldsValue,
-    };
-  }
-
   render() {
     const {
       prefixCls: customizePrefixCls,

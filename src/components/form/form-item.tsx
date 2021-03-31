@@ -228,7 +228,6 @@ class InternalFormItem extends React.Component<InternalFormItemProps, FormItemSt
           defaultValue: initialValue,
           name,
         };
-        console.log('extProps===>', extProps);
         return React.cloneElement(child, extProps);
       }
       return child;

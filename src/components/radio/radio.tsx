@@ -58,7 +58,7 @@ class Radio extends Component<RadioProps, RadioState> {
 
   renderRadio = ({ getPrefixCls }: ConfigConsumerProps) => {
     const {
-      forwardedRef, onChange, prefixCls, children, disabled, style, name = 'radio', ...rest
+      forwardedRef, onChange, prefixCls, children, disabled, style, name = 'radio', defaultChecked, ...rest
     } = this.props;
     const { checked } = this.state;
     const prefix = getPrefixCls('radio', prefixCls);
@@ -66,7 +66,6 @@ class Radio extends Component<RadioProps, RadioState> {
       // [`${prefix}-checked`]: checked,
     });
     const onchange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
-      console.log('onchange', e);
       if (onChange) {
         (onChange as React.ChangeEventHandler<HTMLInputElement>)(e);
       }
