@@ -66,6 +66,7 @@ class Radio extends Component<RadioProps, RadioState> {
       // [`${prefix}-checked`]: checked,
     });
     const onchange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
+      console.log('onchange', e);
       if (onChange) {
         (onChange as React.ChangeEventHandler<HTMLInputElement>)(e);
       }

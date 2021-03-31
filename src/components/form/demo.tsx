@@ -31,51 +31,59 @@ export default () => {
   const data = [
     {
       key: '0',
-      value: 'node-0',
+      title: 'node-0',
+      value: '0',
       children: [
         {
           key: '0-1',
-          value: 'node-0-1',
+          title: 'node-0-1',
+          value: '0-1',
         },
         {
           key: '0-2',
-          value: 'node-0-2',
+          title: 'node-0-2',
+          value: '0-2',
         },
       ],
     },
     {
       key: '1',
-      value: 'node-1',
+      title: 'node-1',
+      value: '1',
       children: [
         {
           key: '1-1',
-          value: 'node-1-1',
+          title: 'node-1-1',
+          value: '1-1',
           children: [
             {
               key: '1-1-1',
-              value: 'node-1-1-1',
+              title: 'node-1-1-1',
+              value: '1-1-1',
             },
             {
               key: '1-1-2',
-              value: 'node-1-1-2',
+              title: 'node-1-1-2',
+              value: '1-1-2',
             },
           ],
         },
         {
           key: '1-2',
-          value: 'node-1-2',
+          title: 'node-1-2',
+          value: '1-2',
           children: [
             {
               key: '1-2-1',
-              value: 'node-1-2-1',
+              title: 'node-1-2-1',
               children: [
                 {
                   key: '1-1-3',
-                  value: 'node-1-1-3',
+                  title: 'node-1-1-3',
                 },
                 {
                   key: '1-1-4',
-                  value: 'node-1-1-4',
+                  title: 'node-1-1-4',
                 },
               ],
             },
@@ -251,12 +259,11 @@ export default () => {
             name="test"
             label="头像"
             validateFirst={false}
-            valuePropName="fileList"
             rules={[
               { required: true, message: '请填写年龄' },
             ]}
           >
-            <TreeSelect data={data} />
+            <TreeSelect treeData={data} onChange={(...args) => console.log('args', args)} />
           </FormItem>
           <FormItem
             name="test1"
@@ -271,14 +278,14 @@ export default () => {
             </Checkbox.Group>
           </FormItem>
           <FormItem
-            name="test2"
+            name="test23"
             label="是否历史记录"
             rules={[
               { required: true, message: '请填写年龄' },
             ]}
             initialValue="B"
           >
-            <Radio.Group>
+            <Radio.Group onChange={(e) => console.log('e', e)}>
               <Radio value="A">A</Radio>
               <Radio value="B">B</Radio>
               <Radio value="C">C</Radio>
