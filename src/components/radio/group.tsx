@@ -33,14 +33,14 @@ class Group extends Component<RadioGroupProps, RadioGroupState> {
     onChange: () => {},
   };
 
-  static getDerivedStateFromProps(props: RadioGroupProps, state: RadioGroupState) {
-    if (props.value !== state.value) {
-      return {
-        value: props.value,
-      };
-    }
-    return null;
-  }
+  // static getDerivedStateFromProps(props: RadioGroupProps, state: RadioGroupState) {
+  //   if (props.value !== state.value) {
+  //     return {
+  //       value: props.value,
+  //     };
+  //   }
+  //   return null;
+  // }
 
   constructor(props: RadioGroupProps) {
     super(props);
@@ -48,6 +48,13 @@ class Group extends Component<RadioGroupProps, RadioGroupState> {
     this.state = {
       value: props.value || props.defaultValue,
     };
+  }
+
+  componentDidUpdate(prevProps: RadioGroupProps) {
+    const { value } = this.props;
+    if (value !== prevProps.value) {
+      this.setState({ value });
+    }
   }
 
   renderRadioGroup = ({ getPrefixCls }: ConfigConsumerProps) => {

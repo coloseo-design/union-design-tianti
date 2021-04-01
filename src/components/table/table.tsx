@@ -8,11 +8,18 @@ import {
 } from '..';
 import { PaginationProps } from '../pagination/pagination';
 import {
-  ColumnsProps, FixedType, RenderReturnObjectType, RowProps, TableProps, TableState,
+  ColumnsProps,
+  FixedType,
+  RenderReturnObjectType,
+  RowProps,
+  TableProps,
+  TableRowSelectionType,
+  TableState,
 } from './type';
 import Row from './row';
 import ColGroup from './col-group';
 import TableHeader from './header';
+import { groupColums, sortColums } from './utils';
 
 @withGlobalConfig
 export default class Table extends React.Component<TableProps, TableState> {
@@ -43,13 +50,13 @@ export default class Table extends React.Component<TableProps, TableState> {
       selectedRowKey: '',
       filters,
       // eslint-disable-next-line react/no-unused-state
-      pagination: props.pagination || { current: 0, pageSize: 10 },
+      pagination: props.pagination || { current: 1, pageSize: 10 },
     };
   }
 
   componentDidUpdate(props: TableProps) {
-    const { rowSelection: { selectedRowKeys }, pagination } = this.props;
-    if (props.rowSelection.selectedRowKeys !== selectedRowKeys) {
+    const { rowSelection: { selectedRowKeys } = {}, pagination } = this.props;
+    if (props.rowSelection && props.rowSelection.selectedRowKeys !== selectedRowKeys) {
       this.setState({
         selectedRowKeys,
       });
@@ -187,10 +194,14 @@ export default class Table extends React.Component<TableProps, TableState> {
     dataSource: unknown[],
   ) => {
     const { selectedRowKey } = this.state;
+    const hoverable = columns.filter((column) => !!column.fixed).length > 0;
     const results = this.formateDataSource(dataSource, columns).map((row) => (
       <Row
         key={row.key}
         prefixCls={this.getPrefixCls()}
+        {...(
+          hoverable ? { onMouseOver: this.onMouseOver(row.key), onMouseOut: this.onMouseOut } : {}
+        )}
         // onMouseOver={this.onMouseOver(row.key)}
         // onMouseOut={this.onMouseOut}
         rowKey={row.key}
@@ -227,43 +238,18 @@ export default class Table extends React.Component<TableProps, TableState> {
     ) : null;
   }
 
-  groupColums = (columns: ColumnsProps[], direction: 'left' | 'right' | 'center' = 'center') => columns.filter((column) => {
-    let columDirection = column.fixed as string;
-    if (column.fixed === true) {
-      columDirection = 'left';
-    }
-    if (!column.fixed) {
-      columDirection = 'center';
-    }
-    return direction === columDirection;
-  });
-
-  // onSideTableScroll: React.UIEventHandler<HTMLDivElement> = (e) => {
-  //   const { scrollTop } = e.target as HTMLDivElement;
-  //   if (this.leftTableBodyRef) {
-  //     (this.leftTableBodyRef.current as HTMLDivElement).scrollTop = scrollTop;
-  //   }
-  //   if (this.rightTableBodyRef) {
-  //     (this.rightTableBodyRef.current as HTMLDivElement).scrollTop = scrollTop;
-  //   }
-  //   if (this.mainTableBodyRef) {
-  //     const ele = (this.mainTableBodyRef.current as HTMLDivElement);
-  //     ele.scrollTop = scrollTop;
-  //   }
-  // }
-
   onScroll: React.UIEventHandler<HTMLDivElement> = (e) => {
     const { scrollTop, scrollLeft } = e.target as HTMLDivElement;
-    if (this.leftTableBodyRef) {
+    if (this.leftTableBodyRef.current) {
       (this.leftTableBodyRef.current as HTMLDivElement).scrollTop = scrollTop;
     }
-    if (this.rightTableBodyRef) {
+    if (this.rightTableBodyRef.current) {
       (this.rightTableBodyRef.current as HTMLDivElement).scrollTop = scrollTop;
     }
-    if (this.mainTableHeaderRef) {
+    if (this.mainTableHeaderRef.current) {
       (this.mainTableHeaderRef.current as HTMLDivElement).scrollLeft = scrollLeft;
     }
-    if (this.mainTableBodyRef) {
+    if (this.mainTableBodyRef.current) {
       const ele = (this.mainTableBodyRef.current as HTMLDivElement);
       ele.scrollTop = scrollTop;
       ele.scrollLeft = scrollLeft;
@@ -337,7 +323,7 @@ export default class Table extends React.Component<TableProps, TableState> {
       columnWidth,
       onChange,
       selectedRowKeys: defaultSelectdRowKeys = [],
-    } = rowSelection;
+    } = rowSelection as TableRowSelectionType;
     return {
       title: columnTitle || this.selectAllCheckbox(),
       dataIndex: 'selected',
@@ -397,7 +383,7 @@ export default class Table extends React.Component<TableProps, TableState> {
       rowSelection,
     } = this.props;
     const prefix = this.getPrefixCls();
-    const filteredColumns = this.groupColums(columns, position);
+    const filteredColumns = groupColums(columns, position);
     const tableOuterCls = classnames(`${prefix}-item`, {
       [`${prefix}-item-fixed-${position}`]: position,
     }, `${prefix}-item-fixed`);
@@ -449,33 +435,12 @@ export default class Table extends React.Component<TableProps, TableState> {
    * @returns
    */
   getMainColums = (columns: ColumnsProps[]) => {
+    const sortedColumns = sortColums(columns);
     const { rowSelection } = this.props;
-    const all = columns.reduce<ColumnsProps[][]>((composed, item) => {
-      const [leftColumns, mainColumns, rightColumns] = composed;
-      if (item.fixed === 'left' || item.fixed === true) {
-        leftColumns.push(item);
-      } else if (item.fixed === 'right') {
-        rightColumns.push(item);
-      } else {
-        mainColumns.push(item);
-      }
-      return composed;
-    }, [[/* left  */], [/* center  */], [/* right  */]]);
-    const result = [...all[0], ...all[1], ...all[2]];
-    // 去掉filter组件, 挡在后面的filter不展示，提升性能
-    const resultWithoutFilter = result.map((item: ColumnsProps) => {
-      if (item.fixed && item.filters && item.filters?.length > 0) {
-        return {
-          ...item,
-          filters: [],
-        };
-      }
-      return item;
-    });
     if (rowSelection) {
-      resultWithoutFilter.unshift(this.selectionColumn());
+      sortedColumns.unshift(this.selectionColumn());
     }
-    return resultWithoutFilter;
+    return sortedColumns;
   }
 
   onPageChange = (current: number, pageSize: number) => {
@@ -523,13 +488,14 @@ export default class Table extends React.Component<TableProps, TableState> {
     });
 
     const filteredDataSource = dataSource.filter(this.filterDataSourceFilter());
+    console.log('filteredDataSource', filteredDataSource);
     const paginateDataSource = this.paginateDataSource(filteredDataSource);
 
     const mainColumns = columns.slice();
     // eslint-disable-next-line no-nested-ternary
     const maxHeight = scroll ? (typeof scroll.y === 'boolean' ? 'auto' : scroll.y) : 'auto';
 
-    console.log('filteredDataSource', filteredDataSource.length, pagination);
+    console.log('filteredDataSource', filteredDataSource.length, paginateDataSource);
     return (
       <div className={`${prefix}-container`}>
         <div className={`${prefix}-container-with-spin`}>

@@ -39,14 +39,14 @@ class Radio extends Component<RadioProps, RadioState> {
     defaultChecked: false,
   };
 
-  static getDerivedStateFromProps(props: RadioProps, state: { checked: boolean | undefined; }) {
-    if (props.checked !== state.checked) {
-      return {
-        checked: props.checked,
-      };
-    }
-    return null;
-  }
+  // static getDerivedStateFromProps(props: RadioProps, state: { checked: boolean | undefined; }) {
+  //   if (props.checked !== state.checked) {
+  //     return {
+  //       checked: props.checked,
+  //     };
+  //   }
+  //   return null;
+  // }
 
   constructor(props: RadioProps) {
     super(props);
@@ -54,6 +54,13 @@ class Radio extends Component<RadioProps, RadioState> {
     this.state = {
       checked: props.checked || props.defaultChecked,
     };
+  }
+
+  componentDidUpdate(prevProps: RadioProps) {
+    const { checked } = this.props;
+    if (checked !== prevProps.checked) {
+      this.setState({ checked });
+    }
   }
 
   renderRadio = ({ getPrefixCls }: ConfigConsumerProps) => {

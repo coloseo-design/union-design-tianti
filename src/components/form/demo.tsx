@@ -297,14 +297,14 @@ export default () => {
             </Checkbox.Group>
           </FormItem>
           <FormItem
-            name="test23"
-            label="是否历史记录"
+            name="radio"
+            label="单选框"
             rules={[
               { required: true, message: '请填写年龄' },
             ]}
             initialValue="B"
           >
-            <Radio.Group onChange={(e) => console.log('e', e)}>
+            <Radio.Group>
               <Radio value="A">A</Radio>
               <Radio value="B">B</Radio>
               <Radio value="C">C</Radio>

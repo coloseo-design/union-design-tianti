@@ -45,6 +45,26 @@ export interface ColumnsProps {
 
 export type RowKeyType = string | ((record: unknown) => string);
 
+export type TableRowSelectionType = {
+  /** 用户手动选择/取消选择某行的回调 */
+  onSelect: () => void;
+  /** 用户手动选择/取消选择所有行的回调 */
+  onSelectAll: () => void;
+  /** 选中项发生变化时的回调 */
+  onChange: (selectedRowKeys: unknown[], selectedRows: unknown[]) => void;
+  /** 列宽 */
+  columnWidth?: number;
+  /** 列标题 */
+  columnTitle?: React.ReactNode;
+  /** checkbox默认设置 */
+  getCheckboxProps: (record: unknown) => {
+    disabled?: boolean;
+    name?: React.ReactNode;
+  };
+  /** 默认选中 */
+  selectedRowKeys: unknown[];
+}
+
 export interface TableProps extends ConfigConsumerProps {
   /** 是否包含边框 */
   bordered: boolean;
@@ -56,25 +76,7 @@ export interface TableProps extends ConfigConsumerProps {
   /** 是否加载中 */
   loading?: boolean;
   /** 表格行是否可选择 */
-  rowSelection: {
-    /** 用户手动选择/取消选择某行的回调 */
-    onSelect: () => void;
-    /** 用户手动选择/取消选择所有行的回调 */
-    onSelectAll: () => void;
-    /** 选中项发生变化时的回调 */
-    onChange: (selectedRowKeys: unknown[], selectedRows: unknown[]) => void;
-    /** 列宽 */
-    columnWidth?: number;
-    /** 列标题 */
-    columnTitle?: React.ReactNode;
-    /** checkbox默认设置 */
-    getCheckboxProps: (record: unknown) => {
-      disabled?: boolean;
-      name?: React.ReactNode;
-    };
-    /** 默认选中 */
-    selectedRowKeys: unknown[];
-  }
+  rowSelection: TableRowSelectionType;
   scroll: {
     /** 设置横向滚动，也可用于指定滚动区域的宽 */
     x?: number | boolean;
