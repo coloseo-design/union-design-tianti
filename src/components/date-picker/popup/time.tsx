@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable consistent-return */
 /* eslint-disable no-plusplus */
@@ -42,152 +43,150 @@ const scrollToY = (containerId: string, targetId: string, duration: number) => {
 };
 
 abstract class PopupTime<T extends PickerType> extends Popup<T> {
-    protected formatTag = 'YYYY-MM-DD HH:mm:ss';
+  protected formatTag = 'YYYY-MM-DD HH:mm:ss';
 
-    protected cmpTag: dayjs.UnitType = 'second';
+  protected cmpTag: dayjs.UnitType = 'second';
 
-    private scrollIdTag = 'scroll-popuptime';
+  private scrollIdTag = 'scroll-popuptime';
 
-    private viewData = new Proxy({
-      year: [],
-      month: generateDatetimeKeyValue(0, 12, true),
-      date: [],
-      hour: generateDatetimeKeyValue(0, 24),
-      minute: generateDatetimeKeyValue(0, 60),
-      second: generateDatetimeKeyValue(0, 60),
-    } as { [key: string]: { key: number, value: string }[] }, {
-      get: (target, param) => {
-        if (param === 'year') {
-          const { yearRange } = this.props;
-
-          return generateDatetimeKeyValue(yearRange?.[0], yearRange?.[1]);
-        }
-
-        if (param === 'date') {
-          const { viewDate } = this.props;
-          const re: { key: number, value: string }[] = [];
-          const allDays = dayjs().set('year', viewDate.get('year'))
-            .set('month', viewDate.get('month')).daysInMonth();
-
-          for (let i = 0; i < allDays; i++) {
-            re.push({ key: i + 1, value: `${i + 1}`.padStart(2, '0') });
-          }
-
-          return re;
-        }
-
-        return target[param as UnitType];
-      },
-    });
-
-    public componentDidMount = () => {
+  private viewData = {
+    year: () => {
+      const { yearRange } = this.props;
+      return generateDatetimeKeyValue(yearRange![0], yearRange![1]);
+    },
+    month: generateDatetimeKeyValue(0, 12, true),
+    date: () => {
       const { viewDate } = this.props;
+      const re: { key: number, value: string }[] = [];
+      const allDays = dayjs().set('year', viewDate.get('year'))
+        .set('month', viewDate.get('month')).daysInMonth();
 
-      this.animationScrollToValue(this.getDate() ?? viewDate);
-    };
-
-    public componentDidUpdate = (preProps: PopupProps<T>) => {
-      const { selectedDate: preSelectedDate } = preProps;
-      const { selectedDate: curSelectedDate } = this.props;
-
-      if (preSelectedDate !== curSelectedDate) {
-        const date = this.getSelectDate() ?? this.getDate();
-        date && this.animationScrollToValue(date);
+      for (let i = 0; i < allDays; i++) {
+        re.push({ key: i + 1, value: `${i + 1}`.padStart(2, '0') });
       }
-    };
 
-    protected view = () => (
-      <>
-        {this.bodyView()}
-        {this.footerView()}
-      </>
-    );
+      return re;
+    },
+    hour: generateDatetimeKeyValue(0, 24),
+    minute: generateDatetimeKeyValue(0, 60),
+    second: generateDatetimeKeyValue(0, 60),
+  } as {
+      [key in UnitType]: { key: number, value: string }[]
+      | (() => { key: number, value: string }[]) };
 
-    protected bodyView = () => {
-      const { mode } = this.props;
-      const data = handleData(mode!);
+  public componentDidMount = () => {
+    const { viewDate } = this.props;
+
+    this.animationScrollToValue(this.getDate() ?? viewDate);
+  };
+
+  public componentDidUpdate = (preProps: PopupProps<T>) => {
+    const { selectedDate: preSelectedDate } = preProps;
+    const { selectedDate: curSelectedDate } = this.props;
+
+    if (preSelectedDate !== curSelectedDate) {
       const date = this.getSelectDate() ?? this.getDate();
+      date && this.animationScrollToValue(date);
+    }
+  };
 
-      return (
-        <div className={this.getClass('popuptime')}>
-          {data.map((col) => (
-            <div
-              id={`${this.scrollIdTag}-${col}`}
-              key={`${this.scrollIdTag}-${col}`}
-              data-class={['year', 'month', 'date'].includes(`${col}`) ? 'date' : 'time'}
-            >
-              {this.viewData[col].map((row) => (
-                <div
-                  id={`${this.scrollIdTag}-${col}-${row.key}`}
-                  data-class={date?.get(col) === row.key ? 'active' : 'none'}
-                  onClick={() => this.clickDate(col, row.key)}
-                  key={row.key}
-                >
-                  {row.value}
-                </div>
-              ))}
-              <div />
-            </div>
-          ))}
-        </div>
-      );
-    };
+  protected view = () => (
+    <>
+      {this.bodyView()}
+      {this.footerView()}
+    </>
+  );
 
-    protected footerView = () => {
-      const {
-        showFooter = true,
-        onNow = () => { },
-        onOk = () => { },
-      } = this.props;
+  protected bodyView = () => {
+    const { mode } = this.props;
+    const data = handleData(mode!);
+    const date = this.getSelectDate() ?? this.getDate();
 
-      if (!showFooter) return;
-
-      const okDisabled = !(this.getDate() || this.getSelectDate());
-
-      return (
-        <div className={this.getClass('popuptime-footer')}>
-          <div>
-            <Button
-              type="link"
-              size="small"
-              onClick={onNow}
-            >
-              此刻
-            </Button>
+    return (
+      <div className={this.getClass('popuptime')}>
+        {data.map((col) => (
+          <div
+            id={`${this.scrollIdTag}-${col}`}
+            key={`${this.scrollIdTag}-${col}`}
+            data-class={['year', 'month', 'date'].includes(`${col}`) ? 'date' : 'time'}
+          >
+            {this.getCol(col).map((row) => (
+              <div
+                id={`${this.scrollIdTag}-${col}-${row.key}`}
+                data-class={date?.get(col) === row.key ? 'active' : 'none'}
+                onClick={() => this.clickDate(col, row.key)}
+                key={row.key}
+              >
+                {row.value}
+              </div>
+            ))}
+            <div />
           </div>
-          <div>
-            <Button
-              size="small"
-              type="primary"
-              onClick={onOk}
-              disabled={okDisabled}
-            >
-              确定
-            </Button>
-          </div>
+        ))}
+      </div>
+    );
+  };
+
+  private getCol = (col: UnitType) => {
+    const tempCol = this.viewData[col];
+    return typeof tempCol === 'function' ? tempCol() : tempCol;
+  }
+
+  protected footerView = () => {
+    const {
+      showFooter = true,
+      onNow = () => { },
+      onOk = () => { },
+    } = this.props;
+
+    if (!showFooter) return;
+
+    const okDisabled = !(this.getDate() || this.getSelectDate());
+
+    return (
+      <div className={this.getClass('popuptime-footer')}>
+        <div>
+          <Button
+            type="link"
+            size="small"
+            onClick={onNow}
+          >
+            此刻
+          </Button>
         </div>
-      );
-    };
+        <div>
+          <Button
+            size="small"
+            type="primary"
+            onClick={onOk}
+            disabled={okDisabled}
+          >
+            确定
+          </Button>
+        </div>
+      </div>
+    );
+  };
 
-    protected clickDate = (type: UnitType, num: number) => {
-      const { onDate = () => { }, viewDate } = this.props;
+  protected clickDate = (type: UnitType, num: number) => {
+    const { onDate = () => { }, viewDate } = this.props;
 
-      onDate(viewDate.set(type, num));
-    };
+    onDate(viewDate.set(type, num));
+  };
 
-    protected animationScrollToValue = (date: Dayjs) => {
-      const { mode } = this.props;
-      const data = handleData(mode!);
+  protected animationScrollToValue = (date: Dayjs) => {
+    const { mode } = this.props;
+    const data = handleData(mode!);
 
-      data.forEach((item) => {
-        const containerId = `${this.scrollIdTag}-${item}`;
-        const targetId = `${this.scrollIdTag}-${item}-${date.get(item)}`;
+    data.forEach((item) => {
+      const containerId = `${this.scrollIdTag}-${item}`;
+      const targetId = `${this.scrollIdTag}-${item}-${date.get(item)}`;
 
-        setTimeout(() => {
-          scrollToY(containerId, targetId, 200);
-        });
+      setTimeout(() => {
+        scrollToY(containerId, targetId, 200);
       });
-    };
+    });
+  };
 }
 
 export class PopupSingleTime extends PopupTime<'single'> {
