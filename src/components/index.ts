@@ -39,7 +39,7 @@ export { default as Descriptions } from './descriptions';
 export { default as Form } from './form';
 export { Row, Col } from './grid';
 export { default as Input } from './input';
-export { default as InputNUmber } from './input-number';
+export { default as InputNumber } from './input-number';
 export { default as List } from './list';
 export { default as Radio } from './radio';
 export { default as Rate } from './rate';
