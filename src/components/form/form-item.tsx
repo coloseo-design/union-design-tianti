@@ -93,7 +93,7 @@ class InternalFormItem extends React.Component<InternalFormItemProps, FormItemSt
    * @param evts
    */
   onCollect = (...evts: unknown[]) => {
-    this.setState({ isValidating: true });
+    // this.setState({ isValidating: true });
     const {
       getValueFromEvent, valuePropName = 'value', context, name = '', trigger = 'onChange',
     } = this.props;

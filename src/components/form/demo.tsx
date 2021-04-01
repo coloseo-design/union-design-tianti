@@ -277,7 +277,6 @@ export default () => {
           <FormItem
             name="test"
             label="头像"
-            validateFirst={false}
             rules={[
               { required: true, message: '请填写年龄' },
             ]}
@@ -288,7 +287,7 @@ export default () => {
             name="test1"
             label="是否满意"
             rules={[
-              { required: true, message: '请填写年龄' },
+              { required: true, message: '请选择' },
             ]}
           >
             <Checkbox.Group>

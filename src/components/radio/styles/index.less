@@ -38,15 +38,18 @@
       border: @border-width-base @border-style-base @radio-dot-color;
     }
   }
-  input:checked+span {
+}
+// 选中之后的状态
+.@{radio-prefix-cls}-checked {
+  input+span {
     background-color: @radio-button-bg;
     border: @border-width-base @border-style-base @radio-dot-color;
     border-radius: 50%;
   }
-  input:checked,input:disabled+span {
+  input,input:disabled+span {
     border: @border-width-base @border-style-base @border;
   }
-  input:checked+span::after {
+  input + span::after {
     position: absolute;
     content: '';
     width: @radio-center-button-width;
@@ -56,7 +59,7 @@
     left: (@radio-center-button-width - @border-width-base * 2) / 2px;
     background-color: @radio-dot-color;
   }
-  input:checked,input:disabled+span::after {
+  input, input:disabled+span::after {
     background-color: @border;
   }
 }
