@@ -35,6 +35,7 @@ class Group extends Component<RadioGroupProps, RadioGroupState> {
 
   // static getDerivedStateFromProps(props: RadioGroupProps, state: RadioGroupState) {
   //   if (props.value !== state.value) {
+  //     console.log('props.value', props.value);
   //     return {
   //       value: props.value,
   //     };
@@ -73,7 +74,6 @@ class Group extends Component<RadioGroupProps, RadioGroupState> {
         (onChange as React.ChangeEventHandler<HTMLInputElement>)(e);
       }
     };
-
     if (children) {
       return (
         <div className={mainClass} style={style}>

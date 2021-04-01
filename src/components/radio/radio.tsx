@@ -39,15 +39,6 @@ class Radio extends Component<RadioProps, RadioState> {
     defaultChecked: false,
   };
 
-  // static getDerivedStateFromProps(props: RadioProps, state: { checked: boolean | undefined; }) {
-  //   if (props.checked !== state.checked) {
-  //     return {
-  //       checked: props.checked,
-  //     };
-  //   }
-  //   return null;
-  // }
-
   constructor(props: RadioProps) {
     super(props);
     // 劫持checked
@@ -70,8 +61,9 @@ class Radio extends Component<RadioProps, RadioState> {
     const { checked } = this.state;
     const prefix = getPrefixCls('radio', prefixCls);
     const mainClass = classNames(prefix, {
-      // [`${prefix}-checked`]: checked,
+      [`${prefix}-checked`]: checked,
     });
+
     const onchange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
       if (onChange) {
         (onChange as React.ChangeEventHandler<HTMLInputElement>)(e);
@@ -79,7 +71,7 @@ class Radio extends Component<RadioProps, RadioState> {
     };
     return (
       <label className={mainClass} style={{ ...style, cursor: disabled ? 'not-allowed' : 'pointer' }}>
-        <input {...rest} ref={forwardedRef} type="radio" disabled={disabled} checked={checked} name={name} onChange={onchange} />
+        <input {...rest} ref={forwardedRef} type="radio" disabled={disabled} name={name} onChange={onchange} />
         <span />
         <span>{children}</span>
       </label>
