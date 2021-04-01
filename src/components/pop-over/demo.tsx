@@ -21,7 +21,7 @@ const PopoverDemo = () => (
       title={<div>Title4</div>}
       trigger="focus"
       content={<div>和哈哈哈哈4</div>}
-      visible
+      // visible
     >
       <Button style={{ margin: 24 }}>Focus</Button>
     </Popover>
