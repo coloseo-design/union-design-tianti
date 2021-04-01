@@ -81,6 +81,8 @@ export { default as Result } from './result/result';
 /* eslint-disable */
 export { default as Select } from './select/select';
 /* eslint-disable */
+export { default as Skeleton } from './skeleton/skeleton';
+/* eslint-disable */
 export { default as Slider } from './slider/slider';
 /* eslint-disable */
 export { default as Spin } from './spin/spin';
@@ -96,6 +98,8 @@ export { default as Table } from './table/table';
 export { default as Tabs } from './tabs/tabs';
 /* eslint-disable */
 export { default as Tag } from './tag/tag';
+/* eslint-disable */
+export { default as Timeline } from './timeline/timeline';
 /* eslint-disable */
 export { default as Tooltip } from './tooltip/tooltip';
 /* eslint-disable */

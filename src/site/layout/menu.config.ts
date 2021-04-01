@@ -133,6 +133,10 @@ export default [
         title: 'Form 表单',
         key: 'form',
       },
+      {
+        title: 'Timeline 时间轴',
+        key: 'timeline',
+      },
     ],
   },
   {
@@ -242,6 +246,10 @@ export default [
       {
         title: 'Progress 进度条',
         key: 'progress',
+      },
+      {
+        title: 'Skeleton 骨架屏',
+        key: 'skeleton',
       },
     ],
   },

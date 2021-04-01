@@ -70,3 +70,5 @@ export { default as Typography } from './typography';
 export { default as Menu } from './menu';
 export { default as BackTop } from './backTop';
 export { default as Checkbox } from './checkbox';
+export { default as Skeleton } from './skeleton';
+export { default as Timeline } from './timeline';
