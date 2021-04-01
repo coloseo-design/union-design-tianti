@@ -24,8 +24,8 @@ class TimelineItem extends React.Component<TimelineItemProps, any> {
           <div className={`${prefix}-item-head`} />
           <div className={`${prefix}-item-label`}>
             {
-                        label && <div>{label}</div>
-                    }
+              label && <div>{label}</div>
+            }
             <div className={`${prefix}-item-content`}>{children}</div>
           </div>
 
