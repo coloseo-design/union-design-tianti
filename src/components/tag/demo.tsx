@@ -21,7 +21,7 @@ class EditableTagGroup extends React.Component {
   };
 
   showInput = () => {
-    this.setState({ inputVisible: true });
+    // this.setState({ inputVisible: true });
   };
 
   handleInputChange = (e) => {
