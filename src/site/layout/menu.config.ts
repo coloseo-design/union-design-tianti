@@ -66,6 +66,10 @@ export default [
         title: 'Steps 步骤条',
         key: 'steps',
       },
+      {
+        title: 'PageHeader 页头',
+        key: 'pageHeader',
+      },
     ],
   },
   {
@@ -250,6 +254,10 @@ export default [
       {
         title: 'Skeleton 骨架屏',
         key: 'skeleton',
+      },
+      {
+        title: 'Result 结果',
+        key: 'result',
       },
     ],
   },

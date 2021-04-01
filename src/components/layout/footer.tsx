@@ -11,7 +11,7 @@ export interface FooterProps {
 
 class Footer extends Component<FooterProps> {
   renderFooter = ({ getPrefixCls }: ConfigConsumerProps) => {
-    const { prefixCls, children } = this.props;
+    const { prefixCls, children, style } = this.props;
 
     const prefix = getPrefixCls('layout-footer', prefixCls);
     const mainClass = classNames(prefix, {
@@ -19,7 +19,7 @@ class Footer extends Component<FooterProps> {
     });
 
     return (
-      <footer className={mainClass}>
+      <footer className={mainClass} style={style}>
         {children}
       </footer>
     );
