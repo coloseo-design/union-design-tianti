@@ -54,6 +54,9 @@ class DropButton extends React.Component<DropMenuProps, DropMenuState> {
   componentDidUpdate(prevProps: DropMenuProps) {
     const { visible } = this.props;
     if (visible !== prevProps.visible) {
+      if (visible) {
+        this.compute(true);
+      }
       this.setState({ visible });
     }
   }
@@ -95,8 +98,8 @@ class DropButton extends React.Component<DropMenuProps, DropMenuState> {
   };
 
   click = (evt: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
-    const { trigger = ['hover'], disabled } = this.props;
-    if (trigger.indexOf('click') >= 0 && !disabled) {
+    const { trigger = ['hover'], disabled, visible: propsVisible } = this.props;
+    if (trigger.indexOf('click') >= 0 && !disabled && propsVisible === undefined) {
       this.compute(false, evt);
     }
   };
@@ -110,11 +113,8 @@ class DropButton extends React.Component<DropMenuProps, DropMenuState> {
   };
 
   handleClick = (evt: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
-    const { onClick, visible: propsVisible } = this.props;
+    const { onClick } = this.props;
     onClick && onClick(evt);
-    if (propsVisible !== undefined) {
-      this.click(evt);
-    }
   };
 
   compute = (first: boolean, evt?: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {

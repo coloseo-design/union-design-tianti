@@ -112,11 +112,12 @@ class Dropdown extends React.Component<DropdownProps, DropdownState> {
   compute = (evt: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
     evt.stopPropagation();
     const { visible } = this.state;
+    const { visible: propsVisible } = this.props;
     const {
       placement = 'bottomCenter', arrow = false, onVisibleChange,
     } = this.props;
     const target = evt.nativeEvent.target as HTMLSpanElement;
-    if (!visible) {
+    if (!visible || propsVisible) {
       if (target && this.node) {
         const { height: contentHeight, width: contentWidth } = this.node.getBoundingClientRect();
         const {
@@ -156,9 +157,9 @@ class Dropdown extends React.Component<DropdownProps, DropdownState> {
         this.setState({
           x: placementMap[placement].x,
           y: placementMap[placement].y,
-          visible: true,
+          visible: propsVisible !== undefined ? propsVisible : true,
         });
-        onVisibleChange && onVisibleChange(true);
+        onVisibleChange && onVisibleChange(propsVisible !== undefined ? propsVisible : true);
       }
     }
   };

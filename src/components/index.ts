@@ -69,4 +69,4 @@ export { default as Steps } from './steps';
 export { default as Typography } from './typography';
 export { default as Menu } from './menu';
 export { default as BackTop } from './backTop';
-export { default as Checkbox, Group } from './checkbox';
+export { default as Checkbox } from './checkbox';

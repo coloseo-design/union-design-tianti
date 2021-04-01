@@ -42,7 +42,7 @@ const menu = (
 const DropdownDemo = () => {
   const [visible, setVisible] = React.useState(false);
   const handleButtonClick = () => {
-    setVisible(true);
+    setVisible(!visible);
   };
   const onVisibleChange = (vis: boolean) => {
     console.log('--change', vis);
@@ -52,10 +52,10 @@ const DropdownDemo = () => {
       <div style={{ display: 'flex', justifyContent: 'space-between' }}>
         <div>
           <Dropdown
-            placement="bottomCenter"
+            placement="bottomLeft"
             overlay={menu}
             arrow={true}
-            // visible={visible}
+            visible={visible}
             onVisibleChange={onVisibleChange}
             trigger={['click']}
           >
@@ -68,7 +68,7 @@ const DropdownDemo = () => {
           </Dropdown>
         </div>
         <div>
-          <Dropdown placement="bottomRight" overlay={menu} arrow={true}>
+          <Dropdown placement="bottomRight" visible={true} overlay={menu} arrow={true}>
             <Button>hover bottomRight</Button>
           </Dropdown>
         </div>
@@ -94,7 +94,7 @@ const DropdownDemo = () => {
           overlay={menu}
           type="primary"
           icon={<Icon style={{ fontSize: 14 }} type="zoomout" />}
-          visible={visible}
+          // visible={visible}
           onClick={handleButtonClick}
           onVisibleChange={onVisibleChange}
           trigger={['click']}

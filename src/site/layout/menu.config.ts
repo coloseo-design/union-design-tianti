@@ -200,6 +200,10 @@ export default [
         title: 'Image 图片',
         key: 'image',
       },
+      {
+        title: 'Table 表格',
+        key: 'table',
+      },
     ],
   },
   {
