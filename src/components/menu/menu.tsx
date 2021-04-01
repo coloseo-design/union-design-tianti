@@ -154,11 +154,18 @@ export default class Menu extends MenuBase<MenuProps, MenuState> {
     const checkTag = (el: HTMLElement): boolean => {
       let result = false;
       const tag = el.getAttribute('data-menu-tag');
+
       if (tag === 'menu-popup' || tag === 'menu') {
         return true;
       }
+
+      if (/body/ig.test(el.nodeName)) {
+        return false;
+      }
+
       const parentEl = el.parentElement ?? el.parentNode as unknown as HTMLElement;
       if (parentEl) result = checkTag(parentEl);
+
       return result;
     };
 
