@@ -18,7 +18,7 @@ const SelectDemo = () => (
       placeholder="请选择选项"
       style={{ width: 220 }}
     >
-      <Option key="1" value="1">选项111</Option>
+      <Option key="1" value="1">选项111swdewdw是我的我的午饭人反而更</Option>
       <Option key="2" value="2">选项1222</Option>
       <Option disabled key="3" value="3">选项33333</Option>
     </Select>
@@ -33,8 +33,8 @@ const SelectDemo = () => (
       placeholder="请选择选项"
       style={{ width: 220 }}
       type="multiple"
-      maxTagCount={1}
-      maxTagTextLength={5}
+      // maxTagCount={1}
+      // maxTagTextLength={5}
     >
       <Option key="1" value="1">这是一个很长的很长的选项111</Option>
       <Option key="2" value="2">选项1222</Option>

@@ -34,7 +34,7 @@
   background-color: @component-background;
   border: @border-width-base @border-style-base @btn-default-border;
   padding: 0px 8px;
-  height: @btn-height-base;
+  min-height: @btn-height-base;
   line-height: @btn-height-base - 2px;
   border-radius: @border-radius-base;
   float: left;
@@ -95,7 +95,7 @@
 
 .@{select-item-prefix-cls}-wrapper {
   display: inline-block;
-  overflow-y: scroll;
+  // overflow-y: scroll;
   height: 30px;
   margin-right: 14px;
   line-height: 1;
@@ -106,14 +106,16 @@
   display: inline-block;
   box-sizing: border-box;
   margin: 2px 4px 2px 0px;
-  padding: 0px 4px 0px 8px;
+  padding: 3px 4px 3px 8px;
   border-radius: @border-radius-base;
   background-color: rgb(245, 245, 245);
   border: 1px solid rgb(245, 245, 245);
   height: 24px;
-  line-height: 22px;
+  // line-height: 22px;
   user-select: none;
   font-size: 12px;
+  max-width: 150px;
+  overflow: hidden;
   span {
     margin-right: 4px;
   }
@@ -126,7 +128,7 @@
   width: auto;
   max-height: 300px;
   overflow: scroll;
-  z-index: 10;
+  z-index: 1000;
   background: #fff;
   // padding: 4px 0;
   border-radius: @border-radius-sm;
@@ -145,6 +147,10 @@
 .@{select-dropdown-prefix-cls}-item {
   cursor: pointer;
   padding: 4px 8px;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   &:not(&-disabled) {
     &:hover {
       background: @item-hover-bg;

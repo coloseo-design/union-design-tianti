@@ -11,6 +11,7 @@ import { ConfigConsumer, ConfigConsumerProps } from '../config-provider/context'
 import Icon from '../icon';
 import Option, { OptionProps } from './option';
 import { SelectContext } from './context';
+import Portal from '../common/portal';
 
 export const tuple = <T extends string[]>(...args: T) => args;
 
@@ -50,6 +51,7 @@ export interface SelectProps extends CommonParams {
   onSelect?: (value: string | string[], label: string | obj[], checked?: boolean) => void,
   onSearch?: (value: string) => void,
   onClick?: () => void,
+  getPopupContainer?: () => HTMLElement;
 }
 
 export interface obj {
@@ -63,6 +65,9 @@ export interface SelectState extends CommonParams {
   newChildren?: ReactNode,
   isSearch?: boolean,
   selectedOptions?: Array<obj>,
+  left: number,
+  top: number,
+  width: number | string,
 }
 
 class Select extends React.Component<SelectProps, SelectState> {
@@ -80,6 +85,8 @@ class Select extends React.Component<SelectProps, SelectState> {
   }
 
   static Option: typeof Option;
+
+  node: HTMLSpanElement | undefined;
 
   constructor(props: SelectProps) {
     super(props);
@@ -100,6 +107,9 @@ class Select extends React.Component<SelectProps, SelectState> {
       children,
       isSearch: false,
       selectedOptions: [],
+      left: 0,
+      top: 0,
+      width: 0,
     };
     if (currentLabel) {
       Object.assign(stateObj, {
@@ -110,6 +120,10 @@ class Select extends React.Component<SelectProps, SelectState> {
       });
     }
     this.state = stateObj;
+  }
+
+  componentDidMount() {
+    document.addEventListener('click', this.hideDrop);
   }
 
   componentDidUpdate(prevProps: SelectProps) {
@@ -133,12 +147,39 @@ class Select extends React.Component<SelectProps, SelectState> {
     }
   }
 
-  onClick = () => {
+  getLocation = () => {
+    setTimeout(() => {
+      if (this.node?.getBoundingClientRect) {
+        const {
+          height, top, left, width,
+        } = this.node.getBoundingClientRect();
+        const offsetTop = Math.ceil(window.pageYOffset + top);
+        const offsetLeft = Math.ceil(window.pageXOffset + left);
+        this.setState({
+          left: offsetLeft,
+          top: offsetTop + height + 4,
+          width,
+        });
+      }
+    }, 30);
+  };
+
+  getNode = (node: HTMLDivElement) => {
+    this.node = node;
+  };
+
+  hideDrop = () => {
+    this.setState({ showDropdown: false });
+  };
+
+  onClick = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    event.stopPropagation();
     const { showDropdown } = this.state;
     const _showDropdown = !showDropdown;
     this.setState({
       showDropdown: _showDropdown,
     });
+    this.getLocation();
   }
 
   handleInputChange = (e: any) => {
@@ -196,6 +237,7 @@ class Select extends React.Component<SelectProps, SelectState> {
       if (onChange) {
         onChange(valueArr, arr);
       }
+      this.getLocation();
     } else {
       this.setState({
         renderObj: {
@@ -226,6 +268,7 @@ class Select extends React.Component<SelectProps, SelectState> {
     if (onChange) {
       onChange(valueArr, newOptions);
     }
+    this.getLocation();
   }
 
   renderSelect = ({ getPrefixCls }: ConfigConsumerProps) => {
@@ -242,6 +285,7 @@ class Select extends React.Component<SelectProps, SelectState> {
       remoteSearch,
       maxTagCount,
       maxTagTextLength,
+      getPopupContainer,
     } = this.props;
     const {
       showDropdown,
@@ -251,6 +295,9 @@ class Select extends React.Component<SelectProps, SelectState> {
       newChildren,
       isSearch,
       selectedOptions,
+      left,
+      top,
+      width,
     } = this.state;
     const prefix = getPrefixCls('select', customizePrefixCls);
     const wrapperClass = classnames(`${prefix}-wrapper`);
@@ -275,7 +322,7 @@ class Select extends React.Component<SelectProps, SelectState> {
 
     return (
       <div className={wrapperClass} style={style}>
-        <div onClick={!disabled ? this.onClick : () => {}} className={mainClass}>
+        <div onClick={!disabled ? this.onClick : () => {}} className={mainClass} ref={this.getNode}>
           {type === 'search'
             ? (
               <>
@@ -300,9 +347,22 @@ class Select extends React.Component<SelectProps, SelectState> {
                               }
                               return (
                                 <div key={idx} className={itemClass}>
-                                  <span>{temp ? `${_label.substr(0, maxTagTextLength)}...` : _label}</span>
-                                  <span onClick={(el) => this.handleItemDelete(el, i)}>
-                                    <Icon type="close" />
+                                  <span
+                                    style={{
+                                      display: 'inline-block',
+                                      maxWidth: '70%',
+                                      overflow: 'hidden',
+                                      textOverflow: 'ellipsis',
+                                      wordBreak: 'break-all',
+                                    }}
+                                  >
+                                    {temp ? `${_label.substr(0, maxTagTextLength)}...` : _label}
+                                  </span>
+                                  <span
+                                    onClick={(el) => this.handleItemDelete(el, i)}
+                                    style={{ float: 'right', display: 'inline-block', marginRight: 4 }}
+                                  >
+                                    <Icon type="close" style={{ marginTop: -5 }} />
                                   </span>
                                 </div>
                               );
@@ -310,8 +370,22 @@ class Select extends React.Component<SelectProps, SelectState> {
                             : (
                               selectedOptions?.map((i, idx) => (
                                 <div key={idx} className={itemClass}>
-                                  <span>{i.label}</span>
-                                  <span onClick={(el) => this.handleItemDelete(el, i)}>
+                                  <span
+                                    style={{
+                                      display: 'inline-block',
+                                      maxWidth: '70%',
+                                      overflow: 'hidden',
+                                      textOverflow: 'ellipsis',
+                                      whiteSpace: 'nowrap',
+                                      wordBreak: 'break-all',
+                                    }}
+                                  >
+                                    {i.label}
+                                  </span>
+                                  <span
+                                    onClick={(el) => this.handleItemDelete(el, i)}
+                                    style={{ float: 'right', display: 'inline-block', marginRight: 4 }}
+                                  >
                                     <Icon type="close" />
                                   </span>
                                 </div>
@@ -335,33 +409,40 @@ class Select extends React.Component<SelectProps, SelectState> {
               </>
             )}
         </div>
-        <div className={dropdownClass} style={dropdownStyle}>
-          <SelectContext.Provider
-            value={{
-              value: `${value || defaultValue}`,
-              label: `${children}`,
-              onSelect: this.onSelect,
-              multiple: type === 'multiple' || type === 'tags',
-              selectedOptions,
+        <Portal {...({ getPopupContainer })}>
+          <div
+            className={dropdownClass}
+            style={{
+              left, top, width, ...dropdownStyle,
             }}
           >
-            {
-              /**
-               * 如果是远程搜索，则直接展示数据children
-               * 否则判断newChildren是否为空，如果不为空则代表是搜索，展示搜索出的数据newChildren
-               */
-            }
-            {remoteSearch
-              ? children
-              : newChildren && Object.keys(newChildren).length
-                ? newChildren
-                : (
-                  isSearch
-                    ? <div className={noContentClass}>暂无数据</div>
-                    : children
-                )}
-          </SelectContext.Provider>
-        </div>
+            <SelectContext.Provider
+              value={{
+                value: `${value || defaultValue}`,
+                label: `${children}`,
+                onSelect: this.onSelect,
+                multiple: type === 'multiple' || type === 'tags',
+                selectedOptions,
+              }}
+            >
+              {
+                /**
+                 * 如果是远程搜索，则直接展示数据children
+                 * 否则判断newChildren是否为空，如果不为空则代表是搜索，展示搜索出的数据newChildren
+                 */
+              }
+              {remoteSearch
+                ? children
+                : newChildren && Object.keys(newChildren).length
+                  ? newChildren
+                  : (
+                    isSearch
+                      ? <div className={noContentClass}>暂无数据</div>
+                      : children
+                  )}
+            </SelectContext.Provider>
+          </div>
+        </Portal>
       </div>
     );
   }

@@ -37,10 +37,12 @@ class Option extends React.Component<OptionProps, OptionState> {
       <SelectContext.Consumer>
         {({ onSelect, multiple, selectedOptions }) => (
           <section
-            onClick={() => {
+            onClick={(event) => {
+              event.stopPropagation();
               !disabled && !multiple && onSelect(value, children);
             }}
             className={sectionClass}
+            title={children}
           >
             {multiple && (
               <Checkbox

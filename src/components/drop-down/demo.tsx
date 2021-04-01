@@ -68,7 +68,7 @@ const DropdownDemo = () => {
           </Dropdown>
         </div>
         <div>
-          <Dropdown placement="bottomRight" visible={true} overlay={menu} arrow={true}>
+          <Dropdown placement="bottomRight" overlay={menu} arrow={true}>
             <Button>hover bottomRight</Button>
           </Dropdown>
         </div>

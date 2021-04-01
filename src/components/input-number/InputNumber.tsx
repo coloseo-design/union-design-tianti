@@ -127,7 +127,6 @@ class InputNumber extends React.Component<InputNumberProps, { value: string | nu
      */
     const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
       this.setState({ value: event.target.value });
-      console.log('dewdw2222222222', event.target.value);
       onChange && onChange(event.target.value);
     };
     let last = val;
