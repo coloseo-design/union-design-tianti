@@ -105,12 +105,12 @@ class PopComponent extends React.Component<PopProps, PopconfirmState> {
 
   compute = (target: HTMLSpanElement | HTMLElement, firstRender: boolean) => {
     const { direction, visible } = this.state;
-    const { autoAdjustOverflow = true, onVisibleChange } = this.props;
+    const { autoAdjustOverflow = true, onVisibleChange, visible: propsVisible } = this.props;
     // const target = evt.nativeEvent.target as HTMLSpanElement;
     const bodyW = document.body.scrollWidth;
     const bodyH = document.body.scrollHeight;
     let dT: PlacementType;
-    if (!visible || firstRender) {
+    if (!visible || firstRender || propsVisible) {
       if (target && this.node) {
         const { height: contentHeight, width: contentWidth } = this.node.getBoundingClientRect();
         const {
@@ -150,13 +150,13 @@ class PopComponent extends React.Component<PopProps, PopconfirmState> {
           /* eslint no-nested-ternary: 0 */
           const yT: number = dT.indexOf('Top') >= 0 ? offsetTop : dT.indexOf('Bottom') >= 0 ? (offsetTop - contentHeight + height) : offsetTop + (height - contentHeight) / 2;
           this.setState({
-            visible: true,
+            visible: propsVisible !== undefined ? propsVisible : true,
             x: xT,
             y: yT,
             direction: dT,
           });
         }
-        onVisibleChange && onVisibleChange(true);
+        onVisibleChange && onVisibleChange(propsVisible !== undefined ? propsVisible : true);
       }
     }
   }
