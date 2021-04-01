@@ -35,9 +35,9 @@ export { default as Descriptions } from './descriptions/descriptions';
 /* eslint-disable */
 export { default as Divider } from './divider/divider';
 /* eslint-disable */
-export { default as Drawer } from './drawer/drawer';
-/* eslint-disable */
 export { default as DropDown } from './drop-down/drop-down';
+/* eslint-disable */
+export { default as Drawer } from './drawer/drawer';
 /* eslint-disable */
 export { default as Form } from './form/form';
 /* eslint-disable */
