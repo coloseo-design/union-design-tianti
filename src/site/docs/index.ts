@@ -3,9 +3,9 @@ export { default as Affix } from './affix/affix';
 /* eslint-disable */
 export { default as Alert } from './alert/alert';
 /* eslint-disable */
-export { default as Anchor } from './anchor/anchor';
-/* eslint-disable */
 export { default as AutoComplete } from './auto-complete/auto-complete';
+/* eslint-disable */
+export { default as Anchor } from './anchor/anchor';
 /* eslint-disable */
 export { default as Avatar } from './avatar/avatar';
 /* eslint-disable */
