@@ -8,11 +8,18 @@ import {
 } from '..';
 import { PaginationProps } from '../pagination/pagination';
 import {
-  ColumnsProps, FixedType, RenderReturnObjectType, RowProps, TableProps, TableState,
+  ColumnsProps,
+  FixedType,
+  RenderReturnObjectType,
+  RowProps,
+  TableProps,
+  TableRowSelectionType,
+  TableState,
 } from './type';
 import Row from './row';
 import ColGroup from './col-group';
 import TableHeader from './header';
+import { groupColums, sortColums } from './utils';
 
 @withGlobalConfig
 export default class Table extends React.Component<TableProps, TableState> {
@@ -231,17 +238,6 @@ export default class Table extends React.Component<TableProps, TableState> {
     ) : null;
   }
 
-  groupColums = (columns: ColumnsProps[], direction: 'left' | 'right' | 'center' = 'center') => columns.filter((column) => {
-    let columDirection = column.fixed as string;
-    if (column.fixed === true) {
-      columDirection = 'left';
-    }
-    if (!column.fixed) {
-      columDirection = 'center';
-    }
-    return direction === columDirection;
-  });
-
   onScroll: React.UIEventHandler<HTMLDivElement> = (e) => {
     const { scrollTop, scrollLeft } = e.target as HTMLDivElement;
     if (this.leftTableBodyRef.current) {
@@ -327,7 +323,7 @@ export default class Table extends React.Component<TableProps, TableState> {
       columnWidth,
       onChange,
       selectedRowKeys: defaultSelectdRowKeys = [],
-    } = rowSelection;
+    } = rowSelection as TableRowSelectionType;
     return {
       title: columnTitle || this.selectAllCheckbox(),
       dataIndex: 'selected',
@@ -387,7 +383,7 @@ export default class Table extends React.Component<TableProps, TableState> {
       rowSelection,
     } = this.props;
     const prefix = this.getPrefixCls();
-    const filteredColumns = this.groupColums(columns, position);
+    const filteredColumns = groupColums(columns, position);
     const tableOuterCls = classnames(`${prefix}-item`, {
       [`${prefix}-item-fixed-${position}`]: position,
     }, `${prefix}-item-fixed`);
@@ -439,33 +435,12 @@ export default class Table extends React.Component<TableProps, TableState> {
    * @returns
    */
   getMainColums = (columns: ColumnsProps[]) => {
+    const sortedColumns = sortColums(columns);
     const { rowSelection } = this.props;
-    const all = columns.reduce<ColumnsProps[][]>((composed, item) => {
-      const [leftColumns, mainColumns, rightColumns] = composed;
-      if (item.fixed === 'left' || item.fixed === true) {
-        leftColumns.push(item);
-      } else if (item.fixed === 'right') {
-        rightColumns.push(item);
-      } else {
-        mainColumns.push(item);
-      }
-      return composed;
-    }, [[/* left  */], [/* center  */], [/* right  */]]);
-    const result = [...all[0], ...all[1], ...all[2]];
-    // 去掉filter组件, 挡在后面的filter不展示，提升性能
-    const resultWithoutFilter = result.map((item: ColumnsProps) => {
-      if (item.fixed && item.filters && item.filters?.length > 0) {
-        return {
-          ...item,
-          filters: [],
-        };
-      }
-      return item;
-    });
     if (rowSelection) {
-      resultWithoutFilter.unshift(this.selectionColumn());
+      sortedColumns.unshift(this.selectionColumn());
     }
-    return resultWithoutFilter;
+    return sortedColumns;
   }
 
   onPageChange = (current: number, pageSize: number) => {
