@@ -157,7 +157,8 @@ export default class Menu extends MenuBase<MenuProps, MenuState> {
       if (tag === 'menu-popup' || tag === 'menu') {
         return true;
       }
-      if (el.parentElement) result = checkTag(el.parentElement);
+      const parentEl = el.parentElement ?? el.parentNode as unknown as HTMLElement;
+      if (parentEl) result = checkTag(parentEl);
       return result;
     };
 
