@@ -16,7 +16,7 @@ interface FailedResponseType {
 }
 
 interface FormValues {
-  [key:string]: any
+  [key:string]: unknown;
 }
 
 interface FormErrors {
