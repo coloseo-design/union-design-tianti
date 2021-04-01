@@ -1,3 +1,12 @@
+## [0.1.1](http://10.124.128.2:8888/muses/union-design/compare/v0.1.0...v0.1.1) (2021-04-01)
+
+
+### Bug Fixes
+
+* 🐛 修复auchr下面ts错误 ([ad0fbdf](http://10.124.128.2:8888/muses/union-design/commits/ad0fbdf8c9cb7863944a05204ac99fa94c2a0693))
+
+
+
 # 0.1.0 (2021-04-01)
 
 
