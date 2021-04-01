@@ -1,7 +1,6 @@
 import React from 'react';
 import {
   Checkbox,
-  Group,
   Button,
 } from '..';
 
@@ -60,7 +59,7 @@ export default class Filter extends React.Component<FilterProps, FilterState> {
             e.stopPropagation();
           }}
         >
-          <Group
+          <Checkbox.Group
             style={{ padding: 5 }}
             onChange={this.onChange}
             value={values}
@@ -72,7 +71,7 @@ export default class Filter extends React.Component<FilterProps, FilterState> {
                 </div>
               ))
             }
-          </Group>
+          </Checkbox.Group>
         </div>
         <div className={`${prefix}-filter-footer`}>
           <Button size="small" type="default" onClick={this.onReset}>重置</Button>

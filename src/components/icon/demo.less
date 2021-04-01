@@ -1,7 +1,15 @@
 ul.icon-container {
-  display: flex;
-  flex-wrap: wrap;
+  zoom: 1;
+  &::before,
+  &::after {
+    display: table;
+    content: '';
+  }
+  &::after {
+    clear: both;
+  }
   li {
+    float: left;
     margin: 5px;
     padding: 5px;
     list-style: none;
@@ -11,8 +19,7 @@ ul.icon-container {
     }
   }
   .icon,.icon-name {
-    display: flex;
-    justify-content: center;
+    text-align: center;
   }
   .icon {
     margin-bottom: 5px;

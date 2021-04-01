@@ -78,7 +78,11 @@ class Switch extends React.Component<BaseSwitchProps, BaseSwitchState> {
       );
     }
     return (
-      <button className={classname} onClick={this.handleClick}>
+      <button
+        className={classname}
+        onClick={this.handleClick}
+        type="button"
+      >
         <div className={`${prefix}-round`} />
         {node}
       </button>
