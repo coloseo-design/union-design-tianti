@@ -10,7 +10,6 @@
   "module": "es/index.js",
   "typings": "lib/index.d.ts",
   "scripts": {
-    "postinstall": "husky install",
     "lint": "union-tool run lint source=src/components",
     "compile": "union-tool run compile source=src/components",
     "dev": "union-tool run dev",

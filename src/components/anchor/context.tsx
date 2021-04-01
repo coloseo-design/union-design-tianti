@@ -3,7 +3,7 @@
 /* eslint-disable import/prefer-default-export */
 import React from 'react';
 
-interface contextProps {
+export interface contextProps {
   updateHref?: (href: string) => void;
   currentHref?: string;
   getContainer?: () => HTMLElement;

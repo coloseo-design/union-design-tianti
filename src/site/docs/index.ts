@@ -1,15 +1,11 @@
 /* eslint-disable */
 export { default as Affix } from './affix/affix';
 /* eslint-disable */
-export { default as Avatar } from './avatar/avatar';
-/* eslint-disable */
-export { default as Anchor } from './anchor/anchor';
-/* eslint-disable */
 export { default as Alert } from './alert/alert';
 /* eslint-disable */
 export { default as AutoComplete } from './auto-complete/auto-complete';
 /* eslint-disable */
-export { default as Avatar } from './avatar/avatar';
+export { default as Anchor } from './anchor/anchor';
 /* eslint-disable */
 export { default as BackTop } from './backTop/backTop';
 /* eslint-disable */
@@ -17,9 +13,11 @@ export { default as Badge } from './badge/badge';
 /* eslint-disable */
 export { default as Breadcrumb } from './breadcrumb/breadcrumb';
 /* eslint-disable */
+export { default as Avatar } from './avatar/avatar';
+/* eslint-disable */
 export { default as Button } from './button/button';
 /* eslint-disable */
-export { default as BackTop } from './backTop/backTop';
+export { default as Calendar } from './calendar/calendar';
 /* eslint-disable */
 export { default as Card } from './card/card';
 /* eslint-disable */
@@ -29,8 +27,6 @@ export { default as Cascader } from './cascader/cascader';
 /* eslint-disable */
 export { default as Checkbox } from './checkbox/checkbox';
 /* eslint-disable */
-export { default as Breadcrumb } from './breadcrumb/breadcrumb';
-/* eslint-disable */
 export { default as Collapse } from './collapse/collapse';
 /* eslint-disable */
 export { default as DatePicker } from './date-picker/date-picker';
@@ -39,7 +35,7 @@ export { default as Descriptions } from './descriptions/descriptions';
 /* eslint-disable */
 export { default as Divider } from './divider/divider';
 /* eslint-disable */
-export { default as Descriptions } from './descriptions/descriptions';
+export { default as Drawer } from './drawer/drawer';
 /* eslint-disable */
 export { default as DropDown } from './drop-down/drop-down';
 /* eslint-disable */
@@ -85,11 +81,11 @@ export { default as Result } from './result/result';
 /* eslint-disable */
 export { default as Select } from './select/select';
 /* eslint-disable */
+export { default as Skeleton } from './skeleton/skeleton';
+/* eslint-disable */
 export { default as Slider } from './slider/slider';
 /* eslint-disable */
 export { default as Spin } from './spin/spin';
-/* eslint-disable */
-export { default as Skeleton } from './skeleton/skeleton';
 /* eslint-disable */
 export { default as Statistic } from './statistic/statistic';
 /* eslint-disable */
@@ -97,11 +93,11 @@ export { default as Steps } from './steps/steps';
 /* eslint-disable */
 export { default as Switch } from './switch/switch';
 /* eslint-disable */
-export { default as Tabs } from './tabs/tabs';
+export { default as Table } from './table/table';
 /* eslint-disable */
 export { default as Tag } from './tag/tag';
 /* eslint-disable */
-export { default as Table } from './table/table';
+export { default as Tabs } from './tabs/tabs';
 /* eslint-disable */
 export { default as Timeline } from './timeline/timeline';
 /* eslint-disable */
