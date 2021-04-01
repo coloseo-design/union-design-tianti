@@ -1,0 +1,60 @@
+@import '../../style/themes/index';
+
+@collapse: ~'@{uni-prefix}-collapse';
+@collapse-item: ~'@{collapse}-item';
+@collapse-item-header: ~'@{collapse-item}-header';
+@collapse-item-collapsible: ~'@{collapse-item}-collapsible';
+@collapse-item-content: ~'@{collapse-item}-content';
+@collapse-item-content-active: ~'@{collapse-item}-content-active';
+@collapse-item-content-visibility: ~'@{collapse-item}-content-visibility';
+@collapse-item-content-box: ~'@{collapse-item}-content-box';
+
+.@{collapse}{
+  margin: 0;
+  padding: 0;
+  border: 1px solid @normal-color;
+  border-radius: 3px;
+  border-bottom:0;
+  max-width: 636px;
+}
+
+.@{collapse-item}{
+  width: 100%;
+  border-bottom: 1px solid @normal-color;
+}
+
+.@{collapse-item-header}{
+  height: 46px;
+  padding: 12px 17px;
+  background-color: #F4F5F7;
+  cursor:pointer;
+  span{
+    transition:all .3s;
+  }
+}
+
+.@{collapse-item-content}{
+  background-color: #F9FAFB;
+  transition:all .3s,visibility .1s;
+
+}
+
+.@{collapse-item-content-box} {
+  padding: 16px 17px;
+}
+
+.@{collapse-item-content-active}{
+  visibility:visible;
+  opacity:1;
+}
+
+.@{collapse-item-content-visibility}{
+  visibility:hidden;
+  opacity:0;
+}
+
+.@{collapse-item-collapsible}{
+  cursor:not-allowed;
+  opacity:.6;
+  user-select: none;
+}

@@ -1,0 +1,45 @@
+---
+category: Components
+type: 通用
+title: alert
+subtitle: 警告提示
+---
+
+## 字段和功说明
+
+### alert
+
+type: 指定警告提示的样式，有四种选择 success、info、warning、error;
+
+message: 警告提示内容;
+
+description: 警告提示的辅助性文字介绍;
+
+icon: 自定义图标，showIcon 为 true 时有效
+
+banner: 是否用作顶部公告
+
+closeText: 自定义关闭按钮
+
+closable: 默认不显示关闭按钮
+
+showIcon: 是否显示辅助图标
+
+style: alert样式
+
+
+
+alert的属性说明如下：
+
+| 属性 | 说明 | 类型 | 默认值 |  |
+| --- | --- | --- | --- | --- |
+| type | 指定警告提示的样式 有四种选择 success、info、warning、error| string | info，banner 模式下默认值为 warning |  |
+| message | 警告提示内容 | string | ReactNode |  |  |
+| description | 警告提示的辅助性文字介绍  | string|ReactNode |  |  |
+| icon | 自定义图标，showIcon 为 true 时有效 | ReactNode | 无| |
+| banner | 是否用作顶部公告 | boolean | false |  |
+| closeText | 自定义关闭按钮 | boolean | 无 |  |
+| closable | 是否显示辅助图标 | ReactNode | <Icon type="exclamation-circle" /> |  |
+| showIcon | 是否显示辅助图标 | boolean  |   |
+| style | alert样式 | object | - |  |
+|className| 自定义类 | string|

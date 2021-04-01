@@ -10334,19 +10334,19 @@ unified@^4.1.1:
     trough "^1.0.0"
     vfile "^1.0.0"
 
-union-icons-react@^1.1.2:
-  version "1.1.2"
-  resolved "http://10.236.18.95:4873/union-icons-react/-/union-icons-react-1.1.2.tgz#b5eecb22e288be69fb31a17aaf0b671e4cea8598"
-  integrity sha512-tRJT0PzlaDECqeea/lEfE9T/wlL3P/JVpverwp16Ag/oZFvHZQ73LXgA9gYNEbJOxJtyEOiajM0I1nJFfvP/gA==
+union-icons-react@1.1.3:
+  version "1.1.3"
+  resolved "http://10.236.18.95:4873/union-icons-react/-/union-icons-react-1.1.3.tgz#78dc145d8418352726d445fcd0fe440bb21c3d20"
+  integrity sha512-yJbKc2rixc0qqCB+7tYyNcw4Q09qNY2SWzGIvbvvQuTkf5Jj/kH1Ab3ZPo4jU59U/IGa+hAAT1PQdzlphiBgIQ==
   dependencies:
     classnames "^2.2.6"
     react "^17.0.1"
-    union-icons "^1.2.2"
+    union-icons "1.2.3"
 
-union-icons@^1.2.2:
-  version "1.2.2"
-  resolved "http://10.236.18.95:4873/union-icons/-/union-icons-1.2.2.tgz#5ddeb6e21dee7bf35b11f7eb2cd597c7934039a8"
-  integrity sha512-zHdmnKfi3D7uzw/T332aSlmPxUamA21TQBHwPS4xkCF71tT1zNY91OwIrGXlm+Lr3loTOr8vUQ+uCNOIm2LOjQ==
+union-icons@1.2.3:
+  version "1.2.3"
+  resolved "http://10.236.18.95:4873/union-icons/-/union-icons-1.2.3.tgz#d69ed6ec889568d3aa1f18da4e76b9fe0228b4ad"
+  integrity sha512-xRu6DTQrgsBSLwpxWlnV9QH6ZwlLLYvpy6VH1WSJUhyigWHHM8kGxCrIntS12+0HcJcvOI1qpP48eaBe5LQEqA==
 
 union-tool@1.1.5:
   version "1.1.5"

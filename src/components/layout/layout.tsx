@@ -15,7 +15,22 @@ export interface LayoutProps {
   style?: CSSProperties;
 }
 
-class Layout extends Component<LayoutProps> {
+interface LayoutState {
+  hasSider: boolean;
+}
+
+// 判断是否含有Sider子组件
+const judeSider = (children: unknown) => {
+  let hasSider = false;
+  React.Children.forEach(children, (child) => {
+    if (child.type.name === 'Sider') { // 这里使用child的type.name进行判断
+      hasSider = true;
+    }
+  });
+  return hasSider;
+};
+
+class Layout extends Component<LayoutProps, LayoutState> {
   static defaultProps: LayoutProps = {
     className: '',
   };
@@ -28,16 +43,28 @@ class Layout extends Component<LayoutProps> {
 
   static Sider: typeof Sider;
 
+  constructor(props: LayoutProps) {
+    super(props);
+    this.state = {
+      hasSider: false,
+    };
+  }
+
+  componentDidMount() {
+    const { children } = this.props;
+
+    this.setState({ hasSider: judeSider(children) });
+  }
+
   renderLayout = ({ getPrefixCls }: ConfigConsumerProps) => {
     const {
       prefixCls, className, children, style,
     } = this.props;
+    const { hasSider } = this.state;
     // eslint-disable-next-line max-len
-    const childrenProps = React.Children.toArray(children).map((child: ReactNode) => (React.isValidElement(child) ? child.props : {}));
-    const siders = childrenProps.filter((i) => i.children === 'Sider');
     const prefix = getPrefixCls('layout', prefixCls);
     const mainClass = classNames(prefix, {
-      [`${prefix}-has-sider`]: siders.length > 0,
+      [`${prefix}-has-sider`]: hasSider,
     });
 
     return (

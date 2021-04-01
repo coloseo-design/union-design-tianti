@@ -1,7 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
 import DropButton from './button';
-import DropMenu from './menu';
 import Portal from '../pop-confirm/portal';
 import { ConfigConsumer, ConfigConsumerProps } from '../config-provider';
 
@@ -12,7 +11,7 @@ export interface DropdownProps {
   trigger?: ['hover' | 'click' | 'contextMenu'],
   onVisibleChange?: (visible: boolean) => void;
   overlayStyle?: React.CSSProperties;
-  overlay: React.ReactNode;
+  overlay: any;
   disabled?: boolean;
   prefixCls?: string;
   overlayClassName?: string;
@@ -27,8 +26,6 @@ export interface DropdownState {
 
 class Dropdown extends React.Component<DropdownProps, DropdownState> {
   static Button: typeof DropButton;
-
-  static Menu: typeof DropMenu;
 
   node: HTMLSpanElement | undefined;
 
@@ -58,9 +55,12 @@ class Dropdown extends React.Component<DropdownProps, DropdownState> {
   }
 
   dropHidden = () => {
-    this.setState({ visible: false });
-    const { onVisibleChange } = this.props;
-    onVisibleChange && onVisibleChange(false);
+    const { visible: propsVisible } = this.props;
+    if (propsVisible === undefined) {
+      this.setState({ visible: false });
+      const { onVisibleChange } = this.props;
+      onVisibleChange && onVisibleChange(false);
+    }
   };
 
   getNode = (node: HTMLDivElement) => {
@@ -75,22 +75,28 @@ class Dropdown extends React.Component<DropdownProps, DropdownState> {
   };
 
   out = () => {
-    const { trigger = ['hover'], onVisibleChange } = this.props;
+    const { trigger = ['hover'], onVisibleChange, visible: propsVisible } = this.props;
     if (trigger.indexOf('hover') >= 0) {
-      this.setState({ visible: false });
+      if (propsVisible === undefined) {
+        this.setState({ visible: false });
+      }
       onVisibleChange && onVisibleChange(false);
     }
   };
 
   click = (evt: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
-    const { trigger = ['hover'], onVisibleChange, disabled } = this.props;
+    const {
+      trigger = ['hover'], onVisibleChange, disabled, visible: propsVisible,
+    } = this.props;
     const { visible } = this.state;
     if (trigger.indexOf('click') >= 0 && !disabled) {
       if (!visible) {
         this.compute(evt);
-      } else {
+      } else { // 传了visible之后 visible完全由外面控制
         onVisibleChange && onVisibleChange(false);
-        this.setState({ visible: false });
+        if (propsVisible === undefined) {
+          this.setState({ visible: false });
+        }
       }
     }
   };
@@ -106,9 +112,12 @@ class Dropdown extends React.Component<DropdownProps, DropdownState> {
   compute = (evt: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
     evt.stopPropagation();
     const { visible } = this.state;
-    const { placement = 'bottomCenter', arrow = false, onVisibleChange } = this.props;
+    const { visible: propsVisible } = this.props;
+    const {
+      placement = 'bottomCenter', arrow = false, onVisibleChange,
+    } = this.props;
     const target = evt.nativeEvent.target as HTMLSpanElement;
-    if (!visible) {
+    if (!visible || propsVisible) {
       if (target && this.node) {
         const { height: contentHeight, width: contentWidth } = this.node.getBoundingClientRect();
         const {
@@ -148,9 +157,9 @@ class Dropdown extends React.Component<DropdownProps, DropdownState> {
         this.setState({
           x: placementMap[placement].x,
           y: placementMap[placement].y,
-          visible: true,
+          visible: propsVisible !== undefined ? propsVisible : true,
         });
-        onVisibleChange && onVisibleChange(true);
+        onVisibleChange && onVisibleChange(propsVisible !== undefined ? propsVisible : true);
       }
     }
   };
@@ -198,7 +207,10 @@ class Dropdown extends React.Component<DropdownProps, DropdownState> {
           >
             {arrow && <div className={arrowStyle} />}
             <div className={containter}>
-              {overlay}
+              {overlay && React.isValidElement(overlay) ? React.cloneElement(
+                overlay,
+                { popupClassName: `${prefix}-menu` },
+              ) : ''}
             </div>
           </div>
         </Portal>
@@ -216,7 +228,5 @@ class Dropdown extends React.Component<DropdownProps, DropdownState> {
 }
 
 Dropdown.Button = DropButton;
-Dropdown.Menu = DropMenu;
-Dropdown.Menu.isMenu = true;
 
 export default Dropdown;

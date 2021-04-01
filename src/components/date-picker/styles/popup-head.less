@@ -1,0 +1,52 @@
+@import "./common.less";
+
+.@{dpalias-popuphead}{
+  position: relative;
+  height: @dpsize-popuphead-height;
+  border-bottom: @dpborder-split-line;
+  padding: 0 8px;
+
+  & > div {
+    .dp-v-center();
+  }
+
+  & > div[data-class*="icon"]{
+    z-index: 100;
+    cursor: pointer;
+    color: @dpcolor-icon-normal;
+
+    &:hover{
+      color: @dpcolor-text-85;
+    }
+  }
+
+  & > div[data-class*="left"]{
+    float: left;
+    margin-left: 10px;
+  }
+
+  & > div[data-class*="right"]{
+    float: right;
+    margin-right: 10px;
+  }
+
+  & div[data-class*="title"]{
+    display: inline-block;
+    font-weight: 500;
+    user-select: none;
+    cursor: pointer;
+  }
+
+  & div[data-class*="hover"]{
+    &:hover{
+      color: @dpcolor-input-border-hover;
+    }
+  }
+
+  & div[data-class*="nohover"]{
+    cursor: default;
+    &:hover{
+      color: inherit;
+    }
+  }
+}

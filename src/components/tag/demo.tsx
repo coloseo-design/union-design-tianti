@@ -1,6 +1,6 @@
 import React from 'react';
 import Tag from './index';
-// import Input from '../input/index'
+import Input from '../input/index';
 import Icon from '../icon';
 
 class EditableTagGroup extends React.Component {
@@ -21,7 +21,7 @@ class EditableTagGroup extends React.Component {
   };
 
   showInput = () => {
-    // this.setState({ inputVisible: true });
+    this.setState({ inputVisible: true });
   };
 
   handleInputChange = (e) => {
@@ -61,7 +61,7 @@ class EditableTagGroup extends React.Component {
           );
           return tagElem;
         })}
-        {/* {inputVisible && (
+        {inputVisible && (
           <Input
             type="text"
             size="small"
@@ -70,10 +70,14 @@ class EditableTagGroup extends React.Component {
             onChange={this.handleInputChange}
             onBlur={this.handleInputConfirm}
             onPressEnter={this.handleInputConfirm}
-            style={{ width: '40px !important',
-            height: '22px !important', marginRight: '8px !important', verticalAlign: 'top' }}
+            style={{
+              width: '20px',
+              height: '22px',
+              marginRight: '8px',
+              verticalAlign: 'top',
+            }}
           />
-        )} */}
+        )}
         {!inputVisible && (
           <Tag style={{ background: '#fff', borderStyle: 'dashed' }} icon={<Icon type="add" />} onClick={this.showInput}>
             标签

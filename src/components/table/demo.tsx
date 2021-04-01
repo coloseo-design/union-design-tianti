@@ -67,6 +67,35 @@ const columnsBase = [
     ),
   },
 ];
+const columnsFixed = [
+  {
+    title: '姓名',
+    dataIndex: 'name',
+    key: 'name',
+    width: 150,
+    fixed: true,
+  },
+  {
+    title: '年龄',
+    dataIndex: 'age',
+    key: 'age',
+    width: 150,
+    fixed: 'right',
+  },
+  {
+    title: '住址',
+    dataIndex: 'address',
+    key: 'address',
+    // eslint-disable-next-line react/display-name
+    render: (k: string, row: any) => (
+      <div>
+        {row.name}
+        @
+        {k}
+      </div>
+    ),
+  },
+];
 
 const columns = [
   {
@@ -258,7 +287,7 @@ const rowSelection = {
 
 const TableDemo: React.FC<unknown> = () => (
   <div style={{ padding: 32, background: '#fff' }}>
-    {/* <div>
+    <div>
       <h4>基础表格</h4>
       <div>
         <Table
@@ -266,7 +295,7 @@ const TableDemo: React.FC<unknown> = () => (
           columns={columnsBase}
           rowKey="key"
           bordered
-          scroll={{ y: 300 }}
+          scroll={{ y: 200 }}
         />
       </div>
     </div>
@@ -275,7 +304,7 @@ const TableDemo: React.FC<unknown> = () => (
       <div>
         <Table
           dataSource={dataSource}
-          columns={columns}
+          columns={columnsFixed}
           rowKey="key"
           bordered
           // loading
@@ -292,13 +321,26 @@ const TableDemo: React.FC<unknown> = () => (
     <div>
       <h4>可选择行</h4>
       <div>
-        <Table rowSelection={rowSelection} columns={columns} dataSource={data} rowKey="key" scroll={{ y: 200, x: 1500 }} />,
+        <Table
+          rowSelection={rowSelection}
+          columns={columnsFixed}
+          dataSource={data}
+          rowKey="key"
+        scroll={{ y: 200, x: 1500 }} />,
       </div>
-    </div> */}
+    </div>
     <div>
-      <h4>可编辑行</h4>
+      <h4>可筛选过滤</h4>
       <div>
-        <Table rowSelection={rowSelection} columns={columns} dataSource={data} rowKey="key" scroll={{ y: 200, x: 1500 }} />,
+        <Table
+          rowSelection={rowSelection}
+          columns={columns}
+          pagination={{ pageSize: 2 }}
+          // pagination={false}
+          dataSource={data}
+          rowKey="key"
+          scroll={{ y: 200, x: 1500 }}
+        />,
       </div>
     </div>
   </div>

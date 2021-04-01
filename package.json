@@ -1,6 +1,6 @@
 {
   "name": "union-design",
-  "version": "0.0.4",
+  "version": "0.1.1",
   "license": "MIT",
   "files": [
     "lib",
@@ -10,7 +10,6 @@
   "module": "es/index.js",
   "typings": "lib/index.d.ts",
   "scripts": {
-    "postinstall": "husky install",
     "lint": "union-tool run lint source=src/components",
     "compile": "union-tool run compile source=src/components",
     "dev": "union-tool run dev",
@@ -35,7 +34,7 @@
     "react-app-polyfill": "^2.0.0",
     "react-router-dom": "5.2.0",
     "shallowequal": "^1.1.0",
-    "union-icons-react": "^1.1.2",
+    "union-icons-react": "1.1.3",
     "union-tool": "1.1.5"
   },
   "devDependencies": {

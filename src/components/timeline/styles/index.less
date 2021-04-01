@@ -1,0 +1,50 @@
+@import '../../style/themes/index';
+
+@timeline: ~'@{uni-prefix}-timeline';
+
+.@{timeline}{
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  &-item{
+    position: relative;
+    padding-bottom: 27px;
+
+    &-label{
+      position: relative;
+      margin: 0 0 0 30px;
+      font-size: 16px;
+      top:-6px;
+    }
+
+    &-line{
+      position: absolute;
+      left: 5px;
+      border-left: 1px solid #D8D8D8;
+      top: 15px;
+    }
+
+    &-head{
+      position: absolute;
+      width: 11px;
+      height:11px;
+      background-color: white;
+      border-radius:50%;
+      border: 2px solid @primary-color;
+    }
+
+
+    &-content{
+      font-size: @font-size-base;
+    }
+
+    &-last > &-line {
+      display: none;
+    }
+
+    &-last > &-head {
+      border: 2px solid @border
+    }
+  }
+}

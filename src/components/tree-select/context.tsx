@@ -4,9 +4,9 @@
 import React from 'react';
 
 export interface TreeNodeContect {
-  handleSelect?: (value: string, node: any, other: object) => void;
-  handleTreeExpand?: (keys: string, currentNode: object) => void;
-  handleChecked?: (value: string, checked: boolean, other: object) => void;
+  handleSelect?: (value: string, node: any, other: {[key: string] : unknown}) => void;
+  handleTreeExpand?: (keys: string, currentNode: {[key: string] : unknown}) => void;
+  handleChecked?: (value: string, checked: boolean, other: {[key: string] : unknown}) => void;
   isExpand?: boolean,
   prefixCls?: string,
   treeCheckable?: boolean,

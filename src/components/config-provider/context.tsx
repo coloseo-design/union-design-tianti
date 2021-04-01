@@ -19,10 +19,10 @@ export const ConfigContext = createContext<ConfigConsumerProps>({
 export const { Consumer: ConfigConsumer } = ConfigContext;
 /* eslint max-len: 0 */
 /* eslint react/display-name: 0 */
-export const withGlobalConfig = <T extends ConfigConsumerProps>(Component: React.FC<T> | React.Component<T>) => (props: T) => (
+export const withGlobalConfig = <T extends ConfigConsumerProps>(Component: React.FC<T> | React.Component<T>) => React.forwardRef((props, ref) => (
   <ConfigConsumer>
     {
-      ({ getPrefixCls }: ConfigConsumerProps) => (<Component {...props} getPrefixCls={getPrefixCls} />)
+      ({ getPrefixCls }: ConfigConsumerProps) => (<Component {...props} ref={ref} getPrefixCls={getPrefixCls} />)
     }
   </ConfigConsumer>
-);
+));

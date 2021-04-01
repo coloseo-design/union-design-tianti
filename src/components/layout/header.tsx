@@ -11,7 +11,7 @@ export interface HeaderProps {
 
 class Header extends Component<HeaderProps> {
   renderHeader = ({ getPrefixCls }: ConfigConsumerProps) => {
-    const { prefixCls, children } = this.props;
+    const { prefixCls, children, style } = this.props;
 
     const prefix = getPrefixCls('layout-header', prefixCls);
     const mainClass = classNames(prefix, {
@@ -19,7 +19,7 @@ class Header extends Component<HeaderProps> {
     });
 
     return (
-      <header className={mainClass}>
+      <header className={mainClass} style={style}>
         {children}
       </header>
     );

@@ -29,11 +29,11 @@ export interface TreeProps {
   // 多选
   multiple?: boolean;
   // 点击复选框调用
-  onCheck?: (value: string[], other: object) => void;
+  onCheck?: (value: string[], other: {[key: string] : unknown}) => void;
   // 选中节点调用
-  onSelect?: (value: string[], other: object) => void;
+  onSelect?: (value: string[], other: {[key: string] : unknown}) => void;
   // 展开/收起节点调用
-  onExpand?: (expandedKeys: string[], other: object) => void;
+  onExpand?: (expandedKeys: string[], other: {[key: string] : unknown}) => void;
   // 整个树形disabled
   disabled?: boolean;
   prefixCls?: string;

@@ -40,10 +40,7 @@ const Affix: React.FC<AffixProps> = (props: AffixProps) => {
   const targetDom = targetProp === window ? document.documentElement : targetProp;
   let placeholderElmentDom = null;
 
-  console.log('target', targetProp);
-
   const getOffset = () => {
-    console.log('getOffset');
     if (offsetTop === undefined && offsetBottom === undefined) {
       offsetTop = 0;
     }
@@ -53,7 +50,6 @@ const Affix: React.FC<AffixProps> = (props: AffixProps) => {
       : { top: 0, bottom: document.body.clientHeight, height: document.body.clientHeight };
     const scrolldown = placeholderRect.bottom - targetRect.bottom
     + targetDom.scrollTop + offsetBottom;
-    console.log('顶部', targetDom, targetRect.top, placeholderRect.top, targetRect.height, placeholderRect.height);
     return {
       scrollTop: offsetTop !== undefined
         ? (placeholderRect.top - targetRect.top + targetDom.scrollTop - offsetTop) : null,
@@ -101,10 +97,8 @@ const Affix: React.FC<AffixProps> = (props: AffixProps) => {
   };
 
   useEffect(() => {
-    console.log('初始化', targetDom);
     placeholderElmentDom = placeholderRef.current;
     offset.current = getOffset();
-    console.log(offset.current);
     setPlaceholderStyle({
       width: offset.current.width,
       height: offset.current.height,
@@ -115,7 +109,6 @@ const Affix: React.FC<AffixProps> = (props: AffixProps) => {
   const rerender = () => { offset.current = getOffset(); scrollFix(); };
 
   useEffect(() => {
-    console.log('渲染完毕');
     placeholderElmentDom = placeholderRef.current;
     window.addEventListener('scroll', rerender);
     targetProp.addEventListener('resize', rerender);

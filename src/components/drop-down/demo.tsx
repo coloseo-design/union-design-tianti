@@ -1,115 +1,140 @@
-/* eslint-disable max-len */
 /* eslint-disable react/jsx-boolean-value */
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
 import Dropdown from './index';
 import Button from '../button';
 import Icon from '../icon';
-
-const { Menu } = Dropdown;
-const { SubMenu } = Menu;
+import Menu from '../menu';
 
 const menu = (
   <Menu>
-    <Menu.Item title="哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈" key="1" icon={<Icon type="user" />} />
-    <Menu.Item title="呵呵呵" key="2" icon={<Icon type="user" />} />
-    <Menu.Item title="看看看" key="3" icon={<Icon type="user" />} disabled={true} />
-    <Menu.Item title="孤寡孤寡" key="4" icon={<Icon type="user" />} danger={true} />
+    <Menu.Item icon={<Icon type="user" />}>
+      工作台1
+    </Menu.Item>
+    <Menu.SubMenu title="工作台2">
+      <Menu.Item>
+        工作台1
+      </Menu.Item>
+      <Menu.Item>
+        工作台2
+      </Menu.Item>
+    </Menu.SubMenu>
+    <Menu.SubMenu title="工作台3">
+      <Menu.Item>
+        工作台1
+      </Menu.Item>
+      <Menu.Item>
+        工作台2
+      </Menu.Item>
+      <Menu.SubMenu key="2" icon="image" title="表单页1">
+        <Menu.Item key="3">
+          表单页
+        </Menu.Item>
+        <Menu.SubMenu key="4" title="表单页2">
+          <Menu.Item key="5">
+            表单页2
+          </Menu.Item>
+        </Menu.SubMenu>
+      </Menu.SubMenu>
+    </Menu.SubMenu>
   </Menu>
 );
-const menu1 = (
-  <Menu>
-    <SubMenu key="sub" title="sub">
-      <Menu.Item title="哈哈哈哈" key="h" disabled={true} />
-      <Menu.Item title="kkkkkk" key="k" />
-      <SubMenu key="sub1" title="sub1">
-        <Menu.Item title="sub child" key="child" />
-      </SubMenu>
-    </SubMenu>
-    <Menu.Item title="test" key="t" />
-  </Menu>
-);
 
-const test = (
-  <div style={{ width: 200 }}>
-    <div>哈哈哈哈哈哈哈哈哈哈</div>
-    <div>哈哈哈哈哈哈哈哈哈哈</div>
-    <div>哈哈哈哈哈哈哈哈哈哈</div>
-    <div>哈哈哈哈哈哈哈哈哈哈</div>
-  </div>
-);
+const DropdownDemo = () => {
+  const [visible, setVisible] = React.useState(false);
+  const handleButtonClick = () => {
+    setVisible(!visible);
+  };
+  const onVisibleChange = (vis: boolean) => {
+    console.log('--change', vis);
+  };
+  return (
+    <div style={{ padding: 32 }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+        <div>
+          <Dropdown
+            placement="bottomLeft"
+            overlay={menu}
+            arrow={true}
+            visible={visible}
+            onVisibleChange={onVisibleChange}
+            trigger={['click']}
+          >
+            <Button onClick={handleButtonClick}>open bottomLeft</Button>
+          </Dropdown>
+        </div>
+        <div>
+          <Dropdown placement="bottomCenter" trigger={['click']} overlayStyle={{ maxWidth: 240 }} overlay={menu} arrow={true}>
+            <Button>click bottomCenter</Button>
+          </Dropdown>
+        </div>
+        <div>
+          <Dropdown placement="bottomRight" overlay={menu} arrow={true}>
+            <Button>hover bottomRight</Button>
+          </Dropdown>
+        </div>
+        <div>
+          <Dropdown placement="topLeft" overlay={menu}>
+            <Button>hover topLeft</Button>
+          </Dropdown>
+        </div>
+        <div>
+          <Dropdown placement="topCenter" overlay={menu}>
+            <Button>hover topCenter</Button>
+          </Dropdown>
+        </div>
+        <div>
+          <Dropdown placement="topRight" overlay={menu} trigger={['contextMenu']}>
+            <Button>右键点击 topRight</Button>
+          </Dropdown>
+        </div>
+      </div>
 
-const DropdownDemo = () => (
-  <div style={{ padding: 32 }}>
-    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-      <div>
-        <Dropdown placement="bottomLeft" overlayStyle={{ width: 220 }} overlay={menu1} arrow={true} trigger={['click']}>
-          <Button>click bottomLeft</Button>
-        </Dropdown>
+      <div style={{ marginTop: 32 }}>
+        <Dropdown.Button
+          overlay={menu}
+          type="primary"
+          icon={<Icon style={{ fontSize: 14 }} type="zoomout" />}
+          // visible={visible}
+          onClick={handleButtonClick}
+          onVisibleChange={onVisibleChange}
+          trigger={['click']}
+          // onClick={() => setVisible1(true)}
+        >
+          primary dropdown
+        </Dropdown.Button>
       </div>
-      <div>
-        <Dropdown placement="bottomCenter" trigger={['click']} overlayStyle={{ maxWidth: 240 }} overlay={menu} arrow={true}>
-          <Button>click bottomCenter</Button>
-        </Dropdown>
+      <div style={{ marginTop: 32 }}>
+        <Dropdown.Button overlay={menu} size="large" icon={<Icon style={{ fontSize: 16 }} type="zoomout" />}>
+          bigButton
+        </Dropdown.Button>
       </div>
-      <div>
-        <Dropdown placement="bottomRight" overlay={menu} arrow={true}>
-          <Button>hover bottomRight</Button>
-        </Dropdown>
+      <div style={{ marginTop: 32 }}>
+        <Dropdown.Button overlay={menu} size="small" icon={<Icon style={{ fontSize: 12 }} type="zoomout" />}>
+          small Button
+        </Dropdown.Button>
       </div>
-      <div>
-        <Dropdown placement="topLeft" overlay={menu}>
-          <Button>hover topLeft</Button>
-        </Dropdown>
+      <div style={{ marginTop: 32 }}>
+        <Dropdown.Button overlay={menu} type="dashed">
+          dashed
+        </Dropdown.Button>
       </div>
-      <div>
-        <Dropdown placement="topCenter" overlay={menu}>
-          <Button>hover topCenter</Button>
-        </Dropdown>
+      <div style={{ marginTop: 32 }}>
+        <Dropdown.Button disabled={true} type="dashed" overlay={menu} trigger={['click']}>
+          dashed
+        </Dropdown.Button>
       </div>
-      <div>
-        <Dropdown placement="topRight" overlay={menu} trigger={['contextMenu']}>
-          <Button>contentMenu topRight</Button>
-        </Dropdown>
+      <div style={{ marginTop: 32 }}>
+        <Dropdown.Button type="danger" overlay={menu} trigger={['click']}>
+          dashed
+        </Dropdown.Button>
+      </div>
+      <div style={{ marginTop: 32 }}>
+        <Dropdown.Button type="link" overlay={menu}>
+          dashed
+        </Dropdown.Button>
       </div>
     </div>
-
-    <div style={{ marginTop: 32 }}>
-      <Dropdown.Button overlay={test} type="primary" icon={<Icon style={{ fontSize: 14 }} type="zoomout" />}>
-        default dropdown
-      </Dropdown.Button>
-    </div>
-    <div style={{ marginTop: 32 }}>
-      <Dropdown.Button overlay={test} size="large" icon={<Icon style={{ fontSize: 16 }} type="zoomout" />}>
-        bigButton
-      </Dropdown.Button>
-    </div>
-    <div style={{ marginTop: 32 }}>
-      <Dropdown.Button overlay={test} size="small" icon={<Icon style={{ fontSize: 12 }} type="zoomout" />}>
-        small Button
-      </Dropdown.Button>
-    </div>
-    <div style={{ marginTop: 32 }}>
-      <Dropdown.Button overlay={test} type="dashed">
-        dashed
-      </Dropdown.Button>
-    </div>
-    <div style={{ marginTop: 32 }}>
-      <Dropdown.Button disabled={true} type="dashed" overlay={test} trigger={['click']}>
-        dashed
-      </Dropdown.Button>
-    </div>
-    <div style={{ marginTop: 32 }}>
-      <Dropdown.Button type="danger" overlay={test} trigger={['click']}>
-        dashed
-      </Dropdown.Button>
-    </div>
-    <div style={{ marginTop: 32 }}>
-      <Dropdown.Button type="link" overlay={test}>
-        dashed
-      </Dropdown.Button>
-    </div>
-  </div>
-);
+  );
+};
 
 export default DropdownDemo;

@@ -12,6 +12,10 @@ export default [
         title: 'Icon 图标',
         key: 'icon',
       },
+      {
+        title: 'Typography 文字排版',
+        key: 'typography',
+      },
     ],
   },
   {
@@ -27,6 +31,10 @@ export default [
         title: 'Layout 布局',
         key: 'layout',
       },
+      {
+        title: 'Divider 分割线',
+        key: 'divider',
+      },
     ],
   },
   {
@@ -41,6 +49,26 @@ export default [
       {
         title: 'Dropdown 下拉菜单',
         key: 'drop-down',
+      },
+      {
+        title: 'Breadcrumb 面包屑',
+        key: 'breadcrumb',
+      },
+      {
+        title: 'Pagination 分页',
+        key: 'pagination',
+      },
+      {
+        title: 'Menu 菜单',
+        key: 'menu',
+      },
+      {
+        title: 'Steps 步骤条',
+        key: 'steps',
+      },
+      {
+        title: 'PageHeader 页头',
+        key: 'pageHeader',
       },
     ],
   },
@@ -105,6 +133,14 @@ export default [
         title: 'Upload 上传',
         key: 'upload',
       },
+      {
+        title: 'Form 表单',
+        key: 'form',
+      },
+      {
+        title: 'Timeline 时间轴',
+        key: 'timeline',
+      },
     ],
   },
   {
@@ -168,6 +204,14 @@ export default [
         title: 'Tree 树形控件',
         key: 'tree',
       },
+      {
+        title: 'Image 图片',
+        key: 'image',
+      },
+      {
+        title: 'Table 表格',
+        key: 'table',
+      },
     ],
   },
   {
@@ -198,6 +242,22 @@ export default [
       {
         title: 'Popconfirm 气泡确认框',
         key: 'pop-confirm',
+      },
+      {
+        title: 'Spin 加载中',
+        key: 'spin',
+      },
+      {
+        title: 'Progress 进度条',
+        key: 'progress',
+      },
+      {
+        title: 'Skeleton 骨架屏',
+        key: 'skeleton',
+      },
+      {
+        title: 'Result 结果',
+        key: 'result',
       },
     ],
   },

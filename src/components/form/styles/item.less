@@ -1,0 +1,61 @@
+@form-item-cls: ~'@{uni-prefix}-form-item';
+
+
+.@{form-item-cls}-explain {
+  clear: both;
+  min-height: 24px;
+  color: rgba(0,0,0,.45);
+  font-size: 14px;
+  line-height: 1.5715;
+  transition: color .3s cubic-bezier(.215,.61,.355,1);
+}
+
+// label
+.@{uni-prefix}-form {
+  .@{form-item-cls} {
+    line-height: 1.5;
+  }
+  .@{form-item-cls}-label-required {
+    &::before {
+      content: '*';
+      display: inline-block;
+      margin-right: 4px;
+      color: #f5222d;
+      font-size: 14px;
+    }
+  }
+  .@{form-item-cls}-label {
+    display: inline-block;
+    overflow: hidden;
+    // line-height: 40px;
+    white-space: nowrap;
+    text-align: right;
+    vertical-align: middle;
+    &::after {
+      content: ":";
+      position: relative;
+      margin: 0 8px 0 2px;
+    }
+  }
+  .@{form-item-cls}-label-left{
+    text-align: left;
+  }
+}
+
+// 处理错误输入框样式
+.has-error {
+  .@{form-item-cls}-explain {
+    color: #f5222d;
+  }
+  // Input, Select, Cascader, InputNumber, AutoComplete, DatePicker
+  .uni-input,  .uni-select, .uni-cascader-picker, .uni-number, .uni-auto-complete-input, .uni-datepicker-picker > .input-single{
+    background-color: #fff;
+    border-color: #ff4d4f;
+  }
+  .uni-input:focus, .uni-input:not([disabled]):not(.uni-input-group):hover {
+    @input-focus-border-box-shadow-color: rgba(red(@red-6), green(@red-6), blue(@red-6), 0.2);
+    background-color: #fff;
+    border-color: #ff4d4f;
+    box-shadow: 0 0 0 2px @input-focus-border-box-shadow-color;
+  }
+}

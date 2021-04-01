@@ -1,0 +1,87 @@
+@import '../../style/themes/index';
+
+
+@switch: ~'@{uni-prefix}-switch';
+// 选中
+@switch-checked: ~'@{switch}-checked';
+
+@switch-disabled: ~'@{switch}-disabled';
+
+// 父级元素
+@switch-parent: ~'@{switch}-parent';
+// 子级元素  圆
+@switch-round: ~'@{switch}-round';
+// 子级元素  文字or 图片
+@switch-content: ~'@{switch}-content';
+
+// 父级元素 宽高
+@switch-parent-width: 44px;
+
+@switch-parent-height: 22px;
+
+// 子级元素 宽高
+@switch-children-width: 18px;
+
+@switch-children-height: 18px;
+
+// 圆形弧度
+@radius: 40px;
+
+.@{switch-parent} {
+  border: 0;
+  outline: none;
+  position: relative;
+  width: @switch-parent-width;
+  height: @switch-parent-height;
+  border-radius: @radius;
+  background-color: @border;
+  color: white;
+  padding:0;
+
+  .@{switch-round} {
+    width: @switch-children-width;
+    height: @switch-children-height;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    left: 2px;
+    position: absolute;
+    transition:all .2s ease-in-out;
+    background-color: white;
+    border-radius: @radius;
+  }
+}
+
+.@{switch-disabled} {
+  cursor:not-allowed;
+  opacity:.4;
+  user-select: none;
+}
+
+.@{switch-content} {
+  width: 12px;
+  height: 22px;
+  line-height: 22px;
+  font-size: 12px;
+  margin: 0 9px 0 22px;
+  transition: margin .2s;
+  svg{
+    font-size: 14px;
+  }
+}
+
+
+.@{switch-checked} {
+  background-color:@primary-color;
+  .@{switch-round}{
+    left: 24px;
+  }
+  .@{switch-content}{
+    margin: 0 22px 0 9px;
+  }
+}
+
+
+
+
+

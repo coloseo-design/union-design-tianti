@@ -76,6 +76,16 @@
   }
 }
 
+// 分页
+.@{table-prefix-cls}-pagination {
+  margin-top: 15px;
+  .clearfix();
+  & > div {
+    float: right;
+  }
+}
+
+
 // 表格基础样式
 .@{table-prefix-cls} {
   width: 100%;
@@ -117,7 +127,7 @@
   padding-bottom: 0;
   min-width: 0px;
   opacity: 0.999;
-  overflow: scroll hidden;
+  overflow: hidden;
   table.@{table-prefix-cls}-fixed {
     border-bottom: 0;
   }

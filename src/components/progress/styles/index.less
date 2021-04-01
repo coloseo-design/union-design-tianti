@@ -1,0 +1,72 @@
+@import '../../style/themes/index';
+@import '../../style/mixins/index';
+
+@progress-prefix-cls: ~'@{uni-prefix}-progress';
+
+.@{progress-prefix-cls} {
+  width: 100%;
+  position: relative;
+  margin-right: 8px;
+  margin-bottom: 8px;
+  &-outer {
+    display: inline-block;
+    width: 100%;
+    margin-right: calc(-2em - 8px);
+    padding-right: calc(2em + 8px);
+    .@{progress-prefix-cls}-inner {
+      position: relative;
+      display: inline-block;
+      width: 100%;
+      overflow: hidden;
+      vertical-align: middle;
+      background-color: @progress-remaining-color;
+      border-radius: @progress-radius;
+      .@{progress-prefix-cls}-bg {
+        position: relative;
+        background-color: @progress-default-color;
+        border-radius: @progress-radius;
+        transition: all .4s cubic-bezier(.08,.82,.17,1) 0s;
+      }
+    }
+  }
+  &-text {
+    display: inline-block;
+    width: 2em;
+    margin-left: 8px;
+    color: @progress-text-color;
+    font-size: 1em;
+    line-height: 1;
+    white-space: nowrap;
+    text-align: left;
+    vertical-align: middle;
+    word-break: normal;
+  }
+}
+
+.@{progress-prefix-cls}-status-exception {
+  .@{progress-prefix-cls}-outer {
+    .@{progress-prefix-cls}-inner {
+      .@{progress-prefix-cls}-bg {
+        background-color: @progress-status-exception-color;
+      }
+    }
+  }
+
+  .@{progress-prefix-cls}-text {
+    color: @progress-status-exception-color;
+  }
+}
+
+.@{progress-prefix-cls}-status-success {
+  .@{progress-prefix-cls}-outer {
+    .@{progress-prefix-cls}-inner {
+      .@{progress-prefix-cls}-bg {
+        background-color: @progress-status-success-color;
+      }
+    }
+  }
+
+  .@{progress-prefix-cls}-text {
+    color: @progress-status-success-color;
+  }
+}

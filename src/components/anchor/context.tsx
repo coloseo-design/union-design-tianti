@@ -3,12 +3,12 @@
 /* eslint-disable import/prefer-default-export */
 import React from 'react';
 
-interface contextProps {
+export interface contextProps {
   updateHref?: (href: string) => void;
   currentHref?: string;
   getContainer?: () => HTMLElement;
   onChange?: (currentActiveLink: string) => void;
-  onClick?: (e: unknown, link: object) => void;
+  onClick?: (e: unknown, link: {[key: string] : unknown}) => void;
 }
 
 export const AnchorContext = React.createContext<contextProps>({

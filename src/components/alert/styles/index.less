@@ -1,0 +1,95 @@
+@import '../../style/themes/index';
+@import '../../style/mixins/index';
+
+@alert: ~'@{uni-prefix}-alert';
+
+.borderBg(@border, @bg) {
+  border: @border-width-base @border-style-base @border;
+  background-color: @bg;
+}
+
+.@{alert} {
+  width: 100%;
+  margin: 0;
+  padding: 9px 44px 9px 40px;
+  letter-spacing: 0;
+  line-height: 22px;
+  position: relative;
+  border-radius: 3px;
+  max-height: 10000px;
+  transition: max-height 0.5s @ease-in-out;
+  &-has_no_icon {
+    padding: 9px 44px 9px 20px;
+  }
+  &-hasDes {
+    padding: 16px 64px;
+  }
+  &-hasDes-has_no_icon {
+    padding: 16px 24px;
+  }
+  &-success {
+    .borderBg(@alert-success-border-color, @alert-success-bg-color);
+  }
+  &-info {
+    .borderBg(@alert-info-border-color, @alert-info-bg-color);
+  }
+  &-warning {
+    .borderBg(@alert-warning-border-color, @alert-warning-bg-color);
+  }
+  &-error {
+    .borderBg(@alert-error-border-color, @alert-error-bg-color);
+  }
+  &-banner {
+    margin-bottom: 0;
+    border: none;
+    border-radius: 0;
+  }
+  &-icon-content-hasDes {
+    position: absolute;
+    top: 16px;
+    left: 26px;
+  }
+  &-icon-content {
+    position: absolute;
+    top: 10px;
+    left: 16px;
+  }
+  &-icon-success {
+    color: @success-color;
+  }
+  &-icon-info {
+    color: @alert-info-icon-color;
+  }
+  &-icon-warning {
+    color: @alert-warning-icon-color;
+  }
+  &-icon-error {
+    color: @alert-error-icon-color;
+  }
+  &-message {
+    &-hasDes {
+      font-size: 16px;
+      color: rgba(0,0,0,0.85);
+      line-height: 24px;
+    }
+  }
+  &-description {
+    display: block;
+    margin-top: 4px;
+  }
+  &-close {
+    position: absolute;
+    right: 16px;
+    top: 10px;
+    color: #ACAFB9;
+    cursor: pointer;
+  }
+}
+
+.@{alert}-fadeOut {
+  max-height: 0px;
+  transition: max-height 0.5s;
+}
+
+
+

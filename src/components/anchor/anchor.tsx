@@ -15,7 +15,7 @@ export interface AnchorProps {
   /* 监听锚点链接改变 */
   onChange?: (currentActiveLink: string) => void;
   /* click 事件的 handler */
-  onClick?: (e: unknown, link: object) => void;
+  onClick?: (e: unknown, link: {[key: string] : unknown}) => void;
   /* 指定滚动的容器 */
   getContainer?: () => HTMLElement;
 }

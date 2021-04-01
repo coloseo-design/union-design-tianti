@@ -1,0 +1,90 @@
+@import '../../style/themes/index';
+@import '../../style/mixins/index';
+
+@base-transfer: ~'@{uni-prefix}-transfer';
+@operation: ~'@{base-transfer}-operation';
+
+.@{base-transfer} {
+  background-color: @white;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-variant: tabular-nums;
+  position: relative;
+}
+.@{operation} {
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0 9px;
+  &-btn {
+    width: 100%;
+    display: block;
+    margin-bottom: 4px;
+  }
+}
+
+.@{base-transfer}-list {
+  position: relative;
+  display: inline-block;
+  width: 176px;
+  height: @transfer-list-height;
+  border: @border-width-base @border-style-base @border;
+  border-radius: @border-radius-base;
+  vertical-align: middle;
+  overflow: hidden;
+  padding-top: @transfer-header-height + 6px;
+  &-header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: @transfer-header-height;
+    width: 100%;
+    padding: @input-padding-vertical-lg @input-padding-horizontal-base;
+    border-bottom: @border-width-base @border-style-base @border;
+    overflow: hidden;
+    &-left {
+      float: left;
+      span {
+        color: @placeholder;
+      }
+    }
+    &-right {
+      float: right;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+  &-body {
+    position: relative;
+    height: 100%;
+    &-search {
+      padding-top: @transfer-header-height;
+    }
+    &-disabled {
+      cursor: not-allowed;
+      background-color: @disabled-bg;
+    }
+    &-content {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      overflow: auto;
+      &-item {
+        height: 28px;
+        width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        word-break: break-all;
+        padding: 0px 12px;
+        line-height: 28px;
+        &-selected {
+          background-color: @item-hover-bg;
+        }
+      }
+    }
+  }
+}
+

@@ -1,0 +1,46 @@
+@row-cls: ~'@{uni-prefix}-row';
+@row-flex-cls: ~'@{row-cls}-flex';
+
+// 设置flex的justify-content
+@flex-justify-content-props: start, end, center, space-around, space-between;
+// 设置flex的align-items
+@flex-align-map : {
+  top: flex-start;
+  middle: center;
+  bottom: flex-end;
+};
+
+.@{row-cls} {
+  display: block;
+  zoom: 1;
+  height: auto;
+  box-sizing: border-box;
+  &::before, &::after {
+    display: table;
+    content: ' ';
+  }
+  &::after {
+    clear: both;
+  }
+}
+
+.@{row-flex-cls} {
+  display: flex;
+  // 设置flex方向和wrap
+  flex-flow: row wrap;
+  .clearfix();
+}
+
+// 处理justify-content
+each(@flex-justify-content-props, {
+  .@{row-flex-cls}-@{value} {
+    justify-content: @value;
+  }
+})
+
+// 处理align-items
+each(@flex-align-map, {
+  .@{row-flex-cls}-@{key} {
+    align-items: @value;
+  }
+})

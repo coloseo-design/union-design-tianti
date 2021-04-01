@@ -13,7 +13,7 @@ export interface DropMenuProps {
   type?: 'default' | 'primary' | 'ghost' | 'dashed' | 'danger'| 'link',
   visible?: boolean;
   disabled?: boolean;
-  overlay: React.ReactNode;
+  overlay: any;
   overlayStyle?: React.CSSProperties;
   placement?: 'bottomLeft' | 'bottomCenter' | 'bottomRight' | 'topLeft' | 'topCenter' | 'topRight' ;
   trigger?: ['hover' | 'click' | 'contextMenu'],
@@ -44,12 +44,19 @@ class DropButton extends React.Component<DropMenuProps, DropMenuState> {
   }
 
   componentDidMount() {
+    const { visible } = this.props;
+    if (visible) {
+      this.compute(true);
+    }
     document.addEventListener('click', this.dropHidden);
   }
 
   componentDidUpdate(prevProps: DropMenuProps) {
     const { visible } = this.props;
     if (visible !== prevProps.visible) {
+      if (visible) {
+        this.compute(true);
+      }
       this.setState({ visible });
     }
   }
@@ -59,9 +66,12 @@ class DropButton extends React.Component<DropMenuProps, DropMenuState> {
   }
 
   dropHidden = () => {
-    this.setState({ visible: false });
-    const { onVisibleChange } = this.props;
-    onVisibleChange && onVisibleChange(false);
+    const { visible: propsVisible } = this.props;
+    if (propsVisible === undefined) { // 没有传值visible时候， visisble由自己改变
+      this.setState({ visible: false });
+      const { onVisibleChange } = this.props;
+      onVisibleChange && onVisibleChange(false);
+    }
   };
 
   getNodeC = (nodeC: HTMLDivElement) => {
@@ -75,7 +85,7 @@ class DropButton extends React.Component<DropMenuProps, DropMenuState> {
   over = (evt: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
     const { trigger = ['hover'], disabled } = this.props;
     if (trigger.indexOf('hover') >= 0 && !disabled) {
-      this.compute(evt);
+      this.compute(false, evt);
     }
   };
 
@@ -88,9 +98,9 @@ class DropButton extends React.Component<DropMenuProps, DropMenuState> {
   };
 
   click = (evt: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
-    const { trigger = ['hover'], disabled } = this.props;
-    if (trigger.indexOf('click') >= 0 && !disabled) {
-      this.compute(evt);
+    const { trigger = ['hover'], disabled, visible: propsVisible } = this.props;
+    if (trigger.indexOf('click') >= 0 && !disabled && propsVisible === undefined) {
+      this.compute(false, evt);
     }
   };
 
@@ -98,7 +108,7 @@ class DropButton extends React.Component<DropMenuProps, DropMenuState> {
     const { trigger = ['hover'], disabled } = this.props;
     if (trigger.indexOf('contextMenu') >= 0 && !disabled) {
       evt.preventDefault();
-      this.compute(evt);
+      this.compute(false, evt);
     }
   };
 
@@ -107,11 +117,11 @@ class DropButton extends React.Component<DropMenuProps, DropMenuState> {
     onClick && onClick(evt);
   };
 
-  compute = (evt: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
-    evt.stopPropagation();
+  compute = (first: boolean, evt?: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
+    evt && evt.stopPropagation();
     const { visible } = this.state;
-    const { placement = 'bottomRight', onVisibleChange } = this.props;
-    if (!visible) {
+    const { placement = 'bottomRight', onVisibleChange, visible: propsVisible } = this.props;
+    if (!visible || first) {
       if (this.nodeB && this.nodeC) {
         const { height: contentHeight, width: contentWidth } = this.nodeC.getBoundingClientRect();
         const {
@@ -156,7 +166,9 @@ class DropButton extends React.Component<DropMenuProps, DropMenuState> {
         onVisibleChange && onVisibleChange(true);
       }
     } else {
-      this.setState({ visible: false });
+      if (propsVisible === undefined) {
+        this.setState({ visible: false });
+      }
       onVisibleChange && onVisibleChange(false);
     }
   };
@@ -218,7 +230,12 @@ class DropButton extends React.Component<DropMenuProps, DropMenuState> {
             onMouseOver={() => trigger.indexOf('hover') >= 0 && this.setState({ visible: true })}
             onMouseOut={() => trigger.indexOf('hover') >= 0 && this.setState({ visible: false })}
           >
-            <div className={containter}>{overlay}</div>
+            <div className={containter}>
+              {overlay && React.isValidElement(overlay) ? React.cloneElement(
+                overlay,
+                { popupClassName: `${pre}-menu` },
+              ) : ''}
+            </div>
           </div>
         </Portal>
       </>

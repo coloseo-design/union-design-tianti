@@ -28,7 +28,7 @@ const PopconfirmDemo: React.FC<unknown> = () => {
           getPopupContainer={() => document.getElementById('pop') || document.body}
           okButtonProps={{ loading }}
           onConfirm={onConfirm}
-          visible={visible}
+          // visible={visible}
         >
           <Button onClick={handleClick}>topLeft</Button>
         </PopConfirm>
@@ -37,6 +37,7 @@ const PopconfirmDemo: React.FC<unknown> = () => {
           placement="top"
           onVisibleChange={handleVisibleChange}
           trigger="hover"
+          // visible={visible}
         >
           <Button style={{ margin: 24 }}>top</Button>
         </PopConfirm>

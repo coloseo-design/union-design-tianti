@@ -1,0 +1,117 @@
+@import '../../style/themes/index';
+@import '../../style/mixins/index';
+
+@auto-complete-cls: ~'@{uni-prefix}-auto-complete';
+@auto-complete-select: ~'@{auto-complete-cls}-select';
+
+
+.@{auto-complete-cls}-wrapper {
+  top: 0;
+  left: 0;
+  position: relative;
+  display: inline-block;
+  width: inherit;
+}
+.input() {
+  width: 100%;
+  height: @input-height-base;
+  color: @input-color;
+  background: @input-bg;
+  line-height: 1.5;
+  padding: @input-padding-vertical-base @input-padding-horizontal-base;
+  position: relative;
+  border-radius: @border-radius-base;
+  font-size: @font-size-base;
+  border: @border-width-base @border-style-base @input-border-color;
+  &:hover, &:active, &:focus{
+    outline: none;
+    border-color: @input-hover-border-color;
+  }
+
+  &:placeholder-shown {
+    text-overflow: ellipsis;
+  }
+  &::placeholder {
+    font-size: @font-size-base;
+    color: @input-placeholder-color;
+  }
+}
+
+.@{auto-complete-cls}-textarea {
+  .input();
+  height: @input-height-base * 2;
+}
+.@{auto-complete-cls}-input {
+  .input();
+}
+.@{auto-complete-cls}-active {
+  border-color: @input-hover-border-color;
+}
+.@{auto-complete-cls}-disabled {
+  cursor: not-allowed;
+  background: @input-disabled-bg;
+  border-color: @disabled-color;
+  &:hover {
+    border-color: @disabled-color;
+  }
+}
+.@{auto-complete-cls}-input-search {
+  position: absolute;
+  right: 12px;
+  z-index: 1;
+  top: 50%;
+  transform: translateY(-50%);
+  &:hover {
+    cursor: pointer;
+  }
+}
+.@{auto-complete-cls}-dropdown {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+}
+.dropdown-select() {
+  width: 100%;
+  padding: 3px 0px;
+  background-color: @white;
+  position: absolute;
+  border-radius: @border-radius-base;
+  line-height: 1.5;
+  z-index: 100;
+  box-shadow: 0 2px 8px @box-shadow;
+  margin: 0;
+}
+
+.@{auto-complete-select} {
+  .dropdown-select();
+}
+.@{auto-complete-select}-textarea {
+  .dropdown-select();
+}
+.@{auto-complete-select}-hide {
+  display: none;
+}
+.@{auto-complete-select}-group {
+  // border-bottom: 1px solid @input-border-color;
+  border-bottom: @border-width-base @border-style-base @input-border-color;
+  .@{auto-complete-select}-group-label {
+    padding: @input-padding-vertical-base @input-padding-horizontal-base;
+    font-weight: bold;
+  }
+  &:last-child {
+    border: none;
+  }
+}
+.@{auto-complete-select}-item {
+  padding: 2px 12px;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  height: 28px;
+  &:hover {
+    background-color: @item-hover-bg;
+    cursor: pointer;
+    font-size: 14px;
+  }
+}
