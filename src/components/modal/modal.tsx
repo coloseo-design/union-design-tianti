@@ -44,6 +44,7 @@ export interface ModalProps {
 export interface ModalState {
   visible?: boolean;
   modalTransition?: boolean;
+  childName?: string;
 }
 
 export interface MappString {
@@ -75,6 +76,7 @@ class Modal extends React.Component<ModalProps, ModalState, ModalMethodProps> {
     this.state = {
       visible: visible || false,
       modalTransition: false,
+      childName: '',
     };
   }
 
@@ -102,6 +104,7 @@ class Modal extends React.Component<ModalProps, ModalState, ModalMethodProps> {
   }
 
   componentWillUnmount() {
+    this.setState({ visible: false });
     document.onkeydown = null;
   }
 
@@ -140,6 +143,22 @@ class Modal extends React.Component<ModalProps, ModalState, ModalMethodProps> {
       setTimeout(() => {
         this.setState({ modalTransition: false, visible: false });
       }, 300);
+    }
+  }
+
+  handleParent = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    const { childName } = this.state;
+    if (e.nativeEvent.target) {
+      const parentName = e.nativeEvent.target.className;
+      if (childName !== '' && parentName !== childName) {
+        this.handleMask(e);
+      }
+    }
+  }
+
+  handleChild = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    if (e.nativeEvent.target) {
+      this.setState({ childName: e.nativeEvent.target?.className });
     }
   }
 
@@ -230,15 +249,15 @@ class Modal extends React.Component<ModalProps, ModalState, ModalMethodProps> {
       </>
     );
 
-    return (
+    return visible && (
       <Portal {...({ getPopupContainer })}>
         <div className={container}>
           <div className={maskCalss} style={{ ...maskStyle, zIndex }} />
-          <div className={wrapper} onClick={this.handleMask} style={{ zIndex }}>
+          <div className={wrapper} style={{ zIndex }} onClick={this.handleParent}>
             <div
               className={wrapperContent1}
               style={{ ...style, width }}
-              onClick={(evt: React.MouseEvent<HTMLDivElement, MouseEvent>) => evt.stopPropagation()}
+              onClick={this.handleChild}
             >
               {!methodType && normalRender}
               {methodType && methodRender}

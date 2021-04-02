@@ -93,6 +93,7 @@ class PopComponent extends React.Component<PopProps, PopconfirmState> {
   }
 
   componentWillUnmount = () => {
+    this.setState({ visible: false });
     document.body.removeEventListener('click', this.documentBodyOnClick);
   }
 

@@ -51,6 +51,7 @@ class Dropdown extends React.Component<DropdownProps, DropdownState> {
   }
 
   componentWillUnmount() {
+    this.setState({ visible: false });
     document.removeEventListener('click', this.dropHidden);
   }
 

@@ -148,6 +148,7 @@ class Select extends React.Component<SelectProps, SelectState> {
   }
 
   componentWillUnmount() {
+    this.setState({ showDropdown: false });
     document.removeEventListener('click', this.hideDrop);
   }
 

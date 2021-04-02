@@ -2,7 +2,11 @@
 import React, { useState } from 'react';
 import Modal from './index';
 import Button from '../button';
+import Select from '../select';
+import TreeSelect from '../tree-select';
 
+const { Option } = Select;
+const { TreeNode } = TreeSelect;
 const ModalDemo: React.FC<unknown> = () => {
   const [visible, setVisible] = useState(false);
   const [visible1, setVisible1] = useState(false);
@@ -124,7 +128,28 @@ const ModalDemo: React.FC<unknown> = () => {
         confirmLoading={confirmLoading}
         centered
       >
-        <div>modal基本样式</div>
+        <div>
+          <Select style={{ marginBottom: 32, width: 200 }}>
+            <Option key="1" value="1">选项111swdewdw是我的我的午饭人反而更</Option>
+            <Option key="2" value="2">选项1222</Option>
+            <Option disabled key="3" value="3">选项33333</Option>
+          </Select>
+          <TreeSelect
+            value="1"
+            // onChange={onChange}
+          >
+            <TreeNode title="顶级" key="a" value="a">
+              <TreeNode title="哈哈哈" key="1" value="1">
+                <TreeNode title="快看看" key="2" value="2">
+                  <TreeNode title="what" key="5" value="5" />
+                </TreeNode>
+              </TreeNode>
+              <TreeNode title="呵呵呵1" key="3" value="3">
+                <TreeNode title="滚滚滚" key="4" value="4" />
+              </TreeNode>
+            </TreeNode>
+          </TreeSelect>
+        </div>
       </Modal>
     </div>
   );
