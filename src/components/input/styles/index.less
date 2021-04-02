@@ -31,6 +31,18 @@
 
 .@{input-prefix-cls}-group {
   display: inline-block;
+  height: @input-height-base;
+  display: flex;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  .@{uni-prefix}-input {
+    flex: auto;
+    -webkit-box-flex: 1;
+    -ms-flex: auto;
+    -webkit-flex: auto;
+    .input(100%, 100%);
+  }
   >.@{uni-prefix}-input:not(:first-child):not(:last-child) {
     border-radius: 0;
   }
@@ -49,6 +61,7 @@
     box-sizing: border-box;
     background: @input-disabled-bg;
     height: 100%;
+    vertical-align: bottom;
   }
   .addon:first-child {
     border: @border-width-base @border-style-base @input-border-color;
