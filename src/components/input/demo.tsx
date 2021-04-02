@@ -27,7 +27,7 @@ const InputDemo = () => {
       <Input allowClear addonBefore="https://" />
       <br />
       <br />
-      <Input addonAfter=".com" />
+      <Input addonAfter={<Icon type="user" />} />
       <br />
       <br />
       <Search onSearch={(value: any) => { console.log('searchValue', value); }} />

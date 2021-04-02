@@ -192,7 +192,7 @@ class Input extends Component<BaseInputProps, InputState> {
     return (
       <span className={containerClasses} style={style}>
         {addonBefore && <span className="addon">{addonBefore}</span>}
-        <span className={containerClasses}>
+        <span className={containerClasses} style={style}>
           <input
             {...rest}
             value={value}
