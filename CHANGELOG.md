@@ -1,3 +1,19 @@
+## [0.1.3](http://10.124.128.2:8888/muses/union-design/compare/v0.1.1...v0.1.3) (2021-04-02)
+
+
+### Bug Fixes
+
+* 🐛 input前后展示不对修改 ([d1f39b1](http://10.124.128.2:8888/muses/union-design/commits/d1f39b1a353a1aead6a46845db8e874caa182381))
+
+
+### Features
+
+* 🎸 修改布局样式 ([9477a5f](http://10.124.128.2:8888/muses/union-design/commits/9477a5fb180c075697e1e25891fa31e085545b26))
+* 🎸 修改inputNumber ([e191941](http://10.124.128.2:8888/muses/union-design/commits/e1919415a80339368b6d1f9e4dcd9e721bbe5bbd))
+* 🎸 fix bug ([13cf238](http://10.124.128.2:8888/muses/union-design/commits/13cf238f46eefb7a0a238abc9f11aad7ab2e0ac6))
+
+
+
 ## 0.1.2 (2021-04-01)
 
 
