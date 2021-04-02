@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
 import Input from './index';
+import Icon from '../icon';
 
 const { Search, TextArea } = Input;
 
@@ -20,7 +21,7 @@ const InputDemo = () => {
       <Input disabled placeholder="不可编辑" />
       <br />
       <br />
-      <Input allowClear addonBefore="前" addonAfter="后" />
+      <Input allowClear addonBefore={<Icon type="add" />} addonAfter="后" />
       <br />
       <br />
       <Input allowClear addonBefore="https://" />

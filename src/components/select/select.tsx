@@ -147,6 +147,10 @@ class Select extends React.Component<SelectProps, SelectState> {
     }
   }
 
+  componentWillUnmount() {
+    document.removeEventListener('click', this.hideDrop);
+  }
+
   getLocation = () => {
     setTimeout(() => {
       if (this.node?.getBoundingClientRect) {

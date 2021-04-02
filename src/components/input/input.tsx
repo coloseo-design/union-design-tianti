@@ -3,7 +3,7 @@
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable @typescript-eslint/ban-types */
-import React, { Component } from 'react';
+import React, { Component, ReactNode } from 'react';
 import classNames from 'classnames';
 import { ConfigConsumer, ConfigConsumerProps } from '../config-provider/context';
 import TextArea from './textarea';
@@ -87,9 +87,9 @@ export interface BaseInputProps {
   // 输入框默认内容
   defaultValue?: string | number;
   // 带标签的 input，设置后置标签
-  addonAfter?: string| Node;
+  addonAfter?: ReactNode;
   // 带标签的 input，设置前置标签
-  addonBefore?: string| Node;
+  addonBefore?: ReactNode;
   style?: {[key: string] : unknown};
   // 点击搜索图标、清除图标，或按下回车键时的回调
   onSearch?: (
