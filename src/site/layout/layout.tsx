@@ -148,7 +148,7 @@ const Layout: React.FC<LayoutProps> = (props) => {
             {
               routeConfig.pre && (
                 <>
-                  <div>
+                  <div className="arrow">
                     <Icon type="arrow-left" />
                   </div>
                   <div className="action">
@@ -167,7 +167,7 @@ const Layout: React.FC<LayoutProps> = (props) => {
                     <div className="title">下一页</div>
                     <div className="sub-title">{routeConfig.next?.subTitle}</div>
                   </div>
-                  <div>
+                  <div className="arrow">
                     <Icon type="arrow-right" />
                   </div>
                 </>

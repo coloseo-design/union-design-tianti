@@ -9,6 +9,16 @@
 // #root {
 //   overflow: visible;
 // }
+.clearfix() {
+  &::before, &::after {
+    zoom: 1;
+    content: ' ';
+    display: table;
+  }
+  &::after {
+    clear: both;
+  }
+}
 
 .g-layout {
   // display: flex;
@@ -100,13 +110,8 @@
 }
 
 .g-menus {
-  // .menu-box {
-  //   padding: 0 15px;
-  // }
   .menu {
-    // padding: 0 15px;
-    display: flex;
-    justify-content: space-between;
+    .clearfix();
     margin-bottom: 25px;
     cursor: pointer;
     .title {
@@ -116,8 +121,10 @@
       font-size: 14px;
       pointer-events: none;
       user-select: none;
+      float: left;
     }
     .icon {
+      float: right;
       pointer-events: none;
       &>span {
         transition: all .3s ease-in-out;
@@ -173,18 +180,21 @@ header.g-header-fixed {
 }
 
 footer.g-footer {
-  height: 80px;
-  padding: 0 60px;
+  padding: 16px 60px;
   color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
   transition: all .3s ease-in-out;
+  .clearfix();
   .item {
-    display: flex;
-    align-items: center;
+    float: left;
+    &:last-child {
+      float: right;
+    }
     cursor: pointer;
+    .arrow {
+      display: inline-block;
+    }
     .action {
+      display: inline-block;
       font-weight: 400;
       margin-left: 10px;
       .title {
