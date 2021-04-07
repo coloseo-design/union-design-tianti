@@ -290,7 +290,7 @@ export default class Upload extends BaseComponent<UploadPorps> {
             <img src={file.thumbUrl} alt="" />
           )}
 
-          {file.status === 'success' && (
+          {(file.status === 'success' || file.status === 'error') && (
             <div className="mask" onClick={(event) => event.stopPropagation()}>
               <div className="icons">
                 <Icon
@@ -469,7 +469,7 @@ export default class Upload extends BaseComponent<UploadPorps> {
           return;
         }
 
-        formData.append(key, file.data[key]);
+        formData.append(key, file.data[key] as string);
       });
 
       if (file instanceof Blob) {

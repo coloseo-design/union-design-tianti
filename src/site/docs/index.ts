@@ -3,29 +3,29 @@ export { default as Affix } from './affix/affix';
 /* eslint-disable */
 export { default as Alert } from './alert/alert';
 /* eslint-disable */
-export { default as Avatar } from './avatar/avatar';
+export { default as Anchor } from './anchor/anchor';
 /* eslint-disable */
 export { default as AutoComplete } from './auto-complete/auto-complete';
 /* eslint-disable */
+export { default as Avatar } from './avatar/avatar';
+/* eslint-disable */
 export { default as BackTop } from './backTop/backTop';
-/* eslint-disable */
-export { default as Anchor } from './anchor/anchor';
-/* eslint-disable */
-export { default as Breadcrumb } from './breadcrumb/breadcrumb';
 /* eslint-disable */
 export { default as Badge } from './badge/badge';
 /* eslint-disable */
-export { default as Calendar } from './calendar/calendar';
-/* eslint-disable */
 export { default as Button } from './button/button';
 /* eslint-disable */
-export { default as Card } from './card/card';
+export { default as Breadcrumb } from './breadcrumb/breadcrumb';
 /* eslint-disable */
-export { default as Carousel } from './carousel/carousel';
+export { default as Calendar } from './calendar/calendar';
+/* eslint-disable */
+export { default as Card } from './card/card';
 /* eslint-disable */
 export { default as Cascader } from './cascader/cascader';
 /* eslint-disable */
 export { default as Checkbox } from './checkbox/checkbox';
+/* eslint-disable */
+export { default as Carousel } from './carousel/carousel';
 /* eslint-disable */
 export { default as Collapse } from './collapse/collapse';
 /* eslint-disable */
@@ -63,9 +63,9 @@ export { default as Modal } from './modal/modal';
 /* eslint-disable */
 export { default as Notification } from './notification/notification';
 /* eslint-disable */
-export { default as Pagination } from './pagination/pagination';
-/* eslint-disable */
 export { default as PageHeader } from './pageHeader/pageHeader';
+/* eslint-disable */
+export { default as Pagination } from './pagination/pagination';
 /* eslint-disable */
 export { default as PopConfirm } from './pop-confirm/pop-confirm';
 /* eslint-disable */
