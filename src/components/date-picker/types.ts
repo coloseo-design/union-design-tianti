@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable max-len */
 import { Dayjs } from 'dayjs';
 import { CSSProperties } from 'react';
@@ -23,7 +24,7 @@ export type PickerPosition = 'start' | 'end';
 
 export type PickerSize = 'small' | 'middle' | 'large';
 
-export type PickFuncs<O> = { [K in keyof O as O[K] extends (undefined | ((...args: unknown[]) => unknown)) ? K : never]: O[K] };
+export type PickFuncs<O> = { [K in keyof O as O[K] extends (undefined | ((...args: any[]) => any)) ? K : never]: O[K] };
 
 export type PickerProps<T extends PickerType> = {
     type?: T;
@@ -41,8 +42,8 @@ export type PickerProps<T extends PickerType> = {
     value?: PickerTypeSplit<T, Dayjs, [Dayjs?, Dayjs?]>;
     defaultValue?: PickerTypeSplit<T, Dayjs, [Dayjs?, Dayjs?]>;
     onChange?: (
-        date?: PickerTypeSplit<T, Dayjs, [Dayjs, Dayjs]>,
-        format?: PickerTypeSplit<T, string, [string, string]>
+        date?: PickerTypeSplit<T, Dayjs, [Dayjs?, Dayjs?]>,
+        format?: PickerTypeSplit<T, string, [string?, string?]>
     ) => void;
     disabledValue?: (date: Dayjs) => boolean;
 } & BaseProps;
