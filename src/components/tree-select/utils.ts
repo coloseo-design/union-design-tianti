@@ -55,7 +55,7 @@ export const checkedFun = (
   values: any, // 选择框回填的数据
   checkedKeys: string[], // 选择的数据
   backFill: string | undefined,
-) => { // 选择父级勾选子级， 子级选满勾选父级 showCheckedStrategy: SHOW_ALL
+) => { // 选择父级勾选子级， 子级选满勾选父级 showCheckedStrategy: SHOW_CHILD
   const temp = smooth.filter((i: any) => values.indexOf(i.value) >= 0);
   const temChecked = smooth.filter((i: any) => checkedKeys.indexOf(i.value) >= 0);
   let lastList = [...temChecked];
@@ -97,13 +97,13 @@ export const checkedFun = (
       if (parentList.length > 0) {
         const parentValue = parentList.map((i) => i.value);
         // 去掉child
-        const deleteValue = temp.filter((i: any) => parentValue.indexOf(i.parent && i.parent.key) >= 0).map((i: any) => i.value);
-        backFillValues = temp.concat(parentList).filter((i: any) => deleteValue.indexOf(i.key) === -1);
+        const deleteValue = temp.filter((i: any) => parentValue.indexOf(i.parent && i.parent.value) >= 0).map((i: any) => i.value);
+        backFillValues = temp.concat(parentList).filter((i: any) => deleteValue.indexOf(i.value) === -1);
       } else if (current.children && current.children.length > 0) {
-        const parentValue = [current.key];
+        const parentValue = [current.value];
         // 去掉child
-        const deleteValue = temp.filter((i: any) => parentValue.indexOf(i.parent && i.parent.key) >= 0).map((i: any) => i.value);
-        backFillValues = temp.concat([current]).filter((i: any) => deleteValue.indexOf(i.key) === -1);
+        const deleteValue = temp.filter((i: any) => parentValue.indexOf(i.parent && i.parent.value) >= 0).map((i: any) => i.value);
+        backFillValues = temp.concat([current]).filter((i: any) => deleteValue.indexOf(i.value) === -1);
       } else {
         backFillValues = temp.concat(parentChild);
       }
@@ -115,8 +115,12 @@ export const checkedFun = (
   } else {
     lastList = temChecked.filter((i:any) => parentChild.map((j) => j.value).indexOf(i.value) === -1
       && parentList.map((m) => m.value).indexOf(i.value) === -1);
-    backFillValues = temChecked.filter((i:any) => parentChild.map((j) => j.value).indexOf(i.value) === -1
-      && parentList.map((m) => m.value).indexOf(i.value) === -1);
+    if (backFill === 'SHOW_PARENT') {
+      backFillValues = temChecked.filter((i:any) => parentChild.map((j) => j.value).indexOf(i.value) === -1
+        && parentList.map((m) => m.value).indexOf(i.value) === -1);
+    } else {
+      backFillValues = (backFillValues || []).filter((i: any) => current.value !== i.value && lastList.map((j: any) => j.value).indexOf(i.value) >= 0);
+    }
   }
   return {
     checkedList: uniqAry(lastList),
@@ -234,4 +238,42 @@ export const translateDataToTree = (data: any) => {
 
   translator(parents, childrens);
   return parents;
+};
+
+export const commonInit = (
+  value: string | string[] | undefined,
+  defaultValue: string | string[] | undefined,
+  multiple: boolean,
+  treeCheckable: boolean,
+  showCheckedStrategy: string,
+  sm: any[],
+) => {
+  let valuesList = [];
+  let selectList = [];
+  if (multiple || treeCheckable) {
+    if ((value && Object.prototype.toString.call(value) !== '[object Array]')
+        || (defaultValue && Object.prototype.toString.call(defaultValue) !== '[object Array]')) {
+      throw new Error('多选模式value和defaultValue 类型应是 Array');
+    } else {
+      const mergeValue = [...(value || []), ...(defaultValue || [])];
+      if (treeCheckable) {
+        const { values, checkedValues } = initValues(mergeValue, sm, showCheckedStrategy);
+        valuesList = values.map((i: any) => i.value);
+        selectList = checkedValues.map((i: any) => i.value);
+      } else {
+        valuesList = mergeValue;
+        selectList = mergeValue;
+      }
+    }
+  } else if ((value && typeof value !== 'string') || (defaultValue && typeof defaultValue !== 'string')) {
+    throw new Error('单选选模式value和defaultValue 类型应是 String');
+  } else {
+    const mergeValue = [...(value || []), ...(defaultValue || [])];
+    valuesList = mergeValue;
+    selectList = mergeValue;
+  }
+  return {
+    valuesList,
+    selectList,
+  };
 };

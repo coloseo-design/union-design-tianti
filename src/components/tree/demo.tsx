@@ -125,6 +125,22 @@ const data = [
   },
 ];
 const TreeDemo = () => {
+  const dataTest = [
+    {
+      key: '1',
+      title: '哈哈哈',
+    },
+    {
+      key: '2',
+      title: '嘿嘿黑',
+    },
+  ];
+  const [dataT, setData] = React.useState([]);
+  React.useEffect(() => {
+    setTimeout(() => {
+      setData(data);
+    }, 2000);
+  }, []);
   const onExpand = (keys: string[], obj: {[key: string] : unknown}) => {
     console.log('---keys', keys, obj);
   };
@@ -170,12 +186,12 @@ const TreeDemo = () => {
       <div style={{ width: 340, marginTop: 32 }}>
         <h1>可勾选的 (父子节点有关联)</h1>
         <Tree
-          treeData={data}
+          treeData={dataT}
           onSelect={onSelect}
           checkable={true}
           style={{ width: 320 }}
-          defaultSelectedKeys={['90']}
-          defaultCheckedKeys={['90']}
+          defaultSelectedKeys={['24']}
+          defaultCheckedKeys={['24', '23']}
           onCheck={onCheck}
         />
       </div>

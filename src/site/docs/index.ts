@@ -13,19 +13,19 @@ export { default as BackTop } from './backTop/backTop';
 /* eslint-disable */
 export { default as Badge } from './badge/badge';
 /* eslint-disable */
-export { default as Button } from './button/button';
-/* eslint-disable */
 export { default as Breadcrumb } from './breadcrumb/breadcrumb';
+/* eslint-disable */
+export { default as Button } from './button/button';
 /* eslint-disable */
 export { default as Calendar } from './calendar/calendar';
 /* eslint-disable */
 export { default as Card } from './card/card';
 /* eslint-disable */
-export { default as Cascader } from './cascader/cascader';
+export { default as Carousel } from './carousel/carousel';
 /* eslint-disable */
 export { default as Checkbox } from './checkbox/checkbox';
 /* eslint-disable */
-export { default as Carousel } from './carousel/carousel';
+export { default as Cascader } from './cascader/cascader';
 /* eslint-disable */
 export { default as Collapse } from './collapse/collapse';
 /* eslint-disable */
