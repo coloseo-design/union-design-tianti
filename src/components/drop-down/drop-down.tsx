@@ -210,7 +210,7 @@ class Dropdown extends React.Component<DropdownProps, DropdownState> {
             <div className={containter}>
               {overlay && React.isValidElement(overlay) ? React.cloneElement(
                 overlay,
-                { popupClassName: `${prefix}-menu`, inlineCollapsedMaxWidth: overlayStyle && overlayStyle.width ? overlayStyle.width : undefined },
+                { popupClassName: `${prefix}-menu` },
               ) : ''}
             </div>
           </div>
