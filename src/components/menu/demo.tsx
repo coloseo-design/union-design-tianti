@@ -16,53 +16,56 @@ const Demo = () => {
         <Switch onChange={(s) => setTheme(s ? 'dark' : 'light')} />
       </div>
 
-      <Menu style={{ height: '60vh' }} theme={theme} mode="vertical" inlineCollapsedIcon>
-        <Menu.Item icon="image">
-          工作台1
-        </Menu.Item>
-        <Menu.SubMenu icon="image" title="工作台3">
+      <div style={{ width: 180, height: 700, backgroundColor: 'red' }}>
+        <Menu theme={theme} mode="vertical" inlineCollapsedIcon>
           <Menu.Item icon="image">
             工作台1
           </Menu.Item>
-          <Menu.Item icon="image">
-            工作台2
-          </Menu.Item>
-          <Menu.ItemGroup title="工作台3">
+          <Menu.SubMenu icon="image" title="工作台3">
             <Menu.Item icon="image">
               工作台1
             </Menu.Item>
             <Menu.Item icon="image">
               工作台2
             </Menu.Item>
-          </Menu.ItemGroup>
-        </Menu.SubMenu>
-        <Menu.SubMenu title="工作台4">
-          <Menu.Item>
-            工作台1
-          </Menu.Item>
-          <Menu.SubMenu title="工作台2">
+            <Menu.ItemGroup title="工作台3">
+              <Menu.Item icon="image">
+                工作台1
+              </Menu.Item>
+              <Menu.Item icon="image">
+                工作台2
+              </Menu.Item>
+            </Menu.ItemGroup>
+          </Menu.SubMenu>
+          <Menu.SubMenu title="工作台4">
             <Menu.Item>
               工作台1
             </Menu.Item>
+            <Menu.SubMenu title="工作台2">
+              <Menu.Item>
+                工作台1
+              </Menu.Item>
+              <Menu.Item>
+                工作台2
+              </Menu.Item>
+            </Menu.SubMenu>
+          </Menu.SubMenu>
+          <Menu.SubMenu icon="image" title="工作台5">
             <Menu.Item>
+              工作台1
+            </Menu.Item>
+            <Menu.Item icon="image">
               工作台2
             </Menu.Item>
           </Menu.SubMenu>
-        </Menu.SubMenu>
-        <Menu.SubMenu icon="image" title="工作台5">
-          <Menu.Item>
-            工作台1
-          </Menu.Item>
-          <Menu.Item icon="image">
-            工作台2
-          </Menu.Item>
-        </Menu.SubMenu>
-      </Menu>
+        </Menu>
+
+      </div>
 
       <div style={{ height: 20 }} />
 
       <Menu
-        style={{ height: '60vh' }}
+        style={{ height: '60vh', width: 300 }}
         onClick={console.log}
         theme={theme}
         mode="inline"
@@ -104,7 +107,7 @@ const Demo = () => {
 
       <div style={{ height: 20 }} />
 
-      <Menu>
+      <Menu style={{ width: 300 }}>
         <Menu.Item>
           工作台1
         </Menu.Item>

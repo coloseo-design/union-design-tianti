@@ -47,6 +47,7 @@ const DropdownDemo = () => {
   const onVisibleChange = (vis: boolean) => {
     console.log('--change', vis);
   };
+
   return (
     <div style={{ padding: 32 }}>
       <div style={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -58,12 +59,13 @@ const DropdownDemo = () => {
             visible={visible}
             onVisibleChange={onVisibleChange}
             trigger={['click']}
+            overlayStyle={{ width: 130 }}
           >
             <Button onClick={handleButtonClick}>open bottomLeft</Button>
           </Dropdown>
         </div>
         <div>
-          <Dropdown placement="bottomCenter" trigger={['click']} overlayStyle={{ maxWidth: 240 }} overlay={menu} arrow={true}>
+          <Dropdown placement="bottomCenter" trigger={['click']} overlay={menu} arrow={true}>
             <Button>click bottomCenter</Button>
           </Dropdown>
         </div>
@@ -98,7 +100,7 @@ const DropdownDemo = () => {
           onClick={handleButtonClick}
           onVisibleChange={onVisibleChange}
           trigger={['click']}
-          // onClick={() => setVisible1(true)}
+        // onClick={() => setVisible1(true)}
         >
           primary dropdown
         </Dropdown.Button>

@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import classNames from 'classnames';
 import DropButton from './button';
 import Portal from '../pop-confirm/portal';
 import { ConfigConsumer, ConfigConsumerProps } from '../config-provider';
+import { MENU_TAG_MENU } from '../menu/menu';
 
 export interface DropdownProps {
   getPopupContainer?: () => HTMLElement | null;
@@ -11,7 +12,7 @@ export interface DropdownProps {
   trigger?: ['hover' | 'click' | 'contextMenu'],
   onVisibleChange?: (visible: boolean) => void;
   overlayStyle?: React.CSSProperties;
-  overlay: any;
+  overlay: ReactNode;
   disabled?: boolean;
   prefixCls?: string;
   overlayClassName?: string;
@@ -165,7 +166,7 @@ class Dropdown extends React.Component<DropdownProps, DropdownState> {
     }
   };
 
-  renderDropdown = ({ getPrefixCls } : ConfigConsumerProps) => {
+  renderDropdown = ({ getPrefixCls }: ConfigConsumerProps) => {
     const { visible } = this.state;
     const {
       children,
@@ -187,7 +188,6 @@ class Dropdown extends React.Component<DropdownProps, DropdownState> {
     const arrowStyle = classNames(`${prefix}-arrow`, {
       [`${prefix}-arrow-${placement}`]: placement,
     });
-
     return (
       <>
         <span
@@ -208,10 +208,16 @@ class Dropdown extends React.Component<DropdownProps, DropdownState> {
           >
             {arrow && <div className={arrowStyle} />}
             <div className={containter}>
-              {overlay && React.isValidElement(overlay) ? React.cloneElement(
-                overlay,
-                { popupClassName: `${prefix}-menu` },
-              ) : ''}
+              {overlay && React.isValidElement(overlay) ? (() => {
+                if ((overlay.type as unknown as Record<string, unknown>).tag === MENU_TAG_MENU) {
+                  return React.cloneElement(overlay, {
+                    who: 'drop-down',
+                    popupClassName: `${prefix}-menu`,
+                    inlineCollapsedMaxWidth: overlayStyle?.width,
+                  });
+                }
+                return overlay;
+              })() : ''}
             </div>
           </div>
         </Portal>

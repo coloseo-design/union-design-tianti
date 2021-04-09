@@ -1,5 +1,10 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import React, { CSSProperties, ReactElement, ReactNode } from 'react';
+import React, {
+  createRef,
+  CSSProperties,
+  ReactElement,
+  ReactNode,
+} from 'react';
 
 import { Icon } from '..';
 import { BasePropsV2, BaseStateV2 } from '../common/base-component';
@@ -51,10 +56,10 @@ export type MenuProps = BasePropsV2<{
   /** 取消选中时调用，仅在 multiple 生效 */
   onDeselect: (key: string, keyPath: string[]) => void;
 
+  who: 'self' | 'drop-down';
   popupClassName: string;
   inlineCollapsedMinWidth: number;
   inlineCollapsedMaxWidth: number;
-
   onCollapsed: (collapsed: boolean) => void;
 }>;
 
@@ -94,7 +99,12 @@ export default class Menu extends MenuBase<MenuProps, MenuState> {
     onClick: () => null,
     onSelect: () => null,
     onDeselect: () => null,
+    who: 'self',
   };
+
+  private menuMaxWidth?: number;
+
+  private menuRef = createRef<HTMLDivElement>();
 
   public constructor(props: MenuProps) {
     super(props);
@@ -197,7 +207,7 @@ export default class Menu extends MenuBase<MenuProps, MenuState> {
     const {
       mode, className, style, theme,
       inlineCollapsedMinWidth = 62,
-      inlineCollapsedMaxWidth = 206,
+      inlineCollapsedMaxWidth, who,
     } = this.props;
 
     let { inlineCollapsedIcon } = this.props;
@@ -205,13 +215,24 @@ export default class Menu extends MenuBase<MenuProps, MenuState> {
 
     inlineCollapsedIcon = mode !== 'horizontal' && inlineCollapsedIcon;
 
+    if (inlineCollapsed) {
+      this.menuMaxWidth = this.menuRef.current?.offsetWidth;
+    }
+
     const newStyle = {
-      ...style,
-      width: (() => {
-        if (mode === 'horizontal') return 'auto';
-        return inlineCollapsed ? inlineCollapsedMinWidth : inlineCollapsedMaxWidth;
+      width: '100%',
+      maxWidth: (() => {
+        if (inlineCollapsed) {
+          return inlineCollapsedMinWidth;
+        }
+        return inlineCollapsedMaxWidth ?? this.menuMaxWidth ?? 1000;
       })(),
+      ...style,
     };
+
+    if (who === 'drop-down' && !inlineCollapsedMaxWidth) {
+      newStyle.width = 206;
+    }
 
     return (
       <div style={newStyle} className={this.classNames(className, this.getPrefixClass('container'))}>
@@ -226,7 +247,7 @@ export default class Menu extends MenuBase<MenuProps, MenuState> {
             <Icon type={inlineCollapsed ? 'right' : 'left'} />
           </div>
         )}
-        <div data-menu-tag="menu" className={this.classNames('children', `${mode}`, `${theme}`)}>
+        <div ref={this.menuRef} data-menu-tag="menu" className={this.classNames('children', `${mode}`, `${theme}`)}>
           {this.handleChildren()}
         </div>
         {menuPopups!.map((item) => item[1])}
