@@ -74,6 +74,8 @@ export interface TreeSelectProps {
   // 选项框回填的值
   showCheckedStrategy?: 'SHOW_ALL' | 'SHOW_PARENT' | 'SHOW_CHILD';
 
+  children?: any;
+
 }
 
 export interface TreePopupProps {

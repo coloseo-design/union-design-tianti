@@ -54,6 +54,8 @@ export interface TreeProps {
 
   // 默认勾选的节点
   defaultCheckedKeys?: string[];
+
+  children?: any;
 }
 
 export interface TreeState {

@@ -44,7 +44,6 @@ export interface ModalProps {
 export interface ModalState {
   visible?: boolean;
   modalTransition?: boolean;
-  childName?: string;
 }
 
 export interface MappString {
@@ -76,7 +75,6 @@ class Modal extends React.Component<ModalProps, ModalState, ModalMethodProps> {
     this.state = {
       visible: visible || false,
       modalTransition: false,
-      childName: '',
     };
   }
 
@@ -147,18 +145,8 @@ class Modal extends React.Component<ModalProps, ModalState, ModalMethodProps> {
   }
 
   handleParent = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    const { childName } = this.state;
-    if (e.nativeEvent.target) {
-      const parentName = e.nativeEvent.target.className;
-      if (childName !== '' && parentName !== childName) {
-        this.handleMask(e);
-      }
-    }
-  }
-
-  handleChild = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    if (e.nativeEvent.target) {
-      this.setState({ childName: e.nativeEvent.target?.className });
+    if (e.target === e.currentTarget) {
+      this.handleMask(e);
     }
   }
 
@@ -257,7 +245,6 @@ class Modal extends React.Component<ModalProps, ModalState, ModalMethodProps> {
             <div
               className={wrapperContent1}
               style={{ ...style, width }}
-              onClick={this.handleChild}
             >
               {!methodType && normalRender}
               {methodType && methodRender}

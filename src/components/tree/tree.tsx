@@ -15,71 +15,92 @@ class Tree extends React.Component<TreeProps, TreeState> {
 
   constructor(props: TreeProps) {
     super(props);
+    const { multiple, checkable } = props;
     this.state = {
       childrenList: [],
       expandKeys: [],
-      multiple: false,
+      multiple: multiple || checkable || false,
       smooth: [],
       selectedKeys: [],
       checkedKeys: [],
     };
   }
 
-  componentDidMount() {
+  static getDerivedStateFromProps(nextProps: TreeProps, nextState: TreeState) {
     const {
-      treeData,
-      children,
-      selectedKeys,
-      defaultSelectedKeys,
-      multiple,
-      checkable = false,
-      checkStrictly = false,
       defaultExpandParent = false,
       autoExpandParent = false,
-      defaultExpandedKeys,
+      treeData,
       checkedKeys,
       defaultCheckedKeys,
-    } = this.props;
-    let sm = [];
-    let childrenList = [];
-    let mul = false;
-    let expand = [];
-    let finalKeys = [];
+      checkable = false,
+      checkStrictly = false,
+      selectedKeys,
+      defaultSelectedKeys,
+      defaultExpandedKeys,
+      children,
+    } = nextProps;
+    const { smooth } = nextState;
     if (treeData) {
-      sm = flattenTree(treeData);
+      const sm = flattenTree(treeData);
+      if (smooth && smooth.length === 0) {
+        let expand: string[] = [];
+        let finalKeys = [];
+        const mergeKeys = [...(checkedKeys || []), ...(defaultCheckedKeys || [])];
+        if (checkable && !checkStrictly) {
+          finalKeys = initKeys(mergeKeys, sm);
+        }
+        if (defaultExpandParent || autoExpandParent) {
+          expand = autoExpandParent && treeData && treeData.length === 1
+            ? treeData.map((i) => i.key)
+            : (treeData || []).filter((i) => i.key).map((i) => i.key);
+        }
+        return {
+          smooth: sm,
+          expandKeys: [...expand, ...(defaultExpandedKeys || [])],
+          checkedKeys: checkable && !checkStrictly
+            ? finalKeys.map((i: any) => (i.key || i.currentKey)) : mergeKeys,
+          selectedKeys: [...(selectedKeys || []), ...(defaultSelectedKeys || [])],
+        };
+      }
+
+      return {
+        smooth: sm,
+      };
     }
     if (children) {
-      sm = flatChildrenTree(children);
-      childrenList = translateDataToTree(sm);
-    }
-    if (multiple || checkable) {
-      mul = true;
-    }
-    const mergeKeys = [...(checkedKeys || []), ...(defaultCheckedKeys || [])];
-    if (checkable && !checkStrictly) {
-      finalKeys = initKeys(mergeKeys, sm);
-    }
-    if (defaultExpandParent || autoExpandParent) {
-      if (treeData) {
-        expand = autoExpandParent && treeData && treeData.length === 1 ? treeData.map((i) => i.key)
-          : (treeData || []).filter((i) => i.key).map((i) => i.key);
+      let finalKeys = [];
+      let expand = [];
+      const sm = flatChildrenTree(children) || [];
+      const childrenList = translateDataToTree(sm) || [];
+      if (smooth && smooth.length === 0) {
+        const mergeKeys = [...(checkedKeys || []), ...(defaultCheckedKeys || [])];
+        if (checkable && !checkStrictly) {
+          finalKeys = initKeys(mergeKeys, sm);
+        }
+        if (defaultExpandParent || autoExpandParent) {
+          if (children) {
+            const list = childrenList;
+            expand = autoExpandParent && list.length === 1 ? list.map((i: any) => i.currentKey)
+              : list.filter((i: any) => i.currentKey).map((i: any) => i.currentKey);
+          }
+        }
+        return {
+          childrenList,
+          smooth: sm,
+          expandKeys: [...expand, ...(defaultExpandedKeys || [])],
+          checkedKeys: checkable && !checkStrictly
+            ? finalKeys.map((i: any) => (i.key || i.currentKey)) : mergeKeys,
+          selectedKeys: [...(selectedKeys || []), ...(defaultSelectedKeys || [])],
+        };
       }
-      if (children) {
-        const list = childrenList;
-        expand = autoExpandParent && list.length === 1 ? list.map((i: any) => i.currentKey)
-          : list.filter((i: any) => i.currentKey).map((i: any) => i.currentKey);
-      }
+      return {
+        smooth: sm,
+        childrenList,
+      };
     }
 
-    this.setState({
-      childrenList,
-      smooth: sm,
-      multiple: mul,
-      expandKeys: [...expand, ...(defaultExpandedKeys || [])],
-      checkedKeys: checkable && !checkStrictly
-        ? finalKeys.map((i: any) => (i.key || i.currentKey)) : mergeKeys,
-      selectedKeys: [...(selectedKeys || []), ...(defaultSelectedKeys || [])],
-    });
+    return null;
   }
 
   componentDidUpdate(prevProps: TreeProps) {

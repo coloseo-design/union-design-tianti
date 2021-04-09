@@ -9,7 +9,7 @@ import TreePopup from './tree-popup';
 import { TreeSelectProps, TreeSelectStates, TreeSelectData } from './type';
 import { ConfigConsumer, ConfigConsumerProps } from '../config-provider';
 import {
-  flattenTree, flatChildrenTree, checkedFun, initValues, translateDataToTree,
+  flattenTree, flatChildrenTree, checkedFun, initValues, translateDataToTree, commonInit,
 } from './utils';
 
 class TreeSelect extends React.Component<TreeSelectProps, TreeSelectStates> {
@@ -37,59 +37,56 @@ class TreeSelect extends React.Component<TreeSelectProps, TreeSelectStates> {
   // eslint-disable-next-line react/sort-comp
   static TreeNode: typeof TreeNode;
 
-  componentDidMount() {
+  static getDerivedStateFromProps(nextProps: TreeSelectProps, nextState: TreeSelectStates) {
     const {
       treeData,
-      children,
       value,
       defaultValue,
       multiple = false,
       treeCheckable = false,
       showCheckedStrategy = 'SHOW_CHILD',
-    } = this.props;
-    let sm = [];
-    let valuesList = [];
-    let selectList = [];
-    let childrenList: any[] = [];
+      children,
+    } = nextProps;
+    const { smooth } = nextState;
     if (treeData) {
+      let sm: any[] = [];
       sm = flattenTree(treeData);
-    }
-    if (children && React.isValidElement(children)) {
-      sm = flatChildrenTree(children);
-      childrenList = translateDataToTree(sm);
-    }
-    if (multiple || treeCheckable) {
-      if ((value && Object.prototype.toString.call(value) !== '[object Array]')
-          || (defaultValue && Object.prototype.toString.call(defaultValue) !== '[object Array]')) {
-        throw new Error('多选模式value和defaultValue 类型应是 Array');
-      } else {
-        const mergeValue = [...(value || []), ...(defaultValue || [])];
-        if (treeCheckable) {
-          const { values, checkedValues } = initValues(mergeValue, sm, showCheckedStrategy);
-          valuesList = values.map((i: any) => i.value);
-          selectList = checkedValues.map((i: any) => i.value);
-        } else {
-          valuesList = mergeValue;
-          selectList = mergeValue;
-        }
-        this.setState({
+      if (smooth && smooth.length === 0) { // 第一次渲染的时候
+        const { valuesList, selectList } = commonInit(value, defaultValue, multiple, treeCheckable, showCheckedStrategy, sm);
+        return {
+          smooth: sm,
           selectValues: selectList,
           values: valuesList,
-        });
+        };
       }
-    } else if ((value && typeof value !== 'string') || (defaultValue && typeof defaultValue !== 'string')) {
-      throw new Error('单选选模式value和defaultValue 类型应是 String');
-    } else {
-      const mergeValue = [...(value || []), ...(defaultValue || [])];
-      this.setState({
-        selectValues: mergeValue,
-        values: mergeValue,
-      });
+
+      return {
+        smooth: sm,
+      };
     }
-    this.setState({
-      childrenList,
-      smooth: sm,
-    });
+    if (children && React.isValidElement(children)) {
+      let sm = [];
+      let childrenList: any[] = [];
+      sm = flatChildrenTree(children);
+      childrenList = translateDataToTree(sm);
+      if (smooth && smooth.length === 0) { // 第一次渲染的时候
+        const { valuesList, selectList } = commonInit(value, defaultValue, multiple, treeCheckable, showCheckedStrategy, sm);
+        return {
+          childrenList,
+          smooth: sm,
+          selectValues: selectList,
+          values: valuesList,
+        };
+      }
+      return {
+        smooth: sm,
+      };
+    }
+
+    return null;
+  }
+
+  componentDidMount() {
     document.addEventListener('click', this.hideDrop, false);
   }
 

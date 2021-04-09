@@ -38,7 +38,12 @@ const menu = (
     </Menu.SubMenu>
   </Menu>
 );
-
+const test = (
+  <div style={{ width: 130, padding: 12 }}>
+    <div style={{ height: 32 }}>和哈哈哈哈</div>
+    <div style={{ height: 32 }}>和哈哈哈哈</div>
+  </div>
+);
 const DropdownDemo = () => {
   const [visible, setVisible] = React.useState(false);
   const handleButtonClick = () => {
@@ -54,7 +59,7 @@ const DropdownDemo = () => {
         <div>
           <Dropdown
             placement="bottomLeft"
-            overlay={menu}
+            overlay={test}
             arrow={true}
             visible={visible}
             onVisibleChange={onVisibleChange}
@@ -65,7 +70,7 @@ const DropdownDemo = () => {
           </Dropdown>
         </div>
         <div>
-          <Dropdown placement="bottomCenter" trigger={['click']} overlay={menu} arrow={true}>
+          <Dropdown placement="bottomCenter" overlayStyle={{ width: '100px' }} trigger={['click']} overlay={menu} arrow={true}>
             <Button>click bottomCenter</Button>
           </Dropdown>
         </div>
