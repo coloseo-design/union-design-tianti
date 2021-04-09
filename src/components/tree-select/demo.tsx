@@ -136,6 +136,7 @@ const TreeSelectDEmo = () => {
           // showCheckedStrategy="SHOW_ALL"
         />
       </div>
+
       <div style={{ width: 320, marginTop: 32 }}>
         <h1>可勾选的, SHOW_ALL</h1>
         <TreeSelect

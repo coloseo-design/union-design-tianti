@@ -45,10 +45,11 @@ class TreeSelect extends React.Component<TreeSelectProps, TreeSelectStates> {
       multiple = false,
       treeCheckable = false,
       showCheckedStrategy = 'SHOW_CHILD',
+      children,
     } = nextProps;
     const { smooth } = nextState;
-    let sm: any[] = [];
     if (treeData) {
+      let sm: any[] = [];
       sm = flattenTree(treeData);
       if (smooth && smooth.length === 0) { // 第一次渲染的时候
         const { valuesList, selectList } = commonInit(value, defaultValue, multiple, treeCheckable, showCheckedStrategy, sm);
@@ -63,34 +64,29 @@ class TreeSelect extends React.Component<TreeSelectProps, TreeSelectStates> {
         smooth: sm,
       };
     }
+    if (children && React.isValidElement(children)) {
+      let sm = [];
+      let childrenList: any[] = [];
+      sm = flatChildrenTree(children);
+      childrenList = translateDataToTree(sm);
+      if (smooth && smooth.length === 0) { // 第一次渲染的时候
+        const { valuesList, selectList } = commonInit(value, defaultValue, multiple, treeCheckable, showCheckedStrategy, sm);
+        return {
+          childrenList,
+          smooth: sm,
+          selectValues: selectList,
+          values: valuesList,
+        };
+      }
+      return {
+        smooth: sm,
+      };
+    }
 
     return null;
   }
 
   componentDidMount() {
-    const {
-      treeData,
-      children,
-      value,
-      defaultValue,
-      multiple = false,
-      treeCheckable = false,
-      showCheckedStrategy = 'SHOW_CHILD',
-    } = this.props;
-    let sm = [];
-    let childrenList: any[] = [];
-
-    if (children && React.isValidElement(children) && !treeData) {
-      sm = flatChildrenTree(children);
-      childrenList = translateDataToTree(sm);
-      const { valuesList, selectList } = commonInit(value, defaultValue, multiple, treeCheckable, showCheckedStrategy, sm);
-      this.setState({
-        childrenList,
-        smooth: sm,
-        selectValues: selectList,
-        values: valuesList,
-      });
-    }
     document.addEventListener('click', this.hideDrop, false);
   }
 
