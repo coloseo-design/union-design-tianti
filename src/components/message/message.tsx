@@ -65,7 +65,7 @@ export default class Message extends BaseComponent<MessageProps> {
 
     public static loading = (content:ReactNode, key?:string, onClose?: ()=>void) => Message.open({
       key,
-      icon: 'loading',
+      icon: 'loading_circle',
       content,
       duration: 0,
       onClose,
