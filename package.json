@@ -1,6 +1,6 @@
 {
   "name": "union-design",
-  "version": "0.1.3",
+  "version": "0.0.1",
   "license": "MIT",
   "files": [
     "lib",
@@ -35,12 +35,12 @@
     "union-tool": "0.0.1"
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^4.11.1",
-    "@typescript-eslint/parser": "^4.11.1",
-    "@types/enquire.js": "^2.1.2",
     "@types/classnames": "^2.2.11",
+    "@types/enquire.js": "^2.1.2",
     "@types/react-dom": "^17.0.0",
     "@types/react-router-dom": "^5.1.7",
+    "@typescript-eslint/eslint-plugin": "^4.11.1",
+    "@typescript-eslint/parser": "^4.11.1",
     "commitizen": "^4.2.2",
     "conventional-changelog-cli": "^2.1.1",
     "del": "^6.0.0",

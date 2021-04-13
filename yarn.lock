@@ -1084,12 +1084,12 @@
 
 "@types/classnames@^2.2.11":
   version "2.2.11"
-  resolved "http://10.236.18.95:4873/@types%2fclassnames/-/classnames-2.2.11.tgz#2521cc86f69d15c5b90664e4829d84566052c1cf"
+  resolved "http://ccp.tianti.tg.unicom.local/artifactory/api/npm/sjxt-npm-virtual/@types/classnames/-/classnames-2.2.11.tgz#2521cc86f69d15c5b90664e4829d84566052c1cf"
   integrity sha1-JSHMhvadFcW5BmTkgp2EVmBSwc8=
 
 "@types/enquire.js@^2.1.2":
   version "2.1.2"
-  resolved "http://10.236.18.95:4873/@types%2fenquire.js/-/enquire.js-2.1.2.tgz#8cfa6196faabb9a7e09aebcb50c4b9a8538e229c"
+  resolved "http://ccp.tianti.tg.unicom.local/artifactory/api/npm/sjxt-npm-virtual/@types/enquire.js/-/enquire.js-2.1.2.tgz#8cfa6196faabb9a7e09aebcb50c4b9a8538e229c"
   integrity sha1-jPphlvqruafgmuvLUMS5qFOOIpw=
 
 "@types/glob@^7.1.1":
@@ -1102,7 +1102,7 @@
 
 "@types/history@*":
   version "4.7.8"
-  resolved "http://10.236.18.95:4873/@types%2fhistory/-/history-4.7.8.tgz#49348387983075705fe8f4e02fb67f7daaec4934"
+  resolved "http://ccp.tianti.tg.unicom.local/artifactory/api/npm/sjxt-npm-virtual/@types/history/-/history-4.7.8.tgz#49348387983075705fe8f4e02fb67f7daaec4934"
   integrity sha1-STSDh5gwdXBf6PTgL7Z/farsSTQ=
 
 "@types/html-minifier-terser@^5.0.0":
@@ -1152,7 +1152,7 @@
 
 "@types/prop-types@*":
   version "15.7.3"
-  resolved "http://10.236.18.95:4873/@types%2fprop-types/-/prop-types-15.7.3.tgz#2ab0d5da2e5815f94b0b9d4b95d1e5f243ab2ca7"
+  resolved "http://ccp.tianti.tg.unicom.local/artifactory/api/npm/sjxt-npm-virtual/@types/prop-types/-/prop-types-15.7.3.tgz#2ab0d5da2e5815f94b0b9d4b95d1e5f243ab2ca7"
   integrity sha1-KrDV2i5YFflLC51LldHl8kOrLKc=
 
 "@types/q@^1.5.1":
@@ -1162,14 +1162,14 @@
 
 "@types/react-dom@^17.0.0":
   version "17.0.3"
-  resolved "http://10.236.18.95:4873/@types%2freact-dom/-/react-dom-17.0.3.tgz#7fdf37b8af9d6d40127137865bb3fff8871d7ee1"
+  resolved "http://ccp.tianti.tg.unicom.local/artifactory/api/npm/sjxt-npm-virtual/@types/react-dom/-/react-dom-17.0.3.tgz#7fdf37b8af9d6d40127137865bb3fff8871d7ee1"
   integrity sha1-f983uK+dbUAScTeGW7P/+IcdfuE=
   dependencies:
     "@types/react" "*"
 
 "@types/react-router-dom@^5.1.7":
   version "5.1.7"
-  resolved "http://10.236.18.95:4873/@types%2freact-router-dom/-/react-router-dom-5.1.7.tgz#a126d9ea76079ffbbdb0d9225073eb5797ab7271"
+  resolved "http://ccp.tianti.tg.unicom.local/artifactory/api/npm/sjxt-npm-virtual/@types/react-router-dom/-/react-router-dom-5.1.7.tgz#a126d9ea76079ffbbdb0d9225073eb5797ab7271"
   integrity sha1-oSbZ6nYHn/u9sNkiUHPrV5ercnE=
   dependencies:
     "@types/history" "*"
@@ -1178,7 +1178,7 @@
 
 "@types/react-router@*":
   version "5.1.13"
-  resolved "http://10.236.18.95:4873/@types%2freact-router/-/react-router-5.1.13.tgz#051c0d229bd48ad90558a1db500708127cc512f7"
+  resolved "http://ccp.tianti.tg.unicom.local/artifactory/api/npm/sjxt-npm-virtual/@types/react-router/-/react-router-5.1.13.tgz#051c0d229bd48ad90558a1db500708127cc512f7"
   integrity sha1-BRwNIpvUitkFWKHbUAcIEnzFEvc=
   dependencies:
     "@types/history" "*"
@@ -1186,7 +1186,7 @@
 
 "@types/react@*":
   version "17.0.3"
-  resolved "http://10.236.18.95:4873/@types%2freact/-/react-17.0.3.tgz#ba6e215368501ac3826951eef2904574c262cc79"
+  resolved "http://ccp.tianti.tg.unicom.local/artifactory/api/npm/sjxt-npm-virtual/@types/react/-/react-17.0.3.tgz#ba6e215368501ac3826951eef2904574c262cc79"
   integrity sha1-um4hU2hQGsOCaVHu8pBFdMJizHk=
   dependencies:
     "@types/prop-types" "*"
@@ -1195,7 +1195,7 @@
 
 "@types/scheduler@*":
   version "0.16.1"
-  resolved "http://10.236.18.95:4873/@types%2fscheduler/-/scheduler-0.16.1.tgz#18845205e86ff0038517aab7a18a62a6b9f71275"
+  resolved "http://ccp.tianti.tg.unicom.local/artifactory/api/npm/sjxt-npm-virtual/@types/scheduler/-/scheduler-0.16.1.tgz#18845205e86ff0038517aab7a18a62a6b9f71275"
   integrity sha1-GIRSBehv8AOFF6q3oYpiprn3EnU=
 
 "@types/source-list-map@*":
@@ -1238,7 +1238,7 @@
 
 "@typescript-eslint/eslint-plugin@^4.11.1":
   version "4.22.0"
-  resolved "http://10.236.18.95:4873/@typescript-eslint%2feslint-plugin/-/eslint-plugin-4.22.0.tgz#3d5f29bb59e61a9dba1513d491b059e536e16dbc"
+  resolved "http://ccp.tianti.tg.unicom.local/artifactory/api/npm/sjxt-npm-virtual/@typescript-eslint/eslint-plugin/-/eslint-plugin-4.22.0.tgz#3d5f29bb59e61a9dba1513d491b059e536e16dbc"
   integrity sha1-PV8pu1nmGp26FRPUkbBZ5Tbhbbw=
   dependencies:
     "@typescript-eslint/experimental-utils" "4.22.0"
@@ -1252,7 +1252,7 @@
 
 "@typescript-eslint/experimental-utils@4.22.0":
   version "4.22.0"
-  resolved "http://10.236.18.95:4873/@typescript-eslint%2fexperimental-utils/-/experimental-utils-4.22.0.tgz#68765167cca531178e7b650a53456e6e0bef3b1f"
+  resolved "http://ccp.tianti.tg.unicom.local/artifactory/api/npm/sjxt-npm-virtual/@typescript-eslint/experimental-utils/-/experimental-utils-4.22.0.tgz#68765167cca531178e7b650a53456e6e0bef3b1f"
   integrity sha1-aHZRZ8ylMReOe2UKU0VubgvvOx8=
   dependencies:
     "@types/json-schema" "^7.0.3"
@@ -1264,7 +1264,7 @@
 
 "@typescript-eslint/parser@^4.11.1":
   version "4.22.0"
-  resolved "http://10.236.18.95:4873/@typescript-eslint%2fparser/-/parser-4.22.0.tgz#e1637327fcf796c641fe55f73530e90b16ac8fe8"
+  resolved "http://ccp.tianti.tg.unicom.local/artifactory/api/npm/sjxt-npm-virtual/@typescript-eslint/parser/-/parser-4.22.0.tgz#e1637327fcf796c641fe55f73530e90b16ac8fe8"
   integrity sha1-4WNzJ/z3lsZB/lX3NTDpCxasj+g=
   dependencies:
     "@typescript-eslint/scope-manager" "4.22.0"
@@ -1274,7 +1274,7 @@
 
 "@typescript-eslint/scope-manager@4.22.0":
   version "4.22.0"
-  resolved "http://10.236.18.95:4873/@typescript-eslint%2fscope-manager/-/scope-manager-4.22.0.tgz#ed411545e61161a8d702e703a4b7d96ec065b09a"
+  resolved "http://ccp.tianti.tg.unicom.local/artifactory/api/npm/sjxt-npm-virtual/@typescript-eslint/scope-manager/-/scope-manager-4.22.0.tgz#ed411545e61161a8d702e703a4b7d96ec065b09a"
   integrity sha1-7UEVReYRYajXAucDpLfZbsBlsJo=
   dependencies:
     "@typescript-eslint/types" "4.22.0"
@@ -1282,12 +1282,12 @@
 
 "@typescript-eslint/types@4.22.0":
   version "4.22.0"
-  resolved "http://10.236.18.95:4873/@typescript-eslint%2ftypes/-/types-4.22.0.tgz#0ca6fde5b68daf6dba133f30959cc0688c8dd0b6"
+  resolved "http://ccp.tianti.tg.unicom.local/artifactory/api/npm/sjxt-npm-virtual/@typescript-eslint/types/-/types-4.22.0.tgz#0ca6fde5b68daf6dba133f30959cc0688c8dd0b6"
   integrity sha1-DKb95baNr226Ez8wlZzAaIyN0LY=
 
 "@typescript-eslint/typescript-estree@4.22.0":
   version "4.22.0"
-  resolved "http://10.236.18.95:4873/@typescript-eslint%2ftypescript-estree/-/typescript-estree-4.22.0.tgz#b5d95d6d366ff3b72f5168c75775a3e46250d05c"
+  resolved "http://ccp.tianti.tg.unicom.local/artifactory/api/npm/sjxt-npm-virtual/@typescript-eslint/typescript-estree/-/typescript-estree-4.22.0.tgz#b5d95d6d366ff3b72f5168c75775a3e46250d05c"
   integrity sha1-tdldbTZv87cvUWjHV3Wj5GJQ0Fw=
   dependencies:
     "@typescript-eslint/types" "4.22.0"
@@ -1300,7 +1300,7 @@
 
 "@typescript-eslint/visitor-keys@4.22.0":
   version "4.22.0"
-  resolved "http://10.236.18.95:4873/@typescript-eslint%2fvisitor-keys/-/visitor-keys-4.22.0.tgz#169dae26d3c122935da7528c839f42a8a42f6e47"
+  resolved "http://ccp.tianti.tg.unicom.local/artifactory/api/npm/sjxt-npm-virtual/@typescript-eslint/visitor-keys/-/visitor-keys-4.22.0.tgz#169dae26d3c122935da7528c839f42a8a42f6e47"
   integrity sha1-Fp2uJtPBIpNdp1KMg59CqKQvbkc=
   dependencies:
     "@typescript-eslint/types" "4.22.0"
@@ -3493,7 +3493,7 @@ cssom@0.3.x, "cssom@>= 0.3.0 < 0.4.0":
 
 csstype@^3.0.2:
   version "3.0.7"
-  resolved "http://10.236.18.95:4873/csstype/-/csstype-3.0.7.tgz#2a5fb75e1015e84dd15692f71e89a1450290950b"
+  resolved "http://ccp.tianti.tg.unicom.local/artifactory/api/npm/sjxt-npm-virtual/csstype/-/csstype-3.0.7.tgz#2a5fb75e1015e84dd15692f71e89a1450290950b"
   integrity sha1-Kl+3XhAV6E3RVpL3HomhRQKQlQs=
 
 currently-unhandled@^0.4.1:
@@ -10266,7 +10266,7 @@ tslib@^2.0.3:
 
 tsutils@^3.17.1:
   version "3.21.0"
-  resolved "http://10.236.18.95:4873/tsutils/-/tsutils-3.21.0.tgz#b48717d394cea6c1e096983eed58e9d61715b623"
+  resolved "http://ccp.tianti.tg.unicom.local/artifactory/api/npm/sjxt-npm-virtual/tsutils/-/tsutils-3.21.0.tgz#b48717d394cea6c1e096983eed58e9d61715b623"
   integrity sha1-tIcX05TOpsHglpg+7Vjp1hcVtiM=
   dependencies:
     tslib "^1.8.1"
