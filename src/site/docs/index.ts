@@ -1,15 +1,15 @@
 /* eslint-disable */
 export { default as Affix } from './affix/affix';
 /* eslint-disable */
-export { default as Alert } from './alert/alert';
-/* eslint-disable */
 export { default as AutoComplete } from './auto-complete/auto-complete';
+/* eslint-disable */
+export { default as Alert } from './alert/alert';
 /* eslint-disable */
 export { default as Anchor } from './anchor/anchor';
 /* eslint-disable */
 export { default as Avatar } from './avatar/avatar';
 /* eslint-disable */
-export { default as BackTop } from './backTop/backTop';
+export { default as BackTop } from './back-top/back-top';
 /* eslint-disable */
 export { default as Badge } from './badge/badge';
 /* eslint-disable */
@@ -63,7 +63,7 @@ export { default as Modal } from './modal/modal';
 /* eslint-disable */
 export { default as Notification } from './notification/notification';
 /* eslint-disable */
-export { default as PageHeader } from './pageHeader/pageHeader';
+export { default as PageHeader } from './page-header/page-header';
 /* eslint-disable */
 export { default as Pagination } from './pagination/pagination';
 /* eslint-disable */
