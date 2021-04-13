@@ -28,6 +28,9 @@ const MessageDemo = () => (
     </Button>
     <div style={{ height: 20 }} />
     <Button type="primary" onClick={() => Message.destroy('abc')}>close</Button>
+    <div style={{ height: 20 }} />
+    <Button type="primary" onClick={() => Message.loading('这 个 loading demo', 'loading key')}>loading</Button>
+    <Button type="primary" onClick={() => Message.destroy('loading key')}>loading close</Button>
   </div>
 );
 

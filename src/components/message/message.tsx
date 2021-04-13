@@ -23,7 +23,7 @@ type MessageConfig = {
 type MessageAPI = (
     content: ReactNode | MessageConfig, duration?: number, onClose?: () => void) => void;
 
-type MessageType = 'success' | 'error' | 'info' | 'warning';
+type MessageType = 'success'| 'loading' | 'error' | 'info' | 'warning';
 
 type MessageProps = {
     uuid: string;
@@ -62,6 +62,14 @@ export default class Message extends BaseComponent<MessageProps> {
       duration,
       onClose,
     }, 'warning');
+
+    public static loading = (content:ReactNode, key?:string, onClose?: ()=>void) => Message.open({
+      key,
+      icon: 'loading',
+      content,
+      duration: 0,
+      onClose,
+    }, 'loading');
 
     public static open = (config: MessageConfig, type?: MessageType) => {
       if (config.duration === undefined) delete config.duration;
@@ -168,6 +176,7 @@ export default class Message extends BaseComponent<MessageProps> {
       if (type === 'error') return '#FF4D4F';
       if (type === 'warning') return '#FAAD14';
       if (type === 'success') return '#44BF30';
+      if (type === 'loading') return 'rgba(0, 0, 0, 0.65)';
 
       return '#407CE2';
     };
