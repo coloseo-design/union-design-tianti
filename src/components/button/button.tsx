@@ -155,13 +155,14 @@ class Button extends React.Component<ButtonProps, ButtonState> {
       prefixCls: customizedPrefixCls,
       forwardedRef,
       getPrefixCls,
-      ...rest
+      ...restProps
     } = this.props;
     const { loading } = this.state;
     let sizeCls = '';
     if (size) {
       sizeCls = ButtonSizeMap[size];
     }
+    const rest = omit(restProps, ['loading']);
     const prefixCls = getPrefixCls!('btn', customizedPrefixCls);
 
     const classes: string = classNames(prefixCls, className, {

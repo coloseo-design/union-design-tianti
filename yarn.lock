@@ -10434,20 +10434,20 @@ unified@^4.1.1:
     trough "^1.0.0"
     vfile "^1.0.0"
 
-union-icons-react@0.0.2:
-  version "0.0.2"
-  resolved "http://ccp.tianti.tg.unicom.local/artifactory/api/npm/sjxt-npm-virtual/union-icons-react/-/union-icons-react-0.0.2.tgz#364889f836c7d32ae1544233a8a50840ee3cdd51"
-  integrity sha1-NkiJ+DbH0yrhVEIzqKUIQO483VE=
+union-icons-react@^0.0.3:
+  version "0.0.3"
+  resolved "http://ccp.tianti.tg.unicom.local/artifactory/api/npm/sjxt-npm-virtual/union-icons-react/-/union-icons-react-0.0.3.tgz#c1037ff7b18ed68646600bd058f2fb2aafd0f0c2"
+  integrity sha1-wQN/97GO1oZGYAvQWPL7Kq/Q8MI=
   dependencies:
     classnames "^2.2.6"
     react "^17.0.1"
-    union-icons "0.0.2"
+    union-icons "0.0.3"
     union-tool "^0.0.1"
 
-union-icons@0.0.2:
-  version "0.0.2"
-  resolved "http://ccp.tianti.tg.unicom.local/artifactory/api/npm/sjxt-npm-virtual/union-icons/-/union-icons-0.0.2.tgz#7a9df69548b7e37d3cb37ac9b11463fb9c525c40"
-  integrity sha1-ep32lUi34308s3rJsRRj+5xSXEA=
+union-icons@0.0.3:
+  version "0.0.3"
+  resolved "http://ccp.tianti.tg.unicom.local/artifactory/api/npm/sjxt-npm-virtual/union-icons/-/union-icons-0.0.3.tgz#22cc81c2ec96218f2c02fb2ac11739671c71c00d"
+  integrity sha1-IsyBwuyWIY8sAvsqwRc5ZxxxwA0=
 
 union-tool@0.0.1, union-tool@^0.0.1:
   version "0.0.1"
