@@ -9,10 +9,11 @@ import {
   composeFieldName, defaultGetValueFromEvent, getValueFromKeypaths, toArray, validateRules,
 } from './util';
 import { Col, Row } from '../grid';
-import { FormContextProps, withFormContext } from './form-context';
+import { withFormContext } from './form-context';
 import { ConfigConsumerProps } from '../config-provider';
 import { withGlobalConfig } from '../config-provider/context';
 import FormItemError from './form-item-error';
+import { FormContextProps } from './type';
 
 export type ItemProps = ResponsiveColProps & BaseProps;
 

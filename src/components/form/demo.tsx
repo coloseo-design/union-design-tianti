@@ -1,22 +1,24 @@
 /* eslint-disable consistent-return */
 import React, { useRef } from 'react';
-import Form from './index';
-import FormItem from './form-item';
-import Input from '../input';
-import Select from '../select';
-import Button from '../button';
-import Cascader from '../cascader';
-import AutoComplete from '../auto-complete';
-import Checkbox from '../checkbox';
-import InputNumber from '../input-number';
-import Radio from '../radio';
-import Rate from '../rate';
-import Slider from '../slider';
-import Upload from '../upload';
-import DatePicker from '../date-picker';
-import Switch from '../switch';
-import TreeSelect from '../tree-select';
+import {
+  Form,
+  Input,
+  Select,
+  Button,
+  Cascader,
+  AutoComplete,
+  Checkbox,
+  InputNumber,
+  Radio,
+  Rate,
+  Slider,
+  Upload,
+  DatePicker,
+  Switch,
+  TreeSelect,
+} from '../index';
 
+const { Item: FormItem } = Form;
 export default () => {
   const formRef = useRef(null);
   console.log('formRef', formRef);
