@@ -2,11 +2,11 @@
 
 ## API
 
-* Message.success(config);
-* Message.error(config);
-* Message.info(config);
-* Message.warning(config);
-* Message.open(config);
+* Notification.success(config);
+* Notification.error(config);
+* Notification.info(config);
+* Notification.warning(config);
+* Notification.open(config);
 
 ## config
 
@@ -22,5 +22,5 @@
 | onClose     | 关闭时触发的回调函数                      | ()=>void         | -      |
 | onClick     | 点击 message 时触发的回调函数             | ()=>void         | -      |
 
-* Message.config={...} 全局配置
-* Message.destroy(key); 可以关闭 提示
+* Notification.config={...} 全局配置
+* Notification.destroy(key); 可以关闭 提示
