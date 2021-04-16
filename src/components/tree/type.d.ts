@@ -56,6 +56,9 @@ export interface TreeProps {
   defaultCheckedKeys?: string[];
 
   children?: any;
+
+  className?: string;
+
 }
 
 export interface TreeState {

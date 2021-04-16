@@ -254,10 +254,11 @@ class Tree extends React.Component<TreeProps, TreeState> {
       prefixCls,
       treeData,
       style,
+      className,
     } = this.props;
     const { childrenList } = this.state;
     const treeStyle = getPrefixCls('tree', prefixCls);
-    const treewrapper = classnames(`${treeStyle}-wrapper`);
+    const treewrapper = classnames(`${treeStyle}-wrapper`, className);
     return (
       <div className={treewrapper} style={style}>
         {this.renderTreeNode(treeData || childrenList)}

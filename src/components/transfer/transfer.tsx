@@ -325,6 +325,7 @@ class Transfer extends React.Component<TransferProps, TransferState> {
       disabled,
       showSearch,
       className,
+      style,
     } = this.props;
     const {
       targetKeys,
@@ -353,7 +354,7 @@ class Transfer extends React.Component<TransferProps, TransferState> {
     const tranContent = classNames(`${prefix}-list-body-content`);
 
     return (
-      <div className={tranContainer}>
+      <div className={tranContainer} style={style}>
         {this.renderList(sourceData, 'left', tranList, tranBody, tranContent)}
         <div className={operationStyle}>
           <Button

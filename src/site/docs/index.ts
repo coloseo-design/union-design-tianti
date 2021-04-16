@@ -7,11 +7,11 @@ export { default as Anchor } from './anchor/anchor';
 /* eslint-disable */
 export { default as AutoComplete } from './auto-complete/auto-complete';
 /* eslint-disable */
+export { default as Avatar } from './avatar/avatar';
+/* eslint-disable */
 export { default as BackTop } from './back-top/back-top';
 /* eslint-disable */
 export { default as Badge } from './badge/badge';
-/* eslint-disable */
-export { default as Avatar } from './avatar/avatar';
 /* eslint-disable */
 export { default as Breadcrumb } from './breadcrumb/breadcrumb';
 /* eslint-disable */

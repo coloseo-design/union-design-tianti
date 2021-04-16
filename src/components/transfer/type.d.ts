@@ -35,4 +35,5 @@ export interface TransferProps {
   onSearch?: (direction: TransferDirection, value: string) => void;
   filterOption?: (inputValue: string, option: {[key: string] : unknown}) => boolean;
   className?: string;
+  style?: React.CSSProperties;
 }
