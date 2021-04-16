@@ -7,11 +7,11 @@ export { default as Anchor } from './anchor/anchor';
 /* eslint-disable */
 export { default as AutoComplete } from './auto-complete/auto-complete';
 /* eslint-disable */
+export { default as Avatar } from './avatar/avatar';
+/* eslint-disable */
 export { default as BackTop } from './back-top/back-top';
 /* eslint-disable */
 export { default as Badge } from './badge/badge';
-/* eslint-disable */
-export { default as Avatar } from './avatar/avatar';
 /* eslint-disable */
 export { default as Breadcrumb } from './breadcrumb/breadcrumb';
 /* eslint-disable */
@@ -29,9 +29,9 @@ export { default as Checkbox } from './checkbox/checkbox';
 /* eslint-disable */
 export { default as Collapse } from './collapse/collapse';
 /* eslint-disable */
-export { default as DatePicker } from './date-picker/date-picker';
-/* eslint-disable */
 export { default as Descriptions } from './descriptions/descriptions';
+/* eslint-disable */
+export { default as DatePicker } from './date-picker/date-picker';
 /* eslint-disable */
 export { default as Divider } from './divider/divider';
 /* eslint-disable */

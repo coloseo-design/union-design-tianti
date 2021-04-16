@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import classNames from 'classnames';
 import { ConfigConsumer, ConfigConsumerProps } from '../config-provider';
 
-export interface ItemProps {
+export interface ItemProps extends
+React.HTMLAttributes<HTMLTableDataCellElement | HTMLTableHeaderCellElement> {
   /** 内容的描述 */
   label?: string | React.ReactNode;
   /* 包含列的数量 */
   span?: number;
   /* 用户自定义类前缀，默认uni-input */
   prefixCls?: string;
-  children?: unknown;
   /** 是否展示边框 */
   bordered?: boolean;
 }
@@ -17,10 +17,10 @@ export interface ItemProps {
 class Item extends Component<ItemProps> {
   renderItem = ({ getPrefixCls }: ConfigConsumerProps) => {
     const {
-      prefixCls, children, label, span = 1, bordered,
+      prefixCls, children, label, span = 1, bordered, className, ...rest
     } = this.props;
     const prefix = getPrefixCls('descriptions-item', prefixCls);
-    const mainClass = classNames(prefix, {
+    const mainClass = classNames(prefix, className, {
       // [`${prefix}-label`]: label,
     });
     if (bordered) {
@@ -32,9 +32,9 @@ class Item extends Component<ItemProps> {
       );
     }
     return (
-      <td colSpan={span} className={mainClass}>
-        <span className={`${mainClass}-label`}>{label}</span>
-        <span className={`${mainClass}-content`}>{children}</span>
+      <td {...rest} colSpan={span} className={mainClass}>
+        <span className={`${prefix}-label`}>{label}</span>
+        <span className={`${prefix}-content`}>{children}</span>
       </td>
     );
   }

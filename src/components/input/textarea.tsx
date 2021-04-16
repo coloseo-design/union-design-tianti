@@ -8,7 +8,7 @@ import Icon from '../icon';
 
 export const tuple = <T extends string[]>(...args: T) => args;
 
-export interface BaseTextAreaProps {
+export interface BaseTextAreaProps extends React.HTMLAttributes<HTMLTextAreaElement> {
   // 用于表单的自动填充功能
   autocomplete?: string;
   // 文本是否自动首字母大写

@@ -4,7 +4,7 @@ import { ConfigConsumer, ConfigConsumerProps } from '../config-provider';
 import Icon from '../icon';
 import { scrollToTop } from '../utils/animation';
 
-export interface BackTopProps {
+export interface BackTopProps extends React.HTMLAttributes<HTMLDivElement> {
   /* 自定义样式 */
   style?: CSSProperties;
   /* 用户自定义类前缀，默认uni-backTop */
@@ -60,12 +60,13 @@ class BackTop extends Component<BackTopProps, BackTopState> {
 
   renderBackTop = ({ getPrefixCls }: ConfigConsumerProps) => {
     const {
-      prefixCls, style, onClick, visibilityHeight = 400, duration = 450,
+      prefixCls, style, onClick, visibilityHeight = 400, duration = 450, className,
+      ...rest
     } = this.props;
     const { scrollTop = 0 } = this.state;
 
     const classPrefix = getPrefixCls('backTop', prefixCls);
-    const mainClass = classNames(classPrefix, {
+    const mainClass = classNames(classPrefix, className, {
       // [`${prefix}-has-sider`]: siders.length > 0,
     });
 
@@ -77,7 +78,7 @@ class BackTop extends Component<BackTopProps, BackTopState> {
     };
 
     return (
-      <div className={mainClass} style={style}>
+      <div {...rest} className={mainClass} style={style}>
         {scrollTop >= visibilityHeight && (
           <span onClick={handleClick}>
             <Icon type="top" />

@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import classNames from 'classnames';
 import { ConfigConsumer, ConfigConsumerProps } from '../config-provider';
 
-export interface PreviewGroupProps {
+export interface PreviewGroupProps extends React.HTMLAttributes<HTMLDivElement> {
   prefixCls?: string;
 }
 
@@ -16,10 +16,12 @@ const { Provider } = context;
 
 class PreviewGroup extends Component<PreviewGroupProps> {
   renderPreviewGroup = ({ getPrefixCls }: ConfigConsumerProps) => {
-    const { prefixCls, children } = this.props;
+    const {
+      prefixCls, children, className, ...rest
+    } = this.props;
 
     const prefix = getPrefixCls('image-preview-group', prefixCls);
-    const mainClass = classNames(prefix, {
+    const mainClass = classNames(prefix, className, {
       // [`${prefix}-error`]: error,
     });
 
@@ -33,7 +35,7 @@ class PreviewGroup extends Component<PreviewGroupProps> {
 
     return (
       <Provider value={{ isPreviewGroup: true, previewUrls }}>
-        <div className={mainClass}>
+        <div {...rest} className={mainClass}>
           {_children}
         </div>
       </Provider>

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import classNames from 'classnames';
 import { ConfigConsumer, ConfigConsumerProps } from '../config-provider';
 
-export interface MetaProps {
+export interface MetaProps extends React.HTMLAttributes<HTMLDivElement> {
   /** 列表元素的描述内容 */
   description?: React.ReactNode;
   /* 列表元素的标题 */
@@ -12,17 +12,19 @@ export interface MetaProps {
 
 class Meta extends Component<MetaProps> {
   renderMeta = ({ getPrefixCls }: ConfigConsumerProps) => {
-    const { prefixCls, title, description } = this.props;
+    const {
+      prefixCls, title, description, className, ...rest
+    } = this.props;
 
     const prefix = getPrefixCls('list-item-meta', prefixCls);
-    const mainClass = classNames(prefix, {
+    const mainClass = classNames(prefix, className, {
       // [`${prefix}-checked`]: checked,
     });
 
     return (
-      <div className={mainClass}>
-        <div className={`${mainClass}-title`}>{title}</div>
-        <div className={`${mainClass}-description`}>{description}</div>
+      <div {...rest} className={mainClass}>
+        <div className={`${prefix}-title`}>{title}</div>
+        <div className={`${prefix}-description`}>{description}</div>
       </div>
     );
   };

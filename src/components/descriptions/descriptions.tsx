@@ -23,12 +23,11 @@ function calc(arr: unknown[], spans: number) {
   }, []);
 }
 
-export interface DescriptionsProps {
+export interface DescriptionsProps extends React.HTMLAttributes<HTMLDivElement> {
   /** 是否展示边框 */
   bordered?: boolean;
   /* 用户自定义类前缀，默认uni-input */
   prefixCls?: string;
-  children?: unknown;
 }
 
 export interface DescriptionsState {
@@ -64,7 +63,9 @@ class Descriptions extends Component<DescriptionsProps, DescriptionsState> {
   }
 
   renderDescriptions = ({ getPrefixCls }: ConfigConsumerProps) => {
-    const { prefixCls, children } = this.props;
+    const {
+      prefixCls, children, className, ...rest
+    } = this.props;
     const { bordered } = this.state;
 
     let toArrayChildren = React.Children.toArray(children);
@@ -75,7 +76,7 @@ class Descriptions extends Component<DescriptionsProps, DescriptionsState> {
     }
 
     const prefix = getPrefixCls('descriptions', prefixCls);
-    const mainClass = classNames(prefix, {
+    const mainClass = classNames(prefix, className, {
       [`${prefix}-bordered`]: bordered,
     });
 
@@ -100,7 +101,7 @@ class Descriptions extends Component<DescriptionsProps, DescriptionsState> {
     }
 
     return (
-      <div className={mainClass}>
+      <div {...rest} className={mainClass}>
         <table>
           <tbody>
             {(refactorChildren || []).map((item: unknown, index: number) => (

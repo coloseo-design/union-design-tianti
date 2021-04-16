@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import { ConfigConsumer, ConfigConsumerProps } from '../config-provider';
 import Radio from './radio';
 
-export interface RadioGroupProps {
+export interface RadioGroupProps extends React.HTMLAttributes<HTMLDivElement> {
   /* 用户自定义类前缀，默认uni-input */
   prefixCls?: string;
   // 选项变化时的回调函数
@@ -60,11 +60,11 @@ class Group extends Component<RadioGroupProps, RadioGroupState> {
 
   renderRadioGroup = ({ getPrefixCls }: ConfigConsumerProps) => {
     const {
-      onChange, prefixCls, children, options, name, disabled, style,
+      onChange, prefixCls, children, options, name, disabled, className, ...rest
     } = this.props;
     const { value } = this.state;
     const prefix = getPrefixCls('radio-group', prefixCls);
-    const mainClass = classNames(prefix, {
+    const mainClass = classNames(prefix, className, {
       // [`${prefix}-checked`]: checked,
     });
 
@@ -76,7 +76,7 @@ class Group extends Component<RadioGroupProps, RadioGroupState> {
     };
     if (children) {
       return (
-        <div className={mainClass} style={style}>
+        <div {...rest} className={mainClass}>
           {(React.Children.toArray(children) || []).map((item) => (
             <Radio
               key={item.props.value}
@@ -95,7 +95,7 @@ class Group extends Component<RadioGroupProps, RadioGroupState> {
     }
 
     return (
-      <div className={mainClass} style={style}>
+      <div {...rest} className={mainClass}>
         {(options || []).map((item: { value: string; label: React.ReactNode; }) => (
           <Radio
             key={item.value}

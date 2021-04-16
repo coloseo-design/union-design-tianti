@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import Icon from '../icon';
 import { ConfigConsumer, ConfigConsumerProps } from '../config-provider';
 
-export interface ProgressProps {
+export interface ProgressProps extends React.HTMLAttributes<HTMLDivElement> {
   /** 百分比 */
   percent?: number;
   /** 状态，可选：success exception normal */
@@ -43,11 +43,13 @@ class Progress extends Component<ProgressProps, ProgressState> {
   }
 
   renderProgress = ({ getPrefixCls }: ConfigConsumerProps) => {
-    const { prefixCls, status, size } = this.props;
+    const {
+      prefixCls, status, size, className, ...rest
+    } = this.props;
     const { percent } = this.state;
     const _status = percent === 100 ? 'success' : status;
     const prefix = getPrefixCls('progress', prefixCls);
-    const mainClass = classNames(prefix, {
+    const mainClass = classNames(prefix, className, {
       [`${prefix}-status-${_status}`]: _status,
     });
     const textMapping = {
@@ -57,7 +59,7 @@ class Progress extends Component<ProgressProps, ProgressState> {
     };
 
     return (
-      <div className={mainClass}>
+      <div {...rest} className={mainClass}>
         <div className={`${prefix}-outer`}>
           <div className={`${prefix}-inner`}>
             <div className={`${prefix}-bg`} style={{ width: `${percent}%`, height: size === 'small' ? 6 : 8 }} />

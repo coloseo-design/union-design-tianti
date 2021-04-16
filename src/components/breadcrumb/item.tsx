@@ -3,11 +3,9 @@ import classNames from 'classnames';
 import { Link } from 'react-router-dom';
 import { ConfigConsumer, ConfigConsumerProps } from '../config-provider';
 
-export interface ItemProps {
+export interface ItemProps extends React.HTMLAttributes<HTMLSpanElement> {
   /* 用户自定义类前缀，默认uni-breadcrumb-item */
   prefixCls?: string;
-  /* 自定义类名 */
-  className?: string;
   /* 链接的目的地 */
   href?: string;
   /* 单击事件 */
@@ -17,16 +15,12 @@ export interface ItemProps {
 }
 
 class Item extends Component<ItemProps> {
-  static defaultProps: ItemProps = {
-    className: '',
-  };
-
   renderItem = ({ getPrefixCls }: ConfigConsumerProps) => {
     const {
-      prefixCls, children, className, separator, href, onClick,
+      prefixCls, children, className, separator, href, onClick, ...rest
     } = this.props;
     const prefix = getPrefixCls('breadcrumb-item', prefixCls);
-    const mainClass = classNames(prefix, {
+    const mainClass = classNames(prefix, className, {
       // [`${prefix}-has-sider`]: siders.length > 0,
     });
 
@@ -37,7 +31,7 @@ class Item extends Component<ItemProps> {
     };
 
     return (
-      <span className={`${mainClass} ${className}`}>
+      <span {...rest} className={mainClass}>
         <span className={`${prefix}-link`} onClick={onclick}>
           {href ? <Link to={href}>{children}</Link> : children}
         </span>

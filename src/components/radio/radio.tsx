@@ -6,7 +6,7 @@ import classNames from 'classnames';
 import { ConfigConsumer, ConfigConsumerProps } from '../config-provider';
 import Group from './group';
 
-export interface RadioProps {
+export interface RadioProps extends React.HTMLAttributes<HTMLInputElement> {
   // 指定当前是否选中
   checked?: boolean;
   // 初始是否选中
@@ -19,7 +19,6 @@ export interface RadioProps {
   prefixCls?: string;
   // 变化时的回调
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
-  style?: {[key: string] : unknown};
   // RadioGroup 下所有 input[type="radio"] 的 name 属性
   name?: string;
   forwardedRef?: React.MutableRefObject<HTMLInputElement>;
@@ -56,11 +55,11 @@ class Radio extends Component<RadioProps, RadioState> {
 
   renderRadio = ({ getPrefixCls }: ConfigConsumerProps) => {
     const {
-      forwardedRef, onChange, prefixCls, children, disabled, style, name = 'radio', defaultChecked, ...rest
+      forwardedRef, onChange, prefixCls, children, disabled, style, name = 'radio', defaultChecked, className, ...rest
     } = this.props;
     const { checked } = this.state;
     const prefix = getPrefixCls('radio', prefixCls);
-    const mainClass = classNames(prefix, {
+    const mainClass = classNames(prefix, className, {
       [`${prefix}-checked`]: checked,
     });
 

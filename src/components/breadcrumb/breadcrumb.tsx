@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import { ConfigConsumer, ConfigConsumerProps } from '../config-provider';
 import Item from './item';
 
-export interface BreadcrumbProps {
+export interface BreadcrumbProps extends React.HTMLAttributes<HTMLDivElement> {
   /* 用户自定义类前缀，默认uni-breadcrumb */
   prefixCls?: string;
   /* 分隔符自定义 */
@@ -18,9 +18,11 @@ class Breadcrumb extends Component<BreadcrumbProps> {
   static Item: typeof Item;
 
   renderBreadcrumb = ({ getPrefixCls }: ConfigConsumerProps) => {
-    const { prefixCls, children, separator } = this.props;
+    const {
+      prefixCls, children, separator, className, ...rest
+    } = this.props;
     const prefix = getPrefixCls('breadcrumb', prefixCls);
-    const mainClass = classNames(prefix, {
+    const mainClass = classNames(prefix, className, {
       // [`${prefix}-has-sider`]: siders.length > 0,
     });
 
@@ -31,7 +33,7 @@ class Breadcrumb extends Component<BreadcrumbProps> {
     }
 
     return (
-      <div className={mainClass}>
+      <div {...rest} className={mainClass}>
         {toArrayChildren}
       </div>
     );

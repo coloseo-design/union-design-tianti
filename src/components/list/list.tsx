@@ -7,7 +7,7 @@ function arraysAreEqual(arr1: unknown[] = [], arr2: unknown[] = []) {
   return arr1.length === arr2.length && arr1.every((item, index) => item === arr2[index]);
 }
 
-export interface ListProps {
+export interface ListProps extends React.HTMLAttributes<HTMLDivElement> {
   /** 列表数据源 */
   dataSource?: unknown[];
   /** 当使用 dataSource 时，可以用 renderItem 自定义渲染列表项 */
@@ -46,7 +46,7 @@ class List extends Component<ListProps, ListState> {
 
   renderList = ({ getPrefixCls }: ConfigConsumerProps) => {
     const {
-      prefixCls, children, renderItem, dataSource,
+      prefixCls, children, renderItem, dataSource, className, ...rest
     } = this.props;
 
     let refactorChildren = children;
@@ -55,13 +55,13 @@ class List extends Component<ListProps, ListState> {
     }
 
     const prefix = getPrefixCls('list', prefixCls);
-    const mainClass = classNames(prefix, {
+    const mainClass = classNames(prefix, className, {
       // [`${prefix}-checked`]: checked,
     });
 
     return (
-      <div className={mainClass}>
-        <ul className={`${mainClass}-items`}>
+      <div {...rest} className={mainClass}>
+        <ul className={`${prefix}-items`}>
           {refactorChildren}
         </ul>
       </div>

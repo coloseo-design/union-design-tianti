@@ -16,7 +16,7 @@ const InputTypes = tuple('button', 'checkbox', 'color', 'date', 'datetime-local'
 
 export type InputType = (typeof InputTypes)[number];
 
-export interface BaseInputProps {
+export interface BaseInputProps extends React.HTMLAttributes<HTMLInputElement> {
   type?: InputType;
   /* 用户自定义类前缀，默认uni-input */
   prefixCls?: string;
