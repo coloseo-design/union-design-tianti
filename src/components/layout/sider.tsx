@@ -4,11 +4,9 @@ import classNames from 'classnames';
 import { ConfigConsumer, ConfigConsumerProps } from '../config-provider';
 import { MenuTheme, MENU_TAG_MENU } from '../menu/menu';
 
-export type SiderProps = {
+export interface SiderProps extends React.HTMLAttributes<HTMLElement> {
   /* 用户自定义类前缀，默认uni-layout */
   prefixCls?: string;
-  /* 容器 className */
-  className?: string;
   /* 当前收起状态 */
   collapsed?: boolean;
   /* 收缩宽度 */
@@ -23,9 +21,6 @@ export type SiderProps = {
   width?: number;
   /* 展开-收起时的回调函数 */
   onCollapse?: (collapsed: boolean) => void;
-  /* 指定样式 */
-  style?: CSSProperties;
-  // children?: any;
 }
 
 export type SiderState = {
@@ -37,7 +32,6 @@ class Sider extends Component<SiderProps, SiderState> {
     collapsedWidth: 80,
     theme: 'dark',
     width: 200,
-    className: '',
   };
 
   constructor(props: SiderProps) {
@@ -49,13 +43,13 @@ class Sider extends Component<SiderProps, SiderState> {
 
   renderSider = ({ getPrefixCls }: ConfigConsumerProps) => {
     const {
-      prefixCls, className, children, style, width, collapsedWidth, theme, collapsible,
+      prefixCls, className, children, style, width, collapsedWidth, theme, collapsible, ...rest
     } = this.props;
 
     const { collapsed } = this.state;
 
     const prefix = getPrefixCls('layout-sider', prefixCls);
-    const mainClass = classNames(prefix, {
+    const mainClass = classNames(prefix, className, {
       [`${prefix}-${theme}`]: theme,
       [`${prefix}-collapsible`]: collapsible,
     });
@@ -69,7 +63,7 @@ class Sider extends Component<SiderProps, SiderState> {
     };
 
     return (
-      <aside className={`${className} ${mainClass}`} style={newStyle}>
+      <aside {...rest} className={mainClass} style={newStyle}>
         {React.Children.map(children, (child) => {
           const type = (child as ReactElement)?.type ?? {};
           const tag = (type as unknown as { [key: string]: unknown }).tag as string;

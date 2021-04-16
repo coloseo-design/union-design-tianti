@@ -1,4 +1,4 @@
-import React, { Component, CSSProperties, ReactNode } from 'react';
+import React, { Component } from 'react';
 import classNames from 'classnames';
 import { ConfigConsumer, ConfigConsumerProps } from '../config-provider';
 import Header from './header';
@@ -6,13 +6,9 @@ import Content from './content';
 import Footer from './footer';
 import Sider from './sider';
 
-export interface LayoutProps {
+export interface LayoutProps extends React.HTMLAttributes<HTMLElement> {
   /* 用户自定义类前缀，默认uni-layout */
   prefixCls?: string;
-  /* 容器 className */
-  className?: string;
-  /* 指定样式 */
-  style?: CSSProperties;
 }
 
 interface LayoutState {
@@ -31,10 +27,6 @@ const judeSider = (children: unknown) => {
 };
 
 class Layout extends Component<LayoutProps, LayoutState> {
-  static defaultProps: LayoutProps = {
-    className: '',
-  };
-
   static Header: typeof Header;
 
   static Content: typeof Content;
@@ -58,17 +50,17 @@ class Layout extends Component<LayoutProps, LayoutState> {
 
   renderLayout = ({ getPrefixCls }: ConfigConsumerProps) => {
     const {
-      prefixCls, className, children, style,
+      prefixCls, className, children, ...rest
     } = this.props;
     const { hasSider } = this.state;
     // eslint-disable-next-line max-len
     const prefix = getPrefixCls('layout', prefixCls);
-    const mainClass = classNames(prefix, {
+    const mainClass = classNames(prefix, className, {
       [`${prefix}-has-sider`]: hasSider,
     });
 
     return (
-      <section className={`${className} ${mainClass}`} style={style}>
+      <section {...rest} className={mainClass}>
         {children}
       </section>
     );

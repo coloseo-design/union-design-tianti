@@ -9,7 +9,7 @@ import { ConfigConsumer, ConfigConsumerProps } from '../config-provider';
 import Icon from '../icon';
 import { context } from './previewGroup';
 
-export interface PreviewProps {
+export interface PreviewProps extends React.HTMLAttributes<HTMLDivElement> {
   onVisibleChange?: (visible: unknown, prevVisible: unknown) => void;
   getContainer?: string | HTMLElement | (() => HTMLElement); // V4.8.0
   src?: string; // V4.10.0
@@ -126,7 +126,7 @@ class PreView extends Component<PreviewProps, PreviewState> {
   }
 
   renderImage = ({ getPrefixCls }: ConfigConsumerProps) => {
-    const { prefixCls, previewUrls } = this.props;
+    const { prefixCls, previewUrls, className } = this.props;
 
     const {
       scaleX, disabled, angle, src, current, position, originPositionRef,
@@ -135,7 +135,7 @@ class PreView extends Component<PreviewProps, PreviewState> {
     const { isPreviewGroup } = this.context;
 
     const prefix = getPrefixCls('image', prefixCls);
-    const mainClass = classNames(prefix, {
+    const mainClass = classNames(prefix, className, {
       // [`${prefix}-error`]: error,
     });
     const previewOperationsPrefix = getPrefixCls('image-preview-operations-operation', prefixCls);
@@ -224,12 +224,12 @@ class PreView extends Component<PreviewProps, PreviewState> {
     };
 
     return (
-      <div className={`${mainClass}-preview`}>
-        <div className={`${mainClass}-preview-content`}>
-          <div className={`${mainClass}-preview-body`}>
-            <div className={`${mainClass}-preview-img-wrapper`} style={{ transform: `translate3d(${position.x}px, ${position.y}px, 0px)` }}>
+      <div className={`${prefix}-preview`}>
+        <div className={`${prefix}-preview-content`}>
+          <div className={`${prefix}-preview-body`}>
+            <div className={`${prefix}-preview-img-wrapper`} style={{ transform: `translate3d(${position.x}px, ${position.y}px, 0px)` }}>
               <img
-                className={`${mainClass}-preview-img`}
+                className={`${prefix}-preview-img`}
                 src={src}
                 style={{
                   transform: `scale3d(${scaleX}, ${scaleX}, 1) rotate(${angle}deg)`,

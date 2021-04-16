@@ -9,7 +9,7 @@ import classNames from 'classnames';
 import { ConfigConsumer, ConfigConsumerProps } from '../config-provider';
 import Icon from '../icon/index';
 
-export interface RateProps {
+export interface RateProps extends React.HTMLAttributes<HTMLDivElement> {
   // 是否允许半选
   allowHalf?: boolean;
   // star 总数
@@ -63,12 +63,12 @@ class Rate extends Component<RateProps, RateState> {
 
   renderRate = ({ getPrefixCls }: ConfigConsumerProps) => {
     const {
-      forwardedRef, onChange, prefixCls, allowHalf,
+      forwardedRef, onChange, prefixCls, allowHalf, className, ...rest
     } = this.props;
     const { value, arr } = this.state;
 
     const prefix = getPrefixCls('rate', prefixCls);
-    const mainClass = classNames(prefix, {
+    const mainClass = classNames(prefix, className, {
       // [`${prefix}-allowHalf`]: allowHalf,
     });
     const handleClick = (index: number) => {
@@ -82,7 +82,7 @@ class Rate extends Component<RateProps, RateState> {
 
     if (allowHalf) {
       return (
-        <div className={mainClass} ref={forwardedRef}>
+        <div {...rest} className={mainClass} ref={forwardedRef}>
           {(arr || []).map((item, index) => (
             <div
               className="allowHalf"
@@ -109,7 +109,7 @@ class Rate extends Component<RateProps, RateState> {
     }
 
     return (
-      <div className={mainClass} ref={forwardedRef}>
+      <div {...rest} className={mainClass} ref={forwardedRef}>
         {(arr || []).map((item, index) => (
           <div role="radio" aria-name="rate" aria-checked={item >= value} key={item} onClick={handleClick.bind(null, index)}>
             <Icon type="favorite" />

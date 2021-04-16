@@ -7,7 +7,7 @@ import { ConfigConsumer, ConfigConsumerProps } from '../config-provider';
 import PreviewGroup, { context } from './previewGroup';
 import PreView from './preview';
 
-export interface ImageProps {
+export interface ImageProps extends React.HTMLAttributes<HTMLDivElement> {
   /** 图像描述 */
   alt?: string;
   /** 加载失败容错地址 */
@@ -25,6 +25,7 @@ export interface ImageProps {
   /* 用户自定义类前缀，默认uni-image */
   prefixCls?: string;
   current?: number;
+  style?: CSSProperties;
 }
 
 export interface ImageState {
@@ -45,7 +46,7 @@ class Images extends Component<ImageProps, ImageState> {
     preview: false,
     clientX: 0,
     clientY: 0,
-    style: { display: 'none' },
+    // style: { display: 'none' },
     error: false,
     current: 0,
   };
@@ -97,7 +98,7 @@ class Images extends Component<ImageProps, ImageState> {
 
   renderImage = ({ getPrefixCls }: ConfigConsumerProps) => {
     const {
-      prefixCls, src, alt, width, height, fallback = '', current, placeholder, onError,
+      prefixCls, src, alt, width, height, fallback = '', current, placeholder, onError, className, style: mainStyle,
     } = this.props;
     const {
       preview, clientX, clientY, style, error, status,
@@ -105,7 +106,7 @@ class Images extends Component<ImageProps, ImageState> {
 
     const { previewUrls } = this.context;
     const prefix = getPrefixCls('image', prefixCls);
-    const mainClass = classNames(prefix, {
+    const mainClass = classNames(prefix, className, {
       [`${prefix}-error`]: error,
     });
 
@@ -149,7 +150,7 @@ class Images extends Component<ImageProps, ImageState> {
     };
 
     return (
-      <div className={mainClass} style={{ width, height }}>
+      <div className={mainClass} style={{ ...mainStyle, width, height }}>
         {
           (error && !fallback)
             ? (
@@ -177,7 +178,7 @@ class Images extends Component<ImageProps, ImageState> {
             )
             : (
               <img
-                className={`${mainClass}-img`}
+                className={`${prefix}-img`}
                 src={error ? fallback : src}
                 alt={alt}
                 onClick={handlePreview}
@@ -188,7 +189,7 @@ class Images extends Component<ImageProps, ImageState> {
         }
 
         {status === 'loading' && (
-          <div className={`${mainClass}-placeholder`}>
+          <div className={`${prefix}-placeholder`}>
             {placeholder}
           </div>
         )}

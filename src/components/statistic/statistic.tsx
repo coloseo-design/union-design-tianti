@@ -6,7 +6,7 @@ function retain(num: number, d: number) {
   return (parseInt(`${num * 100}`, 10) / 100).toFixed(d);
 }
 
-export interface StatisticProps {
+export interface StatisticProps extends React.HTMLAttributes<HTMLDivElement> {
   /* 用户自定义类前缀，默认uni-statistic */
   prefixCls?: string;
   /* 自定义数值展示 */
@@ -14,7 +14,7 @@ export interface StatisticProps {
   /* 数值精度 */
   precision?: number;
   /* 设置数值的前缀 */
-  prefix?: ReactNode;
+  prefix?: ReactNode | undefined;
   /* 设置数值的后缀 */
   suffix?: ReactNode;
   /* 数值的标题 */
@@ -49,7 +49,7 @@ class Statistic extends Component<StatisticProps, StatisticState> {
 
   renderStatistic = ({ getPrefixCls }: ConfigConsumerProps) => {
     const {
-      prefixCls, title, prefix, suffix, valueStyle, precision = 0, formatter,
+      prefixCls, title, prefix, suffix, valueStyle, precision = 0, formatter, className, ...rest
     } = this.props;
     const { value = 0 } = this.state;
     let newValue = value;
@@ -57,12 +57,12 @@ class Statistic extends Component<StatisticProps, StatisticState> {
       newValue = retain(newValue, precision).toLocaleString();
     }
     const classPrefix = getPrefixCls('statistic', prefixCls);
-    const mainClass = classNames(classPrefix, {
+    const mainClass = classNames(classPrefix, className, {
       // [`${prefix}-has-sider`]: siders.length > 0,
     });
 
     return (
-      <div className={mainClass}>
+      <div {...rest} className={mainClass}>
         <div className={`${classPrefix}-title`}>{title}</div>
         <div className={`${classPrefix}-content`} style={valueStyle}>
           {prefix && <span className={`${classPrefix}-content-prefix`}>{prefix}</span>}
