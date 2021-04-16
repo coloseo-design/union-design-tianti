@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import Icon from '../icon/index';
 import { ConfigConsumer, ConfigConsumerProps } from '../config-provider';
 
-export interface SpinProps {
+export interface SpinProps extends React.HTMLAttributes<HTMLDivElement> {
   /* 用户自定义类前缀，默认uni-input */
   prefixCls?: string;
   /* 是否为加载中状态 */
@@ -37,16 +37,14 @@ class Spin extends Component<SpinProps, SpinState> {
   }
 
   renderSpin = ({ getPrefixCls }: ConfigConsumerProps) => {
-    const { prefixCls } = this.props;
+    const {
+      prefixCls, style, className, ...rest
+    } = this.props;
     const { spinning } = this.state;
-
-    const prefix = getPrefixCls('rate', prefixCls);
-    const mainClass = classNames(prefix, {
-      // [`${prefix}-allowHalf`]: allowHalf,
-    });
-
+    const prefix = getPrefixCls('spain', prefixCls);
+    const mainClass = classNames(prefix, className);
     return (
-      <div className={mainClass} style={{ display: spinning ? 'inline-block' : 'none' }}>
+      <div {...rest} className={mainClass} style={{ ...style, display: spinning ? 'inline-block' : 'none' }}>
         <Icon type="loading" />
       </div>
     );

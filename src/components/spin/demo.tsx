@@ -3,7 +3,12 @@ import Spin from './index';
 
 const SpinDemo = () => (
   <div>
-    <Spin />
+    <Spin
+      className="my-spin"
+      style={{
+        padding: 20,
+      }}
+    />
   </div>
 );
 export default SpinDemo;
