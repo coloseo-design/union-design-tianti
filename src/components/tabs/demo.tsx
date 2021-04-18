@@ -1,34 +1,64 @@
+/* eslint-disable react/jsx-one-expression-per-line */
 import React from 'react';
 import Tabs from './index';
 import Icon from '../icon';
 
-const TabsDemo = () => {
-  const titles = [{ key: '1', text: '页签' }, { key: '2', text: '四字页签' }, { key: '3', text: '五个字页签' },
-    {
-      key: '4',
-      text:
-  <span>
-    <Icon type="apps" />
-    带icon页签
-  </span>,
-    }];
+const { Pane } = Tabs;
 
-  return (
-    <>
-      <div style={{ margin: 50 }}>
-        <p>type=&lsquo;line&rsquo;示例</p>
-        <Tabs titles={titles} defaultKey="2" type="line" />
-      </div>
-      <div style={{ margin: 50 }}>
-        <p>type=&lsquo;line&rsquo;示例</p>
-        <Tabs titles={titles} defaultKey="2" type="card" />
-      </div>
-      <div style={{ margin: 50 }}>
-        <p>type=&lsquo;page&rsquo;示例</p>
-        <Tabs titles={titles} defaultKey="2" type="page" />
-      </div>
-    </>
-  );
-};
+const TabsDemo = () => (
+  <>
+    <div style={{ margin: 20 }}>
+      <p>type=&lsquo;line&rsquo;示例</p>
+      <Tabs defaultActiveKey="3" type="line">
+        <Pane key="1" tab="页签">
+          <div style={{ background: 'red' }}>a</div>
+        </Pane>
+        <Pane key="2" tab="四字页签">
+          <div style={{ background: 'blue' }}>b</div>
+        </Pane>
+        <Pane tab="五个字页签" key="3">
+          <div style={{ background: 'green' }}>c</div>
+        </Pane>
+        <Pane key="4" tab={<span><Icon type="apps" />带icon页签</span>}>
+          <div style={{ background: 'purple' }}>d</div>
+        </Pane>
+      </Tabs>
+    </div>
+    <div style={{ margin: 20 }}>
+      <p>type=&lsquo;line&rsquo;示例</p>
+      <Tabs defaultActiveKey="2" type="card">
+        <Pane key="1" tab="页签">
+          <div style={{ background: 'red' }}>a</div>
+        </Pane>
+        <Pane key="2" tab="四字页签">
+          <div style={{ background: 'blue' }}>b</div>
+        </Pane>
+        <Pane tab="五个字页签" key="3">
+          <div style={{ background: 'green' }}>c</div>
+        </Pane>
+        <Pane key="4" tab={<span><Icon type="apps" />带icon页签</span>}>
+          <div style={{ background: 'purple' }}>d</div>
+        </Pane>
+      </Tabs>
+    </div>
+    <div style={{ margin: 20 }}>
+      <p>type=&lsquo;page&rsquo;示例</p>
+      <Tabs defaultActiveKey="3" type="page">
+        <Pane key="1" tab="页签">
+          <div style={{ background: 'red' }}>a</div>
+        </Pane>
+        <Pane key="2" tab="四字页签">
+          <div style={{ background: 'blue' }}>b</div>
+        </Pane>
+        <Pane tab="五个字页签" key="3">
+          <div style={{ background: 'green' }}>c</div>
+        </Pane>
+        <Pane key="4" tab={<span><Icon type="apps" />带icon页签</span>}>
+          <div style={{ background: 'purple' }}>d</div>
+        </Pane>
+      </Tabs>
+    </div>
+  </>
+);
 
 export default TabsDemo;

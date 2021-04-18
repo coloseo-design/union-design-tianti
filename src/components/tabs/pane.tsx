@@ -1,0 +1,33 @@
+import classNames from 'classnames';
+import React from 'react';
+import { ConfigConsumer, ConfigConsumerProps } from '../config-provider';
+
+export interface TabPaneBase extends React.HTMLAttributes<HTMLDivElement> {
+  prefixCls?: string;
+  tab: React.ReactNode;
+  key: string;
+}
+
+export default class Pane extends React.Component<TabPaneBase> {
+  renderPane = ({ getPrefixCls }: ConfigConsumerProps) => {
+    const { children } = this.props;
+    let { prefixCls } = this.props;
+    prefixCls = getPrefixCls('tabpane', prefixCls);
+    const paneClassName = classNames(prefixCls);
+    return (
+      <div className={paneClassName}>
+        {children}
+      </div>
+    );
+  }
+
+  render() {
+    return (
+      <ConfigConsumer>
+        {
+          (contextProps: ConfigConsumerProps) => this.renderPane(contextProps)
+        }
+      </ConfigConsumer>
+    );
+  }
+}
