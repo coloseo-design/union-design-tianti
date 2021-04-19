@@ -49,6 +49,10 @@ export type MenuProps = BasePropsV2<{
   inlineCollapsed: boolean;
   /** inline 时是否展示收起菜单图标 */
   inlineCollapsedIcon: boolean;
+  /** subMenu 最大高度 */
+  subMenuMaxHeight: number;
+  /** popupMenu 最大高度 */
+  popupMenuMaxHeight: number;
   /** 点击 Menu.Item 调用此函数 */
   onClick: (key: string, keyPath: string[]) => void;
   /** 被选中时调用 */
@@ -69,7 +73,6 @@ export type MenuState = BaseStateV2<{
   selectedKeys: string[];
   selectedKeyPaths: { [key: string]: string[] };
   menuPopups: [key: string, view: ReactNode][];
-  inlineCollapsedMaxHeight: number;
   handleLevelLeft: (level: number) => number;
   handleSubMenuOnClick: (key: string) => void;
   handleItemOnClick: (key: string, keyPath: string[]) => void;
@@ -123,11 +126,18 @@ export default class Menu extends MenuBase<MenuProps, MenuState> {
     if (preProps.inlineCollapsed !== this.props.inlineCollapsed) {
       this.setState({ inlineCollapsed: this.props.inlineCollapsed ?? false });
     }
+
+    if (this.props.inlineCollapsed) {
+      this.menuMaxWidth = this.menuRef.current?.offsetWidth;
+    }
   };
 
   public componentDidMount = () => {
     document.body.addEventListener('mouseover', this.bodyOnMouseOver);
     document.body.addEventListener('click', this.bodyOnClick);
+    if (this.props.inlineCollapsed) {
+      this.menuMaxWidth = this.menuRef.current?.offsetWidth;
+    }
   };
 
   public componentWillUnmount = () => {
@@ -187,7 +197,6 @@ export default class Menu extends MenuBase<MenuProps, MenuState> {
   private initState = () => {
     const { defaultSelectedKeys, defaultOpenKeys, inlineCollapsed } = this.props;
     this.state = {
-      inlineCollapsedMaxHeight: 360,
       inlineCollapsed: inlineCollapsed ?? false,
       selectedKeys: defaultSelectedKeys ?? [],
       selectedKeyPaths: {},
@@ -214,10 +223,6 @@ export default class Menu extends MenuBase<MenuProps, MenuState> {
     const { inlineCollapsed, menuPopups } = this.state;
 
     inlineCollapsedIcon = mode !== 'horizontal' && inlineCollapsedIcon;
-
-    if (inlineCollapsed) {
-      this.menuMaxWidth = this.menuRef.current?.offsetWidth;
-    }
 
     const newStyle = {
       width: '100%',

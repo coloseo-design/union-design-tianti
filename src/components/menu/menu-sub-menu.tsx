@@ -135,7 +135,7 @@ export class SubMenu extends MenuBase<SubMenuProps> {
     private childrenContainerStyle = () => {
       const { _level, _key } = this.props;
       const {
-        mode, inlineCollapsed, inlineCollapsedMaxHeight, openKeys,
+        mode, inlineCollapsed, subMenuMaxHeight, openKeys,
       } = this.menuCtx;
 
       if (_level === 0 && mode === 'horizontal') {
@@ -147,7 +147,7 @@ export class SubMenu extends MenuBase<SubMenuProps> {
       if (mode === 'vertical' || mode === 'horizontal') maxHeight = 0;
       else if (inlineCollapsed) maxHeight = 0;
       else if (openKeys?.includes(_key!)) {
-        maxHeight = inlineCollapsedMaxHeight;
+        maxHeight = subMenuMaxHeight ?? 1000;
         overflow = 'auto';
       } else maxHeight = 0;
 
