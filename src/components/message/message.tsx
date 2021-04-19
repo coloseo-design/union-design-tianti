@@ -65,13 +65,14 @@ export default class Message extends BaseComponent<MessageProps> {
 
     public static loading = (content:ReactNode, key?:string, onClose?: ()=>void) => Message.open({
       key,
-      icon: 'loading_circle',
+      icon: 'loading-circle',
       content,
       duration: 0,
       onClose,
     }, 'loading');
 
     public static open = (config: MessageConfig, type?: MessageType) => {
+      console.log('config', config);
       if (config.duration === undefined) delete config.duration;
       if (config.onClose === undefined) delete config.onClose;
 
@@ -159,7 +160,7 @@ export default class Message extends BaseComponent<MessageProps> {
               className={`icon ${(type === 'info' && icon === 'exclamation-circle') ? 'icon-rotate' : ''}`}
               style={{ color: this.handleColor() }}
             >
-              <Icon type={icon} />
+              <Icon type={icon} {...(icon === 'loading-circle') ? { spin: true } : {}} />
             </div>
             <div className="content">
               {content}
