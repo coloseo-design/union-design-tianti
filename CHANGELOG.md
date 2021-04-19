@@ -1,3 +1,12 @@
+## [0.0.5](http://10.124.128.2:8888/muses/union-design/compare/v0.0.4...v0.0.5) (2021-04-19)
+
+
+### Bug Fixes
+
+* 🐛 修复message.loading的错误 ([47674aa](http://10.124.128.2:8888/muses/union-design/commits/47674aa834052d18e8d540c6cba8e889cbd62672))
+
+
+
 ## [0.0.4](http://10.124.128.2:8888/muses/union-design/compare/v0.1.1...v0.0.4) (2021-04-18)
 
 
