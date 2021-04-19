@@ -15,8 +15,8 @@ class Header extends Component<HeaderProps> {
       prefixCls, children, style, className, ...rest
     } = this.props;
 
-    const prefix = getPrefixCls('layout-header', className, prefixCls);
-    const mainClass = classNames(prefix, {
+    const prefix = getPrefixCls('layout-header', prefixCls);
+    const mainClass = classNames(prefix, className, {
       // [`${prefix}-bordered`]: bordered,
     });
 
