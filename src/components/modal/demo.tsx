@@ -61,6 +61,12 @@ const ModalDemo: React.FC<unknown> = () => {
       content: `一系列的信息描述，可能会很长。也可以是很短同样也可以带标点
       一系列的信息描述，可能会很长。也可以是很短同样也可以带标点。
       一系列的信息描述，可能会很长。也可以是很短同样也可以带标点。`,
+      onOk: () => {
+        console.log('--ok');
+      },
+      onCancel: () => {
+        console.log('--cancel');
+      },
     });
   };
 

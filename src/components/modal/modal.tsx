@@ -108,10 +108,11 @@ class Modal extends React.Component<ModalProps, ModalState, ModalMethodProps> {
 
   handleCancel = (e: React.MouseEvent<HTMLElement>) => {
     const { onCancel, methodType } = this.props;
-    if (onCancel && !methodType) {
+    if (!methodType) {
       onCancel && onCancel(e);
     } else {
       this.setState({ modalTransition: true });
+      onCancel && onCancel(e);
       setTimeout(() => {
         this.setState({ modalTransition: false, visible: false });
       }, 300);
@@ -121,10 +122,11 @@ class Modal extends React.Component<ModalProps, ModalState, ModalMethodProps> {
   handleMask = (e: React.MouseEvent<HTMLElement>) => {
     const { maskClosable = true, onCancel, methodType } = this.props;
     if (maskClosable) {
-      if (onCancel && !methodType) {
-        onCancel(e);
+      if (!methodType) {
+        onCancel && onCancel(e);
       } else {
         this.setState({ modalTransition: true });
+        onCancel && onCancel(e);
         setTimeout(() => {
           this.setState({ modalTransition: false, visible: false });
         }, 300);
@@ -134,10 +136,11 @@ class Modal extends React.Component<ModalProps, ModalState, ModalMethodProps> {
 
   handleOk = (e: React.MouseEvent<HTMLElement>) => {
     const { onOk, methodType } = this.props;
-    if (onOk && !methodType) {
+    if (!methodType) {
       onOk && onOk(e);
     } else {
       this.setState({ modalTransition: true });
+      onOk && onOk(e);
       setTimeout(() => {
         this.setState({ modalTransition: false, visible: false });
       }, 300);

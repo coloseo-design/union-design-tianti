@@ -29,9 +29,9 @@ export { default as Checkbox } from './checkbox/checkbox';
 /* eslint-disable */
 export { default as Collapse } from './collapse/collapse';
 /* eslint-disable */
-export { default as Descriptions } from './descriptions/descriptions';
-/* eslint-disable */
 export { default as DatePicker } from './date-picker/date-picker';
+/* eslint-disable */
+export { default as Descriptions } from './descriptions/descriptions';
 /* eslint-disable */
 export { default as Divider } from './divider/divider';
 /* eslint-disable */
