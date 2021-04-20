@@ -1,3 +1,15 @@
+## [0.0.6](http://10.124.128.2:8888/muses/union-design/compare/v0.0.4...v0.0.6) (2021-04-20)
+
+
+### Bug Fixes
+
+* 🐛 修复message.loading的错误 ([47674aa](http://10.124.128.2:8888/muses/union-design/commits/47674aa834052d18e8d540c6cba8e889cbd62672))
+* 🐛 layout的header加上className ([345d447](http://10.124.128.2:8888/muses/union-design/commits/345d447e655e64d6f8588978a542c78944db7e4e))
+* 🐛 modal fix bug ([0193957](http://10.124.128.2:8888/muses/union-design/commits/01939571918909e9e212bda6e9a0ef03c8a502ab))
+* 🐛 style ([c6f9248](http://10.124.128.2:8888/muses/union-design/commits/c6f924882a074f4966384c890a365217dbb06da1))
+
+
+
 ## [0.0.5](http://10.124.128.2:8888/muses/union-design/compare/v0.0.4...v0.0.5) (2021-04-19)
 
 
