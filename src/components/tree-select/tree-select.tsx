@@ -320,6 +320,7 @@ class TreeSelect extends React.Component<TreeSelectProps, TreeSelectStates> {
         {data.map((item: TreeSelectData) => (
           <div key={item.value}>
             <TreeNode
+              {...item}
               title={item.title}
               value={item.value}
               current={item.value}

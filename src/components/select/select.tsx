@@ -68,6 +68,7 @@ export interface SelectState extends CommonParams {
   left: number,
   top: number,
   width: number | string,
+  firstRender?: boolean;
 }
 
 class Select extends React.Component<SelectProps, SelectState> {
@@ -95,10 +96,7 @@ class Select extends React.Component<SelectProps, SelectState> {
       placeholder,
       noContent,
       dropdownMatchSelectWidth,
-      defaultValue,
     } = props;
-    const childrenProps = React.Children.toArray(children);
-    const currentLabel: ReactElement<OptionProps> | undefined = childrenProps.find((i: ReactElement<OptionProps>) => i.props.value === defaultValue) as ReactElement<OptionProps> | undefined;
     const stateObj = {
       placeholder,
       noContent,
@@ -110,16 +108,59 @@ class Select extends React.Component<SelectProps, SelectState> {
       left: 0,
       top: 0,
       width: 0,
+      firstRender: false,
     };
-    if (currentLabel) {
-      Object.assign(stateObj, {
-        renderObj: {
-          value: defaultValue,
-          label: currentLabel.props.children,
-        },
-      });
-    }
     this.state = stateObj;
+  }
+
+  static getDerivedStateFromProps(nextProps: SelectProps, nextState: SelectState) {
+    const {
+      children, value, defaultValue, type,
+    } = nextProps;
+    const childrenProps = React.Children.toArray(children);
+    const { firstRender } = nextState;
+    const m = type === 'multiple' || type === 'tags';
+    const t = type === 'default' || type === 'search';
+    if (childrenProps.length) {
+      if (!firstRender) { // 第一次children有值渲染的时候
+        const temp = {};
+        let currentLabel;
+        let selectOp;
+        if (m) {
+          if ((value && Object.prototype.toString.call(value) !== '[object Array]')
+          || (defaultValue && Object.prototype.toString.call(defaultValue) !== '[object Array]')) {
+            throw new Error('多选模式 或者标签选择器 value和defaultValue 类型应是 Array');
+          } else {
+            const mergeValue = [...(value || []), ...(defaultValue || [])];
+            const tempOp = (childrenProps || []).filter((i:any) => mergeValue.indexOf(i.props.value) >= 0);
+            selectOp = tempOp.map((i: any) => ({ value: i.props.value, label: i.props.children }));
+          }
+        } else if (t) {
+          if ((value && typeof value !== 'string')
+          || (defaultValue && typeof defaultValue !== 'string')) {
+            throw new Error('单选选模式value和defaultValue 类型应是 String');
+          } else {
+            currentLabel = (childrenProps || []).find((i: any) => i.props.value === value || i.props.value === defaultValue);
+          }
+        }
+        if (currentLabel) {
+          Object.assign(temp, {
+            value: defaultValue,
+            label: currentLabel.props.children,
+          });
+        }
+        return {
+          children,
+          renderObj: temp,
+          selectedOptions: selectOp || [],
+          firstRender: true,
+        };
+      }
+      return {
+        children,
+      };
+    }
+    return null;
   }
 
   componentDidMount() {
@@ -127,23 +168,24 @@ class Select extends React.Component<SelectProps, SelectState> {
   }
 
   componentDidUpdate(prevProps: SelectProps) {
-    const { children, remoteSearch, value } = this.props;
-    const _children: unknown = children;
-    if (remoteSearch && _children.length && prevProps.children !== _children) {
-      this.setState({
-        children,
-      });
-    }
-
+    const { children, value, type } = this.props;
     if (value !== prevProps.value) {
       const childrenProps = React.Children.toArray(children).map((i) => i.props);
       const currentLabel = (childrenProps || []).find((i) => i.value === value);
-      this.setState({
-        renderObj: {
-          value,
-          label: currentLabel ? currentLabel.children : '',
-        },
-      });
+      if (type === 'default' || type === 'search') {
+        this.setState({
+          renderObj: {
+            value,
+            label: currentLabel ? currentLabel.children : '',
+          },
+        });
+      }
+      if (type === 'multiple' || type === 'tags') {
+        const temp = childrenProps.filter((i: any) => (value || []).indexOf(i.value) >= 0);
+        this.setState({
+          selectedOptions: (temp || []).map((i: any) => ({ value: i.value, label: i.children })),
+        });
+      }
     }
   }
 
@@ -322,7 +364,9 @@ class Select extends React.Component<SelectProps, SelectState> {
 
     let num = 0;
     if (selectedOptions?.length && maxTagCount) {
-      num = selectedOptions.length - maxTagCount;
+      if (selectedOptions.length - maxTagCount > 0) {
+        num = selectedOptions.length - maxTagCount;
+      }
     }
 
     return (
@@ -359,6 +403,7 @@ class Select extends React.Component<SelectProps, SelectState> {
                                       overflow: 'hidden',
                                       textOverflow: 'ellipsis',
                                       wordBreak: 'break-all',
+                                      whiteSpace: 'nowrap',
                                     }}
                                   >
                                     {temp ? `${_label.substr(0, maxTagTextLength)}...` : _label}

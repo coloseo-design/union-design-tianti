@@ -15,7 +15,7 @@ dropdownMatchSelectWidth: boolean - 下拉框是否与展示框同宽
 
 defaultValue: string | string[] - 默认数据
 
-type: SelectType; // default - 基本选择器;search - 可搜索;group - 分组;multiple - 多选;tags - 标签选择器
+type: SelectType; // default - 基本选择器;search - 可搜索;multiple - 多选;tags - 标签选择器
 
 allowClear: boolean - 是否允许清除
 

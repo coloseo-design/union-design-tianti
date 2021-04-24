@@ -48,6 +48,7 @@ class TreeNode extends React.Component<TreeNodeProps> {
       isLeaf = false,
       isSelected,
       isChecked,
+      style,
     } = this.props;
     const { treeType, treeDisabled } = this.context;
     const tree = getPrefixCls(`${treeType}`, prefixCls);
@@ -62,6 +63,7 @@ class TreeNode extends React.Component<TreeNodeProps> {
           <div
             className={tree}
             onClick={(evt: React.MouseEvent<HTMLSpanElement, MouseEvent>) => evt.stopPropagation()}
+            style={style}
           >
             <div className={`${tree}-node`}>
               {prefixIcon && !isLeaf && (

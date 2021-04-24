@@ -17,6 +17,7 @@
   outline: none;
   touch-action: manipulation;
   height: 32px;
+  line-height: 1.499;
 }
 
 // menu style
@@ -111,7 +112,7 @@
     margin: 6px;
   }
   &-btn {
-    .btn(6px 12px, @border-radius-base 0 0 @border-radius-base,);
+    .btn(0px 12px, @border-radius-base 0 0 @border-radius-base,);
     border-right: none;
     font-weight: @btn-font-weight;
     border-color: @btn-default-border;
@@ -186,9 +187,8 @@
     }
   }
   &-btnIcon {
-    .btn(6px 8px, 0 @border-radius-base @border-radius-base 0);
+    .btn(0px 8px, 0 @border-radius-base @border-radius-base 0);
     font-weight: @btn-font-weight;
-    line-height: 1.5;
     border-color: @btn-default-border;
     &:hover {
       color: ~`colorPalette('@{btn-primary-bg}', 5) `;

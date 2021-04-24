@@ -102,4 +102,5 @@ export interface TreeNodeProps {
   expandKeys?: string[],
   currentNode?: any;
   isChecked?: boolean;
+  style?: React.CSSProperties;
 }

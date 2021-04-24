@@ -101,9 +101,9 @@ export { default as Tag } from './tag/tag';
 /* eslint-disable */
 export { default as Timeline } from './timeline/timeline';
 /* eslint-disable */
-export { default as Tooltip } from './tooltip/tooltip';
-/* eslint-disable */
 export { default as Transfer } from './transfer/transfer';
+/* eslint-disable */
+export { default as Tooltip } from './tooltip/tooltip';
 /* eslint-disable */
 export { default as Tree } from './tree/tree';
 /* eslint-disable */
