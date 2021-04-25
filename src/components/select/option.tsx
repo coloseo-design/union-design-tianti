@@ -39,6 +39,7 @@ class Option extends React.Component<OptionProps, OptionState> {
           <section
             onClick={(event) => {
               event.stopPropagation();
+              event.nativeEvent.stopImmediatePropagation();
               !disabled && !multiple && onSelect(value, children);
             }}
             className={sectionClass}

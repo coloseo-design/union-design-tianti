@@ -113,6 +113,7 @@ class Dropdown extends React.Component<DropdownProps, DropdownState> {
 
   compute = (evt: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
     evt.stopPropagation();
+    evt.nativeEvent.stopImmediatePropagation();
     const { visible } = this.state;
     const { visible: propsVisible } = this.props;
     const {

@@ -160,6 +160,7 @@ class TreeSelect extends React.Component<TreeSelectProps, TreeSelectStates> {
 
   handleClick = (evt: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
     evt.stopPropagation();
+    evt.nativeEvent.stopImmediatePropagation();
     const { border } = this.state;
     this.setState({ border: !border });
     this.getLocation();
@@ -167,6 +168,7 @@ class TreeSelect extends React.Component<TreeSelectProps, TreeSelectStates> {
 
   handleClose = (item: string) => (evt: React.MouseEvent) => {
     evt.stopPropagation();
+    evt.nativeEvent.stopImmediatePropagation();
     evt.preventDefault();
     const { onChange, treeCheckable, showCheckedStrategy = 'SHOW_CHILD' } = this.props;
     const {

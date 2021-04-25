@@ -221,6 +221,7 @@ class Select extends React.Component<SelectProps, SelectState> {
 
   onClick = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     event.stopPropagation();
+    event.nativeEvent.stopImmediatePropagation();
     const { showDropdown } = this.state;
     const _showDropdown = !showDropdown;
     this.setState({

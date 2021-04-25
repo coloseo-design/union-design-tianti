@@ -11,6 +11,7 @@ import { ConfigConsumer, ConfigConsumerProps } from '../config-provider';
 class TreeNode extends React.Component<TreeNodeProps> {
   handleExpand = (evt: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
     evt.stopPropagation();
+    evt.nativeEvent.stopImmediatePropagation();
     const { handleTreeExpand } = this.context;
     const { current, currentNode } = this.props;
     handleTreeExpand && handleTreeExpand(current, currentNode);
@@ -18,6 +19,7 @@ class TreeNode extends React.Component<TreeNodeProps> {
 
   handleSelect = (evt: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
     evt.stopPropagation();
+    evt.nativeEvent.stopImmediatePropagation();
     const { handleSelect } = this.context;
     const { current, disabled, currentNode } = this.props;
     if (!disabled) {
@@ -62,7 +64,7 @@ class TreeNode extends React.Component<TreeNodeProps> {
         {({ treeCheckable, expandKeys }) => (
           <div
             className={tree}
-            onClick={(evt: React.MouseEvent<HTMLSpanElement, MouseEvent>) => evt.stopPropagation()}
+            onClick={(evt: React.MouseEvent<HTMLSpanElement, MouseEvent>) => { evt.stopPropagation(); evt.nativeEvent.stopImmediatePropagation(); }}
             style={style}
           >
             <div className={`${tree}-node`}>
@@ -81,7 +83,7 @@ class TreeNode extends React.Component<TreeNodeProps> {
               treeCheckable && checkable && (
                 <span
                   className={`${tree}-node-checkbox`}
-                  onClick={(evt: React.MouseEvent<HTMLSpanElement, MouseEvent>) => evt.stopPropagation()}
+                  onClick={(evt: React.MouseEvent<HTMLSpanElement, MouseEvent>) => { evt.stopPropagation(); evt.nativeEvent.stopImmediatePropagation(); }}
                 >
                   <Checkbox
                     disabled={disableCheckbox || disabled || treeDisabled}
