@@ -1,3 +1,17 @@
+## [0.0.7](http://10.124.128.2:8888/muses/union-design/compare/v0.0.6...v0.0.7) (2021-04-25)
+
+
+### Bug Fixes
+
+* 🐛 select fix 其他样式修改 ([c42718b](http://10.124.128.2:8888/muses/union-design/commits/c42718b22c1f079618907c435c6c79b93a95de41))
+
+
+### Features
+
+* 🎸 阻止冒泡 update ([85c251a](http://10.124.128.2:8888/muses/union-design/commits/85c251a2ba87bace27d09f9166382a96b3f263d4))
+
+
+
 ## [0.0.6](http://10.124.128.2:8888/muses/union-design/compare/v0.0.4...v0.0.6) (2021-04-20)
 
 
