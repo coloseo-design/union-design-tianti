@@ -19,7 +19,7 @@ interface LayoutState {
 const judeSider = (children: unknown) => {
   let hasSider = false;
   React.Children.forEach(children, (child) => {
-    if (child.type.name === 'Sider') { // 这里使用child的type.name进行判断
+    if (child && child.type.name === 'Sider') { // 这里使用child的type.name进行判断
       hasSider = true;
     }
   });
@@ -42,10 +42,14 @@ class Layout extends Component<LayoutProps, LayoutState> {
     };
   }
 
-  componentDidMount() {
-    const { children } = this.props;
-
-    this.setState({ hasSider: judeSider(children) });
+  static getDerivedStateFromProps(nextProps: LayoutProps) {
+    const { children } = nextProps;
+    if (children) {
+      return {
+        hasSider: judeSider(children),
+      };
+    }
+    return null;
   }
 
   renderLayout = ({ getPrefixCls }: ConfigConsumerProps) => {

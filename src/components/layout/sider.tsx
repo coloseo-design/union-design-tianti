@@ -1,12 +1,14 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
-import React, { Component, CSSProperties, ReactElement } from 'react';
+/* eslint-disable no-underscore-dangle */
+import React, { Component, CSSProperties } from 'react';
 import classNames from 'classnames';
 import { ConfigConsumer, ConfigConsumerProps } from '../config-provider';
-import { MenuTheme, MENU_TAG_MENU } from '../menu/menu';
+import Icon from '../icon';
 
-export interface SiderProps extends React.HTMLAttributes<HTMLElement> {
+export interface SiderProps {
   /* 用户自定义类前缀，默认uni-layout */
   prefixCls?: string;
+  /* 容器 className */
+  className?: string;
   /* 当前收起状态 */
   collapsed?: boolean;
   /* 收缩宽度 */
@@ -16,70 +18,81 @@ export interface SiderProps extends React.HTMLAttributes<HTMLElement> {
   /* 是否默认收起 */
   defaultCollapsed?: boolean;
   /* 主题颜色 */
-  theme?: MenuTheme;
+  theme?: 'light' | 'dark';
   /* 宽度 */
   width?: number;
   /* 展开-收起时的回调函数 */
   onCollapse?: (collapsed: boolean) => void;
+  /* 指定样式 */
+  style?: CSSProperties;
 }
 
-export type SiderState = {
-  collapsed: boolean;
-};
+export interface SiderState {
+  /* 当前收起状态 */
+  collapsed?: boolean;
+}
 
 class Sider extends Component<SiderProps, SiderState> {
   static defaultProps: SiderProps = {
     collapsedWidth: 80,
+    collapsible: false,
+    defaultCollapsed: false,
     theme: 'dark',
     width: 200,
+    className: '',
   };
 
   constructor(props: SiderProps) {
     super(props);
     this.state = {
-      collapsed: props.defaultCollapsed ?? false,
+      collapsed: props.collapsed || props.defaultCollapsed,
     };
+  }
+
+  static getDerivedStateFromProps(nextProps: SiderProps, nextState: SiderState) {
+    const { collapsed } = nextProps;
+    if (collapsed !== nextState.collapsed) {
+      return {
+        collapsed,
+      };
+    }
+    return null;
   }
 
   renderSider = ({ getPrefixCls }: ConfigConsumerProps) => {
     const {
-      prefixCls, className, children, style, width, collapsedWidth, theme, collapsible, ...rest
+      prefixCls, className, children, style, width = 200, collapsedWidth = 80,
+      theme = 'dark', collapsible, onCollapse,
     } = this.props;
-
     const { collapsed } = this.state;
 
     const prefix = getPrefixCls('layout-sider', prefixCls);
-    const mainClass = classNames(prefix, className, {
+    const mainClass = classNames(prefix, {
       [`${prefix}-${theme}`]: theme,
       [`${prefix}-collapsible`]: collapsible,
     });
 
-    const tempWidth = collapsed! ? collapsedWidth! : width!;
-
-    const newStyle = {
-      ...style,
-      flex: `0 0 ${tempWidth}px`,
-      width: tempWidth,
+    const onClick = () => {
+      // this.setState({ collapsed: !collapsed });
+      if (onCollapse) {
+        onCollapse(!collapsed);
+      }
     };
 
-    return (
-      <aside {...rest} className={mainClass} style={newStyle}>
-        {React.Children.map(children, (child) => {
-          const type = (child as ReactElement)?.type ?? {};
-          const tag = (type as unknown as { [key: string]: unknown }).tag as string;
+    const _width = collapsed ? collapsedWidth : width;
 
-          if (React.isValidElement(child) && tag === MENU_TAG_MENU) {
-            return React.cloneElement(child, {
-              theme,
-              inlineCollapsed: collapsed,
-              inlineCollapsedIcon: collapsible,
-              inlineCollapsedMinWidth: collapsedWidth!,
-              inlineCollapsedMaxWidth: width,
-              onCollapsed: (c: boolean) => this.setState({ collapsed: c }),
-            });
-          }
-          return child;
-        })}
+    return (
+      <aside className={`${className} ${mainClass}`} style={{ width: _width, flex: `0 0 ${_width}px`, ...style }}>
+        <div className={`${prefix}-children`}>
+          {children}
+        </div>
+        {collapsedWidth && collapsible && (
+          <div className={`${prefix}-trigger`} style={{ left: collapsed ? collapsedWidth : width }} onClick={onClick}>
+            {collapsed
+              ? <Icon type="right" />
+              : <Icon type="left" />}
+          </div>
+        )}
       </aside>
     );
   }

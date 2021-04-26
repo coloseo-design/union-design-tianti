@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import React from 'react';
 import Layout from './index';
 import Menu from '../menu';
@@ -11,6 +12,13 @@ const LayoutDemo = () => {
   const headerStyle = { background: '#7dbcea' };
   const contentStyle = { background: 'rgba(16, 142, 233, 1)', height: 120, lineHeight: '120px' };
   const siderStyle = { background: '#3ba0e9', lineHeight: '120px' };
+  const [dataT, setData] = React.useState();
+  const [collapsed, setCollapsed] = React.useState(false);
+  React.useEffect(() => {
+    setTimeout(() => {
+      setData(true);
+    }, 2000);
+  }, []);
   return (
     <>
       <h3>基本结构</h3>
@@ -44,9 +52,10 @@ const LayoutDemo = () => {
 
       <h3>侧边布局</h3>
       <Layout>
-        <Sider collapsible>
+        {dataT && (
+        <Sider collapsible collapsed={collapsed} onCollapse={(_collapsed) => { setCollapsed(_collapsed); }}>
           logo
-          <Menu>
+          <Menu theme="dark">
             <Menu.Item icon="image">
               工作台1
             </Menu.Item>
@@ -89,6 +98,7 @@ const LayoutDemo = () => {
             </Menu.SubMenu>
           </Menu>
         </Sider>
+        )}
         <Layout style={layoutStyle}>
           <Header style={headerStyle}>Header</Header>
           <Content style={contentStyle}>Content</Content>
