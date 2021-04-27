@@ -1,3 +1,44 @@
+## [0.0.9](http://10.124.128.2:8888/muses/union-design/compare/v0.1.2...v0.0.9) (2021-04-27)
+
+
+### Bug Fixes
+
+* 🐛 添加style，classname ([e36ca3b](http://10.124.128.2:8888/muses/union-design/commits/e36ca3b136adab9cb86676d1633721346c5a6c89))
+* 🐛 修复dataIcon和button里面错误警告的bug ([efc3451](http://10.124.128.2:8888/muses/union-design/commits/efc34510632fc99885cd973a9dc17d57ad2e2ea5))
+* 🐛 修复message.loading的错误 ([47674aa](http://10.124.128.2:8888/muses/union-design/commits/47674aa834052d18e8d540c6cba8e889cbd62672))
+* 🐛 修复spin的classname和style无法自定义的bug ([e7993f4](http://10.124.128.2:8888/muses/union-design/commits/e7993f4513fb1dd76ebcf9a9ec96b42efc43df0d))
+* 🐛 修改form的的类型文件 ([4fb366c](http://10.124.128.2:8888/muses/union-design/commits/4fb366c7efed855a6be7bcd2f2bc15785f305c6b))
+* 🐛 修改tab删除元素的逻辑 ([b001165](http://10.124.128.2:8888/muses/union-design/commits/b0011655765e85b360fe0ba16a126c94a81c7835))
+* 🐛 date-picker time range sort ([da0ed2b](http://10.124.128.2:8888/muses/union-design/commits/da0ed2b117d11f0d2dbb063789b37e6ebefc01a0))
+* 🐛 fix popconform 图标位置 ([823e1e1](http://10.124.128.2:8888/muses/union-design/commits/823e1e15932cfd5ab656fc83efccc89de80f85e3))
+* 🐛 input前后展示不对修改 ([d1f39b1](http://10.124.128.2:8888/muses/union-design/commits/d1f39b1a353a1aead6a46845db8e874caa182381))
+* 🐛 layout的header加上className ([345d447](http://10.124.128.2:8888/muses/union-design/commits/345d447e655e64d6f8588978a542c78944db7e4e))
+* 🐛 layout的sider没有箭头修改 ([7dd28d7](http://10.124.128.2:8888/muses/union-design/commits/7dd28d7a26ee89092bd5dd11a17b94676baba42f))
+* 🐛 menu to drop-down ([9632356](http://10.124.128.2:8888/muses/union-design/commits/9632356a2557183439eed2298fda81edf3b664e9))
+* 🐛 modal fix bug ([0193957](http://10.124.128.2:8888/muses/union-design/commits/01939571918909e9e212bda6e9a0ef03c8a502ab))
+* 🐛 select 样式修改 ([f620185](http://10.124.128.2:8888/muses/union-design/commits/f620185ab0446e1f2b39098a9284e4fbcf1383b4))
+* 🐛 select fix 其他样式修改 ([c42718b](http://10.124.128.2:8888/muses/union-design/commits/c42718b22c1f079618907c435c6c79b93a95de41))
+* 🐛 style ([c6f9248](http://10.124.128.2:8888/muses/union-design/commits/c6f924882a074f4966384c890a365217dbb06da1))
+* 🐛 upload ([395b6a7](http://10.124.128.2:8888/muses/union-design/commits/395b6a742f7ca37fc4ed2842a21c7f034fc2f58f))
+
+
+### Features
+
+* 🎸 补上缺失的className,style ([ae0ca76](http://10.124.128.2:8888/muses/union-design/commits/ae0ca768fb9e471570d9a14e483f36a0499136d8))
+* 🎸 完善 tree treeselect ([644439b](http://10.124.128.2:8888/muses/union-design/commits/644439b36ba28a601ccf72986f5e9c4f2c7b2a4e))
+* 🎸 修改布局样式 ([9477a5f](http://10.124.128.2:8888/muses/union-design/commits/9477a5fb180c075697e1e25891fa31e085545b26))
+* 🎸 修改路径和更新图片版本 ([71c55c7](http://10.124.128.2:8888/muses/union-design/commits/71c55c7b2bffba63c374e99ca4aa11eabbb282c3))
+* 🎸 修改项目registry地址 ([481e944](http://10.124.128.2:8888/muses/union-design/commits/481e944001c866b51adfab19a2a220d74998e076))
+* 🎸 修改message的loading图标 ([85d76f6](http://10.124.128.2:8888/muses/union-design/commits/85d76f6f0eb1741748c65f1553ef75e5db238c50))
+* 🎸 修改tree组件bug ([2f9d3e2](http://10.124.128.2:8888/muses/union-design/commits/2f9d3e2c50c7ea7a277cec7d743be20ac8e3df5d))
+* 🎸 阻止冒泡 update ([85c251a](http://10.124.128.2:8888/muses/union-design/commits/85c251a2ba87bace27d09f9166382a96b3f263d4))
+* 🎸 fix bug ([13cf238](http://10.124.128.2:8888/muses/union-design/commits/13cf238f46eefb7a0a238abc9f11aad7ab2e0ac6))
+* 🎸 message add loading ([ff706fa](http://10.124.128.2:8888/muses/union-design/commits/ff706fa9d90fc3d8d57038b7942f323d8ba7a65e))
+* 🎸 update ([f249ae9](http://10.124.128.2:8888/muses/union-design/commits/f249ae9133a75fd790e308b45035231c5012257b))
+* 🎸 update notification md ([7e71a58](http://10.124.128.2:8888/muses/union-design/commits/7e71a5826cd9fce2df74f90ef1170a662ab692c6))
+
+
+
 ## 0.0.8 (2021-04-26)
 
 
