@@ -39,9 +39,9 @@ export { default as Drawer } from './drawer/drawer';
 /* eslint-disable */
 export { default as DropDown } from './drop-down/drop-down';
 /* eslint-disable */
-export { default as Grid } from './grid/grid';
-/* eslint-disable */
 export { default as Form } from './form/form';
+/* eslint-disable */
+export { default as Grid } from './grid/grid';
 /* eslint-disable */
 export { default as Icon } from './icon/icon';
 /* eslint-disable */

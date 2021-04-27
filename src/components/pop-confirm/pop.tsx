@@ -298,8 +298,8 @@ class PopComponent extends React.Component<PopProps, PopconfirmState> {
     const confirmContent = (
       <div className={`${contentStyle}-inner`}>
         <div>
-          <div style={{ display: 'inline-block' }}>{icon || <Icon type="exclamation-circle" className={`${contentStyle}-inner-icon`} />}</div>
-          <div style={{ display: 'inline-block' }}>{title}</div>
+          <div>{icon || <Icon type="exclamation-circle" className={`${contentStyle}-inner-icon`} />}</div>
+          <div style={{ paddingLeft: 24 }}>{title}</div>
         </div>
         <div className={btnStyle}>
           <Button size="small" style={{ marginRight: 8 }} {...cancelButtonProps} onClick={this.handleCancel}>{cancelText}</Button>

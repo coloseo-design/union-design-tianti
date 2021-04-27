@@ -23,17 +23,23 @@ const PopconfirmDemo: React.FC<unknown> = () => {
     <div id="pop" style={{ padding: 120 }}>
       <div>
         <PopConfirm
-          title={<div>异步关闭气泡确认框？</div>}
+          title={(
+            <div>
+              你是否确定这是一个气泡确认框kkk
+              你是否确定这是一个气泡确认框？你是否确定这是一个气泡确认框？
+            </div>
+)}
           placement="topLeft"
           getPopupContainer={() => document.getElementById('pop') || document.body}
           okButtonProps={{ loading }}
           onConfirm={onConfirm}
           // visible={visible}
+          overlayStyle={{ maxWidth: 200 }}
         >
           <Button onClick={handleClick}>topLeft</Button>
         </PopConfirm>
         <PopConfirm
-          title="你是否确定这是一个气泡确认框？"
+          title="你是否确定这是一个气泡确认框"
           placement="top"
           onVisibleChange={handleVisibleChange}
           trigger="hover"
