@@ -1,3 +1,12 @@
+## [0.0.11](http://10.124.128.2:8888/muses/union-design/compare/v0.0.10...v0.0.11) (2021-05-08)
+
+
+### Bug Fixes
+
+* 🐛 锚点异步时展示不对修改 ([0e175d1](http://10.124.128.2:8888/muses/union-design/commits/0e175d1a18de035c242de81f13dc34ef77255f2d))
+
+
+
 ## [0.0.10](http://10.124.128.2:8888/muses/union-design/compare/v0.0.8...v0.0.10) (2021-04-28)
 
 
