@@ -1,3 +1,12 @@
+## [0.0.12](http://10.124.128.2:8888/muses/union-design/compare/v0.0.11...v0.0.12) (2021-05-08)
+
+
+### Features
+
+* 🎸 锚点修改 ([b0fc239](http://10.124.128.2:8888/muses/union-design/commits/b0fc2392fe28748fcd307794d43fb506611225b4))
+
+
+
 ## [0.0.11](http://10.124.128.2:8888/muses/union-design/compare/v0.0.10...v0.0.11) (2021-05-08)
 
 
