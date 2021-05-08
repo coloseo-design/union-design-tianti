@@ -20,7 +20,9 @@ class Link extends Component<LinkProps> {
   private animating: boolean | undefined;
 
   componentDidMount() {
-    const { getContainer } = this.context;
+    const { getContainer, updateLinkElementHeight } = this.context;
+    const linkElementHeight = document.querySelector('.uni-anchor-link')?.clientHeight;
+    updateLinkElementHeight(linkElementHeight);
     const container = getContainer ? getContainer() : window;
     container && container.addEventListener('scroll', this.onScroll);
   }

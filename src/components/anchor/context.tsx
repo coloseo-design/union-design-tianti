@@ -4,6 +4,7 @@
 import React from 'react';
 
 export interface contextProps {
+  updateLinkElementHeight?: (height: number) => void;
   updateHref?: (href: string) => void;
   currentHref?: string;
   getContainer?: () => HTMLElement;

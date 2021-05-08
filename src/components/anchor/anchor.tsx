@@ -46,6 +46,10 @@ class Anchor extends Component<AnchorProps, AnchorState> {
     this.setState({ currentHref: href });
   }
 
+  updateLinkElementHeight = (height: number) => {
+    this.setState({ linkElementHeight: height });
+  }
+
   renderAnchor = ({ getPrefixCls }: ConfigConsumerProps) => {
     const {
       prefixCls, children, style, getContainer, onChange, onClick,
@@ -63,6 +67,7 @@ class Anchor extends Component<AnchorProps, AnchorState> {
 
     return (
       <Provider value={{
+        updateLinkElementHeight: this.updateLinkElementHeight,
         updateHref: this.updateHref,
         currentHref,
         getContainer,
