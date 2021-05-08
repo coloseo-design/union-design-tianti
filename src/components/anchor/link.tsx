@@ -105,7 +105,7 @@ class Link extends Component<LinkProps> {
       <AnchorContext.Consumer>
         {({ currentHref }) => (
           <div className={mainClass} onClick={handleClick}>
-            <span style={{ color: currentHref === href ? '#b30000' : 'black' }}>{title}</span>
+            <span title={title} style={{ color: currentHref === href ? '#b30000' : 'black' }}>{title}</span>
           </div>
         )}
       </AnchorContext.Consumer>
