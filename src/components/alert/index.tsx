@@ -1,3 +1,3 @@
-import './styles/index.less';
+import './styles/index';
 
 export { default } from './alert';
