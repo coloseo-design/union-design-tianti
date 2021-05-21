@@ -1,3 +1,9 @@
+---
+category: Components
+type: 通用
+title: Upload
+subtitle: 上传组件
+---
 # 上传组件
 
 ## API

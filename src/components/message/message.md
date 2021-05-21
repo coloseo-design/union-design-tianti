@@ -1,3 +1,10 @@
+---
+category: Components
+type: 通用
+title: Message
+subtitle: 消息提示
+---
+
 # 消息提示组件
 
 ## API

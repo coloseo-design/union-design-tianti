@@ -1,3 +1,10 @@
+---
+category: Components
+type: 通用
+title: Pagination
+subtitle: 分页
+---
+
 # 分页
 
 ## API

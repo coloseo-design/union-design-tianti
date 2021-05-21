@@ -1,3 +1,10 @@
+---
+category: Components
+type: 通用
+title: Menu
+subtitle: 菜单
+---
+
 # 菜单组件
 
 ## Menu

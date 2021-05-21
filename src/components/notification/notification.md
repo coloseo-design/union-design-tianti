@@ -1,3 +1,9 @@
+---
+category: Components
+type: 通用
+title: 通知提醒
+subtitle: Notification
+---
 # 消息提示组件
 
 ## API

@@ -1,3 +1,10 @@
+---
+category: Components
+type: 通用
+title: Drawer
+subtitle: 抽屉
+---
+
 # 抽屉组件
 
 ## API
