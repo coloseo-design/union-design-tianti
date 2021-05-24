@@ -7,7 +7,7 @@ const AnchorDemo = () => (
   <div>
     <Anchor
       style={{
-        position: 'fixed', top: 0, right: 20,
+        position: 'fixed', top: 100, right: 200,
       }}
     >
       <Link href="#A" title="A demo" />
