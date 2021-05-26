@@ -66,8 +66,8 @@ export const checkedFun = (
   smooth: any,
   values: any,
 ) => { // 选择父级勾选子级， 子级选满勾选父级
-  const temp = smooth.filter((i: any) => values.indexOf(i.key || i.currentKey) >= 0);
-  let lastList = [...temp];
+  const temp = (smooth || []).filter((i: any) => values.indexOf(i.key || i.currentKey) >= 0);
+  let lastList = [];
   const parentChild: any[] = [];
   const parentList: any[] = [];
   const currentSelected = [current.key || current.currentKey].concat(values);
