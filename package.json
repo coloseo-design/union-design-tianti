@@ -32,7 +32,7 @@
     "react-router-dom": "5.2.0",
     "shallowequal": "^1.1.0",
     "union-icons-react": "^0.0.3",
-    "union-tool": "^0.0.3"
+    "union-tool": "^0.0.8"
   },
   "devDependencies": {
     "@types/classnames": "^2.2.11",
