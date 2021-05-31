@@ -1,5 +1,5 @@
 import React from 'react';
-import BackTop from './index';
+import { BackTop } from '../index';
 
 const BackTopDemo = () => (
   <div>

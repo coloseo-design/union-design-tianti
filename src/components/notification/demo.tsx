@@ -1,6 +1,5 @@
 import React from 'react';
-import Notification from './index';
-import Button from '../button';
+import { Notification, Button } from './index';
 
 const NotificationDemo = () => (
   <div style={{

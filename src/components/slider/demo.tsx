@@ -1,11 +1,10 @@
-/* eslint-disable no-shadow */
 import React, { useState } from 'react';
-import Slider from './index';
+import { Slider } from '../index';
 
 const SliderDemo = () => {
   const [value, setValue] = useState(0);
-  const onChange = (value: number) => {
-    setValue(value);
+  const onChange = (val: number) => {
+    setValue(val);
   };
   const marks = [{
     label: '0°C',

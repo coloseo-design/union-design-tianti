@@ -1,5 +1,5 @@
 import React from 'react';
-import Rate from './index';
+import { Rate } from '../index';
 
 const RateDemo = () => (
   <div>

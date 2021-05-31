@@ -1,6 +1,6 @@
-/* eslint-disable */
 import React from 'react';
-import Table from './index';
+import { Table } from '../index';
+
 const dataSource = [
   {
     key: '1',
@@ -40,6 +40,14 @@ const dataSource = [
   },
 ];
 
+const render1 = (k: string, row: any) => (
+  <div>
+    {row.name}
+    @
+    {k}
+  </div>
+);
+
 const columnsBase = [
   {
     title: '姓名',
@@ -57,14 +65,7 @@ const columnsBase = [
     title: '住址',
     dataIndex: 'address',
     key: 'address',
-    // eslint-disable-next-line react/display-name
-    render: (k: string, row: any) => (
-      <div>
-        {row.name}
-        @
-        {k}
-      </div>
-    ),
+    render: render1,
   },
 ];
 const columnsFixed = [
@@ -86,14 +87,7 @@ const columnsFixed = [
     title: '住址',
     dataIndex: 'address',
     key: 'address',
-    // eslint-disable-next-line react/display-name
-    render: (k: string, row: any) => (
-      <div>
-        {row.name}
-        @
-        {k}
-      </div>
-    ),
+    render: render1,
   },
 ];
 
@@ -115,7 +109,7 @@ const columns = [
         value: 'Joe',
       },
     ],
-    onFilter: (value, record) => record.name.includes(value),
+    onFilter: (value: any, record: { name: string | any[]; }) => record.name.includes(value),
   },
   {
     title: '年龄',
@@ -139,19 +133,12 @@ const columns = [
         value: 'No. 2',
       },
     ],
-    onFilter: (value, record) => record.address.includes(value),
-    // eslint-disable-next-line react/display-name
-    render: (k: string, row: any) => (
-      <div>
-        {row.name}
-        @
-        {k}
-      </div>
-    ),
+    onFilter: (value: any, record: any) => record.address.includes(value),
+    render: render1,
   },
 ];
 
-const renderContent = (value, row, index) => {
+const renderContent = (value: any, row: any, index: number) => {
   const obj = {
     children: value,
     props: {},
@@ -166,12 +153,14 @@ const spanColumns = [
   {
     title: 'Name',
     dataIndex: 'name',
-    render: (text, row, index) => {
+    render: (text: unknown | null | undefined, row: any, index: number) => {
       if (index < 4) {
-        return <a>{text}</a>;
+        // return <a>{text}</a>;
+        return <span style={{ color: '#b30000' }}>{text}</span>;
       }
       return {
-        children: <a>{text}</a>,
+        // children: <a>{text}</a>,
+        children: <span style={{ color: '#b30000' }}>{text}</span>,
         props: {
           colSpan: 6,
         },
@@ -188,7 +177,7 @@ const spanColumns = [
     title: 'Home phone',
     colSpan: 2,
     dataIndex: 'tel',
-    render: (value, row, index) => {
+    render: (value: any, row: any, index: number) => {
       const obj = {
         children: value,
         props: {},
@@ -196,7 +185,6 @@ const spanColumns = [
       if (index === 2) {
         obj.props.rowSpan = 2;
       }
-      // These two are merged into above cell
       if (index === 3) {
         obj.props.rowSpan = 0;
       }
@@ -275,10 +263,10 @@ const data = [
 ];
 
 const rowSelection = {
-  onChange: (selectedRowKeys, selectedRows) => {
+  onChange: (selectedRowKeys: any, selectedRows: any) => {
     console.log(`selectedRowKeys: ${selectedRowKeys}`, selectedRowKeys, 'selectedRows: ', selectedRows);
   },
-  getCheckboxProps: (record) => ({
+  getCheckboxProps: (record: { name: string; }) => ({
     disabled: record.name === 'Jim Red', // Column configuration not to be checked
     name: record.name,
   }),
@@ -307,7 +295,6 @@ const TableDemo: React.FC<unknown> = () => (
           columns={columnsFixed}
           rowKey="key"
           bordered
-          // loading
           scroll={{ y: 200, x: 1500 }}
         />
       </div>
@@ -326,7 +313,8 @@ const TableDemo: React.FC<unknown> = () => (
           columns={columnsFixed}
           dataSource={data}
           rowKey="key"
-        scroll={{ y: 200, x: 1500 }} />,
+          scroll={{ y: 200, x: 1500 }}
+        />
       </div>
     </div>
     <div>
@@ -336,11 +324,10 @@ const TableDemo: React.FC<unknown> = () => (
           rowSelection={rowSelection}
           columns={columns}
           pagination={{ pageSize: 2 }}
-          // pagination={false}
           dataSource={data}
           rowKey="key"
           scroll={{ y: 200, x: 1500 }}
-        />,
+        />
       </div>
     </div>
   </div>

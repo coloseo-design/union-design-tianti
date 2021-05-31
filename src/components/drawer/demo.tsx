@@ -1,13 +1,11 @@
 import React, { useCallback, useState } from 'react';
-import Drawer from './index';
+import { Drawer } from '../index';
 import { DrawerPlacement } from './drawer';
 
 const DrawerDemo = () => {
-  // const tempRef = useRef<HTMLDivElement>(null);
   const [drawerVisible1, setDrawerVisible1] = useState(false);
   const [drawerVisible2, setDrawerVisible2] = useState(false);
   const [drawerVisible3, setDrawerVisible3] = useState(false);
-  // const [drawerVisible4, setDrawerVisible4] = useState(false);
 
   const [placement, setPlacement] = useState<DrawerPlacement>('right');
 
@@ -84,30 +82,6 @@ const DrawerDemo = () => {
           </Drawer>
         </Drawer>
       </Drawer>
-      {/* <h1>容器内的抽屉</h1>
-            <button onClick={() => {
-                setDrawerVisible4(!drawerVisible4);
-            }}>open drawer in div</button>
-
-            <div ref={tempRef} style={{ backgroundColor: "lightgrey", width: 600, height: 300 }}>
-                <Drawer
-                    visible={drawerVisible4}
-                    title="自定义footer"
-                    placement={placement}
-                    wh={200}
-                    distance={100}
-                    containerNode={tempRef.current}
-                    footer={() => {
-                        return (
-                            <div style={{ borderTop: '1px solid black' }}>
-                                footer
-                            </div>
-                        );
-                    }}
-                    onClose={() => setDrawerVisible4(false)} >
-                    open drawer footer
-                    </Drawer>
-            </div> */}
     </div>
   );
 };

@@ -1,5 +1,5 @@
 import React from 'react';
-import Progress from './index';
+import { Progress } from '../index';
 
 const ProgressDemo = () => (
   <div>

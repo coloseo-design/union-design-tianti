@@ -72,3 +72,4 @@ export { default as BackTop } from './back-top';
 export { default as Checkbox } from './checkbox';
 export { default as Skeleton } from './skeleton';
 export { default as Timeline } from './timeline';
+export { default as Breadcrumb } from './breadcrumb';

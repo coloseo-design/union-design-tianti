@@ -1,6 +1,5 @@
-/* eslint-disable react/jsx-boolean-value */
 import React from 'react';
-import TreeSelect from './index';
+import { TreeSelect } from '../index';
 
 const { TreeNode } = TreeSelect;
 const data = [
@@ -58,7 +57,6 @@ const data = [
   {
     value: '11',
     title: '和哈哈哈哈',
-    // disabled: true,
     children: [
       {
         value: '114',
@@ -120,7 +118,7 @@ const TreeSelectDEmo = () => {
         <TreeSelect
           treeData={data}
           dropdownStyle={{ maxHeight: 250, overflow: 'auto' }}
-          multiple={true}
+          multiple
           value={['11']}
           onChange={onChange}
         />
@@ -131,9 +129,8 @@ const TreeSelectDEmo = () => {
         <TreeSelect
           treeData={dataT}
           dropdownStyle={{ maxHeight: 250, overflow: 'auto' }}
-          treeCheckable={true}
+          treeCheckable
           defaultValue={['node-1-2-2', 'third']}
-          // showCheckedStrategy="SHOW_ALL"
         />
       </div>
 
@@ -142,13 +139,12 @@ const TreeSelectDEmo = () => {
         <TreeSelect
           treeData={data}
           dropdownStyle={{ maxHeight: 150, overflow: 'auto' }}
-          treeCheckable={true}
+          treeCheckable
           showCheckedStrategy="SHOW_ALL"
           maxTagCount={3}
         />
       </div>
     </div>
-
   );
 };
 

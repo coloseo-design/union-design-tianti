@@ -1,5 +1,5 @@
 import React from 'react';
-import Alert from './index';
+import { Alert } from '../index';
 
 const handleclose = (e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
   console.log('--e', e);

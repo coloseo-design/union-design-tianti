@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
-import AutoComplete from './index';
-import Button from '../button';
-// import Input from '../input';
+import { AutoComplete, Button } from '../index';
 
 const { Option, OptGroup } = AutoComplete;
 export default () => {
@@ -111,7 +109,6 @@ export default () => {
           onFocus={handleFocus}
           onBlur={handleBlur}
           value={value}
-          // style={{ width: 256, height: 42 }}
         />
       </div>
       <Button onClick={() => setValue('ggg')}>change</Button>
@@ -119,7 +116,6 @@ export default () => {
       <AutoComplete
         onSearch={handleSearch}
         dataSource={children}
-        // autoFocus
         placeholder="请输入"
         style={{ marginLeft: 32, width: 256 }}
         multiInput
@@ -133,9 +129,7 @@ export default () => {
         style={{ margin: 32, width: 256 }}
         showSearch
         dataSource={searchChild}
-      >
-        {/* {searchChild} */}
-      </AutoComplete>
+      />
       <AutoComplete
         placeholder="请输入"
         style={{ margin: 32, width: 256 }}

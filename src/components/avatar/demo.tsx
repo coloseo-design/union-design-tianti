@@ -1,7 +1,5 @@
 import React from 'react';
-import Avatar from './index';
-import Icon from '../icon';
-import Badge from '../badge';
+import { Avatar, Icon, Badge } from '../index';
 
 const AvatarDemo = () => (
   <div style={{ padding: 100 }}>

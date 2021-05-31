@@ -1,7 +1,5 @@
 import React from 'react';
-import Tag from './index';
-import Input from '../input/index';
-import Icon from '../icon';
+import { Tag, Input, Icon } from '../index';
 
 class EditableTagGroup extends React.Component {
   constructor(props) {

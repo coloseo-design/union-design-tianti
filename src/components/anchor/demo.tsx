@@ -1,5 +1,5 @@
 import React from 'react';
-import Anchor from './index';
+import { Anchor } from '../index';
 
 const { Link } = Anchor;
 

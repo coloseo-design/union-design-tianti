@@ -1,6 +1,5 @@
-/* eslint-disable no-console */
 import React from 'react';
-import { Icon, Steps } from '..';
+import { Icon, Steps } from '../index';
 
 const Demo = () => (
   <div style={{

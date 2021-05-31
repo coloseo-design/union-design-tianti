@@ -1,9 +1,7 @@
-/* eslint-disable react/jsx-boolean-value */
 import React from 'react';
-import Dropdown from './index';
-import Button from '../button';
-import Icon from '../icon';
-import Menu from '../menu';
+import {
+  Dropdown, Button, Icon, Menu,
+} from '../index';
 
 const menu = (
   <Menu>
@@ -60,7 +58,7 @@ const DropdownDemo = () => {
           <Dropdown
             placement="bottomLeft"
             overlay={test}
-            arrow={true}
+            arrow
             visible={visible}
             onVisibleChange={onVisibleChange}
             trigger={['click']}
@@ -70,12 +68,12 @@ const DropdownDemo = () => {
           </Dropdown>
         </div>
         <div>
-          <Dropdown placement="bottomCenter" overlayStyle={{ width: '100px' }} trigger={['click']} overlay={menu} arrow={true}>
+          <Dropdown placement="bottomCenter" overlayStyle={{ width: '100px' }} trigger={['click']} overlay={menu} arrow>
             <Button>click bottomCenter</Button>
           </Dropdown>
         </div>
         <div>
-          <Dropdown placement="bottomRight" overlay={menu} arrow={true}>
+          <Dropdown placement="bottomRight" overlay={menu} arrow>
             <Button>hover bottomRight</Button>
           </Dropdown>
         </div>
@@ -101,11 +99,9 @@ const DropdownDemo = () => {
           overlay={menu}
           type="primary"
           icon={<Icon style={{ fontSize: 14 }} type="zoomout" />}
-          // visible={visible}
           onClick={handleButtonClick}
           onVisibleChange={onVisibleChange}
           trigger={['click']}
-        // onClick={() => setVisible1(true)}
         >
           primary dropdown
         </Dropdown.Button>
@@ -126,7 +122,7 @@ const DropdownDemo = () => {
         </Dropdown.Button>
       </div>
       <div style={{ marginTop: 32 }}>
-        <Dropdown.Button disabled={true} type="dashed" overlay={menu} trigger={['click']}>
+        <Dropdown.Button disabled type="dashed" overlay={menu} trigger={['click']}>
           dashed
         </Dropdown.Button>
       </div>

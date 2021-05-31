@@ -1,9 +1,7 @@
-/* eslint-disable react/jsx-closing-tag-location */
 import React, { useState } from 'react';
-import Modal from './index';
-import Button from '../button';
-import Select from '../select';
-import TreeSelect from '../tree-select';
+import {
+  Modal, Button, Select, TreeSelect,
+} from '../index';
 
 const { Option } = Select;
 const { TreeNode } = TreeSelect;
@@ -73,10 +71,11 @@ const ModalDemo: React.FC<unknown> = () => {
   const handleInfo = () => {
     Modal.info({
       title: '弹出窗Info',
-      content: <div>
-        <p>一系列的信息描述，可能会很长。也可以是很短同样也可以带标点。</p>
-        <p>一系列的信息描述，可能会很长。也可以是很短同样也可以带标点</p>
-      </div>,
+      content:
+  <div>
+    <p>一系列的信息描述，可能会很长。也可以是很短同样也可以带标点。</p>
+    <p>一系列的信息描述，可能会很长。也可以是很短同样也可以带标点</p>
+  </div>,
     });
   };
   return (
@@ -142,7 +141,6 @@ const ModalDemo: React.FC<unknown> = () => {
           </Select>
           <TreeSelect
             value="1"
-            // onChange={onChange}
           >
             <TreeNode title="顶级" key="a" value="a">
               <TreeNode title="哈哈哈" key="1" value="1">

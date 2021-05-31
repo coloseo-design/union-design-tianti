@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row, Col } from './index';
+import { Row, Col } from '../index';
 
 const GridDemo = () => (
   <div>

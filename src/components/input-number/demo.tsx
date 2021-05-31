@@ -1,5 +1,5 @@
 import React from 'react';
-import InputNumber from './index';
+import { InputNumber } from '../index';
 
 const layout = {
   padding: '0 20px', display: 'flex', alignItems: 'center', justifyContent: 'space-around',
@@ -17,10 +17,6 @@ const InputNumberDemo = (): React.ReactNode => (
         max={10}
         min={1}
         onChange={handleChange}
-        // onStep={(value, info) => {
-        //   console.log('onStep', value, info);
-        // }}
-        // // onChange={(value) => { console.log('change', value); }}
       />
     </span>
     <span>
@@ -29,7 +25,6 @@ const InputNumberDemo = (): React.ReactNode => (
         precision={2}
         formatter={(value) => `${value}%`}
         parser={(value) => value.replace('%', '')}
-
       />
     </span>
     <span>

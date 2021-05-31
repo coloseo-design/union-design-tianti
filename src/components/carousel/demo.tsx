@@ -1,10 +1,28 @@
-/* eslint-disable react/no-array-index-key */
 import React from 'react';
-import Carousel from './index';
+import { Carousel } from '../index';
 
 const image = 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png';
 
-const imgList = [image, image, image, image, image, image, image];
+const imgList = [
+  {
+    id: '1', src: image,
+  },
+  {
+    id: '2', src: image,
+  },
+  {
+    id: '3', src: image,
+  },
+  {
+    id: '4', src: image,
+  },
+  {
+    id: '5', src: image,
+  },
+  {
+    id: '6', src: image,
+  },
+];
 const CarouselDemo = () => {
   const beforeChange = (from: number, to: number) => {
     console.log('--from', from, to);
@@ -70,8 +88,8 @@ const CarouselDemo = () => {
         <h1>切换效果为渐显</h1>
         <div style={{ width: 320, height: 300 }}>
           <Carousel dotPosition="bottom" effect="fade">
-            {imgList.map((item, index) => (
-              <img src={item} alt="" key={index} />
+            {imgList.map((item) => (
+              <img src={item.src} alt="" key={item.id} />
             ))}
           </Carousel>
         </div>
@@ -81,13 +99,13 @@ const CarouselDemo = () => {
         <div style={{ width: 320, height: 300 }}>
           <Carousel dotPosition="bottom" dotsShape="circle" autoplay>
             {imgList.map((item, index) => (
-              <div key={index}>
+              <div key={item.id}>
                 <p>
                   第
                   {index + 1}
                   张
                 </p>
-                <img src={item} alt="" style={{ width: 320, objectFit: 'contain' }} />
+                <img src={item.src} alt="" style={{ width: 320, objectFit: 'contain' }} />
               </div>
             ))}
           </Carousel>

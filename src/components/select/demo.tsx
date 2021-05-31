@@ -1,7 +1,5 @@
-/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-/* eslint-disable react/jsx-no-target-blank */
 import React from 'react';
-import Select from './index';
+import { Select } from '../index';
 
 const { Option } = Select;
 
@@ -52,7 +50,7 @@ const SelectDemo = () => {
           <Option value={item.value} key={item.value}>{item.label}</Option>
         ))}
       </Select>
-      <h1 onClick={() => setvalue(['2'])}>多选框</h1>
+      <h1>多选框</h1>
       <Select
         onChange={
           (value, label) => {
@@ -92,7 +90,7 @@ const SelectDemo = () => {
       </Select>
       <h1>
         远程搜索选择框 - (备注：使用方法参见
-        <a target="_blank" href="https://ant.design/components/select-cn/#components-select-demo-search-box">antd select 搜索框</a>
+        <a target="_blank" rel="noreferrer" href="https://ant.design/components/select-cn/#components-select-demo-search-box">antd select 搜索框</a>
         )
       </h1>
       <Select

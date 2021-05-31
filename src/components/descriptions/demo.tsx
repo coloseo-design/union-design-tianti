@@ -1,5 +1,5 @@
 import React from 'react';
-import Descriptions from './index';
+import { Descriptions } from '../index';
 
 const DescriptionsDemo = () => (
   <div>

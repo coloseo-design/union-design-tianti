@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import Checkbox, { Group } from './index';
+import { Checkbox } from '../index';
+
+const { Group } = Checkbox;
 
 export default () => {
   const options = [

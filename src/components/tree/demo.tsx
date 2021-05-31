@@ -1,7 +1,5 @@
-/* eslint-disable react/jsx-boolean-value */
-/* eslint-disable @typescript-eslint/ban-types */
 import React from 'react';
-import Tree from './index';
+import { Tree } from '../index';
 
 const { TreeNode } = Tree;
 const data = [
@@ -89,7 +87,6 @@ const data = [
     key: '11',
     value: '11',
     title: '和哈哈哈哈',
-    // disabled: true,
     children: [
       {
         key: '114',
@@ -125,16 +122,6 @@ const data = [
   },
 ];
 const TreeDemo = () => {
-  const dataTest = [
-    {
-      key: '1',
-      title: '哈哈哈',
-    },
-    {
-      key: '2',
-      title: '嘿嘿黑',
-    },
-  ];
   const [dataT, setData] = React.useState([]);
   React.useEffect(() => {
     setTimeout(() => {
@@ -160,7 +147,7 @@ const TreeDemo = () => {
         >
           <TreeNode title="parent 1" key="0-0">
             <TreeNode title="parent 1-0" key="0-0-0">
-              <TreeNode title="leaf" key="0-0-0-0" disableCheckbox={true} />
+              <TreeNode title="leaf" key="0-0-0-0" disableCheckbox />
               <TreeNode title="leaf" key="0-0-0-1" />
             </TreeNode>
             <TreeNode title="parent 1-1" key="0-0-1">
@@ -177,7 +164,7 @@ const TreeDemo = () => {
         <h1>多选的</h1>
         <Tree
           treeData={data}
-          multiple={true}
+          multiple
           onExpand={onExpand}
           onSelect={onSelect}
         />
@@ -188,7 +175,7 @@ const TreeDemo = () => {
         <Tree
           treeData={dataT}
           onSelect={onSelect}
-          checkable={true}
+          checkable
           style={{ width: 320 }}
           defaultSelectedKeys={['24']}
           defaultCheckedKeys={['24', '23']}
@@ -200,8 +187,8 @@ const TreeDemo = () => {
         <Tree
           treeData={data}
           onSelect={onSelect}
-          checkable={true}
-          checkStrictly={true}
+          checkable
+          checkStrictly
           onCheck={onCheck}
           style={{ width: 320, maxHeight: 200, overflow: 'auto' }}
           selectedKeys={['24']}

@@ -1,9 +1,8 @@
 import React from 'react';
-import Upload from './index';
+import { Upload } from '../index';
 
 const UploadDemo = () => {
   const common = {
-    // action: "http://10.13.6.87:3000/upload",
     action: 'http://192.168.0.102:3000/upload',
   };
   return (

@@ -1,6 +1,5 @@
-/* eslint-disable @typescript-eslint/ban-types */
 import React from 'react';
-import Cascader from './index';
+import { Cascader } from '../index';
 
 const marginBottomStyle = {
   marginBottom: 16,

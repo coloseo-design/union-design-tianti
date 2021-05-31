@@ -1,6 +1,5 @@
-/* eslint-disable react/jsx-key */
 import React from 'react';
-import List from './index';
+import { List } from '../index';
 
 export default () => {
   const data = [
@@ -46,7 +45,7 @@ export default () => {
           (item, index) => (
             <List.Item
               key={`${index}`}
-              actions={[<span>查看详情</span>]}
+              actions={[<span key={1}>查看详情</span>]}
             >
               <List.Item.Meta
                 title={<span>{item.title}</span>}

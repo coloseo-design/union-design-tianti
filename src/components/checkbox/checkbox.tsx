@@ -25,6 +25,8 @@ export interface CheckboxState {
 }
 
 class Checkbox extends React.Component<CheckboxProps, CheckboxState> {
+  static Group: typeof Group;
+
   static defaultProps: CheckboxProps = {
     checked: false,
     autoFocus: false,

@@ -1,4 +1,3 @@
-/* eslint-disable consistent-return */
 import React, { useRef } from 'react';
 import {
   Form,
@@ -169,13 +168,13 @@ export default () => {
                 validator: (rule, value) => {
                   if (!value || value.length < 2) {
                     return Promise.reject(new Error('长度必须大于2'));
-                    // callback('长度必须大于2');
                   }
+                  return null;
                 },
               },
             ]}
           >
-            <Input placeholder="请输入" onChange={(e, v) => console.log('change', e, v)} />
+            <Input placeholder="请输入" onChange={(e: any, v: any) => console.log('change', e, v)} />
           </FormItem>
           <FormItem
             name="textarea"
@@ -188,8 +187,8 @@ export default () => {
                 validator: (rule, value) => {
                   if (!value || value.length < 2) {
                     return Promise.reject(new Error('长度必须大于2'));
-                    // callback('长度必须大于2');
                   }
+                  return null;
                 },
               },
             ]}

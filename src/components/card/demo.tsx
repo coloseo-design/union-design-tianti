@@ -1,7 +1,5 @@
-/* eslint-disable no-alert */
 import React from 'react';
-import Card from './index';
-import Icon from '../icon';
+import { Card, Icon } from '../index';
 
 const CardDemo = () => (
   <>
@@ -34,23 +32,6 @@ const CardDemo = () => (
         </div>
       </Card>
       <br />
-
-      {/* <Card  width={300}   titleHeight={50} style={{color:'red'}}
-      title='限制title高限制宽度我是超长的title我是超长的title我是超长的title我是超长的title我是超长的t
-      itle我是超长的title我是超长的title我是超长的title我是超长的title我是超长的title我是超长的tit
-      le我是超长的title我是超长的title我是超长的title我是超长的title' >
-        限制宽度我是超长的内容我是超长的内容我是超长的内容我是超长的内容我是超长的内容我是超长的内容我是超长的内容我是超长的内容我
-        是超长的内容我是超长的内容我是超长的内容
-        我是超长的内容我是超长的内容我是超长的内容我是超长的内容我是超长的内容我是超长的内容我是超长的内容我是超长的内容我是超长的内容
-      </Card>
-      <br/>
-
-      <Card  width={492} style={{color:'red'}} title='限制宽度我是超长的title我是超长的title我是超长的title我是超长的title
-      我是超长的title我是超长的title我是超长的title我是超长的title我是超长的title我是超长的title我是超长的title我是超长的titl
-      e我是超长的title我是超长的title我是超长的title' >
-        限制宽度我是超长的内容我是超长的内容我是超长的内容我是超长的内容我是超长的内容我是超长的内容我是超长的内容我是超长的内容我是超长的内容我是超长的内容我是超长的内容我是超长的
-        内容我是超长的内容我是超长的内容我是超长的内容我是超长的内容我是超长的内容我是超长的内容我是超长的内容我是超长的内容
-      </Card> */}
 
       <Card title="我是超长的title我是超长的title我是超长的title我是超长的title我是超长的title我是超长的title我是超长的title我是超长
       的title我是超长的title我是超长的title我是超长的title我是超长的title我是超长的title我是超长的title我是超长的title"

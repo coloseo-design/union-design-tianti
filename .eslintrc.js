@@ -36,7 +36,7 @@ module.exports = {
     'import/no-extraneous-dependencies': 'off',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     'linebreak-style': 'off',
-
+    'react/no-array-index-key': 'off',
   },
   settings: {
     'import/resolver': {

@@ -1,7 +1,5 @@
-/* eslint-disable react/jsx-one-expression-per-line */
 import React from 'react';
-import Tabs from './index';
-import Icon from '../icon';
+import { Tabs, Icon } from '../index';
 
 const { Pane } = Tabs;
 
@@ -19,7 +17,15 @@ const TabsDemo = () => (
         <Pane tab="五个字页签" key="3">
           <div style={{ background: 'green' }}>c</div>
         </Pane>
-        <Pane key="4" tab={<span><Icon type="apps" />带icon页签</span>}>
+        <Pane
+          key="4"
+          tab={(
+            <span>
+              <Icon type="apps" />
+              带icon页签
+            </span>
+          )}
+        >
           <div style={{ background: 'purple' }}>d</div>
         </Pane>
       </Tabs>
@@ -36,7 +42,15 @@ const TabsDemo = () => (
         <Pane tab="五个字页签" key="3">
           <div style={{ background: 'green' }}>c</div>
         </Pane>
-        <Pane key="4" tab={<span><Icon type="apps" />带icon页签</span>}>
+        <Pane
+          key="4"
+          tab={(
+            <span>
+              <Icon type="apps" />
+              带icon页签
+            </span>
+)}
+        >
           <div style={{ background: 'purple' }}>d</div>
         </Pane>
       </Tabs>
@@ -53,7 +67,15 @@ const TabsDemo = () => (
         <Pane tab="五个字页签" key="3">
           <div style={{ background: 'green' }}>c</div>
         </Pane>
-        <Pane key="4" tab={<span><Icon type="apps" />带icon页签</span>}>
+        <Pane
+          key="4"
+          tab={(
+            <span>
+              <Icon type="apps" />
+              带icon页签
+            </span>
+)}
+        >
           <div style={{ background: 'purple' }}>d</div>
         </Pane>
       </Tabs>

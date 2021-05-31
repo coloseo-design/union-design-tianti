@@ -1,5 +1,5 @@
 import React from 'react';
-import { Pagination } from '..';
+import { Pagination } from '../index';
 
 const Demo = () => (
   <div style={{ minHeight: '40vh', padding: 40 }}>

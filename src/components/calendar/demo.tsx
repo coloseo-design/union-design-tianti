@@ -1,7 +1,6 @@
-/* eslint-disable no-console */
 import React from 'react';
 
-import Calendar from './index';
+import { Calendar } from '../index';
 
 const CalendarDemo = () => (
   <div style={{ display: 'flex', flexFlow: 'column nowrap', alignItems: 'flex-start' }}>

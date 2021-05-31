@@ -1,5 +1,5 @@
 import React from 'react';
-import Badge from './index';
+import { Badge } from '../index';
 
 const BadgeDemo = () => (
   <div style={{ height: 600, padding: 100 }}>

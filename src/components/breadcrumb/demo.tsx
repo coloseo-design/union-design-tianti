@@ -1,5 +1,5 @@
 import React from 'react';
-import Breadcrumb from './index';
+import { Breadcrumb } from '../index';
 
 const BreadcrumbDemo = () => (
   <Breadcrumb>

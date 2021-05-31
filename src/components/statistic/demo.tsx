@@ -1,6 +1,5 @@
 import React from 'react';
-import Statistic from './index';
-import Icon from '../icon';
+import { Statistic, Icon } from '../index';
 
 const StatisticDemo = () => (
   <div>

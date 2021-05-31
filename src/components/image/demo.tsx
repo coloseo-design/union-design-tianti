@@ -1,6 +1,5 @@
 import React from 'react';
-import Image from './index';
-import Button from '../button';
+import { Image, Button } from '../index';
 
 const ImageDemo = () => {
   const [random, setRandom] = React.useState();

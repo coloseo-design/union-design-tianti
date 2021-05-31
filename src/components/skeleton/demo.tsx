@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { Button } from '..';
-import Skeleton from './index';
+import { Button, Skeleton } from '../index';
 
 const SkeletonDemo = () => {
   const [show, setShow] = useState(false);

@@ -1,10 +1,9 @@
 import React from 'react';
-import PopConfirm from './index';
-import Button from '../button';
+import { PopConfirm, Button } from '../index';
 
 const PopconfirmDemo: React.FC<unknown> = () => {
   const handleVisibleChange = (visible: boolean) => {
-    // console.log('-visible-', visible);
+    console.log('-visible-', visible);
   };
   const [loading, setLoading] = React.useState(false);
   const [visible, setVisible] = React.useState(false);
@@ -33,7 +32,6 @@ const PopconfirmDemo: React.FC<unknown> = () => {
           getPopupContainer={() => document.getElementById('pop') || document.body}
           okButtonProps={{ loading }}
           onConfirm={onConfirm}
-          // visible={visible}
           overlayStyle={{ maxWidth: 200 }}
         >
           <Button onClick={handleClick}>topLeft</Button>
@@ -43,7 +41,6 @@ const PopconfirmDemo: React.FC<unknown> = () => {
           placement="top"
           onVisibleChange={handleVisibleChange}
           trigger="hover"
-          // visible={visible}
         >
           <Button style={{ margin: 24 }}>top</Button>
         </PopConfirm>

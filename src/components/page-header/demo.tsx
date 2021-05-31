@@ -1,5 +1,5 @@
 import React from 'react';
-import PageHeader from './index';
+import { PageHeader } from '../index';
 
 const PageHeaderDemo: React.FC<unknown> = () => (
   <div style={{ padding: 100 }}>

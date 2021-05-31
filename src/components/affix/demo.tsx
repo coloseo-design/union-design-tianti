@@ -1,9 +1,7 @@
 import React, { useEffect } from 'react';
-import Affix from './index';
-import Button from '../button';
+import { Affix, Button } from '../index';
 
 const AffixDemo = () => {
-  // const [target, setTarget] = React.useState(window);
   const t = React.useRef(window);
   useEffect(() => {
     console.log('demo1', t.current);
@@ -15,7 +13,6 @@ const AffixDemo = () => {
         <div className="target" ref={t}>
           这是开头
           <Affix offsetTop={20} target={() => t.current}>
-            {/* <Affix offsetTop={20} target={() => window}> */}
             <Button type="primary">固定在容器上方20px</Button>
           </Affix>
           这是结尾
@@ -32,8 +29,6 @@ const AffixDemo = () => {
           </div>
           这是开头2
           <Affix offsetTop={20} offsetBottom={20} target={() => t.current}>
-            {/* <Affix offsetTop={20} offsetBottom={20} target={() => window}> */}
-            {/* <div className="inner" /> */}
             <Button type="danger">固定在容器上方和下方20px</Button>
           </Affix>
           这是结尾2
@@ -53,7 +48,6 @@ const AffixDemo = () => {
       <div className="content">
         <div className="target2">
           这是开头
-          {/* <Affix offsetTop={20} target={() => t.current}> */}
           <Affix offsetTop={20} target={() => window}>
             <Button type="primary">固定在页面上方20px</Button>
           </Affix>
@@ -70,7 +64,6 @@ const AffixDemo = () => {
             此大年也。而彭祖乃今以久特闻，众人匹之，不亦悲乎？
           </div>
           这是开头2
-          {/* <Affix offsetTop={20} offsetBottom={20} target={() => t.current}> */}
           <Affix offsetTop={20} offsetBottom={20} target={() => window}>
             <Button type="danger">固定在页面上方和下方20px</Button>
           </Affix>

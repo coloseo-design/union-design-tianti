@@ -1,7 +1,5 @@
-/* eslint-disable max-len */
 import React from 'react';
-import Layout from './index';
-import Menu from '../menu';
+import { Layout, Menu } from '../index';
 
 const {
   Header, Footer, Sider, Content,
@@ -12,7 +10,7 @@ const LayoutDemo = () => {
   const headerStyle = { background: '#7dbcea' };
   const contentStyle = { background: 'rgba(16, 142, 233, 1)', height: 120, lineHeight: '120px' };
   const siderStyle = { background: '#3ba0e9', lineHeight: '120px' };
-  const [dataT, setData] = React.useState();
+  const [dataT, setData] = React.useState(false);
   const [collapsed, setCollapsed] = React.useState(false);
   React.useEffect(() => {
     setTimeout(() => {
@@ -53,7 +51,11 @@ const LayoutDemo = () => {
       <h3>侧边布局</h3>
       <Layout>
         {dataT && (
-        <Sider collapsible collapsed={collapsed} onCollapse={(_collapsed) => { setCollapsed(_collapsed); }}>
+        <Sider
+          collapsible
+          collapsed={collapsed}
+          onCollapse={(_collapsed) => { setCollapsed(_collapsed); }}
+        >
           logo
           <Menu theme="dark">
             <Menu.Item icon="image">
