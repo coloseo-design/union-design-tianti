@@ -11,8 +11,8 @@
   "typings": "lib/index.d.ts",
   "scripts": {
     "lint": "union-tool run lint source=src/components",
-    "compile": "union-tool run compile source=src/components",
-    "dev": "union-tool run dev",
+    "compile": "node injector.js env=production && union-tool run compile source=src/components",
+    "dev": "node injector.js env=development && union-tool run dev",
     "commit": "npx git-cz",
     "init:commit": "npx commitizen init cz-conventional-changelog --yarn --dev --exact",
     "version": "conventional-changelog -p angular -i CHANGELOG.md -s && git add CHANGELOG.md",

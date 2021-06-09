@@ -8,3 +8,6 @@ src/site/docs/
 src/site/demos/
 src/site/dist/
 .DS_Store
+.yarnrc
+.npmrc
+yarn.lock

@@ -15,7 +15,7 @@ export interface IconProps extends Pick<BaseIconProps, 'onClick'> {
 
 const Icon = (props: Omit<IconProps, 'ref'>, ref: React.ForwardedRef<HTMLSpanElement>) => {
   const { type, ...rest } = props;
-  if (type === 'loading' || type === 'loading_circle') {
+  if (type?.startsWith('loading')) {
     Object.assign(rest, {
       spin: true,
     });
