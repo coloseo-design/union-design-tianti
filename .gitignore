@@ -11,3 +11,4 @@ src/site/dist/
 .yarnrc
 .npmrc
 yarn.lock
+package-lock.json

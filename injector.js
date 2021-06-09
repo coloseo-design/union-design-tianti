@@ -33,9 +33,7 @@ fs.writeFileSync(config.npm.filename, config.npm.content[env]);
 fs.writeFileSync(config.yarn.filename, config.yarn.content[env]);
 
 try {
-  fs.statSync('yarn.lock');
   fs.unlinkSync('yarn.lock');
-  fs.statSync('package-lock.json');
   fs.unlinkSync('package-lock.json');
 } catch (e) {
 }
