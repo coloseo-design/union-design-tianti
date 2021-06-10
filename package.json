@@ -11,7 +11,7 @@
   "typings": "lib/index.d.ts",
   "scripts": {
     "lint": "union-tool run lint source=src/components",
-    "compile": "node injector.js env=production && union-tool run compile source=src/components",
+    "compile": "node injector.js env=development && union-tool run compile source=src/components",
     "dev": "node injector.js env=development && union-tool run dev",
     "commit": "npx git-cz",
     "init:commit": "npx commitizen init cz-conventional-changelog --yarn --dev --exact",
@@ -70,5 +70,8 @@
   },
   "engines": {
     "node": ">=10"
+  },
+  "publishConfig": {
+    "registry": "https://nexus.coloseo.cn/repository/npm-hosted/"
   }
 }

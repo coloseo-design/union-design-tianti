@@ -14,14 +14,20 @@ const config = {
     filename: '.npmrc',
     content: {
       production: 'registry=http://ccp.tianti.tg.unicom.local/artifactory/api/npm/sjxt-npm-virtual/',
-      development: 'registry=http://192.168.0.132:4873/',
+      development: `registry=https://nexus.coloseo.cn/repository/npm-all/
+email=devops@coloseo.cn
+always-auth=true
+_auth="bnBtOmNvbG9zZW8xMjM="`,
     },
   },
   yarn: {
     filename: '.yarnrc',
     content: {
       production: 'registry "http://ccp.tianti.tg.unicom.local/artifactory/api/npm/sjxt-npm-virtual/"',
-      development: 'registry "http://192.168.0.132:4873/"',
+      development: `registry "https://nexus.coloseo.cn/repository/npm-all/"
+email "devops@coloseo.cn"
+always-auth true
+_auth "bnBtOmNvbG9zZW8xMjM="`,
     },
   },
 };
