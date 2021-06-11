@@ -1,4 +1,5 @@
 const fs = require('fs');
+const packageConfig = require('./package.json');
 
 const args = process.argv.slice(2);
 const parsedArgs = args.reduce((p, c) => {
@@ -10,6 +11,10 @@ const parsedArgs = args.reduce((p, c) => {
 }, {});
 
 const config = {
+  publishConfig: {
+    production: 'http://ccp.tianti.tg.unicom.local/artifactory/api/npm/sjxt-npm-virtual/',
+    development: 'https://nexus.coloseo.cn/repository/npm-hosted/',
+  },
   npm: {
     filename: '.npmrc',
     content: {
@@ -37,7 +42,12 @@ if (!env) {
 }
 fs.writeFileSync(config.npm.filename, config.npm.content[env]);
 fs.writeFileSync(config.yarn.filename, config.yarn.content[env]);
-
+Object.assign(packageConfig, {
+  publishConfig: {
+    registry: config.publishConfig[env],
+  },
+});
+fs.writeFileSync('package.json', JSON.stringify(packageConfig));
 try {
   fs.unlinkSync('yarn.lock');
   fs.unlinkSync('package-lock.json');
