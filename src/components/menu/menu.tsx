@@ -54,7 +54,7 @@ export type MenuProps = BasePropsV2<{
   /** popupMenu 最大高度 */
   popupMenuMaxHeight: number;
   /** 点击 Menu.Item 调用此函数 */
-  onClick: (key: string, keyPath: string[]) => void;
+  onClick: (key: string, keyPath: string[], item: unknown) => void;
   /** 被选中时调用 */
   onSelect: (key: string, keyPath: string[]) => void;
   /** 取消选中时调用，仅在 multiple 生效 */
@@ -75,7 +75,7 @@ export type MenuState = BaseStateV2<{
   menuPopups: [key: string, view: ReactNode][];
   handleLevelLeft: (level: number) => number;
   handleSubMenuOnClick: (key: string) => void;
-  handleItemOnClick: (key: string, keyPath: string[]) => void;
+  handleItemOnClick: (key: string, keyPath: string[], ext: unknown) => void;
   openMenuPopup: (level: number, key: string, dom?: HTMLDivElement, children?: ReactNode) => void;
   closeMenuPopup: () => void;
 }>;
@@ -377,7 +377,7 @@ export default class Menu extends MenuBase<MenuProps, MenuState> {
     }
   }
 
-  private handleItemOnClick = (key: string, keyPath: string[]) => {
+  private handleItemOnClick = (key: string, keyPath: string[], ext: any) => {
     const {
       onClick, onSelect, onDeselect, multiple,
     } = this.props;
@@ -406,6 +406,6 @@ export default class Menu extends MenuBase<MenuProps, MenuState> {
       onSelect!(key, keyPath);
     }
 
-    onClick!(key, keyPath);
+    onClick!(key, keyPath, ext);
   };
 }

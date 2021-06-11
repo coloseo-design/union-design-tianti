@@ -97,9 +97,7 @@ export class Item extends MenuBase<ItemProps> {
   private handleItemOnClick = () => {
     const { _key, _keyPath } = this.props;
     const { handleItemOnClick, menuPopups = [], closeMenuPopup } = this.menuCtx;
-
-    handleItemOnClick!(_key!, _keyPath!);
-
+    handleItemOnClick!(_key!, _keyPath!, this.props);
     if (menuPopups.length > 0) closeMenuPopup!();
   };
 

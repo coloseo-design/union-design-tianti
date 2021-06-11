@@ -81,7 +81,7 @@ const Demo = () => {
             表单页
           </Menu.Item>
           <Menu.SubMenu key="4" title="表单页2">
-            <Menu.Item key="5">
+            <Menu.Item key="5" data-icon="abc" data-c="12">
               表单页2
             </Menu.Item>
           </Menu.SubMenu>
