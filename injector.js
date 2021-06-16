@@ -47,7 +47,7 @@ Object.assign(packageConfig, {
     registry: config.publishConfig[env],
   },
 });
-fs.writeFileSync('package.json', JSON.stringify(packageConfig));
+// fs.writeFileSync('package.json', JSON.stringify(packageConfig));
 try {
   fs.unlinkSync('yarn.lock');
   fs.unlinkSync('package-lock.json');
