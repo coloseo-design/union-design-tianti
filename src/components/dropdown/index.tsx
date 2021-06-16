@@ -1,4 +1,4 @@
 import './styles/index';
 
-export { default } from './drop-down';
+export { default } from './dropdown';
 // export { default as DropButton } from './button';

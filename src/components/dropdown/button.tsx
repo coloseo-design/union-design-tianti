@@ -3,7 +3,7 @@
 import React from 'react';
 import classNames from 'classnames';
 import Icon from '../icon';
-import Portal from '../pop-confirm/portal';
+import Portal from '../popconfirm/portal';
 import { ConfigConsumer, ConfigConsumerProps } from '../config-provider';
 
 export interface DropMenuProps {

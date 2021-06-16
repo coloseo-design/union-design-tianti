@@ -1,3 +1,3 @@
-import './style/index';
+import './styles/index';
 
 export { default } from './skeleton';

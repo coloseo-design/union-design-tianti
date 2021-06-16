@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react';
 import classNames from 'classnames';
 import DropButton from './button';
-import Portal from '../pop-confirm/portal';
+import Portal from '../popconfirm/portal';
 import { ConfigConsumer, ConfigConsumerProps } from '../config-provider';
 import { MENU_TAG_MENU } from '../menu/menu';
 
