@@ -120,6 +120,7 @@ class AutoComplete extends React.Component<AutoCompleteProps, autoState> {
 
   handleClick = (event: React.MouseEvent<HTMLDivElement, MouseEvent>): void => {
     event.stopPropagation();
+    event.nativeEvent.stopImmediatePropagation();
   }
 
   renderAuto = ({ getPrefixCls }: ConfigConsumerProps) => {
