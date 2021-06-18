@@ -15,13 +15,13 @@ subtitle: 描述列表
 
 ## Descriptions
 
-| 属性 | 说明 | 类型 | 默认值 | 版本 |
-| --- | --- | --- | --- | --- |
-| bordered | 是否展示边框 | boolean | false |  |
+| 属性 | 说明 | 类型 | 默认值 |
+| --- | ---  | --- | ---   |
+| bordered | 是否展示边框 | boolean | false |
 
 ## Descriptions.Item
 
-| 属性 | 说明 | 类型 | 默认值 | 版本 |
-| --- | --- | --- | --- | --- |
-| label | 内容的描述 | ReactNode | - |  |
-| span | 包含列的数量 | number | 1 |  |
+| 属性 | 说明 | 类型 | 默认值 |
+| --- | --- | ---  | ---   |
+| label | 内容的描述 | ReactNode | - |
+| span | 包含列的数量 | number | 1 |

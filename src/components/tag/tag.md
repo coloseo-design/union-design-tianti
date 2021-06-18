@@ -4,25 +4,12 @@ type: 通用
 title: Tag
 subtitle: 标签
 ---
-# 字段和功能简单说明
-
-## Tag
-
+## API
   
-  className?: string; -- 自定义样式类名
-
-  color?: LiteralUnion<PresetColorType, string>;-- 自定义样式颜色   预设('pink', 'red', 'yellow', 'orange', 'cyan', 'green', 'blue', 'purple', 'geekblue', 'magenta', 'volcano', 'gold', 'lime',)
-  
-  closable?: boolean; -- 标签是否可关闭
-
-  visible?: boolean; -- 标签是否可见
-
-  onClose?: (e: React.MouseEvent<HTMLElement>) => void; -- 点击关闭图标响应函数
-
-  style?: React.CSSProperties; -- 用户自定义样式
-
-  icon?: React.ReactNode; -- 标签前插入icon
-
-  ref?: React.MutableRefObject<HTMLSpanElement>; -- React.forwardRef传递函数组件ref到<span>dom
-
-
+| 属性 | 说明 | 类型 | 默认值 |
+| --- | ---  | --- | ---   |
+| color | 标签色 | string | - |
+| closable | 标签是否可以关闭 | boolean | false |
+| visible | 是否显示标签 | boolean | true |
+| onClose | 关闭时的回调 | (e: React.MouseEvent<HTMLElement>) => void | - |
+| icon | 标签前插入icon | ReactNode | - |

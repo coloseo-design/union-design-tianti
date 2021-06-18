@@ -5,8 +5,10 @@ title: PopOver
 subtitle: 气泡卡片
 ---
 
-## 字段和功说明
+## API
 
-content: 卡片内容  类型： string|ReactNode 默认值： 无
+| 属性 | 说明 | 类型 | 默认值 |
+| --- | --- | ---  | ---   |
+| content | 卡片内容 | ReactNode \| string | - |
 
-### Popover 更多属性参考Popconfirm
+更多属性请参考Tooltip

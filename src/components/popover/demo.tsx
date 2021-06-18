@@ -1,5 +1,5 @@
 import React from 'react';
-import { Popover, Button } from './index';
+import { Popover, Button } from '../index';
 
 const PopoverDemo = () => (
   <div style={{ paddingTop: 120 }}>

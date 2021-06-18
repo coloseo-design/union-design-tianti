@@ -1,13 +1,10 @@
 ---
-category: FunctionComponent
+category: Components
 type: 通用
 title: Tabs
 subtitle: 标签页
 ---
-# 字段和功能简单说明
-
-## Tabs
-
+## API
   
 | 属性 | 说明 | 类型 | 默认值 |
 | --- | ---  | --- | ---   |

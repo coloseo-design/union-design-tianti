@@ -27,21 +27,21 @@ Footer：底部布局，自带默认样式，其下可嵌套任何元素，只�
 
 ## Layout
 
-| 属性 | 说明 | 类型 | 默认值 | 版本 |
-| --- | --- | --- | --- | --- |
-| className | 容器 className | string | - |  |
-| style | 指定样式 | CSSProperties | - |  |
+| 属性 | 说明 | 类型 | 默认值 |
+| --- | --- | ---  | ---   |
+| className | 容器 className | string | - |
+| style | 指定样式 | CSSProperties | - |
 
 ## Layout.Sider
 
-| 属性 | 说明 | 类型 | 默认值 | 版本 |
-| --- | --- | --- | --- | --- |
-| className | 容器 className | string | - |  |
-| style | 指定样式 | CSSProperties | - |  |
-| collapsed | 当前收起状态 | boolean | - |  |
-| collapsedWidth | 收缩宽度 | number | 80 |  |
-| collapsible | 是否可收起 | boolean | false |  |
-| defaultCollapsed | 是否默认收起 | boolean | false |  |
-| theme | 主题颜色 | light、dark | dark |  |
-| onCollapse | 展开-收起时的回调函数 | (collapsed) => {} | - |  |
-| width | 宽度 | number | 200 |  |
+| 属性 | 说明 | 类型 | 默认值 |
+| --- | --- | ---  | ---   |
+| className | 容器 className | string | - |
+| style | 指定样式 | CSSProperties | - |
+| collapsed | 当前收起状态 | boolean | - |
+| collapsedWidth | 收缩宽度 | number | 80 |
+| collapsible | 是否可收起 | boolean | false |
+| defaultCollapsed | 是否默认收起 | boolean | false |
+| theme | 主题颜色 | light、dark | dark |
+| onCollapse | 展开-收起时的回调函数 | (collapsed) => {} | - |
+| width | 宽度 | number | 200 |

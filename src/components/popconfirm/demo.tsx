@@ -1,5 +1,5 @@
 import React from 'react';
-import { PopConfirm, Button } from '../index';
+import { Popconfirm, Button } from '../index';
 
 const PopconfirmDemo: React.FC<unknown> = () => {
   const handleVisibleChange = (visible: boolean) => {
@@ -21,7 +21,7 @@ const PopconfirmDemo: React.FC<unknown> = () => {
   return (
     <div id="pop" style={{ padding: 120 }}>
       <div>
-        <PopConfirm
+        <Popconfirm
           title={(
             <div>
               你是否确定这是一个气泡确认框kkk
@@ -35,103 +35,103 @@ const PopconfirmDemo: React.FC<unknown> = () => {
           overlayStyle={{ maxWidth: 200 }}
         >
           <Button onClick={handleClick}>topLeft</Button>
-        </PopConfirm>
-        <PopConfirm
+        </Popconfirm>
+        <Popconfirm
           title="你是否确定这是一个气泡确认框"
           placement="top"
           onVisibleChange={handleVisibleChange}
           trigger="hover"
         >
           <Button style={{ margin: 24 }}>top</Button>
-        </PopConfirm>
-        <PopConfirm
+        </Popconfirm>
+        <Popconfirm
           title="你是否确定这是一个气泡确认框？"
           placement="topRight"
         >
           <Button style={{ margin: 24 }}>topRight</Button>
-        </PopConfirm>
+        </Popconfirm>
       </div>
       <div>
         <div style={{ display: 'inline-block' }}>
           <div>
-            <PopConfirm
+            <Popconfirm
               title="你是否确定这是一个气泡确认框？"
               placement="leftTop"
             >
               <Button style={{ margin: 24, marginLeft: 0 }}>leftTop</Button>
-            </PopConfirm>
+            </Popconfirm>
           </div>
           <div>
-            <PopConfirm
+            <Popconfirm
               title="你是否确定这是一个气泡确认框？"
               placement="left"
             >
               <Button style={{ margin: 24, marginLeft: 0 }}>left</Button>
-            </PopConfirm>
+            </Popconfirm>
           </div>
           <div>
-            <PopConfirm
+            <Popconfirm
               title="你是否确定这是一个气泡确认框？"
               placement="leftBottom"
             >
               <Button style={{ margin: 24, marginLeft: 0 }}>leftBottom</Button>
-            </PopConfirm>
+            </Popconfirm>
           </div>
         </div>
         <div style={{ display: 'inline-block', paddingLeft: 64 }}>
           <div>
-            <PopConfirm
+            <Popconfirm
               title="你是否确定这是一个气泡确认框？"
               placement="rightTop"
             >
               <Button style={{ margin: 24 }}>rightTop</Button>
-            </PopConfirm>
+            </Popconfirm>
           </div>
           <div>
-            <PopConfirm
+            <Popconfirm
               title="你是否确定这是一个气泡确认框？"
               placement="right"
             >
               <Button style={{ margin: 24 }}>right</Button>
-            </PopConfirm>
+            </Popconfirm>
           </div>
           <div>
-            <PopConfirm
+            <Popconfirm
               title="你是否确定这是一个气泡确认框？"
               placement="rightBottom"
             >
               <Button style={{ margin: 24 }}>rightBottom</Button>
-            </PopConfirm>
+            </Popconfirm>
           </div>
         </div>
       </div>
       <div>
-        <PopConfirm
+        <Popconfirm
           title="你是否确定这是一个气泡确认框？"
           placement="bottomLeft"
         >
           <Button>bottomLeft</Button>
-        </PopConfirm>
-        <PopConfirm
+        </Popconfirm>
+        <Popconfirm
           title="你是否确定这是一个气泡确认框？"
           placement="bottom"
         >
           <Button style={{ margin: 24 }}>bottom</Button>
-        </PopConfirm>
-        <PopConfirm
+        </Popconfirm>
+        <Popconfirm
           title="你是否确定这是一个气泡确认框？"
           placement="bottomRight"
         >
           <Button style={{ margin: 24 }}>bottomRight</Button>
-        </PopConfirm>
+        </Popconfirm>
       </div>
       <div style={{ marginTop: 34 }}>
-        <PopConfirm
+        <Popconfirm
           title="你是否确定这是一个气泡确认框？"
           placement="top"
         >
           <span>top</span>
-        </PopConfirm>
+        </Popconfirm>
       </div>
     </div>
   );

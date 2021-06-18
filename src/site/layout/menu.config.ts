@@ -48,7 +48,7 @@ export default [
       },
       {
         title: 'Dropdown 下拉菜单',
-        key: 'drop-down',
+        key: 'dropdown',
       },
       {
         title: 'Breadcrumb 面包屑',
@@ -182,7 +182,7 @@ export default [
       },
       {
         title: 'Popover 气泡卡片',
-        key: 'pop-over',
+        key: 'popover',
       },
       {
         title: 'Tooltip 文字提示',
@@ -241,7 +241,7 @@ export default [
       },
       {
         title: 'Popconfirm 气泡确认框',
-        key: 'pop-confirm',
+        key: 'popconfirm',
       },
       {
         title: 'Spin 加载中',

@@ -19,8 +19,8 @@ subtitle: 进度条
 
 ## Progress
 
-| 属性 | 说明 | 类型 | 默认值 | 版本 |
-| --- | --- | --- | --- | --- |
-| percent | 百分比 | number | 0 |  |
-| status | 状态，可选：success exception normal | string | normal |  |
-| size | 大小 | string | - |  |
+| 属性 | 说明 | 类型 | 默认值 |
+| --- | ---  | --- | ---   |
+| percent | 百分比 | number | 0 |
+| status | 状态，可选：success exception normal | string | normal |
+| size | 大小 | string | - |

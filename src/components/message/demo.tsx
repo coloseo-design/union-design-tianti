@@ -1,5 +1,5 @@
 import React from 'react';
-import { Message, Button } from './index';
+import { Message, Button } from '../index';
 
 const MessageDemo = () => (
   <div style={{

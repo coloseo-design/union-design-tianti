@@ -19,14 +19,14 @@ subtitle: 面包屑
 
 ## Breadcrumb
 
-| 属性 | 说明 | 类型 | 默认值 | 版本 |
-| --- | --- | --- | --- | --- |
-| separator | 分隔符自定义 | ReactNode | > |  |
+| 属性 | 说明 | 类型 | 默认值 |
+| --- | ---  | --- | ---   |
+| separator | 分隔符自定义 | ReactNode | > |
 
 ## Breadcrumb.Item
 
-| 属性 | 说明 | 类型 | 默认值 | 版本 |
-| --- | --- | --- | --- | --- |
-| className | 自定义类名 | string | - |  |
-| href | 链接的目的地 | string | - |  |
-| onClick | 单击事件 | (e:MouseEvent) => void | - |  |
+| 属性 | 说明 | 类型 | 默认值 |
+| ---  | --- | --- | ---   |
+| className | 自定义类名 | string |
+| href | 链接的目的地 | string | - |
+| onClick | 单击事件 | (e:MouseEvent) => void | - |
