@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-import { DatePicker, Button } from '../index';
+import { DatePicker } from '../index';
 import { PickerSize } from './types';
 
 const DatePickerDemo = () => {
   const [size, setSize] = React.useState('middle');
-  const changeSize = (s: PickerSize) => {
+  const changeSize = (s: PickerSize) => () => {
     setSize(s);
   };
   const commonProps = {
@@ -81,3 +81,5 @@ const DatePickerDemo = () => {
     </div>
   );
 };
+
+export default DatePickerDemo;
