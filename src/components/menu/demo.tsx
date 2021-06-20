@@ -15,8 +15,14 @@ const Demo = () => {
         <Switch onChange={(s) => setTheme(s ? 'dark' : 'light')} />
       </div>
 
-      <div style={{ width: 180, height: 700, backgroundColor: 'red' }}>
-        <Menu theme={theme} mode="vertical" inlineCollapsedIcon>
+      <div style={{
+        width: 180,
+        height: '50vh',
+        position: 'relative',
+        backgroundColor: 'red',
+      }}
+      >
+        <Menu theme={theme} style={{ height: '100%' }} mode="vertical" inlineCollapsedIcon>
           <Menu.Item icon="image">
             工作台1
           </Menu.Item>
@@ -64,7 +70,7 @@ const Demo = () => {
       <div style={{ height: 20 }} />
 
       <Menu
-        style={{ height: '60vh', width: 300 }}
+        style={{ height: '40vh', width: 300 }}
         onClick={console.log}
         theme={theme}
         mode="inline"
@@ -106,7 +112,7 @@ const Demo = () => {
 
       <div style={{ height: 20 }} />
 
-      <Menu style={{ width: 300 }}>
+      <Menu style={{ width: 300, height: '40vh' }}>
         <Menu.Item>
           工作台1
         </Menu.Item>
@@ -140,7 +146,11 @@ const Demo = () => {
 
       <div style={{ height: 20 }} />
 
-      <Menu mode="horizontal" style={{ width: '100%', position: 'relative' }} onSelect={console.log}>
+      <Menu
+        mode="horizontal"
+        style={{ width: '100%' }}
+        onSelect={console.log}
+      >
         <Menu.Item>
           工作台1
         </Menu.Item>

@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import React, {
-  createRef,
   CSSProperties,
   ReactElement,
   ReactNode,
@@ -47,6 +46,8 @@ export type MenuProps = BasePropsV2<{
   inlineIndent: number;
   /** inline 时菜单是否收起状态 */
   inlineCollapsed: boolean;
+  /** inline 时菜单收起宽度 */
+  inlineCollapsedWidth: number;
   /** inline 时是否展示收起菜单图标 */
   inlineCollapsedIcon: boolean;
   /** subMenu 最大高度 */
@@ -60,10 +61,7 @@ export type MenuProps = BasePropsV2<{
   /** 取消选中时调用，仅在 multiple 生效 */
   onDeselect: (key: string, keyPath: string[]) => void;
 
-  who: 'self' | 'drop-down';
   popupClassName: string;
-  inlineCollapsedMinWidth: number;
-  inlineCollapsedMaxWidth: number;
   onCollapsed: (collapsed: boolean) => void;
 }>;
 
@@ -99,15 +97,11 @@ export default class Menu extends MenuBase<MenuProps, MenuState> {
     inlineCollapsedIcon: false,
     multiple: false,
     triggerSubMenuAction: 'hover',
+    inlineCollapsedWidth: 62,
     onClick: () => null,
     onSelect: () => null,
     onDeselect: () => null,
-    who: 'self',
   };
-
-  private menuMaxWidth?: number;
-
-  private menuRef = createRef<HTMLDivElement>();
 
   public constructor(props: MenuProps) {
     super(props);
@@ -126,18 +120,11 @@ export default class Menu extends MenuBase<MenuProps, MenuState> {
     if (preProps.inlineCollapsed !== this.props.inlineCollapsed) {
       this.setState({ inlineCollapsed: this.props.inlineCollapsed ?? false });
     }
-
-    if (this.props.inlineCollapsed) {
-      this.menuMaxWidth = this.menuRef.current?.offsetWidth;
-    }
   };
 
   public componentDidMount = () => {
     document.body.addEventListener('mouseover', this.bodyOnMouseOver);
     document.body.addEventListener('click', this.bodyOnClick);
-    if (this.props.inlineCollapsed) {
-      this.menuMaxWidth = this.menuRef.current?.offsetWidth;
-    }
   };
 
   public componentWillUnmount = () => {
@@ -195,7 +182,12 @@ export default class Menu extends MenuBase<MenuProps, MenuState> {
   };
 
   private initState = () => {
-    const { defaultSelectedKeys, defaultOpenKeys, inlineCollapsed } = this.props;
+    const {
+      defaultSelectedKeys,
+      defaultOpenKeys,
+      inlineCollapsed,
+    } = this.props;
+
     this.state = {
       inlineCollapsed: inlineCollapsed ?? false,
       selectedKeys: defaultSelectedKeys ?? [],
@@ -215,8 +207,7 @@ export default class Menu extends MenuBase<MenuProps, MenuState> {
   protected getView = () => {
     const {
       mode, className, style, theme,
-      inlineCollapsedMinWidth = 62,
-      inlineCollapsedMaxWidth, who,
+      inlineCollapsedWidth,
     } = this.props;
 
     let { inlineCollapsedIcon } = this.props;
@@ -224,53 +215,40 @@ export default class Menu extends MenuBase<MenuProps, MenuState> {
 
     inlineCollapsedIcon = mode !== 'horizontal' && inlineCollapsedIcon;
 
-    const newStyle = {
-      width: '100%',
-      maxWidth: (() => {
-        if (inlineCollapsed) {
-          return inlineCollapsedMinWidth;
-        }
-        return inlineCollapsedMaxWidth ?? this.menuMaxWidth ?? 1000;
-      })(),
-      ...style,
-    };
-
-    if (who === 'drop-down' && !inlineCollapsedMaxWidth) {
-      newStyle.width = 206;
-    }
+    const { width = '100%', ...otherProps } = style ?? {};
 
     return (
-      <div
-        style={newStyle}
-        className={this.classNames(
-          className,
-          this.gpc(),
-        )}
-      >
-        {inlineCollapsedIcon && (
-          <div
-            onClick={this.inlineCollapsedIconOnClick}
-            className={this.classNames(
-              this.gpc('foldbtn'),
-              this.gpc(`${theme}`),
-            )}
-          >
-            <Icon type={inlineCollapsed ? 'right' : 'left'} />
-          </div>
-        )}
+      <>
         <div
-          ref={this.menuRef}
+          style={{
+            width: inlineCollapsed ? inlineCollapsedWidth : width,
+            ...otherProps,
+          }}
           data-menu-tag="menu"
           className={this.classNames(
-            this.gpc('children'),
-            this.gpc(`${mode}`),
+            className,
+            this.gpc(),
             this.gpc(`${theme}`),
           )}
         >
-          {this.handleChildren()}
+          <div className={this.gpc(`${mode}`)}>
+            {this.handleChildren()}
+          </div>
+
+          {inlineCollapsedIcon && (
+            <div
+              onClick={this.inlineCollapsedIconOnClick}
+              className={this.classNames(
+                this.gpc(`${theme}`),
+              )}
+            >
+              <Icon type={inlineCollapsed ? 'right' : 'left'} />
+            </div>
+          )}
         </div>
+
         {menuPopups!.map((item) => item[1])}
-      </div>
+      </>
     );
   };
 
@@ -345,7 +323,7 @@ export default class Menu extends MenuBase<MenuProps, MenuState> {
           className={popupClassName}
           data={[]}
           key={newKey}
-          top={top}
+          top={top - 20}
           left={right}
         >
           {children}

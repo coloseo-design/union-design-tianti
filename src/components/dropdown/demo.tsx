@@ -68,7 +68,7 @@ const DropdownDemo = () => {
           </Dropdown>
         </div>
         <div>
-          <Dropdown placement="bottomCenter" overlayStyle={{ width: '100px' }} trigger={['click']} overlay={menu} arrow>
+          <Dropdown placement="bottomCenter" overlayStyle={{ width: '200px' }} trigger={['click']} overlay={menu} arrow>
             <Button>click bottomCenter</Button>
           </Dropdown>
         </div>

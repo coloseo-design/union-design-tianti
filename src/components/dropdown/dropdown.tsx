@@ -212,9 +212,7 @@ class Dropdown extends React.Component<DropdownProps, DropdownState> {
               {overlay && React.isValidElement(overlay) ? (() => {
                 if ((overlay.type as unknown as Record<string, unknown>).tag === MENU_TAG_MENU) {
                   return React.cloneElement(overlay, {
-                    who: 'drop-down',
                     popupClassName: `${prefix}-menu`,
-                    inlineCollapsedMaxWidth: overlayStyle?.width,
                   });
                 }
                 return overlay;

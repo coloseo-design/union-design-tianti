@@ -106,7 +106,7 @@
 
 
 
-// button  
+// button
   &-btngroup {
     display: inline-block;
     margin: 6px;
@@ -256,53 +256,62 @@
 }
 
 @menu: ~"@{uni-prefix}-menu";
+@menu-dark: ~"@{menu}-dark";
+@menu-light: ~"@{menu}-light";
+@menu-vertical: ~"@{menu}-vertical";
+@menu-sub-menu: ~"@{menu}-sub-menu";
+@menu-item: ~"@{menu}-item";
+@menu-item-group: ~"@{menu}-item-group";
+@menu-item-selected: ~"@{menu}-item-selected";
+@menu-sub-menu-selected: ~"@{menu}-sub-menu-selected";
+@menu-title: ~"@{menu}-title";
+@menu-left-icon: ~"@{menu}-left-icon";
 
 .abcdefg() {
-  .vertical {
-    height: 100%;
+  .@{menu-light},
+  .@{menu-dark} {
+      color: rgba(0, 0, 0, 0.85);
+      background-color: #fff;
+  }
+
+  .@{menu-vertical} {
     box-shadow: none;
     padding: 3px 0 3px 0;
     overflow: auto;
     background-color: #fff;
 
-  .light,
-  .dark {
-      color: rgba(0, 0, 0, 0.85);
-      background-color: #fff;
-
-      &:hover{
-          background-color: @item-hover-bg;
-      }
-  }
-
-  div.sub-menu,
-  div.item,
-  div.item-group {
+    div.@{menu-sub-menu},
+    div.@{menu-item},
+    div.@{menu-item-group} {
       height: 28px;
       padding-right: 8px;
       font-size: 14px;
       line-height: 28px;
 
-      .left-icon {
+      .@{menu-left-icon} {
         float: left;
         margin-right: -6px;
+      }
+
+      .@{menu-title} {
+        line-height: 28px;
+        color: rgba(0, 0, 0, 0.85);
+        letter-spacing: 0.46px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow:ellipsis;
+      }
+
+      &:hover{
+        background-color: @item-hover-bg;
+      }
     }
 
-      .title {
-          line-height: 28px;
-          color: rgba(0, 0, 0, 0.85);
-          letter-spacing: 0.46px;
-          overflow: hidden;
-          white-space: nowrap;
-          text-overflow:ellipsis;
-      } 
-    }
-
-      div.item-selected,
-      div.item-selected.dark,
-      div.item-selected.light,
-      div.sub-menu-selected.dark,
-      div.sub-menu-selected.light {
+    div.@{menu-item-selected},
+    div.@{menu-item-selected}.@{menu-dark},
+    div.@{menu-item-selected}.@{menu-light},
+    div.@{menu-sub-menu-selected}.@{menu-dark},
+    div.@{menu-sub-menu-selected}.@{menu-light} {
       color: none;
       background-color: none;
 
@@ -315,16 +324,17 @@
 
 .@{dropDown} {
   &-containter {
-    .@{menu}-container,
+    .@{menu},
     .@{menu}-popup {
+      box-shadow: unset;
       .abcdefg();
     }
   }
 }
 
-.@{dropDown}-menu.@{menu}-container.@{menu}-popup {
+.@{dropDown}-menu.@{menu}.@{menu}-popup {
   .abcdefg();
-  .vertical {
+  .@{menu-vertical} {
     box-shadow: 2px 0 4px 0 rgba(147,147,147,0.35);
   }
 }

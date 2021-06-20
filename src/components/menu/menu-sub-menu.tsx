@@ -30,8 +30,6 @@ export class SubMenu extends MenuBase<SubMenuProps> {
 
   private subMenuRef = createRef<HTMLDivElement>();
 
-  private children!: ReactNode;
-
   protected getView = () => {
     const {
       title, icon, _level, _keyPath, _inItemGroup,
@@ -87,12 +85,14 @@ export class SubMenu extends MenuBase<SubMenuProps> {
             </>
           )}
         </div>
-        <div
-          className={this.gpc('children-container')}
-          style={this.childrenContainerStyle()}
-        >
-          {this.handleChildren()}
-        </div>
+        {mode === 'inline' && (
+          <div
+            className={this.gpc('children-container')}
+            style={this.childrenContainerStyle()}
+          >
+            {this.handleChildren()}
+          </div>
+        )}
       </>
     );
   };
@@ -113,7 +113,7 @@ export class SubMenu extends MenuBase<SubMenuProps> {
     const tags = [MENU_TAG_SUB_MENU, MENU_TAG_ITEM, MENU_TAG_ITEM_GROUP];
 
     let index = 0;
-    this.children = React.Children.map(children, (child) => {
+    const result = React.Children.map(children, (child) => {
       const type = ((child as ReactElement)?.type as unknown as { [key: string]: unknown }) ?? {};
       const tag = type.tag as string;
 
@@ -133,7 +133,7 @@ export class SubMenu extends MenuBase<SubMenuProps> {
       return null;
     });
 
-    return this.children;
+    return result;
   };
 
   private childrenContainerStyle = () => {
@@ -196,7 +196,7 @@ export class SubMenu extends MenuBase<SubMenuProps> {
     if (triggerSubMenuAction === 'click') {
       if (!this.subMenuRef.current) return;
       if (mode === 'horizontal' || mode === 'vertical' || inlineCollapsed) {
-        openMenuPopup!(_level!, _key!, this.subMenuRef.current, this.children);
+        openMenuPopup!(_level!, _key!, this.subMenuRef.current, this.handleChildren());
       }
     }
   };
@@ -209,6 +209,6 @@ export class SubMenu extends MenuBase<SubMenuProps> {
     if (triggerSubMenuAction === 'click') return;
     if (mode === 'inline' && !inlineCollapsed) return;
     if (!this.subMenuRef.current) return;
-    openMenuPopup!(_level!, _key!, this.subMenuRef.current, this.children);
+    openMenuPopup!(_level!, _key!, this.subMenuRef.current, this.handleChildren());
   };
 }
