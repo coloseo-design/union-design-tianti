@@ -17,13 +17,7 @@ subtitle: 锚点
 
 | 属性 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
-| style | 自定义样式 | CSSProperties | - |
+| options | 锚点选项 | { id: string, name: string }[] | - |
 | onChange | 监听锚点链接改变 | (currentActiveLink: string) => void | - |
-| onClick | click 事件的 handler | function(e: Event, link: Object) | - |
-
-## Anchor.Link
-
-| 属性 | 说明 | 类型 | 默认值 |
-| --- | ---  | --- | ---   |
-| href | 锚点链接 | string | - |
-| title | 文字内容 | ReactNode | - |
+| onClick | click 事件的 handler | (link: { id: string, name: string }, e: Event) => void | - |
+| getContainer | 指定滚动的容器 | () => HTMLElement | () => window |

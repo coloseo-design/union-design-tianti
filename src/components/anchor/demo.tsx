@@ -1,27 +1,17 @@
 import React from 'react';
 import { Anchor } from '../index';
 
-const { Link } = Anchor;
-
 const AnchorDemo = () => (
   <div>
     <Anchor
-      style={{
-        position: 'fixed', top: 100, right: 200,
-      }}
-    >
-      <Link href="#A" title="A demo" />
-      <Link href="#B" title="B demo" />
-      <Link href="#C" title="C demo" />
-      <Link href="#D" title="D demo" />
-      <Link href="#E" title="E demo" />
-    </Anchor>
+      options={[{ id: 'a', name: 'a-demoa-demoa-demoa-demoa-demoa-demoa-demo' }, { id: 'b', name: 'b-demo' }, { id: 'c', name: 'c-demo' }, { id: 'd', name: 'd-demo' }, { id: 'e', name: 'e-demo' }]}
+    />
 
-    <div id="A" style={{ height: 200, background: 'red' }}>A</div>
-    <div id="B" style={{ height: 200, background: 'orange' }}>B</div>
-    <div id="C" style={{ height: 200, background: 'yellow' }}>C</div>
-    <div id="D" style={{ height: 200, background: 'green' }}>D</div>
-    <div id="E" style={{ height: 200, background: 'blue' }}>E</div>
+    <div id="a" style={{ height: 200, background: 'red' }}>A</div>
+    <div id="b" style={{ height: 200, background: 'orange' }}>B</div>
+    <div id="c" style={{ height: 200, background: 'yellow' }}>C</div>
+    <div id="d" style={{ height: 200, background: 'green' }}>D</div>
+    <div id="e" style={{ height: 200, background: 'blue' }}>E</div>
   </div>
 );
 

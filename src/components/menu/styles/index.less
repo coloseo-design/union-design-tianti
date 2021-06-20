@@ -2,28 +2,48 @@
 @import "../../style/mixins/index";
 
 @menu: ~"@{uni-prefix}-menu";
+@menu-dark: ~"@{menu}-dark";
+@menu-light: ~"@{menu}-light";
+@menu-inline: ~"@{menu}-inline";
+@menu-vertical: ~"@{menu}-vertical";
+@menu-horizontal: ~"@{menu}-horizontal";
+@menu-children: ~"@{menu}-children";
+@menu-sub-menu: ~"@{menu}-sub-menu";
+@menu-item: ~"@{menu}-item";
+@menu-item-group: ~"@{menu}-item-group";
+@menu-item-selected: ~"@{menu}-item-selected";
+@menu-sub-menu-selected: ~"@{menu}-sub-menu-selected";
+@menu-popup: ~"@{menu}-popup";
+@menu-popup-animation: ~"@{menu}-popup-animation";
+@menu-fold-icon: ~"@{menu}-fold-icon";
+@menu-foldbtn: ~"@{menu}-foldbtn";
+@menu-foldbtn-animation: ~"@{menu}-foldbtn-animation";
+@menu-title: ~"@{menu}-title";
+@menu-left-icon: ~"@{menu}-left-icon";
+@menu-right-icon: ~"@{menu}-right-icon";
+@menu-children-container: ~"@{menu}-children-container";
 
-@keyframes menu-collapsed-menu-icon {
+@keyframes @menu-foldbtn-animation {
     from { opacity: 0; }
     to { opacity: 1; }
 }
 
-@keyframes menu-open-popup {
-    from { 
-        opacity: 0; 
+@keyframes @menu-popup-animation {
+    from {
+        opacity: 0;
         transform: scale(0.8);
     }
-    to { 
-        opacity: 1; 
+    to {
+        opacity: 1;
         transform: scale(1);
     }
 }
 
-.@{menu}-container {
+.@{menu} {
     position: relative;
     transition: max-width 0.2s;
-    
-    .dark {
+
+    .@{menu-dark} {
         color: #C8CAD1;
         background-color: #2E3343;
 
@@ -32,7 +52,7 @@
         }
     }
 
-    .light {
+    .@{menu-light} {
         color: rgba(0, 0, 0, 0.85);
         background-color: #E9EBF0;
 
@@ -41,7 +61,7 @@
         }
     }
 
-    .inline-collapsed-icon {
+    .@{menu-foldbtn} {
         position: absolute;
         top: 50%;
         right: -30px;
@@ -56,33 +76,33 @@
         cursor: pointer;
     }
 
-    .inline-collapsed-menu-icon {
+    .@{menu-fold-icon} {
         position: relative;
         height: 36px;
         line-height: 36px;
         text-align: center;
-        animation: 0.5s menu-collapsed-menu-icon;
+        animation: 0.5s @menu-foldbtn-animation;
         font-size: 16px;
         user-select: none;
         cursor: pointer;
     }
 
-    .inline,
-    .vertical,
-    .horizontal {
+    .@{menu-inline},
+    .@{menu-vertical},
+    .@{menu-horizontal} {
         width: 100%;
         height: 100%;
     }
 
-    .inline,
-    .vertical {
+    .@{menu-inline},
+    .@{menu-vertical} {
         box-shadow: 2px 0 4px 0 rgba(147,147,147,0.35);
         padding: 12px 0;
         overflow: auto;
         text-align: start;
     }
 
-    .horizontal {
+    .@{menu-horizontal} {
         background-image: linear-gradient(90deg, #B30000 0%, #E50027 64%, #B30000 100%);
         background-color: #E50027;
         overflow-y: auto;
@@ -93,36 +113,36 @@
             vertical-align: middle;
         }
 
-        .light,
-        .dark {
+        .@{menu-light},
+        .@{menu-dark} {
             color: #fff;
             background-color: transparent;
-    
+
             &:hover{
                 background-color: #8C0005;
             }
         }
 
-        div.sub-menu,
-        div.item,
-        div.item-group {
+        div.@{menu-sub-menu},
+        div.@{menu-item},
+        div.@{menu-item-group} {
             height: 40px;
             padding-right: 40px;
 
-            .title {
+            .@{menu-title} {
                 line-height: 40px;
                 font-size: 16px;
                 color: #FFFFFF;
                 letter-spacing: 0.46px;
                 text-align: center;
-            } 
+            }
         }
 
-        div.item-selected,
-        div.item-selected.dark,
-        div.item-selected.light,
-        div.sub-menu-selected.dark,
-        div.sub-menu-selected.light {
+        div.@{menu-item-selected},
+        div.@{menu-item-selected}.@{menu-dark},
+        div.@{menu-item-selected}.@{menu-light},
+        div.@{menu-sub-menu-selected}.@{menu-dark},
+        div.@{menu-sub-menu-selected}.@{menu-light} {
             color: #fff;
             background-color: #8C0005;
 
@@ -132,29 +152,29 @@
         }
     }
 
-    .children {
+    .@{menu-children} {
         position: relative;
 
-        .sub-menu,
-        .item {
+        .@{menu-sub-menu},
+        .@{menu-item} {
             position: relative;
-            height: 36px; 
+            height: 36px;
             line-height: 36px;
             user-select: none;
             cursor: pointer;
             padding-right: 18px;
             font-size: 16px;
             overflow: hidden;
-            
-            .left-icon {
+
+            .@{menu-left-icon} {
                 float: left;
             }
 
-            .right-icon {
+            .@{menu-right-icon} {
                 float: right;
             }
 
-            .title {
+            .@{menu-title} {
                 font-size: 14px;
                 overflow: hidden;
                 white-space: nowrap;
@@ -162,7 +182,7 @@
             }
         }
 
-        .item-selected {
+        .@{menu-item-selected} {
             background-color: #fff;
 
             &::after{
@@ -176,22 +196,22 @@
             }
         }
 
-        .item-selected.dark {
+        .@{menu-item-selected}.@{menu-dark} {
             color: rgba(0, 0, 0, 0.85);
             &:hover {
                 color: #000;
             }
         }
-        
-        .sub-menu-selected.light {
+
+        .@{menu-sub-menu-selected}.@{menu-light} {
             color: #B30000;
         }
 
-        .sub-menu-selected.dark {
+        .@{menu-sub-menu-selected}.@{menu-dark} {
             color: #fff;
         }
 
-        .item-group {
+        .@{menu-item-group} {
             user-select: none;
             white-space: nowrap;
             height: 36px;
@@ -200,15 +220,15 @@
             overflow: hidden;
         }
 
-        .item-group.light {
+        .@{menu-item-group}.@{menu-light} {
             color: rgba(0, 0, 0, 0.45);
         }
 
-        .item-group.dark {
+        .@{menu-item-group}.@{menu-dark} {
             color: #C8CAD1;
         }
 
-        .children-container{
+        .@{menu-children-container} {
             transition: max-height 0.2s;
         }
     }
@@ -216,10 +236,10 @@
 
 @dropDown: ~'@{uni-prefix}-drop-down';
 
-.@{menu}-popup {
+.@{menu-popup} {
     z-index: 999999;
     width: 166px;
-    animation: menu-open-popup 0.3s;
+    animation: @menu-popup-animation 0.3s;
     padding: 8px;
     max-height: 360px;
     overflow: auto;
