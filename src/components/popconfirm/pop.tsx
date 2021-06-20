@@ -107,7 +107,6 @@ class PopComponent extends React.Component<PopProps, PopconfirmState> {
   compute = (target: HTMLSpanElement | HTMLElement, firstRender: boolean) => {
     const { direction, visible } = this.state;
     const { autoAdjustOverflow = true, onVisibleChange, visible: propsVisible } = this.props;
-    // const target = evt.nativeEvent.target as HTMLSpanElement;
     const bodyW = document.body.scrollWidth;
     const bodyH = document.body.scrollHeight;
     let dT: PlacementType;
@@ -313,7 +312,6 @@ class PopComponent extends React.Component<PopProps, PopconfirmState> {
         {content && <div className={`${contentStyle}-inner-content`}>{content}</div>}
       </div>
     );
-
     return (
       <>
         <span
@@ -334,7 +332,7 @@ class PopComponent extends React.Component<PopProps, PopconfirmState> {
             ref={this.getNode}
             onClick={(e) => {
               e.stopPropagation();
-              e.nativeEvent.stopPropagation();
+              e.nativeEvent.stopImmediatePropagation();
             }}
             onMouseOver={this.showPop}
             onMouseOut={this.hidePop}

@@ -1,3 +1,3 @@
 import './styles/index';
 
-export { default } from './popOver';
+export { default } from './popover';

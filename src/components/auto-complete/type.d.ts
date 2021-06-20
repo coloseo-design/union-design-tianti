@@ -30,7 +30,7 @@ export interface AutoCompleteProps {
 
   placeholder?: string;
   // ref
-  forwardedRef?: React.MutableRefObject<HTMLInputElement>;
+  forwardedRef?: React.MutableRefObject<HTMLInputElement | HTMLTextAreaElement>;
   onSearch?: (value: string) => void;
   onChange?: (value: string) => void;
 

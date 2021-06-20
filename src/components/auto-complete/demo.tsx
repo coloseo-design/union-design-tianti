@@ -96,7 +96,6 @@ export default () => {
   const handleBlur = () => {
     console.log('---blur');
   };
-  const [value, setValue] = React.useState('test');
 
   return (
     <div>
@@ -108,10 +107,8 @@ export default () => {
           dataSource={children}
           onFocus={handleFocus}
           onBlur={handleBlur}
-          value={value}
         />
       </div>
-      <Button onClick={() => setValue('ggg')}>change</Button>
       <h2>多行的</h2>
       <AutoComplete
         onSearch={handleSearch}
@@ -143,14 +140,13 @@ export default () => {
             label: 'fff',
           },
         ]}
+        disabled
         showSearch
-      >
-        dew
-      </AutoComplete>
+      />
 
       <AutoComplete
         placeholder="请输入"
-        onSearch={handleSearch}
+        // onSearch={handleSearch}
         style={{ margin: 32, width: 256 }}
         dataSource={options}
       />

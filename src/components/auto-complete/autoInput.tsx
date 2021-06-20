@@ -4,6 +4,7 @@ import React, { ChangeEvent } from 'react';
 import classNames from 'classnames';
 import { ConfigConsumer, ConfigConsumerProps } from '../config-provider/context';
 import { AutoCompleteProps } from './type';
+import Portal from '../common/portal';
 import Option from './option';
 import OptGroup from './opt-group';
 import Icon from '../icon';
@@ -16,34 +17,48 @@ export interface DataSourceItemObject {
 }
 export type DataSourceItemType = DataSourceItemObject | React.ReactNode;
 interface autoState {
-  showDrop?: boolean;
+  showAutoDrop?: boolean;
   inputValue: unknown;
-  searchChildren?: React.ReactNode;
   isSearch?: boolean;
   searchData?: DataSourceItemType;
   dropStyleP?: React.CSSProperties;
-}
-function isSelectOptionOrSelectOptGroup(child: unknown): boolean {
-  return child && child.type && (child.type.isSelectOption || child.type.isSelectOptGroup);
+  left: number,
+  top: number,
+  width: number,
 }
 
 class AutoComplete extends React.Component<AutoCompleteProps, autoState> {
   static Option: typeof Option;
 
+  static OptGroup: typeof OptGroup;
+
+  static isSelectOptGroup: boolean;
+
+  node: HTMLSpanElement | undefined;
+
   constructor(props: AutoCompleteProps) {
     super(props);
     const {
-      open, defaultOpen, value, defaultValue, dropdownMenuStyle,
+      open, defaultOpen, value, defaultValue,
     } = props;
     this.state = {
-      showDrop: open || defaultOpen || false,
+      showAutoDrop: open || defaultOpen || false,
       inputValue: value || defaultValue || '',
-      searchChildren: [],
       searchData: [],
       isSearch: false,
-      dropStyleP: dropdownMenuStyle || {},
+      left: 0,
+      top: 0,
+      width: 0,
     };
   }
+
+  componentDidMount = () => {
+    const { open, defaultOpen } = this.props;
+    if (open || defaultOpen) {
+      this.getLocation();
+    }
+    document.addEventListener('click', this.documentBodyOnClick);
+  };
 
   componentDidUpdate(prevProps: AutoCompleteProps) {
     const { value } = this.props;
@@ -52,32 +67,28 @@ class AutoComplete extends React.Component<AutoCompleteProps, autoState> {
     }
   }
 
+  componentWillUnmount = () => {
+    document.removeEventListener('click', this.documentBodyOnClick);
+  }
+
   onChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const {
-      onChange, onSearch, showSearch, children, dataSource,
+      onChange, onSearch, showSearch, dataSource,
     } = this.props;
-    // const len = React.Children.toArray(children);
     onChange && onChange(e.target.value);
     onSearch && onSearch(e.target.value);
     this.setState({
       inputValue: e.target.value,
-      showDrop: e.target.value !== '',
+      showAutoDrop: e.target.value !== '',
     });
     if (showSearch) {
       if (e.target.value !== '') {
-        if (dataSource) {
-          const data = (dataSource || []).filter((i) => {
-            const flag = i.props ? (Object.prototype.toString.call(i.props.children) !== '[object Object]' && i.props.children.indexOf(e.target.value) >= 0)
-              : typeof i === 'string' ? i.indexOf(e.target.value) >= 0 : i.label && i.label.indexOf(e.target.value) >= 0;
-            return flag;
-          });
-          this.setState({ isSearch: true, searchData: data });
-        } else if (children) {
-          const searchChild = (children || []).filter(
-            (i: { props: { children: string | string[]; }; }) => i.props.children.indexOf(e.target.value) >= 0,
-          );
-          this.setState({ isSearch: true, searchChildren: searchChild });
-        }
+        const data = (dataSource || []).filter((i: any) => {
+          const flag = i.props ? (Object.prototype.toString.call(i.props.children) !== '[object Object]' && i.props.children.indexOf(e.target.value) >= 0)
+            : typeof i === 'string' ? i.indexOf(e.target.value) >= 0 : i.label && i.label.indexOf(e.target.value) >= 0;
+          return flag;
+        });
+        this.setState({ isSearch: true, searchData: data });
       } else {
         this.setState({ isSearch: false });
       }
@@ -85,12 +96,8 @@ class AutoComplete extends React.Component<AutoCompleteProps, autoState> {
   };
 
   onFocus = () => {
-    const { children, dataSource, onFocus } = this.props;
+    const { onFocus } = this.props;
     onFocus && onFocus();
-    const len = React.Children.toArray(children);
-    if ((dataSource && dataSource.length > 0) || React.Children.count(len) > 0) {
-      this.setState({ showDrop: true });
-    }
   };
 
   onSelect = (value: string, option: any) => {
@@ -101,27 +108,45 @@ class AutoComplete extends React.Component<AutoCompleteProps, autoState> {
     this.setState({
       inputValue: Object.prototype.toString.call(option) === '[object String]' ? option
         : Object.prototype.toString.call(option) === '[object Array]' ? option[0] : value,
-      showDrop: false,
+      showAutoDrop: false,
       isSearch: false,
     });
   };
 
   documentBodyOnClick = () => {
-    this.setState({ showDrop: false });
+    this.setState({ showAutoDrop: false });
   }
 
-  componentDidMount = () => {
-    document.body.addEventListener('click', this.documentBodyOnClick);
-  };
-
-  componentWillUnmount = () => {
-    document.body.removeEventListener('click', this.documentBodyOnClick);
-  }
-
-  handleClick = (event: React.MouseEvent<HTMLDivElement, MouseEvent>): void => {
+  handleClick = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     event.stopPropagation();
     event.nativeEvent.stopImmediatePropagation();
+    const { disabled } = this.props;
+    if (!disabled) {
+      this.setState({ showAutoDrop: true });
+      this.getLocation();
+    }
   }
+
+  getNode = (node: HTMLDivElement) => {
+    this.node = node;
+  };
+
+  getLocation = () => {
+    setTimeout(() => {
+      if (this.node) {
+        const {
+          height, top, left, width,
+        } = this.node.getBoundingClientRect();
+        const offsetTop = Math.ceil(window.pageYOffset + top);
+        const offsetLeft = Math.ceil(window.pageXOffset + left);
+        this.setState({
+          left: offsetLeft,
+          top: offsetTop + height + 4,
+          width,
+        });
+      }
+    }, 30);
+  };
 
   renderAuto = ({ getPrefixCls }: ConfigConsumerProps) => {
     const {
@@ -129,18 +154,17 @@ class AutoComplete extends React.Component<AutoCompleteProps, autoState> {
       disabled,
       autoFocus,
       placeholder,
-      style,
+      style = {},
       dataSource,
-      children,
-      // dropdownMenuStyle,
       showSearch,
       multiInput,
       forwardedRef,
       className,
       rows = 2,
+      dropdownMenuStyle = {},
     } = this.props;
     const {
-      showDrop, inputValue, searchChildren, isSearch, searchData, dropStyleP,
+      showAutoDrop, inputValue, isSearch, searchData, left, top, width,
     } = this.state;
 
     /*  =====  className  */
@@ -152,21 +176,13 @@ class AutoComplete extends React.Component<AutoCompleteProps, autoState> {
       [`${prefix}-active`]: autoFocus,
     });
 
-    const dropdownContainer = classNames(`${prefix}-dropdown`);
-    const dropStyle = showDrop;
-    const dropSelect = classNames(multiInput ? `${prefix}-select-textarea` : `${prefix}-select`, {
-      [`${prefix}-select-hide`]: !dropStyle,
-      [`${prefix}-select-show`]: dropStyle,
-    });
+    const dropSelect = classNames(multiInput ? `${prefix}-select-textarea` : `${prefix}-select`);
 
     /*  =====  children dataSource  */
-    const childNodes = React.Children.toArray(isSearch ? searchChildren : children);
     let optionChildren: React.ReactNode[];
     const data = isSearch ? searchData : dataSource;
 
-    if (childNodes.length && isSelectOptionOrSelectOptGroup(childNodes[0]) && isValidElement(childNodes[0])) {
-      optionChildren = React.Children.map(isSearch ? searchChildren : children, (child) => React.cloneElement(child, { onClick: this.onSelect }));
-    } else if (dataSource && dataSource.length && isValidElement(dataSource[0])) {
+    if (dataSource && dataSource.length && isValidElement(dataSource[0])) {
       optionChildren = React.Children.map(data, (child) => React.cloneElement(child, { onClick: this.onSelect }));
     } else {
       optionChildren = data
@@ -174,9 +190,7 @@ class AutoComplete extends React.Component<AutoCompleteProps, autoState> {
           switch (Object.prototype.toString.call(item)) {
             case '[object String]':
               return (
-                <Option key={item} value={item} onClick={this.onSelect}>
-                  {item}
-                </Option>
+                <Option value={item} key={item}>{item}</Option>
               );
             case '[object Object]': {
               const { value: optionValue } = item as DataSourceItemObject;
@@ -203,41 +217,54 @@ class AutoComplete extends React.Component<AutoCompleteProps, autoState> {
       value: inputValue,
       className: inputClass,
       onBlur: handleBlur,
-      style: style && style.height ? { height: style.height } : multiInput ? { height: rows * 32 } : {},
-    };
-    const drop = {
-      ...dropStyleP,
-      top: multiInput ? (style && style.height ? (Number(style.height) + 4) : (rows * 32) + 4)
-        : (style && style.height ? Number(style.height) + 4 : 36),
     };
 
     return (
-      <div className={wrapperContainer} style={style} onClick={this.handleClick}>
-        {!multiInput
-          && (
+      <div
+        className={wrapperContainer}
+        style={style}
+      >
+        <div onClick={this.handleClick} ref={this.getNode}>
+          {
+          multiInput && (
+            <textarea
+              ref={forwardedRef}
+              {...params}
+              style={{
+                height: style && style.height ? style.height : rows * 32,
+              }}
+            />
+          )
+        }
+          {
+          !multiInput && (
             <>
-              <input
-                ref={forwardedRef}
-                {...params}
-              />
-              {showSearch && <span className={serachCls}><Icon type="search" /></span>}
+              <input ref={forwardedRef} {...params} />
+              {showSearch && <div className={serachCls} style={{ cursor: disabled ? 'not-allowed' : 'pointer' }}><Icon type="search" /></div>}
             </>
-          )}
-        {multiInput
-          && (
-          <textarea
-            ref={forwardedRef}
-            {...params}
-          />
-          )}
-        <div className={dropdownContainer}>
+          )
+        }
+        </div>
+
+        {showAutoDrop && optionChildren && optionChildren.length > 0 && (
+        <Portal>
           <div
             className={dropSelect}
-            style={{ ...drop }}
+            style={{
+              ...dropdownMenuStyle,
+              top,
+              left,
+              width,
+            }}
+            onClick={(e) => {
+              e.stopPropagation();
+              e.nativeEvent.stopImmediatePropagation();
+            }}
           >
             {optionChildren}
           </div>
-        </div>
+        </Portal>
+        )}
       </div>
     );
   }
@@ -250,7 +277,8 @@ class AutoComplete extends React.Component<AutoCompleteProps, autoState> {
     );
   }
 }
-const AutoCompleteRef = React.forwardRef((props: AutoCompleteProps | autoState, ref: React.MutableRefObject<HTMLInputElement | HTMLTextAreaElement>) => <AutoComplete {...props} forwardedRef={ref} />);
+const AutoCompleteRef = React.forwardRef((props: AutoCompleteProps, ref: React.MutableRefObject<HTMLInputElement | HTMLTextAreaElement>) => <AutoComplete {...props} forwardedRef={ref} />);
+
 AutoCompleteRef.Option = Option;
 AutoCompleteRef.Option.isSelectOption = true;
 AutoCompleteRef.OptGroup = OptGroup;

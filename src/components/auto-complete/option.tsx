@@ -14,7 +14,9 @@ export interface OptionProps {
 }
 
 class Option extends React.Component<OptionProps> {
-  handleClick = (value: string, children: unknown) => (evt?: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+  handleClick = (value: string, children: unknown) => (evt: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    evt.stopPropagation();
+    evt.nativeEvent.stopImmediatePropagation();
     const { onClick } = this.props;
     onClick && onClick(value, children, evt);
   };

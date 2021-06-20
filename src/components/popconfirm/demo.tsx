@@ -40,7 +40,6 @@ const PopconfirmDemo: React.FC<unknown> = () => {
           title="你是否确定这是一个气泡确认框"
           placement="top"
           onVisibleChange={handleVisibleChange}
-          trigger="hover"
         >
           <Button style={{ margin: 24 }}>top</Button>
         </Popconfirm>

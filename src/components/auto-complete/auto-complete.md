@@ -17,9 +17,8 @@ autoComplete的属性说明如下：
 | showSearch | 是否展示搜索按钮 | boolean | false |
 | disabled | 是否禁用  | boolean | false |
 | autoFocus  | 是否自动聚焦 | boolean| false|
-| children | 自动完成的数据源 | React.ReactElement<OptionProps> Array<React.ReactElement<OptionProps>> |  |
 | defaultValue | 指定默认选中的条目 | string | - |
-| value | 指定当前选中的条目 | string \| string[] \| { key: string, label: string \| ReactNode } \| Array<{ key: string, label: string \| ReactNode }> | - |
+| value | 指定当前选中的条目 | string | -|
 | open | 是否展开下拉菜单 | boolean  | false  |
 | defaultOpen | 是否默认展开下拉菜单 | boolean | false |
 | placeholder | 输入框提示 | string | - |
