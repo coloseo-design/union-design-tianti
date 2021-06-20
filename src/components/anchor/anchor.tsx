@@ -71,12 +71,12 @@ class Anchor extends Component<AnchorProps, AnchorState> {
 
   renderAnchor = ({ getPrefixCls }: ConfigConsumerProps) => {
     const {
-      prefixCls, onChange, onClick, options, ...rest
+      prefixCls, onChange, onClick, options, className, ...rest
     } = this.props;
     const { linkElementHeight = 0, link } = this.state;
 
     const classPrefix = getPrefixCls('anchor', prefixCls);
-    const mainClass = classNames(classPrefix, {
+    const mainClass = classNames(classPrefix, className, {
       // [`${prefix}-has-sider`]: siders.length > 0,
     });
 

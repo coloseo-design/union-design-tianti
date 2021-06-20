@@ -1,12 +1,11 @@
-import React, { Component, CSSProperties } from 'react';
+import React, { Component } from 'react';
 import classNames from 'classnames';
 import { ConfigConsumer, ConfigConsumerProps } from '../config-provider';
 import Icon from '../icon';
 import { scrollToTop } from '../utils/animation';
+import { Omit } from '../utils/type';
 
-export interface BackTopProps extends React.HTMLAttributes<HTMLDivElement> {
-  /* 自定义样式 */
-  style?: CSSProperties;
+export interface BackTopProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onClick'> {
   /* 用户自定义类前缀，默认uni-backTop */
   prefixCls?: string;
   /* 回到顶部所需时间（ms） */
@@ -16,7 +15,7 @@ export interface BackTopProps extends React.HTMLAttributes<HTMLDivElement> {
   /* 滚动高度达到此参数值才出现 BackTop */
   visibilityHeight?: number;
   /* 点击按钮的回调函数 */
-  onClick?: () => void;
+  onClick?: (e: Event) => void;
 }
 
 interface BackTopState {
@@ -49,18 +48,13 @@ class BackTop extends Component<BackTopProps, BackTopState> {
   }
 
   onScroll = () => {
-    /**
-     * clientHeight: 可视区域高度
-     * scrollTop: 滚动条滚动高度
-     * scrollHeight: 滚动内容高度
-     */
-    const { scrollTop } = document.documentElement || document.body;
+    const { scrollTop } = document.documentElement;
     this.setState({ scrollTop });
   };
 
   renderBackTop = ({ getPrefixCls }: ConfigConsumerProps) => {
     const {
-      prefixCls, style, onClick, visibilityHeight = 400, duration = 450, className,
+      prefixCls, onClick, visibilityHeight = 400, duration = 450, className,
       ...rest
     } = this.props;
     const { scrollTop = 0 } = this.state;
@@ -70,15 +64,17 @@ class BackTop extends Component<BackTopProps, BackTopState> {
       // [`${prefix}-has-sider`]: siders.length > 0,
     });
 
-    const handleClick = () => {
-      scrollToTop('body', duration);
+    const handleClick = (e: Event) => {
+      const { target } = this.props;
+      const id = target ? target().id : 'body';
+      scrollToTop(id, duration);
       if (onClick) {
-        onClick();
+        onClick(e);
       }
     };
 
     return (
-      <div {...rest} className={mainClass} style={style}>
+      <div {...rest} className={mainClass}>
         {scrollTop >= visibilityHeight && (
           <span onClick={handleClick}>
             <Icon type="top" />

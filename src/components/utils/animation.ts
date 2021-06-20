@@ -22,7 +22,7 @@ export const animation = (
 };
 
 export const scrollToTop = (id: string, duration: number) => {
-  const ele = document.getElementById(id);
+  const ele = id === 'body' ? document.getElementsByTagName(id) : document.getElementById(id);
   const startTop = document.documentElement.scrollTop;
   if (!ele) return;
   const { offsetTop } = ele;
