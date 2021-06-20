@@ -22,12 +22,12 @@ export const animation = (
 };
 
 export const scrollToTop = (id: string, duration: number) => {
-  const ele = document.querySelector(id);
+  const ele = document.getElementById(id);
   const startTop = document.documentElement.scrollTop;
   if (!ele) return;
   const { offsetTop } = ele;
-  // const { height } = document.getElementsByTagName('header')[0].getBoundingClientRect();
-  const endTop = offsetTop;
+  const { height } = document.getElementsByTagName('header')[0].getBoundingClientRect();
+  const endTop = offsetTop - height;
   const distance = endTop - startTop;
   if (Math.abs(distance) === 0) return;
   let start: number;

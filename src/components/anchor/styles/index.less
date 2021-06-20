@@ -3,68 +3,41 @@
 
 @anchor-prefix-cls: ~'@{uni-prefix}-anchor';
 
-.@{anchor-prefix-cls}-wrapper {
-  // height: 100vh;
-  margin-left: -4px;
-  padding-left: 4px;
-  overflow: auto;
-  background-color: inherit;
-  .@{anchor-prefix-cls} {
-    box-sizing: border-box;
-    margin: 0;
-    color: rgba(0,0,0,.85);
-    font-variant: tabular-nums;
-    line-height: 1.5715;
-    list-style: none;
+.@{anchor-prefix-cls} {
+  width: 120px;
+  position: fixed;
+  top: 100px;
+  right: 0px;
+  border-left: 1px solid #D8D8D8;
+  &-wrapper {
     position: relative;
-    padding: 0 0 0 2px;
-    &-ink {
+    .@{anchor-prefix-cls}-ball-gray {
       position: absolute;
-      top: 0;
-      left: 0;
-      height: 100%;
-      &:before {
-        position: relative;
-        display: block;
-        width: 1px;
-        height: 100%;
-        margin: 0 auto;
-        background-color: @anchor-border-color;
-        content: " ";
-      }
-      &-ball {
-        position: absolute;
-        left: 50%;
-        width: @anchor-ball-width;
-        height: @anchor-ball-width;
-        background-color: @old_brand_red-6;
-        border-radius: @anchor-ball-width;
-        transform: translateX(-50%);
-        transition: top .3s ease-in-out;
-        display: none;
-        z-index: 10;
-      }
-      &-ball-gray {
-        position: absolute;
-        left: 50%;
-        width: @anchor-ball-width;
-        height: @anchor-ball-width;
-        background-color: @anchor-gray-ball-color;
-        border-radius: @anchor-ball-width;
-        transform: translateX(-50%);
-      }
+      left: -5px;
+      width: 10px;
+      height: 10px;
+      background: #ACAFB9;
+      border-radius: 50%;
     }
-    .@{anchor-prefix-cls}-link {
-      padding: 7px 16px;
-      line-height: 1.143;
-      transition: color 0.3s;
-      cursor: pointer;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      overflow: hidden;
-      &:hover {
-        color: @old_brand_red-6;
-      }
+    .@{anchor-prefix-cls}-ball-red {
+      position: absolute;
+      left: -5px;
+      width: 10px;
+      height: 10px;
+      background: #B30000;
+      border-radius: 50%;
+      transition: .3s;
+    }
+  }
+  &-link {
+    padding: 5px 10px;
+    color: rgba(0,0,0,0.85);
+    cursor: pointer;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+    &:hover {
+      color: #B30000;
     }
   }
 }
