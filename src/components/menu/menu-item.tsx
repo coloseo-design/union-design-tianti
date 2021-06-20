@@ -41,21 +41,26 @@ export class Item extends MenuBase<ItemProps> {
         }}
         onClick={this.handleItemOnClick}
         onMouseEnter={this.itemOnMouseEnter}
-        className={this.classNames(className, 'item', `${theme}`, {
-          'item-selected': selectedKeys?.includes(_key!),
-        })}
+        className={this.classNames(
+          className,
+          this.gpc('item'),
+          this.gpc(`${theme}`),
+          {
+            [this.gpc('item-selected')]: selectedKeys?.includes(_key!),
+          },
+        )}
       >
         {inlineCollapsedIcon || (
           <>
             {icon && (
-              <div className="left-icon">
+              <div className={this.gpc('left-icon')}>
                 {React.isValidElement(icon) ? icon : (
                   <Icon type={icon as string} />
                 )}
               </div>
             )}
             <div
-              className="title"
+              className={this.gpc('title')}
               style={{
                 paddingLeft: icon ? 16 : 0,
               }}
@@ -88,7 +93,7 @@ export class Item extends MenuBase<ItemProps> {
     };
 
     return (
-      <div className={this.classNames('inline-collapsed-menu-icon')}>
+      <div className={this.gpc('fold-icon')}>
         {view()}
       </div>
     );

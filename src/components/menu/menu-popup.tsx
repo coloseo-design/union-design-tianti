@@ -85,11 +85,18 @@ export class MenuPopup extends MenuBase<MenuPopupProps, MenuPopupState> {
           style={{ ...position }}
           className={this.classNames(
             className,
-            this.getPrefixClass('container'),
-            this.getPrefixClass('popup'),
+            this.gpc(),
+            this.gpc('popup'),
           )}
         >
-          <div style={{ maxHeight: popupMenuMaxHeight ?? 360 }} className={this.classNames('children', 'vertical', `${theme}`)}>
+          <div
+            style={{ maxHeight: popupMenuMaxHeight ?? 360 }}
+            className={this.classNames(
+              this.gpc('children'),
+              this.gpc('vertical'),
+              this.gpc(`${theme}`),
+            )}
+          >
             {children}
           </div>
         </div>,

@@ -240,19 +240,33 @@ export default class Menu extends MenuBase<MenuProps, MenuState> {
     }
 
     return (
-      <div style={newStyle} className={this.classNames(className, this.getPrefixClass('container'))}>
+      <div
+        style={newStyle}
+        className={this.classNames(
+          className,
+          this.gpc(),
+        )}
+      >
         {inlineCollapsedIcon && (
           <div
             onClick={this.inlineCollapsedIconOnClick}
             className={this.classNames(
-              'inline-collapsed-icon',
-              `${theme}`,
+              this.gpc('foldbtn'),
+              this.gpc(`${theme}`),
             )}
           >
             <Icon type={inlineCollapsed ? 'right' : 'left'} />
           </div>
         )}
-        <div ref={this.menuRef} data-menu-tag="menu" className={this.classNames('children', `${mode}`, `${theme}`)}>
+        <div
+          ref={this.menuRef}
+          data-menu-tag="menu"
+          className={this.classNames(
+            this.gpc('children'),
+            this.gpc(`${mode}`),
+            this.gpc(`${theme}`),
+          )}
+        >
           {this.handleChildren()}
         </div>
         {menuPopups!.map((item) => item[1])}
