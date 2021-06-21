@@ -26,7 +26,8 @@ export const scrollToTop = (id: string, duration: number) => {
   const startTop = document.documentElement.scrollTop;
   if (!ele) return;
   const { offsetTop } = ele;
-  const { height } = document.getElementsByTagName('header')[0].getBoundingClientRect();
+  const header = document.getElementsByTagName('header');
+  const height = header && header[0] && header[0].getBoundingClientRect().height || 0;
   const endTop = offsetTop - height;
   const distance = endTop - startTop;
   if (Math.abs(distance) === 0) return;
