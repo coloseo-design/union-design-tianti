@@ -47,8 +47,10 @@ class BackTop extends Component<BackTopProps, BackTopState> {
     container && container.removeEventListener('scroll', this.onScroll);
   }
 
-  onScroll = () => {
-    const { scrollTop } = document.documentElement;
+  onScroll = (e) => {
+    const { target } = this.props;
+    // const { scrollTop } = document.documentElement;
+    const scrollTop = target && target() ? e.target.scrollTop : document.documentElement.scrollTop;
     this.setState({ scrollTop });
   };
 
@@ -66,8 +68,9 @@ class BackTop extends Component<BackTopProps, BackTopState> {
 
     const handleClick = (e: Event) => {
       const { target } = this.props;
-      const id = target ? target().id : 'body';
-      scrollToTop(id, duration);
+      const { scrollTop: newscrollTop } = this.state;
+      const container = target ? target() : document.getElementsByTagName('body')[0];
+      scrollToTop(target ? '' : 'body', duration, newscrollTop, container);
       if (onClick) {
         onClick(e);
       }

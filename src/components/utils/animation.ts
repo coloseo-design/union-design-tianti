@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable no-mixed-operators */
 /* eslint import/prefer-default-export: 0 */
 export const animation = (
@@ -21,9 +22,9 @@ export const animation = (
   window.requestAnimationFrame(step);
 };
 
-export const scrollToTop = (id: string, duration: number) => {
-  const ele = id === 'body' ? document.getElementsByTagName(id) : document.getElementById(id);
-  const startTop = document.documentElement.scrollTop;
+export const scrollToTop = (id: string, duration: number, scrollTop?: number, container?: HTMLElement) => {
+  const ele = container || document.getElementById(id);
+  const startTop = scrollTop || document.documentElement.scrollTop;
   if (!ele) return;
   const { offsetTop } = ele;
   const header = document.getElementsByTagName('header');
@@ -40,7 +41,11 @@ export const scrollToTop = (id: string, duration: number) => {
     const elapsed = Math.min(timeGap, duration);
     if (elapsed > duration) return;
     const tempDistance = distance * elapsed / duration;
-    document.documentElement.scrollTop = startTop + tempDistance;
+    if (container && id !== 'body') {
+      ele.scrollTop = startTop + tempDistance;
+    } else {
+      document.documentElement.scrollTop = startTop + tempDistance;
+    }
     if (elapsed < duration) {
       window.requestAnimationFrame(step);
     }
