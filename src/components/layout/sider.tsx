@@ -1,8 +1,9 @@
 /* eslint-disable no-underscore-dangle */
-import React, { Component, CSSProperties } from 'react';
+import React, { Component, CSSProperties, ReactElement } from 'react';
 import classNames from 'classnames';
 import { ConfigConsumer, ConfigConsumerProps } from '../config-provider';
 import Icon from '../icon';
+import { MENU_TAG_MENU } from '../menu/menu';
 
 export interface SiderProps {
   /* 用户自定义类前缀，默认uni-layout */
@@ -62,12 +63,12 @@ class Sider extends Component<SiderProps, SiderState> {
   renderSider = ({ getPrefixCls }: ConfigConsumerProps) => {
     const {
       prefixCls, className, children, style, width = 200, collapsedWidth = 80,
-      theme = 'dark', collapsible, onCollapse,
+      theme = 'dark', collapsible, onCollapse, ...rest
     } = this.props;
     const { collapsed } = this.state;
 
     const prefix = getPrefixCls('layout-sider', prefixCls);
-    const mainClass = classNames(prefix, {
+    const mainClass = classNames(prefix, className, {
       [`${prefix}-${theme}`]: theme,
       [`${prefix}-collapsible`]: collapsible,
     });
@@ -82,12 +83,25 @@ class Sider extends Component<SiderProps, SiderState> {
     const _width = collapsed ? collapsedWidth : width;
 
     return (
-      <aside className={`${className} ${mainClass}`} style={{ width: _width, flex: `0 0 ${_width}px`, ...style }}>
+      <aside {...rest} className={mainClass} style={{ width: _width, flex: `0 0 ${_width}px`, ...style }}>
         <div className={`${prefix}-children`}>
-          {children}
+          {React.Children.map(children, (child) => {
+            const type = (child as ReactElement)?.type ?? {};
+            const tag = (type as unknown as { [key: string]: unknown }).tag as string;
+
+            if (React.isValidElement(child) && tag === MENU_TAG_MENU) {
+              return React.cloneElement(child, {
+                theme,
+                inlineCollapsed: collapsed,
+                inlineCollapsedIcon: false,
+                inlineCollapsedWidth: _width,
+              });
+            }
+            return child;
+          })}
         </div>
         {collapsedWidth && collapsible && (
-          <div className={`${prefix}-trigger`} style={{ left: collapsed ? collapsedWidth : width }} onClick={onClick}>
+          <div className={`${prefix}-trigger`} style={{ left: _width }} onClick={onClick}>
             {collapsed
               ? <Icon type="right" />
               : <Icon type="left" />}
