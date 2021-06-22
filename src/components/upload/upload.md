@@ -4,7 +4,6 @@ type: 通用
 title: Upload
 subtitle: 上传组件
 ---
-# 上传组件
 
 ## API
 
@@ -26,7 +25,7 @@ subtitle: 上传组件
 | onChange        | 上传文件改变时回调                                                                                                                                                                                       | (fileList: UploadFile[]) => void                                                                 | -      |
 | canDrag         | 能否拖拽文件                                                                                                                                                                                             | boolean                                                                                          | false  |
 
-## UploadFile
+### UploadFile
 
 | 参数     | 说明                            | 类型                                                 | 默认值        |
 | :------- | :------------------------------ | :--------------------------------------------------- | :------------ |

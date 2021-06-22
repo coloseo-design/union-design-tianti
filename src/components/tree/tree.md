@@ -5,7 +5,8 @@ title: Tree
 subtitle: 树形控件
 ---
 
-## Tree的属性说明如下：
+## API
+### Tree
 
 | 属性 | 说明 | 类型 | 默认值 |  |
 | --- | --- | --- | --- | --- |
@@ -29,7 +30,7 @@ subtitle: 树形控件
 |onExpand| 展开/收起节点时触发 | function(expandedKeys, {expanded: bool, node})| |
 
 
-## TreeDataType格式
+### TreeDataType格式
 ```typescript
 interface TreeDataType {
   key: string;
@@ -38,7 +39,7 @@ interface TreeDataType {
 }
 ```
 
-## treeNode
+### treeNode
 
 | 属性 | 说明 | 类型 | 默认值 |  |
 | --- | --- | --- | --- | --- |

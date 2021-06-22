@@ -5,12 +5,7 @@ title: Result
 subtitle: 结果
 ---
 
-
-## 字段和功说明
-
-### result
-
-
+### API
 
 result的属性说明如下：
 

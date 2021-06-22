@@ -5,7 +5,8 @@ title: TreeSelect
 subtitle: 数选择
 ---
 
-## 树选择器TreeSelect
+## API
+### TreeSelect
 
 | 属性                    | 说明               | 类型                                                                                   | 默认值        |
 | ---------------------- | ------------------ | ------------------------------------------------------------------------------------  | ------------ |
@@ -28,7 +29,7 @@ subtitle: 数选择
 |onSelect | 被选中时调用| function(value, node) | - |
 |showCheckedStrategy|定义选中项回填的方式。SHOW_ALL: 显示所有选中节点(包括父节点). SHOW_PARENT: 只显示父节点(当父节点下所有子节点都选中时). 默认只显示子节点. ｜ SHOW_ALL, SHOW_PARENT,SHOW_CHILD | SHOW_CHILD|
 
-## TreeSelectData格式
+### TreeSelectData格式
 ```typescript
 interface TreeDataType {
   value: string;
@@ -37,7 +38,7 @@ interface TreeDataType {
 }
 ```
 
-## treeNode
+### treeNode
 
 | 属性 | 说明 | 类型 | 默认值 |
 | --- | ---  | --- | ---   |

@@ -15,8 +15,6 @@ subtitle: 评分组件
 
 ## API
 
-## Rate
-
 | 属性 | 说明 | 类型 | 默认值 |
 | --- | --- | ---  | ---   |
 | allowHalf | 是否允许半选 | boolean | false |

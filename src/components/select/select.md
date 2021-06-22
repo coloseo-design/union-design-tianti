@@ -4,9 +4,10 @@ type: 通用
 title: Select
 subtitle: 选择框
 ---
-# 字段和功能简单说明
 
-## select
+## API
+
+### Select
 
 | 属性 | 说明 | 类型 | 默认值 |
 | --- | --- | ---  | ---   |
@@ -30,6 +31,6 @@ subtitle: 选择框
 |onSearch|搜索时触发|(value: string) => void|--|
 
 
-## option
+### Option
 
 disabled - 是否禁用子项
