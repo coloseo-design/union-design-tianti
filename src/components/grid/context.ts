@@ -5,5 +5,5 @@ export interface RowContextProps {
   gutter: number[];
 }
 
-const RowContenxt = React.createContext<RowContextProps>({ gutter: [0, 0] });
+export const RowContenxt = React.createContext<RowContextProps>({ gutter: [0, 0] });
 export const { Consumer: RowConsumer, Provider: RowProvider } = RowContenxt;

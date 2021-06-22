@@ -7,7 +7,7 @@
 import Schema from 'async-validator';
 import React from 'react';
 import { warning } from '../utils/warning';
-import { ValidatorRule } from './form-item';
+import { ValidatorRule } from './type';
 
 export const toArray = (input: string | string[]) => {
   if (!input) {
@@ -35,14 +35,14 @@ export const validateRule: (name: string, value: unknown, rule: ValidatorRule, m
   return [];
 };
 
-export const validateRules = (name: string, value: string, rules: ValidatorRule[], validateFirst: boolean, messageVariables: Record<string, string>) => {
+export const validateRules = (name: string, value: unknown, rules: ValidatorRule[], validateFirst: boolean, messageVariables: Record<string, string>) => {
   const filledRules = rules.map((rule) => {
     const originValidator = rule.validator;
     if (!originValidator) {
       return rule;
     }
     // reset validator
-    const validator = (rule: ValidatorRule, value: any, callback: (error?: string) => void) => {
+    const validator = (rule: ValidatorRule, value: unknown, callback: (error?: string) => void) => {
       let hasPromise = false;
       /**
        * 如果originValidator返回的是primise，则忽略callback，否则callback将会被调用
@@ -143,6 +143,11 @@ export const getValueFromKeypaths = (name: string | string[], values: {[key: str
 export const composeFieldName = (formName = '', fieldName: string | string[] = '') => {
   const filedNameStringify = Array.isArray(fieldName) ? fieldName.join('_') : fieldName;
   return `${formName}_${filedNameStringify}`;
+};
+
+export const decomposeFiledName = (fieldName: string) => {
+  const arr = fieldName.split('_');
+  return arr.slice(1);
 };
 
 /**

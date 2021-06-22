@@ -17,11 +17,11 @@ import { FormContextProps } from './type';
 
 export type ItemProps = ResponsiveColProps & BaseProps;
 
-export interface ValidatorRule {
-  message?: string;
-  validator: (rule: ValidatorRule, value: unknown, cb: (error?: string) => void) => Promise<void | unknown> | void;
-  validateTrigger: string | string[];
-}
+// export interface ValidatorRule {
+//   message?: string;
+//   validator?: (rule: ValidatorRule, value: unknown, cb: (error?: string) => void) => Promise<void | unknown> | void;
+//   validateTrigger: string | string[];
+// }
 
 interface InternalFormItemProps extends BaseProps, ConfigConsumerProps {
   /** label栅格布局 */
@@ -255,4 +255,6 @@ class InternalFormItem extends React.Component<InternalFormItemProps, FormItemSt
   }
 }
 
-export default withGlobalConfig(withFormContext(InternalFormItem));
+export default InternalFormItem;
+
+// export default withGlobalConfig(withFormContext(InternalFormItem));

@@ -1,4 +1,11 @@
 import './styles/index';
+import Form from './form';
+import Item from './item';
 
-export { default } from './form';
-export { default as FormItem } from './form-item';
+const ComposedForm = Form as typeof Form & {
+  Item: typeof Item;
+};
+
+ComposedForm.Item = Item;
+
+export default ComposedForm;

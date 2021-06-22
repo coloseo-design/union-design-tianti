@@ -153,6 +153,10 @@ export default () => {
         <Form
           {...layout}
           name="test"
+          initialValues={{
+            username: 'zhansgan',
+            password: 'lisi',
+          }}
           ref={formRef}
           onFinish={onSubmit}
           onFinishFailed={onFinishFailed}
@@ -177,12 +181,11 @@ export default () => {
             <Input placeholder="请输入" onChange={(e: any, v: any) => console.log('change', e, v)} />
           </FormItem>
           <FormItem
-            name="textarea"
-            label="多行输入"
+            name="password"
+            label="密码"
+            required
             validateFirst
-            initialValue="哈哈哈哈哈哈哈"
             rules={[
-              { required: true, message: '请输入用户名' },
               {
                 validator: (rule, value) => {
                   if (!value || value.length < 2) {
@@ -193,7 +196,21 @@ export default () => {
               },
             ]}
           >
-            <Input.TextArea placeholder="请输入" style={{ width: '100%' }} onChange={(e, v) => console.log('change', e, v)} />
+            <Input type="password" placeholder="请输入" style={{ width: '100%' }} onChange={(e, v) => console.log('change', e, v)} />
+          </FormItem>
+          <FormItem
+            name={['address', 'province']}
+            label="省份"
+            required
+          >
+            <Input placeholder="请输入省份" style={{ width: '100%' }} />
+          </FormItem>
+          <FormItem
+            name={['address', 'city']}
+            label="城市"
+            required
+          >
+            <Input placeholder="请输入城市" style={{ width: '100%' }} />
           </FormItem>
           <FormItem
             name="sex"
@@ -208,129 +225,13 @@ export default () => {
               <Select.Option value="女">女</Select.Option>
             </Select>
           </FormItem>
-
-          <FormItem
-            name="address"
-            label="地址"
-            validateFirst={false}
-            rules={[
-              { required: true, message: '请选择地址' },
-            ]}
-          >
-            <Cascader options={options} style={{ width: '100%' }} />
-          </FormItem>
-          <FormItem
-            name="age"
-            label="年龄"
-            validateFirst
-            rules={[
-              { required: true, message: '请填写年龄' },
-            ]}
-          >
-            <InputNumber style={{ width: '100%' }} />
-          </FormItem>
-          <FormItem
-            name="birthday"
-            label="生日"
-            validateFirst
-            rules={[
-              { required: true, message: '请填写年龄' },
-            ]}
-          >
-            <DatePicker style={{ width: '100%' }} />
-          </FormItem>
-          <FormItem
-            name="email"
-            label="邮箱"
-            validateFirst
-            rules={[
-              { required: true, message: '请填写年龄' },
-            ]}
-          >
-            <AutoComplete style={{ width: '100%' }} placeholder="请输入邮箱地址" dataSource={['Burns Bay Road', 'Downing Street', 'Wall Street']} />
-          </FormItem>
-          <FormItem
-            name="read"
-            label="是否关联"
-            validateFirst
-            initialValue
-            valuePropName="checked"
-            rules={[
-              { required: true, message: '请填写年龄' },
-            ]}
-          >
-            <Switch type="default" />
-          </FormItem>
-          <FormItem
-            name="avatar"
-            label="头像"
-            validateFirst
-            valuePropName="fileList"
-            rules={[
-              { required: true, message: '请填写年龄' },
-            ]}
-          >
-            <Upload.Card
-              listType="picture-card"
-              btnDesc="支持扩展名.jpg"
-            />
-          </FormItem>
-          <FormItem
-            name="test"
-            label="头像"
-            rules={[
-              { required: true, message: '请填写年龄' },
-            ]}
-          >
-            <TreeSelect treeData={data} onChange={(...args) => console.log('args', args)} />
-          </FormItem>
-          <FormItem
-            name="test1"
-            label="是否满意"
-            rules={[
-              { required: true, message: '请选择' },
-            ]}
-          >
-            <Checkbox.Group>
-              <Checkbox>hello</Checkbox>
-              <Checkbox>hello2</Checkbox>
-            </Checkbox.Group>
-          </FormItem>
-          <FormItem
-            name="radio"
-            label="单选框"
-            rules={[
-              { required: true, message: '请填写年龄' },
-            ]}
-            initialValue="B"
-          >
-            <Radio.Group>
-              <Radio value="A">A</Radio>
-              <Radio value="B">B</Radio>
-              <Radio value="C">C</Radio>
-              <Radio value="D">D</Radio>
-            </Radio.Group>
-          </FormItem>
-          <FormItem
-            name="test3"
-            label="评分"
-            initialValue={3}
-          >
-            <Rate onChange={(e) => console.log('e', e)} />
-          </FormItem>
-          <FormItem
-            name="test4"
-            label="评分"
-          >
-            <Slider />
-          </FormItem>
           <FormItem {...tailFormItemLayout}>
             <Button type="primary" htmlType="submit" style={{ marginRight: 20 }}>提交</Button>
             <Button
               htmlType="reset"
               onClick={() => {
                 console.log('formRef', formRef);
-                formRef.current.resetFields();
+                formRef.current.reset();
               }}
             >
               重置
