@@ -5,9 +5,9 @@ title: Menu
 subtitle: 菜单
 ---
 
-# 菜单组件
+## API
 
-## Menu
+### Menu
 
 | 参数                 | 说明                                         | 类型                                   | 默认值     |
 | :------------------- | :------------------------------------------- | :------------------------------------- | :--------- |
@@ -30,20 +30,20 @@ subtitle: 菜单
 | onSelect             | 被选中时调用                                 | (key: string, keyPath: string[]) => void | -          |
 | onDeselect           | 取消选中时调用，仅在 multiple 生效           | (key: string, keyPath: string[]) => void | -          |
 
-## Menu.Item
+### Menu.Item
 
 | 参数 | 说明     | 类型      | 默认值 |
 | :--- | :------- | :-------- | :----- |
 | icon | 菜单图标 | ReactNode | -      |
 | key  | 唯一标志 | string    | -      |
 
-## Menu.ItemGroup
+### Menu.ItemGroup
 
 | 参数  | 说明     | 类型   | 默认值 |
 | :---- | :------- | :----- | :----- |
 | title | 分组标题 | string | -      |
 
-## Menu.SubMenu
+### Menu.SubMenu
 
 | 参数         | 说明           | 类型                  | 默认值 |
 | :----------- | :------------- | :-------------------- | :----- |

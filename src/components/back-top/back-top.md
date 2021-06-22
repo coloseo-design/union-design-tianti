@@ -15,8 +15,6 @@ subtitle: 回到顶部
 
 ## API
 
-## BackTop
-
 | 属性 | 说明 | 类型 | 默认值 |
 | --- | ---  | --- | ---   |
 | duration | 回到顶部所需时间（ms） | number | 450 |

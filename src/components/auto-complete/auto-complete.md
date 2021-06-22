@@ -5,11 +5,7 @@ title: autoComplete
 subtitle: 自动完成
 ---
 
-## 字段和功说明
-
-### autoComplete
-
-autoComplete的属性说明如下：
+## API
 
 | 属性 | 说明 | 类型 | 默认值 |
 | --- | --- | ---  | ---   |
@@ -32,6 +28,7 @@ autoComplete的属性说明如下：
 |onFocus|获得焦点时的回调|function()|-|
 |rows | 多上输入框的行数, multiInput为true时有效| number| 2 |
 
+### DataSourceItemObject说明
 ```typescript
 export type DataSourceItemType = DataSourceItemObject | React.ReactNode;
 interface DataSourceItemObject {

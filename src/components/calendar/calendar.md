@@ -5,8 +5,6 @@ title: Calendar
 subtitle: 日历
 ---
 
-# 日历选择组件
-
 ## API
 
 | 参数                | 说明                                           | 类型                                      | 默认值      |

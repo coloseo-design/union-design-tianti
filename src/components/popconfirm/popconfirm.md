@@ -6,9 +6,8 @@ subtitle: 气泡确认框
 ---
 
 
-## 字段和功说明
 
-### popConfirm
+## API
 
 
 

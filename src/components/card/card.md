@@ -4,7 +4,6 @@ type: 通用
 title: Card
 subtitle: 卡片
 ---
-# 字段和功能简单说明
 
 ## Card
 

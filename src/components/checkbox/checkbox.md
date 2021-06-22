@@ -35,7 +35,7 @@ subtitle: 多选框
 | onChange | 变化时回调函数 | (checkedValues: string[]) => void | - |
 | disabled | 整组失效 | boolean | - |
 
-#### CheckboxOption
+### CheckboxOption
 
 ```typescript
 interface CheckboxOption {

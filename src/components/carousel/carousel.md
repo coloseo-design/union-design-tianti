@@ -5,7 +5,7 @@ title: Carousel
 subtitle: 走马灯
 ---
 
-Carousel走马灯的属性说明如下：
+## API
 
 | 属性 | 说明 | 类型 | 默认值 |  |
 | --- | --- | --- | --- | --- |

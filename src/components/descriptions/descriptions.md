@@ -13,13 +13,13 @@ subtitle: 描述列表
 
 ## API
 
-## Descriptions
+### Descriptions
 
 | 属性 | 说明 | 类型 | 默认值 |
 | --- | ---  | --- | ---   |
 | bordered | 是否展示边框 | boolean | false |
 
-## Descriptions.Item
+### Descriptions.Item
 
 | 属性 | 说明 | 类型 | 默认值 |
 | --- | --- | ---  | ---   |

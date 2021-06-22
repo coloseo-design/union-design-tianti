@@ -5,28 +5,7 @@ title: alert
 subtitle: 警告提示
 ---
 
-## 字段和功说明
-
-### alert
-
-type: 指定警告提示的样式，有四种选择 success、info、warning、error;
-
-message: 警告提示内容;
-
-description: 警告提示的辅助性文字介绍;
-
-icon: 自定义图标，showIcon 为 true 时有效
-
-banner: 是否用作顶部公告
-
-closeText: 自定义关闭按钮
-
-closable: 默认不显示关闭按钮
-
-showIcon: 是否显示辅助图标
-
-style: alert样式
-
+## API
 
 
 alert的属性说明如下：

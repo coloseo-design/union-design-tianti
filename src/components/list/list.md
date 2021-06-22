@@ -13,20 +13,20 @@ subtitle: 列表
 
 ## API
 
-## List
+### List
 
 | 属性 | 说明 | 类型 | 默认值 |
 | --- | --- | ---  | ---   |
 | dataSource | 列表数据源 | any[] | [] |
 | renderItem | 当使用 dataSource 时，可以用 renderItem 自定义渲染列表项 | (item: any, index?: number) => React.ReactNode | - |
 
-## List.Item
+### List.Item
 
 | 属性 | 说明 | 类型 | 默认值 |
 | --- | --- | ---  | ---   |
 | actions | 列表操作组, 位置在最右侧 | ReactNode[] | [] |
 
-## List.Item.Meta
+### List.Item.Meta
 
 | 属性 | 说明 | 类型 | 默认值 |
 | --- | --- | ---  | ---   |

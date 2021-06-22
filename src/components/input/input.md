@@ -15,7 +15,7 @@ subtitle: 输入框
 
 ## API
 
-## Input
+### Input
 
 | 属性 | 说明 | 类型 | 默认值 |
 | --- | ---  | --- | ---   |
@@ -29,7 +29,7 @@ subtitle: 输入框
 | value | 输入框内容 | string | - |
 | onChange | 输入框内容变化时的回调 | function(e) | - |
 
-## Input.Search
+### Input.Search
 
 | 属性 | 说明 | 类型 | 默认值 |
 | --- | --- | ---  | ---   |
@@ -38,7 +38,7 @@ subtitle: 输入框
 | onSearch | 点击搜索图标，或按下回车键时的回调 | function(value, event) | - |
 | onPressEnter | 按下回车的回调 | function(value, event) | - |
 
-## Input.TextArea
+### Input.TextArea
 
 | 属性 | 说明 | 类型 | 默认值 |
 | --- | --- | ---  | ---   |

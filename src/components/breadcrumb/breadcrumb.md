@@ -17,13 +17,13 @@ subtitle: 面包屑
 
 ## API
 
-## Breadcrumb
+### Breadcrumb
 
 | 属性 | 说明 | 类型 | 默认值 |
 | --- | ---  | --- | ---   |
 | separator | 分隔符自定义 | ReactNode | > |
 
-## Breadcrumb.Item
+### Breadcrumb.Item
 
 | 属性 | 说明 | 类型 | 默认值 |
 | ---  | --- | --- | ---   |

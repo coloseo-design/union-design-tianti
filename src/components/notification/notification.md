@@ -4,7 +4,7 @@ type: 通用
 title: 通知提醒
 subtitle: Notification
 ---
-# 消息提示组件
+
 
 ## API
 
@@ -14,7 +14,6 @@ subtitle: Notification
 * Notification.warning(config);
 * Notification.open(config);
 
-## config
 
 | 参数        | 说明                                      | 类型             | 默认值 |
 | :---------- | :---------------------------------------- | :--------------- | :----- |

@@ -6,7 +6,9 @@ subtitle: 对话框
 ---
 
 
-modal 对话框的属性说明如下：
+## API
+
+### Modal
 
 | 属性 | 说明 | 类型 | 默认值 |
 | --- | --- | ---  | ---   |
@@ -34,8 +36,8 @@ modal 对话框的属性说明如下：
 | onOk | 点击确定回调 | function(e) | - |
 | centered | 垂直居中展示 Modal | boolean | false |
 
-Modal.method() #
-包括：
+
+### Modal.method()
 
 Modal.info(object)
 

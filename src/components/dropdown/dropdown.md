@@ -5,8 +5,9 @@ title: Dropdown
 subtitle: 下拉菜单
 ---
 
+## API
 
-## Dropdown api 说明
+#### Dropdown
 
 | 属性 | 说明 | 类型 | 默认值 |
 | --- | --- | ---  | ---   |
@@ -22,7 +23,7 @@ subtitle: 下拉菜单
 |onVisibleChange|菜单显示状态改变时调用，参数为 visible|(visible: boolean) => void|--|
 
 
-## Dropdown.Button api 说明
+## Dropdown.Button
 
 | 属性 | 说明 | 类型 | 默认值 |
 | --- | ---  | ---  | ---  |

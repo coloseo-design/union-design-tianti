@@ -5,7 +5,6 @@ title: Pagination
 subtitle: 分页
 ---
 
-# 分页
 
 ## API
 
