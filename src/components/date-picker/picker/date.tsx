@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
 /* eslint-disable max-classes-per-file */
-import dayjs from 'dayjs';
+import dayjs, { Dayjs } from 'dayjs';
 import React from 'react';
 import {
   PopupRangeDate, PopupRangeDatetime, PopupSingleDate, PopupSingleDatetime,
@@ -173,7 +173,7 @@ export class PickerRangeDate extends PickerRange {
       }
 
       return (
-        <div className="range">
+        <div className={this.gpc('picker-range')}>
           <div>
             <PopupRangeDate
               {...common}
@@ -190,7 +190,7 @@ export class PickerRangeDate extends PickerRange {
               showLeft={false}
               showDoubleLeft={false}
               showFooter={false}
-              viewDate={viewDate?.add(1, 'month')}
+              viewDate={viewDate?.add(1, 'month') as Dayjs}
               {...this.popupRangeDate}
             />
           </div>

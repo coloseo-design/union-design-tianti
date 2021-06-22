@@ -107,96 +107,102 @@ const handleYearRangeData = cacheFunc((year: number) => {
 });
 
 abstract class PopupYear<T extends PickerType> extends Popup<T> {
-    protected abstract handleData: (year: number) => { startYear: number, endYear: number, data: PopupData[][] };
+  protected abstract handleData: (year: number) => { startYear: number, endYear: number, data: PopupData[][] };
 
-    protected abstract classItem: (item: PopupData) => string;
+  protected abstract classItem: (item: PopupData) => string;
 
-    protected formatTag = 'YYYY';
+  protected formatTag = 'YYYY';
 
-    protected cmpTag: UnitType = 'year';
+  protected cmpTag: UnitType = 'year';
 
-    protected view = () => (
-      <>
-        {this.headView()}
-        {this.bodyView()}
-      </>
+  protected view = () => (
+    <>
+      {this.headView()}
+      {this.bodyView()}
+    </>
+  );
+
+  protected headView = () => {
+    const { viewDate, onYear } = this.props;
+    const { startYear, endYear } = this.handleData(viewDate.get('year'));
+
+    return (
+      <PopupHead
+        {...this.props}
+        showLeft={false}
+        showRight={false}
+        content={(
+          <div>
+            <div
+              data-class={this.classNames(
+                this.gpc('tag-title'),
+                {
+                  [this.gpc('tag-hover')]: onYear,
+                  [this.gpc('tag-nohover')]: !onYear,
+                },
+              )}
+              onClick={onYear}
+            >
+              {`${startYear}-${endYear}`}
+            </div>
+          </div>
+        )}
+      />
     );
+  };
 
-    protected headView = () => {
-      const { viewDate, onYear } = this.props;
-      const { startYear, endYear } = this.handleData(viewDate.get('year'));
+  protected bodyView = () => {
+    const { viewDate, onMouseEnter = () => { }, onMouseLeave = () => { } } = this.props;
+    const { data } = this.handleData(viewDate.get('year'));
 
-      return (
-        <PopupHead
-          {...this.props}
-          showLeft={false}
-          showRight={false}
-          content={(
-            <div>
+    return (
+      <div
+        onMouseLeave={onMouseLeave}
+        className={this.getPrefixClass('popupyear-normal')}
+      >
+        {data.map((line) => (
+          <div data-class={this.gpc('tag-row')} key={line[0].key}>
+            {line.map((item) => (
               <div
-                data-class={`title ${onYear ? 'hover' : 'nohover'}`}
-                onClick={onYear}
+                key={item.key}
+                data-class={this.gpc('tag-col')}
+                onMouseEnter={() => onMouseEnter(item.date)}
+                onClick={() => this.clickDate(item)}
+                className={this.classItem(item)}
               >
-                {`${startYear}-${endYear}`}
+                <span>{item.value}</span>
               </div>
-            </div>
-                )}
-        />
-      );
-    };
+            ))}
+          </div>
+        ))}
+      </div>
+    );
+  };
 
-    protected bodyView = () => {
-      const { viewDate, onMouseEnter = () => { }, onMouseLeave = () => { } } = this.props;
-      const { data } = this.handleData(viewDate.get('year'));
+  protected clickDate = (item: PopupData) => {
+    if (item.disabled) return;
+    const { onDate = () => { }, viewDate } = this.props;
 
-      return (
-        <div
-          onMouseLeave={onMouseLeave}
-          className={this.getPrefixClass('popupyear-normal')}
-        >
-          {data.map((line) => (
-            <div data-class="row" key={line[0].key}>
-              {line.map((item) => (
-                <div
-                  key={item.key}
-                  data-class="col"
-                  onMouseEnter={() => onMouseEnter(item.date)}
-                  onClick={() => this.clickDate(item)}
-                  className={this.classItem(item)}
-                >
-                  <span>{item.value}</span>
-                </div>
-              ))}
-            </div>
-          ))}
-        </div>
-      );
-    };
-
-    protected clickDate = (item: PopupData) => {
-      if (item.disabled) return;
-      const { onDate = () => { }, viewDate } = this.props;
-
-      onDate(viewDate.set('year', item.date.get('year')));
-    };
+    onDate(viewDate.set('year', item.date.get('year')));
+  };
 }
 
 export class PopupSingleYear extends PopupYear<'single'> {
-    protected handleData = (year: number) => handleYearData(year);
+  protected handleData = (year: number) => handleYearData(year);
 
-    protected classItem = (item: PopupData) => this.singleClassItem(item);
+  protected classItem = (item: PopupData) => this.singleClassItem(item);
 }
 
 export class PopupSingleYearRange extends PopupSingleYear {
-    protected handleData = (year: number) => handleYearRangeData(year);
+  protected handleData = (year: number) => handleYearRangeData(year);
 
-    protected classItem = (item: PopupData) => this.classNames('item item-range-year-hover', {
-      'item-notcur': !item.cur,
-    });
+  protected classItem = (item: PopupData) => this.classNames('item item-range-year-hover', {
+    [this.gpc('item-notcur')]: !item.cur,
+  });
 }
 
 export class PopupRangeYear extends PopupYear<'range'> {
-    protected handleData = (year: number) => handleYearData(year);
+  protected handleData = (year: number) => handleYearData(year);
 
-    protected classItem = (item: PopupData) => this.rangeClassItem(item);
+  protected classItem = (item: PopupData) => this.rangeClassItem(item);
 }

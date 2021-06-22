@@ -76,7 +76,7 @@ export abstract class Picker<
         {popupVisible && (
           <div
             style={{ top: (this.container?.current?.offsetHeight ?? 0) + 3 }}
-            className="popup"
+            className={this.gpc('picker-popup')}
           >
             {popupVisible && this.popupView()}
           </div>
@@ -208,10 +208,10 @@ export abstract class PickerSingle extends Picker<'single'> {
         placeholder={placeholder}
         disabled={disabled}
         onIcon={this.onInputIcon}
-        className={this.classNames('input-single', {
-          'input-single-hover': !disabled,
-          'input-single-focus': !disabled && popupVisible,
-          'input-single-disabled': disabled,
+        className={this.classNames(this.gpc('picker-input-single'), {
+          [this.gpc('picker-input-single-hover')]: !disabled,
+          [this.gpc('picker-input-single-focus')]: !disabled && popupVisible,
+          [this.gpc('picker-input-single-disabled')]: disabled,
         })}
       />
     );
@@ -303,13 +303,13 @@ export abstract class PickerRange extends Picker<'range'> {
     const inputValue = this.getFormatDate();
 
     return (
-      <div className={this.classNames('input-range', {
-        'input-range-start-hover': !startDisabled,
-        'input-range-end-hover': !endDisabled,
-        'input-range-start-focus': !startDisabled && popupVisible && position === 'start',
-        'input-range-end-focus': !endDisabled && popupVisible && position === 'end',
-        'input-range-start-disabled': startDisabled,
-        'input-range-end-disabled': endDisabled,
+      <div className={this.classNames(this.gpc('picker-input-range'), {
+        [this.gpc('picker-input-range-start-hover')]: !startDisabled,
+        [this.gpc('picker-input-range-end-hover')]: !endDisabled,
+        [this.gpc('picker-input-range-start-focus')]: !startDisabled && popupVisible && position === 'start',
+        [this.gpc('picker-input-range-end-focus')]: !endDisabled && popupVisible && position === 'end',
+        [this.gpc('picker-input-range-start-disabled')]: startDisabled,
+        [this.gpc('picker-input-range-end-disabled')]: endDisabled,
       })}
       >
         <InputIcon
@@ -320,7 +320,7 @@ export abstract class PickerRange extends Picker<'range'> {
           onIcon={this.onStartInputIcon}
           onMouseEnter={this.onStartMouseEnter}
           onMouseLeave={this.onMouseLeave}
-          className="start-container"
+          className={this.gpc('picker-start-container')}
           placeholder={placeholder?.[0]}
           disabled={Array.isArray(disabled) ? disabled[0] : disabled}
         />
@@ -332,7 +332,7 @@ export abstract class PickerRange extends Picker<'range'> {
           onIcon={this.onEndInputIcon}
           onMouseEnter={this.onEndMouseEnter}
           onMouseLeave={this.onMouseLeave}
-          className="end-container"
+          className={this.gpc('picker-end-container')}
           placeholder={placeholder?.[1]}
           disabled={Array.isArray(disabled) ? disabled[1] : disabled}
         />

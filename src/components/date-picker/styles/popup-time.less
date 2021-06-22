@@ -4,15 +4,15 @@
   position: relative;
   height: @dpsize-popuptime-height;
 
-  & [data-class="active"] {
+  & [data-class=~"'@{datepicker-tag-active}'"] {
     background-color: @dpcolor-bg-hover;
   }
 
-  & [data-class="date"] {
+  & [data-class=~"'@{datepicker-tag-date}'"] {
     width: @dpsize-popuptime-col-date-width;
   }
 
-  & [data-class="time"] {
+  & [data-class=~"'@{datepicker-tag-time}'"] {
     width: @dpsize-popuptime-col-time-width;
   }
 

@@ -80,7 +80,7 @@ export class PickerRangeYear extends PickerRange {
     };
 
     return (
-      <div className="range">
+      <div className={this.gpc('picker-range')}>
         <div>
           <PopupRangeYear
             {...common}

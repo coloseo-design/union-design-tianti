@@ -37,12 +37,12 @@ export class InputIcon extends BaseComponent<InputIconProps> {
       >
         <div
           onClick={onIcon}
-          className="icon"
+          className={this.gpc('picker-icon')}
         >
           <Icon type={suffixIcon} />
         </div>
 
-        <div className="input">
+        <div className={this.gpc('picker-input')}>
           <input
             autoComplete="off"
             disabled

@@ -21,7 +21,7 @@ export class PopupHead extends BaseComponent<PopupHeadProps> {
     showLeft: true,
     showDoubleRight: true,
     showRight: true,
-    onIconClick: () => {},
+    onIconClick: () => { },
   };
 
   protected view = () => {
@@ -32,22 +32,46 @@ export class PopupHead extends BaseComponent<PopupHeadProps> {
     return (
       <div className={this.getClass('popuphead')}>
         {showDoubleLeft && (
-          <div data-class="icon double-left" onClick={this.clickDoubleLeftIcon}>
+          <div
+            data-class={this.classNames(
+              this.gpc('tag-icon'),
+              this.gpc('tag-double-left'),
+            )}
+            onClick={this.clickDoubleLeftIcon}
+          >
             <Icon type="double-left" />
           </div>
         )}
         {showLeft && (
-          <div data-class="icon left" onClick={this.clickLeftIcon}>
+          <div
+            data-class={this.classNames(
+              this.gpc('tag-icon'),
+              this.gpc('tag-left'),
+            )}
+            onClick={this.clickLeftIcon}
+          >
             <Icon type="left" />
           </div>
         )}
         {showDoubleRight && (
-          <div data-class="icon double-right" onClick={this.clickonDoubleRightIcon}>
+          <div
+            data-class={this.classNames(
+              this.gpc('tag-icon'),
+              this.gpc('tag-double-right'),
+            )}
+            onClick={this.clickonDoubleRightIcon}
+          >
             <Icon type="double-right" />
           </div>
         )}
         {showRight && (
-          <div data-class="icon right" onClick={this.clickRightIcon}>
+          <div
+            data-class={this.classNames(
+              this.gpc('tag-icon'),
+              this.gpc('tag-right'),
+            )}
+            onClick={this.clickRightIcon}
+          >
             <Icon type="right" />
           </div>
         )}
