@@ -17,8 +17,6 @@ subtitle: 进度条
 
 ## API
 
-## Progress
-
 | 属性 | 说明 | 类型 | 默认值 |
 | --- | ---  | --- | ---   |
 | percent | 百分比 | number | 0 |

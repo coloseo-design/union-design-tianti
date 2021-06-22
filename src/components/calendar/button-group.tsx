@@ -22,14 +22,14 @@ export class ButtonGroup extends BaseComponent<ButtonGroupProps> {
       return (
         <div className={this.getPrefixClass('buttongroup')}>
           <div
-            className="year"
+            className={this.gpc('tag-year')}
             data-active={mode === 'year'}
             onClick={onYear}
           >
             年
           </div>
           <div
-            className="month"
+            className={this.gpc('tag-month')}
             data-active={mode === 'month'}
             onClick={onMonth}
           >

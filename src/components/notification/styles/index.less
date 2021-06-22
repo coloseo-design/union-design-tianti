@@ -1,13 +1,20 @@
 @import "../../style/themes/index";
 @import "../../style/mixins/index";
 
-@message: ~"@{uni-prefix}-notification";
+@notification: ~"@{uni-prefix}-notification";
+@notification-animation: ~"@{notification}-animation";
+@notification-container: ~"@{notification}-container";
+@notification-head: ~"@{notification}-head";
+@notification-icon: ~"@{notification}-icon";
+@notification-title: ~"@{notification}-title";
+@notification-close: ~"@{notification}-close";
+@notification-content: ~"@{notification}-content";
 
-.@{message}-wrap {
+.@{notification}-wrap {
     padding: 0 40px 0 0;
-    animation: in 0.2s linear;
+    animation: @notification-animation 0.2s linear;
 
-    & > .container {
+    & > .@{notification-container} {
         display: inline-block;
         width: 384px;
         margin: 10px auto;
@@ -17,31 +24,31 @@
         border-radius: @border-radius-base;
         pointer-events: auto;
 
-        & > .head {
+        & > .@{notification-head} {
             position: relative;
             width: 100%;
 
-            & > .icon,
-            & > .title,
-            & > .close {
+            & > .@{notification-icon},
+            & > .@{notification-title},
+            & > .@{notification-close} {
                 display: inline-block;
                 vertical-align: middle;
             }
 
-            & > .icon,
-            & > .close{
+            & > .@{notification-icon},
+            & > .@{notification-close} {
                 width: 24px;
             }
 
-            & > .icon {
+            & > .@{notification-icon} {
                 margin-right: 10px;
             }
 
-            & > .close {
+            & > .@{notification-close} {
                 margin-left: 10px;
             }
 
-            & > .title {
+            & > .@{notification-title} {
                 font-size: 16px;
                 line-height: 24px;
                 font-weight: bold;
@@ -50,15 +57,15 @@
                 white-space: nowrap;
             }
 
-            & > .icon,
-            & > .close {
+            & > .@{notification-icon},
+            & > .@{notification-close} {
                 font-size: 24px;
                 user-select: none;
                 cursor: pointer;
             }
         }
 
-        & > .content {
+        & > .@{notification-content} {
             font-size: 14px;
             line-height: 22px;
             color: rgba(0, 0, 0, 0.65);
@@ -66,15 +73,15 @@
     }
 }
 
-@keyframes in {
-    from { 
-        opacity: 0; 
+@keyframes @notification-animation {
+    from {
+        opacity: 0;
         z-index: -1;
         transform: translateX(20%);
     }
 
-    to { 
-        opacity: 1; 
+    to {
+        opacity: 1;
         z-index: 0;
         transform: translateX(0);
     }

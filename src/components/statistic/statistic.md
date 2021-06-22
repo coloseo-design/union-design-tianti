@@ -15,8 +15,6 @@ subtitle: 统计数值
 
 ## API
 
-## Statistic
-
 | 属性 | 说明 | 类型 | 默认值 |
 | --- | --- | ---  | ---   |
 | formatter | 自定义数值展示 | (value) => ReactNode | - |
