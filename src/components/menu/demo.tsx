@@ -1,3 +1,4 @@
+/* eslint-disable no-confusing-arrow */
 import React, { useState } from 'react';
 import { Menu, Switch } from '../index';
 
@@ -34,7 +35,21 @@ const Demo = () => {
           </Menu.Item>
           <Menu.SubMenu icon="image" title="工作台3">
             <Menu.SubMenu title="工作台1">
-              {Array.from({ length: 100 }, (v, k) => k).map((v, i) => (
+              {Array.from({ length: 100 }, (v, k) => k).map((v, i) => i % 3 === 0 ? (
+                <Menu.SubMenu title="工作台4">
+                  <Menu.Item>
+                    工作台1
+                  </Menu.Item>
+                  <Menu.SubMenu title="工作台2">
+                    <Menu.Item>
+                      工作台1
+                    </Menu.Item>
+                    <Menu.Item>
+                      工作台2
+                    </Menu.Item>
+                  </Menu.SubMenu>
+                </Menu.SubMenu>
+              ) : (
                 <Menu.Item key={`${i}`} icon="image">
                   工作台
                   {i}

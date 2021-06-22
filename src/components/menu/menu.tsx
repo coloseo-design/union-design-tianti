@@ -309,31 +309,6 @@ export default class Menu extends MenuBase<MenuProps, MenuState> {
     const cRect = this.containerRef.current?.getBoundingClientRect() as DOMRect;
     const dRect = dom.getBoundingClientRect();
 
-    // if (mode === 'horizontal' && level === 0) {
-    //   newMenuPopups[level] = [newKey,
-    //     <MenuPopup
-    //       level={level}
-    //       cRect={cRect}
-    //       dRect={dRect}
-    //       className={popupClassName}
-    //       data={[]}
-    //       key={newKey}
-    //     >
-    //       {children}
-    //     </MenuPopup>];
-    // } else {
-    //   newMenuPopups[level] = [newKey,
-    //     <MenuPopup
-    //       className={popupClassName}
-    //       data={[]}
-    //       key={newKey}
-    //       top={top - 12}
-    //       left={right}
-    //     >
-    //       {children}
-    //     </MenuPopup>];
-    // }
-
     newMenuPopups[level] = [newKey,
       <MenuPopup
         level={level}
