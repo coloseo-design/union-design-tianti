@@ -1,5 +1,30 @@
 @import "./common.less";
 
+@datepicker: ~"@{uni-prefix}-datepicker";
+@datepicker-picker: ~"@{datepicker}-picker";
+@datepicker-picker-range: ~"@{datepicker}-picker-range";
+@datepicker-picker-popup: ~"@{datepicker}-picker-popup";
+
+@datepicker-picker-input: ~"@{datepicker}-picker-input";
+@datepicker-picker-icon: ~"@{datepicker}-picker-icon";
+
+@datepicker-picker-input-range: ~"@{datepicker}-picker-input-range";
+
+@datepicker-picker-start-container: ~"@{datepicker}-picker-start-container";
+@datepicker-picker-end-container: ~"@{datepicker}-picker-end-container";
+
+@datepicker-picker-input-range-start-hover: ~"@{datepicker}-picker-input-range-start-hover";
+@datepicker-picker-input-range-start-focus: ~"@{datepicker}-picker-input-range-start-focus";
+@datepicker-picker-input-range-start-disabled: ~"@{datepicker}-picker-input-range-start-disabled";
+@datepicker-picker-input-range-end-hover: ~"@{datepicker}-picker-input-range-end-hover";
+@datepicker-picker-input-range-end-focus: ~"@{datepicker}-picker-input-range-end-focus";
+@datepicker-picker-input-range-end-disabled: ~"@{datepicker}-picker-input-range-end-disabled";
+
+@datepicker-picker-input-single: ~"@{datepicker}-picker-input-single";
+@datepicker-picker-input-single-hover: ~"@{datepicker}-picker-input-single-hover";
+@datepicker-picker-input-single-focus: ~"@{datepicker}-picker-input-single-focus";
+@datepicker-picker-input-single-disabled: ~"@{datepicker}-picker-input-single-disabled";
+
 .@{dpalias-picker} {
   display: inline-block;
   position: relative;
@@ -8,7 +33,7 @@
   color: @dpcolor-text-85;
   text-align: center;
 
-  & > .popup {
+  & > .@{datepicker-picker-popup} {
     white-space: nowrap;
     position: absolute;
     border-radius: @dpborder-radius;
@@ -17,28 +42,28 @@
     background-color: @dpcolor-bg;
     box-shadow: @dpstyle-popup;
 
-    & > .range {
+    & > .@{datepicker-picker-range} {
       & > div:nth-of-type(1) {
         display: inline-block;
       }
-    
+
       & > div:nth-of-type(2) {
         display: inline-block;
       }
     }
   }
 
-  & > .input-range,
-  & > .input-single {
+  & > .@{datepicker-picker-input-range},
+  & > .@{datepicker-picker-input-single} {
     width: 100%;
     height: 100%;
 
-    & .icon{
+    & .@{datepicker-picker-icon} {
       float: right;
       height: 100%;
       width: @dpsize-pickerbase-icon-container;
       cursor: pointer;
-  
+
       & > span {
         .dp-vh-center();
         color: @dpcolor-icon-normal;
@@ -46,10 +71,10 @@
       }
     }
 
-    & .input{
+    & .@{datepicker-picker-input} {
       height: 100%;
       margin-right: @dpsize-pickerbase-icon-container;
-  
+
       & > input {
         background-color: inherit;
         border: none;
@@ -60,27 +85,27 @@
         border-radius: @dpborder-radius;
         line-height: 100%;
       }
-      
+
     }
   }
 
-  & > .input-single {
+  & > .@{datepicker-picker-input-single} {
     box-sizing: border-box;
     border: @dpborder-input-normal;
     border-radius: @dpborder-radius;
   }
 
-  & > .input-single-hover {
+  & > .@{datepicker-picker-input-single-hover} {
     &:hover {
       border: @dpborder-input-hover;
     }
   }
 
-  & > .input-single-focus {
+  & > .@{datepicker-picker-input-single-focus} {
     border: @dpborder-input-hover;
   }
 
-  & > .input-single-disabled {
+  & > .@{datepicker-picker-input-single-disabled} {
     background-color: @dpcolor-bg-disabled;
     border: @dpborder-disabled;
     color: @dpcolor-text-45;
@@ -90,11 +115,11 @@
     }
   }
 
-  & > .input-range {
+  & > .@{datepicker-picker-input-range} {
     position: relative;
 
-    & > .start-container,
-    & > .end-container {
+    & > .@{datepicker-picker-start-container},
+    & > .@{datepicker-picker-end-container} {
       position: absolute;
       top: 0;
       bottom: 0;
@@ -102,7 +127,7 @@
       border: @dpborder-input-normal;
     }
 
-    & > .start-container{
+    & > .@{datepicker-picker-start-container}{
       left: 0;
       right: 50%;
       z-index: 1;
@@ -110,7 +135,7 @@
       border-bottom-left-radius: @dpborder-radius;
     }
 
-    & > .end-container{
+    & > .@{datepicker-picker-end-container} {
       left: 50%;
       right: 0;
       margin-left: -1px;
@@ -120,22 +145,22 @@
     }
   }
 
-  & > .input-range-start-hover > .start-container,
-  & > .input-range-end-hover > .end-container{
+  & > .@{datepicker-picker-input-range-start-hover} > .@{datepicker-picker-start-container},
+  & > .@{datepicker-picker-input-range-end-hover} > .@{datepicker-picker-end-container} {
     &:hover {
       border: @dpborder-input-hover;
       z-index: 3;
     }
   }
 
-  & > .input-range-start-focus > .start-container,
-  & > .input-range-end-focus > .end-container {
+  & > .@{datepicker-picker-input-range-start-focus} > .@{datepicker-picker-start-container},
+  & > .@{datepicker-picker-input-range-end-focus} > .@{datepicker-picker-end-container} {
     border: @dpborder-input-hover;
     z-index: 3;
   }
 
-  & > .input-range-start-disabled > .start-container,
-  & > .input-range-end-disabled > .end-container {
+  & > .@{datepicker-picker-input-range-start-disabled} > .@{datepicker-picker-start-container},
+  & > .@{datepicker-picker-input-range-end-disabled} > .@{datepicker-picker-end-container} {
     background-color: @dpcolor-bg-disabled;
     border: @dpborder-disabled;
     color: @dpcolor-text-45;

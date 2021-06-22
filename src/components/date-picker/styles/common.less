@@ -74,6 +74,43 @@
 
 @dpstyle-popup: @shadow-2;
 
+
+@datepicker: ~"@{uni-prefix}-datepicker";
+
+@datepicker-tag-row: ~"@{datepicker}-tag-row";
+@datepicker-tag-col: ~"@{datepicker}-tag-col";
+@datepicker-tag-head: ~"@{datepicker}-tag-head";
+@datepicker-tag-content: ~"@{datepicker}-tag-content";
+@datepicker-tag-active: ~"@{datepicker}-tag-active";
+@datepicker-tag-date: ~"@{datepicker}-tag-date";
+@datepicker-tag-time: ~"@{datepicker}-tag-time";
+@datepicker-tag-icon: ~"@{datepicker}-tag-icon";
+@datepicker-tag-left: ~"@{datepicker}-tag-left";
+@datepicker-tag-right: ~"@{datepicker}-tag-right";
+@datepicker-tag-double-left: ~"@{datepicker}-tag-double-left";
+@datepicker-tag-double-right: ~"@{datepicker}-tag-double-right";
+@datepicker-tag-title: ~"@{datepicker}-tag-title";
+@datepicker-tag-hover: ~"@{datepicker}-tag-hover";
+@datepicker-tag-nohover: ~"@{datepicker}-tag-nohover";
+
+@datepicker-item: ~"@{datepicker}-item";
+@datepicker-item-cur: ~"@{datepicker}-item-cur";
+@datepicker-item-notcur: ~"@{datepicker}-item-notcur";
+@datepicker-item-hover: ~"@{datepicker}-item-hover";
+@datepicker-item-disabled: ~"@{datepicker}-item-disabled";
+@datepicker-item-selected: ~"@{datepicker}-item-selected";
+
+@datepicker-item-border-start: ~"@{datepicker}-item-border-start";
+@datepicker-item-border-end: ~"@{datepicker}-item-border-end";
+@datepicker-item-border-range: ~"@{datepicker}-item-border-range";
+@datepicker-item-border-left: ~"@{datepicker}-item-border-left";
+@datepicker-item-border-right: ~"@{datepicker}-item-border-right";
+
+@datepicker-item-bg-start: ~"@{datepicker}-item-bg-start";
+@datepicker-item-bg-end: ~"@{datepicker}-item-bg-end";
+@datepicker-item-bg-range: ~"@{datepicker}-item-bg-range";
+@datepicker-item-bg-hover: ~"@{datepicker}-item-bg-hover";
+
 .dp-v-center() {
   position: relative;
   top: 50%;
@@ -93,7 +130,7 @@
 }
 
 .item-base(@line-height) {
-  & .item {
+  & .@{datepicker-item} {
     line-height: @line-height;
 
     & span {
@@ -121,7 +158,7 @@
 }
 
 .item-cur-base(@width) {
-  & .item-cur {
+  & .@{datepicker-item-cur} {
     color: @dpcolor-bg-selected;
     &::before {
       margin: auto;
@@ -133,13 +170,13 @@
 }
 
 .item-notcur-base() {
-  & .item-notcur {
+  & .@{datepicker-item-notcur} {
     color: @dpcolor-text-35;
   }
 }
 
 .item-hover-base(@width) {
-  & .item-hover {
+  & .@{datepicker-item-hover} {
     &:hover::before {
       margin: auto;
       width: @width;
@@ -150,7 +187,7 @@
 }
 
 .item-disabled-base() {
-  & .item-disabled {
+  & .@{datepicker-item-disabled} {
     cursor: not-allowed;
     color: @dpcolor-text-35;
     background-color: @dpcolor-bg-disabled;
@@ -158,7 +195,7 @@
 }
 
 .item-selected-base(@width) {
-  & .item-selected {
+  & .@{datepicker-item-selected} {
     color: @dpcolor-text-selected;
     & span {
       margin: 0 auto;
@@ -170,48 +207,48 @@
 }
 
 .item-border-range-base() {
-  & .item-border-start,
-  & .item-border-end,
-  & .item-border-range {
+  & .@{datepicker-item-border-start},
+  & .@{datepicker-item-border-end},
+  & .@{datepicker-item-border-range} {
     &::after {
       width: 100%;
       border: 1px dashed @dpcolor-bg-selected;
     }
   }
 
-  & .item-border-range {
+  & .@{datepicker-item-border-range} {
     &::after {
       border-left: none;
       border-right: none;
     }
   }
 
-  & .item-border-start.item-selected,
-  & .item-border-end.item-selected {
+  & .@{datepicker-item-border-start}.@{datepicker-item-selected},
+  & .@{datepicker-item-border-end}.@{datepicker-item-selected} {
     &::after {
       width: 50%;
     }
   }
 
-  & .item-border-left {
+  & .@{datepicker-item-border-left} {
     &::after {
       left: 50%;
     }
   }
 
-  & .item-border-right {
+  & .@{datepicker-item-border-right} {
     &::after {
       right: 50%;
     }
   }
 
-  & .item-border-start.item-border-end {
+  & .@{datepicker-item-border-start}.@{datepicker-item-border-end} {
     &::after {
       border: 1px dashed @dpcolor-bg-selected;
     }
   }
 
-  & .item-border-start {
+  & .@{datepicker-item-border-start} {
     &::after {
       border-right: none;
       border-top-left-radius: @dpborder-radius;
@@ -219,7 +256,7 @@
     }
   }
 
-  & .item-border-end {
+  & .@{datepicker-item-border-end} {
     &::after {
       border-left: none;
       border-top-right-radius: @dpborder-radius;
@@ -229,9 +266,9 @@
 }
 
 .item-bg-range-base() {
-  & .item-bg-start,
-  & .item-bg-end,
-  & .item-bg-range {
+  & .@{datepicker-item-bg-start},
+  & .@{datepicker-item-bg-end},
+  & .@{datepicker-item-bg-range} {
     &::before {
       width: 100%;
       border: none;
@@ -239,26 +276,26 @@
     }
   }
 
-  & .item-bg-start,
-  & .item-bg-end {
+  & .@{datepicker-item-bg-start},
+  & .@{datepicker-item-bg-end} {
     &::before {
       width: 50%;
     }
   }
 
-  & .item-bg-start {
+  & .@{datepicker-item-bg-start} {
     &::before {
       left: 50%;
     }
   }
 
-  & .item-bg-end {
+  & .@{datepicker-item-bg-end} {
     &::before {
       right: 50%;
     }
   }
 
-  & .item-bg-hover {
+  & .@{datepicker-item-bg-hover} {
     &::before {
       background-color: @dpcolor-bg-hover-hover;
     }

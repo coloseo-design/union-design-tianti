@@ -6,12 +6,12 @@
   height: @dpsize-popupmonth-height;
   padding: 12px;
 
-  & [data-class*="row"] {
+  & [data-class*=~"'@{datepicker-tag-row}'"] {
     position: relative;
     height: 100% / 4;
   }
 
-  & [data-class*="col"] {
+  & [data-class*=~"'@{datepicker-tag-col}'"] {
     .dp-v-center();
     display: inline-block;
     width: 100% / 3;

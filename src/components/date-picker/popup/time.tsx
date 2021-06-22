@@ -108,12 +108,12 @@ abstract class PopupTime<T extends PickerType> extends Popup<T> {
           <div
             id={`${this.scrollIdTag}-${col}`}
             key={`${this.scrollIdTag}-${col}`}
-            data-class={['year', 'month', 'date'].includes(`${col}`) ? 'date' : 'time'}
+            data-class={['year', 'month', 'date'].includes(`${col}`) ? this.gpc('tag-date') : this.gpc('tag-time')}
           >
             {this.getCol(col).map((row) => (
               <div
                 id={`${this.scrollIdTag}-${col}-${row.key}`}
-                data-class={date?.get(col) === row.key ? 'active' : 'none'}
+                data-class={date?.get(col) === row.key ? this.gpc('tag-active') : 'none'}
                 onClick={() => this.clickDate(col, row.key)}
                 key={row.key}
               >
