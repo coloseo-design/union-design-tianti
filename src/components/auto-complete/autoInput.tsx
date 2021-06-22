@@ -190,7 +190,7 @@ class AutoComplete extends React.Component<AutoCompleteProps, autoState> {
           switch (Object.prototype.toString.call(item)) {
             case '[object String]':
               return (
-                <Option value={item} key={item}>{item}</Option>
+                <Option value={item} key={item} onClick={this.onSelect}>{item}</Option>
               );
             case '[object Object]': {
               const { value: optionValue } = item as DataSourceItemObject;
