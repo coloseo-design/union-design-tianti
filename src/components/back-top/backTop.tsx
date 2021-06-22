@@ -56,7 +56,7 @@ class BackTop extends Component<BackTopProps, BackTopState> {
 
   renderBackTop = ({ getPrefixCls }: ConfigConsumerProps) => {
     const {
-      prefixCls, onClick, visibilityHeight = 400, duration = 450, className,
+      prefixCls, onClick, visibilityHeight = 400, duration = 450, className, target,
       ...rest
     } = this.props;
     const { scrollTop = 0 } = this.state;
@@ -67,10 +67,8 @@ class BackTop extends Component<BackTopProps, BackTopState> {
     });
 
     const handleClick = (e: Event) => {
-      const { target } = this.props;
-      const { scrollTop: newscrollTop } = this.state;
       const container = target ? target() : document.getElementsByTagName('body')[0];
-      scrollToTop(target ? '' : 'body', duration, newscrollTop, container);
+      scrollToTop(target ? target().id : 'body', duration, scrollTop, container);
       if (onClick) {
         onClick(e);
       }

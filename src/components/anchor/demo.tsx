@@ -2,8 +2,12 @@ import React from 'react';
 import { Anchor } from '../index';
 
 const AnchorDemo = () => (
-  <div>
+  <div
+    id="AnchorDemo"
+    style={{ height: 400, overflow: 'scroll', position: 'relative' }}
+  >
     <Anchor
+      getContainer={() => document.getElementById('AnchorDemo')}
       options={[{ id: 'a', name: 'a-demoa-demoa-demoa-demoa-demoa-demoa-demo' }, { id: 'b', name: 'b-demo' }, { id: 'c', name: 'c-demo' }, { id: 'd', name: 'd-demo' }, { id: 'e', name: 'e-demo' }]}
     />
 

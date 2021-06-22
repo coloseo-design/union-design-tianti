@@ -1,3 +1,5 @@
+/* eslint-disable max-len */
+/* eslint-disable react/no-unused-state */
 /* eslint-disable no-shadow */
 import React, { Component } from 'react';
 import classNames from 'classnames';
@@ -9,6 +11,7 @@ interface AnchorState {
   link?: { id: string, name: string };
   linkElementHeight?: number;
   isClick?: boolean;
+  scrollTop?: number;
 }
 export interface AnchorProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onChange' | 'onClick'> {
   // 锚点选项
@@ -29,6 +32,7 @@ class Anchor extends Component<AnchorProps, AnchorState> {
     this.state = {
       linkElementHeight: 0,
       isClick: false,
+      scrollTop: 0,
     };
   }
 
@@ -47,16 +51,23 @@ class Anchor extends Component<AnchorProps, AnchorState> {
     container && container.removeEventListener('scroll', this.scroll);
   }
 
-  scroll = () => {
+  scroll = (e) => {
     const { isClick, link } = this.state;
-    const { options, onChange } = this.props;
+    const { options, onChange, getContainer } = this.props;
+    this.setState({ scrollTop: e.target.scrollTop });
     if (isClick) return;
-    const { scrollTop } = document.documentElement;
     const offsetTop = (document.querySelectorAll('.g-header')[0]?.getBoundingClientRect().height ?? 0);
+    const offsetY = getContainer ? 0 : offsetTop;
+    function anchorY(ele, container) {
+      if (container === document) {
+        return ele.getBoundingClientRect().y;
+      }
+      return ele.getBoundingClientRect().y - container.getBoundingClientRect().y;
+    }
     let activedId = '';
     let activedLink = { id: '', name: '' };
     options.forEach((item) => {
-      if (scrollTop + offsetTop > (document.getElementById(item.id)?.offsetTop ?? 0)) {
+      if (anchorY(document.getElementById(item.id), e.target) <= offsetY) {
         activedId = item.id;
         activedLink = { ...item };
       }
@@ -71,23 +82,42 @@ class Anchor extends Component<AnchorProps, AnchorState> {
 
   renderAnchor = ({ getPrefixCls }: ConfigConsumerProps) => {
     const {
-      prefixCls, onChange, onClick, options, className, ...rest
+      prefixCls, onChange, onClick, options, className, getContainer, ...rest
     } = this.props;
-    const { linkElementHeight = 0, link } = this.state;
-
+    const {
+      linkElementHeight = 0, link, scrollTop,
+    } = this.state;
     const classPrefix = getPrefixCls('anchor', prefixCls);
     const mainClass = classNames(classPrefix, className, {
       // [`${prefix}-has-sider`]: siders.length > 0,
     });
 
     let timer: NodeJS.Timeout | null = null;
+    let anotherTimer: NodeJS.Timeout | null = null;
 
     const handleClick = (link: { id: string; name: string; }) => (e) => {
-      this.setState({ link, isClick: true });
-      scrollToTop(link.id, duration);
+      this.setState({ isClick: true });
+      if (getContainer) {
+        const container = getContainer && getContainer();
+        const { offsetTop } = container;
+        const header = document.getElementsByTagName('header');
+        const height = (header && header[0] && header[0].getBoundingClientRect().height) || 0;
+        const endTop = offsetTop - height;
+        if (document.documentElement.scrollTop === endTop) {
+          scrollToTop(link.id, duration, scrollTop || 0.1, container);
+        } else {
+          scrollToTop(container.id, duration);
+          clearTimeout(anotherTimer);
+          anotherTimer = setTimeout(() => {
+            scrollToTop(link.id, duration, scrollTop || 0.1, container);
+          }, duration);
+        }
+      } else {
+        scrollToTop(link.id, duration);
+      }
       clearTimeout(timer);
       timer = setTimeout(() => {
-        this.setState({ isClick: false });
+        this.setState({ isClick: false, link });
       }, duration + 100);
       if (onClick) {
         onClick(link, e);

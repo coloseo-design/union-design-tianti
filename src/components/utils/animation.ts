@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 /* eslint-disable max-len */
 /* eslint-disable no-mixed-operators */
 /* eslint import/prefer-default-export: 0 */
@@ -23,12 +24,12 @@ export const animation = (
 };
 
 export const scrollToTop = (id: string, duration: number, scrollTop?: number, container?: HTMLElement) => {
-  const ele = container || document.getElementById(id);
+  const ele = id === 'body' ? document.getElementsByTagName('body')[0] : document.getElementById(id);
   const startTop = scrollTop || document.documentElement.scrollTop;
   if (!ele) return;
   const { offsetTop } = ele;
   const header = document.getElementsByTagName('header');
-  const height = header && header[0] && header[0].getBoundingClientRect().height || 0;
+  const height = container && id !== 'body' ? 0 : header && header[0] && header[0].getBoundingClientRect().height || 0;
   const endTop = offsetTop - height;
   const distance = endTop - startTop;
   if (Math.abs(distance) === 0) return;
@@ -42,7 +43,7 @@ export const scrollToTop = (id: string, duration: number, scrollTop?: number, co
     if (elapsed > duration) return;
     const tempDistance = distance * elapsed / duration;
     if (container && id !== 'body') {
-      ele.scrollTop = startTop + tempDistance;
+      container.scrollTop = startTop + tempDistance;
     } else {
       document.documentElement.scrollTop = startTop + tempDistance;
     }
