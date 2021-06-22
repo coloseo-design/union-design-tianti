@@ -3,6 +3,29 @@
 
 @calendar: ~"@{uni-prefix}-calendar";
 
+@calendar-tag-title: ~"@{calendar}-tag-title";
+@calendar-tag-head: ~"@{calendar}-tag-head";
+@calendar-tag-year: ~"@{calendar}-tag-year";
+@calendar-tag-month: ~"@{calendar}-tag-month";
+@calendar-tag-btns: ~"@{calendar}-tag-btns";
+@calendar-tag-row: ~"@{calendar}-tag-row";
+@calendar-tag-col: ~"@{calendar}-tag-col";
+@calendar-tag-content: ~"@{calendar}-tag-content";
+@calendar-tag-col-selected: ~"@{calendar}-tag-col-selected";
+@calendar-tag-col-cur: ~"@{calendar}-tag-col-cur";
+@calendar-tag-head-row: ~"@{calendar}-tag-head-row";
+@calendar-tag-content-row: ~"@{calendar}-tag-content-row";
+
+@calendar-tag-item: ~"@{calendar}-tag-item";
+@calendar-tag-item-hover: ~"@{calendar}-tag-item-hover";
+@calendar-tag-item-notcur: ~"@{calendar}-tag-item-notcur";
+@calendar-tag-item-cur-date: ~"@{calendar}-tag-item-cur-date";
+@calendar-tag-item-selected: ~"@{calendar}-tag-item-selected";
+
+@calendar-tag-value: ~"@{calendar}-tag-value";
+@calendar-tag-icon: ~"@{calendar}-tag-icon";
+@calendar-tag-popup: ~"@{calendar}-tag-popup";
+
 @calendar-title-bg-color: #E9EBF0;
 @calendar-line-color: @border;
 @calendar-head-button-normal-color: rgba(0, 0, 0, 0.85);
@@ -25,33 +48,33 @@
     border-radius: @border-radius-base;
     background-color: @white;
 
-    & > .title {
+    & > .@{calendar-tag-title} {
         height: 36px;
         line-height: 36px;
         background-color: @calendar-title-bg-color;
         padding-left: 16px;
     }
 
-    & > .head {
+    & > .@{calendar-tag-head} {
         position: relative;
         height: 43px;
 
-        & > .year,
-        & > .month,
-        & > .btns {
+        & > .@{calendar-tag-year},
+        & > .@{calendar-tag-month},
+        & > .@{calendar-tag-btns} {
             position: absolute;
             top: 10px;
         }
 
-        & > .year{
+        & > .@{calendar-tag-year}{
             left: 16px;
         }
 
-        & > .month {
+        & > .@{calendar-tag-month} {
             left: 88px + 16px + 16px;
         }
 
-        & > .btns {
+        & > .@{calendar-tag-btns} {
             right: 16px;
         }
     }
@@ -62,12 +85,12 @@
     height: 246px;
     margin: 0 8px;
 
-    & > .row {
+    & > .@{calendar-tag-row} {
         position: relative;
         width: 100%;
         height: 56px;
 
-        & > .col {
+        & > .@{calendar-tag-col} {
             position: relative;
             width: 100px;
             height: 100%;
@@ -80,7 +103,7 @@
                 background-color: @calendar-year-item-select-bg-color;
             }
 
-            & > .title{
+            & > .@{calendar-tag-title} {
                 height: 22px;
                 line-height: 22px;
                 font-size: 14px;
@@ -88,22 +111,22 @@
                 user-select: none;
             }
 
-            & > .content{
+            & > .@{calendar-tag-content} {
                 width: 100%;
                 height: 34px;
                 // overflow-y: auto;
             }
         }
 
-        & > .col + .col {
+        & > .@{calendar-tag-col} + .@{calendar-tag-col} {
             margin-left: 8px;
         }
 
-        & > .col-selected {
+        & > .@{calendar-tag-col-selected} {
             background-color: @calendar-year-item-select-bg-color;
         }
 
-        & > .col-cur {
+        & > .@{calendar-tag-col-cur} {
             border-top: 1px solid @calendar-year-item-border-top-active-color;
         }
     }
@@ -119,14 +142,14 @@
     margin: 0 8px;
     padding: 0 8px;
 
-    & > .head-row {
+    & > .@{calendar-tag-head-row} {
         margin-top: 10px;
         margin-bottom: 6px;
         color: @calendar-head-button-normal-color;
     }
 
-    & > .head-row > .col,
-    & > .content-row > .col {
+    & > .@{calendar-tag-head-row} > .@{calendar-tag-col},
+    & > .@{calendar-tag-content-row} > .@{calendar-tag-col} {
         position: relative;
         display: inline-block;
         width: 100% / 7;
@@ -134,10 +157,10 @@
         cursor: default;
     }
 
-    & > .content-row{
+    & > .@{calendar-tag-content-row} {
         height: 34px;
 
-        & > .col {
+        & > .@{calendar-tag-col} {
             height: 22px;
             margin-top: 6px;
             color: @calendar-month-cur-color;
@@ -145,7 +168,7 @@
             cursor: pointer;
         }
 
-        & > .item::before{
+        & > .@{calendar-tag-item}::before {
             content: "";
             position: absolute;
             border-radius: @border-radius-base;
@@ -158,24 +181,24 @@
             height: 24px;
         }
 
-        & > .item-hover {
+        & > .@{calendar-tag-item-hover} {
             &:hover::before{
                 background-color: @calendar-month-item-hover-color;
             }
         }
 
-        & > .item-notcur{
+        & > .@{calendar-tag-item-notcur} {
             color: @calendar-month-not-cur-color;
         }
 
-        & > .item-cur-date{
+        & > .@{calendar-tag-item-cur-date} {
             color: @calendar-head-button-active-color;
             &::before{
                 border: 1px solid @calendar-head-button-active-color;
             }
         }
 
-        & > .item-selected{
+        & > .@{calendar-tag-item-selected} {
             color: @white;
             &::before{
                 background-color: @calendar-month-item-selected-color;
@@ -196,19 +219,19 @@
     cursor: pointer;
     user-select: none;
 
-    & > .value {
+    & > .@{calendar-tag-value} {
         float: left;
         padding-left: 8px;
     }
 
-    & > .icon {
+    & > .@{calendar-tag-icon} {
         float: right;
         font-size: 16px;
         margin-left: 8px;
         margin-right: 8px;
     }
 
-    & > .popup {
+    & > .@{calendar-tag-popup} {
         position: absolute;
         top: 26px;
         width: 100%;
@@ -220,7 +243,7 @@
         border-radius: @border-radius-base;
         padding: 5px 0px;
 
-        & > .item {
+        & > .@{calendar-tag-item} {
             height: 24px;
             text-align: center;
 
@@ -229,7 +252,7 @@
             }
         }
 
-        & > .item-select {
+        & > .@{calendar-tag-item-selected} {
             background-color: @calendar-year-item-select-bg-color;
         }
     }
@@ -240,8 +263,8 @@
     border: 1px solid @calendar-line-color;
     border-radius: @border-radius-base;
 
-    & > .year,
-    & > .month {
+    & > .@{calendar-tag-year},
+    & > .@{calendar-tag-month} {
         width: 40px;
         height: 24px;
         line-height: 24px;
@@ -253,7 +276,7 @@
         color: @calendar-head-button-normal-color;
     }
 
-    & > .year + .month {
+    & > .@{calendar-tag-year} + .@{calendar-tag-month} {
         border-left: 1px solid @calendar-line-color;
     }
 

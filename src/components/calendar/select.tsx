@@ -5,117 +5,117 @@ import { uuid } from '../cascader/utils';
 import Icon from '../icon';
 
 export type SelectBaseData = {
-    key: string | number;
-    value: string;
+  key: string | number;
+  value: string;
 };
 
 export type SelectProps<T extends SelectBaseData> = {
-    data: T[];
-    value: string;
-    onChange?: (item: T) => void;
+  data: T[];
+  value: string;
+  onChange?: (item: T) => void;
 } & BaseProps;
 
 export type SelectState = {
-    popupVisible: boolean;
+  popupVisible: boolean;
 } & BaseState;
 
 export class Select<T extends SelectBaseData> extends BaseComponent<SelectProps<T>, SelectState> {
-    public static defaultProps: Omit<SelectProps<SelectBaseData>, 'data' | 'value'> = {
-      onChange: () => ({ }),
+  public static defaultProps: Omit<SelectProps<SelectBaseData>, 'data' | 'value'> = {
+    onChange: () => ({}),
+  };
+
+  protected classPrefix = 'calendar';
+
+  private uuid = uuid();
+
+  public constructor(props: SelectProps<T>) {
+    super(props);
+    this.state = {
+      popupVisible: false,
     };
+  }
 
-    protected classPrefix = 'calendar';
+  public componentDidMount = () => {
+    document.body.addEventListener('click', this.clickBody);
+  };
 
-    private uuid = uuid();
+  public componentWillUnmount = () => {
+    document.body.removeEventListener('click', this.clickBody);
+  };
 
-    public constructor(props: SelectProps<T>) {
-      super(props);
-      this.state = {
-        popupVisible: false,
-      };
+  protected view = () => {
+    const { data, value } = this.props;
+    const { popupVisible } = this.state;
+
+    return (
+      <div
+        className={this.getPrefixClass('select')}
+        onClick={this.clickSelect}
+      >
+        <div className={this.gpc('tag-value')}>{value}</div>
+        <div className={this.gpc('tag-icon')}><Icon type={popupVisible ? 'up' : 'down'} /></div>
+        {popupVisible && (
+          <div
+            id={`${this.uuid}-container`}
+            className={this.gpc('tag-popup')}
+            data-uuid={this.uuid}
+          >
+            {data.map((item) => (
+              <div
+                key={item.key}
+                className={this.classNames(this.gpc('tag-item'), {
+                  [this.gpc('tag-item-selected')]: item.value === value,
+                })}
+                id={`${this.uuid}-${item.value}`}
+                onClick={() => this.clickItem(item)}
+              >
+                {item.value}
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    );
+  };
+
+  private clickSelect: DOMAttributes<HTMLDivElement>['onClick'] = (event) => {
+    event.stopPropagation();
+    const { popupVisible } = this.state;
+    this.setState({ popupVisible: !popupVisible }, () => {
+      if (this.state.popupVisible) {
+        scrollToY(`${this.uuid}-container`, `${this.uuid}-${this.props.value}`, 200);
+      }
+    });
+  }
+
+  private clickItem = (item: T) => {
+    const { onChange } = this.props;
+
+    onChange?.(item);
+
+    this.setState({ popupVisible: false });
+  }
+
+  private handleClickBodyWithoutCur = (target: HTMLElement) => {
+    if (target.getAttribute('data-uuid') === this.uuid) {
+      return;
     }
 
-    public componentDidMount = () => {
-      document.body.addEventListener('click', this.clickBody);
-    };
-
-    public componentWillUnmount = () => {
-      document.body.removeEventListener('click', this.clickBody);
-    };
-
-    protected view = () => {
-      const { data, value } = this.props;
-      const { popupVisible } = this.state;
-
-      return (
-        <div
-          className={this.getPrefixClass('select')}
-          onClick={this.clickSelect}
-        >
-          <div className="value">{value}</div>
-          <div className="icon"><Icon type={popupVisible ? 'up' : 'down'} /></div>
-          {popupVisible && (
-            <div
-              id={`${this.uuid}-container`}
-              className="popup"
-              data-uuid={this.uuid}
-            >
-              {data.map((item) => (
-                <div
-                  key={item.key}
-                  className={this.classNames('item', {
-                    'item-select': item.value === value,
-                  })}
-                  id={`${this.uuid}-${item.value}`}
-                  onClick={() => this.clickItem(item)}
-                >
-                  {item.value}
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
-      );
-    };
-
-    private clickSelect: DOMAttributes<HTMLDivElement>['onClick'] = (event) => {
-      event.stopPropagation();
-      const { popupVisible } = this.state;
-      this.setState({ popupVisible: !popupVisible }, () => {
-        if (this.state.popupVisible) {
-          scrollToY(`${this.uuid}-container`, `${this.uuid}-${this.props.value}`, 200);
-        }
-      });
-    }
-
-    private clickItem = (item: T) => {
-      const { onChange } = this.props;
-
-      onChange?.(item);
-
+    if (target.nodeName === 'BODY') {
       this.setState({ popupVisible: false });
+      return;
     }
 
-    private handleClickBodyWithoutCur = (target: HTMLElement) => {
-      if (target.getAttribute('data-uuid') === this.uuid) {
-        return;
-      }
+    if (target.parentNode) {
+      this.handleClickBodyWithoutCur(target.parentNode as HTMLElement);
+    }
+  };
 
-      if (target.nodeName === 'BODY') {
-        this.setState({ popupVisible: false });
-        return;
-      }
-
-      if (target.parentNode) {
-        this.handleClickBodyWithoutCur(target.parentNode as HTMLElement);
-      }
-    };
-
-    private clickBody = (event: Event) => {
-      const { popupVisible } = this.state;
-      if (!popupVisible) return;
-      event.target && this.handleClickBodyWithoutCur(event.target as HTMLElement);
-    };
+  private clickBody = (event: Event) => {
+    const { popupVisible } = this.state;
+    if (!popupVisible) return;
+    event.target && this.handleClickBodyWithoutCur(event.target as HTMLElement);
+  };
 }
 
 const scrollToY = (containerId: string, targetId: string, duration: number) => {
