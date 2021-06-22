@@ -2,13 +2,17 @@
 @import "../../style/mixins/index";
 
 @message: ~"@{uni-prefix}-message";
+@message-container: ~"@{message}-container";
+@message-icon: ~"@{message}-icon";
+@message-content: ~"@{message}-content";
+@message-icon-rotate: ~"@{message}-icon-rotate";
 
 .@{message}-wrap {
     text-align: center;
     padding: 0 40px;
     animation: in 0.2s linear;
 
-    & > .container {
+    & > .@{message-container} {
         display: inline-block;
         margin: 10px auto;
         padding: 9px 16px;
@@ -20,21 +24,21 @@
         vertical-align: middle;
         pointer-events: auto;
 
-        & > .icon,
-        & > .content {
+        & > .@{message-icon},
+        & > .@{message-content} {
             display: inline-block;
         }
 
-        & > .icon {
+        & > .@{message-icon} {
             font-size: 16px;
         }
 
-        & > .icon-rotate {
+        & > .@{message-icon-rotate} {
             font-size: 16px;
             transform: rotate(180deg);
         }
 
-        & > .content {
+        & > .@{message-content} {
             font-size: 14px;
             margin-left: 10px;
             color: rgba(0, 0, 0, 0.65);
@@ -43,15 +47,15 @@
 }
 
 @keyframes in {
-    from { 
+    from {
         margin-top: -20px;
-        opacity: 0; 
+        opacity: 0;
         z-index: -1;
     }
 
-    to { 
+    to {
         margin-top: 0;
-        opacity: 1; 
+        opacity: 1;
         z-index: 0;
     }
 }
