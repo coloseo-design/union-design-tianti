@@ -328,7 +328,7 @@ class PopComponent extends React.Component<PopProps, PopconfirmState> {
         <Portal {...({ getPopupContainer })}>
           <div
             className={popContainter}
-            style={{ left: x, top: y, ...overlayStyle }}
+            style={{ ...overlayStyle, left: x, top: y }}
             ref={this.getNode}
             onClick={(e) => {
               e.stopPropagation();

@@ -30,7 +30,7 @@ const PopconfirmDemo: React.FC<unknown> = () => {
 )}
           placement="topLeft"
           getPopupContainer={() => document.getElementById('pop') || document.body}
-          okButtonProps={{ loading }}
+          okButtonProps={{ loading: true }}
           onConfirm={onConfirm}
           overlayStyle={{ maxWidth: 200 }}
         >
