@@ -4,7 +4,7 @@
 import React from 'react';
 import { FormContextProps } from './type';
 
-const FormContext = React.createContext<FormContextProps>({
+export const FormContext = React.createContext<FormContextProps>({
   name: '',
   colon: true,
   validateTrigger: 'onChange',
@@ -18,11 +18,3 @@ const FormContext = React.createContext<FormContextProps>({
 });
 
 export const { Consumer: FormConsumer, Provider: FormProvider } = FormContext;
-
-export const withFormContext = <T extends FormContextProps>(Component: React.FC<T> | React.Component<T>) => (props: T) => (
-  <FormConsumer>
-    {
-      (context: FormContextProps) => (<Component {...props} context={context} />)
-    }
-  </FormConsumer>
-);

@@ -11,7 +11,7 @@ export interface BaseProps {
 
 export interface ColProps {
   /* 内容所占的栅格数 */
-  span: number;
+  span?: number;
   /** 栅格左右的占格数 */
   offset?: number;
   /** 栅格顺序 */

@@ -1,3 +1,5 @@
+/* eslint-disable max-len */
+import React, { HtmlHTMLAttributes } from 'react';
 import { BaseProps, ResponsiveColProps } from '../utils/type';
 import { ConfigConsumerProps } from '../config-provider';
 
@@ -23,7 +25,7 @@ export interface FormCommmonProps {
   /** 输入框布局 */
   wrapperCol?: ResponsiveColProps;
   /** label对齐方式 */
-  labelAlign: 'left' | 'right',
+  labelAlign?: 'left' | 'right',
 }
 
 export interface FormContextProps extends FormCommmonProps{
@@ -38,7 +40,7 @@ export interface FormContextProps extends FormCommmonProps{
   /** 表单收集的数据集 */
   values: FormValues;
   /** 表单收集的数据集 */
-  errors: FormValues;
+  errors: FormErrors;
   /** 表单数据收集 */
   onCollect: (name: string, action: any) => void;
   /** 表单错误收集 */
@@ -49,7 +51,8 @@ export interface FormContextProps extends FormCommmonProps{
   isValidating: boolean;
 }
 
-export interface FormProps extends FormCommmonProps, BaseProps, ConfigConsumerProps {
+// eslint-disable-next-line max-len
+export interface FormProps extends FormCommmonProps, BaseProps, React.HTMLAttributes<HTMLFormElement> {
   /** 表单名称 */
   name: string;
   /** 表单提交回调 */
@@ -60,19 +63,14 @@ export interface FormProps extends FormCommmonProps, BaseProps, ConfigConsumerPr
   onValuesChange?: (changedValues: FormValues, allValues: FormValues) => void;
   /** 默认校验时机 */
   validateTrigger?: 'onChange',
-}
+  /** 默认值 */
+  initialValues?: FormValues;
 
-export interface FormState {
-  /** 表单收集的值 */
-  values: { [key: string]: any };
-  /** 表单收集的错误 */
-  errors: { [key: string]: string[] | React.ReactNode[] };
-  /** 表单的校验状态 */
-  isValidating: boolean;
+  forwardRef: React.LegacyRef<FormInstance | null>;
 }
 
 type ValueCollection = {
-  value: any;
+  value: unknown;
   event: string;
 };
 
@@ -80,3 +78,50 @@ type ErrorCollection = {
   errors: string[] | React.ReactNode[];
   event: string;
 };
+
+export type ItemProps = ResponsiveColProps & BaseProps;
+
+export interface ValidatorRule {
+  message?: string;
+  validator?: (rule: ValidatorRule, value: unknown, cb: (error?: string) => void) => Promise<void | unknown> | void;
+  validateTrigger?: string | string[];
+  required?: boolean;
+}
+
+export type FormInstance = {
+  reset: () => void;
+  setFieldsValue: (value: Values) => void;
+  submit: () => void;
+};
+
+interface FormItemProps extends BaseProps, ConfigConsumerProps, React.HTMLAttributes<HtmlHTMLAttributes> {
+  /** label栅格布局 */
+  labelCol?: ResponsiveColProps;
+  /** 输入框栅格布局 */
+  wrapperCol?: ResponsiveColProps;
+  /** 字段名称 */
+  name?: string | string[];
+  /** 标签 */
+  label?: React.ReactNode;
+  prefixCls: string;
+  valuePropName: string;
+  trigger: string;
+  /** 用户自定义获取值的方法 */
+  getValueFromEvent: (evt: any) => any;
+  /** 校验器 */
+  rules?: ValidatorRule[];
+  /** 校验时机， 默认为onChange */
+  validateTrigger: string | string[];
+  messageVariables?: Record<string, string>;
+  /** 当检测到第一个错误的时候，停止 */
+  validateFirst: boolean;
+  /** 默认值: 请与当前输入组件相结合 */
+  initialValue: any;
+  /** 校验状态 */
+  isValidating: boolean;
+  /** 是否必填 */
+  required: boolean;
+  context: FormContextProps;
+  /** label对齐方式 */
+  labelAlign?: 'left' | 'right',
+}
