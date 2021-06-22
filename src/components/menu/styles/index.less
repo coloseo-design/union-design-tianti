@@ -235,15 +235,17 @@
   box-shadow: unset;
 
   & > div:first-of-type {
+    height: 100%;
+    width: 100%;
     box-shadow: 2px 0 4px 0 rgba(147,147,147,0.35);
+    overflow: auto;
   }
 }
 
 .@{menu-popup} {
+    position: fixed;
     z-index: 999999;
-    width: 166px;
+    width: 180px;
     animation: @menu-popup-animation 0.3s;
-    padding: 8px;
-    max-height: 360px;
-    overflow: auto;
+    padding-left: 8px;
 }

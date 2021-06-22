@@ -3,6 +3,7 @@ import React, {
   CSSProperties,
   ReactElement,
   ReactNode,
+  createRef,
 } from 'react';
 
 import { Icon } from '..';
@@ -102,6 +103,8 @@ export default class Menu extends MenuBase<MenuProps, MenuState> {
     onSelect: () => null,
     onDeselect: () => null,
   };
+
+  private containerRef = createRef<HTMLDivElement>();
 
   public constructor(props: MenuProps) {
     super(props);
@@ -224,6 +227,7 @@ export default class Menu extends MenuBase<MenuProps, MenuState> {
             width: inlineCollapsed ? inlineCollapsedWidth : width,
             ...otherProps,
           }}
+          ref={this.containerRef}
           data-menu-tag="menu"
           className={this.classNames(
             className,
@@ -291,7 +295,7 @@ export default class Menu extends MenuBase<MenuProps, MenuState> {
     children?: ReactNode,
   ) => {
     const { menuPopups } = this.state;
-    const { mode, popupClassName } = this.props;
+    const { popupClassName } = this.props;
     const newKey = `${level}-${key}`;
 
     if (!dom) {
@@ -302,33 +306,51 @@ export default class Menu extends MenuBase<MenuProps, MenuState> {
 
     const newMenuPopups = [...menuPopups!].slice(0, level + 1);
 
-    const {
-      top, right, bottom, left,
-    } = dom.getBoundingClientRect();
+    const cRect = this.containerRef.current?.getBoundingClientRect() as DOMRect;
+    const dRect = dom.getBoundingClientRect();
 
-    if (mode === 'horizontal' && level === 0) {
-      newMenuPopups[level] = [newKey,
-        <MenuPopup
-          className={popupClassName}
-          data={[]}
-          key={newKey}
-          top={bottom}
-          left={left}
-        >
-          {children}
-        </MenuPopup>];
-    } else {
-      newMenuPopups[level] = [newKey,
-        <MenuPopup
-          className={popupClassName}
-          data={[]}
-          key={newKey}
-          top={top - 20}
-          left={right}
-        >
-          {children}
-        </MenuPopup>];
-    }
+    // if (mode === 'horizontal' && level === 0) {
+    //   newMenuPopups[level] = [newKey,
+    //     <MenuPopup
+    //       level={level}
+    //       cRect={cRect}
+    //       dRect={dRect}
+    //       className={popupClassName}
+    //       data={[]}
+    //       key={newKey}
+    //     >
+    //       {children}
+    //     </MenuPopup>];
+    // } else {
+    //   newMenuPopups[level] = [newKey,
+    //     <MenuPopup
+    //       className={popupClassName}
+    //       data={[]}
+    //       key={newKey}
+    //       top={top - 12}
+    //       left={right}
+    //     >
+    //       {children}
+    //     </MenuPopup>];
+    // }
+
+    newMenuPopups[level] = [newKey,
+      <MenuPopup
+        level={level}
+        cRect={{
+          top: cRect.top,
+          left: cRect.left,
+          right: cRect.right,
+          width: this.containerRef.current?.offsetWidth as number,
+          height: this.containerRef.current?.offsetHeight as number,
+        } as DOMRect}
+        dRect={dRect}
+        className={popupClassName}
+        data={[]}
+        key={newKey}
+      >
+        {children}
+      </MenuPopup>];
 
     this.setState({ menuPopups: newMenuPopups });
   };

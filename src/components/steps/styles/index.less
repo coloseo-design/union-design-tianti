@@ -7,7 +7,9 @@
 @step-wait-color: #ACAFB9;
 @step-process-color: #B30000;
 
-.@{steps}-wrap { 
+// @step: ~"@{step}-steps";
+
+.@{steps}-wrap {
     & > .@{step}-wrap:last-of-type > .line-vertical,
     & > .@{step}-wrap:last-of-type > .line-horizontal {
         height: 0;
@@ -15,14 +17,14 @@
     }
 }
 
-.@{steps}-horizontal { 
+.@{steps}-horizontal {
     & > div {
         display: inline-block;
         vertical-align: top;
     }
 }
 
-.@{steps}-vertical { 
+.@{steps}-vertical {
     & > div {
         display: block;
     }
@@ -113,7 +115,7 @@
         & > .icon-error {
             color: @step-process-color;
             border: 1px solid @step-process-color;
-           
+
         }
 
         & > .icon-finish.default {

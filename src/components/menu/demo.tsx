@@ -22,25 +22,31 @@ const Demo = () => {
         backgroundColor: 'red',
       }}
       >
-        <Menu theme={theme} style={{ height: '100%' }} mode="vertical" inlineCollapsedIcon>
+        <Menu
+          theme={theme}
+          style={{ height: '100%' }}
+          mode="vertical"
+          triggerSubMenuAction="click"
+          inlineCollapsedIcon
+        >
           <Menu.Item icon="image">
             工作台1
           </Menu.Item>
           <Menu.SubMenu icon="image" title="工作台3">
-            <Menu.Item icon="image">
-              工作台1
-            </Menu.Item>
-            <Menu.Item icon="image">
-              工作台2
-            </Menu.Item>
-            <Menu.ItemGroup title="工作台3">
-              <Menu.Item icon="image">
-                工作台1
+            <Menu.SubMenu title="工作台1">
+              {Array.from({ length: 100 }, (v, k) => k).map((v, i) => (
+                <Menu.Item key={`${i}`} icon="image">
+                  工作台
+                  {i}
+                </Menu.Item>
+              ))}
+            </Menu.SubMenu>
+            {Array.from({ length: 100 }, (v, k) => k).map((v, i) => (
+              <Menu.Item key={`${i + 1}`} icon="image">
+                工作台
+                {i}
               </Menu.Item>
-              <Menu.Item icon="image">
-                工作台2
-              </Menu.Item>
-            </Menu.ItemGroup>
+            ))}
           </Menu.SubMenu>
           <Menu.SubMenu title="工作台4">
             <Menu.Item>
@@ -174,9 +180,12 @@ const Demo = () => {
               表单页
             </Menu.Item>
             <Menu.SubMenu title="表单页2">
-              <Menu.Item>
-                表单页2
-              </Menu.Item>
+              {Array.from({ length: 100 }, (v, k) => k).map((v, i) => (
+                <Menu.Item key={`${i}`} icon="image">
+                  工作台
+                  {i}
+                </Menu.Item>
+              ))}
             </Menu.SubMenu>
           </Menu.SubMenu>
           <Menu.SubMenu icon="image" title="表单页1">
