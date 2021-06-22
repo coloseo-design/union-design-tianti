@@ -7,6 +7,7 @@ const CardDemo = () => (
       <Card title="card1 点我试一试" onClick={() => { alert('点击card'); }}>
         card内容
       </Card>
+      <br />
       <Card title="card2">
         card
       </Card>
@@ -18,7 +19,7 @@ const CardDemo = () => (
       <Card
         title={(
           <span>
-            <Icon type="bell" />
+            <Icon type="bell" style={{ color: '#ACAFB9', paddingRight: 6, fontSize: 16 }} />
             加Icon
           </span>
         )}
