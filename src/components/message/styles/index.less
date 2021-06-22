@@ -2,6 +2,7 @@
 @import "../../style/mixins/index";
 
 @message: ~"@{uni-prefix}-message";
+@message-animation: ~"@{message}-animation";
 @message-container: ~"@{message}-container";
 @message-icon: ~"@{message}-icon";
 @message-content: ~"@{message}-content";
@@ -10,7 +11,7 @@
 .@{message}-wrap {
     text-align: center;
     padding: 0 40px;
-    animation: in 0.2s linear;
+    animation: @message-animation 0.2s linear;
 
     & > .@{message-container} {
         display: inline-block;
@@ -46,7 +47,7 @@
     }
 }
 
-@keyframes in {
+@keyframes @message-animation {
     from {
         margin-top: -20px;
         opacity: 0;
