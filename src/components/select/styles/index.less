@@ -33,11 +33,11 @@
   cursor: pointer;
   background-color: @component-background;
   border: @border-width-base @border-style-base @btn-default-border;
-  padding: 0px 8px;
+  padding: 3px 8px;
   min-height: @btn-height-base;
-  line-height: @btn-height-base - 2px;
+  // line-height: @btn-height-base - 2px;
   border-radius: @border-radius-base;
-  float: left;
+  // float: left;
   user-select: none;
   &:hover, &:focus {
     border: @border-width-base @border-style-base @primary-color;
@@ -49,8 +49,10 @@
   }
   &-iconWrapper {
     position: absolute;
-    top: 0px;
-    right: 8px;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
     &-icon {
       color: @btn-default-border;
     }
@@ -93,29 +95,27 @@
   bottom: 0;
 }
 
-.@{select-item-prefix-cls}-wrapper {
-  display: inline-block;
-  // overflow-y: scroll;
-  height: 30px;
-  margin-right: 14px;
-  line-height: 1;
-  padding: 1px 0px;
-}
+// .@{select-item-prefix-cls}-wrapper {
+//   display: inline-block;
+//   // overflow-y: scroll;
+//   height: 30px;
+//   margin-right: 14px;
+//   line-height: 1;
+//   padding: 1px 0px;
+// }
 
 .@{select-item-prefix-cls} {
+  height: 22px;
+  max-width: 100px;
+  border-radius: 3px; background: #E9EBF0;
   display: inline-block;
-  box-sizing: border-box;
-  margin: 2px 4px 2px 0px;
-  padding: 3px 4px 3px 8px;
-  border-radius: @border-radius-base;
-  background-color: rgb(245, 245, 245);
-  border: 1px solid rgb(245, 245, 245);
-  height: 24px;
-  // line-height: 22px;
-  user-select: none;
+  vertical-align: middle;
+  border: 1px solid #C8CAD1;
+  margin-right: 8px;
+  padding: 0px 8px;
   font-size: 12px;
-  max-width: 150px;
-  overflow: hidden;
+  color: rgba(0,0,0,0.65);
+  line-height: 20px;
   span {
     margin-right: 4px;
   }

@@ -17,6 +17,7 @@ const InputNumberDemo = (): React.ReactNode => (
         max={10}
         min={1}
         onChange={handleChange}
+        disabled
       />
     </span>
     <span>

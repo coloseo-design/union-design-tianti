@@ -413,7 +413,7 @@ class Select extends React.Component<SelectProps, SelectState> {
                                     onClick={(el) => this.handleItemDelete(el, i)}
                                     style={{ float: 'right', display: 'inline-block', marginRight: 4 }}
                                   >
-                                    <Icon type="close" style={{ marginTop: -5 }} />
+                                    <Icon type="close" style={{ marginTop: -5, color: '#ACAFB9' }} />
                                   </span>
                                 </div>
                               );
@@ -430,6 +430,7 @@ class Select extends React.Component<SelectProps, SelectState> {
                                       whiteSpace: 'nowrap',
                                       wordBreak: 'break-all',
                                     }}
+                                    title={i.label || ''}
                                   >
                                     {i.label}
                                   </span>
@@ -437,7 +438,7 @@ class Select extends React.Component<SelectProps, SelectState> {
                                     onClick={(el) => this.handleItemDelete(el, i)}
                                     style={{ float: 'right', display: 'inline-block', marginRight: 4 }}
                                   >
-                                    <Icon type="close" />
+                                    <Icon type="close" style={{ color: '#ACAFB9' }} />
                                   </span>
                                 </div>
                               ))
@@ -451,11 +452,11 @@ class Select extends React.Component<SelectProps, SelectState> {
                           ) : null}
                         </div>
                       )
-                      : <span className={`${prefix}-value`}>{renderObj?.label}</span>
+                      : <span className={`${prefix}-value`} style={{ color: disabled ? 'rgba(0,0,0,0.45)' : undefined }}>{renderObj?.label}</span>
                   )
                   : <span className={`${prefix}-placeholder`}>{placeholder}</span>}
                 {allowClear && renderObj?.label
-                  ? <span onClick={this.handleClear}><Icon type="close" /></span>
+                  ? <span className={`${prefix}-iconWrapper`} onClick={this.handleClear}><Icon type="close" /></span>
                   : <span className={`${prefix}-iconWrapper`}><Icon className={`${prefix}-iconWrapper-icon`} type={`${showDropdown ? 'up' : 'down'}`} /></span>}
               </>
             )}

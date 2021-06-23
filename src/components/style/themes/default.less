@@ -146,8 +146,10 @@
 @background-color-base: hsv(0, 0, 96%); // Default grey background color
 
 // Disabled states
-@disabled-color: fade(#000, 25%);
-@disabled-bg: @background-color-base;
+@disabled-color: fade(#000, 45%);
+// @disabled-bg: @background-color-base;
+@disabled-bg: #E9EBF0;
+@disabled-border-color: #C8CAD1;
 @disabled-color-dark: fade(#fff, 35%);
 
 // Shadow
@@ -186,7 +188,7 @@
 
 @btn-disable-color: @disabled-color;
 @btn-disable-bg: @disabled-bg;
-@btn-disable-border: @border-color-base;
+@btn-disable-border: @disabled-border-color;
 
 @btn-padding-base: 0 @padding-md - 1px;
 @btn-font-size-lg: @font-size-lg;

@@ -76,6 +76,9 @@ export interface TreeSelectProps {
 
   children?: any;
 
+  // 是否禁用
+  disabled?: boolean
+
 }
 
 export interface TreePopupProps {

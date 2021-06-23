@@ -42,6 +42,7 @@ const SelectDemo = () => {
             console.log('--- value ', value, label);
           }
         }
+        disabled
         placeholder="请选择选项"
         style={{ width: 220 }}
         value="1"

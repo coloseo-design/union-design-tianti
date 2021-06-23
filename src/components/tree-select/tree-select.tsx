@@ -212,7 +212,7 @@ class TreeSelect extends React.Component<TreeSelectProps, TreeSelectStates> {
               <Icon
                 type="close"
                 style={{
-                  cursor: 'pointer', fontSize: 12, color: '#ACAFB9', verticalAlign: 'text-top', marginTop: -1,
+                  cursor: 'pointer', fontSize: 12, color: '#ACAFB9', verticalAlign: 'text-top', marginTop: -2,
                 }}
                 onClick={this.handleClose(value)}
               />
@@ -359,6 +359,7 @@ class TreeSelect extends React.Component<TreeSelectProps, TreeSelectStates> {
       getPopupContainer,
       style,
       dropdownClassName,
+      disabled,
     } = this.props;
     const {
       border, left, top, width, values, childrenList, multiple,
@@ -366,6 +367,7 @@ class TreeSelect extends React.Component<TreeSelectProps, TreeSelectStates> {
     const treeSelect = getPrefixCls('tree-select', prefixCls);
     const selection = classNames(`${treeSelect}-selection`, {
       [`${treeSelect}-selection-focus`]: border,
+      [`${treeSelect}-selection-disabled`]: disabled,
     });
     const dropdown = classNames(`${treeSelect}-drop`, dropdownClassName, {
       [`${treeSelect}-drop-show`]: border,

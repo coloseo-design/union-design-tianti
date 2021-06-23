@@ -28,6 +28,7 @@ subtitle: 数选择
 | getPopupContainer       | 下拉列表展示位置   | fucntion () => HTMLElement                                                             | document.body |
 |onSelect | 被选中时调用| function(value, node) | - |
 |showCheckedStrategy|定义选中项回填的方式。SHOW_ALL: 显示所有选中节点(包括父节点). SHOW_PARENT: 只显示父节点(当父节点下所有子节点都选中时). 默认只显示子节点. ｜ SHOW_ALL, SHOW_PARENT,SHOW_CHILD | SHOW_CHILD|
+|disabled|是否禁用  | boolean | - |
 
 ### TreeSelectData格式
 ```typescript

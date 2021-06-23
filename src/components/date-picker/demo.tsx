@@ -23,7 +23,7 @@ const DatePickerDemo = () => {
       <h1 style={{ textAlign: 'center' }}>type=single:时间选择器</h1>
       <div style={{ margin: '15px 0' }}>
         <h1 style={{ display: 'inline-block', marginRight: 15 }}>mode=time-full</h1>
-        <DatePicker mode="time-full" {...commonProps} />
+        <DatePicker disabled mode="time-full" {...commonProps} />
       </div>
       <div style={{ margin: '15px 0 15px 0' }}>
         <h1 style={{ display: 'inline-block', marginRight: 15 }}>mode=time-ymd</h1>
