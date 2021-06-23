@@ -8,82 +8,134 @@ import { Icon, Popover, Typography } from '..';
 export const STEP_NAME = 'UNI_STEP';
 
 export class Step extends BaseComponent<StepProps> {
-    public static tag = STEP_NAME;
+  public static tag = STEP_NAME;
 
-    protected classPrefix = 'step';
+  protected classPrefix = 'step';
 
-    private titleRef = createRef<HTMLDivElement>();
+  private titleRef = createRef<HTMLDivElement>();
 
-    private lineRef = createRef<HTMLDivElement>();
+  private lineRef = createRef<HTMLDivElement>();
 
-    public containerRef = createRef<HTMLDivElement>();
+  public containerRef = createRef<HTMLDivElement>();
 
-    public componentDidMount() {
-      this.handleHorizontal();
-    }
+  public componentDidMount() {
+    this.handleHorizontal();
+  }
 
-    protected view = () => {
-      const {
-        icon,
-        status,
-        title,
-        description,
-        _defaultStatus,
-        _serialNumber,
-        _direction,
-        _size,
-        _onClick,
-      } = this.props;
-      const _status = status ?? _defaultStatus;
-      this.handleHorizontal();
+  protected view = () => {
+    const {
+      icon,
+      status,
+      title,
+      description,
+      _defaultStatus,
+      _serialNumber,
+      _direction,
+      _size,
+      _onClick,
+    } = this.props;
+    const _status = status ?? _defaultStatus;
+    this.handleHorizontal();
 
-      return (
+    return (
+      <div
+        ref={this.containerRef}
+        className={`${this.getPrefixClass('wrap')}`}
+      >
         <div
-          ref={this.containerRef}
-          className={`${this.getPrefixClass('wrap')}`}
+          ref={this.lineRef}
+          className={this.classNames(
+            this.gpc(`tag-line-${_direction}`),
+            this.gpc(`tag-${_size}`),
+          )}
+        />
+        <div
+          className={this.classNames(
+            this.gpc('tag-icon'),
+            this.gpc(`tag-icon-${_size}`),
+          )}
+          onClick={() => _onClick?.(_serialNumber!)}
         >
-          <div ref={this.lineRef} className={`line-${_direction} ${_size}`} />
-          <div
-            className={this.classNames('icon', `icon-${_size}`)}
-            onClick={() => _onClick?.(_serialNumber!)}
-          >
-            {icon || (
-              <>
-                {_status === 'wait' && <div className={`icon-wait ${_size}`}><span>{_serialNumber}</span></div>}
-                {_status === 'process' && <div className={`icon-process ${_size}`}><span>{_serialNumber}</span></div>}
-                {_status === 'finish' && <div className={`icon-finish ${_size}`}><Icon type="checkout" /></div>}
-                {_status === 'error' && <div className={`icon-error ${_size}`}><Icon type="close" /></div>}
-              </>
-            )}
-          </div>
-          <div
-            ref={this.titleRef}
-            className={this.classNames('title', `title-${_size}`, _status)}
-            onClick={() => _onClick?.(_serialNumber!)}
-          >
-            {title}
-          </div>
-          <Popover
-            content={description}
-            overlayStyle={{ width: '30%' }}
-            trigger="click"
-          >
-            <Typography className={`description ${_size} ${_status}`} rows={3}>
-              {description}
-            </Typography>
-          </Popover>
+          {icon || (
+            <>
+              {_status === 'wait' && (
+                <div className={this.classNames(
+                  this.gpc('tag-icon-wait'),
+                  this.gpc(`tag-${_size}`),
+                )}
+                >
+                  <span>{_serialNumber}</span>
+                </div>
+              )}
+              {_status === 'process' && (
+                <div className={this.classNames(
+                  this.gpc('tag-icon-process'),
+                  this.gpc(`tag-${_size}`),
+                )}
+                >
+                  <span>{_serialNumber}</span>
+                </div>
+              )}
+              {_status === 'finish' && (
+                <div className={this.classNames(
+                  this.gpc('tag-icon-finish'),
+                  this.gpc(`tag-${_size}`),
+                )}
+                >
+                  <Icon type="checkout" />
+                </div>
+              )}
+              {_status === 'error' && (
+                <div className={this.classNames(
+                  this.gpc('tag-icon-error'),
+                  this.gpc(`tag-${_size}`),
+                )}
+                >
+                  <Icon type="close" />
+                </div>
+              )}
+            </>
+          )}
         </div>
-      );
-    };
+        <div
+          ref={this.titleRef}
+          className={this.classNames(
+            this.gpc('tag-title'),
+            this.gpc(`tag-title-${_size}`),
+            this.gpc(`tag-${_status}`),
+          )}
+          onClick={() => _onClick?.(_serialNumber!)}
+        >
+          {title}
+        </div>
+        <Popover
+          content={description}
+          overlayStyle={{ width: '30%' }}
+          trigger="click"
+        >
+          <Typography
+            className={this.classNames(
+              this.gpc(`tag-${_status}`),
+              this.gpc('tag-description'),
+              this.gpc(`tag-${_size}`),
+            )}
+            rows={3}
+          >
+            {description}
+          </Typography>
+        </Popover>
+      </div>
+    );
+  };
 
-    private handleHorizontal = () => {
-      if (this.props._direction !== 'horizontal') return;
-      setTimeout(() => {
-        if (!this.lineRef.current) return;
-        if (!this.titleRef.current) return;
-        const width = this.props._size === 'default' ? 24 : 32;
-        const titleWidth = this.titleRef.current.offsetWidth;
-        this.lineRef.current.style.left = `${titleWidth + width}px`;
-      });
-    };
+  private handleHorizontal = () => {
+    if (this.props._direction !== 'horizontal') return;
+    setTimeout(() => {
+      if (!this.lineRef.current) return;
+      if (!this.titleRef.current) return;
+      const width = this.props._size === 'default' ? 24 : 32;
+      const titleWidth = this.titleRef.current.offsetWidth;
+      this.lineRef.current.style.left = `${titleWidth + width}px`;
+    });
+  };
 }
