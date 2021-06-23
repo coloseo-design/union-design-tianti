@@ -7,11 +7,27 @@
 @step-wait-color: #ACAFB9;
 @step-process-color: #B30000;
 
-// @step: ~"@{step}-steps";
+@step-tag-line-vertical: ~"@{step}-tag-line-vertical";
+@step-tag-line-horizontal: ~"@{step}-tag-line-horizontal";
+@step-tag-default: ~"@{step}-tag-default";
+@step-tag-big: ~"@{step}-tag-big";
+@step-tag-description: ~"@{step}-tag-description";
+@step-tag-icon-wait: ~"@{step}-tag-icon-wait";
+@step-tag-icon-process: ~"@{step}-tag-icon-process";
+@step-tag-icon-finish: ~"@{step}-tag-icon-finish";
+@step-tag-icon-error: ~"@{step}-tag-icon-error";
+@step-tag-icon-default: ~"@{step}-tag-icon-default";
+@step-tag-icon-big: ~"@{step}-tag-icon-big";
+@step-tag-icon: ~"@{step}-tag-icon";
+@step-tag-title: ~"@{step}-tag-title";
+@step-tag-title-default: ~"@{step}-tag-title-default";
+@step-tag-title-big: ~"@{step}-tag-title-big";
+@step-tag-wait: ~"@{step}-tag-wait";
+@step-tag-finish: ~"@{step}-tag-finish";
 
 .@{steps}-wrap {
-    & > .@{step}-wrap:last-of-type > .line-vertical,
-    & > .@{step}-wrap:last-of-type > .line-horizontal {
+    & > .@{step}-wrap:last-of-type > .@{step-tag-line-vertical},
+    & > .@{step}-wrap:last-of-type > .@{step-tag-line-horizontal} {
         height: 0;
         width: 0;
     }
@@ -38,50 +54,50 @@
     position: relative;
     display: inline-block;
 
-    & > .line-horizontal,
-    & > .line-vertical {
+    & > .@{step-tag-line-horizontal},
+    & > .@{step-tag-line-vertical} {
         position: absolute;
         z-index: 1;
         background-color: #D8D8D8;
     }
 
-    & > .line-horizontal {
+    & > .@{step-tag-line-horizontal} {
         float: right;
         height: 1px;
         left: 0;
         right: 8px;
     }
 
-    & > .line-horizontal.default {
+    & > .@{step-tag-line-horizontal}.@{step-tag-default} {
         top: 12px;
     }
 
-    & > .line-horizontal.big {
+    & > .@{step-tag-line-horizontal}.@{step-tag-big} {
         top: 16px;
     }
 
-    & > .line-vertical {
+    & > .@{step-tag-line-vertical} {
         width: 1px;
         bottom: 0;
     }
 
-    & > .line-vertical.default {
+    & > .@{step-tag-line-vertical}.@{step-tag-default} {
         top: 32px;
         left: 12px;
     }
 
-    & > .line-vertical.big {
+    & > .@{step-tag-line-vertical}.@{step-tag-big} {
         top: 40px;
         left: 16px;
     }
 
-    & > .icon,
-    & > .title {
+    & > .@{step-tag-icon},
+    & > .@{step-tag-title} {
         display: inline-block;
         vertical-align: middle;
     }
 
-    & > .icon {
+    & > .@{step-tag-icon} {
         position: relative;
         box-sizing: border-box;
         text-align: center;
@@ -92,53 +108,53 @@
             font-size: 14px;
         }
 
-        & > .icon-wait,
-        & > .icon-process,
-        & > .icon-finish,
-        & > .icon-error {
+        & > .@{step-tag-icon-wait},
+        & > .@{step-tag-icon-process},
+        & > .@{step-tag-icon-finish},
+        & > .@{step-tag-icon-error} {
             width: 100%;
             height: 100%;
             border-radius: 50%;
         }
 
-        & > .icon-wait {
+        & > .@{step-tag-icon-wait} {
             color: @step-wait-color;
             border: 1px solid @step-wait-color;
         }
 
-        & > .icon-process {
+        & > .@{step-tag-icon-process} {
             color: #fff;
             background-color: @step-process-color;
         }
 
-        & > .icon-finish,
-        & > .icon-error {
+        & > .@{step-tag-icon-finish},
+        & > .@{step-tag-icon-error} {
             color: @step-process-color;
             border: 1px solid @step-process-color;
 
         }
 
-        & > .icon-finish.default {
+        & > .@{step-tag-icon-finish}.@{step-tag-default} {
             & span {
                 margin-top: 3px;
                 font-size: 16px;
             }
         }
 
-        & > .icon-error.default {
+        & > .@{step-tag-icon-error}.@{step-tag-default} {
             & span {
                 font-size: 14px;
             }
         }
 
-        & > .icon-finish.big {
+        & > .@{step-tag-icon-finish}.@{step-tag-big} {
             & span {
                 margin-top: 5px;
                 font-size: 22px;
             }
         }
 
-        & > .icon-error.big {
+        & > .@{step-tag-icon-error}.@{step-tag-big} {
             & span {
                 margin-top: 6px;
                 font-size: 18px;
@@ -146,44 +162,44 @@
         }
     }
 
-    & > .icon-default {
+    & > .@{step-tag-icon-default} {
         width: 24px;
         height: 24px;
         line-height: 24px;
     }
 
-    & > .icon-big {
+    & > .@{step-tag-icon-big} {
         width: 32px;
         height: 32px;
         line-height: 32px;
     }
 
-    & > .title {
+    & > .@{step-tag-title} {
         font-weight: bold;
         padding: 0 8px;
         color: rgba(0, 0, 0, 0.85);
         cursor: pointer;
     }
 
-    & > .title-default {
+    & > .@{step-tag-title-default} {
         font-size: 14px;
         line-height: 22px;
     }
 
-    & > .title-big {
+    & > .@{step-tag-title-big} {
         font-size: 16px;
         line-height: 24px;
     }
 
-    & > .title.wait {
+    & > .@{step-tag-title}.@{step-tag-wait} {
         color: rgba(0, 0, 0, 0.45);
     }
 
-    & > .title.finish {
+    & > .@{step-tag-title}.@{step-tag-finish} {
         color: rgba(0, 0, 0, 0.65);
     }
 
-    & .description {
+    & .@{step-tag-description} {
         margin-top: 4px;
         font-size: 14px;
         font-weight: normal;
@@ -191,19 +207,19 @@
         cursor: default;
     }
 
-    & .description.default {
+    & .@{step-tag-description}.@{step-tag-default} {
         margin-left: 32px;
     }
 
-    & .description.big {
+    & .@{step-tag-description}.@{step-tag-big} {
         margin-left: 40px;
     }
 
-    & .description.wait {
+    & .@{step-tag-description}.@{step-tag-wait} {
         color: rgba(0, 0, 0, 0.45);
     }
 
-    & .description.finish {
+    & .@{step-tag-description}.@{step-tag-finish} {
         color: rgba(0, 0, 0, 0.65);
     }
 }

@@ -135,7 +135,13 @@ class Anchor extends Component<AnchorProps, AnchorState> {
           {(options || []).map((item, index) => (
             <span key={`${index}`} className={`${classPrefix}-ball-gray`} style={{ top: (index * linkElementHeight) + linkElementHeight / 2 - 4 }} />
           ))}
-          <span className={`${classPrefix}-ball-red`} style={{ display: link?.id ? 'inline-block' : 'none', top: (currentIndex * linkElementHeight) + linkElementHeight / 2 - 4 }} />
+          <span
+            className={`${classPrefix}-ball-red`}
+            style={{
+              display: link?.id ? 'inline-block' : 'none',
+              top: (currentIndex * linkElementHeight) + linkElementHeight / 2 - 4,
+            }}
+          />
         </div>
         {options.map((item) => (
           <div
@@ -143,6 +149,9 @@ class Anchor extends Component<AnchorProps, AnchorState> {
             className={`${classPrefix}-link`}
             onClick={handleClick(item)}
             title={item.name}
+            style={{
+              color: item.id === link?.id ? '#B30000' : 'rgba(0, 0, 0, 0.85)',
+            }}
           >
             {item.name}
           </div>

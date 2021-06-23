@@ -1,3 +1,15 @@
+## [0.0.24](http://10.124.128.2:8888/muses/union-design/compare/v0.0.23...v0.0.24) (2021-06-22)
+
+
+### Bug Fixes
+
+* 🐛 calendar ([c3558e7](http://10.124.128.2:8888/muses/union-design/commits/c3558e71da1d648768f2ecfddb54d7d1fc88bdde))
+* 🐛 date-picker ([b432b4a](http://10.124.128.2:8888/muses/union-design/commits/b432b4a43b5bbb66fbbf8b6bf9839d7347509fde))
+* 🐛 message ([8df88f4](http://10.124.128.2:8888/muses/union-design/commits/8df88f442b5397dc97c25eb76592b38252fe92b6))
+* 🐛 notification ([796b486](http://10.124.128.2:8888/muses/union-design/commits/796b486d306cceee83afe16aad6e43c1124937dd))
+
+
+
 ## [0.0.23](http://10.124.128.2:8888/muses/union-design/compare/v0.0.21...v0.0.23) (2021-06-21)
 
 
