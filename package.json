@@ -1,6 +1,6 @@
 {
 	"name": "union-design",
-	"version": "0.0.24",
+	"version": "0.0.25",
 	"license": "MIT",
 	"files": [
 		"lib",
@@ -74,5 +74,4 @@
 	"publishConfig": {
 		"registry": "https://nexus.coloseo.cn/repository/npm-hosted/"
 	}
-
 }
