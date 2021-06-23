@@ -7,6 +7,13 @@
 @pagination-hover-color: rgb(230, 231, 234);
 @pagination-selected-color: #ACAFB9;
 
+@pagination-icon: ~"@{pagination}-icon";
+@pagination-item: ~"@{pagination}-item";
+@pagination-item-hover: ~"@{pagination}-item-hover";
+@pagination-item-selected: ~"@{pagination}-item-selected";
+@pagination-quick-jumper: ~"@{pagination}-quick-jumper";
+@pagination-size-changer: ~"@{pagination}-size-changer";
+
 .@{pagination}-wrap {
     height: 24px;
     color: #595959;
@@ -21,8 +28,8 @@
         margin-left: 4px;
     }
 
-    & > .icon,
-    & > .item {
+    & > .@{pagination-icon},
+    & > .@{pagination-item} {
         width: 24px;
         height: 24px;
         line-height: 24px;
@@ -32,30 +39,30 @@
         font-size: 14px;
     }
 
-    & > .item {
+    & > .@{pagination-item} {
         border: 1px solid @pagination-normal-color;
         border-radius: @border-radius-base;
         font-size: 12px;
     }
 
-    & > .item-hover:hover {
+    & > .@{pagination-item-hover}:hover {
         background-color: @pagination-hover-color;
         border: 1px solid @pagination-hover-color;
     }
 
-    & > .item-selected {
+    & > .@{pagination-item-selected} {
         background-color: @pagination-selected-color;
         border: 1px solid @pagination-selected-color;
         color: #fff;
     }
 
-    & > .quick-jumper,
-    & > .size-changer {
+    & > .@{pagination-quick-jumper},
+    & > .@{pagination-size-changer} {
         margin-left: 12px;
         font-size: 14px;
     }
 
-    & > .quick-jumper {
+    & > .@{pagination-quick-jumper} {
         cursor: default;
 
         & > input {
