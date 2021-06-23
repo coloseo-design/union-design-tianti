@@ -54,6 +54,7 @@ const Slider: React.FC<SliderProps> = (props: SliderProps) => {
     onChange,
   } = props;
   const [value, setValue] = useState(props.value || props.defaultValue || 0);
+  const [isDrop, setIsDrop] = useState(false);
   const [width, setWidth] = useState(0);
   const [left, setLeft] = useState(0);
   useEffect(() => {
@@ -116,7 +117,6 @@ const Slider: React.FC<SliderProps> = (props: SliderProps) => {
   };
 
   const onMouseMove = useCallback((evt: MouseEvent) => {
-    console.log('candrop move', canDrop);
     if (canDrop) {
       const formatedValue = translateOffsetToValue(evt);
       onChange && onChange(formateValue(formatedValue));
@@ -133,6 +133,7 @@ const Slider: React.FC<SliderProps> = (props: SliderProps) => {
       onChange && onChange(formateValue(formatedValue));
     }
     canDrop = false;
+    setIsDrop(false);
   }, [onChange, onMouseMove, translateOffsetToValue]);
 
   const onMouseDown = (evt: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
@@ -142,6 +143,7 @@ const Slider: React.FC<SliderProps> = (props: SliderProps) => {
     evt.stopPropagation();
     evt.preventDefault();
     canDrop = true;
+    setIsDrop(true);
   };
 
   return (
@@ -162,7 +164,7 @@ const Slider: React.FC<SliderProps> = (props: SliderProps) => {
           className="uni-tooltip"
           style={{
             top: -45,
-            visibility: canDrop ? 'visible' : 'hidden',
+            visibility: isDrop ? 'visible' : 'hidden',
             left: '50%',
             transform: 'translateX(-50%)',
           }}
