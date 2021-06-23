@@ -67,6 +67,7 @@
   .button-disabled();
 }
 
+
 .button-variant-other(@color; @background; @border) {
   .button-color(@color; @background; @border);
 
@@ -202,6 +203,7 @@
 // primary button style
 .btn-primary() {
   .button-variant-primary(@btn-primary-color; @btn-primary-bg);
+  .button-disabled(@disabled-color; @btn-disable-bg; @btn-disable-bg);
 }
 // default button style
 .btn-default() {
@@ -217,6 +219,7 @@
 // ghost button style
 .btn-ghost() {
   .button-variant-other(@btn-ghost-color, @btn-ghost-bg, @btn-ghost-border);
+  .button-disabled(@btn-ghost-disabled-color; transparent; @btn-ghost-disabled-border);
 }
 // dashed button style
 .btn-dashed() {
@@ -226,6 +229,7 @@
 // danger button style
 .btn-danger() {
   .button-variant-primary(@btn-danger-color, @btn-danger-bg);
+  .button-disabled(@disabled-color; @btn-disable-bg; @btn-disable-bg);
 }
 // link button style
 .btn-link() {

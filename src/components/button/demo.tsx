@@ -10,19 +10,19 @@ const ButtonDemo: React.FC<unknown> = () => (
       <Button type="dashed" style={{ marginRight: 10 }}>dashed</Button>
       <Button type="link" style={{ marginRight: 10 }}>link</Button>
       <Button type="ghost" style={{ marginRight: 10 }}>ghost</Button>
-      <Button type="primary" style={{ marginRight: 10 }} loading>loading</Button>
-      <Button type="primary" style={{ marginRight: 10 }} disabled>disabled</Button>
+    </div>
+    <div style={{ padding: 10, background: '#acafb9' }}>
+      <Button type="ghost" style={{ marginRight: 10 }}>幽灵按钮默认状态</Button>
+      <Button type="ghost" style={{ marginRight: 10 }} disabled>幽灵按钮禁止状态</Button>
     </div>
 
     <div style={{ marginBottom: 10 }}>
-      <Button type="default" style={{ marginRight: 10 }} size="large">default</Button>
-      <Button type="primary" style={{ marginRight: 10 }} size="large">primary</Button>
-      <Button type="danger" style={{ marginRight: 10 }} size="large">danger</Button>
-      <Button type="dashed" style={{ marginRight: 10 }} size="large">dashed</Button>
-      <Button type="link" style={{ marginRight: 10 }} size="large">link</Button>
-      <Button type="ghost" style={{ marginRight: 10 }} size="large">ghost</Button>
-      <Button type="primary" style={{ marginRight: 10 }} size="large" loading>loading</Button>
-      <Button type="primary" style={{ marginRight: 10 }} size="large" disabled>disabled</Button>
+      <Button type="default" style={{ marginRight: 10 }} disabled>default</Button>
+      <Button type="primary" style={{ marginRight: 10 }} disabled>primary</Button>
+      <Button type="danger" style={{ marginRight: 10 }} disabled>danger</Button>
+      <Button type="dashed" style={{ marginRight: 10 }} disabled>dashed</Button>
+      <Button type="link" style={{ marginRight: 10 }} disabled>link</Button>
+      <Button type="ghost" style={{ marginRight: 10 }} disabled>ghost</Button>
     </div>
 
     <div style={{ marginBottom: 10 }}>

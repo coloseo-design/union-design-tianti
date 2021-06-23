@@ -17,6 +17,7 @@
     margin-bottom: 1px;
     &[disabled]+span {
       background: @disabled-background-color;
+      border-color: @disabled-border-color;
     }
     &[disabled]~span:last-child {
       color: @disabled-color;
@@ -60,6 +61,6 @@
     background-color: @radio-dot-color;
   }
   input, input:disabled+span::after {
-    background-color: @border;
+    background-color: @disabled-border-color;
   }
 }
