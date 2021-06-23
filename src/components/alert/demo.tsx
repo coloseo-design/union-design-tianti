@@ -2,7 +2,7 @@ import React from 'react';
 import { Alert } from '../index';
 
 const handleclose = (e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
-  console.log('--e', e);
+  console.log('00000', e);
 };
 
 const AlertDemo = () => (
