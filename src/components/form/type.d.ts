@@ -94,7 +94,7 @@ export type FormInstance = {
   submit: () => void;
 };
 
-interface FormItemProps extends BaseProps, ConfigConsumerProps, React.HTMLAttributes<HtmlHTMLAttributes> {
+interface FormItemProps extends BaseProps, React.HTMLAttributes<HtmlHTMLAttributes> {
   /** label栅格布局 */
   labelCol?: ResponsiveColProps;
   /** 输入框栅格布局 */
@@ -103,25 +103,22 @@ interface FormItemProps extends BaseProps, ConfigConsumerProps, React.HTMLAttrib
   name?: string | string[];
   /** 标签 */
   label?: React.ReactNode;
-  prefixCls: string;
-  valuePropName: string;
-  trigger: string;
+  prefixCls?: string;
+  valuePropName?: string;
+  trigger?: string;
   /** 用户自定义获取值的方法 */
-  getValueFromEvent: (evt: any) => any;
+  getValueFromEvent?: (evt: any) => any;
   /** 校验器 */
   rules?: ValidatorRule[];
   /** 校验时机， 默认为onChange */
-  validateTrigger: string | string[];
+  validateTrigger?: string | string[];
   messageVariables?: Record<string, string>;
   /** 当检测到第一个错误的时候，停止 */
-  validateFirst: boolean;
+  validateFirst?: boolean;
   /** 默认值: 请与当前输入组件相结合 */
-  initialValue: any;
-  /** 校验状态 */
-  isValidating: boolean;
+  initialValue?: any;
   /** 是否必填 */
-  required: boolean;
-  context: FormContextProps;
+  required?: boolean;
   /** label对齐方式 */
   labelAlign?: 'left' | 'right',
 }
