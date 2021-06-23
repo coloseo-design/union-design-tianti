@@ -5,10 +5,11 @@
 /* eslint-disable no-mixed-operators */
 /* eslint-disable eqeqeq */
 /* eslint-disable react/sort-comp */
-import React, { ReactNode } from 'react';
+import React, {
+  ReactNode, useCallback, useContext, useEffect, useState,
+} from 'react';
 import classnames from 'classnames';
-import { ConfigConsumer, ConfigConsumerProps } from '../config-provider';
-import Tooltip from '../tooltip';
+import { ConfigContext } from '../config-provider/context';
 
 interface mark {
   label: ReactNode;
@@ -36,41 +37,42 @@ export interface SliderProps {
   disabled?: boolean;
 }
 
-export interface SliderState {
-  value: number;
-  canDrop: boolean;
-}
+// export interface SliderState {
+//   value: number;
+//   canDrop: boolean;
+// }
 
-class Slider extends React.Component<SliderProps, SliderState> {
-  node?: HTMLDivElement;
+let canDrop = false;
+const Slider: React.FC<SliderProps> = (props: SliderProps) => {
+  const {
+    className,
+    prefixCls,
+    disabled = false,
+    marks = [],
+    max = 100,
+    min = 0,
+    onChange,
+  } = props;
+  const [value, setValue] = useState(props.value || props.defaultValue || 0);
+  const [width, setWidth] = useState(0);
+  const [left, setLeft] = useState(0);
+  useEffect(() => {
+    setValue(props.value);
+  }, [props.value]);
+  const { getPrefixCls } = useContext(ConfigContext);
+  const prefix = getPrefixCls('slider', prefixCls);
+  const wrapperClass = classnames(prefix, {
+    [`${prefix}-disabled`]: disabled,
+  }, className);
 
-  constructor(props: SliderProps) {
-    super(props);
-    this.state = {
-      value: props.value || props.defaultValue || 0,
-      canDrop: false,
-    };
-  }
+  const dotClass = classnames(`${prefix}-dot`, {});
+  const markWraperClass = classnames(`${prefix}-mark`);
 
-  getNode = (node: HTMLDivElement) => {
-    this.node = node;
-  }
-
-  componentDidUpdate(props: SliderProps) {
-    const { value } = this.props;
-    if (value != props.value) {
-      this.setState({
-        value,
-      });
-    }
-  }
-
-  translateOffsetToValue = (evt: MouseEvent) => {
+  const translateOffsetToValue = useCallback((evt: MouseEvent) => {
     const { pageXOffset } = window;
-    const { max = 100, min = 0 } = this.props;
-    const { width: containerWidth, left } = this.node?.getBoundingClientRect();
+    // const { max = 100, min = 0 } = this.props;
     const offsetX = evt.pageX - left - pageXOffset;
-    const value = (offsetX / containerWidth * max);
+    const value = (offsetX / width * max);
     let formatedValue = value;
     if (formatedValue > max) {
       formatedValue = max;
@@ -79,123 +81,111 @@ class Slider extends React.Component<SliderProps, SliderState> {
       formatedValue = min;
     }
     return formatedValue;
-  }
+  }, [left, max, min, width]);
 
-  onRailClick = (evt: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    const { disabled } = this.props;
+  const onRailClick = (evt: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    // const { disabled } = this.props;
     if (disabled) return;
-    const formatedValue = this.translateOffsetToValue(evt as unknown as MouseEvent);
-    const { onChange } = this.props;
-    onChange && onChange(this.formateValue(formatedValue));
-    this.setState({
-      value: formatedValue,
-    });
+    const formatedValue = translateOffsetToValue(evt as unknown as MouseEvent);
+    // const { onChange } = this.props;
+    onChange && onChange(formateValue(formatedValue));
+    setValue(formatedValue);
   };
 
-  onMouseMove = (evt: MouseEvent) => {
-    if (this.state.canDrop) {
-      const formatedValue = this.translateOffsetToValue(evt);
-      const { onChange } = this.props;
-      onChange && onChange(this.formateValue(formatedValue));
-      this.setState({
-        value: formatedValue,
-      });
-    }
-  }
-
-  formateValue = (value: number) => Math.round(value)
-
-  onMouseUp = (evt: MouseEvent) => {
-    evt.stopPropagation();
-    document.removeEventListener('mousemove', this.onMouseMove);
-    document.removeEventListener('mouseup', this.onMouseUp);
-    this.setState({
-      canDrop: false,
-    });
-  }
-
-  componentWillUnmount() {
-    document.removeEventListener('mousemove', this.onMouseMove);
-    document.removeEventListener('mouseup', this.onMouseUp);
-  }
-
-  onMouseDown = (evt: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    const { disabled } = this.props;
-    if (disabled) return;
-    evt.stopPropagation();
-    evt.preventDefault();
-    this.setState({
-      canDrop: true,
-    });
-    document.addEventListener('mousemove', this.onMouseMove, true);
-    document.addEventListener('mouseup', this.onMouseUp, true);
-  }
-
-  getPosition = (value = 0) => {
-    const { max = 100 } = this.props;
+  const getPosition = (value = 0) => {
+    // const { max = 100 } = props;
     const barWidthPercentage: number = value / max * 100;
     const barWidthCss = `${barWidthPercentage}%`;
     return barWidthCss;
-  }
-
-  onMarkClick = (value: number) => () => {
-    const { disabled } = this.props;
-    if (disabled) return;
-    const { onChange } = this.props;
-    onChange && onChange(this.formateValue(value));
-    this.setState({
-      value,
-    });
   };
 
-  renderSlider = ({ getPrefixCls }: ConfigConsumerProps) => {
-    const {
-      className, prefixCls, disabled = false, marks = [],
-    } = this.props;
-    const { value = 0 } = this.state;
-    const prefix = getPrefixCls!('slider', prefixCls);
-    const wrapperClass = classnames(prefix, {
-      [`${prefix}-disabled`]: disabled,
-    }, className);
+  const formateValue = (value: number) => Math.round(value);
 
-    const dotClass = classnames(`${prefix}-dot`, {});
-    const markWraperClass = classnames(`${prefix}-mark`);
+  const getNode = (node: HTMLDivElement) => {
+    if (node) {
+      const { width: containerWidth, left: containerLeft } = node?.getBoundingClientRect();
+      setWidth(containerWidth);
+      setLeft(containerLeft);
+    }
+  };
 
-    return (
-      <div className={wrapperClass} ref={this.getNode} onClick={this.onRailClick}>
-        <div className={`${prefix}-rail`} />
-        <div className={`${prefix}-bar`} style={{ width: this.getPosition(value) }} onClick={this.onRailClick} />
-        {
-          marks.map((mark) => (
-            <div className={dotClass} style={{ left: this.getPosition(mark.value) }} onClick={this.onMarkClick(mark.value)} />
-          ))
-        }
-        <Tooltip trigger="hover" message={Math.round(value)}>
-          <div className={dotClass} style={{ left: this.getPosition(value), zIndex: 1 }} onMouseDown={this.onMouseDown} />
-        </Tooltip>
-        <div className={markWraperClass}>
-          {
-            marks.map((mark) => (
-              <span
-                className={`${prefix}-mark-item`}
-                style={{ left: this.getPosition(mark.value) }}
-              >
-                {mark.label}
-              </span>
-            ))
-          }
+  const onMarkClick = (value: number) => () => {
+    if (disabled) return;
+    onChange && onChange(formateValue(value));
+    setValue(value);
+  };
+
+  const onMouseMove = useCallback((evt: MouseEvent) => {
+    console.log('candrop move', canDrop);
+    if (canDrop) {
+      const formatedValue = translateOffsetToValue(evt);
+      onChange && onChange(formateValue(formatedValue));
+      setValue(formatedValue);
+    }
+  }, [onChange, translateOffsetToValue]);
+
+  const onMouseUp = useCallback((evt: MouseEvent) => {
+    evt.stopPropagation();
+    document.removeEventListener('mousemove', onMouseMove);
+    document.removeEventListener('mouseup', onMouseUp);
+    if (canDrop) {
+      const formatedValue = translateOffsetToValue(evt);
+      onChange && onChange(formateValue(formatedValue));
+    }
+    canDrop = false;
+  }, [onChange, onMouseMove, translateOffsetToValue]);
+
+  const onMouseDown = (evt: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    if (disabled) return;
+    document.addEventListener('mousemove', onMouseMove, true);
+    document.addEventListener('mouseup', onMouseUp, true);
+    evt.stopPropagation();
+    evt.preventDefault();
+    canDrop = true;
+  };
+
+  return (
+    <div className={wrapperClass} ref={getNode} onClick={onRailClick}>
+      <div className={`${prefix}-rail`} />
+      <div className={`${prefix}-bar`} style={{ width: getPosition(value) }} onClick={onRailClick} />
+      {
+        marks.map((mark) => (
+          <div className={dotClass} style={{ left: getPosition(mark.value) }} onClick={onMarkClick(mark.value)} />
+        ))
+      }
+      <div
+        className={dotClass}
+        style={{ left: getPosition(value), zIndex: 1 }}
+        onMouseDown={onMouseDown}
+      >
+        <div
+          className="uni-tooltip"
+          style={{
+            top: -45,
+            visibility: canDrop ? 'visible' : 'hidden',
+            left: '50%',
+            transform: 'translateX(-50%)',
+          }}
+        >
+          <div className="uni-tooltip-content">
+            <div className="uni-tooltip-content-arrow uni-tooltip-content-arrow-top" />
+            <div className="uni-tooltip-content-inner">{Math.round(value)}</div>
+          </div>
         </div>
       </div>
-    );
-  }
-
-  render() {
-    return (
-      <ConfigConsumer>
-        {this.renderSlider}
-      </ConfigConsumer>
-    );
-  }
-}
-
+      <div className={markWraperClass}>
+        {
+          marks.map((mark) => (
+            <span
+              className={`${prefix}-mark-item`}
+              style={{ left: getPosition(mark.value) }}
+            >
+              {mark.label}
+            </span>
+          ))
+        }
+      </div>
+    </div>
+  );
+};
 export default Slider;
