@@ -34,7 +34,7 @@ const CarouselDemo = () => {
       </div>
       <div style={{ marginBottom: 64 }}>
         <h1>自动播放的</h1>
-        <div style={{ width: 320, height: 160 }}>
+        <div style={{ width: '100%', height: 160 }}>
           <Carousel beforeChange={beforeChange} autoplay dotsShape="circle">
             <div style={style}>1</div>
             <div style={style}>2</div>

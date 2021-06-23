@@ -10,7 +10,7 @@ const AffixDemo = () => {
   return (
     <>
       <div className="content">
-        <div className="target" ref={t}>
+        <div className="target" style={{ backgroundColor: '#fff' }} ref={t}>
           这是开头
           <Affix offsetTop={20} target={() => t.current}>
             <Button type="primary">固定在容器上方20px</Button>

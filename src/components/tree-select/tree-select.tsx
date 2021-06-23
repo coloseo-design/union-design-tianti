@@ -391,9 +391,9 @@ class TreeSelect extends React.Component<TreeSelectProps, TreeSelectStates> {
                 )
                 : <span className={`${treeSelect}-selection-placholder`}>{placeholder}</span>
             }
-          </span>
-          <span className={`${treeSelect}-icon`}>
-            <Icon type={border ? 'up' : 'down'} style={{ color: '#ACAFB9', fontSize: 16 }} />
+            <span className={`${treeSelect}-icon`}>
+              <Icon type={border ? 'up' : 'down'} style={{ color: '#ACAFB9', fontSize: 16 }} />
+            </span>
           </span>
         </span>
         <TreePopup {...({ getPopupContainer })}>
