@@ -1,46 +1,10 @@
-/* eslint-disable react/jsx-key */
-/* eslint-disable max-len */
-/* eslint-disable no-shadow */
-/* eslint-disable react/destructuring-assignment */
 /* eslint-disable no-mixed-operators */
-/* eslint-disable eqeqeq */
-/* eslint-disable react/sort-comp */
 import React, {
-  ReactNode, useCallback, useContext, useEffect, useState,
+  useCallback, useContext, useEffect, useState,
 } from 'react';
 import classnames from 'classnames';
 import { ConfigContext } from '../config-provider/context';
-
-interface mark {
-  label: ReactNode;
-  value: number;
-}
-export interface SliderProps {
-  /* 默认值 */
-  defaultValue?: number;
-  /* 滑块取值，默认为0 */
-  value: number;
-  /* 滑块拖拽事件 */
-  onChange?: (value: number) => void;
-  /** 自定义类名称 */
-  className?: string;
-  /** 自定义类前缀 */
-  prefixCls?: string;
-  /* 滑块的最大区间，默认为0 */
-  min?: number;
-  /* 滑块的最大区间，默认为10 */
-  max?: number;
-  /** 是否水平方向 默认false */
-  vertical?: boolean;
-  marks?: mark[];
-  /* 是否被禁用 */
-  disabled?: boolean;
-}
-
-// export interface SliderState {
-//   value: number;
-//   canDrop: boolean;
-// }
+import { SliderProps } from './type';
 
 let canDrop = false;
 const Slider: React.FC<SliderProps> = (props: SliderProps) => {
@@ -52,14 +16,16 @@ const Slider: React.FC<SliderProps> = (props: SliderProps) => {
     max = 100,
     min = 0,
     onChange,
+    value: valueFromProps,
+    defaultValue,
   } = props;
-  const [value, setValue] = useState(props.value || props.defaultValue || 0);
+  const [value, setValue] = useState(valueFromProps || defaultValue || 0);
   const [isDrop, setIsDrop] = useState(false);
   const [width, setWidth] = useState(0);
   const [left, setLeft] = useState(0);
   useEffect(() => {
-    setValue(props.value);
-  }, [props.value]);
+    setValue(valueFromProps);
+  }, [valueFromProps]);
   const { getPrefixCls } = useContext(ConfigContext);
   const prefix = getPrefixCls('slider', prefixCls);
   const wrapperClass = classnames(prefix, {
@@ -71,10 +37,9 @@ const Slider: React.FC<SliderProps> = (props: SliderProps) => {
 
   const translateOffsetToValue = useCallback((evt: MouseEvent) => {
     const { pageXOffset } = window;
-    // const { max = 100, min = 0 } = this.props;
     const offsetX = evt.pageX - left - pageXOffset;
-    const value = (offsetX / width * max);
-    let formatedValue = value;
+    const newValue = (offsetX / width * max);
+    let formatedValue = newValue;
     if (formatedValue > max) {
       formatedValue = max;
     }
@@ -85,22 +50,19 @@ const Slider: React.FC<SliderProps> = (props: SliderProps) => {
   }, [left, max, min, width]);
 
   const onRailClick = (evt: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    // const { disabled } = this.props;
     if (disabled) return;
     const formatedValue = translateOffsetToValue(evt as unknown as MouseEvent);
-    // const { onChange } = this.props;
     onChange && onChange(formateValue(formatedValue));
     setValue(formatedValue);
   };
 
-  const getPosition = (value = 0) => {
-    // const { max = 100 } = props;
-    const barWidthPercentage: number = value / max * 100;
+  const getPosition = (newValue = 0) => {
+    const barWidthPercentage: number = newValue / max * 100;
     const barWidthCss = `${barWidthPercentage}%`;
     return barWidthCss;
   };
 
-  const formateValue = (value: number) => Math.round(value);
+  const formateValue = (newValue: number) => Math.round(newValue);
 
   const getNode = (node: HTMLDivElement) => {
     if (node) {
@@ -110,10 +72,10 @@ const Slider: React.FC<SliderProps> = (props: SliderProps) => {
     }
   };
 
-  const onMarkClick = (value: number) => () => {
+  const onMarkClick = (newValue: number) => () => {
     if (disabled) return;
-    onChange && onChange(formateValue(value));
-    setValue(value);
+    onChange && onChange(formateValue(newValue));
+    setValue(newValue);
   };
 
   const onMouseMove = useCallback((evt: MouseEvent) => {
@@ -152,7 +114,12 @@ const Slider: React.FC<SliderProps> = (props: SliderProps) => {
       <div className={`${prefix}-bar`} style={{ width: getPosition(value) }} onClick={onRailClick} />
       {
         marks.map((mark) => (
-          <div className={dotClass} style={{ left: getPosition(mark.value) }} onClick={onMarkClick(mark.value)} />
+          <div
+            key={`${mark.value}`}
+            className={dotClass}
+            style={{ left: getPosition(mark.value) }}
+            onClick={onMarkClick(mark.value)}
+          />
         ))
       }
       <div
@@ -179,6 +146,7 @@ const Slider: React.FC<SliderProps> = (props: SliderProps) => {
         {
           marks.map((mark) => (
             <span
+              key={`${mark.value}`}
               className={`${prefix}-mark-item`}
               style={{ left: getPosition(mark.value) }}
             >
