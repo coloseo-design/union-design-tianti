@@ -70,5 +70,9 @@
 	},
 	"engines": {
 		"node": ">=10"
+	},
+	"publishConfig": {
+		"registry": "https://nexus.coloseo.cn/repository/npm-hosted/"
 	}
+
 }
