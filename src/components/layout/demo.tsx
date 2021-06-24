@@ -57,7 +57,7 @@ const LayoutDemo = () => {
           onCollapse={(_collapsed) => { setCollapsed(_collapsed); }}
         >
           logo
-          <Menu theme="dark">
+          <Menu>
             <Menu.Item icon="image">
               工作台1
             </Menu.Item>

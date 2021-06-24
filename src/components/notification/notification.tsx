@@ -89,7 +89,7 @@ export default class Notification extends BaseComponent<NotificationProps> {
         top: 0,
         right: 0,
         pointerEvents: 'none',
-        zInnde: 1055,
+        zIndex: 1055,
       } as CSSProperties);
     }
     ReactDOM.render(
