@@ -24,7 +24,9 @@ const Slider: React.FC<SliderProps> = (props: SliderProps) => {
   const [width, setWidth] = useState(0);
   const [left, setLeft] = useState(0);
   useEffect(() => {
-    setValue(valueFromProps);
+    if (valueFromProps) {
+      setValue(valueFromProps);
+    }
   }, [valueFromProps]);
   const { getPrefixCls } = useContext(ConfigContext);
   const prefix = getPrefixCls('slider', prefixCls);
@@ -53,7 +55,7 @@ const Slider: React.FC<SliderProps> = (props: SliderProps) => {
     if (disabled) return;
     const formatedValue = translateOffsetToValue(evt as unknown as MouseEvent);
     onChange && onChange(formateValue(formatedValue));
-    setValue(formatedValue);
+    setValue(formateValue(formatedValue));
   };
 
   const getPosition = (newValue = 0) => {
@@ -82,7 +84,7 @@ const Slider: React.FC<SliderProps> = (props: SliderProps) => {
     if (canDrop) {
       const formatedValue = translateOffsetToValue(evt);
       onChange && onChange(formateValue(formatedValue));
-      setValue(formatedValue);
+      setValue(formateValue(formatedValue));
     }
   }, [onChange, translateOffsetToValue]);
 
@@ -138,7 +140,7 @@ const Slider: React.FC<SliderProps> = (props: SliderProps) => {
         >
           <div className="uni-tooltip-content">
             <div className="uni-tooltip-content-arrow uni-tooltip-content-arrow-top" />
-            <div className="uni-tooltip-content-inner">{Math.round(value)}</div>
+            <div className="uni-tooltip-content-inner">{formateValue(value)}</div>
           </div>
         </div>
       </div>

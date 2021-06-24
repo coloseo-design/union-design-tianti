@@ -8,7 +8,7 @@ export interface SliderProps {
   /* 默认值 */
   defaultValue?: number;
   /* 滑块取值，默认为0 */
-  value: number;
+  value?: number;
   /* 滑块拖拽事件 */
   onChange?: (value: number) => void;
   /** 自定义类名称 */

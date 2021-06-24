@@ -11,18 +11,18 @@ const SliderDemo = () => {
     value: 0,
   }, {
     label: '3°C',
-    value: 3,
+    value: 20,
   }, {
     label: '5°C',
-    value: 5,
+    value: 40,
   }, {
     label: <strong>7°C</strong>,
-    value: 7,
+    value: 60,
   }];
   return (
     <div style={{ padding: 20, position: 'relative' }}>
       <div style={{ padding: 10, width: 500, marginBottom: 20 }}>
-        <Slider value={value} min={0} marks={marks} max={10} onChange={onChange} />
+        <Slider value={value} min={0} marks={marks} max={100} onChange={onChange} />
       </div>
       <div>
         value:
