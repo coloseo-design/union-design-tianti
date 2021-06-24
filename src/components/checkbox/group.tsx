@@ -2,39 +2,19 @@ import React, { useContext, useEffect, useState } from 'react';
 import classnames from 'classnames';
 import Checkbox from './checkbox';
 import { ConfigContext } from '../config-provider/context';
-
-export interface GroupCheckboxConsumerProps {
-  value?: string[];
-  onGroupChange?: (value: CheckboxOption) => void;
-}
+import { CheckboxGroupProps, CheckboxOption, GroupCheckboxConsumerProps } from './type';
 
 export const CheckboxGroupContext = React.createContext<GroupCheckboxConsumerProps>({});
-
-interface CheckboxOption {
-  label: string;
-  value: string;
-  disabled?: boolean;
-  onChange?: (checkedValue: boolean) => void;
-}
-
-export interface CheckboxGroupProps extends Omit<React.HtmlHTMLAttributes<HTMLInputElement>, 'onChange'> {
-  defaultValue?: string[];
-  name?: string;
-  options?: string[] | CheckboxOption[];
-  value?: string[];
-  onChange?: (checkedValues: string[]) => void;
-  disabled?: boolean;
-}
 
 const Group: React.FC<CheckboxGroupProps> = (props: CheckboxGroupProps) => {
   const {
     options,
     disabled,
     className,
-    style,
     value: valueFromProps,
     defaultValue,
     onChange,
+    prefixCls: customizePrefixCls,
     ...rest
   } = props;
   let { children } = props;
@@ -49,8 +29,8 @@ const Group: React.FC<CheckboxGroupProps> = (props: CheckboxGroupProps) => {
       return option;
     });
   const { getPrefixCls } = useContext(ConfigContext);
-  const prefix = getPrefixCls('checkbox-group');
-  const classString = classnames(prefix);
+  const prefix = getPrefixCls('checkbox-group', customizePrefixCls);
+  const classString = classnames(prefix, className);
   const [value, setValue] = useState<Array<string>>(valueFromProps || defaultValue || []);
 
   useEffect(() => {
@@ -91,7 +71,7 @@ const Group: React.FC<CheckboxGroupProps> = (props: CheckboxGroupProps) => {
   };
 
   return (
-    <div {...rest} {...({ className, style })} className={classString}>
+    <div {...rest} className={classString}>
       <CheckboxGroupContext.Provider
         value={{
           value,

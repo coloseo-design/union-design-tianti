@@ -1,24 +1,8 @@
-/* eslint-disable @typescript-eslint/no-empty-function */
 import React, { useContext, useEffect, useState } from 'react';
 import classnames from 'classnames';
-import Group, { CheckboxGroupContext } from './group';
+import { CheckboxGroupContext } from './group';
 import { ConfigContext } from '../config-provider/context';
-
-export interface CheckboxProps extends Omit<React.HTMLAttributes<HTMLInputElement>, 'onChange'> {
-  prefixCls?: string;
-  /** 是否选中  */
-  checked?: boolean;
-  /** 默认选中状态（仅在初始化有效） */
-  defaultChecked?: boolean;
-  /** 当前空间是否禁止状态 */
-  disabled?: boolean;
-  /** onChange切换选择状态的回调(为了将来兼容form， 所以输入组件必须对value和onChange进行处理) */
-  onChange?: (checkedValue: boolean) => void;
-  /** checkbox选中的值(为了将来兼容form， 所以输入组件必须对value和onChange进行处理) */
-  value?: string;
-  /** 设置 indeterminate 状态，只负责样式控制 */
-  indeterminate?: boolean;
-}
+import { CheckboxProps } from './type';
 
 const Checkbox: React.FC<CheckboxProps> = (props: CheckboxProps) => {
   const {
@@ -35,7 +19,7 @@ const Checkbox: React.FC<CheckboxProps> = (props: CheckboxProps) => {
   // eslint-disable-next-line prefer-const
   let [checked, setChecked] = useState(checkFromProps || defaultChecked);
   useEffect(() => {
-    // setChecked(checkFromProps);
+    setChecked(checkFromProps);
   }, [checkFromProps]);
   const { getPrefixCls } = useContext(ConfigContext);
 
@@ -84,8 +68,4 @@ const Checkbox: React.FC<CheckboxProps> = (props: CheckboxProps) => {
   );
 };
 
-const ComposedCheckbox = Checkbox as typeof Checkbox & {
-  Group: typeof Group;
-};
-ComposedCheckbox.Group = Group;
-export default ComposedCheckbox;
+export default Checkbox;
