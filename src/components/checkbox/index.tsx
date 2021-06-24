@@ -1,6 +1,11 @@
 import './styles/index';
+import Checkbox from './checkbox';
+import Group from './group';
 
-export { default } from './checkbox';
-export { default as Group } from './group';
-export type { CheckboxGroupProps } from './group';
-export type { CheckboxProps } from './checkbox';
+export type { CheckboxGroupProps, CheckboxProps } from './type';
+
+const ComposedCheckbox = Checkbox as typeof Checkbox & {
+  Group: typeof Group;
+};
+ComposedCheckbox.Group = Group;
+export default ComposedCheckbox;
