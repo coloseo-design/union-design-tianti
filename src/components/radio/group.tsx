@@ -1,124 +1,87 @@
-/* eslint-disable @typescript-eslint/no-empty-function */
-/* eslint-disable @typescript-eslint/ban-types */
-import React, { Component } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import classNames from 'classnames';
-import { ConfigConsumer, ConfigConsumerProps } from '../config-provider';
 import Radio from './radio';
+import { ConfigContext } from '../config-provider/context';
+import { RadioGroupProps, RadioOptions } from './type';
 
-export interface RadioGroupProps extends React.HTMLAttributes<HTMLDivElement> {
-  /* 用户自定义类前缀，默认uni-input */
-  prefixCls?: string;
-  // 选项变化时的回调函数
-  onChange?: React.ChangeEventHandler<HTMLInputElement>;
-  // 以配置形式设置子元素
-  options?: string[] | Array<{ label: string; value: string; disabled?: boolean }>;
-  // 用于设置当前选中的值
-  value?: string;
-  // 默认选中的值
-  defaultValue?: any;
-  // RadioGroup 下所有 input[type="radio"] 的 name 属性
-  name?: string;
-  style?: {[key: string] : unknown};
-  // 禁选所有子单选器
-  disabled?: boolean;
-}
+const getOptions = (options: RadioOptions) => options.map((item) => {
+  if (typeof item === 'string') {
+    return {
+      label: item,
+      value: item,
+    };
+  }
+  return item;
+});
 
-export interface RadioGroupState {
-   value?: any;
-}
+const Group: React.FC<RadioGroupProps> = (props: RadioGroupProps) => {
+  const {
+    onChange,
+    prefixCls,
+    children,
+    options,
+    name,
+    disabled,
+    className,
+    defaultValue,
+    value: valueFromProps = '',
+    ...rest
+  } = props;
+  const [value, setValue] = useState(valueFromProps || defaultValue);
+  const [counter, setCounter] = useState(false);
+  useEffect(() => {
+    if (counter) {
+      setValue(valueFromProps);
+    } else {
+      setCounter(true);
+    }
+  }, [valueFromProps]);
 
-class Group extends Component<RadioGroupProps, RadioGroupState> {
-  static defaultProps: RadioGroupProps = {
-    value: '',
-    onChange: () => {},
+  const { getPrefixCls } = useContext(ConfigContext);
+  const prefix = getPrefixCls('radio-group', prefixCls);
+  const mainClass = classNames(prefix, className);
+
+  const onchange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setValue(e.target.value);
+    if (onChange) {
+      (onChange as React.ChangeEventHandler<HTMLInputElement>)(e);
+    }
   };
-
-  // static getDerivedStateFromProps(props: RadioGroupProps, state: RadioGroupState) {
-  //   if (props.value !== state.value) {
-  //     console.log('props.value', props.value);
-  //     return {
-  //       value: props.value,
-  //     };
-  //   }
-  //   return null;
-  // }
-
-  constructor(props: RadioGroupProps) {
-    super(props);
-    // 劫持value
-    this.state = {
-      value: props.value || props.defaultValue,
-    };
-  }
-
-  componentDidUpdate(prevProps: RadioGroupProps) {
-    const { value } = this.props;
-    if (value !== prevProps.value) {
-      this.setState({ value });
-    }
-  }
-
-  renderRadioGroup = ({ getPrefixCls }: ConfigConsumerProps) => {
-    const {
-      onChange, prefixCls, children, options, name, disabled, className, ...rest
-    } = this.props;
-    const { value } = this.state;
-    const prefix = getPrefixCls('radio-group', prefixCls);
-    const mainClass = classNames(prefix, className, {
-      // [`${prefix}-checked`]: checked,
-    });
-
-    const onchange = (e: React.ChangeEvent<HTMLInputElement>) => {
-      this.setState({ value: e.target.value });
-      if (onChange) {
-        (onChange as React.ChangeEventHandler<HTMLInputElement>)(e);
-      }
-    };
-    if (children) {
-      return (
-        <div {...rest} className={mainClass}>
-          {(React.Children.toArray(children) || []).map((item) => (
-            <Radio
-              key={item.props.value}
-              disabled={disabled}
-              value={item.props.value}
-              checked={value === item.props.value}
-              name={name}
-              onChange={onchange}
-              style={item.props.style || {}}
-            >
-              {item.props.children}
-            </Radio>
-          ))}
-        </div>
-      );
-    }
-
+  if (children) {
     return (
       <div {...rest} className={mainClass}>
-        {(options || []).map((item: { value: string; label: React.ReactNode; }) => (
+        {(React.Children.toArray(children) || []).map((item) => (
           <Radio
-            key={item.value}
-            disabled={disabled}
-            value={item.value}
-            checked={value === item.value}
+            key={item.props.value}
+            disabled={disabled || item.props.disabled}
+            value={item.props.value}
+            checked={value === item.props.value}
             name={name}
             onChange={onchange}
           >
-            {item.label}
+            {item.props.children}
           </Radio>
         ))}
       </div>
     );
-  };
-
-  render() {
-    return (
-      <ConfigConsumer>
-        {this.renderRadioGroup}
-      </ConfigConsumer>
-    );
   }
-}
+
+  return (
+    <div {...rest} className={mainClass}>
+      {getOptions(options || []).map((item) => (
+        <Radio
+          key={item.value}
+          disabled={disabled || item.disabled}
+          value={item.value}
+          checked={value === item.value}
+          name={name}
+          onChange={onchange}
+        >
+          {item.label}
+        </Radio>
+      ))}
+    </div>
+  );
+};
 
 export default Group;

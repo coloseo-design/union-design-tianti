@@ -1,4 +1,11 @@
 import './styles/index';
+import Radio from './radio';
+import Group from './group';
 
-export { default } from './radio';
-export type { RadioProps } from './radio';
+export type { RadioProps } from './type';
+
+const ComposedRadio = Radio as typeof Radio & {
+  Group: typeof Group;
+};
+ComposedRadio.Group = Group;
+export default ComposedRadio;

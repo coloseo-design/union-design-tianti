@@ -8,6 +8,7 @@
   transition: all .3s;
   display: inline-block;
   margin-right: 8px;
+  cursor: pointer;
   input[type="radio"] {
     opacity: 0; //设置透明度，隐藏原有input样式
     width: @radio-size;
@@ -39,6 +40,9 @@
       border: @border-width-base @border-style-base @radio-dot-color;
     }
   }
+}
+.@{radio-prefix-cls}-disabled {
+  cursor: not-allowed;
 }
 // 选中之后的状态
 .@{radio-prefix-cls}-checked {

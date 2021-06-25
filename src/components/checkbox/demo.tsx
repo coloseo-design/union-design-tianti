@@ -29,7 +29,7 @@ export default () => {
         <Checkbox value="hello2">hello2</Checkbox>
       </Group>
       <Checkbox onChange={onChecked} checked={checked}>abc</Checkbox>
-      <Checkbox indeterminate checked />
+      <Checkbox indeterminate />
     </>
   );
 };
