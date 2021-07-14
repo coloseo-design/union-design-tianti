@@ -1,5 +1,6 @@
 import React from 'react';
 import { Table } from '../index';
+import './styles/index';
 
 const dataSource = [
   {

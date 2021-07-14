@@ -1,6 +1,7 @@
 import React from 'react';
 import * as icons from 'union-icons';
 import { Icon } from '../index';
+import './styles/index';
 import './demo.less';
 
 function rename(name: string, separator = '-'): string {

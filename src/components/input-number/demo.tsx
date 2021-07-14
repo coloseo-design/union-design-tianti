@@ -1,5 +1,6 @@
 import React from 'react';
 import { InputNumber } from '../index';
+import './styles/index';
 
 const layout = {
   padding: '0 20px', display: 'flex', alignItems: 'center', justifyContent: 'space-around',

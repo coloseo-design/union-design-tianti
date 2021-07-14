@@ -1,5 +1,7 @@
 import React from 'react';
 import { Icon, Steps } from '../index';
+import './styles/index';
+import '../icon/styles/index';
 
 const Demo = () => (
   <div style={{

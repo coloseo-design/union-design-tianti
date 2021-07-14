@@ -1,5 +1,6 @@
 import React from 'react';
 import { Progress } from '../index';
+import './styles/index';
 
 const ProgressDemo = () => (
   <div>

@@ -1,4 +1,3 @@
-import './styles/index';
 import Radio from './radio';
 import Group from './group';
 

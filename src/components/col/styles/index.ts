@@ -1,2 +1,2 @@
 import '../../style/index.less';
-import '../../grid/styles';
+import '../../grid/styles/index.less';

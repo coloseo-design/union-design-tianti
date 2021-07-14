@@ -1,5 +1,6 @@
 import React from 'react';
 import { Descriptions } from '../index';
+import './styles/index';
 
 const DescriptionsDemo = () => (
   <div>

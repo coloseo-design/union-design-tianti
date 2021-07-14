@@ -1,5 +1,6 @@
 import React from 'react';
 import { Upload } from '../index';
+import './styles/index';
 
 const UploadDemo = () => {
   const common = {

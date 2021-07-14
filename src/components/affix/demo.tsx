@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { Affix, Button } from '../index';
+import './styles/index';
 
 const AffixDemo = () => {
   const t = React.useRef(window);

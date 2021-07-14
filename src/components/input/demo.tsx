@@ -1,5 +1,7 @@
 import React, { useRef } from 'react';
 import { Input, Icon } from '../index';
+import './styles/index';
+import '../icon/styles/index';
 
 const { Search, TextArea } = Input;
 

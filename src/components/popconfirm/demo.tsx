@@ -1,5 +1,7 @@
 import React from 'react';
 import { Popconfirm, Button } from '../index';
+import './styles/index';
+import '../button/styles/index';
 
 const PopconfirmDemo: React.FC<unknown> = () => {
   const handleVisibleChange = (visible: boolean) => {

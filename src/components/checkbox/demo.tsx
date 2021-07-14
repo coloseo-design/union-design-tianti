@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Checkbox } from '../index';
+import './styles/index';
 
 const { Group } = Checkbox;
 

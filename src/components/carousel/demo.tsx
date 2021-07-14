@@ -1,5 +1,6 @@
 import React from 'react';
 import { Carousel } from '../index';
+import './styles/index';
 
 const CarouselDemo = () => {
   const beforeChange = (from: number, to: number) => {

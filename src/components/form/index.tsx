@@ -1,4 +1,3 @@
-import './styles/index';
 import Form from './form';
 import Item from './item';
 

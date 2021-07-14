@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Button, Skeleton } from '../index';
+import './styles/index';
+import '../button/styles/index';
 
 const SkeletonDemo = () => {
   const [show, setShow] = useState(false);

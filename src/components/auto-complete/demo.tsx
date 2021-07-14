@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { AutoComplete, Button } from '../index';
+import './styles/index';
 
 const { Option, OptGroup } = AutoComplete;
 export default () => {

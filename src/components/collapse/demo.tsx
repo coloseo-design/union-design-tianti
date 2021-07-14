@@ -1,5 +1,6 @@
 import React from 'react';
 import { Collapse } from '../index';
+import './styles/index';
 
 const { Panel } = Collapse;
 

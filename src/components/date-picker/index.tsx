@@ -1,6 +1,4 @@
 /* eslint-disable react/prop-types */
-import './styles';
-
 import dayjs from 'dayjs';
 import React, { RefObject } from 'react';
 import { Picker } from './picker/picker';

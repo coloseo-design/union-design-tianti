@@ -1,5 +1,8 @@
 import React from 'react';
 import { Result, Icon, Button } from '../index';
+import './styles/index';
+import '../icon/styles/index';
+import '../button/styles/index';
 
 const ResultDemo: React.FC<unknown> = () => (
   <div style={{ padding: 100 }}>

@@ -16,6 +16,11 @@ import {
   Switch,
   TreeSelect,
 } from '../index';
+import '../grid/styles/index';
+import '../button/styles/index';
+import '../input/styles/index';
+import '../select/styles/index';
+import './styles/index';
 
 const { Item: FormItem } = Form;
 export default () => {

@@ -1,5 +1,7 @@
 import React from 'react';
 import { Button, Tooltip } from '../index';
+import './styles/index';
+import '../button/styles/index';
 
 const TooltipDemo = () => (
   <div style={{ padding: 20 }}>

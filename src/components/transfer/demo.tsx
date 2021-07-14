@@ -1,6 +1,7 @@
 import React from 'react';
 import { Transfer } from '../index';
 import { TransferItem } from './type';
+import './styles/index';
 
 const TransferDemo = () => {
   const mockData = [];

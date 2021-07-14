@@ -1,5 +1,6 @@
 import React from 'react';
 import { Select } from '../index';
+import './styles/index';
 
 const { Option } = Select;
 

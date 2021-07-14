@@ -1,5 +1,6 @@
 import React from 'react';
 import { Row, Col } from '../index';
+import './styles/index';
 
 const GridDemo = () => (
   <div>

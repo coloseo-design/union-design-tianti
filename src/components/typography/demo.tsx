@@ -1,5 +1,6 @@
 import React from 'react';
 import { Typography } from '../index';
+import './styles/index';
 
 const Demo = () => (
   <div style={{ minHeight: '40vh', padding: 40 }}>

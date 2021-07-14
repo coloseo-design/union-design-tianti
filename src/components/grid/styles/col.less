@@ -26,7 +26,7 @@ each(@med-query-map, {
 
 .generate-cols(@class: ~'') {
   each(@cols, {
-    @col-width: percentage(@index / @grid-columns);
+    @col-width: percentage((@index / @grid-columns));
     .@{col-cls}@{class}-@{index} {
       flex: 0 0 auto;
       float: left;

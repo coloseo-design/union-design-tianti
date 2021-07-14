@@ -1,5 +1,6 @@
 import React from 'react';
 import { Badge } from '../index';
+import './styles/index';
 
 const BadgeDemo = () => (
   <div style={{ height: 600, padding: 100 }}>

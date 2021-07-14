@@ -1,4 +1,2 @@
-import './styles/index';
-
 export { default } from './tooltip';
 export type { TooltipProps } from './tooltip';

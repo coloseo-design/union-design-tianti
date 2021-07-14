@@ -1,5 +1,6 @@
 import React from 'react';
 import { Tree } from '../index';
+import './styles/index';
 
 const { TreeNode } = Tree;
 const data = [

@@ -1,4 +1,3 @@
-import './styles/index';
 import Checkbox from './checkbox';
 import Group from './group';
 

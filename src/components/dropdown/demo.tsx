@@ -2,6 +2,7 @@ import React from 'react';
 import {
   Dropdown, Button, Icon, Menu,
 } from '../index';
+import './styles/index';
 
 const menu = (
   <Menu>
