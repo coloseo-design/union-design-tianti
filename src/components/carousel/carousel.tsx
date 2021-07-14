@@ -81,6 +81,10 @@ class Carousel extends Component<CarouselProps, CarouselState> {
     }
   }
 
+  componentWillUnmount() {
+    timer && clearInterval(timer);
+  }
+
   getNode = (node: HTMLDivElement) => {
     this.node = node;
   }
