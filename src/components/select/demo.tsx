@@ -90,11 +90,6 @@ const SelectDemo = () => {
         <Option key="2" value="2">选项1222</Option>
         <Option disabled key="3" value="3">选项33333</Option>
       </Select>
-      <h1>
-        远程搜索选择框 - (备注：使用方法参见
-        <a target="_blank" rel="noreferrer" href="https://ant.design/components/select-cn/#components-select-demo-search-box">antd select 搜索框</a>
-        )
-      </h1>
       <Select
         onSelect={
           (value, label) => {

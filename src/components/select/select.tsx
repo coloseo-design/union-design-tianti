@@ -396,7 +396,7 @@ class Select extends React.Component<SelectProps, SelectState> {
                                 temp = _label.length > maxTagTextLength;
                               }
                               return (
-                                <div key={idx} className={itemClass}>
+                                <div key={idx} title={_label} className={itemClass}>
                                   <span
                                     style={{
                                       display: 'inline-block',
