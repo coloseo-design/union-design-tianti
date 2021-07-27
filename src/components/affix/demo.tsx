@@ -10,7 +10,7 @@ const AffixDemo = () => {
 
   return (
     <>
-      <div className="content">
+      <div className="affix-demo-content">
         <div className="target" style={{ backgroundColor: '#fff' }} ref={t}>
           这是开头
           <Affix offsetTop={20} target={() => t.current}>
@@ -46,7 +46,7 @@ const AffixDemo = () => {
           </div>
         </div>
       </div>
-      <div className="content">
+      <div className="affix-demo-content">
         <div className="target2">
           这是开头
           <Affix offsetTop={20} target={() => window}>
