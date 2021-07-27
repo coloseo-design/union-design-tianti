@@ -62,13 +62,13 @@ const columns = [
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | ---  | ---   |
 | bordered | 是否展示外边框和列边框 | boolean | false |
-| columns | 表格列的配置描述，具体项见下表 | [ColumnsType](#Column)\[] | - |
+| columns | 表格列的配置描述，具体项见下表 | [ColumnsType]\[] | - |
 | dataSource | 数据数组 | object\[] | - |
-| loading | 页面是否加载中 | boolean \| [Spin Props](/components/spin/#API) | false |
-| pagination | 分页器，参考[配置项](#pagination)或 [pagination](/components/pagination/) 文档，设为 false 时不展示和进行分页 | object | - |
+| loading | 页面是否加载中 | boolean \| [Spin Props] | false |
+| pagination | 分页器，参考[配置项]或 [pagination] 文档，设为 false 时不展示和进行分页 | object | - |
 | rowKey | 表格行 key 的取值，可以是字符串或一个函数 | string \| function(record): string | `key` |
-| rowSelection | 表格行是否可选择，[配置项](#rowSelection) | object | - |
-| scroll | 表格是否可滚动，也可以指定滚动区域的宽、高，[配置项](#scroll) | object | - |
+| rowSelection | 表格行是否可选择，[配置项] | object | - |
+| scroll | 表格是否可滚动，也可以指定滚动区域的宽、高，[配置项] | object | - |
 | size | 表格大小 | `default` \| `middle` \| `small` | default |
 
 
@@ -93,7 +93,7 @@ const columns = [
 | filters | 表头的筛选菜单项 | object\[] | - |
 | fixed | （IE 下无效）列是否固定，可选 true (等效于 left) `left` `right` | boolean \| string | false |
 | key | React 需要的 key，如果已经设置了唯一的 `dataIndex`，可以忽略这个属性 | string | - |
-| render | 生成复杂数据的渲染函数，参数分别为当前行的值，当前行数据，行索引，@return 里面可以设置表格[行/列合并](#components-table-demo-colspan-rowspan) | function(text, record, index) {} | - |
+| render | 生成复杂数据的渲染函数，参数分别为当前行的值，当前行数据，行索引，@return 里面可以设置表格[行/列合并] | function(text, record, index) {} | - |
 | sortOrder | 排序的受控属性，外界可用此控制列的排序，可设置为 `ascend` `descend` false | boolean \| string | - |
 | title | 列头显示文字 | ReactNode \| ({ sortOrder, sortColumn, filters }) => ReactNode | - |
 | width | 列宽度 | string \| number | - |
@@ -112,7 +112,7 @@ const columns = [
 | --- | --- | --- | --- |
 | position | 指定分页显示的位置， 取值为`bottomRight` | Array | \[`bottomRight`] |
 
-更多配置项，请查看 [`Pagination`](/components/pagination/)。
+更多配置项，请查看 [`Pagination`]。
 
 ### rowSelection
 
@@ -126,7 +126,7 @@ const columns = [
 | getCheckboxProps | 选择框的默认属性配置 | function(record) | - |
 | selectedRowKeys | 指定选中项的 key 数组，需要和 onChange 进行配合 | string\[] \| number\[] | \[] |
 | defaultSelectedRowKeys | 默认选中项的 key 数组 | string\[] \| number\[] | \[] |
-| selections | 自定义选择项 [配置项](#selection), 设为 `true` 时使用默认选择项 | object\[] \| boolean | true |
+| selections | 自定义选择项 [配置项], 设为 `true` 时使用默认选择项 | object\[] \| boolean | true |
 | onChange | 选中项发生变化时的回调 | function(selectedRowKeys, selectedRows) | - |
 
 ## 注意
@@ -147,12 +147,6 @@ return <Table rowKey={record => record.uid} />;
 ### 如何在没有数据或只有一页数据时隐藏分页栏
 
 你可以设置 `pagination` 的 `hideOnSinglePage` 属性为 `true`。
-
-### 表格过滤时会回到第一页？
-
-前端过滤时通常条目总数会减少，从而导致总页数小于筛选前的当前页数，为了防止当前页面没有数据，我们默认会返回第一页。
-
-如果你在使用远程分页，很可能需要保持当前页面，你可以参照这个 [受控例子](https://codesandbox.io/s/yuanchengjiazaishuju-ant-design-demo-7y2uf) 控制当前页面不变。
 
 ### 为什么 更新 state 会导致全表渲染？
 
