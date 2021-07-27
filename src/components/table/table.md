@@ -62,13 +62,13 @@ const columns = [
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | ---  | ---   |
 | bordered | 是否展示外边框和列边框 | boolean | false |
-| columns | 表格列的配置描述，具体项见下表 | [ColumnsType]\[] | - |
+| columns | 表格列的配置描述，具体项见下表 | \[ColumnsType]\[] | - |
 | dataSource | 数据数组 | object\[] | - |
 | loading | 页面是否加载中 | boolean \| [Spin Props] | false |
-| pagination | 分页器，参考[配置项]或 [pagination] 文档，设为 false 时不展示和进行分页 | object | - |
+| pagination | 分页器，参考\[配置项]或 \[pagination] 文档，设为 false 时不展示和进行分页 | object | - |
 | rowKey | 表格行 key 的取值，可以是字符串或一个函数 | string \| function(record): string | `key` |
-| rowSelection | 表格行是否可选择，[配置项] | object | - |
-| scroll | 表格是否可滚动，也可以指定滚动区域的宽、高，[配置项] | object | - |
+| rowSelection | 表格行是否可选择，\[配置项] | object | - |
+| scroll | 表格是否可滚动，也可以指定滚动区域的宽、高，\[配置项] | object | - |
 | size | 表格大小 | `default` \| `middle` \| `small` | default |
 
 
@@ -112,7 +112,7 @@ const columns = [
 | --- | --- | --- | --- |
 | position | 指定分页显示的位置， 取值为`bottomRight` | Array | \[`bottomRight`] |
 
-更多配置项，请查看 [`Pagination`]。
+更多配置项，请查看 \[`Pagination`]。
 
 ### rowSelection
 
@@ -126,7 +126,7 @@ const columns = [
 | getCheckboxProps | 选择框的默认属性配置 | function(record) | - |
 | selectedRowKeys | 指定选中项的 key 数组，需要和 onChange 进行配合 | string\[] \| number\[] | \[] |
 | defaultSelectedRowKeys | 默认选中项的 key 数组 | string\[] \| number\[] | \[] |
-| selections | 自定义选择项 [配置项], 设为 `true` 时使用默认选择项 | object\[] \| boolean | true |
+| selections | 自定义选择项 \[配置项], 设为 `true` 时使用默认选择项 | object\[] \| boolean | true |
 | onChange | 选中项发生变化时的回调 | function(selectedRowKeys, selectedRows) | - |
 
 ## 注意
@@ -141,17 +141,3 @@ return <Table rowKey="uid" />;
 // 或
 return <Table rowKey={record => record.uid} />;
 ```
-
-## FAQ
-
-### 如何在没有数据或只有一页数据时隐藏分页栏
-
-你可以设置 `pagination` 的 `hideOnSinglePage` 属性为 `true`。
-
-### 为什么 更新 state 会导致全表渲染？
-
-由于 `columns` 支持 `render` 方法，因而 Table 无法知道哪些单元会受到影响。你可以通过 `column.shouldCellUpdate` 来控制单元格的渲染。
-
-### 固定列穿透到最上层该怎么办？
-
-固定列通过 `z-index` 属性将其悬浮于非固定列之上，这使得有时候你会发现在 Table 上放置遮罩层时固定列会被透过的情况。为遮罩层设置更高的 `z-index` 覆盖住固定列即可。
