@@ -2,7 +2,7 @@
 category: Components
 type: 通用
 title: TreeSelect
-subtitle: 数选择
+subtitle: 树选择
 ---
 
 ## API

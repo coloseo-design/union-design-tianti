@@ -1,7 +1,7 @@
 ---
 category: Components
 type: 通用
-title: PopConfirm
+title: Popconfirm
 subtitle: 气泡确认框
 ---
 

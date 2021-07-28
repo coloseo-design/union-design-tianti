@@ -2,7 +2,7 @@
 category: Components
 type: 通用
 title: Rate
-subtitle: 评分组件
+subtitle: 评分
 ---
 
 评分组件

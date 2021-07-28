@@ -1,7 +1,7 @@
 ---
 category: Components
 type: 通用
-title: alert
+title: Alert
 subtitle: 警告提示
 ---
 

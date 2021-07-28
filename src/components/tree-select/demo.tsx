@@ -39,7 +39,7 @@ const data = [
       {
         value: 'node-1-2',
         title: 'node-1-2哈哈哈',
-        disabled: true,
+        // disabled: true,
         children: [
           {
             value: 'node-1-2-1',

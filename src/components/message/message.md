@@ -2,7 +2,7 @@
 category: Components
 type: 通用
 title: Message
-subtitle: 消息提示
+subtitle: 全局提示
 ---
 
 

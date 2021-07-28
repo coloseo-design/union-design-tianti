@@ -1,7 +1,7 @@
 ---
 category: Components
 type: 通用
-title: transfer
+title: Transfer
 subtitle: 穿梭框
 ---
 

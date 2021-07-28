@@ -1,8 +1,8 @@
 ---
 category: Components
 type: 通用
-title: 通知提醒
-subtitle: Notification
+title: Notification
+subtitle: 通知提醒
 ---
 
 

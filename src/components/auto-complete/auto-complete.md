@@ -1,7 +1,7 @@
 ---
 category: Components
 type: 通用
-title: autoComplete
+title: AutoComplete
 subtitle: 自动完成
 ---
 

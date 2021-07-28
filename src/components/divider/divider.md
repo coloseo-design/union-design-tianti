@@ -1,7 +1,7 @@
 ---
 category: Components
 type: 通用
-title: divider
+title: Divider
 subtitle: 分割线
 ---
 ## API

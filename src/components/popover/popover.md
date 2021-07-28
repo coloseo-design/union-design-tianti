@@ -1,7 +1,7 @@
 ---
 category: Components
 type: 通用
-title: PopOver
+title: Popover
 subtitle: 气泡卡片
 ---
 

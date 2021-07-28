@@ -2,7 +2,7 @@
 category: Components
 type: 通用
 title: DatePicker
-subtitle: 日期选择器
+subtitle: 日期选择框
 ---
 
 
