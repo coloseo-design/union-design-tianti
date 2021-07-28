@@ -363,6 +363,10 @@ class Select extends React.Component<SelectProps, SelectState> {
 
     const noContentClass = classnames(`${prefix}-dropdown-noContent`);
 
+    const iconStyle = classnames(`${prefix}-iconWrapper`, {
+      [`${prefix}-iconWrapper-disabled`]: disabled,
+    });
+
     let num = 0;
     if (selectedOptions?.length && maxTagCount) {
       if (selectedOptions.length - maxTagCount > 0) {
@@ -378,7 +382,7 @@ class Select extends React.Component<SelectProps, SelectState> {
               <>
                 <input onChange={this.handleInputChange} value={renderObj?.label || ''} className={inputClass} />
                 <span style={{ display: `${renderObj?.label ? 'none' : 'inline-block'}` }} className={`${prefix}-placeholder`}>{placeholder}</span>
-                <span className={`${prefix}-iconWrapper`}><Icon className={`${prefix}-iconWrapper-icon`} type="search" /></span>
+                <span className={iconStyle}><Icon type="search" /></span>
               </>
             )
             : (
@@ -457,7 +461,7 @@ class Select extends React.Component<SelectProps, SelectState> {
                   : <span className={`${prefix}-placeholder`}>{placeholder}</span>}
                 {allowClear && renderObj?.label
                   ? <span className={`${prefix}-iconWrapper`} onClick={this.handleClear}><Icon type="close" /></span>
-                  : <span className={`${prefix}-iconWrapper`}><Icon className={`${prefix}-iconWrapper-icon`} type={`${showDropdown ? 'up' : 'down'}`} /></span>}
+                  : <span className={iconStyle}><Icon type={`${showDropdown ? 'up' : 'down'}`} /></span>}
               </>
             )}
         </div>

@@ -23,7 +23,7 @@
     outline: none;
     transition: all 0.3s linear;
     cursor: text;
-    &:hover {
+    &:not(&-disabled):hover {
       border-color: @input-hover-border-color;
     }
     &-focus {
@@ -71,6 +71,7 @@
       color: @disabled-color;
       border-color: @disabled-border-color;
       background-color: @disabled-bg;
+      cursor: not-allowed;
     }
   }
   &-icon {

@@ -7,7 +7,6 @@ const data = [
   {
     value: 'node-0',
     title: '第一级1',
-    disabled: true,
     children: [
       {
         value: 'node-0-1',
@@ -40,6 +39,7 @@ const data = [
       {
         value: 'node-1-2',
         title: 'node-1-2哈哈哈',
+        disabled: true,
         children: [
           {
             value: 'node-1-2-1',
@@ -83,8 +83,13 @@ const data = [
   },
 ];
 const TreeSelectDEmo = () => {
+  const [value1, setValue1] = React.useState('1');
+  const [value2, setValue2] = React.useState(['node-0-1']);
   const onChange = (value: string | string[], node: any) => {
-    console.log('---value', value, node);
+    setValue1(value);
+  };
+  const onChange1 = (value: string | string[], node: any) => {
+    setValue2(value);
   };
 
   const [dataT, setData] = React.useState([]);
@@ -99,7 +104,7 @@ const TreeSelectDEmo = () => {
       <h1>单选</h1>
       <div style={{ width: 320 }}>
         <TreeSelect
-          value="1"
+          value={value1}
           onChange={onChange}
           disabled
           style={{ width: 256 }}
@@ -122,8 +127,8 @@ const TreeSelectDEmo = () => {
           treeData={data}
           dropdownStyle={{ maxHeight: 250, overflow: 'auto' }}
           multiple
-          value={['11']}
-          onChange={onChange}
+          value={value2}
+          onChange={onChange1}
         />
       </div>
 
@@ -133,7 +138,7 @@ const TreeSelectDEmo = () => {
           treeData={dataT}
           dropdownStyle={{ maxHeight: 250, overflow: 'auto' }}
           treeCheckable
-          defaultValue={['node-1-2-2', 'third']}
+          defaultValue={['node-0-1']}
         />
       </div>
 

@@ -39,12 +39,12 @@
   border-radius: @border-radius-base;
   // float: left;
   user-select: none;
-  &:hover, &:focus {
+  &:not(.@{select-prefix-cls}-disabled):hover, &:not(.@{select-prefix-cls}-disabled):focus {
     border: @border-width-base @border-style-base @primary-color;
     border-color: @input-hover-border-color;
     border-right-width: @border-width-base;
   }
-  &:focus {
+  &:not(.@{select-prefix-cls}-disabled):focus {
     box-shadow: @input-box-shadow-base;
   }
   &-iconWrapper {
@@ -53,9 +53,16 @@
     top: 50%;
     transform: translateY(-50%);
     cursor: pointer;
-    &-icon {
-      color: @btn-default-border;
+    color: @btn-default-border;
+    &-disabled {
+      color: @disabled-color;
     }
+    // &-icon {
+    //   color: @btn-default-border;
+    //   &-disabled {
+    //     color: @disabled-color;
+    //   }
+    // }
   }
 }
 
@@ -67,10 +74,12 @@
 
 .@{select-prefix-cls}-disabled {
   .disabled();
-  &:hover, &:focus {
-    box-shadow: none;
-    border: @border-width-base @border-style-base @btn-default-border;
-  }
+  background-color: @disabled-bg;
+  border-color: @disabled-border-color;
+  // &:hover, &:focus {
+  //   box-shadow: none;
+  //   border: @border-width-base @border-style-base @btn-default-border;
+  // }
 }
 
 .@{select-prefix-cls}-value {

@@ -28,10 +28,6 @@ const CardDemo = () => (
         height={222}
       >
         内容加ReactNode
-        <div className="test">
-          <div className="test-title" />
-          <div className="test-content" />
-        </div>
       </Card>
       <br />
 
