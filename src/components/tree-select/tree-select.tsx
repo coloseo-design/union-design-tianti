@@ -244,7 +244,6 @@ class TreeSelect extends React.Component<TreeSelectProps, TreeSelectStates> {
     } = this.state;
     if (!multiple) { // 单选
       // eslint-disable-next-line no-param-reassign
-      delete nodeInfo.parent;
       onSelect && onSelect(value, nodeInfo);
       onChange && onChange(value, nodeInfo);
       this.setState({ selectValues: [value], border: false, values: [value] });
@@ -261,8 +260,8 @@ class TreeSelect extends React.Component<TreeSelectProps, TreeSelectStates> {
       );
       const list = backFillList.map((i) => i.value);
       const nodeList = smooth.filter((i) => backFillList.indexOf(i.value) >= 0);
-      onChange && onChange(list, nodeList.map((i) => ({ ...i, parent: undefined })));
-      onSelect && onSelect(list, nodeList.map((i) => ({ ...i, parent: undefined })));
+      onChange && onChange(list, nodeList);
+      onSelect && onSelect(list, nodeList);
       this.setState({ selectValues: checkedList.map((i) => i.value), values: list });
     } else { // 多选的
       let temList: any = selectValues;
@@ -272,8 +271,8 @@ class TreeSelect extends React.Component<TreeSelectProps, TreeSelectStates> {
         temList.push(value);
       }
       const nodeList = smooth.filter((i) => temList.indexOf(i.value) >= 0);
-      onSelect && onSelect(temList, nodeList.map((i) => ({ ...i, parent: undefined })));
-      onChange && onChange(temList, nodeList.map((i) => ({ ...i, parent: undefined })));
+      onSelect && onSelect(temList, nodeList);
+      onChange && onChange(temList, nodeList);
       this.setState({ selectValues: temList, values: temList });
     }
     multiple && this.getLocation();
@@ -283,7 +282,7 @@ class TreeSelect extends React.Component<TreeSelectProps, TreeSelectStates> {
     const {
       smooth, selectValues, multiple, values,
     } = this.state;
-    const { onChange, showCheckedStrategy = 'SHOW_CHILD' } = this.props;
+    const { onChange, showCheckedStrategy = 'SHOW_CHILD', onSelect } = this.props;
     const current = smooth.find((i: any) => i.value === value) || {};
     const { checkedList, backFillList } = checkedFun(
       current,
@@ -295,7 +294,10 @@ class TreeSelect extends React.Component<TreeSelectProps, TreeSelectStates> {
     );
     const list = backFillList.map((i) => i.value);
     const nodeList = smooth.filter((i) => backFillList.indexOf(i.value) >= 0);
-    onChange && onChange(list, nodeList.map((i) => ({ ...i, parent: undefined })));
+    onChange && onChange(list, nodeList);
+    if (checked) {
+      onSelect && onSelect(list, nodeList);
+    }
     this.setState({
       selectValues: checkedList.map((i) => i.value),
       values: list,
@@ -385,7 +387,12 @@ class TreeSelect extends React.Component<TreeSelectProps, TreeSelectStates> {
                       ? this.tags(values[0], treeSelect, true)
                       : values.slice(0, maxTagCount).map((item: string) => this.tags(item, treeSelect, false))}
                     {
-                  maxTagCount && multiple && values.length > maxTagCount && <span>...</span>
+                  maxTagCount && multiple && values.length > maxTagCount && (
+                  <span className={`${treeSelect}-selection-tag`}>
+                    ...+
+                    {values.length - maxTagCount}
+                  </span>
+                  )
                 }
                   </span>
                 )

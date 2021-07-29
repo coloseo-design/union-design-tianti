@@ -39,7 +39,7 @@ const data = [
       {
         value: 'node-1-2',
         title: 'node-1-2哈哈哈',
-        // disabled: true,
+        disabled: true,
         children: [
           {
             value: 'node-1-2-1',
@@ -86,10 +86,16 @@ const TreeSelectDEmo = () => {
   const [value1, setValue1] = React.useState('1');
   const [value2, setValue2] = React.useState(['node-0-1']);
   const onChange = (value: string | string[], node: any) => {
+    console.log('---change', value, node);
     setValue1(value);
   };
+  const onSelect = (value: string | string[], node: any) => {
+    console.log('---select', value, node);
+  };
+
   const onChange1 = (value: string | string[], node: any) => {
     setValue2(value);
+    console.log('---change', value, node);
   };
 
   const [dataT, setData] = React.useState([]);
@@ -106,7 +112,8 @@ const TreeSelectDEmo = () => {
         <TreeSelect
           value={value1}
           onChange={onChange}
-          disabled
+          onSelect={onSelect}
+          // disabled
           style={{ width: 256 }}
         >
           <TreeNode title="顶级" key="a" value="a">
@@ -129,6 +136,8 @@ const TreeSelectDEmo = () => {
           multiple
           value={value2}
           onChange={onChange1}
+          onSelect={onSelect}
+          maxTagCount={2}
         />
       </div>
 
@@ -139,6 +148,7 @@ const TreeSelectDEmo = () => {
           dropdownStyle={{ maxHeight: 250, overflow: 'auto' }}
           treeCheckable
           defaultValue={['node-0-1']}
+          onSelect={onSelect}
         />
       </div>
 

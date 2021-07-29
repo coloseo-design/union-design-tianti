@@ -44,7 +44,6 @@ interface TreeDataType {
 | 属性 | 说明 | 类型 | 默认值 |
 | --- | ---  | --- | ---   |
 | checkable | 当树为 checkable 时，设置独立节点是否展示 Checkbox | boolean | - |
-| disableCheckbox | 禁掉 checkbox | boolean | false |
 | disabled | 是否禁用  | boolean | - |
 | isLeaf | 是否是叶子节点 | boolean| - |
 | key | 此项必须设置（其值在整个树范围内唯一） 与value一样 | string | - |

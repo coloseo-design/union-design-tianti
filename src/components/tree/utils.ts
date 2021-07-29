@@ -75,7 +75,9 @@ export const checkedFun = (
     data.forEach((item: any) => {
       if (item.children && item.children.length > 0) {
         const c = item.children.filter((i: any) => currentSelected.indexOf(i.key || i.currentKey) >= 0);
-        if (c.length === (item.children || []).filter((i: any) => !i.disableCheckbox && !i.disabled).length) {
+        if (c.length === (item.children || []).filter((i: any) => !i.disableCheckbox && !i.disabled).length
+            && !item.disableCheckbox && !item.disabled
+        ) {
           parentList.push(item);
           currentSelected.push(item.key);
         }
@@ -113,7 +115,7 @@ const findParent = (AllData: any[], init: string[]) => {
       const EffectiveChildren = (item.children || []).filter((i: any) => !i.disabled && !i.disableCheckbox);
       const includeChild = EffectiveChildren.filter((i: any) => init.indexOf(i.key) >= 0);
       if (EffectiveChildren.length > 0 && includeChild.length > 0
-          && includeChild.length === EffectiveChildren.length) {
+          && includeChild.length === EffectiveChildren.length && !item.disabled && !item.disableCheckbox) {
         parent.push(item);
         parentInit.push(item.key);
       }

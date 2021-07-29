@@ -49,12 +49,12 @@ export const flatChildrenTree = (children: any) => {
 };
 
 export const checkedFun = (
-  current: any,
-  checked: boolean,
-  smooth: any,
-  values: any, // 选择框回填的数据
+  current: any, // 当前选择的数据
+  checked: boolean, // 取消选择还是选中
+  smooth: any, // 所有的展开的数据
+  values: any, // 选择框回填的数据（输入框的数据）
   checkedKeys: string[], // 选择的数据
-  backFill: string | undefined,
+  backFill: string | undefined, // 回填的形式
 ) => { // 选择父级勾选子级， 子级选满勾选父级 showCheckedStrategy: SHOW_CHILD
   const temp = smooth.filter((i: any) => values.indexOf(i.value) >= 0);
   const temChecked = smooth.filter((i: any) => checkedKeys.indexOf(i.value) >= 0);
@@ -67,7 +67,7 @@ export const checkedFun = (
     data.forEach((item: any) => {
       if (item.children && item.children.length > 0) {
         const c = item.children.filter((i: any) => currentSelected.indexOf(i.value) >= 0);
-        if (c.length === (item.children || []).filter((i: any) => !i.disableCheckbox && !i.disabled).length) {
+        if (c.length === (item.children || []).filter((i: any) => !i.disabled).length && !item.disabled) {
           parentList.push(item);
           currentSelected.push(item.value);
         }
@@ -80,7 +80,7 @@ export const checkedFun = (
   current.parent && loopParent([current.parent]);
 
   const loop = (data: any) => data.forEach((item: any) => {
-    if (!item.disableCheckbox && !item.disabled) {
+    if (!item.disabled) {
       parentChild.push(item);
     }
     if (item.children && item.children.length) {
@@ -173,15 +173,15 @@ const findParent = (AllData: any[], init: string[]) => {
   const parentInit: string[] = init;
   const loopParent = (data: any) => {
     data.forEach((item: any) => {
-      const EffectiveChildren = (item.children || []).filter((i: any) => !i.disabled && !i.disableCheckbox);
+      const EffectiveChildren = (item.children || []).filter((i: any) => !i.disabled);
       const includeChild = EffectiveChildren.filter((i: any) => init.indexOf(i.value) >= 0);
       if (EffectiveChildren.length > 0 && includeChild.length > 0
-          && includeChild.length === EffectiveChildren.length) {
+          && includeChild.length === EffectiveChildren.length && !item.disabled) {
         vl.push(item);
         cl.push(item);
         parentInit.push(item.value);
       }
-      if (!item.disabled && !item.disableCheckbox) {
+      if (!item.disabled) {
         if (!item.children || (item.children && item.children.length === 0)) {
           cl.push(item);
         }
@@ -202,7 +202,7 @@ const findChild = (AllData: any[]) => {
   const cl: any[] = [];
   const vl: any[] = [];
   const loopChild = (data: any[]) => data.forEach((item) => {
-    if (!item.disabled && !item.disableCheckbox) {
+    if (!item.disabled) {
       cl.push(item);
       if (!item.children || (item.children && item.children.length === 0)) {
         vl.push(item);
