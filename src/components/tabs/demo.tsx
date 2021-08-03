@@ -59,7 +59,7 @@ const TabsDemo = () => (
     </div>
     <div style={{ margin: 20 }}>
       <p>type=&lsquo;page&rsquo;示例</p>
-      <Tabs defaultActiveKey="3" type="page">
+      <Tabs defaultActiveKey="3" type="page" onClose={(key) => console.log('key', key)}>
         <Pane key="1" tab="页签">
           <div style={{ background: 'red' }}>a</div>
         </Pane>

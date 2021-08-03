@@ -23,6 +23,7 @@ export interface TabsProps extends Omit<React.HTMLAttributes<unknown>, 'onChange
   activeKey?: string;
   type?: TabsType;
   onChange?: (key: string) => void;
+  onClose?: (key: string) => void;
 }
 
 const Tabs: React.FC<TabsProps> & { Pane: typeof Pane} = (props: TabsProps) => {
@@ -33,6 +34,7 @@ const Tabs: React.FC<TabsProps> & { Pane: typeof Pane} = (props: TabsProps) => {
     onChange,
     children,
     activeKey,
+    onClose,
     ...others
   } = props;
   let { prefixCls } = props;
@@ -76,6 +78,7 @@ const Tabs: React.FC<TabsProps> & { Pane: typeof Pane} = (props: TabsProps) => {
     e.stopPropagation();
     closed.push(key);
     if (closed.length >= titles.length) return;
+    onClose && onClose(key);
     if (key === checkedKey) {
       setCheckedKey(titles[0].key);
     }
