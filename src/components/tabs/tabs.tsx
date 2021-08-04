@@ -45,7 +45,7 @@ const Tabs: React.FC<TabsProps> & { Pane: typeof Pane} = (props: TabsProps) => {
   const [checkedKey, setCheckedKey] = useState(defaultActiveKey);
   const [offsetBar, setOffsetBar] = useState([0, 0]);
   const [closed, setClosed] = useState<string[]>([]);
-  const navRef = React.useRef<HTMLDivElement>();
+  const navRef = React.createRef<HTMLDivElement>();
 
   useEffect(() => {
     if (activeKey) {
@@ -97,7 +97,7 @@ const Tabs: React.FC<TabsProps> & { Pane: typeof Pane} = (props: TabsProps) => {
       )
   );
 
-  const navClassName = classNames(
+  const tabCls = classNames(
     prefixCls,
     {
       [`${prefixCls}-${type}`]: type,
@@ -125,7 +125,7 @@ const Tabs: React.FC<TabsProps> & { Pane: typeof Pane} = (props: TabsProps) => {
   };
 
   return (
-    <div className={navClassName}>
+    <div className={tabCls}>
       <div ref={navRef} className={`${prefixCls}-nav`} {...others}>
         {
           titles.filter((item) => closed.indexOf(item.key) === -1).map((title) => (
