@@ -1,3 +1,12 @@
+## [1.0.5](http://10.124.128.2:8888/muses/union-design/compare/v1.0.4...v1.0.5) (2021-08-04)
+
+
+### Bug Fixes
+
+* 🐛 添加onclose为tabs ([08462f4](http://10.124.128.2:8888/muses/union-design/commits/08462f4e6516b1125fd431cafa095bf0c090255f))
+
+
+
 ## [1.0.4](http://10.124.128.2:8888/muses/union-design/compare/v1.0.3...v1.0.4) (2021-07-29)
 
 
