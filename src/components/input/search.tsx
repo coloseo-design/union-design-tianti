@@ -37,20 +37,12 @@ class Search extends Component<BaseInputProps, InputState> {
 
   renderInput = ({ getPrefixCls }: ConfigConsumerProps) => {
     const {
-      forwardedRef, enterButton, onSearch, style, onChange, prefixCls: customizedPrefixCls, className, size, defaultValue, ...rest
+      forwardedRef, enterButton, onSearch, style, onChange, prefixCls: customizedPrefixCls, className, ...rest
     } = this.props;
     const { value } = this.state;
-    const InputSizeMap = {
-      large: 'lg',
-      small: 'sm',
-      default: '',
-    };
-    const sizeCls: string = size ? InputSizeMap[size] : '';
     const prefixCls = getPrefixCls('input', customizedPrefixCls);
 
-    const classes: string = classNames(prefixCls, className, {
-      [`${prefixCls}-${sizeCls}`]: sizeCls,
-    });
+    const classes: string = classNames(prefixCls, className);
 
     const type = 'search';
     const _enterButton = enterButton ? 'wapper' : '';

@@ -108,7 +108,6 @@ export default class Table extends React.Component<TableProps, TableState> {
   filterDataSourceFilter = () => {
     const { columns } = this.props;
     const { filters } = this.state;
-    console.log('filters', filters);
     return columns.reduce((composed, column) => {
       const { onFilter, dataIndex, key } = column;
       const name = dataIndex || key || '';
@@ -488,14 +487,11 @@ export default class Table extends React.Component<TableProps, TableState> {
     });
 
     const filteredDataSource = dataSource.filter(this.filterDataSourceFilter());
-    console.log('filteredDataSource', filteredDataSource);
     const paginateDataSource = this.paginateDataSource(filteredDataSource);
 
     const mainColumns = columns.slice();
     // eslint-disable-next-line no-nested-ternary
     const maxHeight = scroll ? (typeof scroll.y === 'boolean' ? 'auto' : scroll.y) : 'auto';
-
-    console.log('filteredDataSource', filteredDataSource.length, paginateDataSource);
     return (
       <div className={`${prefix}-container`}>
         <div className={`${prefix}-container-with-spin`}>
