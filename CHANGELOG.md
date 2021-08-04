@@ -1,3 +1,19 @@
+## [1.0.6](http://10.124.128.2:8888/muses/union-design/compare/v1.0.5...v1.0.6) (2021-08-04)
+
+
+### Bug Fixes
+
+* 🐛 修复tabs嵌套的bug ([d70640a](http://10.124.128.2:8888/muses/union-design/commits/d70640ab32f7df2bfc4ccaee36bf4463d4ac7908))
+* 🐛 select,隐藏checkbox，table引入分页样式' ([ad74bb1](http://10.124.128.2:8888/muses/union-design/commits/ad74bb1a2d0168de8910bd136b70aac6d83e571f))
+
+
+### Features
+
+* 🎸 去掉input中的defaultValue ([3482aba](http://10.124.128.2:8888/muses/union-design/commits/3482abae2931d08c1095d8bbdece4b147e8b1113))
+* 🎸 修改popconfig默认按钮值 ([152f64b](http://10.124.128.2:8888/muses/union-design/commits/152f64bac22e795d256f1d99c37136f3c54eccc4))
+
+
+
 ## [1.0.5](http://10.124.128.2:8888/muses/union-design/compare/v1.0.4...v1.0.5) (2021-08-04)
 
 
