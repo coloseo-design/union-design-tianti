@@ -8,7 +8,7 @@ export interface CardProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 't
   title?: React.ReactNode;
   children?: React.ReactNode;
   className?: string;
-  width?: number;
+  width?: number | string;
   height?: number;
   titleHeight?: number;
   onClick?: React.MouseEventHandler<HTMLDivElement>;

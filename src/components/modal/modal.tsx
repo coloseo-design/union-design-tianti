@@ -2,7 +2,7 @@ import React from 'react';
 import classNames from 'classnames';
 import Icon from '../icon';
 import Portal from '../popconfirm/portal';
-import Button, { BaseButtonProps } from '../button/button';
+import Button, { BaseButtonProps } from '../button';
 import { ConfigConsumer, ConfigConsumerProps } from '../config-provider';
 import {
   renderMethod, success, error, info, warning, confirm, ModalMethodProps,
