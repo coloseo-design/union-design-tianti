@@ -121,4 +121,6 @@ interface FormItemProps extends BaseProps, React.HTMLAttributes<HtmlHTMLAttribut
   required?: boolean;
   /** label对齐方式 */
   labelAlign?: 'left' | 'right',
+  /** 是否显式冒号 */
+  colon: boolean;
 }

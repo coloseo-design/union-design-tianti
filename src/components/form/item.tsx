@@ -27,6 +27,7 @@ const Item: React.FC<FormItemProps> = (props: FormItemProps) => {
     validateFirst = false, // 遇到错误是否停止
     messageVariables,
     required = false,
+    colon = true,
   } = props;
 
   const { getPrefixCls } = useContext(ConfigContext);
@@ -63,6 +64,7 @@ const Item: React.FC<FormItemProps> = (props: FormItemProps) => {
   const labelClassName = classnames({
     [`${prefix}-label`]: true,
     [`${prefix}-label-left`]: labelAlignt === 'left',
+    [`${prefix}-label-colon`]: colon,
   });
   // 输入组件布局
   const wrapperCol = { ...context.wrapperCol, ...wrapperColFromProps };
