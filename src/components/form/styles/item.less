@@ -32,10 +32,17 @@
     text-align: right;
     vertical-align: middle;
     &::after {
-      content: ":";
+      content: " ";
+      width: 5px;
       position: relative;
       margin: 0 8px 0 2px;
     }
+    &-colon {
+      &::after {
+        content: ":";
+      }
+    }
+
   }
   .@{form-item-cls}-label-left{
     text-align: left;

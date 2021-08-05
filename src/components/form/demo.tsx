@@ -136,7 +136,7 @@ export default () => {
   ];
 
   const layout = {
-    labelCol: { span: 8 },
+    labelCol: { span: 2 },
     wrapperCol: { span: 16 },
   };
 
@@ -212,7 +212,8 @@ export default () => {
           </FormItem>
           <FormItem
             name={['address', 'city']}
-            label="城市"
+            label={<span>地址</span>}
+            colon={false}
             required
           >
             <Input placeholder="请输入城市" style={{ width: '100%' }} />
