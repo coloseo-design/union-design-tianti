@@ -5,7 +5,7 @@ import { ConfigConsumer, ConfigConsumerProps } from '../config-provider';
 import Icon from '../icon';
 import { MENU_TAG_MENU } from '../menu/menu';
 
-export interface SiderProps {
+export interface SiderProps extends Omit<React.HTMLAttributes<HTMLElement>, 'collapsed' | 'defaultCollapsed'> {
   /* 用户自定义类前缀，默认uni-layout */
   prefixCls?: string;
   /* 容器 className */
@@ -63,7 +63,7 @@ class Sider extends Component<SiderProps, SiderState> {
   renderSider = ({ getPrefixCls }: ConfigConsumerProps) => {
     const {
       prefixCls, className, children, style, width = 200, collapsedWidth = 80,
-      theme = 'dark', collapsible, onCollapse, ...rest
+      theme = 'dark', collapsible, onCollapse, collapsed: _collapsed, defaultCollapsed, ...rest
     } = this.props;
     const { collapsed } = this.state;
 

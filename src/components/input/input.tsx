@@ -85,12 +85,11 @@ export interface BaseInputProps extends React.HTMLAttributes<HTMLInputElement> {
   onBlur?: React.FocusEventHandler<HTMLInputElement>;
   onPressEnter?: React.KeyboardEventHandler<HTMLInputElement>;
   // 输入框默认内容
-  defaultValue?: string | number;
+  // defaultValue?: string | number;
   // 带标签的 input，设置后置标签
   addonAfter?: ReactNode;
   // 带标签的 input，设置前置标签
   addonBefore?: ReactNode;
-  style?: {[key: string] : unknown};
   // 点击搜索图标、清除图标，或按下回车键时的回调
   onSearch?: (
     value: string,
@@ -144,7 +143,7 @@ class Input extends Component<BaseInputProps, InputState> {
 
   renderInput = ({ getPrefixCls }: ConfigConsumerProps) => {
     const {
-      allowClear, forwardedRef, style, addonAfter, addonBefore, onChange, prefixCls: customizedPrefixCls, className, type, defaultValue, ...rest
+      allowClear, forwardedRef, style, addonAfter, addonBefore, onChange, prefixCls: customizedPrefixCls, className, type, defaultValue, onSearch, onPressEnter, ...rest
     } = this.props;
     const { value } = this.state;
     const group: string = (addonAfter || addonBefore) ? 'group' : '';

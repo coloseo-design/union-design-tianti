@@ -98,6 +98,7 @@ class TextArea extends Component<BaseTextAreaProps, TextAreaState> {
       onChange,
       prefixCls: customizedPrefixCls,
       className,
+      defaultValue,
       ...rest
     } = this.props;
     const { value } = this.state;
