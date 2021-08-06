@@ -375,8 +375,8 @@ class Select extends React.Component<SelectProps, SelectState> {
     }
 
     return (
-      <div className={wrapperClass} style={style}>
-        <div onClick={!disabled ? this.onClick : () => {}} className={mainClass} ref={this.getNode}>
+      <div className={wrapperClass}>
+        <div onClick={!disabled ? this.onClick : () => {}} className={mainClass} ref={this.getNode} style={style}>
           {type === 'search'
             ? (
               <>

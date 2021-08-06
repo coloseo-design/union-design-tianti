@@ -76,7 +76,9 @@ class Sider extends Component<SiderProps, SiderState> {
     const onClick = () => {
       // this.setState({ collapsed: !collapsed });
       if (onCollapse) {
-        onCollapse(!collapsed);
+        setTimeout(() => {
+          onCollapse(!collapsed);
+        }, 200);
       }
     };
 

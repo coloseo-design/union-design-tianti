@@ -113,7 +113,7 @@ export default class Steps extends BaseComponent<StepsProps> {
           _direction: direction,
           _serialNumber: serialNumber,
           _onClick: onClick,
-          ref: (ref: Step) => this.stepRefs.push(ref),
+          ref: (ref: Step) => ref && this.stepRefs.push(ref),
         });
 
         serialNumber += 1;

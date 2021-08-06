@@ -13,11 +13,13 @@
     right: 0;
     bottom: 0;
     background-color: rgba(0, 0, 0, 0);
+    z-index: @zindex-notification;
 }
 
 .@{drawer}-content {
     position: fixed;
     background: @drawer-bg-color;
+    z-index: @zindex-notification;
 
     & > div {
         width: 100%;
