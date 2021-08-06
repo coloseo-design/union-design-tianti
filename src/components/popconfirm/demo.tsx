@@ -20,6 +20,7 @@ const PopconfirmDemo: React.FC<unknown> = () => {
   const handleClick = () => {
     setVisible(true);
   };
+
   return (
     <div id="pop" style={{ padding: 120 }}>
       <div>
@@ -35,6 +36,7 @@ const PopconfirmDemo: React.FC<unknown> = () => {
           okButtonProps={{ loading: true }}
           onConfirm={onConfirm}
           overlayStyle={{ maxWidth: 200 }}
+          defaultVisible
         >
           <Button onClick={handleClick}>topLeft</Button>
         </Popconfirm>

@@ -285,7 +285,9 @@ class PopComponent extends React.Component<PopProps, PopconfirmState> {
 
     let Tchildren;
     if (React.isValidElement(children)) {
-      Tchildren = React.cloneElement(children, { id: this.tag });
+      Tchildren = React.cloneElement(children, {
+        id: this.tag,
+      });
     } else {
       throw new Error(' props children must bu ReactNode');
     }
@@ -312,6 +314,7 @@ class PopComponent extends React.Component<PopProps, PopconfirmState> {
         {content && <div className={`${contentStyle}-inner-content`}>{content}</div>}
       </div>
     );
+
     return (
       <>
         <span
@@ -319,9 +322,8 @@ class PopComponent extends React.Component<PopProps, PopconfirmState> {
           onMouseOver={this.handleOver}
           onMouseOut={this.handleOut}
           onFocus={this.handleFocus}
-          // style={{ margin: 0, padding: 0, display: 'inline-block' }}
           data-tag={this.tag}
-          id={this.tag}
+          // id={this.tag}
         >
           {Tchildren}
         </span>

@@ -7,6 +7,7 @@ const PopoverDemo = () => (
   <div style={{ paddingTop: 120 }}>
     <Popover
       content="和哈哈哈哈1"
+      visible
     >
       <Button>hover</Button>
     </Popover>
