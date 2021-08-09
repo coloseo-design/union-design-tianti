@@ -78,6 +78,28 @@ export default class extends BaseComponent<DrawerProps, DrawerState> {
 
     public componentDidMount() {
       document.body.appendChild(this.bodyDrawerNode);
+      const {
+        whenChildrenOpen, placement, wh,
+      } = this.props as unknown;
+      if (this.props.visible) {
+        if (typeof whenChildrenOpen === 'function') {
+          whenChildrenOpen();
+        }
+        this.setState({ visible: true }, () => {
+          const content = this.contentRef.current;
+          const mask = this.maskRef.current;
+          const head = this.headRef.current;
+          const body = this.bodyRef.current;
+          const footer = this.footerRef.current;
+          mask && (mask.style.backgroundColor = 'rgba(0, 0, 0, 0)');
+          content && (content.style[placement] = `-${wh}px`);
+          head && body && (body.style.top = `${head.offsetHeight}px`);
+          footer && body && (body.style.bottom = `${footer.offsetHeight}px`);
+          setTimeout(() => {
+            this.animationVisibleTrue();
+          });
+        });
+      }
     }
 
     public componentWillUnmount() {
