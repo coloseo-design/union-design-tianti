@@ -17,7 +17,7 @@ alert的属性说明如下：
 | description | 警告提示的辅助性文字介绍  | string|ReactNode |  |
 | icon | 自定义图标，showIcon 为 true 时有效 | ReactNode | 无|
 | banner | 是否用作顶部公告 | boolean | false |
-| closeText | 自定义关闭按钮 | boolean | 无 |
+| closeText | 自定义关闭按钮 | string ｜ reactNode | 无 |
 | closable | 是否显示辅助图标 | ReactNode | <Icon type="exclamation-circle" /> |
 | showIcon | 是否显示辅助图标 | boolean  |
 | style | alert样式 | object | - |
