@@ -23,7 +23,7 @@
       border-radius: @progress-radius;
       .@{progress-prefix-cls}-bg {
         position: relative;
-        background-color: @progress-default-color;
+        background-color: @link-color;
         border-radius: @progress-radius;
         transition: all .4s cubic-bezier(.08,.82,.17,1) 0s;
       }
@@ -47,13 +47,13 @@
   .@{progress-prefix-cls}-outer {
     .@{progress-prefix-cls}-inner {
       .@{progress-prefix-cls}-bg {
-        background-color: @progress-status-exception-color;
+        background-color: @red-5;
       }
     }
   }
 
   .@{progress-prefix-cls}-text {
-    color: @progress-status-exception-color;
+    color: @red-5;
   }
 }
 
