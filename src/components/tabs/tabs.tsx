@@ -65,6 +65,10 @@ const Tabs: React.FC<TabsProps> & { Pane: typeof Pane} = (props: TabsProps) => {
     }
   }, [prefixCls]);
 
+  useEffect(() => {
+    setClosed([]);
+  }, [children]);
+
   const changeKey = (key: string, e: React.MouseEvent<HTMLDivElement>): void => {
     const { offsetLeft, offsetWidth } = e.currentTarget;
     if (type === 'line') {
@@ -124,6 +128,7 @@ const Tabs: React.FC<TabsProps> & { Pane: typeof Pane} = (props: TabsProps) => {
     marginLeft: `-${index * 100}%`,
   };
 
+  console.log('children', children);
   return (
     <div className={tabCls}>
       <div ref={navRef} className={`${prefixCls}-nav`} {...others}>

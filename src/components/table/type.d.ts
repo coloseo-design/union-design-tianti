@@ -1,3 +1,4 @@
+import React from 'react';
 import { PaginationProps } from '../pagination/pagination';
 
 type ColumnsAlign = 'left' | 'right' | 'center';
@@ -65,7 +66,7 @@ export type TableRowSelectionType = {
   selectedRowKeys: unknown[];
 }
 
-export interface TableProps extends ConfigConsumerProps {
+export interface TableProps extends ConfigConsumerProps, React.HTMLAttributes<HTMLTableElement> {
   /** 是否包含边框 */
   bordered: boolean;
   columns: ColumnsProps[];
