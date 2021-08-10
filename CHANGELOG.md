@@ -1,3 +1,29 @@
+## [1.0.7](http://10.124.128.2:8888/muses/union-design/compare/v0.0.23...v1.0.7) (2021-08-10)
+
+
+### Bug Fixes
+
+* 🐛 添加onclose为tabs ([08462f4](http://10.124.128.2:8888/muses/union-design/commits/08462f4e6516b1125fd431cafa095bf0c090255f))
+* 🐛 修复tabs嵌套的bug ([d70640a](http://10.124.128.2:8888/muses/union-design/commits/d70640ab32f7df2bfc4ccaee36bf4463d4ac7908))
+* 🐛 calendar ([c3558e7](http://10.124.128.2:8888/muses/union-design/commits/c3558e71da1d648768f2ecfddb54d7d1fc88bdde))
+* 🐛 date-picker ([b432b4a](http://10.124.128.2:8888/muses/union-design/commits/b432b4a43b5bbb66fbbf8b6bf9839d7347509fde))
+* 🐛 menu ([e07285c](http://10.124.128.2:8888/muses/union-design/commits/e07285c63feac3dd24573f7e4638a29e76df34ab))
+* 🐛 message ([8df88f4](http://10.124.128.2:8888/muses/union-design/commits/8df88f442b5397dc97c25eb76592b38252fe92b6))
+* 🐛 notification ([796b486](http://10.124.128.2:8888/muses/union-design/commits/796b486d306cceee83afe16aad6e43c1124937dd))
+* 🐛 pagination ([4b951c7](http://10.124.128.2:8888/muses/union-design/commits/4b951c7f7a84a57f1676f686593be283b1b75c6b))
+* 🐛 select,隐藏checkbox，table引入分页样式' ([ad74bb1](http://10.124.128.2:8888/muses/union-design/commits/ad74bb1a2d0168de8910bd136b70aac6d83e571f))
+* 🐛 steps ([78f9745](http://10.124.128.2:8888/muses/union-design/commits/78f9745d3bb85546ff9570a406207edd2edd635d))
+* 🐛 upload ([7e1f150](http://10.124.128.2:8888/muses/union-design/commits/7e1f150b919aef4b651e56b190ff080394fe1a66))
+
+
+### Features
+
+* 🎸 去掉input中的defaultValue ([3482aba](http://10.124.128.2:8888/muses/union-design/commits/3482abae2931d08c1095d8bbdece4b147e8b1113))
+* 🎸 修改popconfig默认按钮值 ([152f64b](http://10.124.128.2:8888/muses/union-design/commits/152f64bac22e795d256f1d99c37136f3c54eccc4))
+* 🎸 form.item增加colon字段来控制冒号显式 ([1926391](http://10.124.128.2:8888/muses/union-design/commits/192639172cb13ca9508183ae22726a267a9f2b94))
+
+
+
 ## [1.0.6](http://10.124.128.2:8888/muses/union-design/compare/v1.0.5...v1.0.6) (2021-08-04)
 
 
