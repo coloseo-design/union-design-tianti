@@ -8,7 +8,7 @@
   visibility: hidden;
   margin: 0;
   padding: 0;
-  z-index: 1030;
+  z-index: @zindex-popover;
   transition: visibility .3s ease-in-out;
   &-show {
     visibility: visible;
@@ -18,8 +18,8 @@
       position: absolute;
       width: 5px;
       height: 5px;
-      background: #fff;
-      box-shadow: 0 1px 4px -1px rgba(147,147,147,0.35);
+      background: @white;
+      box-shadow: 0 1px 4px -1px  @card-shadow;
       &-top {
         bottom: -5px;
         transform: translate(-50%, -2.5px) rotate(45deg);
@@ -82,9 +82,9 @@
       }
     }
     &-inner {
-      background: #fff;
+      background: @white;
       border-radius: 2px;
-      box-shadow: 0 1px 4px 1px rgba(147,147,147,0.35);
+      box-shadow: 0 1px 4px 1px  @card-shadow;
       &-icon {
         color: @alert-warning-icon-color;
         font-size: 16px;
@@ -97,7 +97,7 @@
       &-title {
         min-height: 32px;
         padding: 5px 16px 4px;
-        border-bottom: @border-width-base @border-style-base #d8d8d8;
+        border-bottom: @border-width-base @border-style-base @anchor-border-color;
       }
       &-content {
         padding: 12px 16px;

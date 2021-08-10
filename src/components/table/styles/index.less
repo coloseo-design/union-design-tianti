@@ -36,14 +36,14 @@
 .@{table-prefix-cls}-item-fixed {
   position: absolute;
   top: 0;
-  background-color: #fff;
+  background-color: @white;
   .@{table-prefix-cls} {
     width: auto;
   }
   overflow: hidden;
   &-left {
     left: 0;
-    box-shadow: 6px 0 6px -4px rgba(0, 0, 0, 0.15);
+    box-shadow: 6px 0 6px -4px @shadow-color;
     .@{table-prefix-cls}-body {
       padding-right: 0;
       // 隐藏掉scrollbar
@@ -51,7 +51,7 @@
     }
   }
   &-right {
-    box-shadow: -6px 0 6px -4px rgba(0, 0, 0, 0.15);
+    box-shadow: -6px 0 6px -4px @shadow-color;
     right: 0;
   }
 }
@@ -92,19 +92,19 @@
   td, th {
     padding: 12px 8px;
     overflow-wrap: break-word;
-    border-bottom: 1px solid #e8e8e8;
+    border-bottom: 1px solid @table-border-color;
   }
   th {
-    color: rgba(0, 0, 0, 0.85);
+    color: @descriptions-content;
     font-weight: 500;
-    background: #fafafa;
+    background: @table-selected-row-bg;
     transition: background 0.3s ease;
   }
   td {
     transition: all 0.3s, border 0s;
   }
   tr:hover>td, .@{table-prefix-cls}-row-hover>td {
-    background: #FFF1F0;
+    background: @red-1;
   }
   each(@td-aligns, {
     &-td-@{value} {
@@ -114,9 +114,9 @@
 }
 
 .@{table-prefix-cls}-bordered {
-  border: 1px solid #e8e8e8;
+  border: 1px solid @table-border-color;
   td, th {
-    border-right: 1px solid #e8e8e8;
+    border-right: 1px solid @table-border-color;
   }
 }
 
@@ -145,8 +145,8 @@
   color: inherit;
   line-height: 13px;
   text-align: center;
-  background: #fff;
-  border: 1px solid #e8e8e8;
+  background: @white;
+  border: 1px solid @table-border-color;
   border-radius: 2px;
   outline: none;
   cursor: pointer;

@@ -31,14 +31,14 @@
   box-sizing: border-box;
   width: inherit;
   cursor: pointer;
-  background-color: @component-background;
+  background-color: @white;
   border: @border-width-base @border-style-base @border;
   padding: 3px 8px;
   height: @btn-height-base;
   border-radius: @border-radius-base;
   user-select: none;
   &:not(.@{select-prefix-cls}-disabled):hover, &:not(.@{select-prefix-cls}-disabled):focus {
-    border: @border-width-base @border-style-base @primary-color;
+    border: @border-width-base @border-style-base @input-hover-border-color;
     border-color: @input-hover-border-color;
     border-right-width: @border-width-base;
   }
@@ -65,7 +65,7 @@
 }
 
 .@{select-prefix-cls}-active {
-  border: @border-width-base @border-style-base @primary-color;
+  border: @border-width-base @border-style-base @input-hover-border-color;
   border-color: @input-hover-border-color;
   box-shadow: @input-box-shadow-base;
 }
@@ -102,26 +102,18 @@
   bottom: 0;
 }
 
-// .@{select-item-prefix-cls}-wrapper {
-//   display: inline-block;
-//   // overflow-y: scroll;
-//   height: 30px;
-//   margin-right: 14px;
-//   line-height: 1;
-//   padding: 1px 0px;
-// }
 
 .@{select-item-prefix-cls} {
   height: 22px;
   max-width: 100px;
-  border-radius: 3px; background: #E9EBF0;
+  border-radius: 3px; background: @disabled-background-color;
   display: inline-block;
   vertical-align: middle;
   border: 1px solid @disabled-border-color;
   margin-right: 8px;
   padding: 0px 8px;
   font-size: 12px;
-  color: rgba(0,0,0,0.65);
+  color: @text-color;
   line-height: 20px;
   span {
     margin-right: 4px;
@@ -136,7 +128,7 @@
   max-height: 300px;
   overflow: auto;
   z-index: 1050;
-  background: #fff;
+  background: @white;
   border-radius: @border-radius-sm;
   box-shadow: 0 3px 6px -4px rgba(0,0,0,.12), 0 6px 16px 0 rgba(0,0,0,.08), 0 9px 28px 8px rgba(0,0,0,.05);
 }

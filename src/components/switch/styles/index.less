@@ -35,7 +35,7 @@
   height: @switch-parent-height;
   border-radius: @radius;
   background-color: @border;
-  color: white;
+  color: @white;
   padding:0;
 
   .@{switch-round} {
@@ -47,7 +47,7 @@
     left: 2px;
     position: absolute;
     transition:all .2s ease-in-out;
-    background-color: white;
+    background-color: @white;
     border-radius: @radius;
   }
 }
@@ -72,7 +72,7 @@
 
 
 .@{switch-checked} {
-  background-color:@primary-color;
+  background-color: @primary-color;
   .@{switch-round}{
     left: 24px;
   }

@@ -3,7 +3,6 @@
 
 @pagination: ~"@{uni-prefix}-pagination";
 
-@pagination-hover-color: rgb(230, 231, 234);
 
 @pagination-icon: ~"@{pagination}-icon";
 @pagination-item: ~"@{pagination}-item";
@@ -14,7 +13,7 @@
 
 .@{pagination}-wrap {
     height: 24px;
-    color: #595959;
+    color: @comment-action-hover-color;
     box-sizing: border-box;
 
     & > div {
@@ -51,7 +50,7 @@
     & > .@{pagination-item-selected} {
         background-color: @border;
         border: 1px solid @border;
-        color: #fff;
+        color: @white;
     }
 
     & > .@{pagination-quick-jumper},

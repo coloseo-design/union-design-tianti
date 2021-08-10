@@ -4,7 +4,7 @@
 @step: ~"@{uni-prefix}-step";
 @steps: ~"@{uni-prefix}-steps";
 
-@step-process-color: #B30000;
+@step-process-color: @old_brand_red-6;
 
 @step-tag-line-vertical: ~"@{step}-tag-line-vertical";
 @step-tag-line-horizontal: ~"@{step}-tag-line-horizontal";
@@ -57,7 +57,7 @@
     & > .@{step-tag-line-vertical} {
         position: absolute;
         z-index: 1;
-        background-color: #D8D8D8;
+        background-color: @anchor-border-color;
     }
 
     & > .@{step-tag-line-horizontal} {
@@ -122,7 +122,7 @@
         }
 
         & > .@{step-tag-icon-process} {
-            color: #fff;
+            color: @white;
             background-color: @step-process-color;
         }
 
@@ -176,7 +176,7 @@
     & > .@{step-tag-title} {
         font-weight: bold;
         padding: 0 8px;
-        color: rgba(0, 0, 0, 0.85);
+        color: @descriptions-content;
         cursor: pointer;
     }
 
@@ -191,18 +191,18 @@
     }
 
     & > .@{step-tag-title}.@{step-tag-wait} {
-        color: rgba(0, 0, 0, 0.45);
+        color: @disabled-color;
     }
 
     & > .@{step-tag-title}.@{step-tag-finish} {
-        color: rgba(0, 0, 0, 0.65);
+        color: @text-color;
     }
 
     & .@{step-tag-description} {
         margin-top: 4px;
         font-size: 14px;
         font-weight: normal;
-        color: rgba(0, 0, 0, 0.85);
+        color: @descriptions-content;
         cursor: default;
     }
 
@@ -215,10 +215,10 @@
     }
 
     & .@{step-tag-description}.@{step-tag-wait} {
-        color: rgba(0, 0, 0, 0.45);
+        color: @disabled-color;
     }
 
     & .@{step-tag-description}.@{step-tag-finish} {
-        color: rgba(0, 0, 0, 0.65);
+        color: @text-color;
     }
 }

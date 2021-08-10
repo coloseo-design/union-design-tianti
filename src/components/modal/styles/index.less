@@ -17,7 +17,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    z-index: 1000;
+    z-index: @zindex-modal-mask;
     display: block;
     background-color: @disabled-color;
     animation: maskin 0.3s @ease-in-out;
@@ -51,7 +51,7 @@
     right: 0;
     bottom: 0;
     left: 0;
-    z-index: 1000;
+    z-index: @zindex-modal;
     overflow: auto;
     &-content {
       position: relative;
