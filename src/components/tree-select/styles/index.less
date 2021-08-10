@@ -19,7 +19,7 @@
     padding: 3px @input-padding-horizontal-base;
     border-radius: @border-radius-base;
     position: relative;
-    border: @border-width-base @border-style-base @input-border-color;
+    border: @border-width-base @border-style-base @border;
     outline: none;
     transition: all 0.3s linear;
     cursor: text;
@@ -44,7 +44,7 @@
       border-radius: 3px; background: #E9EBF0;
       display: inline-block;
       vertical-align: middle;
-      border: 1px solid #C8CAD1;
+      border: 1px solid @disabled-border-color;
       margin-right: 8px;
       padding: 0px 8px;
       &-value {
@@ -61,7 +61,7 @@
       }
       &-close {
         cursor: pointer;
-        color: #ACAFB9;
+        color: @border;
         font-size: 12px;
         display: inline-block;
         vertical-align: text-top;

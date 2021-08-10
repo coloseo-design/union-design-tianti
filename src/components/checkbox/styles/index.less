@@ -34,7 +34,7 @@
   transition: all .3s;
   // checked
   background-color: @white;
-  border: @checkbox-border-width @border-style-base @border-color-base;
+  border: @checkbox-border-width @border-style-base @border;
   transition: all .3s;
   &::after {
     // 画一个勾
@@ -131,7 +131,7 @@
       background-color: @input-disabled-bg;
       border-color: @disabled-border-color;
       &::after {
-        border-color: @border-color-base;
+        border-color: @border;
       }
     }
   }

@@ -32,7 +32,7 @@
   width: inherit;
   cursor: pointer;
   background-color: @component-background;
-  border: @border-width-base @border-style-base @btn-default-border;
+  border: @border-width-base @border-style-base @border;
   padding: 3px 8px;
   height: @btn-height-base;
   border-radius: @border-radius-base;
@@ -51,12 +51,12 @@
     top: 50%;
     transform: translateY(-50%);
     cursor: pointer;
-    color: @btn-default-border;
+    color: @border;
     &-disabled {
       color: @disabled-color;
     }
     // &-icon {
-    //   color: @btn-default-border;
+    //   color: @border;
     //   &-disabled {
     //     color: @disabled-color;
     //   }
@@ -76,7 +76,7 @@
   border-color: @disabled-border-color;
   // &:hover, &:focus {
   //   box-shadow: none;
-  //   border: @border-width-base @border-style-base @btn-default-border;
+  //   border: @border-width-base @border-style-base @border;
   // }
 }
 
@@ -117,7 +117,7 @@
   border-radius: 3px; background: #E9EBF0;
   display: inline-block;
   vertical-align: middle;
-  border: 1px solid #C8CAD1;
+  border: 1px solid @disabled-border-color;
   margin-right: 8px;
   padding: 0px 8px;
   font-size: 12px;

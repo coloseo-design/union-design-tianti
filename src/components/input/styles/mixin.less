@@ -3,7 +3,7 @@
   width: @width;
   height: @height;
   background: @input-bg;
-  border: @border-width-base @border-style-base @input-border-color;
+  border: @border-width-base @border-style-base @border;
   border-radius: @border-radius-base;
   padding: @input-padding-vertical-base @input-padding-horizontal-base;
   transition: all .3s;
@@ -47,12 +47,12 @@
   z-index: 2;
   transform: translateY(-50%);
   right: @input-padding-horizontal-base;
-  color: @input-border-color;
+  color: @border;
   &:hover {
     cursor: pointer;
     color: @gray-7;
   }
   &:active {
-    color: @input-border-color;
+    color: @border;
   }
 }

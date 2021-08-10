@@ -207,7 +207,7 @@
 }
 // default button style
 .btn-default() {
-  .button-variant-other(@btn-default-color; @btn-default-bg; @btn-default-border);
+  .button-variant-other(@btn-default-color; @btn-default-bg; @border);
   &:hover,
   &:focus,
   &:active,
@@ -223,7 +223,7 @@
 }
 // dashed button style
 .btn-dashed() {
-  .button-variant-other(@btn-default-color, @btn-default-bg, @btn-default-border);
+  .button-variant-other(@btn-default-color, @btn-default-bg, @border);
   border-style: dashed;
 }
 // danger button style
@@ -233,7 +233,7 @@
 }
 // link button style
 .btn-link() {
-  @link-color: @link-type-color;
+  @link-color: @progress-default-color;
   // .button-variant-other(@link-color, transparent, transparent);
   box-shadow: none;
   .button-color(@link-color; transparent; transparent);

@@ -3,9 +3,7 @@
 
 @pagination: ~"@{uni-prefix}-pagination";
 
-@pagination-normal-color: #ACAFB9;
 @pagination-hover-color: rgb(230, 231, 234);
-@pagination-selected-color: #ACAFB9;
 
 @pagination-icon: ~"@{pagination}-icon";
 @pagination-item: ~"@{pagination}-item";
@@ -40,7 +38,7 @@
     }
 
     & > .@{pagination-item} {
-        border: 1px solid @pagination-normal-color;
+        border: 1px solid @border;
         border-radius: @border-radius-base;
         font-size: 12px;
     }
@@ -51,8 +49,8 @@
     }
 
     & > .@{pagination-item-selected} {
-        background-color: @pagination-selected-color;
-        border: 1px solid @pagination-selected-color;
+        background-color: @border;
+        border: 1px solid @border;
         color: #fff;
     }
 
@@ -68,7 +66,7 @@
         & > input {
             box-sizing: border-box;
             width: 42px;
-            border: 1px solid @pagination-normal-color;
+            border: 1px solid @border;
             border-radius: @border-radius-base;
             margin: 0 8px;
             outline: none;

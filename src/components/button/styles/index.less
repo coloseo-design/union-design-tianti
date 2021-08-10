@@ -34,7 +34,7 @@
       border-left-color: @btn-group-border;
 
       &:disabled {
-        border-color: @btn-default-border;
+        border-color: @border;
       }
     }
 
@@ -42,7 +42,7 @@
       &:not(:last-child) {
         border-right-color: @btn-group-border;
         &[disabled] {
-          border-right-color: @btn-default-border;
+          border-right-color: @border;
         }
       }
     }
@@ -51,7 +51,7 @@
     .@{btn-prefix-cls}-group & + & {
       border-left-color: @btn-group-border;
       &[disabled] {
-        border-left-color: @btn-default-border;
+        border-left-color: @border;
       }
     }
   }

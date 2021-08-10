@@ -3,9 +3,7 @@
 
 @upload: ~"@{uni-prefix}-upload";
 
-@upload-icon-color: #ACAFB9;
 @upload-error-color: @error-color;
-@upload-progress-color: #207EEA;
 
 @upload-list-text: ~"@{upload}-list-text";
 @upload-item: ~"@{upload}-item";
@@ -66,7 +64,7 @@
                     user-select: none;
                     cursor: pointer;
                     text-align: center;
-                    color: @upload-icon-color;
+                    color: @border;
                 }
 
                 & > .@{upload-icon}.@{upload-left} {
@@ -92,7 +90,7 @@
 
                 & > div {
                     height: 2px;
-                    background-color: @upload-progress-color;
+                    background-color: @progress-default-color;
                     border-radius: 1px;
                     transition: all 0.1s;
                     z-index: 10;
@@ -108,7 +106,7 @@
         display: inline-block;
         width: 104px;
         height: 104px;
-        border: 1px solid #C8CAD1;
+        border: 1px solid @disabled-border-color;
         border-radius: @border-radius-base;
         margin: 0px 10px 10px 0px;
         font-size: 14px;
@@ -123,7 +121,7 @@
                 left: 8px;
                 right: 8px;
                 bottom: 8px;
-                background-color: rgba(0, 0, 0, 0.35);
+                background-color: @placeholder;
             }
         }
 
@@ -169,7 +167,7 @@
 
             & > .@{upload-percent} {
                 height: 4px;
-                background-color: @upload-progress-color;
+                background-color: @progress-default-color;
                 border-radius: 2px;
                 transition: all 0.1s;
                 z-index: 10;
