@@ -465,6 +465,7 @@ export default class Table extends React.Component<TableProps, TableState> {
       loading = false,
       scroll,
       bordered,
+      ...rest
     } = this.props;
     const prefix = this.getPrefixCls();
     const tableContainerCls = classnames(`${prefix}-spain-container`, {
@@ -493,7 +494,7 @@ export default class Table extends React.Component<TableProps, TableState> {
     // eslint-disable-next-line no-nested-ternary
     const maxHeight = scroll ? (typeof scroll.y === 'boolean' ? 'auto' : scroll.y) : 'auto';
     return (
-      <div className={`${prefix}-container`}>
+      <div {...rest} className={`${prefix}-container`}>
         <div className={`${prefix}-container-with-spin`}>
           {
             loading && (

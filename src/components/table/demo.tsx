@@ -1,6 +1,15 @@
+/* eslint-disable react/display-name */
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
-import { Table } from '../index';
+import {
+  Table, Tabs, Popconfirm, Tooltip,
+} from '../index';
 import './styles/index';
+import '../popconfirm/styles/index';
+import '../tabs/styles/index';
+import '../tooltip/styles/index';
+
+const { Pane } = Tabs;
 
 const dataSource = [
   {
@@ -67,6 +76,21 @@ const columnsBase = [
     dataIndex: 'address',
     key: 'address',
     render: render1,
+  },
+  {
+    title: '操作',
+    dataIndex: 'op',
+    key: 'op',
+    align: 'right',
+    render: (_, record, index) => (
+      <Popconfirm
+        defaultVisible={index === 1}
+        getPopupContainer={() => document.querySelector('.uni-tabs')}
+        title="呵呵哒卑微的我的风风光光让他给人听胃"
+      >
+        <a className={`delete-${index}`}>删除</a>
+      </Popconfirm>
+    ),
   },
 ];
 const columnsFixed = [
@@ -156,11 +180,11 @@ const spanColumns = [
     dataIndex: 'name',
     render: (text: unknown | null | undefined, row: any, index: number) => {
       if (index < 4) {
-        // return <a>{text}</a>;
+        // return <a>{text}</a >;
         return <span style={{ color: '#b30000' }}>{text}</span>;
       }
       return {
-        // children: <a>{text}</a>,
+        // children: <a>{text}</a >,
         children: <span style={{ color: '#b30000' }}>{text}</span>,
         props: {
           colSpan: 6,
@@ -274,8 +298,8 @@ const rowSelection = {
   selectedRowKeys: ['4'],
 };
 
-const TableDemo: React.FC<unknown> = () => (
-  <div style={{ padding: 32, background: '#fff' }}>
+const tableT = (
+  <>
     <div>
       <h4>基础表格</h4>
       <div>
@@ -331,6 +355,22 @@ const TableDemo: React.FC<unknown> = () => (
         />
       </div>
     </div>
+  </>
+);
+
+const TableDemo: React.FC<unknown> = () => (
+  <div style={{ padding: 32, background: '#fff' }}>
+    <Tabs type="page" activeKey="2">
+      <Pane key="1" tab="页签1">
+        {tableT}
+      </Pane>
+      <Pane key="2" tab="页签2">
+        {tableT}
+      </Pane>
+      <Pane key="3" tab="页签3">
+        {tableT}
+      </Pane>
+    </Tabs>
   </div>
 );
 
