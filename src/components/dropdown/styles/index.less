@@ -7,7 +7,7 @@
 .btn(@padding, @border-radius) {
   padding: @padding;
   text-align: center;
-  background: #FFFFFF;
+  background: @white;
   border: 1px solid transparent;
   border-radius: @border-radius;
   display: inline-block;
@@ -19,29 +19,6 @@
   height: 32px;
   line-height: 1.499;
 }
-
-// menu style
-
-// .@{dropMenu}-container {
-//   & :first-child {
-//     box-shadow: none !important;
-//   }
-//   .light {
-//     background-color: #fff !important;
-//     .item, .sub-menu {
-//       &:hover {
-//         background-color: @item-hover-bg !important;
-//         color: rgba(0,0,0,0.85) !important;
-//       }
-//     }
-//   }
-// }
-// .@{dropMenu}-popup {
-//   .vertical {
-//     box-shadow: 0 1px 4px 1px rgba(147,147,147,0.35) !important;
-//     border-radius: 3px !important;
-//   }
-// }
 
 // 所有的下拉style
 .@{dropDown} {
@@ -60,8 +37,8 @@
   }
   &-containter {
     padding: 3px 0px;
-    background-color: #fff;
-    box-shadow: 0 1px 4px 1px rgba(147,147,147,0.35);
+    background-color: @white;
+    box-shadow: 0 1px 4px 1px @card-shadow;
     border-radius: 3px;
     min-width: 60px;
     transition: all 0.3s ease;
@@ -70,8 +47,8 @@
     position: absolute;
     width: 5px;
     height: 5px;
-    background: #fff;
-    box-shadow: 0 1px 4px -1px rgba(147,147,147,0.35);
+    background: @white;
+    box-shadow: 0 1px 4px -1px @card-shadow;
     &-bottomCenter {
       left: 50%;
       top: 0;
@@ -115,12 +92,11 @@
     .btn(0px 12px, @border-radius-base 0 0 @border-radius-base,);
     border-right: none;
     font-weight: @btn-font-weight;
-    // border-color: @btn-default-border;
-    border-color: #ACAFB9;
+    border-color: @border;
     &:hover {
-      color: ~`colorPalette('@{btn-primary-bg}', 5) `;
-      border-color: ~`colorPalette('@{btn-primary-bg}', 5)`;
-      border-right: 1px solid ~`colorPalette('@{btn-primary-bg}', 5)`;
+      color: @old_brand_red-5;
+      border-color: @old_brand_red-5;
+      border-right: 1px solid @old_brand_red-5;
       & + button {
         border-left: none;
       }
@@ -136,64 +112,64 @@
       font-size: @btn-font-size-sm;
     }
     &-type-dashed {
-      border: 1px dashed #ACAFB9;
+      border: 1px dashed @border;
       border-right: none;
       &:hover {
-        border-right: 1px dashed ~`colorPalette('@{btn-primary-bg}', 5)`;
+        border-right: 1px dashed @old_brand_red-5;
       }
     }
     &-type-primary {
-      color: @btn-primary-color;
-      background-color: @btn-primary-bg;
-      border-color: @btn-primary-bg;
+      color: @white;
+      background-color: @old_brand_red-6;
+      border-color: @old_brand_red-6;
       &:hover {
-        color: @btn-primary-color;
-        border-color: @btn-primary-bg;
-        border-right-color: @btn-primary-color;
+        color: @white;
+        border-color: @old_brand_red-6;
+        border-right-color: @white;
       }
     }
     &-type-danger {
-      color: @btn-danger-color;
-      background-color: @btn-danger-bg;
-      border-color: @btn-danger-border;
+      color: @white;
+      background-color: @red-5;
+      border-color: @red-5;
       &:hover, &:active {
-        color: @btn-danger-color;
-        background-color: ~`colorPalette('@{btn-danger-bg}', 5) `;
-        border-color: ~`colorPalette('@{btn-danger-bg}', 5) `;
-        border-right-color: @btn-danger-color;
+        color: @white;
+        background-color: @red-4;
+        border-color: @red-4;
+        border-right-color: @white;
       }
     }
     &-type-link {
-      color: #207EEA;
+      color: @link-type-color;
       background: transparent;
       border-color: transparent;
       box-shadow: none;
       &:hover {
-        color: #207EEA;
+        color: @link-type-color;
         background: transparent;
         border-color: transparent;
         box-shadow: none;
       }
     }
     &-disabled {
-      color: @btn-disable-color;
-      background-color: @btn-disable-bg;
-      border-color: @btn-disable-border;
+      color: @disabled-color;
+      background-color:@disabled-background-color;
+      border-color: @disabled-border-color;
       cursor: not-allowed;
       &:hover, &:active {
-        color: @btn-disable-color;
-        background-color: @btn-disable-bg;
-        border-color: @btn-disable-border;
+        color: @disabled-color;
+        background-color: @disabled-background-color;
+        border-color: @disabled-border-color;
       }
     }
   }
   &-btnIcon {
     .btn(0px 8px, 0 @border-radius-base @border-radius-base 0);
     font-weight: @btn-font-weight;
-    border-color: #ACAFB9;
+    border-color: @border;
     &:hover {
-      color: ~`colorPalette('@{btn-primary-bg}', 5) `;
-      border-color: ~`colorPalette('@{btn-primary-bg}', 5)`;
+      color: @old_brand_red-5;
+      border-color: @old_brand_red-5;
     }
     &-size-large {
       height: @btn-height-lg;
@@ -206,51 +182,51 @@
       font-size: @btn-font-size-sm;
     }
     &-type-dashed {
-      border: 1px dashed #ACAFB9;
+      border: 1px dashed @border;
     }
     &-type-primary {
-      color: @btn-primary-color;
-      background-color: @btn-primary-bg;
-      border-color: @btn-primary-bg;
-      border-left-color: @btn-primary-color;
+      color: @white;
+      background-color: @old_brand_red-6;
+      border-color: @old_brand_red-6;
+      border-left-color: @white;
       &:hover {
-        color: @btn-primary-color;
-        border-left-color: @btn-primary-color;
+        color: @white;
+        border-left-color: @white;
       }
     }
     &-type-danger {
-      color: @btn-danger-color;
-      background-color: @btn-danger-bg;
-      border-color: @btn-danger-border;
-      border-left-color:  @btn-danger-color;
+      color: @white;
+      background-color: @red-5;
+      border-color: @red-5;
+      border-left-color:  @white;
       &:hover, &:active {
-        color: @btn-danger-color;
-        background-color: ~`colorPalette('@{btn-danger-bg}', 5) `;
-        border-color: ~`colorPalette('@{btn-danger-bg}', 5) `;
-        border-left-color:  @btn-danger-color;
+        color: @white;
+        background-color: @red-4;
+        border-color: @red-4;
+        border-left-color:  @white;
       }
     }
     &-type-link {
-      color: #207EEA;
+      color: @link-type-color;
       background: transparent;
       border-color: transparent;
       box-shadow: none;
       &:hover {
-        color: #207EEA;
+        color: @link-type-color;
         background: transparent;
         border-color: transparent;
         box-shadow: none;
       }
     }
     &-disabled {
-      color: @btn-disable-color;
-      background-color: @btn-disable-bg;
-      border-color: @btn-disable-border;
+      color: @disabled-color;
+      background-color: @disabled-background-color;
+      border-color: @disabled-border-color;
       cursor: not-allowed;
       &:hover, &:active {
-        color: @btn-disable-color;
-        background-color: @btn-disable-bg;
-        border-color: @btn-disable-border;
+        color: @disabled-color;
+        background-color: @disabled-background-color;
+        border-color: @disabled-border-color;
       }
     }
   }
@@ -271,15 +247,15 @@
 .abcdefg() {
   .@{menu-light},
   .@{menu-dark} {
-      color: rgba(0, 0, 0, 0.85);
-      background-color: #fff;
+      color: @descriptions-content;
+      background-color: @white;
   }
 
   .@{menu-vertical} {
     box-shadow: none;
     padding: 3px 0 3px 0;
     overflow: auto;
-    background-color: #fff;
+    background-color: @white;
 
     div.@{menu-sub-menu},
     div.@{menu-item},
@@ -296,7 +272,7 @@
 
       .@{menu-title} {
         line-height: 28px;
-        color: rgba(0, 0, 0, 0.85);
+        color: @descriptions-content;
         letter-spacing: 0.46px;
         overflow: hidden;
         white-space: nowrap;
@@ -336,6 +312,6 @@
 .@{dropDown}-menu.@{menu}.@{menu}-popup {
   .abcdefg();
   .@{menu-vertical} {
-    box-shadow: 2px 0 4px 0 rgba(147,147,147,0.35);
+    box-shadow: 2px 0 4px 0 @card-shadow;
   }
 }

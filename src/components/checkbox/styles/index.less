@@ -28,12 +28,12 @@
   display: block;
   width: @checkbox-size;
   height: @checkbox-size;
-  background-color: @checkbox-check-color;
+  background-color: @white;
   border-radius: 2px;
   border-collapse: separate;
   transition: all .3s;
   // checked
-  background-color: @checkbox-check-color;
+  background-color: @white;
   border: @checkbox-border-width @border-style-base @border-color-base;
   transition: all .3s;
   &::after {
@@ -44,7 +44,7 @@
     height: @check-height;
     position: absolute;
     content: '';
-    border: 2px solid @checkbox-check-color;
+    border: 2px solid @white;
     top: 50%;
     left: 22%;
     transform: rotate(45deg) scale(0) translate(-50%, -50%);
@@ -78,8 +78,8 @@
 // 处理checked
 .@{checkbox-prefix-cls}-checked {
   .@{checkbox-inner-prefix-cls} {
-    background-color: @checkbox-color;
-    border-color: @checkbox-color;
+    background-color: @primary-color;
+    border-color: @primary-color;
     &::after {
       opacity: 1;
       transform: rotate(45deg) scale(1) translate(-50%, -50%);
@@ -89,15 +89,15 @@
 // 设置为未决状态的显示
 .@{checkbox-prefix-cls}-indeterminate {
   .@{checkbox-inner-prefix-cls} {
-    background-color: #fff;
-    // background-color: @checkbox-color;
-    border-color: @checkbox-color;
+    background-color: @white;
+    // background-color: @primary-color;
+    border-color: @primary-color;
     &::after {
       top: 50%;
       left: 50%;
       width: 8px;
       height: 8px;
-      background-color: @checkbox-color;
+      background-color: @primary-color;
       border: 0;
       opacity: 1;
       transform: translate(-50%,-50%) scale(1);

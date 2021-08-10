@@ -40,20 +40,20 @@
 }
 
 .@{menu-dark} {
-  color: #C8CAD1;
-  background-color: #2E3343;
+  color: @disabled-border-color;
+  background-color: @layout-trigger-background;
 
   &:hover{
-      color: #fff;
+      color: @white;
   }
 }
 
 .@{menu-light} {
-  color: rgba(0, 0, 0, 0.85);
-  background-color: #E9EBF0;
+  color: @descriptions-content;
+  background-color: @disabled-background-color;
 
   &:hover{
-      color: #B30000;
+      color: @old_brand_red-6;
   }
 }
 
@@ -64,8 +64,8 @@
 }
 
 .@{menu-horizontal} {
-    background-image: linear-gradient(90deg, #B30000 0%, #E50027 64%, #B30000 100%);
-    background-color: #E50027;
+    background-image: linear-gradient(90deg, @old_brand_red-6 0%, @new-primary-red 64%, @old_brand_red-6 100%);
+    background-color: @new-primary-red;
     overflow-y: auto;
     white-space: nowrap;
 
@@ -76,11 +76,11 @@
 
     .@{menu-light},
     .@{menu-dark} {
-        color: #fff;
+        color: @white;
         background-color: transparent;
 
         &:hover{
-            background-color: #8C0005;
+            background-color: @old_brand_red-7;
         }
     }
 
@@ -93,7 +93,7 @@
         .@{menu-title} {
             line-height: 40px;
             font-size: 16px;
-            color: #FFFFFF;
+            color: @white;
             letter-spacing: 0.46px;
             text-align: center;
         }
@@ -104,8 +104,8 @@
     div.@{menu-item-selected}.@{menu-light},
     div.@{menu-sub-menu-selected}.@{menu-dark},
     div.@{menu-sub-menu-selected}.@{menu-light} {
-        color: #fff;
-        background-color: #8C0005;
+        color: @white;
+        background-color: @old_brand_red-7;
 
         &::after {
             width: 0;
@@ -137,12 +137,12 @@
 
   .@{menu-left-icon} {
     float: left;
-    color: #444A5E;
+    color: @layout-trigger-color;
   }
 
   .@{menu-right-icon} {
     float: right;
-    color: #444A5E;
+    color: @layout-trigger-color;
   }
 
   .@{menu-title} {
@@ -154,7 +154,7 @@
 }
 
 .@{menu-item-selected} {
-  background-color: #fff;
+  background-color: @white;
 
   &::after{
     content: "";
@@ -163,23 +163,23 @@
     top: 0;
     bottom: 0;
     width: 4px;
-    background-color: #B30000;
+    background-color: @old_brand_red-6;
   }
 }
 
 .@{menu-item-selected}.@{menu-dark} {
-  color: rgba(0, 0, 0, 0.85);
+  color: @descriptions-content;
   &:hover {
-      color: #000;
+      color: @black;
   }
 }
 
 .@{menu-sub-menu-selected}.@{menu-light} {
-  color: #B30000;
+  color: @old_brand_red-6;
 }
 
 .@{menu-sub-menu-selected}.@{menu-dark} {
-  color: #fff;
+  color: @white;
 }
 
 .@{menu-item-group} {
@@ -192,11 +192,11 @@
 }
 
 .@{menu-item-group}.@{menu-light} {
-  color: rgba(0, 0, 0, 0.45);
+  color: @disabled-color;
 }
 
 .@{menu-item-group}.@{menu-dark} {
-  color: #C8CAD1;
+  color: @disabled-border-color;
 }
 
 .@{menu-children-container} {
@@ -207,7 +207,7 @@
     position: relative;
     width: 100%;
     transition: width 0.2s;
-    box-shadow: 2px 0 4px 0 rgba(147,147,147,0.35);
+    box-shadow: 2px 0 4px 0 @card-shadow;
 
     & > div:nth-of-type(1) {
       width: 100%;
@@ -224,7 +224,7 @@
       line-height: 80px;
       transform: translateY(-50%) perspective(100px) rotateY(45deg);
       transform-origin: 0 50%;
-      box-shadow: 2px 0 4px 0 rgba(147,147,147,0.35) inset;
+      box-shadow: 2px 0 4px 0 @card-shadow inset;
       border-radius: 0 10px 10px 0;
       font-size: 24px;
       cursor: pointer;
@@ -237,7 +237,7 @@
   & > div:first-of-type {
     height: 100%;
     width: 100%;
-    box-shadow: 2px 0 4px 0 rgba(147,147,147,0.35);
+    box-shadow: 2px 0 4px 0 @card-shadow;
     overflow: auto;
   }
 }

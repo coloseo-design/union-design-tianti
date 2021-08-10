@@ -30,7 +30,7 @@
     overflow: auto;
     outline: 0;
     z-index: 1080;
-    background: rgba(0, 0, 0, 0.5);
+    background: @text-color;
     display: none;
     .@{input-prefix-cls}-preview {
       text-align: center;
@@ -63,7 +63,7 @@
               }
             }
             &-operation-disabled {
-              color: hsla(0,0%,100%,.25);
+              color: @image-operation-bg;
               cursor: not-allowed;
               // pointer-events: none;
             }

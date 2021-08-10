@@ -4,7 +4,7 @@
 .@{form-item-cls}-explain {
   clear: both;
   min-height: 24px;
-  color: rgba(0,0,0,.45);
+  color:  @disabled-color;
   font-size: 14px;
   line-height: 1.5715;
   transition: color .3s cubic-bezier(.215,.61,.355,1);
@@ -20,7 +20,7 @@
       content: '*';
       display: inline-block;
       margin-right: 4px;
-      color: #f5222d;
+      color: @red-6;
       font-size: 14px;
     }
   }
@@ -51,17 +51,17 @@
 // 处理错误输入框样式
 .has-error {
   .@{form-item-cls}-explain {
-    color: #f5222d;
+    color: @red-6;
   }
   // Input, Select, Cascader, InputNumber, AutoComplete, DatePicker
   .uni-input,  .uni-select, .uni-cascader-picker, .uni-number, .uni-auto-complete-input, .uni-datepicker-picker > .input-single{
-    background-color: #fff;
-    border-color: #ff4d4f;
+    background-color: @white;
+    border-color: @red-5;
   }
   .uni-input:focus, .uni-input:not([disabled]):not(.uni-input-group):hover {
     @input-focus-border-box-shadow-color: rgba(red(@red-6), green(@red-6), blue(@red-6), 0.2);
-    background-color: #fff;
-    border-color: #ff4d4f;
+    background-color: @white;
+    border-color: @red-5;
     box-shadow: 0 0 0 2px @input-focus-border-box-shadow-color;
   }
 }

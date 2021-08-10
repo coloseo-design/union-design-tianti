@@ -5,7 +5,7 @@
 
 .@{divider}{
 
-  border-top: @border-width-base solid rgba(0,0,0,.06);
+  border-top: @border-width-base solid @divider-border-color;
   display: flex;
   clear: both;
   width: 100%;
@@ -26,7 +26,7 @@
     white-space: nowrap;
     text-align: center;
     border-top: 0;
-    border-top-color: rgba(0,0,0,.06);
+    border-top-color: @divider-border-color;
 
     &::before,
     &::after {
@@ -68,7 +68,7 @@
     border-top: 0;
     &::before,
     &::after {
-      border-color: rgba(0,0,0,.06);
+      border-color: @divider-border-color;
       border-style: dashed;
       border-width: @border-width-base 0 0;
     }
@@ -76,7 +76,7 @@
 
   &-dashed {
     background: none;
-    border-color: rgba(0,0,0,.06);
+    border-color: @divider-border-color;
     border-style: dashed;
     border-width: @border-width-base 0 0;
   }

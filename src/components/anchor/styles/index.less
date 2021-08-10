@@ -8,7 +8,7 @@
   position: fixed;
   top: 100px;
   right: 0px;
-  border-left: 1px solid #D8D8D8;
+  border-left: 1px solid @anchor-border-color;
   &-wrapper {
     position: relative;
     .@{anchor-prefix-cls}-ball-gray {
@@ -16,7 +16,7 @@
       left: -5px;
       width: 9px;
       height: 9px;
-      background: #ACAFB9;
+      background: @border;
       border-radius: 50%;
     }
     .@{anchor-prefix-cls}-ball-red {
@@ -24,20 +24,20 @@
       left: -5px;
       width: 9px;
       height: 9px;
-      background: #B30000;
+      background: @primary-color;
       border-radius: 50%;
       transition: .3s;
     }
   }
   &-link {
     padding: 12px 10px;
-    color: rgba(0,0,0,0.85);
+    color: @descriptions-content;
     cursor: pointer;
     overflow:hidden;
     text-overflow:ellipsis;
     white-space:nowrap;
     &:hover {
-      color: #B30000;
+      color: @primary-color;
     }
   }
 }

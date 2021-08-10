@@ -8,13 +8,13 @@
 
   display: inline-block;
   border-radius: 3px;
-  box-shadow: 0 2px 4px 0 rgba(147,147,147,0.35);
+  box-shadow: 0 2px 4px 0 @card-shadow;
   overflow: hidden;
 
 
   &-title {
     border-radius:  3px  3px 0 0 ;
-    background-color: #E9EBF0;
+    background-color: @disabled-background-color;
     min-width: 100px;
     min-height: 36px;
     padding: 8px 16px;
@@ -24,7 +24,7 @@
 
   &-content {
     border-radius:  0 0 3px  3px;
-    background-color: #F9FAFB ;
+    background-color: @content-bg;
     min-width: 100px;
     min-height: 48px;
     padding: 8px 16px;

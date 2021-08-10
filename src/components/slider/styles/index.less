@@ -19,7 +19,7 @@
   &:hover {
     cursor: pointer;
     .@{slider-rail-cls} {
-      .slider-rail(darken(@slider-rail-background-color, 5%));
+      .slider-rail(darken(@disabled-background-color, 5%));
     }
     .@{slider-bar-cls} {
       .slider-rail(darken(@slider-track-background-color, 5%));
@@ -29,7 +29,7 @@
     }
   }
   &-rail {
-    .slider-rail(@slider-rail-background-color);
+    .slider-rail(@disabled-background-color);
     width: 100%;
   }
   &-bar {

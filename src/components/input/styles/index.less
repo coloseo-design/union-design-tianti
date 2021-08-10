@@ -64,7 +64,7 @@
     vertical-align: bottom;
     color: rgba(0,0,0,0.45);
     .uniicon {
-      color: #ACAFB9;
+      color: @border;
       font-size: 16px;
     }
   }
@@ -106,12 +106,12 @@
     border-radius: 0 @border-radius-base @border-radius-base 0;
     &:hover,
     &:hover {
-      background: @input-search-button-hover-base;
+      background: @old_brand_red-5;
     }
 
     &:active,
     &.active {
-      background: @input-search-button-active-base;
+      background: @old_brand_red-7;
     }
   }
   .@{input-prefix-cls}:not(:last-child) {

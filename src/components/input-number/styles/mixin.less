@@ -21,7 +21,7 @@
   }
 
   &-disable {
-    background-color: @disabled-bg;
+    background-color: @disabled-background-color;
     border-color: @disabled-border-color;
     color: @disabled-color;
     cursor: not-allowed;
@@ -72,7 +72,7 @@
       user-select: none;
       transition: all 0.1s linear;
       width: 21px;
-      color: #ACAFB9;
+      color: @border;
       &:hover {
         height: 65%;
         & > span {

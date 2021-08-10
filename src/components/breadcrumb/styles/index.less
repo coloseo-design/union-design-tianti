@@ -4,10 +4,10 @@
 @breadcrumb-prefix-cls: ~'@{uni-prefix}-breadcrumb';
 
 .@{breadcrumb-prefix-cls} {
-  color: rgba(0,0,0,.45);
+  color: @disabled-color;
   &-item {
     a {
-      color: rgba(0,0,0,.45);
+      color: @disabled-color;
       transition: color .3s;
     }
     a:hover {
@@ -20,7 +20,7 @@
 
     &:last-child {
       .@{breadcrumb-prefix-cls}-item-link {
-        color: rgba(0,0,0,.85);
+        color: @descriptions-content;
       }
       .@{breadcrumb-prefix-cls}-item-separator {
         display: none;

@@ -31,6 +31,17 @@
 // input不可以编辑背景色
 @disabled-background-color: #E9EBF0;
 
+@content-bg: #F9FAFB;
+
+@divider-border-color: rgba(0,0,0,.06);
+
+@link-type-color: #207EEA;
+
+@image-operation-bg: hsla(0,0%,100%,.25);
+
+@new-primary-red: #E50027;
+
+
 // Color used by default to control hover and active backgrounds and for
 // alert info backgrounds.
 @primary-1: color(~`colorPalette('@{primary-color}', 1) `); // replace tint(@primary-color, 90%)
@@ -147,8 +158,6 @@
 
 // Disabled states
 @disabled-color: fade(#000, 45%);
-// @disabled-bg: @background-color-base;
-@disabled-bg: #E9EBF0;
 @disabled-border-color: #C8CAD1;
 @disabled-color-dark: fade(#fff, 35%);
 
@@ -172,7 +181,7 @@
 @btn-primary-shadow: 0 2px 0 rgba(0, 0, 0, 0.045);
 @btn-text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.12);
 
-@btn-primary-color: #fff;
+@btn-primary-color: @white;
 @btn-primary-bg: @primary-color;
 
 @btn-default-color: @text-color;
@@ -188,15 +197,15 @@
 @btn-ghost-disabled-bg: transparent;
 @btn-ghost-disabled-border: rgba(255, 255, 255, 0.5);
 
-@btn-danger-color: #fff;
+@btn-danger-color: @white;
 // @btn-danger-bg: color(~`colorPalette('@{error-color}', 5) `);
 // @btn-danger-border: color(~`colorPalette('@{error-color}', 5) `);
 
-@btn-danger-bg: #FF4D4F;
-@btn-danger-border: #FF4D4F;
+@btn-danger-bg: @red-5;
+@btn-danger-border: @red-5;
 
 @btn-disable-color: @disabled-color;
-@btn-disable-bg: @disabled-bg;
+@btn-disable-bg: @disabled-background-color;
 @btn-disable-border: @disabled-border-color;
 
 @btn-padding-base: 0 @padding-md - 1px;
@@ -221,25 +230,17 @@
 
 // Checkbox
 @checkbox-size: 16px;
-@checkbox-color: @primary-color;
-@checkbox-check-color: #fff;
 @checkbox-border-width: @border-width-base;
 
 // Descriptions
-@descriptions-bg: #fafafa;
-@descriptions-label: rgba(0,0,0,0.65);
 @descriptions-content: rgba(0,0,0,0.85);
 @descriptions-label-width: 112px;
 @descriptions-content-width: 213px;
 @descriptions-border-color: #D0D5DF;
 @descriptions-border-label-bg: #F4F5F7;
-@descriptions-border-content-bg: #fff;
 @descriptions-border-padding: 13px 16px;
 @descriptions-border-radius: 3px;
 
-// Dropdown
-@dropdown-selected-color: @primary-color;
-@dropdown-menu-submenu-disabled-bg: @component-background;
 
 // Empty
 @empty-font-size: @font-size-base;
@@ -300,7 +301,7 @@
 @layout-header-padding: 0 50px;
 @layout-footer-padding: 24px 50px;
 @layout-sider-background: @layout-header-background;
-@layout-sider-box-shadow: 2px 0 4px 0 rgba(147,147,147,0.35);
+@layout-sider-box-shadow: 2px 0 4px 0 @card-shadow;
 @layout-trigger-height: 80px;
 @layout-trigger-width: 16px;
 @layout-trigger-border-radius: 0 20px 20px 0;
@@ -309,8 +310,7 @@
 @layout-zero-trigger-width: 36px;
 @layout-zero-trigger-height: 42px;
 // Layout light theme
-@layout-sider-background-light: #E9EBF0;
-@layout-trigger-background-light: #E9EBF0;
+
 @layout-trigger-color-light: @text-color;
 
 // z-index list, order by `z-index`
@@ -382,12 +382,10 @@
 // @input-hover-border-color: @blue-5;
 @input-hover-border-color: #4AA1F7;
 @input-focus-border-box-shadow-color: rgba(red(@input-hover-border-color), green(@input-hover-border-color), blue(@input-hover-border-color), 0.2);
-@input-disabled-bg: @disabled-bg;
+@input-disabled-bg: @disabled-background-color;
 @input-outline-offset: 0 0;
 @input-width-base: 263px;
 @input-box-shadow-base: 0 0 0 2px @input-focus-border-box-shadow-color;
-@input-search-button-hover-base: #bf241f;
-@input-search-button-active-base: #8c0005;
 
 
 // Select
@@ -461,8 +459,6 @@
 // Progress
 // --
 @progress-default-color: #207EEA;
-@progress-remaining-color: #E9EBF0;
-@progress-text-color: rgba(0,0,0,.35);
 @progress-radius: 100px;
 @progress-status-exception-color: #FF4D4F;
 @progress-status-success-color: #44BF30;
@@ -524,7 +520,6 @@
 
 // Tag
 // --
-@tag-default-bg: #E9EBF0;
 @tag-default-color: @text-color;
 @tag-font-size: @font-size-sm;
 @tag-line-height: 20px;
@@ -552,8 +547,7 @@
 
 // Rate
 // ---
-@rate-star-color: #FAAD14;;
-@rate-star-bg: #E9EBF0;
+@rate-star-color: #FAAD14;
 @rate-star-font-size: 20px;
 
 // Card
@@ -566,7 +560,7 @@
 @card-actions-background: @background-color-light;
 @card-skeleton-bg: #cfd8dc;
 @card-background: @component-background;
-@card-shadow: 0 2px 8px rgba(0, 0, 0, 0.09);
+@card-shadow: rgba(147,147,147,0.35);
 @card-radius: @border-radius-sm;
 
 // Comment
@@ -582,7 +576,6 @@
 
 // Tabs
 // ---
-@tabs-card-head-background: #E9EBF0;
 @tabs-card-height: 36px;
 @tabs-card-active-color: @primary-color;
 @tabs-card-horizontal-padding: (
@@ -665,7 +658,6 @@
 // Slider
 // ---
 @slider-margin: 14px 6px 10px;
-@slider-rail-background-color: #E9EBF0; // reseted
 @slider-rail-background-color-hover: #e1e1e1;
 @slider-track-background-color: #ACAFB9; // reseted
 @slider-track-background-color-hover: @primary-4;
@@ -706,7 +698,6 @@
 // Transfer
 // ---
 @transfer-header-height: 40px;
-@transfer-disabled-bg: @disabled-bg;
 @transfer-list-height: 200px;
 
 // Message
@@ -748,10 +739,8 @@
 // Statistic
 // ---
 @statistic-title-font-size: 16px;
-@statistic-title-color: rgba(0,0,0,0.65);
 @statistic-title-font-weight: 400;
 @statistic-content-font-size: 36px;
-@statistic-content-color: rgba(0,0,0,0.85);
 @statistic-content-font-weight: 500;
 @statistic-unit-font-size: 16px;
 @statistic-font-family: @font-family;
