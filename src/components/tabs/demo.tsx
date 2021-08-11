@@ -62,7 +62,7 @@ const TabsDemo = () => {
       <div style={{ margin: 20 }}>
         <p>type=&lsquo;page&rsquo;示例</p>
         <Tabs
-          defaultActiveKey="3"
+          defaultActiveKey="1"
           type="page"
           onClose={(key) => {
             setTimeout(() => {

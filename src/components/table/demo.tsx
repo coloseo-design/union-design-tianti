@@ -85,7 +85,6 @@ const columnsBase = [
     render: (_, record, index) => (
       <Popconfirm
         defaultVisible={index === 1}
-        getPopupContainer={() => document.querySelector('.uni-tabs')}
         title="呵呵哒卑微的我的风风光光让他给人听胃"
       >
         <a className={`delete-${index}`}>删除</a>
@@ -298,7 +297,30 @@ const rowSelection = {
   selectedRowKeys: ['4'],
 };
 
-const tableT = (
+const tableT2 = (
+  <div>
+    <h4>固定头表格</h4>
+    <div>
+      <Table
+        dataSource={dataSource}
+        columns={columnsFixed}
+        rowKey="key"
+        bordered
+        scroll={{ y: 200, x: 1500 }}
+      />
+    </div>
+  </div>
+);
+
+const tableT3 = (
+  <div>
+    <h4>合并行列</h4>
+    <div>
+      <Table columns={spanColumns} dataSource={data} rowKey="key" bordered />
+    </div>
+  </div>
+);
+const tableT1 = (
   <>
     <div>
       <h4>基础表格</h4>
@@ -312,7 +334,7 @@ const tableT = (
         />
       </div>
     </div>
-    <div>
+    {/* <div>
       <h4>固定头表格</h4>
       <div>
         <Table
@@ -354,7 +376,7 @@ const tableT = (
           scroll={{ y: 200, x: 1500 }}
         />
       </div>
-    </div>
+    </div> */}
   </>
 );
 
@@ -362,13 +384,13 @@ const TableDemo: React.FC<unknown> = () => (
   <div style={{ padding: 32, background: '#fff' }}>
     <Tabs type="page" activeKey="2">
       <Pane key="1" tab="页签1">
-        {tableT}
+        {tableT1}
       </Pane>
       <Pane key="2" tab="页签2">
-        {tableT}
+        {tableT2}
       </Pane>
       <Pane key="3" tab="页签3">
-        {tableT}
+        {tableT3}
       </Pane>
     </Tabs>
   </div>

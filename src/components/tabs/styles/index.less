@@ -12,24 +12,24 @@
     display: flex;
     justify-content: flex-start;
     position: relative;
-    height: 36px;
+    height: @tabs-card-height;
   }
 
   &-line {
     &>.@{tab-prefix-cls}-nav {
       &>.@{tab-prefix-cls}-tab {
         display: inline-block;
-        height: 32px;
+        height: @tabs-line-height;
         padding: 5px 20px;
         cursor: pointer;
         &-active {
           .@{tab-prefix-cls}-title {
-            color: @primary-color;
+            color: @tabs-line-active-color;
           }
         }
         &:hover {
           .@{tab-prefix-cls}-title {
-            color: @primary-color;
+            color: @tabs-line-active-color;
           }
         }
       }
@@ -61,6 +61,14 @@
           border-right: 1px solid @tabs-border-color2;
           border-left: 1px solid @tabs-border-color2;
           background-color: @tabs-border-color1;
+          .@{tab-prefix-cls}-title {
+            color: @tabs-line-active-color;
+          }
+        }
+        &:hover {
+          .@{tab-prefix-cls}-title {
+            color: @tabs-line-active-color;
+          }
         }
       }
       &>.@{tab-prefix-cls}-bar {
@@ -120,11 +128,16 @@
     will-change: margin-left;
     transition: margin-left .3s ease-in-out;
   }
+  .@{pane-prefix-cls} {
+    width: 100%;
+    flex-shrink: 0;
+    // height: 0;
+    // &.selected {
+    //   height: auto;
+    // }
+  }
 }
 
-.@{pane-prefix-cls} {
-  width: 100%;
-  flex-shrink: 0;
-}
+
 
 

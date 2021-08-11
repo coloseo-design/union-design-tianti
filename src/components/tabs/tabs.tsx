@@ -54,13 +54,16 @@ const Tabs: React.FC<TabsProps> & { Pane: typeof Pane} = (props: TabsProps) => {
   }, [activeKey]);
 
   useEffect(() => {
-    const tabNodeList = navRef.current?.children || [];
-    for (let i = 0; i < tabNodeList.length; i += 1) {
-      const hasTabActive = (tabNodeList[i].className.split(' ')).indexOf(`${prefixCls}-tab-active`);
-      if (hasTabActive !== -1) {
-        const { offsetLeft, offsetWidth } = tabNodeList[i] as HTMLDivElement;
-        setOffsetBar([offsetLeft, offsetWidth]);
-        return;
+    // 只有type为line的情况下才会有bar
+    if (type === 'line') {
+      const tabNodeList = navRef.current?.children || [];
+      for (let i = 0; i < tabNodeList.length; i += 1) {
+        const hasTabActive = (tabNodeList[i].className.split(' ')).indexOf(`${prefixCls}-tab-active`);
+        if (hasTabActive !== -1) {
+          const { offsetLeft, offsetWidth } = tabNodeList[i] as HTMLDivElement;
+          setOffsetBar([offsetLeft, offsetWidth]);
+          return;
+        }
       }
     }
   }, [prefixCls]);
@@ -128,15 +131,15 @@ const Tabs: React.FC<TabsProps> & { Pane: typeof Pane} = (props: TabsProps) => {
     marginLeft: `-${index * 100}%`,
   };
 
-  console.log('children', children);
+  console.log('children', children, checkedKey);
   return (
     <div className={tabCls}>
       <div ref={navRef} className={`${prefixCls}-nav`} {...others}>
         {
-          titles.filter((item) => closed.indexOf(item.key) === -1).map((title) => (
+          titles.filter((item) => closed.indexOf(item.key) === -1).map((title, i) => (
             <div
               key={title.key}
-              className={classNames({ [`${prefixCls}-tab`]: true, [`${prefixCls}-tab-active`]: title.key === checkedKey })}
+              className={classNames({ [`${prefixCls}-tab`]: true, [`${prefixCls}-tab-active`]: (title.key === checkedKey || (!checkedKey && i === 0)) })}
               onClick={(e) => changeKey(title.key, e)}
             >
               {tabNode(title)}
@@ -145,18 +148,20 @@ const Tabs: React.FC<TabsProps> & { Pane: typeof Pane} = (props: TabsProps) => {
         }
         <div className={`${prefixCls}-bar`} style={{ left: offsetBar[0], width: offsetBar[1] }} />
       </div>
-      <div className={contentClassName} style={tabContentStyle}>
+      <div className={contentClassName} style={type === 'page' ? {} : tabContentStyle}>
         {/* {children} */}
         {
-          React.Children.map(children, (item) => {
+          React.Children.map(children, (item, i) => {
             if (item && typeof item === 'object' && 'props' in item) {
               const key = item.key || uuid();
               if (closed.indexOf(key) >= 0) {
                 return null;
               }
-              return item;
+              if (type === 'page' && i !== index) {
+                return null;
+              }
             }
-            return null;
+            return item;
           }) || []
         }
       </div>

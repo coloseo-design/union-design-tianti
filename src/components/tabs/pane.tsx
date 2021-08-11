@@ -10,12 +10,12 @@ export interface TabPaneBase extends React.HTMLAttributes<HTMLDivElement> {
 
 export default class Pane extends React.Component<TabPaneBase> {
   renderPane = ({ getPrefixCls }: ConfigConsumerProps) => {
-    const { children } = this.props;
+    const { children, className, ...rest } = this.props;
     let { prefixCls } = this.props;
     prefixCls = getPrefixCls('tabpane', prefixCls);
-    const paneClassName = classNames(prefixCls);
+    const paneClassName = classNames(prefixCls, className);
     return (
-      <div className={paneClassName}>
+      <div {...rest} className={paneClassName}>
         {children}
       </div>
     );
