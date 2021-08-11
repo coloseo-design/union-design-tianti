@@ -1,3 +1,17 @@
+## [1.0.9](http://10.124.128.2:8888/muses/union-design/compare/v1.0.6...v1.0.9) (2021-08-11)
+
+
+### Bug Fixes
+
+* 🐛 修复tabs当type为page时候的内容展示方式 ([efab168](http://10.124.128.2:8888/muses/union-design/commits/efab168874a69c2a7c63a14a331c2395b466f21e))
+
+
+### Features
+
+* 🎸 form.item增加colon字段来控制冒号显式 ([1926391](http://10.124.128.2:8888/muses/union-design/commits/192639172cb13ca9508183ae22726a267a9f2b94))
+
+
+
 ## [1.0.8](http://10.124.128.2:8888/muses/union-design/compare/v0.0.23...v1.0.8) (2021-08-10)
 
 
