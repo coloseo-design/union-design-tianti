@@ -190,7 +190,6 @@ class Select extends React.Component<SelectProps, SelectState> {
   }
 
   componentWillUnmount() {
-    this.setState({ showDropdown: false });
     document.removeEventListener('click', this.hideDrop);
   }
 
@@ -376,7 +375,16 @@ class Select extends React.Component<SelectProps, SelectState> {
 
     return (
       <div className={wrapperClass}>
-        <div onClick={!disabled ? this.onClick : () => {}} className={mainClass} ref={this.getNode} style={style}>
+        <div
+          onClick={!disabled ? this.onClick : () => {}}
+          className={mainClass}
+          ref={this.getNode}
+          style={{
+            minHeight: type === 'multiple' ? 32 : undefined,
+            height: type !== 'multiple' ? 32 : undefined,
+            ...style,
+          }}
+        >
           {type === 'search'
             ? (
               <>
@@ -466,6 +474,7 @@ class Select extends React.Component<SelectProps, SelectState> {
             )}
         </div>
         <Portal {...({ getPopupContainer })}>
+          {showDropdown && (
           <div
             className={dropdownClass}
             style={{
@@ -498,6 +507,7 @@ class Select extends React.Component<SelectProps, SelectState> {
                   )}
             </SelectContext.Provider>
           </div>
+          )}
         </Portal>
       </div>
     );
