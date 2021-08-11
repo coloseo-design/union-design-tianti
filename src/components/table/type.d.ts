@@ -33,15 +33,15 @@ export interface ColumnsProps {
   /** 标题 */
   title: React.ReactNode;
   /** 宽度 */
-  width: string | number;
+  width?: string | number;
   /** filter数据列表 */
   filters?: {text: React.ReactNode; value: string }[];
   /** 过滤器 */
   onFilter?: (value: unknown, record: unknown) => boolean;
   /** 筛选控制 */
-  filteredValue: string[];
+  filteredValue?: string[];
   /** 筛选控制 */
-  defaultFilteredValue: string[];
+  defaultFilteredValue?: string[];
 }
 
 export type RowKeyType = string | ((record: unknown) => string);

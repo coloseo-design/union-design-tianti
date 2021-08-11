@@ -86,6 +86,8 @@ const columnsBase = [
       <Popconfirm
         defaultVisible={index === 1}
         title="呵呵哒卑微的我的风风光光让他给人听胃"
+        overlayStyle={{ width: 150 }}
+        placement="topRight"
       >
         <a className={`delete-${index}`}>删除</a>
       </Popconfirm>
@@ -323,7 +325,7 @@ const tableT3 = (
 const tableT1 = (
   <>
     <div>
-      <h4>基础表格</h4>
+      <h4>基础表格sweedede</h4>
       <div>
         <Table
           dataSource={dataSource}
@@ -331,6 +333,7 @@ const tableT1 = (
           rowKey="key"
           bordered
           scroll={{ y: 200 }}
+          pagination={false}
         />
       </div>
     </div>

@@ -50,7 +50,7 @@ export default class Table extends React.Component<TableProps, TableState> {
       selectedRowKey: '',
       filters,
       // eslint-disable-next-line react/no-unused-state
-      pagination: props.pagination || { current: 1, pageSize: 10 },
+      pagination: props.pagination === undefined ? { current: 1, pageSize: 10 } : props.pagination,
     };
   }
 
@@ -472,11 +472,8 @@ export default class Table extends React.Component<TableProps, TableState> {
       [`${prefix}-spain-container-blur`]: loading,
     });
     const {
-      pagination = {
-        pageSize: 10,
-      },
+      pagination,
     } = this.state;
-
     const tableStyle = {};
     if (scroll && scroll.x) {
       Object.assign(tableStyle, { width: scroll.x });
