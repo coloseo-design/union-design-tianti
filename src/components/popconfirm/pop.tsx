@@ -44,10 +44,6 @@ export interface PopconfirmState {
   x: number;
   y: number;
   direction: PlacementType;
-  width: number,
-  height: number,
-  left: number,
-  top: number,
 }
 
 class PopComponent extends React.Component<PopProps, PopconfirmState> {
@@ -63,10 +59,6 @@ class PopComponent extends React.Component<PopProps, PopconfirmState> {
       x: 0,
       y: 0,
       direction: placement,
-      width: 0,
-      height: 0,
-      left: 0,
-      top: 0,
     };
   }
 
@@ -95,20 +87,7 @@ class PopComponent extends React.Component<PopProps, PopconfirmState> {
     const { visible } = this.state;
     const target: HTMLElement | null = document.getElementById(this.tag);
     if (target && visible) {
-      const {
-        left, top, width, height,
-      } = target.getBoundingClientRect();
-      if (this.node) {
-        this.compute({
-          left, top, width, height,
-        }, this.node);
-      }
-      this.setState({
-        left,
-        top,
-        width,
-        height,
-      });
+      this.compute(target);
     }
     document.body.addEventListener('click', this.documentBodyOnClick);
   }
@@ -122,91 +101,81 @@ class PopComponent extends React.Component<PopProps, PopconfirmState> {
     const { visible } = this.props;
     if (visible !== prevProps.visible) {
       if (visible) {
+        console.log('==update');
         const target: HTMLElement | null = document.getElementById(this.tag);
-        if (target) {
-          const {
-            left, width, top, height,
-          } = target.getBoundingClientRect();
-          this.setState({
-            left,
-            top,
-            width,
-            height,
-          });
-        }
+        this.compute(target);
       }
       this.setState({ visible });
     }
   }
 
-  compute = (obj: any, node: any) => {
+  compute = (target: any) => {
     const { direction } = this.state;
     const { autoAdjustOverflow = true, onVisibleChange, visible: propsVisible } = this.props;
     const bodyW = document.body.scrollWidth;
     const bodyH = document.body.scrollHeight;
     let dT: PlacementType;
-    const { height: contentHeight, width: contentWidth } = node.getBoundingClientRect();
-    const {
-      width,
-      height,
-      left,
-      top,
-    } = obj;
-    const offsetTop = Math.ceil(window.pageYOffset + top);
-    const offsetLeft = Math.ceil(window.pageXOffset + left);
-    if (direction.indexOf('top') >= 0 || direction.indexOf('bottom') >= 0) { // 上下的pop
-      dT = direction;
-      if (autoAdjustOverflow && direction.indexOf('top') >= 0 && offsetTop < contentHeight + 10) {
-        dT = changeTopDir[direction];
+    if (target && this.node) {
+      const { height: contentHeight, width: contentWidth } = this.node.getBoundingClientRect();
+      const {
+        width,
+        height,
+        left,
+        top,
+      } = target.getBoundingClientRect();
+      const offsetTop = Math.ceil(window.pageYOffset + top);
+      const offsetLeft = Math.ceil(window.pageXOffset + left);
+      if (direction.indexOf('top') >= 0 || direction.indexOf('bottom') >= 0) {
+        // 上下的pop ['top', 'bottom', 'topLeft', topRight', 'bottomLeft', 'bottomRight']
+        dT = direction;
+        if (autoAdjustOverflow && direction.indexOf('top') >= 0 && offsetTop < contentHeight + 10) {
+          dT = changeTopDir[direction]; // 上面超出，自动展示下面
+        }
+        if (autoAdjustOverflow && direction.indexOf('bottom') >= 0 && (bodyH - offsetTop) < contentHeight + 10) {
+          dT = changeBottomDir[direction]; // 下面超出自动展示上面
+        }
+        const xT: number = dT.indexOf('Left') >= 0 ? offsetLeft : dT.indexOf('Right') >= 0 ? (offsetLeft - contentWidth + width) : (offsetLeft + (width - contentWidth) / 2);
+        const yT: number = dT.indexOf('top') >= 0 ? (offsetTop - contentHeight - 10) : offsetTop + height + 10;
+        this.setState({
+          x: xT,
+          y: yT,
+          direction: dT,
+        });
       }
-      if (autoAdjustOverflow && direction.indexOf('bottom') >= 0 && (bodyH - offsetTop) < contentHeight + 10) {
-        dT = changeBottomDir[direction];
+      if (direction.indexOf('left') >= 0 || direction.indexOf('right') >= 0) { // 左右的pop
+        // ['leftTop', leftBottom', 'left', 'rightTop', rightBottom', 'right']
+        dT = direction;
+        if (autoAdjustOverflow && direction.indexOf('left') >= 0 && offsetLeft < contentWidth + 10) {
+          dT = changeLeftDir[direction];
+        }
+        if (autoAdjustOverflow && direction.indexOf('right') >= 0 && (bodyW - offsetLeft) < contentWidth + 10) {
+          dT = changeRightDir[direction];
+        }
+        const xT: number = dT.indexOf('left') >= 0 ? offsetLeft - contentWidth - 10 : offsetLeft + width + 10;
+        /* eslint no-nested-ternary: 0 */
+        const yT: number = dT.indexOf('Top') >= 0 ? offsetTop : dT.indexOf('Bottom') >= 0 ? (offsetTop - contentHeight + height) : offsetTop + (height - contentHeight) / 2;
+        this.setState({
+          x: xT,
+          y: yT,
+          direction: dT,
+        });
       }
-      const xT: number = dT.indexOf('Left') >= 0 ? offsetLeft : dT.indexOf('Right') >= 0 ? (offsetLeft - contentWidth + width) : (offsetLeft + (width - contentWidth) / 2);
-      const yT: number = dT.indexOf('top') >= 0 ? (offsetTop - contentHeight - 10) : offsetTop + height + 10;
-      this.setState({
-        x: xT,
-        y: yT,
-        direction: dT,
-      });
+      onVisibleChange && onVisibleChange(propsVisible !== undefined ? propsVisible : true);
     }
-    if (direction.indexOf('left') >= 0 || direction.indexOf('right') >= 0) { // 左右的pop
-      dT = direction;
-      if (autoAdjustOverflow && direction.indexOf('left') >= 0 && offsetLeft < contentWidth + 10) {
-        dT = changeLeftDir[direction];
-      }
-      if (autoAdjustOverflow && direction.indexOf('right') >= 0 && (bodyW - offsetLeft) < contentWidth + 10) {
-        dT = changeRightDir[direction];
-      }
-      const xT: number = dT.indexOf('left') >= 0 ? offsetLeft - contentWidth - 10 : offsetLeft + width + 10;
-      /* eslint no-nested-ternary: 0 */
-      const yT: number = dT.indexOf('Top') >= 0 ? offsetTop : dT.indexOf('Bottom') >= 0 ? (offsetTop - contentHeight + height) : offsetTop + (height - contentHeight) / 2;
-      this.setState({
-        x: xT,
-        y: yT,
-        direction: dT,
-      });
-    }
-    onVisibleChange && onVisibleChange(propsVisible !== undefined ? propsVisible : true);
   }
 
   handleClick = (evt: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
+    evt.nativeEvent.stopImmediatePropagation();
+    evt.stopPropagation();
     const { trigger, visible: popupVisible, onVisibleChange } = this.props;
     const { visible } = this.state;
     const target = evt.nativeEvent.target as HTMLSpanElement;
     if (trigger === 'click' && target) {
       if (popupVisible === undefined) { // 用户传了 visible 后完全由 用户自己控制 弹窗的显隐（默认组件控制）
         if (!visible) {
-          const {
-            left, top, width, height,
-          } = target.getBoundingClientRect();
-          this.setState({
-            visible: true,
-            left,
-            top,
-            width,
-            height,
-          });
+          console.log('==click');
+          this.compute(target);
+          this.setState({ visible: true });
         } else {
           onVisibleChange && onVisibleChange(false);
           this.setState({ visible: false });
@@ -216,6 +185,8 @@ class PopComponent extends React.Component<PopProps, PopconfirmState> {
   };
 
   handleOver = (evt: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
+    evt.nativeEvent.stopImmediatePropagation();
+    evt.stopPropagation();
     const {
       trigger, mouseEnterDelay = 0, onVisibleChange, visible: popupVisible,
     } = this.props;
@@ -225,16 +196,8 @@ class PopComponent extends React.Component<PopProps, PopconfirmState> {
       if (trigger === 'hover' && target) {
         if (!visible) {
           setTimeout(() => {
-            const {
-              left, top, width, height,
-            } = target.getBoundingClientRect();
-            this.setState({
-              visible: true,
-              left,
-              top,
-              width,
-              height,
-            });
+            this.compute(target);
+            this.setState({ visible: true });
           }, mouseEnterDelay);
         } else {
           onVisibleChange && onVisibleChange(false);
@@ -262,19 +225,21 @@ class PopComponent extends React.Component<PopProps, PopconfirmState> {
   };
 
   handleFocus = (evt: React.FocusEvent<HTMLSpanElement>) => {
-    const { trigger = 'hover' } = this.props;
+    evt.nativeEvent.stopImmediatePropagation();
+    evt.stopPropagation();
+    const { trigger = 'hover', visible: popupVisible, onVisibleChange } = this.props;
+    const { visible } = this.state;
     const target = evt.nativeEvent.target as HTMLSpanElement;
     if (trigger === 'focus' && target) {
-      const {
-        left, width, top, height,
-      } = target.getBoundingClientRect();
-      this.setState({
-        visible: true,
-        left,
-        width,
-        top,
-        height,
-      });
+      if (popupVisible === undefined) { // 用户传了 visible 后完全由 用户自己控制 弹窗的显隐（默认组件控制）
+        if (!visible) {
+          this.compute(target);
+          this.setState({ visible: true });
+        } else {
+          onVisibleChange && onVisibleChange(false);
+          this.setState({ visible: false });
+        }
+      }
     }
   };
 
@@ -296,14 +261,6 @@ class PopComponent extends React.Component<PopProps, PopconfirmState> {
   }
 
   getNode = (node: HTMLDivElement) => {
-    const {
-      left, width, height, top, visible,
-    } = this.state;
-    if (node && visible) {
-      this.compute({
-        left, width, height, top,
-      }, node);
-    }
     this.node = node;
   }
 
@@ -387,12 +344,11 @@ class PopComponent extends React.Component<PopProps, PopconfirmState> {
           onMouseOut={this.handleOut}
           onFocus={this.handleFocus}
           data-tag={this.tag}
-          // id={this.tag}
+          id={Tchildren && Tchildren.props && Tchildren.props.id ? undefined : this.tag}
         >
           {Tchildren}
         </span>
         <Portal {...({ getPopupContainer })}>
-          {visible && (
           <div
             className={popContainter}
             style={{ ...overlayStyle, left: x, top: y }}
@@ -410,7 +366,6 @@ class PopComponent extends React.Component<PopProps, PopconfirmState> {
               {componentType === 'pop-over' && overContent}
             </div>
           </div>
-          )}
         </Portal>
       </>
     );
