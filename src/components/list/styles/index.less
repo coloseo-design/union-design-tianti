@@ -14,13 +14,15 @@
     .@{list-prefix-cls}-item {
       padding: @list-item-padding;
       border-bottom: 1px solid @border-color-split;
-      clear: both;
       overflow: auto;
-      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
       &-meta {
-        float: left;
+        flex: 1;
         &-title {
           color: @descriptions-content;
+          margin-bottom: 6px;
         }
         &-description {
           color: @text-color;
@@ -28,11 +30,7 @@
       }
       &-actions {
         margin-left: 48px;
-        float: right;
-        position: absolute;
-        top: 50%;
-        right: @list-item-padding-horizontal-padding;
-        transform: translateY(-50%);
+        margin-right: @list-item-padding-horizontal-padding;
         li {
           display: inline-block;
           &:not(:last-child) {

@@ -9,9 +9,9 @@ function arraysAreEqual(arr1: unknown[] = [], arr2: unknown[] = []) {
 
 export interface ListProps extends React.HTMLAttributes<HTMLDivElement> {
   /** 列表数据源 */
-  dataSource?: unknown[];
+  dataSource?: Array<any>;
   /** 当使用 dataSource 时，可以用 renderItem 自定义渲染列表项 */
-  renderItem?: (item: unknown, index?: number) => React.ReactNode;
+  renderItem?: (item: any, index?: number) => React.ReactNode;
   /* 用户自定义类前缀，默认uni-list */
   prefixCls?: string;
 }

@@ -83,7 +83,7 @@ export type ItemProps = ResponsiveColProps & BaseProps;
 
 export interface ValidatorRule {
   message?: string;
-  validator?: (rule: ValidatorRule, value: unknown, cb: (error?: string) => void) => Promise<void | unknown> | void;
+  validator?: (rule: ValidatorRule, value: any, cb?: (error?: string) => void) => Promise<void | unknown> | null;
   validateTrigger?: string | string[];
   required?: boolean;
 }
@@ -122,5 +122,5 @@ interface FormItemProps extends BaseProps, React.HTMLAttributes<HtmlHTMLAttribut
   /** label对齐方式 */
   labelAlign?: 'left' | 'right',
   /** 是否显式冒号 */
-  colon: boolean;
+  colon?: boolean;
 }

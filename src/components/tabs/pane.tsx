@@ -6,6 +6,7 @@ export interface TabPaneBase extends React.HTMLAttributes<HTMLDivElement> {
   prefixCls?: string;
   tab: React.ReactNode;
   key: string;
+  closable?: boolean;
 }
 
 export default class Pane extends React.Component<TabPaneBase> {

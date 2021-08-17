@@ -65,14 +65,14 @@ const TabsDemo = () => {
           defaultActiveKey="1"
           type="page"
           onClose={(key) => {
-            setTimeout(() => {
-              setData(['页签', '四字页签', '五个字页签']);
-            }, 3000);
+            // setTimeout(() => {
+            //   setData(['页签', '四字页签', '五个字页签']);
+            // }, 3000);
           }}
         >
           {
             data.map((item, key) => (
-              <Pane key={`${key}`} tab={item}>
+              <Pane key={`${key}`} tab={item} closable={false}>
                 <div style={{ background: 'green' }}>{item}</div>
               </Pane>
             ))
