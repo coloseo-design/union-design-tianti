@@ -96,7 +96,7 @@ class Alert extends React.Component<AlertProps, AlertState> {
             style={{ transform: icon ? 'rotate(0deg)' : 'rotate(-180deg)', top: description ? 18 : 9 }}
             className={alertIconContent}
           >
-            {icon || <Icon type="exclamation-circle" style={{ fontSize: description ? 24 : 16 }} className={alertIcon} />}
+            {icon || <span className={alertIcon}><Icon type="exclamation-circle" style={{ fontSize: description ? 24 : 16 }} /></span>}
           </span>
           )}
         {bType !== 'info' && show
@@ -104,11 +104,12 @@ class Alert extends React.Component<AlertProps, AlertState> {
           <span className={alertIconContent}>
             {icon
               || (
-              <Icon
-                type={typeMapping[bType]}
-                className={alertIcon}
-                style={{ fontSize: description ? 24 : 16 }}
-              />
+                <span className={alertIcon}>
+                  <Icon
+                    type={typeMapping[bType]}
+                    style={{ fontSize: description ? 24 : 16 }}
+                  />
+                </span>
               )}
           </span>
           )}
