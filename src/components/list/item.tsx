@@ -24,9 +24,9 @@ class Item extends Component<ItemProps> {
     } = this.props;
 
     const prefix = getPrefixCls('list-item', prefixCls);
-    const mainClass = classNames(prefix, className, {
+    const mainClass = classNames(prefix, {
       // [`${prefix}-checked`]: checked,
-    });
+    }, className);
 
     return (
       <li {...rest} className={mainClass}>

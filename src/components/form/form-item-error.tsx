@@ -3,25 +3,26 @@ import React from 'react';
 import classnames from 'classnames';
 
 interface FormItemErrorProps {
-  error: string | string[] | React.ReactNode [];
-  simpleMode?: boolean;
+  error?: string[] | React.ReactNode [];
 }
 
-const FormItemError: React.FC<FormItemErrorProps> = ({ error = '', simpleMode = true }) => {
-  const containerCls = classnames('form-item-error', {
-    // ['form-item-error-modal']: !simpleMode,
-  });
+const FormItemError: React.FC<FormItemErrorProps> = ({ error }) => {
+  const containerCls = classnames('form-item-error');
+  let simpleMode = false;
+  if (error && error.length) {
+    simpleMode = error.every((item) => !React.isValidElement(item));
+  }
   return (
     <div className={containerCls}>
       {
-        error.length > 0 && simpleMode && (
+        error && simpleMode && (
           <div className="form-item-error-explain">
             <div role="alert">{error}</div>
           </div>
         )
       }
       {
-        !simpleMode && error.length > 0 && (
+        !simpleMode && error && (
           <div className="form-item-error-modal">
             <div className="error-box">
               <div className="error-box-content">

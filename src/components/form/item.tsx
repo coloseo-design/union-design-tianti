@@ -25,7 +25,7 @@ const Item: React.FC<FormItemProps> = (props: FormItemProps) => {
     validateTrigger: validateTriggerFromProps,
     rules = [],
     validateFirst = false, // 遇到错误是否停止
-    messageVariables,
+    messageVariables = {},
     required = false,
     colon = true,
   } = props;
@@ -104,13 +104,15 @@ const Item: React.FC<FormItemProps> = (props: FormItemProps) => {
       } else {
         newValue = defaultGetValueFromEvent(valuePropName, ...evts);
       }
-      validate(newValue).then((newErrors) => {
-        onError(composedName, { event: trigger, errors: newErrors });
-      })
+      validate(newValue)
+        .then((newErrors) => {
+          onError(composedName, { event: trigger, errors: newErrors });
+        })
         .catch((newErrors) => {
-        // 更新错误信息
+          // 更新错误信息
           onError(composedName, { event: trigger, errors: newErrors });
         });
+      // 收集用户输入
       onCollect(composedName, { event: trigger, value: newValue });
     }
   };
@@ -142,7 +144,6 @@ const Item: React.FC<FormItemProps> = (props: FormItemProps) => {
           }
           collectValue(...args);
         },
-        error: true,
         defaultValue: value || initialValue,
         name,
       };
@@ -150,8 +151,6 @@ const Item: React.FC<FormItemProps> = (props: FormItemProps) => {
     }
     return child;
   });
-  // 是否单错误提示
-  const simpleMode = validateFirst && typeof error[0] === 'string';
   return (
     <Row className={rowCls}>
       {
@@ -164,7 +163,7 @@ const Item: React.FC<FormItemProps> = (props: FormItemProps) => {
       <Col {...wrapperCol} className={controlWraperClassName}>
         <div className={controlInputClassName}>
           {cloneElement}
-          <FormItemError error={hasError ? error : ''} simpleMode={simpleMode} />
+          <FormItemError error={hasError ? error : undefined} />
         </div>
       </Col>
     </Row>

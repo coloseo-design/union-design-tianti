@@ -15,6 +15,7 @@ export type TabsType = 'line' | 'card' | 'page';
 export interface TitleType {
   key: string;
   text: React.ReactNode;
+  closable?: boolean;
 }
 
 export interface TabsProps extends Omit<React.HTMLAttributes<unknown>, 'onChange'> {
@@ -98,7 +99,9 @@ const Tabs: React.FC<TabsProps> & { Pane: typeof Pane} = (props: TabsProps) => {
       : (
         <span>
           <span className={`${prefixCls}-title`}>{title.text}</span>
-          <Icon type="close" className={`${prefixCls}-closeIcon`} onClick={(e) => closeClick(title.key, e)} />
+          {
+            title.closable && (<Icon type="close" className={`${prefixCls}-closeIcon`} onClick={(e) => closeClick(title.key, e)} />)
+          }
           <span className={`${prefixCls}-page-fence`} />
         </span>
       )
@@ -113,12 +116,13 @@ const Tabs: React.FC<TabsProps> & { Pane: typeof Pane} = (props: TabsProps) => {
   );
   const titles: TitleType[] = React.Children.map(children, (item) => {
     if (item && typeof item === 'object' && 'props' in item) {
-      const { tab } = item.props;
+      const { tab, closable = true } = item.props;
       const key = item.key || uuid();
       warning(!item.key, '必须为pane指定key');
       return {
         text: tab,
         key,
+        closable,
       } as TitleType;
     }
     return null;
@@ -131,7 +135,6 @@ const Tabs: React.FC<TabsProps> & { Pane: typeof Pane} = (props: TabsProps) => {
     marginLeft: `-${index * 100}%`,
   };
 
-  console.log('children', children, checkedKey);
   return (
     <div className={tabCls}>
       <div ref={navRef} className={`${prefixCls}-nav`} {...others}>

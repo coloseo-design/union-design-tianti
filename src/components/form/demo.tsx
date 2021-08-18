@@ -1,31 +1,20 @@
-import React, { useRef } from 'react';
+import React, { createRef } from 'react';
 import {
   Form,
   Input,
   Select,
   Button,
-  Cascader,
-  AutoComplete,
-  Checkbox,
-  InputNumber,
-  Radio,
-  Rate,
-  Slider,
-  Upload,
-  DatePicker,
-  Switch,
-  TreeSelect,
 } from '../index';
 import '../grid/styles/index';
 import '../button/styles/index';
 import '../input/styles/index';
 import '../select/styles/index';
 import './styles/index';
+import { FormInstance } from './type';
 
 const { Item: FormItem } = Form;
-export default () => {
-  const formRef = useRef(null);
-  console.log('formRef', formRef);
+const FormDemo = () => {
+  const formRef = createRef<FormInstance>();
   const onSubmit = (values: unknown) => {
     console.log('onSubmit values is', values);
   };
@@ -33,107 +22,6 @@ export default () => {
   const onFinishFailed = (failedData: unknown) => {
     console.log('failed data', failedData);
   };
-
-  const data = [
-    {
-      key: '0',
-      title: 'node-0',
-      value: '0',
-      children: [
-        {
-          key: '0-1',
-          title: 'node-0-1',
-          value: '0-1',
-        },
-        {
-          key: '0-2',
-          title: 'node-0-2',
-          value: '0-2',
-        },
-      ],
-    },
-    {
-      key: '1',
-      title: 'node-1',
-      value: '1',
-      children: [
-        {
-          key: '1-1',
-          title: 'node-1-1',
-          value: '1-1',
-          children: [
-            {
-              key: '1-1-1',
-              title: 'node-1-1-1',
-              value: '1-1-1',
-            },
-            {
-              key: '1-1-2',
-              title: 'node-1-1-2',
-              value: '1-1-2',
-            },
-          ],
-        },
-        {
-          key: '1-2',
-          title: 'node-1-2',
-          value: '1-2',
-          children: [
-            {
-              key: '1-2-1',
-              title: 'node-1-2-1',
-              children: [
-                {
-                  key: '1-1-3',
-                  title: 'node-1-1-3',
-                },
-                {
-                  key: '1-1-4',
-                  title: 'node-1-1-4',
-                },
-              ],
-            },
-          ],
-        },
-      ],
-    },
-
-  ];
-
-  const options = [
-    {
-      value: 'zhejiang',
-      label: 'Zhejiang',
-      children: [
-        {
-          value: 'hangzhou',
-          label: 'Hangzhou',
-          children: [
-            {
-              value: 'xihu',
-              label: 'West Lake',
-            },
-          ],
-        },
-      ],
-    },
-    {
-      value: 'jiangsu',
-      label: 'Jiangsu',
-      children: [
-        {
-          value: 'nanjing',
-          label: 'Nanjing',
-          children: [
-            {
-              value: 'zhonghuamen',
-              label: 'Zhong Hua Men',
-            },
-          ],
-        },
-      ],
-    },
-  ];
 
   const layout = {
     labelCol: { span: 2 },
@@ -183,7 +71,7 @@ export default () => {
               },
             ]}
           >
-            <Input placeholder="请输入" onChange={(e: any, v: any) => console.log('change', e, v)} />
+            <Input placeholder="请输入" />
           </FormItem>
           <FormItem
             name="password"
@@ -192,7 +80,7 @@ export default () => {
             validateFirst
             rules={[
               {
-                validator: (rule, value) => {
+                validator: (_, value) => {
                   if (!value || value.length < 2) {
                     return Promise.reject(new Error('长度必须大于2'));
                   }
@@ -201,7 +89,7 @@ export default () => {
               },
             ]}
           >
-            <Input type="password" placeholder="请输入" style={{ width: '100%' }} onChange={(e, v) => console.log('change', e, v)} />
+            <Input type="password" placeholder="请输入" style={{ width: '100%' }} />
           </FormItem>
           <FormItem
             name={['address', 'province']}
@@ -236,8 +124,7 @@ export default () => {
             <Button
               htmlType="reset"
               onClick={() => {
-                console.log('formRef', formRef);
-                formRef.current.reset();
+                formRef.current?.reset();
               }}
             >
               重置
@@ -248,3 +135,5 @@ export default () => {
     </div>
   );
 };
+
+export default FormDemo;
