@@ -50,6 +50,7 @@ const AlertDemo = () => (
         message="恭喜！你所提交的信息已经审核通过，如有问题请联系客服。"
         description="你所提交的信息已经审核通过，请及时跟进申请状况。如有问题，请联系审核人员或在线客服。"
         closeText="查看详情"
+        onClose={(evt) => { console.log('dd', evt); }}
       />
     </div>
     <div style={{ margin: 24 }}>
@@ -80,6 +81,7 @@ const AlertDemo = () => (
         showIcon
         banner
         closable
+        onClose={(evt) => { console.log('dd', evt); }}
       />
     </div>
   </div>

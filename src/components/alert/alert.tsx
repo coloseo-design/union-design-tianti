@@ -40,13 +40,17 @@ class Alert extends React.Component<AlertProps, AlertState> {
   }
 
   Close = (event: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
-    const { afterClose, onClose } = this.props;
-    this.setState({ close: true });
-    onClose && onClose(event);
-    setTimeout(() => {
-      afterClose && afterClose();
-      this.setState({ blockNone: true, close: false });
-    }, 500);
+    const { afterClose, onClose, closable } = this.props;
+    if (closable) {
+      this.setState({ close: true });
+      onClose && onClose(event);
+      setTimeout(() => {
+        afterClose && afterClose();
+        this.setState({ blockNone: true, close: false });
+      }, 500);
+    } else {
+      onClose && onClose(event);
+    }
   }
 
   renderAlert = ({ getPrefixCls }: ConfigConsumerProps) => {
