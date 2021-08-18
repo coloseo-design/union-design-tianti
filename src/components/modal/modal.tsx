@@ -2,7 +2,7 @@ import React from 'react';
 import classNames from 'classnames';
 import Icon from '../icon';
 import Portal from '../popconfirm/portal';
-import Button, { BaseButtonProps } from '../button';
+import Button, { ButtonProps } from '../button';
 import { ConfigConsumer, ConfigConsumerProps } from '../config-provider';
 import {
   renderMethod, success, error, info, warning, confirm, ModalMethodProps,
@@ -30,8 +30,8 @@ export interface ModalProps {
   okType?: 'link' | 'primary' | 'ghost' | 'default' | 'dashed' | 'danger' | undefined,
   wrapClassName?: string,
   zIndex?: number,
-  okButtonProps?: BaseButtonProps,
-  cancelButtonProps?: BaseButtonProps,
+  okButtonProps?: ButtonProps,
+  cancelButtonProps?: ButtonProps,
   keyboard?: boolean,
   getPopupContainer?: () => HTMLElement | null;
   centered?: boolean;
