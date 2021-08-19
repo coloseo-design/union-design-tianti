@@ -1,8 +1,10 @@
 import { ReactNode } from 'react';
 
 export interface TransferItem {
-  name: string | number | boolean | {[key: string]: unknown} | ReactElement<unknown, string |
-  JSXElementConstructor<unknown>> | ReactNodeArray | ReactPortal | null | undefined;
+  name: string | number | boolean | {[key: string]: unknown}
+  | React.ReactElement<unknown, string
+  | React.JSXElementConstructor<unknown>>
+  | React.ReactNodeArray | React.ReactPortal | null | undefined;
   key: string;
   title: string;
   description?: string;

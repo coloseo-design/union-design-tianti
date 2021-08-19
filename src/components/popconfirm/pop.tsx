@@ -2,7 +2,8 @@ import React from 'react';
 import classnames from 'classnames';
 import Icon from '../icon';
 import Portal from './portal';
-import Button, { BaseButtonProps } from '../button';
+import { BaseButtonProps } from '../button/type';
+import { Button } from '../index';
 import { ConfigConsumer, ConfigConsumerProps } from '../config-provider';
 import {
   PlacementType,

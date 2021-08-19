@@ -6,8 +6,9 @@ import classNames from 'classnames';
 import { ConfigConsumer, ConfigConsumerProps } from '../config-provider';
 import PreviewGroup, { context } from './previewGroup';
 import PreView from './preview';
+import { Omit } from '../utils/type';
 
-export interface ImageProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface ImageProps extends Omit<React.HTMLAttributes<HTMLImageElement>, 'placeholder' | 'onError'> {
   /** 图像描述 */
   alt?: string;
   /** 加载失败容错地址 */

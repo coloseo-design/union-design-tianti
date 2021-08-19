@@ -6,7 +6,7 @@ function retain(num: number, d: number) {
   return (parseInt(`${num * 100}`, 10) / 100).toFixed(d);
 }
 
-export interface StatisticProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface StatisticProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'title' | 'prefix'> {
   /* 用户自定义类前缀，默认uni-statistic */
   prefixCls?: string;
   /* 自定义数值展示 */

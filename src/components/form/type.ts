@@ -90,11 +90,11 @@ export interface ValidatorRule {
 
 export type FormInstance = {
   reset: () => void;
-  setFieldsValue: (value: Values) => void;
+  setFieldsValue: (value: FormValues) => void;
   submit: () => void;
 };
 
-interface FormItemProps extends BaseProps, React.HTMLAttributes<HtmlHTMLAttributes> {
+export interface FormItemProps extends BaseProps, React.HTMLAttributes<HTMLDivElement> {
   /** label栅格布局 */
   labelCol?: ResponsiveColProps;
   /** 输入框栅格布局 */

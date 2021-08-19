@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Modal from './index';
-import { BaseButtonProps } from '../button';
+import { BaseButtonProps } from '../button/type';
 
 export type focusButton = 'ok' | 'cancel';
 

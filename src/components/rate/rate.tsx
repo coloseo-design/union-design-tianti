@@ -9,7 +9,7 @@ import classNames from 'classnames';
 import { ConfigConsumer, ConfigConsumerProps } from '../config-provider';
 import Icon from '../icon/index';
 
-export interface RateProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface RateProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onChange'> {
   // 是否允许半选
   allowHalf?: boolean;
   // star 总数

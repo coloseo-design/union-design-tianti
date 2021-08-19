@@ -1,5 +1,6 @@
 import React from 'react';
 import { PaginationProps } from '../pagination/pagination';
+import { ConfigConsumerProps } from '../config-provider/context';
 
 type ColumnsAlign = 'left' | 'right' | 'center';
 type FixedType = 'left' | 'right';

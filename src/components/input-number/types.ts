@@ -21,13 +21,13 @@ export interface InputNumberProps {
   value?: number;
   // 保留小数位数
   precision?: number;
-  ref?: React.forwardRef<HTMLInputElement>;
+  ref?: React.ForwardedRef<HTMLInputElement>;
   // 输入框内容改变
   onChange?: (value: number | string) => void;
   // 上下箭头回调
   onStep?: (value: number, info?: { offset: number, type: string }) => void;
   // 回车键
-  onPressEnter?: (value, info?: { offset: number, key: string }) => void;
+  onPressEnter?: (value: any, info?: { offset: number, key: string }) => void;
   // 规定展示格式
   formatter?: (value: string | number) => string;
   // 解析配合formatter
