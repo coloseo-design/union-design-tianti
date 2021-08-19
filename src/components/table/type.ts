@@ -1,9 +1,8 @@
 import React from 'react';
 import { PaginationProps } from '../pagination/pagination';
-import { ConfigConsumerProps } from '../config-provider/context';
 
-type ColumnsAlign = 'left' | 'right' | 'center';
-type FixedType = 'left' | 'right';
+export type ColumnsAlign = 'left' | 'right' | 'center';
+export type FixedType = 'left' | 'right';
 
 export type RenderReturnObjectType = {
   props: {
@@ -49,27 +48,27 @@ export type RowKeyType = string | ((record: unknown) => string);
 
 export type TableRowSelectionType = {
   /** 用户手动选择/取消选择某行的回调 */
-  onSelect: () => void;
+  onSelect?: () => void;
   /** 用户手动选择/取消选择所有行的回调 */
-  onSelectAll: () => void;
+  onSelectAll?: () => void;
   /** 选中项发生变化时的回调 */
-  onChange: (selectedRowKeys: unknown[], selectedRows: unknown[]) => void;
+  onChange?: (selectedRowKeys: unknown[], selectedRows: unknown[]) => void;
   /** 列宽 */
   columnWidth?: number;
   /** 列标题 */
   columnTitle?: React.ReactNode;
   /** checkbox默认设置 */
-  getCheckboxProps: (record: unknown) => {
+  getCheckboxProps: (record: any) => {
     disabled?: boolean;
     name?: React.ReactNode;
   };
   /** 默认选中 */
-  selectedRowKeys: unknown[];
+  selectedRowKeys?: unknown[];
 }
 
-export interface TableProps extends ConfigConsumerProps, React.HTMLAttributes<HTMLTableElement> {
+export interface TableProps extends React.HTMLAttributes<HTMLTableElement> {
   /** 是否包含边框 */
-  bordered: boolean;
+  bordered?: boolean;
   columns: ColumnsProps[];
   rowKey: RowKeyType;
   dataSource: unknown[];
@@ -79,7 +78,7 @@ export interface TableProps extends ConfigConsumerProps, React.HTMLAttributes<HT
   loading?: boolean;
   /** 表格行是否可选择 */
   rowSelection: TableRowSelectionType;
-  scroll: {
+  scroll?: {
     /** 设置横向滚动，也可用于指定滚动区域的宽 */
     x?: number | boolean;
     /** 设置横向滚动，也可用于指定滚动区域的宽 */
@@ -87,7 +86,7 @@ export interface TableProps extends ConfigConsumerProps, React.HTMLAttributes<HT
     /** 当分页、排序、筛选变化后是否滚动到表格顶部 */
     scrollToFirstRowOnChange?: boolean;
   };
-  pagination: boolean | PaginationProps;
+  pagination?: boolean | PaginationProps;
 }
 
 export interface TableState {

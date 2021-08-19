@@ -227,7 +227,7 @@ export default class Table extends React.Component<TableProps, TableState> {
       [`${prefix}-bordered`]: bordered,
       [`${prefix}-fixed`]: scroll && (scroll.x || scroll.y),
     });
-    return scroll && scroll.y ? (
+    return scroll && (scroll.x || scroll.y) ? (
       <div className={`${prefix}-header`} ref={ref} onScroll={onScroll}>
         <table className={tableCls} style={tableStyle}>
           <ColGroup columns={columns} />
@@ -394,7 +394,7 @@ export default class Table extends React.Component<TableProps, TableState> {
 
     // eslint-disable-next-line no-nested-ternary
     const maxHeight = scroll ? (typeof scroll.y === 'boolean' ? 'auto' : scroll.y) : 'auto';
-    if (rowSelection && position === 'left') {
+    if (rowSelection && position === 'left' && filteredColumns.length) {
       filteredColumns.unshift(this.selectionColumn());
     }
     if (!filteredColumns.length) return null;
@@ -521,7 +521,9 @@ export default class Table extends React.Component<TableProps, TableState> {
                 <table className={tableCls} style={tableStyle}>
                   <ColGroup columns={this.getMainColums(columns)} />
                   {
-                    !scroll || scroll.y === 0 ? this.renderHeader(mainColumns) : null
+                    !scroll || scroll.y === 0
+                      ? this.renderHeader(this.getMainColums(columns))
+                      : null
                   }
                   {
                     this.renderBody(

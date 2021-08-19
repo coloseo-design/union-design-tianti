@@ -18,7 +18,7 @@ const Item: React.FC<FormItemProps> = (props: FormItemProps) => {
     trigger = 'onChange',
     initialValue,
     prefixCls: customizePrefixCls,
-    labelAlign: lableAlignOfProps = 'right',
+    labelAlign: lableAlignOfProps,
     labelCol: labelColfromProps,
     wrapperCol: wrapperColFromProps,
     getValueFromEvent, // 自定义从event中获取value

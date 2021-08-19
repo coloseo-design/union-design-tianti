@@ -54,11 +54,13 @@ const FormDemo = () => {
           onFinish={onSubmit}
           onFinishFailed={onFinishFailed}
           style={{ padding: 20 }}
+          labelAlign="left"
         >
           <FormItem
             name="username"
             label="用户名"
             validateFirst
+            labelAlign="right"
             rules={[
               { required: true, message: '请输入用户名' },
               {
