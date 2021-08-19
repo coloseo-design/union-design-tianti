@@ -1,3 +1,27 @@
+## [1.0.12](http://10.124.128.2:8888/muses/union-design/compare/v1.0.2...v1.0.12) (2021-08-19)
+
+
+### Bug Fixes
+
+* 🐛 alert icon 颜色修改 ([d4495de](http://10.124.128.2:8888/muses/union-design/commits/d4495dec15d3cce466b1ecdc569895084d8bba3b))
+* 🐛 select,隐藏checkbox，table引入分页样式' ([ad74bb1](http://10.124.128.2:8888/muses/union-design/commits/ad74bb1a2d0168de8910bd136b70aac6d83e571f))
+* 🐛 tabs.pane增加closable, 调整list样式，重构table代码 ([765ba17](http://10.124.128.2:8888/muses/union-design/commits/765ba17920a00fc13a2ac200a9a2706db8f6408c))
+* 🐛 修复table的样式问题 ([8dacaf5](http://10.124.128.2:8888/muses/union-design/commits/8dacaf515e6271aad3c7c3eddf2a2ddaf68431bf))
+* 🐛 修复tabs嵌套的bug ([d70640a](http://10.124.128.2:8888/muses/union-design/commits/d70640ab32f7df2bfc4ccaee36bf4463d4ac7908))
+* 🐛 修复tabs当type为page时候的内容展示方式 ([efab168](http://10.124.128.2:8888/muses/union-design/commits/efab168874a69c2a7c63a14a331c2395b466f21e))
+* 🐛 修复typescript打包类型的错误 ([8c6b180](http://10.124.128.2:8888/muses/union-design/commits/8c6b1805671377ba43000c9f0cfaecfd90b39088))
+* 🐛 添加onclose为tabs ([08462f4](http://10.124.128.2:8888/muses/union-design/commits/08462f4e6516b1125fd431cafa095bf0c090255f))
+
+
+### Features
+
+* 🎸 alert markdown 修改 ([4122fe4](http://10.124.128.2:8888/muses/union-design/commits/4122fe4c00b62ebd0cb0585091294403f668b723))
+* 🎸 form.item增加colon字段来控制冒号显式 ([1926391](http://10.124.128.2:8888/muses/union-design/commits/192639172cb13ca9508183ae22726a267a9f2b94))
+* 🎸 修改popconfig默认按钮值 ([152f64b](http://10.124.128.2:8888/muses/union-design/commits/152f64bac22e795d256f1d99c37136f3c54eccc4))
+* 🎸 去掉input中的defaultValue ([3482aba](http://10.124.128.2:8888/muses/union-design/commits/3482abae2931d08c1095d8bbdece4b147e8b1113))
+
+
+
 ## [1.0.11](http://10.124.128.2:8888/muses/union-design/compare/v1.0.10...v1.0.11) (2021-08-13)
 
 
