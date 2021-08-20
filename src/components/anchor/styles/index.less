@@ -16,7 +16,7 @@
       left: -5px;
       width: 9px;
       height: 9px;
-      background: @border;
+      background: @anchor-bg;
       border-radius: 50%;
     }
     .@{anchor-prefix-cls}-ball-red {
@@ -24,20 +24,20 @@
       left: -5px;
       width: 9px;
       height: 9px;
-      background: @primary-color;
+      background: @anchor-active-bg;
       border-radius: 50%;
       transition: .3s;
     }
   }
   &-link {
     padding: 12px 10px;
-    color: @descriptions-content;
+    color: @anchor-link-color;
     cursor: pointer;
     overflow:hidden;
     text-overflow:ellipsis;
     white-space:nowrap;
     &:hover {
-      color: @primary-color;
+      color: @anchor-link-hover-color;
     }
   }
 }

@@ -13,17 +13,17 @@
 .input() {
   width: 100%;
   height: @input-height-base;
-  color: @input-color;
+  color: @auto-complete-text-color;
   background: @input-bg;
   line-height: 1.5;
   padding: @input-padding-vertical-base @input-padding-horizontal-base;
   // position: relative;
   border-radius: @border-radius-base;
   font-size: @font-size-base;
-  border: @border-width-base @border-style-base @border;
+  border: @border-width-base @border-style-base @auto-complete-border-color;
   &:hover, &:active, &:focus{
     outline: none;
-    border-color: @input-hover-border-color;
+    border-color: @auto-complete-border-hover-color;
   }
 
   &:placeholder-shown {
@@ -31,7 +31,7 @@
   }
   &::placeholder {
     font-size: @font-size-base;
-    color: @input-placeholder-color;
+    color: @auto-complete-placeholer;
   }
 }
 
@@ -43,14 +43,14 @@
   .input();
 }
 .@{auto-complete-cls}-active {
-  border-color: @input-hover-border-color;
+  border-color: @auto-complete-border-hover-color;
 }
 .@{auto-complete-cls}-disabled {
   cursor: not-allowed;
-  background: @input-disabled-bg;
-  border-color: @disabled-border-color;
+  background: @auto-complete-disabled-bg;
+  border-color: @auto-complete-disabled-border;
   &:hover {
-    border-color: @disabled-border-color;
+    border-color: @auto-complete-disabled-border;
   }
 }
 .@{auto-complete-cls}-input-search {
@@ -59,7 +59,7 @@
   z-index: 1;
   top: 50%;
   transform: translateY(-50%);
-  color: @border;
+  color: @auto-complete-search-icon-color;
   &:hover {
     cursor: pointer;
   }
@@ -67,12 +67,12 @@
 
 .dropdown-select() {
   padding: 3px 0px;
-  background-color: @white;
+  background-color: @auto-complete-dropdown-bg;
   position: absolute;
   border-radius: @border-radius-base;
   line-height: 1.5;
   z-index: 1050;
-  box-shadow: 0px 1px 4px 1px @shadow-color;
+  box-shadow: 0px 1px 4px 1px @auto-complete-dropdwon-boxshdow;
   margin: 0;
 }
 
@@ -87,7 +87,7 @@
 }
 .@{auto-complete-select}-group {
   // border-bottom: 1px solid @border;
-  border-bottom: @border-width-base @border-style-base @border;
+  border-bottom: @border-width-base @border-style-base @auto-complete-dropdown-item-border;
   .@{auto-complete-select}-group-label {
     padding: @input-padding-vertical-base @input-padding-horizontal-base;
     font-weight: bold;
@@ -103,7 +103,7 @@
   text-overflow: ellipsis;
   height: 28px;
   &:hover {
-    background-color: @item-hover-bg;
+    background-color: @auto-complete-dropdown-item-hover-bg;
     cursor: pointer;
     font-size: 14px;
   }

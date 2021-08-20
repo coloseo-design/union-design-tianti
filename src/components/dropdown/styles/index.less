@@ -37,8 +37,8 @@
   }
   &-containter {
     padding: 3px 0px;
-    background-color: @white;
-    box-shadow: 0 1px 4px 1px @card-shadow;
+    background-color: @dropdown-containter-bg;
+    box-shadow: 0 1px 4px 1px @dropdown-boxshadow;
     border-radius: 3px;
     min-width: 60px;
     transition: all 0.3s ease;
@@ -47,8 +47,8 @@
     position: absolute;
     width: 5px;
     height: 5px;
-    background: @white;
-    box-shadow: 0 1px 4px -1px @card-shadow;
+    background: @dropdown-containter-bg;
+    box-shadow: 0 1px 4px -1px @dropdown-boxshadow;
     &-bottomCenter {
       left: 50%;
       top: 0;
@@ -92,11 +92,11 @@
     .btn(0px 12px, @border-radius-base 0 0 @border-radius-base,);
     border-right: none;
     font-weight: @btn-font-weight;
-    border-color: @border;
+    border-color: @dropdown-btn-default-border-color;
     &:hover {
-      color: @old_brand_red-5;
-      border-color: @old_brand_red-5;
-      border-right: 1px solid @old_brand_red-5;
+      color: @dropdown-btn-default-hover-color;
+      border-color: @dropdown-btn-default-hover-border-color;
+      border-right: 1px solid @dropdown-btn-default-hover-border-color;
       & + button {
         border-left: none;
       }
@@ -112,64 +112,64 @@
       font-size: @btn-font-size-sm;
     }
     &-type-dashed {
-      border: 1px dashed @border;
+      border: 1px dashed @dropdown-btn-dashed-border-color;
       border-right: none;
       &:hover {
-        border-right: 1px dashed @old_brand_red-5;
+        border-right: 1px dashed @dropdown-btn-dashed-hover-border-color;
       }
     }
     &-type-primary {
-      color: @white;
-      background-color: @old_brand_red-6;
-      border-color: @old_brand_red-6;
+      color: @dropdown-btn-primary-color;
+      background-color: @dropdown-btn-primary-bg;
+      border-color: @dropdown-btn-primary-border-color;
       &:hover {
-        color: @white;
-        border-color: @old_brand_red-6;
-        border-right-color: @white;
+        color: @dropdown-btn-primary-hover-color;
+        border-color: @dropdown-btn-primary-hover-bg;
+        border-right-color: @dropdown-btn-primary-hover-border-right-color;
       }
     }
     &-type-danger {
-      color: @white;
-      background-color: @red-5;
-      border-color: @red-5;
+      color: @dropdown-btn-danger-color;
+      background-color: @dropdown-btn-danger-bg;
+      border-color: @dropdown-btn-danger-border-color;
       &:hover, &:active {
-        color: @white;
-        background-color: @red-4;
-        border-color: @red-4;
-        border-right-color: @white;
+        color: @dropdown-btn-danger-hover-color;
+        background-color: @dropdown-btn-danger-hover-bg;
+        border-color: @dropdown-btn-danger-hover-border-color;
+        border-right-color: @dropdown-btn-danger-hover-border-right-color;
       }
     }
     &-type-link {
-      color: @button-link-color;
+      color: @dropdown-btn-link-color;
       background: transparent;
       border-color: transparent;
       box-shadow: none;
       &:hover {
-        color: @button-link-color;
+        color: @dropdown-btn-link-hover-color;
         background: transparent;
         border-color: transparent;
         box-shadow: none;
       }
     }
     &-disabled {
-      color: @disabled-color;
-      background-color:@disabled-background-color;
-      border-color: @disabled-border-color;
+      color: @dropdown-btn-disabled-color;
+      background-color: @dropdown-btn-disabled-bg;
+      border-color: @dropdown-btn-disabled-border-color;
       cursor: not-allowed;
       &:hover, &:active {
-        color: @disabled-color;
-        background-color: @disabled-background-color;
-        border-color: @disabled-border-color;
+        color: @dropdown-btn-disabled-color;
+        background-color: @dropdown-btn-disabled-bg;
+        border-color: @dropdown-btn-disabled-border-color;
       }
     }
   }
   &-btnIcon {
     .btn(0px 8px, 0 @border-radius-base @border-radius-base 0);
     font-weight: @btn-font-weight;
-    border-color: @border;
+    border-color: @dropdown-btn-default-border-color;
     &:hover {
-      color: @old_brand_red-5;
-      border-color: @old_brand_red-5;
+      color: @dropdown-btn-default-hover-color;
+      border-color:@dropdown-btn-default-hover-border-color;
     }
     &-size-large {
       height: @btn-height-lg;
@@ -182,51 +182,51 @@
       font-size: @btn-font-size-sm;
     }
     &-type-dashed {
-      border: 1px dashed @border;
+      border: 1px dashed @dropdown-btn-dashed-border-color;
     }
     &-type-primary {
-      color: @white;
-      background-color: @old_brand_red-6;
-      border-color: @old_brand_red-6;
-      border-left-color: @white;
+      color: @dropdown-btn-primary-color;
+      background-color: @dropdown-btn-primary-bg;
+      border-color: @dropdown-btn-primary-border-color;
+      border-left-color: @dropdown-btn-primary-hover-border-right-color;
       &:hover {
-        color: @white;
-        border-left-color: @white;
+        color: @dropdown-btn-primary-hover-color;
+        border-left-color: @dropdown-btn-primary-hover-border-right-color;
       }
     }
     &-type-danger {
-      color: @white;
-      background-color: @red-5;
-      border-color: @red-5;
+      color: @dropdown-btn-danger-color;
+      background-color: @dropdown-btn-danger-bg;
+      border-color: @dropdown-btn-danger-border-color;
       border-left-color:  @white;
       &:hover, &:active {
-        color: @white;
-        background-color: @red-4;
-        border-color: @red-4;
+        color: @dropdown-btn-danger-hover-color;
+        background-color: @dropdown-btn-danger-hover-bg;
+        border-color: @dropdown-btn-danger-hover-border-color;
         border-left-color:  @white;
       }
     }
     &-type-link {
-      color: @button-link-color;
+      color: @dropdown-btn-link-color;
       background: transparent;
       border-color: transparent;
       box-shadow: none;
       &:hover {
-        color: @button-link-color;
+        color: @dropdown-btn-link-hover-color;
         background: transparent;
         border-color: transparent;
         box-shadow: none;
       }
     }
     &-disabled {
-      color: @disabled-color;
-      background-color: @disabled-background-color;
-      border-color: @disabled-border-color;
+      color: @dropdown-btn-disabled-color;
+      background-color: @dropdown-btn-disabled-bg;
+      border-color: @dropdown-btn-disabled-border-color;
       cursor: not-allowed;
       &:hover, &:active {
-        color: @disabled-color;
-        background-color: @disabled-background-color;
-        border-color: @disabled-border-color;
+        color: @dropdown-btn-disabled-color;
+        background-color: @dropdown-btn-disabled-bg;
+        border-color: @dropdown-btn-disabled-border-color;
       }
     }
   }

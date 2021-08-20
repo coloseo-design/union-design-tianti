@@ -226,12 +226,27 @@
 @btn-group-border: @primary-5;
 
 // Checkbox
+@checkbox-bg: @white;
+@checnbox-after-border: #fff;
+@checkbox-border-color: @border;
+@checkbox-diabled-color: @disabled-color;
+@checkbox-checked-bg: @primary-color;
+@checkbox-checked-border-colors: @primary-color;
+@checkbox-indeterminate-bg: #fff;
+@checkbox-indeterminate-border-color: @primary-color;
+@checkbox-indeterminate-after-bg: @primary-color;
+@checked-disabled-bg: @disabled-background-color;
+@checkbox-diabled-border-color: @disabled-border-color;
+@checkbox-disabled-after-border-color: @border;
 @checkbox-size: 16px;
 @checkbox-border-width: @border-width-base;
 
 // Descriptions
 @descriptions-content: rgba(0,0,0,0.85);
+@descriptions-content-color: rgba(0,0,0,0.85);
+@descriptions-content-td-bg: @white;
 @descriptions-label-width: 112px;
+@descriptions-label-color: @text-color;
 @descriptions-content-width: 213px;
 @descriptions-border-color: #D0D5DF;
 @descriptions-border-label-bg: #F4F5F7;
@@ -332,10 +347,38 @@
 @animation-duration-fast: 0.1s; // Tooltip
 
 //CollapsePanel
+@collapse-border-color: @normal-color;
+@collapse-item-border-color: @normal-color;
+@collapse-item-header-bg: #F4F5F7;
+@collapse-item-content-bg: @content-bg;
 @collapse-panel-border-radius: @border-radius-base;
 
 //Dropdown
-@dropdown-menu-bg: @component-background;
+@dropdown-containter-bg: @white;
+@dropdown-boxshadow: rgba(147,147,147,0.35);
+@dropdown-btn-default-border-color: @border;
+@dropdown-btn-default-hover-border-color: @primary-5;
+@dropdown-btn-default-hover-color: @primary-5;
+@dropdown-btn-dashed-border-color: @border;
+@dropdown-btn-dashed-hover-border-color: @primary-5;
+@dropdown-btn-primary-color: @white;
+@dropdown-btn-primary-hover-color: @white;
+@dropdown-btn-primary-bg: @primary-color;
+@dropdown-btn-primary-hover-bg: @primary-color;
+@dropdown-btn-primary-border-color: @primary-color;
+@dropdown-btn-primary-hover-border-right-color: @white;
+@dropdown-btn-danger-color: @white;
+@dropdown-btn-danger-bg: @red-5;
+@dropdown-btn-danger-border-color: @red-5;
+@dropdown-btn-danger-hover-color: @white;
+@dropdown-btn-danger-hover-bg: @red-4;
+@dropdown-btn-danger-hover-border-color: @red-4;
+@dropdown-btn-danger-hover-border-right-color: @white;
+@dropdown-btn-link-color: #207EEA;
+@dropdown-btn-link-hover-color: #207EEA;
+@dropdown-btn-disabled-color: @disabled-color;
+@dropdown-btn-disabled-bg: @disabled-background-color;
+@dropdown-btn-disabled-border-color: @disabled-border-color;
 @dropdown-vertical-padding: 5px;
 @dropdown-edge-child-vertical-padding: 4px;
 @dropdown-font-size: @font-size-base;
@@ -343,8 +386,22 @@
 
 // Form
 // ---
-@label-required-color: @highlight-color;
+@form-label-required-color: @red-6;
 @label-color: @heading-color;
+@form-error-color: @red-6;
+@form-item-error-component-bg: @white;
+@form-item-error-component-border-color: @red-5;
+@form-item-error-input-hover-bg: @white;
+@form-item-error-input-hover-border-color: @red-5;
+@form-item-error-input-hover-boxshoadow: rgba(red(@red-6), green(@red-6), blue(@red-6), 0.2);
+@form-item-explain-color: @disabled-color;
+@form-item-error: @disabled-color;
+@form-item-error-box: @white;
+@form-item-error-box-before-border-color: @red-5;
+@form-item-error-box-after-border-color: @white;
+@form-item-error-box-content-border: @red-5;
+@form-item-error-box-content-boxshadow: rgba(147,147,147,0.35);
+@form-item-haserror-error-color: @red-5;
 @form-warning-input-bg: @input-bg;
 @form-item-margin-bottom: 24px;
 @form-item-trailing-colon: true;
@@ -397,14 +454,65 @@
 
 // Cascader
 // ----
+@cascader-bg: #fff;
+@cascader-border-color: @border;
+@cascader-hover-border-color: #4AA1F7;
+@cascader-focus-border-color: #4AA1F7;
+@cascader-keyword-color: @highlight-color;
+@cascader-disabled-bg: @disabled-background-color;
+@cascader-disabled-color: @disabled-color;
+@cascader-disabled-border-color: @disabled-border-color;
+@cascader-placeholder-color: hsv(0, 0, 75%);
+@cascader-icon-color: @border;
+@cascader-icon-disbled-color: rgba(0,0,0,.45); 
+@cascader-dropdwon-boxshadow: @shadow-color;
+@cascader-dropdwon-bg: #fff;
+@cascader-dropdown-border-left-color: @border;
+@cascader-dropdown-item-active-bg: @item-active-bg;
+@cascader-dropdown-item-hover-bg: @item-hover-bg;
+@cascader-dropdown-item-diabled-color: @disabled-color;
 @cascader-dropdown-vertical-padding: @dropdown-vertical-padding;
 @cascader-dropdown-edge-child-vertical-padding: @dropdown-edge-child-vertical-padding;
 @cascader-dropdown-font-size: @dropdown-font-size;
 @cascader-dropdown-line-height: @dropdown-line-height;
 
+// DatePicker
+
+@dpcolor-input-border-normal: @border;
+@dpcolor-input-border-hover: #4AA1F7;
+@dpcolor-input-border-focus: #4AA1F7;
+
+@dpcolor-text-85: rgba(0,0,0,0.85);
+@dpcolor-text-65: @text-color;
+@dpcolor-text-45: @text-color-secondary;
+@dpcolor-text-35: @placeholder;
+@dpcolor-text-selected: @white;
+
+@dpcolor-bg: @white;
+@dpcolor-bg-hover: @red-1;
+@dpcolor-bg-hover-hover: @primary-2;
+@dpcolor-bg-selected: @primary-6;
+@dpcolor-bg-disabled: @disabled-background-color;
+
+@dpcolor-border-disabled: @disabled-border-color;
+
+@dpborder-input-normal: 1px solid @dpcolor-input-border-normal;
+@dpborder-input-hover: 1px solid @dpcolor-input-border-hover;
+@dpborder-input-focus: 1px solid @dpcolor-input-border-focus;
+@dpborder-radius: @border-radius-base;
+@dpborder-split-line: 1px solid @dpcolor-border-disabled;
+@dpborder-disabled: 1px solid @disabled-border-color;
+@dpborder-cur: 1px solid @dpcolor-bg-selected;
+
+@dpstyle-popup: @shadow-2;
+
 // Anchor
 // ---
 @anchor-border-color: #D8D8D8;
+@anchor-link-color: rgba(0,0,0,0.85);
+@anchor-link-hover-color:@primary-color;
+@anchor-bg: @border;
+@anchor-active-bg: @primary-color;
 @anchor-ball-width: 8px;
 
 // Tooltip
@@ -528,6 +636,9 @@
 @carousel-dot-width: 16px;
 @carousel-dot-height: 3px;
 @carousel-dot-active-width: 24px;
+@carousel-strip-dot-bg: #fff;
+@carousel-cicle-dot-bg: #D8D8D8;
+@carousel-circle-dot-active-bg: @primary-color;
 
 // Badge
 // ---
@@ -537,6 +648,9 @@
 @badge-font-weight: normal;
 @badge-status-size: 6px;
 @badge-text-color: @component-background;
+@badge-sup-bg: @primary-color;
+@badge-sup-boxshadow: @white;
+@badge-sup-color: @white;
 
 // Rate
 // ---
@@ -546,13 +660,11 @@
 // Card
 // ---
 @card-head-color: @heading-color;
-@card-head-background: transparent;
+@card-head-background: #E9EBF0;
 @card-head-padding: 16px;
 @card-inner-head-padding: 12px;
 @card-padding-base: 24px;
-@card-actions-background: @background-color-light;
-@card-skeleton-bg: #cfd8dc;
-@card-background: @component-background;
+@card-background: #F9FAFB;
 @card-shadow: rgba(147,147,147,0.35);
 @card-radius: @border-radius-sm;
 
@@ -643,14 +755,31 @@
 
 // Breadcrumb
 // ---
-@breadcrumb-base-color: @text-color-secondary;
-@breadcrumb-last-item-color: @text-color;
+@breadcrumb-base-color: @disabled-color;
+@breadcrumb-last-item-color: rgba(0,0,0,0.85);
 @breadcrumb-font-size: @font-size-base;
 @breadcrumb-icon-font-size: @font-size-base;
-@breadcrumb-link-color: @text-color-secondary;
-@breadcrumb-link-color-hover: @primary-5;
+@breadcrumb-link-color: @disabled-color;
+@breadcrumb-link-color-hover: @primary-color;
 @breadcrumb-separator-color: @text-color-secondary;
 @breadcrumb-separator-margin: 0 @padding-xs;
+
+
+// Calendar 
+
+@calendar-title-bg-color: @disabled-background-color;
+@calendar-line-color: @border;
+@calendar-head-button-normal-color: rgba(0, 0, 0, 0.85);
+@calendar-head-button-active-color: @primary-color;
+@calendar-year-split-line-color: #D8D8D8;
+@calendar-year-item-border-top-normal-color: #D8D8D8;
+@calendar-year-item-border-top-active-color: @primary-color;
+@calendar-year-item-select-bg-color: @red-1;
+@calendar-year-item-hover-bg-color: @primary-1;
+@calendar-month-not-cur-color: @placeholder;
+@calendar-month-cur-color: @text-color;
+@calendar-month-item-hover-color: @primary-1;
+@calendar-month-item-selected-color: @primary-6;
 
 // Slider
 // ---
@@ -719,6 +848,22 @@
 @alert-error-border-color: ~`colorPalette('@{error-color}', 3) `;
 @alert-error-bg-color: ~`colorPalette('@{error-color}', 1) `;
 @alert-error-icon-color: @error-color;
+@alert-description-color: rgba(0,0,0,0.85);
+
+
+// AutoComplete
+
+@auto-complete-text-color: @text-color;
+@auto-complete-border-color: @border;
+@auto-complete-border-hover-color: #4AA1F7;
+@auto-complete-placeholer: hsv(0, 0, 75%);
+@auto-complete-disabled-bg: @disabled-background-color;
+@auto-complete-disabled-border: @disabled-border-color;
+@auto-complete-search-icon-color: @border;
+@auto-complete-dropdwon-boxshdow: @shadow-color;
+@auto-complete-dropdown-bg: @white;
+@auto-complete-dropdown-item-hover-bg: @item-hover-bg;
+@auto-complete-dropdown-item-border: @border;
 
 // List
 // ---
@@ -744,6 +889,9 @@
 
 // Drawer
 // ---
+@drawer-head-color: @disabled-background-color;
+@drawer-bg-color: @content-bg;
+@drawer-boxshadow: rgba(147,147,147,0.35);
 @drawer-header-padding: 16px 24px;
 @drawer-body-padding: 24px;
 

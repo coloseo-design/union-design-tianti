@@ -12,7 +12,7 @@
 .@{collapse}{
   margin: 0;
   padding: 0;
-  border: 1px solid @normal-color;
+  border: 1px solid @collapse-border-color;
   border-radius: 3px;
   border-bottom:0;
   max-width: 636px;
@@ -20,13 +20,13 @@
 
 .@{collapse-item}{
   width: 100%;
-  border-bottom: 1px solid @normal-color;
+  border-bottom: 1px solid @collapse-item-border-color;
 }
 
 .@{collapse-item-header}{
   height: 46px;
   padding: 12px 17px;
-  background-color: @descriptions-border-label-bg;
+  background-color: @collapse-item-header-bg;
   cursor:pointer;
   span{
     transition:all .3s;
@@ -34,7 +34,7 @@
 }
 
 .@{collapse-item-content}{
-  background-color: @content-bg;
+  background-color: @collapse-item-content-bg;
   transition:all .3s,visibility .1s;
 
 }

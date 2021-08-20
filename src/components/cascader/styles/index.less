@@ -8,29 +8,29 @@
 
 .@{cascader-prefix-cls}-picker {
   position: relative;
-  background-color: @white;
+  background-color: @cascader-bg;
   width: @input-width-base;
   height: @input-height-base;
   display: inline-block;
   border-radius: @border-radius-base;
-  border: @border-width-base @border-style-base @border;
+  border: @border-width-base @border-style-base @cascader-border-color;
   padding: @input-padding-vertical-base @input-padding-horizontal-base;
   cursor: pointer;
   // chrome 上不设置会导致排版错误
   vertical-align: middle;
 
   &-focused {
-    border-color: @input-hover-border-color;
+    border-color: @cascader-focus-border-color;
     border-right-width: @border-width-base;
   }
   &-disabled {
-    background: @disabled-background-color;
+    background: @cascader-disabled-bg;
     cursor: not-allowed;
-    color: @disabled-color;
-    border-color: @disabled-border-color;
+    color: @cascader-disabled-color;
+    border-color: @cascader-disabled-border-color;
   }
   &:not(.@{cascader-prefix-cls}-picker-disabled):hover {
-    border-color: @input-hover-border-color;
+    border-color:  @cascader-hover-border-color;
     border-right-width: @border-width-base;
   }
 }
@@ -45,7 +45,7 @@
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-  background: @white;
+  background: @cascader-bg;
   border: none;
   outline: none;
   cursor: pointer;
@@ -56,13 +56,13 @@
   &::placeholder {
     font-family: PingFangSC-Regular;
     font-size: @font-size-base;
-    color: @input-placeholder-color;
+    color: @cascader-placeholder-color;
   }
 
   &-disabled {
-    background: @disabled-background-color;
+    background: @cascader-disabled-bg;
     cursor: not-allowed;
-    color: @disabled-color;
+    color: @cascader-disabled-border-color;
   }
 }
 
@@ -71,13 +71,13 @@
   top: 50%;
   right: @input-padding-horizontal-base;
   transform: translateY(-50%);
-  color: @border;
+  color: @cascader-icon-color;
   cursor: pointer;
 
   &-disabled {
-    background: @disabled-background-color;
+    // background: @disabled-background-color;
     cursor: not-allowed;
-    color: @disabled-color;
+    color: @cascader-icon-disbled-color;
   }
 }
 
@@ -92,11 +92,11 @@
   position: absolute;
   top: 4px;
   left: 0px;
-  box-shadow: 0px 1px 4px 1px @shadow-color;
+  box-shadow: 0px 1px 4px 1px @cascader-dropdwon-boxshadow;
   border-radius: @border-radius-base;
   height: 180px;
   white-space: nowrap;
-  background: @white;
+  background: @cascader-dropdwon-bg;
   z-index: @zindex-dropdown;
 }
 .@{cascader-prefix-cls}-menu {
@@ -104,7 +104,7 @@
   padding: @cascader-dropdown-vertical-padding 0px;
   display: inline-block;
   height: 100%;
-  border-left: @border-width-base @border-style-base @border;
+  border-left: @border-width-base @border-style-base @cascader-dropdown-border-left-color;
   overflow: auto;
 
   &:first-child {
@@ -117,24 +117,24 @@
     min-width: 112px;
 
     &.active {
-      background: @item-active-bg;
+      background: @cascader-dropdown-item-active-bg;
       cursor: pointer;
     }
 
     &.disabled {
       cursor: not-allowed;
-      color: @disabled-color;
+      color: @cascader-dropdown-item-diabled-color;
     }
 
     &:not(.disabled):hover {
-      background: @item-hover-bg;
+      background: @cascader-dropdown-item-hover-bg;
       cursor: pointer;
     }
   }
 }
 
 .@{cascader-prefix-cls}-keyword {
-  color: @highlight-color;
+  color: @cascader-keyword-color;
 }
 
 .@{cascader-prefix-cls}-empty {

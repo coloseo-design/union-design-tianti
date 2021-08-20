@@ -3,8 +3,6 @@
 
 @drawer: ~"@{uni-prefix}-drawer";
 
-@drawer-head-color: @disabled-background-color;
-@drawer-bg-color: @content-bg;
 
 .@{drawer}-mask {
     position: fixed;
@@ -57,7 +55,7 @@
             bottom: 0;
             & > .default {
                 height: 48px;
-                box-shadow: -2px 2px 6px 0 @card-shadow;
+                box-shadow: -2px 2px 6px 0 @drawer-boxshadow;
             }
         }
     }

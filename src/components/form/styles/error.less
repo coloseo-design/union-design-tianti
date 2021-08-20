@@ -1,6 +1,6 @@
 
 .form-item-error {
-  color:  @disabled-color;
+  color: @form-item-error;
   position: relative;
   min-height: 24px;
   transition: color 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
@@ -10,7 +10,7 @@
     top: 6px;
     .error-box {
       position: relative;
-      background-color: @component-background;
+      background-color: @form-item-error-box;
       &::before, &::after {
         content: ' ';
         border-width: 5px;
@@ -19,17 +19,17 @@
         position: absolute;
       }
       &::before {
-        border-color: transparent transparent @btn-danger-bg ;
+        border-color: transparent transparent @form-item-error-box-before-border-color;
         top: -10px;
       }
       &::after {
-        border-color: transparent transparent @component-background ;
+        border-color: transparent transparent @form-item-error-box-after-border-color;
         top: -9px;
       }
       .error-box-content {
         padding: 8px;
-        border: 1px solid @btn-danger-bg;
-        box-shadow: 0 1px 4px 1px @card-shadow;
+        border: 1px solid @form-item-error-box-content-border;
+        box-shadow: 0 1px 4px 1px @form-item-error-box-content-boxshadow;
         border-radius: 3px;
       }
     }
@@ -45,7 +45,7 @@
 }
 .has-error {
   .form-item-error {
-    color: @red-5;
+    color: @form-item-haserror-error-color;
   }
 }
 

@@ -28,13 +28,12 @@
   display: block;
   width: @checkbox-size;
   height: @checkbox-size;
-  background-color: @white;
+  background-color: @checkbox-bg;
   border-radius: 2px;
   border-collapse: separate;
   transition: all .3s;
   // checked
-  background-color: @white;
-  border: @checkbox-border-width @border-style-base @border;
+  border: @checkbox-border-width @border-style-base @checkbox-border-color;
   transition: all .3s;
   &::after {
     // 画一个勾
@@ -44,7 +43,7 @@
     height: @check-height;
     position: absolute;
     content: '';
-    border: 2px solid @white;
+    border: 2px solid @checnbox-after-border;
     top: 50%;
     left: 22%;
     transform: rotate(45deg) scale(0) translate(-50%, -50%);
@@ -72,14 +71,14 @@
 
 // 处理禁止文本
 .@{checkbox-prefix-cls}-disabled+span {
-  color: @disabled-color;
+  color: @checkbox-diabled-color;
 }
 
 // 处理checked
 .@{checkbox-prefix-cls}-checked {
   .@{checkbox-inner-prefix-cls} {
-    background-color: @primary-color;
-    border-color: @primary-color;
+    background-color: @checkbox-checked-bg;
+    border-color: @checkbox-checked-border-colors;
     &::after {
       opacity: 1;
       transform: rotate(45deg) scale(1) translate(-50%, -50%);
@@ -89,15 +88,15 @@
 // 设置为未决状态的显示
 .@{checkbox-prefix-cls}-indeterminate {
   .@{checkbox-inner-prefix-cls} {
-    background-color: @white;
+    background-color: @checkbox-indeterminate-bg;
     // background-color: @primary-color;
-    border-color: @primary-color;
+    border-color: @checkbox-indeterminate-border-color;
     &::after {
       top: 50%;
       left: 50%;
       width: 8px;
       height: 8px;
-      background-color: @primary-color;
+      background-color: @checkbox-indeterminate-after-bg;
       border: 0;
       opacity: 1;
       transform: translate(-50%,-50%) scale(1);
@@ -128,10 +127,10 @@
     }
     .@{checkbox-inner-prefix-cls} {
       cursor: not-allowed;
-      background-color: @input-disabled-bg;
-      border-color: @disabled-border-color;
+      background-color: @checked-disabled-bg;
+      border-color: @checkbox-diabled-border-color;
       &::after {
-        border-color: @border;
+        border-color: @checkbox-disabled-after-border-color;
       }
     }
   }
