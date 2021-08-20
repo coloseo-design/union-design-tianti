@@ -10,8 +10,8 @@
   transition: visibility .3s ease-in-out;
   &-content {
     &-inner{
-      background-color: @black;
-      color: @white;
+      background-color: @tooltip-bg-color;
+      color: @tooltip-color;
       border-radius: 2px;
       padding: 6px;
       min-width: 30px;
@@ -21,7 +21,7 @@
     &-arrow {
       width: 5px;
       height: 5px;
-      background: @black;
+      background: @tooltip-bg-color;
       position: absolute;
       transform: translate(-50%, -2.5px) rotate(45deg);
     }

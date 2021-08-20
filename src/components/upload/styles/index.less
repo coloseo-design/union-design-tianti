@@ -3,8 +3,6 @@
 
 @upload: ~"@{uni-prefix}-upload";
 
-@upload-error-color: @error-color;
-
 @upload-list-text: ~"@{upload}-list-text";
 @upload-item: ~"@{upload}-item";
 @upload-text: ~"@{upload}-text";
@@ -64,7 +62,7 @@
                     user-select: none;
                     cursor: pointer;
                     text-align: center;
-                    color: @border;
+                    color: @upload-icon-color;
                 }
 
                 & > .@{upload-icon}.@{upload-left} {
@@ -86,11 +84,11 @@
                 margin-top: 4px;
                 height: 2px;
                 border-radius: 1px;
-                background-color: @divider-border-color;
+                background-color: @upload-progress-background-color;
 
                 & > div {
                     height: 2px;
-                    background-color: @link-color;
+                    background-color: @upload-progress-child-background-color;
                     border-radius: 1px;
                     transition: all 0.1s;
                     z-index: 10;
@@ -106,12 +104,13 @@
         display: inline-block;
         width: 104px;
         height: 104px;
-        border: 1px solid @disabled-border-color;
+        border: 1px solid @upload-list-picture-card-border-color;
+
         border-radius: @border-radius-base;
         margin: 0px 10px 10px 0px;
         font-size: 14px;
         line-height: 22px;
-        background-color: #fff;
+        background-color: @upload-list-picture-card-background-color;
 
         &:hover{
             & > .@{upload-mask} {
@@ -121,7 +120,7 @@
                 left: 8px;
                 right: 8px;
                 bottom: 8px;
-                background-color: @placeholder;
+                background-color: @upload-list-picture-card-hover-background-color;
             }
         }
 
@@ -134,7 +133,7 @@
                 margin-left: 50%;
                 transform: translate(-50%, -50%);
                 font-size: 18px;
-                color: #fff;
+                color: @upload-icons-color;
 
                 & > span {
                     cursor: pointer;
@@ -153,7 +152,7 @@
             position: relative;
             height: 4px;
             border-radius: 2px;
-            background-color: @divider-border-color;
+            background-color: @upload-progress-background-color;
 
             & > .@{upload-text} {
                 position: absolute;
@@ -167,7 +166,7 @@
 
             & > .@{upload-percent} {
                 height: 4px;
-                background-color: @link-color;
+                background-color: @upload-progress-child-background-color;
                 border-radius: 2px;
                 transition: all 0.1s;
                 z-index: 10;

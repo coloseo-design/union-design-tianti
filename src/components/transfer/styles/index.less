@@ -5,7 +5,7 @@
 @operation: ~'@{base-transfer}-operation';
 
 .@{base-transfer} {
-  background-color: @white;
+  background-color: @transfer-background-color;
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -29,7 +29,7 @@
   display: inline-block;
   width: 176px;
   height: @transfer-list-height;
-  border: @border-width-base @border-style-base @border;
+  border: @border-width-base @border-style-base @transfer-list-border-color;
   border-radius: @border-radius-base;
   vertical-align: middle;
   overflow: hidden;
@@ -41,12 +41,12 @@
     height: @transfer-header-height;
     width: 100%;
     padding: @input-padding-vertical-lg @input-padding-horizontal-base;
-    border-bottom: @border-width-base @border-style-base @border;
+    border-bottom: @border-width-base @border-style-base @transfer-list-border-color;
     overflow: hidden;
     &-left {
       float: left;
       span {
-        color: @placeholder;
+        color: @transfer-list-header-left-color;
       }
     }
     &-right {
@@ -64,7 +64,7 @@
     }
     &-disabled {
       cursor: not-allowed;
-      background-color: @disabled-background-color;
+      background-color: @transfer-body-disabled-bg-color;
     }
     &-content {
       height: 100%;
@@ -81,7 +81,7 @@
         padding: 0px 12px;
         line-height: 28px;
         &-selected {
-          background-color: @item-hover-bg;
+          background-color: @transfer-body-content-item-selected-bg-color;
         }
       }
     }

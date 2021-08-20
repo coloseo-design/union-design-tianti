@@ -15,23 +15,23 @@
     display: block;
     width: 100%;
     min-height: @input-height-base;
-    background: @input-bg;
+    background: @tree-select-background;
     padding: 3px @input-padding-horizontal-base;
     border-radius: @border-radius-base;
     position: relative;
-    border: @border-width-base @border-style-base @border;
+    border: @border-width-base @border-style-base @tree-select-border;
     outline: none;
     transition: all 0.3s linear;
     cursor: text;
     &:not(&-disabled):hover {
-      border-color: @input-hover-border-color;
+      border-color: @tree-select-hover-border-color;
     }
     &-focus {
-      border-color: @input-hover-border-color;
+      border-color: @tree-select-hover-border-color;
       outline: none;
     }
     &-placholder {
-      color: @placeholder;
+      color: @tree-select-placeholder-color;
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
@@ -42,10 +42,10 @@
       height: 22px;
       max-width: 100px;
       border-radius: 3px;
-      background: @disabled-background-color;
+      background: @tree-select-tag-background;
       display: inline-block;
       vertical-align: middle;
-      border: 1px solid @disabled-border-color;
+      border: 1px solid @tree-select-tag-border-color;
       margin-right: 8px;
       padding: 0px 8px;
       &-value {
@@ -58,20 +58,20 @@
         font-size: 12px;
         line-height: 20px;
         padding-right: 8px;
-        color: @text-color;
+        color: @tree-select-tag-value;
       }
       &-close {
         cursor: pointer;
-        color: @border;
+        color: @tree-select-tag-close;
         font-size: 12px;
         display: inline-block;
         vertical-align: text-top;
       }
     }
     &-disabled {
-      color: @disabled-color;
-      border-color: @disabled-border-color;
-      background-color: @disabled-background-color;
+      color: @tree-select-disabled-color;
+      border-color: @tree-select-disabled-border-color;
+      background-color: @tree-select-disabled-background-color;
       cursor: not-allowed;
     }
   }
@@ -84,9 +84,9 @@
   }
   &-drop {
     position: absolute;
-    background-color: @white;
+    background-color: @tree-select-drop-background-color;
     border-radius: 3px;
-    box-shadow: 0 1px 4px 1px @card-shadow;
+    box-shadow: 0 1px 4px 1px @tree-select-drop-box-shadow-color;
     z-index: 1050;
     display: none;
     &-show {
@@ -105,7 +105,7 @@
     height: 28px;
     line-height: 28px;
     &:hover {
-      background-color: @item-hover-bg;
+      background-color: @tree_select-node-hover-background-color;
     }
     &-switch {
       display: inline-block;
@@ -119,11 +119,11 @@
       padding: 0px 3px;
       border-radius: 2px;
       &-selected {
-        color: @old_brand_red-6;
+        color: @tree_select-selected-color;
       }
       &-disabled {
         cursor: not-allowed;
-        color: @disabled-color;
+        color: @tree_select-disabled-color;
       }
     }
   }
