@@ -183,7 +183,15 @@
 @btn-primary-bg: @primary-color;
 
 @btn-default-color: @text-color;
+@btn-default-border-color: @border;
 @btn-default-bg: @component-background;
+
+@btn-disabled-border-color: @border;
+
+@btn-dashed-color: @text-color;
+@btn-dashed-border-color: @border;
+@btn-dashed-bg: @component-background;
+
 
 // 幽灵按钮常规
 @btn-ghost-color: @white;
@@ -258,15 +266,24 @@
 @empty-font-size: @font-size-base;
 
 // Radio
+@radio-border-color: @border;
+@radio-hover-border-color: @primary-color;
+@radio-diabled-bg: @disabled-background-color;
+@radio-diabled-border-color: @disabled-border-color;
+@radio-diabled-text-color: @disabled-color;
+@radio-checked-bg: @white;
+@radio-checked-border-color: @primary-color;
+@radio-checked-diabled-border-color: @border;
+@radio-checked-inner-bg: @primary-color;
+@radio-checked-disabled-inner-bg: @disabled-border-color;
 @radio-size: 16px;
-@radio-dot-color: @primary-color;
 
 // Radio buttons
-@radio-button-bg: @btn-default-bg;
-@radio-button-checked-bg: @btn-default-bg;
-@radio-button-color: @btn-default-color;
-@radio-button-hover-color: @primary-5;
-@radio-button-active-color: @primary-7;
+// @radio-button-bg: @btn-default-bg;
+// @radio-button-checked-bg: @btn-default-bg;
+// @radio-button-color: @btn-default-color;
+// @radio-button-hover-color: @primary-5;
+// @radio-button-active-color: @primary-7;
 @radio-center-button-width: 8px;
 
 // Media queries breakpoints
@@ -317,7 +334,7 @@
 @layout-sider-background: @layout-header-background;
 
 @layout-sider-light-bg: @disabled-background-color;
-@layout-sider-box-shadow: 2px 0 4px 0 @card-shadow;
+@layout-sider-box-shadow: 2px 0 4px 0 rgba(147,147,147,0.35);
 @layout-trigger-height: 80px;
 @layout-trigger-width: 16px;
 @layout-trigger-border-radius: 0 20px 20px 0;
@@ -565,21 +582,15 @@
 
 // Popover
 // ---
-// Popover body background color
-@popover-bg: @component-background;
-// Popover text color
-@popover-color: @text-color;
-// Popover maximum width
-@popover-min-width: 177px;
-// Popover arrow width
-@popover-arrow-width: 6px;
-// Popover arrow color
-@popover-arrow-color: @popover-bg;
-// Popover outer arrow width
-// Popover outer arrow color
-@popover-arrow-outer-color: @popover-bg;
-// Popover distance with trigger
-@popover-distance: @popover-arrow-width + 4px;
+@popover-bg: @white;
+@popover-boxshadow: rgba(147,147,147,0.35);
+@popover-title-border:#D8D8D8;
+
+// Popconfirm
+
+@popconfirm-bg: @white;
+@popconfirm-boxshadow: rgba(147,147,147,0.35);
+@popconfirm-icon-color: @warning-color;
 
 // Modal
 // --
@@ -596,13 +607,23 @@
 
 // Notification
 
+@notification-container-bg: @white;
+@notification-container-boxshadow: @shadow-2;
+@notification-container-text-color: @text-color;
 
 
 // Progress
 // --
+@progress-base-bg: @disabled-background-color;
+@progress-normal-bg: #207EEA;
+@progress-text-color: @placeholder;
+@progress-status-exception-bg: @red-5;
+@progress-status-exception-text-color: @red-5;
+@progress-status-success-bg: #44BF30;
+@progress-status-success-text-color: #44BF30;
 @progress-radius: 100px;
-@progress-status-exception-color: @red-5;
-@progress-status-success-color: #44BF30;
+
+
 
 
 // Menu
@@ -718,8 +739,16 @@
 
 // Rate
 // ---
+@rate-color: @disabled-background-color;
 @rate-star-color: #FAAD14;
 @rate-star-font-size: 20px;
+
+// Result
+
+@result-success-color: #44BF30;
+@result-error-color: @red-6;
+@result-title-color: rgba(0,0,0,0.85);
+@result-subtitle-color: @disabled-color;
 
 // Card
 // ---
@@ -804,18 +833,26 @@
 
 // Pagination
 // ---
+@pagination-color: #595959;
+@pagination-item-border: @border;
+@pagination-item-hover-bg: rgb(230, 231, 234);
+@pagination-item-hover-border-color: rgb(230, 231, 234);
+@pagination-item-selected-border-color: @border;
+@pagination-item-selected-bg: @border;
+@pagination-item-selected-color: @white;
+@pagination-quick-jumper-input-border: @border;
 @pagination-item-size: 32px;
 @pagination-item-size-sm: 24px;
 @pagination-font-family: Arial;
 @pagination-font-weight-active: 500;
-@pagination-hover-color: rgb(230, 231, 234);
 
 // PageHeader
 // ---
 @page-header-padding: 24px;
 @page-header-padding-vertical: 16px;
 @page-header-padding-breadcrumb: 12px;
-@page-header-back-color: #000;
+@page-header-bg: @disabled-background-color;
+@page-header-color: rgba(0,0,0,0.85);
 
 // Breadcrumb
 // ---

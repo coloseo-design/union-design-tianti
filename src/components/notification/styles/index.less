@@ -19,8 +19,8 @@
         width: 384px;
         margin: 10px auto;
         padding: 16px 24px;
-        box-shadow: @shadow-2;
-        background-color: @white;
+        box-shadow: @notification-container-boxshadow;
+        background-color: @notification-container-bg;
         border-radius: @border-radius-base;
         pointer-events: auto;
 
@@ -68,7 +68,7 @@
         & > .@{notification-content} {
             font-size: 14px;
             line-height: 22px;
-            color: @text-color;
+            color: @notification-container-text-color;
         }
     }
 }

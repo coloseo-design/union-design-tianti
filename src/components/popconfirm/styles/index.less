@@ -19,8 +19,8 @@
       position: absolute;
       width: 5px;
       height: 5px;
-      background: @white;
-      box-shadow: 0 1px 4px -1px  @card-shadow;
+      background: @popconfirm-bg;
+      box-shadow: 0 1px 4px -1px @popconfirm-boxshadow;
       &-top {
         bottom: -5px;
         transform: translate(-50%, -2.5px) rotate(45deg);
@@ -83,16 +83,16 @@
       }
     }
     &-inner {
-      background: @white;
+      background: @popconfirm-bg;
       border-radius: 2px;
       padding: 16px 8px;
       min-width: 120px;
       min-height: 90px;
-      box-shadow: 0 1px 4px 1px @card-shadow;
+      box-shadow: 0 1px 4px 1px @popconfirm-boxshadow;
       &-icon {
         position: absolute;
         margin-top: 2px;
-        color: @alert-warning-icon-color;
+        color: @popconfirm-icon-color;
         font-size: 16px;
         margin-right: 8px;
       }

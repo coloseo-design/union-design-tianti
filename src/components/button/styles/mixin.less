@@ -207,7 +207,7 @@
 }
 // default button style
 .btn-default() {
-  .button-variant-other(@btn-default-color; @btn-default-bg; @border);
+  .button-variant-other(@btn-default-color; @btn-default-bg; @btn-default-border-color);
   &:hover,
   &:focus,
   &:active,
@@ -223,7 +223,7 @@
 }
 // dashed button style
 .btn-dashed() {
-  .button-variant-other(@btn-default-color, @btn-default-bg, @border);
+  .button-variant-other(@btn-dashed-color, @btn-dashed-bg, @btn-dashed-border-color);
   border-style: dashed;
 }
 // danger button style

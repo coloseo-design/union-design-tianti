@@ -13,7 +13,7 @@
 
 .@{pagination}-wrap {
     height: 24px;
-    color: @comment-action-hover-color;
+    color: @pagination-color;
     box-sizing: border-box;
 
     & > div {
@@ -37,20 +37,20 @@
     }
 
     & > .@{pagination-item} {
-        border: 1px solid @border;
+        border: 1px solid @pagination-item-border;
         border-radius: @border-radius-base;
         font-size: 12px;
     }
 
     & > .@{pagination-item-hover}:hover {
-        background-color: @pagination-hover-color;
-        border: 1px solid @pagination-hover-color;
+        background-color: @pagination-item-hover-bg;
+        border: 1px solid @pagination-item-hover-border-color;
     }
 
     & > .@{pagination-item-selected} {
-        background-color: @border;
-        border: 1px solid @border;
-        color: @white;
+        background-color: @pagination-item-selected-bg;
+        border: 1px solid @pagination-item-selected-border-color;
+        color: @pagination-item-selected-color;
     }
 
     & > .@{pagination-quick-jumper},
@@ -65,7 +65,7 @@
         & > input {
             box-sizing: border-box;
             width: 42px;
-            border: 1px solid @border;
+            border: 1px solid @pagination-quick-jumper-input-border;
             border-radius: @border-radius-base;
             margin: 0 8px;
             outline: none;

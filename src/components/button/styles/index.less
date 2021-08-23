@@ -34,7 +34,7 @@
       border-left-color: @btn-group-border;
 
       &:disabled {
-        border-color: @border;
+        border-color: @btn-disabled-border-color;
       }
     }
 
@@ -42,7 +42,7 @@
       &:not(:last-child) {
         border-right-color: @btn-group-border;
         &[disabled] {
-          border-right-color: @border;
+          border-right-color: @btn-disabled-border-color;
         }
       }
     }
@@ -51,7 +51,7 @@
     .@{btn-prefix-cls}-group & + & {
       border-left-color: @btn-group-border;
       &[disabled] {
-        border-left-color: @border;
+        border-left-color: @btn-disabled-border-color;
       }
     }
   }
@@ -163,9 +163,9 @@
   }
 
   &-background-ghost {
-    color: @component-background;
+    color: @btn-ghost-color;
     background: transparent !important;
-    border-color: @component-background;
+    border-color: @btn-ghost-border;
   }
 
   &-background-ghost&-primary {

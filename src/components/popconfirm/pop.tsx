@@ -174,7 +174,6 @@ class PopComponent extends React.Component<PopProps, PopconfirmState> {
     if (trigger === 'click' && target) {
       if (popupVisible === undefined) { // 用户传了 visible 后完全由 用户自己控制 弹窗的显隐（默认组件控制）
         if (!visible) {
-          console.log('==click');
           this.compute(target);
           this.setState({ visible: true });
         } else {

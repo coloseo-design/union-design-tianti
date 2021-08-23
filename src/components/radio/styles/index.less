@@ -17,11 +17,11 @@
     margin-top: -2px;
     margin-bottom: 1px;
     &[disabled]+span {
-      background: @disabled-background-color;
-      border-color: @disabled-border-color;
+      background: @radio-diabled-bg;
+      border-color: @radio-diabled-border-color;;
     }
     &[disabled]~span:last-child {
-      color: @disabled-color;
+      color: @radio-diabled-text-color;
     }
   }
   span:last-child {
@@ -34,10 +34,10 @@
     bottom: -1px;
     width: @radio-size;
     height: @radio-size;
-    border: @border-width-base @border-style-base @border;
+    border: @border-width-base @border-style-base @radio-border-color;
     border-radius: 50%;
     &:hover {
-      border: @border-width-base @border-style-base @radio-dot-color;
+      border: @border-width-base @border-style-base @radio-hover-border-color;
     }
   }
 }
@@ -47,12 +47,12 @@
 // 选中之后的状态
 .@{radio-prefix-cls}-checked {
   input+span {
-    background-color: @radio-button-bg;
-    border: @border-width-base @border-style-base @radio-dot-color;
+    background-color: @radio-checked-bg;
+    border: @border-width-base @border-style-base @radio-checked-border-color;
     border-radius: 50%;
   }
   input,input:disabled+span {
-    border: @border-width-base @border-style-base @border;
+    border: @border-width-base @border-style-base @radio-checked-diabled-border-color;
   }
   input + span::after {
     position: absolute;
@@ -62,9 +62,9 @@
     border-radius: 50%;
     top: (@radio-center-button-width - @border-width-base * 2) / 2px;
     left: (@radio-center-button-width - @border-width-base * 2) / 2px;
-    background-color: @radio-dot-color;
+    background-color: @radio-checked-inner-bg;
   }
   input, input:disabled+span::after {
-    background-color: @disabled-border-color;
+    background-color: @radio-checked-disabled-inner-bg;
   }
 }

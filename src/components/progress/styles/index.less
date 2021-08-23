@@ -19,11 +19,11 @@
       width: 100%;
       overflow: hidden;
       vertical-align: middle;
-      background-color: @disabled-background-color;
+      background-color: @progress-base-bg;
       border-radius: @progress-radius;
       .@{progress-prefix-cls}-bg {
         position: relative;
-        background-color: @link-color;
+        background-color: @progress-normal-bg;
         border-radius: @progress-radius;
         transition: all .4s cubic-bezier(.08,.82,.17,1) 0s;
       }
@@ -33,7 +33,7 @@
     display: inline-block;
     width: 2em;
     margin-left: 8px;
-    color: @placeholder;
+    color: @progress-text-color;
     font-size: 1em;
     line-height: 1;
     white-space: nowrap;
@@ -47,13 +47,13 @@
   .@{progress-prefix-cls}-outer {
     .@{progress-prefix-cls}-inner {
       .@{progress-prefix-cls}-bg {
-        background-color: @red-5;
+        background-color: @progress-status-exception-bg;
       }
     }
   }
 
   .@{progress-prefix-cls}-text {
-    color: @red-5;
+    color: @progress-status-exception-text-color;
   }
 }
 
@@ -61,12 +61,12 @@
   .@{progress-prefix-cls}-outer {
     .@{progress-prefix-cls}-inner {
       .@{progress-prefix-cls}-bg {
-        background-color: @progress-status-success-color;
+        background-color: @progress-status-success-bg;
       }
     }
   }
 
   .@{progress-prefix-cls}-text {
-    color: @progress-status-success-color;
+    color: @progress-status-success-text-color;
   }
 }
