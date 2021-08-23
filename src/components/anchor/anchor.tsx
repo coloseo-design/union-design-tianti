@@ -146,12 +146,9 @@ class Anchor extends Component<AnchorProps, AnchorState> {
         {options.map((item) => (
           <div
             key={item.id}
-            className={`${classPrefix}-link`}
+            className={`${classPrefix}-link ${item.id === link?.id ? `${classPrefix}-link-selected` : ''}`}
             onClick={handleClick(item)}
             title={item.name}
-            style={{
-              color: item.id === link?.id ? '#B30000' : 'rgba(0, 0, 0, 0.85)',
-            }}
           >
             {item.name}
           </div>

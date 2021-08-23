@@ -203,6 +203,7 @@ export abstract class PickerSingle extends Picker<'single'> {
         suffixIcon={this.suffixIcon ?? suffixIcon}
         inputValue={this.getFormatDate()}
         onFocus={this.onFocus}
+        onClick={this.onFocus}
         onMouseEnter={this.onMouseEnter}
         onMouseLeave={this.onMouseLeave}
         placeholder={placeholder}
