@@ -21,17 +21,17 @@
     &-line{
       position: absolute;
       left: 5px;
-      border-left: 1px solid @anchor-border-color;
+      border-left: 1px solid @timeline-line-color;
       top: 15px;
     }
 
     &-head{
       position: absolute;
       width: 11px;
-      height:11px;
-      background-color: @white;
-      border-radius:50%;
-      border: 2px solid @primary-color;
+      height: 11px;
+      background-color: @timeline-head-bg-color;
+      border-radius: 50%;
+      border: 2px solid @timeline-head-border-color;
     }
 
 
@@ -44,7 +44,7 @@
     }
 
     &-last > &-head {
-      border: 2px solid @border
+      border: 2px solid @timeline-last-border-color;
     }
   }
 }

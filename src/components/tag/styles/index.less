@@ -15,8 +15,8 @@
     font-size: @tag-font-size;
     line-height: @tag-line-height;
     white-space: nowrap;
-    background: @disabled-background-color;
-    border: @border-width-base @border-style-base @disabled-border-color;
+    background: @tag-bg-color;
+    border: @border-width-base @border-style-base @tag-border-color;
     border-radius: @border-radius-base;
     opacity: 1;
     transition: all 0.3s;
@@ -28,7 +28,7 @@
     &,
     a,
     a:hover {
-      color: @text-color;
+      color: @tag-default-color;
     }
 
     > a:first-child:last-child {
@@ -44,7 +44,7 @@
       transition: all 0.3s;
 
       &:hover {
-        color: @heading-color;
+        color: @tag-close-icon-hover-color;
       }
     }
 
@@ -60,7 +60,7 @@
       a:hover,
       .@{iconfont-css-prefix}-close,
       .@{iconfont-css-prefix}-close:hover {
-        color: @text-color-inverse;
+        color: @tag-has-color-hover-color;        
       }
     }
 
@@ -73,7 +73,7 @@
       }
       &:active,
       &-checked {
-        color: @text-color-inverse;
+        color: @tag-has-color-hover-color;
       }
       &-checked {
         background-color: @primary-6;
@@ -101,7 +101,7 @@
         border-color: @@lightBorderColor;
       }
       &-@{color}-inverse {
-        color: @text-color-inverse;
+        color: @tag-has-color-hover-color;
         background: @@darkColor;
         border-color: @@darkColor;
       }

@@ -497,6 +497,17 @@
 @select-item-selected-bg: @background-color-light;
 @select-item-active-bg: @item-active-bg;
 @select-background: @component-background;
+@select-bg-color: @white;
+@select-border-color: @border;
+@select-disabled-color: @disabled-color;
+@select-hover-border-color: #4AA1F7;
+@select-shadow-color: rgba(red(@select-hover-border-color), green(@select-hover-border-color), blue(@select-hover-border-color), 0.2);
+@select-disabled-bg-color: @disabled-background-color;
+@select-disabled-border-color: @disabled-border-color;
+@select-value-color: @text-color;
+@select-placeholder-color: hsv(0, 0, 75%);
+@select-dropdown-box-shadow: 0 3px 6px -4px rgba(0,0,0,.12), 0 6px 16px 0 rgba(0,0,0,.08), 0 9px 28px 8px rgba(0,0,0,.05);
+@select-dropdown-item-hover-bg-color: @red-1;
 
 // Cascader
 // ----
@@ -703,12 +714,19 @@
 @table-footer-color: @heading-color;
 @table-header-bg-sm: transparent;
 @table-border-color: #e8e8e8;
+@table-bg-color: @white;
+@table-item-fixed-shadow-color: @shadow-color;
+@table-th-color: rgba(0,0,0,0.85);
 
 // Tag
 // --
 @tag-default-color: @text-color;
 @tag-font-size: @font-size-sm;
 @tag-line-height: 20px;
+@tag-bg-color: @disabled-background-color;
+@tag-border-color: @disabled-border-color;
+@tag-close-icon-hover-color: @heading-color;
+@tag-has-color-hover-color: #fff;
 
 // TimePicker
 // ---
@@ -800,9 +818,16 @@
 @tabs-highlight-color: @primary-color;
 @tabs-hover-color: @primary-5;
 @tabs-active-color: @primary-7;
-@tabs-border-color1: rgba(249,250,251,1);
-@tabs-border-color2: rgba(199,202,205,1);
-@tabs-border-color3: rgba(233,235,240,1);
+@tabs-card-active-bg-color: rgba(249,250,251,1);
+@tabs-card-border-color: rgba(199,202,205,1);
+@tabs-card-bg-color: rgba(233,235,240,1);
+@tabs-line-bar-bg-color: @primary-color;
+@tabs-page-bg-color: @content-bg;
+@tabs-page-box-shadow-color: rgba(147,147,147,0.35);
+@tabs-page-active-bg-color: @red-1;
+@tabs-page-active-title-color: @text-color;
+@tabs-page-closeIcon-hover-color: @primary-color;
+@tabs-page-fence-bg-color: #D8D8D8;
 
 // BackTop
 // ---
@@ -830,6 +855,10 @@
 @switch-disabled-opacity: 0.4;
 @switch-color: @primary-color;
 @switch-shadow-color: fade(#00230b, 20%);
+@switch-parent-bg-color: @border;
+@switch-parent-color: @white;
+@switch-round-bg-color: @white;
+@switch-checked-bg-color: @primary-color;
 
 // Pagination
 // ---
@@ -899,6 +928,9 @@
 @slider-dot-border-color-active: tint(@primary-color, 50%);
 @slider-disabled-color: @disabled-color;
 @slider-disabled-background-color: @component-background;
+@slider-disabled-bg-color: @disabled-background-color;
+@slider-border: @border;
+@slider-mark-item-color: @text-color;
 
 // Tree
 // ---
@@ -925,6 +957,7 @@
 // ---
 @skeleton-color: #f2f2f2;
 @skeleton-linegrade-clor: #e6e6e6;
+@skeleton-bg-color: @disabled-background-color;
 
 // Transfer
 // ---
@@ -1004,6 +1037,8 @@
 @statistic-content-font-weight: 500;
 @statistic-unit-font-size: 16px;
 @statistic-font-family: @font-family;
+@statistic-title-color: @text-color;
+@statistic-content-color: rgba(0,0,0,0.85);
 
 // Drawer
 // ---
@@ -1020,6 +1055,10 @@
 @timeline-dot-border-width: 2px;
 @timeline-dot-color: @primary-color;
 @timeline-dot-bg: @component-background;
+@timeline-line-color: #D8D8D8;
+@timeline-head-border-color: @primary-color;
+@timeline-head-bg-color: @white;
+@timeline-last-border-color: @border;
 
 // Typography
 // ---
@@ -1063,3 +1102,11 @@
 @tree_select-node-hover-background-color: @red-1;
 @tree_select-selected-color: @old_brand_red-6;
 @tree_select-disabled-color: @disabled-color;
+
+// steps
+@steps-step-tag-icon-wait-color: @border;
+@steps-step-tag-icon-process-color: @white;
+@steps-step-process-color: @old_brand_red-6;
+@steps-step-tag-title-color: rgba(0,0,0,0.85);
+@steps-step-tag-wait-color: @disabled-color;
+@steps-step-tag-finish-color: @text-color;

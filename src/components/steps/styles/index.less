@@ -4,8 +4,6 @@
 @step: ~"@{uni-prefix}-step";
 @steps: ~"@{uni-prefix}-steps";
 
-@step-process-color: @old_brand_red-6;
-
 @step-tag-line-vertical: ~"@{step}-tag-line-vertical";
 @step-tag-line-horizontal: ~"@{step}-tag-line-horizontal";
 @step-tag-default: ~"@{step}-tag-default";
@@ -117,19 +115,19 @@
         }
 
         & > .@{step-tag-icon-wait} {
-            color: @border;
-            border: 1px solid @border;
+            color: @steps-step-tag-icon-wait-color;
+            border: 1px solid @steps-step-tag-icon-wait-color;
         }
 
         & > .@{step-tag-icon-process} {
-            color: @white;
-            background-color: @step-process-color;
+            color: @steps-step-tag-icon-process-color;
+            background-color: @steps-step-process-color;
         }
 
         & > .@{step-tag-icon-finish},
         & > .@{step-tag-icon-error} {
-            color: @step-process-color;
-            border: 1px solid @step-process-color;
+            color: @steps-step-process-color;
+            border: 1px solid @steps-step-process-color;
 
         }
 
@@ -176,7 +174,7 @@
     & > .@{step-tag-title} {
         font-weight: bold;
         padding: 0 8px;
-        color: @descriptions-content;
+        color: @steps-step-tag-title-color;
         cursor: pointer;
     }
 
@@ -191,18 +189,18 @@
     }
 
     & > .@{step-tag-title}.@{step-tag-wait} {
-        color: @disabled-color;
+        color: @steps-step-tag-wait-color;
     }
 
     & > .@{step-tag-title}.@{step-tag-finish} {
-        color: @text-color;
+        color: @steps-step-tag-finish-color;
     }
 
     & .@{step-tag-description} {
         margin-top: 4px;
         font-size: 14px;
         font-weight: normal;
-        color: @descriptions-content;
+        color: @steps-step-tag-title-color;
         cursor: default;
     }
 
@@ -215,10 +213,10 @@
     }
 
     & .@{step-tag-description}.@{step-tag-wait} {
-        color: @disabled-color;
+        color: @steps-step-tag-wait-color;
     }
 
     & .@{step-tag-description}.@{step-tag-finish} {
-        color: @text-color;
+        color: @steps-step-tag-finish-color;
     }
 }

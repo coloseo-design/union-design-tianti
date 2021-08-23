@@ -38,7 +38,7 @@
         position: absolute;
         bottom: 0;
         height: 4px;
-        background-color: @primary-color;
+        background-color: @tabs-line-bar-bg-color;
         transition: width 500ms, left 500ms;
       }
     }
@@ -46,21 +46,21 @@
 
   &-card {
     .@{tab-prefix-cls}-nav {
-      background-color: @tabs-border-color3;
-      border-top: 1px solid @tabs-border-color2;
-      border-bottom: 1px solid @tabs-border-color2;
+      background-color: @tabs-card-bg-color;
+      border-top: 1px solid @tabs-card-border-color;
+      border-bottom: 1px solid @tabs-card-border-color;
       &>.@{tab-prefix-cls}-tab {
         margin-top: -1px;
         height: 36px;
         padding: 5px 20px;
-        border-top: 1px solid @tabs-border-color2;
-        border-bottom: 1px solid @tabs-border-color2;
+        border-top: 1px solid @tabs-card-border-color;
+        border-bottom: 1px solid @tabs-card-border-color;
         cursor: pointer;
         &-active {
-          border-bottom: 1px solid @tabs-border-color1;
-          border-right: 1px solid @tabs-border-color2;
-          border-left: 1px solid @tabs-border-color2;
-          background-color: @tabs-border-color1;
+          border-bottom: 1px solid @tabs-card-active-bg-color;
+          border-right: 1px solid @tabs-card-border-color;
+          border-left: 1px solid @tabs-card-border-color;
+          background-color: @tabs-card-active-bg-color;
           .@{tab-prefix-cls}-title {
             color: @tabs-line-active-color;
           }
@@ -80,30 +80,30 @@
 
   &-page {
     &>.@{tab-prefix-cls}-nav {
-      background-color: @content-bg;
+      background-color: @tabs-page-bg-color;
       height: 40px;
-      box-shadow: 0 2px 2px 0 @card-shadow;
+      box-shadow: 0 2px 2px 0 @tabs-page-box-shadow-color;
       &>.@{tab-prefix-cls}-tab {
         height: 40px;
         padding: 10px 16px;
         position: relative;
         cursor: pointer;
           &-active {
-            background-color: @item-hover-bg;
+            background-color: @tabs-page-active-bg-color;
             .@{tab-prefix-cls}-title {
-              color: @text-color;
+              color: @tabs-page-active-title-color;
             }
           }
           &:hover {
             background-color: @item-hover-bg;
             .@{tab-prefix-cls}-title {
-              color: @text-color;
+              color: @tabs-page-active-title-color;
             }
           }
           .@{tab-prefix-cls}-closeIcon {
             margin-left:10px;
             &:hover {
-              color: @primary-color;
+              color: @tabs-page-closeIcon-hover-color;
             }
 
           }
@@ -113,7 +113,7 @@
             right: 0;
             height: 24px;
             width: 1px;
-            background-color: @anchor-border-color;
+            background-color: @tabs-page-fence-bg-color;
           }
       }
     }

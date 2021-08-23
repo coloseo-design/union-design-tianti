@@ -12,13 +12,13 @@ const TabsDemo = () => {
       <div style={{ margin: 20 }}>
         <p>type=&lsquo;line&rsquo;示例</p>
         <Tabs defaultActiveKey="3" type="line">
-          <Pane key="1" tab="页签">
+          <Pane key="1" tab="页签" closable>
             <div style={{ background: 'red' }}>a</div>
           </Pane>
-          <Pane key="2" tab="四字页签">
+          <Pane key="2" tab="四字页签" closable>
             <div style={{ background: 'blue' }}>b</div>
           </Pane>
-          <Pane tab="五个字页签" key="3">
+          <Pane tab="五个字页签" key="3" closable>
             <div style={{ background: 'green' }}>c</div>
           </Pane>
           <Pane
@@ -29,6 +29,7 @@ const TabsDemo = () => {
                 带icon页签
               </span>
             )}
+            closable
           >
             <div style={{ background: 'purple' }}>d</div>
           </Pane>
@@ -37,13 +38,13 @@ const TabsDemo = () => {
       <div style={{ margin: 20 }}>
         <p>type=&lsquo;card&rsquo;示例</p>
         <Tabs defaultActiveKey="2" type="card">
-          <Pane key="1" tab="页签">
+          <Pane closable key="1" tab="页签">
             <div style={{ background: 'red' }}>a</div>
           </Pane>
-          <Pane key="2" tab="四字页签">
+          <Pane closable key="2" tab="四字页签">
             <div style={{ background: 'blue' }}>b</div>
           </Pane>
-          <Pane tab="五个字页签" key="3">
+          <Pane closable tab="五个字页签" key="3">
             <div style={{ background: 'green' }}>c</div>
           </Pane>
           <Pane
@@ -54,6 +55,7 @@ const TabsDemo = () => {
                 带icon页签
               </span>
   )}
+            closable
           >
             <div style={{ background: 'purple' }}>d</div>
           </Pane>
@@ -72,7 +74,7 @@ const TabsDemo = () => {
         >
           {
             data.map((item, key) => (
-              <Pane key={`${key}`} tab={item} closable={false}>
+              <Pane closable key={`${key}`} tab={item}>
                 <div style={{ background: 'green' }}>{item}</div>
               </Pane>
             ))
