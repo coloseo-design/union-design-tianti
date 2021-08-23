@@ -4,8 +4,8 @@
 @list-prefix-cls: ~'@{uni-prefix}-list';
 
 .@{list-prefix-cls} {
-  color: @descriptions-content;
-  background: @white;
+  color: @list-color;
+  background: @list-bg;
   ul {
     list-style: none;
     padding: 0;
@@ -13,7 +13,7 @@
   &-items {
     .@{list-prefix-cls}-item {
       padding: @list-item-padding;
-      border-bottom: 1px solid @border-color-split;
+      border-bottom: 1px solid @list-item-border;
       overflow: auto;
       display: flex;
       align-items: center;
@@ -21,11 +21,11 @@
       &-meta {
         flex: 1;
         &-title {
-          color: @descriptions-content;
+          color: @list-item-meta-title-color;
           margin-bottom: 6px;
         }
         &-description {
-          color: @text-color;
+          color: @list-item-meta-description-color;
         }
       }
       &-actions {

@@ -247,8 +247,8 @@
 .abcdefg() {
   .@{menu-light},
   .@{menu-dark} {
-      color: @descriptions-content;
-      background-color: @white;
+      color: @menu-light-color;
+      background-color: @menu-bg;
   }
 
   .@{menu-vertical} {
@@ -272,7 +272,7 @@
 
       .@{menu-title} {
         line-height: 28px;
-        color: @descriptions-content;
+        color: @menu-light-color;
         letter-spacing: 0.46px;
         overflow: hidden;
         white-space: nowrap;
@@ -312,6 +312,6 @@
 .@{dropDown}-menu.@{menu}.@{menu}-popup {
   .abcdefg();
   .@{menu-vertical} {
-    box-shadow: 2px 0 4px 0 @card-shadow;
+    box-shadow: 2px 0 4px 0 @menu-boxshadow;
   }
 }

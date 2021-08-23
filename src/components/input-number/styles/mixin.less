@@ -5,7 +5,7 @@
   min-width: 90px;
   width: 200px;
   border-radius: 2px;
-  border: 1px solid @border;
+  border: 1px solid @input-number-border-color;
   overflow: hidden;
 
   &-large {
@@ -21,14 +21,14 @@
   }
 
   &-disable {
-    background-color: @disabled-background-color;
-    border-color: @disabled-border-color;
-    color: @disabled-color;
+    background-color: @input-number-disabled-bg;
+    border-color: @input-number-disabled-border-color;
+    color: @input-number-disabled-color;
     cursor: not-allowed;
   }
 
   &:hover:not(&-disable) {
-    border-color: @input-hover-border-color;
+    border-color: @input-number-hover-border-color;
     & > :last-child {
       opacity: 1;
     }
@@ -53,13 +53,13 @@
     height: 100%;
     opacity: 0;
     box-sizing: border-box;
-    border-left: 1px solid @gray-6;
+    border-left: 1px solid @input-number-action-border;
     transition: all 0.1s linear;
     // &:hover > span {
     //   height: 40%;
     // }
     & > :first-child {
-      border-bottom: 1px solid @gray-6;
+      border-bottom: 1px solid @input-number-action-border;
     }
 
     & > span {
@@ -72,11 +72,11 @@
       user-select: none;
       transition: all 0.1s linear;
       width: 21px;
-      color: @border;
+      color: @input-number-action-divider-border;
       &:hover {
         height: 65%;
         & > span {
-          color: @old_brand_red-6;
+          color: @input-number-action-hover-text-color;
         }
       }
       & > span {

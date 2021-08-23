@@ -312,12 +312,18 @@
 @layout-header-height: 64px;
 @layout-header-padding: 0 50px;
 @layout-footer-padding: 24px 50px;
+@layout-sider-bg: #2E3343;
+
 @layout-sider-background: @layout-header-background;
+
+@layout-sider-light-bg: @disabled-background-color;
 @layout-sider-box-shadow: 2px 0 4px 0 @card-shadow;
 @layout-trigger-height: 80px;
 @layout-trigger-width: 16px;
 @layout-trigger-border-radius: 0 20px 20px 0;
-@layout-trigger-background: #2E3343;
+@layout-trigger-bg: @disabled-background-color;
+
+
 @layout-trigger-color: #444A5E;
 @layout-zero-trigger-width: 36px;
 @layout-zero-trigger-height: 42px;
@@ -402,14 +408,14 @@
 @form-item-error-box-content-border: @red-5;
 @form-item-error-box-content-boxshadow: rgba(147,147,147,0.35);
 @form-item-haserror-error-color: @red-5;
-@form-warning-input-bg: @input-bg;
+@form-warning-input-bg: #fff;
 @form-item-margin-bottom: 24px;
 @form-item-trailing-colon: true;
 @form-vertical-label-padding: 0 0 8px;
 @form-vertical-label-margin: 0;
 @form-item-label-colon-margin-right: 8px;
 @form-item-label-colon-margin-left: 2px;
-@form-error-input-bg: @input-bg;
+@form-error-input-bg: #fff;
 
 // Input
 // ---
@@ -425,11 +431,8 @@
 @input-padding-vertical-lg: 6px;
 @input-placeholder-color: hsv(0, 0, 75%);
 @input-color: @text-color;
+@input-border-color: @border;
 @input-bg: @component-background;
-@input-number-hover-border-color: @input-hover-border-color;
-@input-number-handler-active-bg: #f4f4f4;
-@input-number-handler-hover-bg: @primary-5;
-@input-number-handler-bg: @component-background;
 @input-addon-bg: @background-color-light;
 // @input-hover-border-color: @blue-5;
 @input-hover-border-color: #4AA1F7;
@@ -438,6 +441,32 @@
 @input-outline-offset: 0 0;
 @input-width-base: 263px;
 @input-box-shadow-base: 0 0 0 2px @input-focus-border-box-shadow-color;
+@input-group-addon-color: @disabled-color;
+@input-group-addon-border-color: @border;
+@input-group-addon-icon-color: @border;
+@input-addon-color: @white;
+@input-addon-hover-bg: @primary-5;
+@input-addon-active-bg: @primary-7;
+@input-disabled-color: @disabled-color;
+@input-disabled-border-color: @disabled-border-color;
+@input-icon-color: @border;
+@input-icon-hover-color: @gray-7;
+@input-icon-border-color: @border;
+
+
+// InputNumber
+
+@input-number-border-color: @border;
+@input-number-disabled-bg: @disabled-background-color;
+@input-number-disabled-border-color: @disabled-border-color;
+@input-number-disabled-color: @disabled-color;
+@input-number-hover-border-color: #4AA1F7;
+@input-number-action-border: @gray-6;
+@input-number-action-divider-border: @border;
+@input-number-action-hover-text-color: @primary-color;
+@input-number-handler-active-bg: #f4f4f4;
+@input-number-handler-hover-bg: @primary-5;
+@input-number-handler-bg: @component-background;
 
 
 // Select
@@ -515,6 +544,9 @@
 @anchor-active-bg: @primary-color;
 @anchor-ball-width: 8px;
 
+// Image
+@image-mask-bg: @text-color;
+
 // Tooltip
 // ---
 // Tooltip max width
@@ -552,11 +584,19 @@
 // Modal
 // --
 @modal-body-padding: 24px;
-@modal-header-bg: @component-background;
+@modal-header-bg: @disabled-background-color;
 @modal-heading-color: @heading-color;
-@modal-footer-bg: transparent;
-@modal-footer-border-color-split: @border-color-split;
+@modal-method-success-icon-color: @success-color;
+@modal-method-error-icon-color: @error-color;
+@modal-method-info-icon-color: @info-color;
+@modal-method-warning-icon-color: @warning-color;
 @modal-mask-bg: fade(@black, 45%);
+@modal-content-bg: @white;
+@modal-content-boxshadow: rgba(0,0,0,0.03), 0 9px 4px 0 rgba(0,0,0,0.05), 0 6px 16px 0 rgba(0,0,0,0.08);
+
+// Notification
+
+
 
 // Progress
 // --
@@ -567,6 +607,29 @@
 
 // Menu
 // ---
+@menu-dark-color: @disabled-border-color;
+@menu-dark-bg: #2E3343;
+@menu-dark-hover-color: @white;
+@menu-light-color: rgba(0,0,0,0.85);
+@menu-light-bg: @disabled-background-color;
+@menu-light-hover-color: @primary-color;
+@menu-horizontal-background-image: linear-gradient(90deg, @primary-color 0%, @new-primary-red 64%, @primary-color 100%);
+@menu-horizontal-bg: @new-primary-red;
+@menu-horizontal-color: @white;
+@menu-horizontal-hover-color: @primary-7;
+@menu-horizontal-item-title-color: @white;
+@menu-horizontal-item-selected-color: @white;
+@menu-horizontal-item-selected-bg: @primary-7;
+@menu-item-icon-color: #444A5E;
+@menu-item-selected-bg: @white;
+@menu-item-selected-right-line-bg: @primary-color;
+@menu-dark-item-selected-color: rgba(0,0,0,0.85);
+@menu-dark-item-selected-hover-color: @black;
+@menu-light-submenu-selected-color: @primary-color;
+@menu-dark-submenu-selected-color: @white;
+@menu-light-item-group-color: @disabled-color;
+@menu-dark-item-group-color: @disabled-border-color;
+@menu-boxshadow: rgba(147,147,147,0.35);
 @menu-inline-toplevel-item-height: 40px;
 @menu-item-height: 40px;
 @menu-collapsed-width: 80px;
@@ -838,6 +901,9 @@
 
 // Message
 // ---
+@message-bg: @white;
+@message-boxshadow: @shadow-2;
+@message-content-text-color: @text-color;
 @message-notice-content-padding: 10px 16px;
 
 // Motion
@@ -877,6 +943,11 @@
 
 // List
 // ---
+@list-color: rgba(0,0,0,0.85);
+@list-bg: @white;
+@list-item-border: @border-color-split;
+@list-item-meta-title-color: rgba(0,0,0,0.85);
+@list-item-meta-description-color: @text-color;
 @list-header-background: transparent;
 @list-footer-background: transparent;
 @list-empty-text-padding: @padding-md;

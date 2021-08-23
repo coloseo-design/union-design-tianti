@@ -19,7 +19,7 @@
     bottom: 0;
     z-index: @zindex-modal-mask;
     display: block;
-    background-color: @disabled-color;
+    background-color: @modal-mask-bg;
     animation: maskin 0.3s @ease-in-out;
     &-transition {
       opacity: 0;
@@ -56,8 +56,8 @@
     &-content {
       position: relative;
       width: 511px;
-      background-color: @white;
-      box-shadow: 0 12px 48px 16px rgba(0,0,0,0.03), 0 9px 4px 0 rgba(0,0,0,0.05), 0 6px 16px 0 rgba(0,0,0,0.08);
+      background-color: @modal-content-bg;
+      box-shadow: 0 12px 48px 16px @modal-content-boxshadow;
       border-radius: 2px;
       margin: 0 auto;
       top: 100px;
@@ -71,11 +71,11 @@
       &-header {
         position: relative;
         padding: 9px 14px 9px 16px;
-        background-color: @disabled-background-color;
+        background-color: @modal-header-bg;
         border-radius: 2px 2px 0 0;
         &-title {
           font-size: 16px;
-          color: @descriptions-content;
+          color: @modal-heading-color;
         }
         &-close {
           position: absolute;
@@ -96,16 +96,16 @@
           left: 43px;
         }
         &-success {
-          color: @success-color;
+          color: @modal-method-success-icon-color;
         }
         &-error {
-          color: @alert-error-icon-color;
+          color: @modal-method-error-icon-color;
         }
         &-info {
-          color: @alert-info-icon-color;
+          color: @modal-method-info-icon-color;
         }
         &-warning, &-confirm {
-          color: @alert-warning-icon-color;
+          color: @modal-method-warning-icon-color;
         }
         &-title {
           padding-left: 32px;

@@ -39,7 +39,7 @@
   }
   &-sider {
     position: relative;
-    background: @layout-trigger-background;
+    background: @layout-sider-bg;
     // text-align: center;
 
     // div.inline,
@@ -60,7 +60,8 @@
       line-height: @layout-trigger-height;
       text-align: center;
       color: @layout-trigger-color;
-      background: @disabled-background-color;
+      // background: @disabled-background-color;
+      background: @layout-trigger-bg;;
       box-shadow: inset @layout-sider-box-shadow, @layout-sider-box-shadow;
       border-radius: @layout-trigger-border-radius;
       position: absolute;
@@ -74,7 +75,7 @@
     transition: all .2s;
   }
   &-sider-light {
-    background: @disabled-background-color;
+    background: @layout-sider-light-bg;
   }
 }
 

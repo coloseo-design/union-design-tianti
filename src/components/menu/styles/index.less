@@ -40,20 +40,20 @@
 }
 
 .@{menu-dark} {
-  color: @disabled-border-color;
-  background-color: @layout-trigger-background;
+  color: @menu-dark-color;
+  background-color: @menu-dark-bg;
 
   &:hover{
-      color: @white;
+    color: @menu-dark-hover-color;
   }
 }
 
 .@{menu-light} {
-  color: @descriptions-content;
-  background-color: @disabled-background-color;
+  color:@menu-light-color;
+  background-color: @menu-light-bg;
 
   &:hover{
-      color: @old_brand_red-6;
+    color: @menu-light-hover-color;
   }
 }
 
@@ -64,24 +64,24 @@
 }
 
 .@{menu-horizontal} {
-    background-image: linear-gradient(90deg, @old_brand_red-6 0%, @new-primary-red 64%, @old_brand_red-6 100%);
-    background-color: @new-primary-red;
+    background-image: @menu-horizontal-background-image;
+    background-color: @menu-horizontal-bg;
     overflow-y: auto;
     white-space: nowrap;
 
     & > div {
-        display: inline-block;
-        vertical-align: middle;
+      display: inline-block;
+      vertical-align: middle;
     }
 
     .@{menu-light},
     .@{menu-dark} {
-        color: @white;
-        background-color: transparent;
+      color: @menu-horizontal-color;
+      background-color: transparent;
 
-        &:hover{
-            background-color: @old_brand_red-7;
-        }
+      &:hover{
+        background-color: @menu-horizontal-hover-color;
+      }
     }
 
     div.@{menu-sub-menu},
@@ -91,11 +91,11 @@
         padding-right: 40px;
 
         .@{menu-title} {
-            line-height: 40px;
-            font-size: 16px;
-            color: @white;
-            letter-spacing: 0.46px;
-            text-align: center;
+          line-height: 40px;
+          font-size: 16px;
+          color: @menu-horizontal-item-title-color;
+          letter-spacing: 0.46px;
+          text-align: center;
         }
     }
 
@@ -104,8 +104,8 @@
     div.@{menu-item-selected}.@{menu-light},
     div.@{menu-sub-menu-selected}.@{menu-dark},
     div.@{menu-sub-menu-selected}.@{menu-light} {
-        color: @white;
-        background-color: @old_brand_red-7;
+        color: @menu-horizontal-item-selected-color;
+        background-color: @menu-horizontal-item-selected-bg;
 
         &::after {
             width: 0;
@@ -137,12 +137,12 @@
 
   .@{menu-left-icon} {
     float: left;
-    color: @layout-trigger-color;
+    color: @menu-item-icon-color;
   }
 
   .@{menu-right-icon} {
     float: right;
-    color: @layout-trigger-color;
+    color: @menu-item-icon-color;
   }
 
   .@{menu-title} {
@@ -154,7 +154,7 @@
 }
 
 .@{menu-item-selected} {
-  background-color: @white;
+  background-color: @menu-item-selected-bg;
 
   &::after{
     content: "";
@@ -163,23 +163,23 @@
     top: 0;
     bottom: 0;
     width: 4px;
-    background-color: @old_brand_red-6;
+    background-color: @menu-item-selected-right-line-bg;
   }
 }
 
 .@{menu-item-selected}.@{menu-dark} {
-  color: @descriptions-content;
+  color: @menu-dark-item-selected-color;
   &:hover {
-      color: @black;
+    color: @menu-dark-item-selected-hover-color;
   }
 }
 
 .@{menu-sub-menu-selected}.@{menu-light} {
-  color: @old_brand_red-6;
+  color: @menu-light-submenu-selected-color;
 }
 
 .@{menu-sub-menu-selected}.@{menu-dark} {
-  color: @white;
+  color: @menu-dark-submenu-selected-color;
 }
 
 .@{menu-item-group} {
@@ -192,11 +192,11 @@
 }
 
 .@{menu-item-group}.@{menu-light} {
-  color: @disabled-color;
+  color: @menu-light-item-group-color;
 }
 
 .@{menu-item-group}.@{menu-dark} {
-  color: @disabled-border-color;
+  color: @menu-dark-item-group-color;
 }
 
 .@{menu-children-container} {
@@ -207,7 +207,7 @@
     position: relative;
     width: 100%;
     transition: width 0.2s;
-    box-shadow: 2px 0 4px 0 @card-shadow;
+    box-shadow: 2px 0 4px 0 @menu-boxshadow;
 
     & > div:nth-of-type(1) {
       width: 100%;
@@ -224,7 +224,7 @@
       line-height: 80px;
       transform: translateY(-50%) perspective(100px) rotateY(45deg);
       transform-origin: 0 50%;
-      box-shadow: 2px 0 4px 0 @card-shadow inset;
+      box-shadow: 2px 0 4px 0 @menu-boxshadow inset;
       border-radius: 0 10px 10px 0;
       font-size: 24px;
       cursor: pointer;
@@ -237,7 +237,7 @@
   & > div:first-of-type {
     height: 100%;
     width: 100%;
-    box-shadow: 2px 0 4px 0 @card-shadow;
+    box-shadow: 2px 0 4px 0 @menu-boxshadow;
     overflow: auto;
   }
 }

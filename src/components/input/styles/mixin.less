@@ -3,7 +3,7 @@
   width: @width;
   height: @height;
   background: @input-bg;
-  border: @border-width-base @border-style-base @border;
+  border: @border-width-base @border-style-base @input-border-color;
   border-radius: @border-radius-base;
   padding: @input-padding-vertical-base @input-padding-horizontal-base;
   transition: all .3s;
@@ -35,8 +35,8 @@
   }
   &[disabled] {
     background: @input-disabled-bg;
-    color: @disabled-color;
-    border-color: @disabled-border-color;
+    color: @input-disabled-color;
+    border-color: @input-disabled-border-color;
     cursor: not-allowed;
   }
 }
@@ -47,12 +47,12 @@
   z-index: 2;
   transform: translateY(-50%);
   right: @input-padding-horizontal-base;
-  color: @border;
+  color: @input-icon-color;
   &:hover {
     cursor: pointer;
-    color: @gray-7;
+    color: @input-icon-hover-color;
   }
   &:active {
-    color: @border;
+    color: @input-icon-border-color;
   }
 }

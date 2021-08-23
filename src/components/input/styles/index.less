@@ -62,20 +62,20 @@
     background: @input-disabled-bg;
     height: 100%;
     vertical-align: bottom;
-    color: @disabled-color;
+    color: @input-group-addon-color;
     .uniicon {
-      color: @border;
+      color: @input-group-addon-icon-color;
       font-size: 16px;
     }
   }
   .addon:first-child {
-    border: @border-width-base @border-style-base @border;
+    border: @border-width-base @border-style-base @input-group-addon-border-color;
     border-radius: @border-radius-base 0 0 @border-radius-base;
     border-right: none;
   }
   .addon:last-child {
     border-radius: 0 @border-radius-base @border-radius-base 0;
-    border: @border-width-base @border-style-base @border;
+    border: @border-width-base @border-style-base @input-group-addon-border-color;
     border-left: none;
   }
 }
@@ -101,17 +101,17 @@
     box-sizing: border-box;
     background: @primary-color;
     height: 100%;
-    color: @white;
+    color: @input-addon-color;
     cursor: pointer;
     border-radius: 0 @border-radius-base @border-radius-base 0;
     &:hover,
     &:hover {
-      background: @old_brand_red-5;
+      background: @input-addon-hover-bg;
     }
 
     &:active,
     &.active {
-      background: @old_brand_red-7;
+      background: @input-addon-active-bg;
     }
   }
   .@{input-prefix-cls}:not(:last-child) {

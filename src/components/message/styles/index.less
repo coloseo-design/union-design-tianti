@@ -19,8 +19,8 @@
         padding: 9px 16px;
         font-size: 14px;
         line-height: 22px;
-        box-shadow: @shadow-2;
-        background-color: @white;
+        box-shadow: @message-boxshadow;
+        background-color: @message-bg;
         border-radius: @border-radius-base;
         vertical-align: middle;
         pointer-events: auto;
@@ -42,7 +42,7 @@
         & > .@{message-content} {
             font-size: 14px;
             margin-left: 10px;
-            color: @text-color;
+            color: @message-content-text-color;
         }
     }
 }

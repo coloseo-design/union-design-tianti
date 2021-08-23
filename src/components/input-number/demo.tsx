@@ -15,10 +15,11 @@ const InputNumberDemo = (): React.ReactNode => (
       <span>large</span>
       <InputNumber
         size="large"
-        max={10}
+        max={20}
         min={1}
         onChange={handleChange}
         disabled
+        value={12}
       />
     </span>
     <span>
