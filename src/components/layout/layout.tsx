@@ -19,7 +19,7 @@ interface LayoutState {
 const judeSider = (children: unknown) => {
   let hasSider = false;
   React.Children.forEach(children, (child) => {
-    if (child && child.type.name === 'Sider') { // 这里使用child的type.name进行判断
+    if (child?.type?.name === 'Sider') { // 这里使用child的type.name进行判断
       hasSider = true;
     }
   });
