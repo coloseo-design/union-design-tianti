@@ -1,3 +1,22 @@
+## [1.0.13](http://10.124.128.2:8888/muses/union-design/compare/v1.0.8...v1.0.13) (2021-08-24)
+
+
+### Bug Fixes
+
+* 🐛 修复table的样式问题 ([8dacaf5](http://10.124.128.2:8888/muses/union-design/commits/8dacaf515e6271aad3c7c3eddf2a2ddaf68431bf))
+* 🐛 修复tabs当type为page时候的内容展示方式 ([efab168](http://10.124.128.2:8888/muses/union-design/commits/efab168874a69c2a7c63a14a331c2395b466f21e))
+* 🐛 修复typescript打包类型的错误 ([8c6b180](http://10.124.128.2:8888/muses/union-design/commits/8c6b1805671377ba43000c9f0cfaecfd90b39088))
+* 🐛 alert icon 颜色修改 ([d4495de](http://10.124.128.2:8888/muses/union-design/commits/d4495dec15d3cce466b1ecdc569895084d8bba3b))
+* 🐛 tabs.pane增加closable, 调整list样式，重构table代码 ([765ba17](http://10.124.128.2:8888/muses/union-design/commits/765ba17920a00fc13a2ac200a9a2706db8f6408c))
+
+
+### Features
+
+* 🎸 组件颜色替换 ([f5d0f26](http://10.124.128.2:8888/muses/union-design/commits/f5d0f26cabbd2db6713da1bc2886b9f0f5aa05e3))
+* 🎸 alert markdown 修改 ([4122fe4](http://10.124.128.2:8888/muses/union-design/commits/4122fe4c00b62ebd0cb0585091294403f668b723))
+
+
+
 ## [1.0.12](http://10.124.128.2:8888/muses/union-design/compare/v1.0.2...v1.0.12) (2021-08-19)
 
 
