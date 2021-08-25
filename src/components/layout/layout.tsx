@@ -18,8 +18,8 @@ interface LayoutState {
 // 判断是否含有Sider子组件
 const judeSider = (children: unknown) => {
   let hasSider = false;
-  React.Children.forEach(children, (child) => {
-    if (child?.type?.name === 'Sider') { // 这里使用child的type.name进行判断
+  React.Children.forEach(children, (child: any) => {
+    if (child && child?.type?.typeName === 'Sider') { // 这里使用child的type.name进行判断
       hasSider = true;
     }
   });

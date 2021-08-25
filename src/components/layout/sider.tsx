@@ -34,6 +34,8 @@ export interface SiderState {
 }
 
 class Sider extends Component<SiderProps, SiderState> {
+  static typeName: string;
+
   static defaultProps: SiderProps = {
     collapsedWidth: 80,
     collapsible: false,
@@ -121,5 +123,7 @@ class Sider extends Component<SiderProps, SiderState> {
     );
   }
 }
+
+Sider.typeName = 'Sider';
 
 export default Sider;
