@@ -21,6 +21,7 @@ const Form: React.FC<FormProps> = (props: FormProps) => {
     wrapperCol,
     validateTrigger = 'onChange',
     labelAlign,
+    labelStyle,
     initialValues,
     forwardRef,
     ...rest
@@ -102,6 +103,7 @@ const Form: React.FC<FormProps> = (props: FormProps) => {
     validateTrigger,
     isValidating,
     labelAlign,
+    labelStyle,
   };
   return (
     <form

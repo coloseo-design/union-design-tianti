@@ -30,6 +30,7 @@ title: Form
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | ---  | ---  | ---   |
 | labelAlign | label 标签的文本对齐方式 | 'left' \| 'right' | 'right' |
+| labelStyle | label 的样式 | React.CSSProperties | - |
 | onFinish | 数据验证成功后回调事件 | Function(values) |  |
 | onFinishFailed | 数据验证失败后回调事件 | Function(errors) |  |
 | onValuesChange | 字段发生变化的回调 | Function(values) |  |
@@ -55,5 +56,6 @@ title: Form
 | labelCol | label 标签布局，同 `<Col>` 组件，设置 `span` `offset` 值，如 `{span: 3, offset: 12}` 或 `sm: {span: 3, offset: 12}` | [object] |  |
 | wrapperCol | 需要为输入控件设置布局样式时，使用该属性，用法同 labelCol | [object] |  |
 | labelAlign | label 标签的文本对齐方式 | 'left' \| 'right' | 'right' |
+| labelStyle | label 的样式 | React.CSSProperties | - |
 | colon | 配置 Form.Item 的 colon 的默认值 (只有在属性 layout 为 horizontal 时有效) | boolean | true |
 | validateTrigger | 配置Form校验触发器 | string | onChange |

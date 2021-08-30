@@ -11,7 +11,7 @@ export interface FormValues {
   [key:string]: unknown;
 }
 
-interface FormErrors {
+export interface FormErrors {
   [key: string]: string[] | React.ReactNode[];
 }
 
@@ -26,6 +26,8 @@ export interface FormCommmonProps {
   wrapperCol?: ResponsiveColProps;
   /** label对齐方式 */
   labelAlign?: 'left' | 'right',
+  /** label样式 */
+  labelStyle?: React.CSSProperties;
 }
 
 export interface FormContextProps extends FormCommmonProps{
@@ -69,12 +71,12 @@ export interface FormProps extends FormCommmonProps, BaseProps, React.HTMLAttrib
   forwardRef: React.LegacyRef<FormInstance | null>;
 }
 
-type ValueCollection = {
+export type ValueCollection = {
   value: unknown;
   event: string;
 };
 
-type ErrorCollection = {
+export type ErrorCollection = {
   errors: string[] | React.ReactNode[];
   event: string;
 };
@@ -103,6 +105,7 @@ export interface FormItemProps extends BaseProps, React.HTMLAttributes<HTMLDivEl
   name?: string | string[];
   /** 标签 */
   label?: React.ReactNode;
+  labelStyle?: React.CSSProperties;
   prefixCls?: string;
   valuePropName?: string;
   trigger?: string;

@@ -28,6 +28,7 @@ const Item: React.FC<FormItemProps> = (props: FormItemProps) => {
     messageVariables = {},
     required = false,
     colon = true,
+    labelStyle: labelStyleOfProps,
   } = props;
 
   const { getPrefixCls } = useContext(ConfigContext);
@@ -155,7 +156,11 @@ const Item: React.FC<FormItemProps> = (props: FormItemProps) => {
     <Row className={rowCls}>
       {
         label && (
-          <Col {...labelCol} className={labelClassName}>
+          <Col
+            {...labelCol}
+            className={labelClassName}
+            style={labelStyleOfProps || context.labelStyle}
+          >
             <label className={labelCls} title={composedName} htmlFor={composedName}>{label}</label>
           </Col>
         )

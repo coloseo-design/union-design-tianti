@@ -24,8 +24,8 @@ const FormDemo = () => {
   };
 
   const layout = {
-    labelCol: { span: 2 },
-    wrapperCol: { span: 16 },
+    // labelCol: { span: 2 },
+    // wrapperCol: { span: 16 },
   };
 
   const tailFormItemLayout = {
@@ -54,17 +54,19 @@ const FormDemo = () => {
           onFinish={onSubmit}
           onFinishFailed={onFinishFailed}
           style={{ padding: 20 }}
-          labelAlign="left"
+          labelAlign="right"
+          labelStyle={{ marginBottom: 8 }}
         >
           <FormItem
             name="username"
-            label="用户名"
             validateFirst
+            label="用户名"
             labelAlign="right"
+            labelStyle={{ marginBottom: 10 }}
             rules={[
               { required: true, message: '请输入用户名' },
               {
-                validator: (rule, value) => {
+                validator: (_, value) => {
                   if (!value || value.length < 2) {
                     return Promise.reject(new Error('长度必须大于2'));
                   }
