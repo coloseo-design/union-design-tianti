@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import React, {
   CSSProperties,
@@ -109,11 +110,17 @@ export default class Menu extends MenuBase<MenuProps, MenuState> {
   public constructor(props: MenuProps) {
     super(props);
     this.initState();
+    const newSelectedKeys = props.selectedKeys || props.defaultSelectedKeys || [];
+    const newSelectedKeyPaths = { [newSelectedKeys[newSelectedKeys?.length - 1]]: newSelectedKeys };
+    setTimeout(() => {
+      this.setState({ selectedKeyPaths: newSelectedKeyPaths });
+    });
   }
 
   public componentDidUpdate = (preProps: MenuProps) => {
     if (preProps.selectedKeys !== this.props.selectedKeys) {
-      this.setState({ selectedKeys: this.props.selectedKeys ?? [] });
+      const newSelectedKeyPaths = { [this.props.selectedKeys[this.props.selectedKeys?.length - 1]]: this.props.selectedKeys };
+      this.setState({ selectedKeys: this.props.selectedKeys ?? [], selectedKeyPaths: newSelectedKeyPaths });
     }
 
     if (preProps.openKeys !== this.props.openKeys) {
