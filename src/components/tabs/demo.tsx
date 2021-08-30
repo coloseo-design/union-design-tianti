@@ -9,14 +9,14 @@ const TabsDemo = () => {
   const [data, setData] = useState(['页签', '四字页签', '五个字页签']);
   return (
     <>
-      <div style={{ margin: 20 }}>
+      <div style={{ margin: 20, backgroundColor: '#FFF' }}>
         <p>type为line示例</p>
         <Tabs defaultActiveKey="3" type="line">
           <Pane key="1" tab="页签" closable>
             <div style={{ background: 'red' }}>a</div>
           </Pane>
           <Pane key="2" tab="四字页签" closable>
-            <div style={{ background: 'blue' }}>b</div>
+            <div style={{ background: 'white' }}>b</div>
           </Pane>
           <Pane tab="五个字页签" key="3" closable>
             <div style={{ background: 'green' }}>c</div>
@@ -67,7 +67,7 @@ const TabsDemo = () => {
             <div style={{ background: 'red' }}>a</div>
           </Pane>
           <Pane closable key="2" tab="四字页签">
-            <div style={{ background: 'blue' }}>b</div>
+            <div style={{ background: 'white' }}>b</div>
           </Pane>
           <Pane closable tab="五个字页签" key="3">
             <div style={{ background: 'green' }}>c</div>
@@ -100,7 +100,7 @@ const TabsDemo = () => {
           {
             data.map((item, key) => (
               <Pane key={`${key}`} tab={item} closable>
-                <div style={{ background: 'green' }}>{item}</div>
+                <div style={{ background: ['white', 'green', 'blue', 'yello'][key] }}>{item}</div>
               </Pane>
             ))
           }
