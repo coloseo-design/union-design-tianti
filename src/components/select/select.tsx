@@ -4,12 +4,12 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable max-len */
 import React, {
-  CSSProperties, ReactElement, ReactNode,
+  CSSProperties, ReactNode,
 } from 'react';
 import classnames from 'classnames';
 import { ConfigConsumer, ConfigConsumerProps } from '../config-provider/context';
 import Icon from '../icon';
-import Option, { OptionProps } from './option';
+import Option from './option';
 import { SelectContext } from './context';
 import Portal from '../common/portal';
 
@@ -263,7 +263,7 @@ class Select extends React.Component<SelectProps, SelectState> {
     });
   }
 
-  onSelect = (value: string | string[], label: string, checked?: boolean) => {
+  onSelect = (value: string | string[], label: string) => {
     const { onChange, onSelect, type } = this.props;
     const { selectedOptions } = this.state;
     if (type === 'multiple' || type === 'tags') {
@@ -272,11 +272,12 @@ class Select extends React.Component<SelectProps, SelectState> {
         label,
       };
       let arr: Array<obj> | undefined = selectedOptions;
-      if (checked) {
+      if ((arr || []).map((i: any) => i.value).indexOf(value) === -1) {
         arr?.push(optionObj);
       } else {
-        arr = arr?.filter((i) => i.value !== value);
+        arr = arr?.filter((i: any) => i.value !== value);
       }
+
       this.setState({
         selectedOptions: arr,
       });
@@ -486,6 +487,7 @@ class Select extends React.Component<SelectProps, SelectState> {
                 value: `${value || defaultValue}`,
                 label: `${children}`,
                 onSelect: this.onSelect,
+                renderObj,
                 multiple: type === 'multiple' || type === 'tags',
                 selectedOptions,
               }}

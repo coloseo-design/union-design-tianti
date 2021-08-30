@@ -29,10 +29,13 @@ class Option extends React.Component<OptionProps, OptionState> {
     const {
       prefixCls: customizePrefixCls,
     } = this.props;
+    const { renderObj } = this.context;
     const prefix = getPrefixCls('select', customizePrefixCls);
     const sectionClass = classnames(`${prefix}-dropdown-item`, {
       [`${prefix}-dropdown-item-disabled`]: disabled,
+      [`${prefix}-dropdown-item-selected`]: renderObj.value === value,
     });
+
     return (
       <SelectContext.Consumer>
         {({ onSelect, multiple, selectedOptions }) => (
@@ -40,14 +43,13 @@ class Option extends React.Component<OptionProps, OptionState> {
             onClick={(event) => {
               event.stopPropagation();
               event.nativeEvent.stopImmediatePropagation();
-              !disabled && !multiple && onSelect(value, children);
+              !disabled && onSelect(value, children);
             }}
-            className={sectionClass}
+            className={`${sectionClass}`}
             title={children}
           >
             {multiple && (
               <Checkbox
-                onChange={(checkedValue: boolean) => { onSelect(value, children, checkedValue); }}
                 checked={selectedOptions?.map((i) => (i.value)).indexOf(value) !== -1}
                 disabled={disabled}
               />
@@ -67,5 +69,6 @@ class Option extends React.Component<OptionProps, OptionState> {
     );
   }
 }
+Option.contextType = SelectContext;
 
 export default Option;
