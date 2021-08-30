@@ -37,7 +37,7 @@ class Sider extends Component<SiderProps, SiderState> {
   static typeName: string;
 
   static defaultProps: SiderProps = {
-    collapsedWidth: 80,
+    collapsedWidth: 62,
     collapsible: false,
     defaultCollapsed: false,
     theme: 'dark',
@@ -64,7 +64,7 @@ class Sider extends Component<SiderProps, SiderState> {
 
   renderSider = ({ getPrefixCls }: ConfigConsumerProps) => {
     const {
-      prefixCls, className, children, style, width = 200, collapsedWidth = 80,
+      prefixCls, className, children, style, width = 200, collapsedWidth = 62,
       theme = 'dark', collapsible, onCollapse, collapsed: _collapsed, defaultCollapsed, ...rest
     } = this.props;
     const { collapsed } = this.state;
