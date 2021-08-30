@@ -543,7 +543,7 @@ export default class Table extends React.Component<TableProps, TableState> {
           </div>
           {
             pagination && (
-              <div className={`${prefix}-pagination`}>
+              <div className={`${prefix}-pagination`} style={pagination?.style || {}}>
                 <Pagination
                   {...pagination}
                   onChange={this.onPageChange}

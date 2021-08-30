@@ -27,6 +27,7 @@ export type PaginationProps = {
   total?: number;
   /** 页码改变的回调，参数是改变后的页码及每页条数 */
   onChange?: (page: number, pageSize: number) => void;
+  style?: React.CSSProperties;
 } & BaseProps;
 
 export type PaginationState = {

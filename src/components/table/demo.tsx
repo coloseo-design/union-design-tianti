@@ -521,7 +521,10 @@ const tableT1 = (
         <Table
           rowSelection={rowSelection}
           columns={columns}
-          pagination={{ pageSize: 2 }}
+          pagination={{
+            pageSize: 2,
+            style: { marginTop: 8 },
+          }}
           dataSource={[
             {
               key: '1',
