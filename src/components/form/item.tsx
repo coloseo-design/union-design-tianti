@@ -61,10 +61,10 @@ const Item: React.FC<FormItemProps> = (props: FormItemProps) => {
   const prefix = getPrefixCls('form-item', customizePrefixCls);
   // label布局
   const labelCol = { ...context.labelCol, ...labelColfromProps };
-  const labelAlignt = lableAlignOfProps || context.labelAlign;
+  const labelAlign = lableAlignOfProps || context.labelAlign;
   const labelClassName = classnames({
     [`${prefix}-label`]: true,
-    [`${prefix}-label-left`]: labelAlignt === 'left',
+    [`${prefix}-label-left`]: labelAlign === 'left',
     [`${prefix}-label-colon`]: colon,
   });
   // 输入组件布局
