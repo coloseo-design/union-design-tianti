@@ -521,7 +521,7 @@
 @cascader-disabled-border-color: @disabled-border-color;
 @cascader-placeholder-color: hsv(0, 0, 75%);
 @cascader-icon-color: @border;
-@cascader-icon-disbled-color: rgba(0,0,0,.45); 
+@cascader-icon-disbled-color: rgba(0,0,0,.45);
 @cascader-dropdwon-boxshadow: @shadow-color;
 @cascader-dropdwon-bg: #fff;
 @cascader-dropdown-border-left-color: @border;
@@ -794,40 +794,12 @@
 // ---
 @tabs-card-height: 36px;
 @tabs-line-height: 32px;
-@tabs-card-active-color: @primary-color;
-@tabs-line-active-color: @primary-color;
-
-@tabs-card-horizontal-padding: (
-    (@tabs-card-height - floor(@font-size-base * @line-height-base)) / 2
-  ) - @border-width-base 21px;
-@tabs-card-horizontal-padding-sm: 6px @padding-md;
-@tabs-card-horizontal-padding-lg: 7px @padding-md 6px;
-@tabs-title-font-size: @font-size-base;
-@tabs-title-font-size-lg: @font-size-lg;
-@tabs-title-font-size-sm: @font-size-base;
-@tabs-link-bar-color: @primary-color;
-@tabs-bar-margin: 0 0 16px 0;
-@tabs-horizontal-margin: 0 10px 0 0;
-@tabs-horizontal-margin-rtl: 0 0 0 10px;
-@tabs-horizontal-padding: 5px 16px 9px 16px;
-@tabs-horizontal-padding-lg: 16px;
-@tabs-horizontal-padding-sm: 8px 16px;
-@tabs-vertical-padding: 8px 24px;
-@tabs-vertical-margin: 0 0 16px 0;
-@tabs-scrolling-size: 10px;
-@tabs-highlight-color: @primary-color;
-@tabs-hover-color: @primary-5;
-@tabs-active-color: @primary-7;
-@tabs-card-active-bg-color: rgba(249,250,251,1);
-@tabs-card-border-color: rgba(199,202,205,1);
-@tabs-card-bg-color: rgba(233,235,240,1);
-@tabs-line-bar-bg-color: @primary-color;
-@tabs-page-bg-color: @content-bg;
-@tabs-page-box-shadow-color: rgba(147,147,147,0.35);
-@tabs-page-active-bg-color: @red-1;
-@tabs-page-active-title-color: @text-color;
-@tabs-page-closeIcon-hover-color: @primary-color;
-@tabs-page-fence-bg-color: #D8D8D8;
+@tabs-bg: #e9ebf0;
+@tabs-color: @primary-color;
+@tabs-active-color: @primary-color;
+@tabs-active-bg: #f9fafb;
+@tabs-border-color: #d8d8d8;
+@tabs-active-border-color: @tabs-border-color;
 
 // BackTop
 // ---
@@ -895,7 +867,7 @@
 @breadcrumb-separator-margin: 0 @padding-xs;
 
 
-// Calendar 
+// Calendar
 
 @calendar-title-bg-color: @disabled-background-color;
 @calendar-line-color: @border;

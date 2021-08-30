@@ -24,12 +24,12 @@
         cursor: pointer;
         &-active {
           .@{tab-prefix-cls}-title {
-            color: @tabs-line-active-color;
+            color: @tabs-active-color;
           }
         }
         &:hover {
           .@{tab-prefix-cls}-title {
-            color: @tabs-line-active-color;
+            color: @tabs-active-color;
           }
         }
       }
@@ -38,7 +38,7 @@
         position: absolute;
         bottom: 0;
         height: 4px;
-        background-color: @tabs-line-bar-bg-color;
+        background-color: @primary-color;
         transition: width 500ms, left 500ms;
       }
     }
@@ -46,28 +46,27 @@
 
   &-card {
     .@{tab-prefix-cls}-nav {
-      background-color: @tabs-card-bg-color;
-      border-top: 1px solid @tabs-card-border-color;
-      border-bottom: 1px solid @tabs-card-border-color;
+      background-color: @tabs-bg;
+      border-top: 1px solid @tabs-border-color;
+      border-bottom: 1px solid @tabs-border-color;
       &>.@{tab-prefix-cls}-tab {
         margin-top: -1px;
-        height: 36px;
+        height: @tabs-card-height;
         padding: 5px 20px;
-        border-top: 1px solid @tabs-card-border-color;
-        border-bottom: 1px solid @tabs-card-border-color;
+        border-top: 1px solid @tabs-border-color;
         cursor: pointer;
         &-active {
-          border-bottom: 1px solid @tabs-card-active-bg-color;
-          border-right: 1px solid @tabs-card-border-color;
-          border-left: 1px solid @tabs-card-border-color;
-          background-color: @tabs-card-active-bg-color;
+          border-right: 1px solid @tabs-active-border-color;
+          border-left: 1px solid @tabs-active-border-color;
+          border-bottom: 1px solid @tabs-active-bg;
+          background-color: @tabs-active-bg;
           .@{tab-prefix-cls}-title {
-            color: @tabs-line-active-color;
+            color: @tabs-active-color;
           }
         }
         &:hover {
           .@{tab-prefix-cls}-title {
-            color: @tabs-line-active-color;
+            color: @tabs-active-color;
           }
         }
       }
@@ -75,35 +74,62 @@
         display: none;
       }
     }
+  }
 
+  &-plain {
+    .@{tab-prefix-cls}-nav {
+      background-color: @tabs-bg;
+      &>.@{tab-prefix-cls}-tab {
+        height: @tabs-card-height;
+        padding: 0 20px;
+        cursor: pointer;
+        line-height: @tabs-card-height;
+        &-active {
+          border-right: 1px solid @tabs-active-border-color;
+          border-left: 1px solid @tabs-active-border-color;
+          background-color: @tabs-active-bg;
+          .@{tab-prefix-cls}-title {
+            color: @tabs-active-color;
+          }
+        }
+        &:hover {
+          .@{tab-prefix-cls}-title {
+            color: @tabs-active-color;
+          }
+        }
+      }
+      &>.@{tab-prefix-cls}-bar {
+        display: none;
+      }
+    }
   }
 
   &-page {
     &>.@{tab-prefix-cls}-nav {
-      background-color: @tabs-page-bg-color;
+      background-color: @content-bg;
       height: 40px;
-      box-shadow: 0 2px 2px 0 @tabs-page-box-shadow-color;
+      box-shadow: 0 2px 2px 0 @card-shadow;
       &>.@{tab-prefix-cls}-tab {
         height: 40px;
         padding: 10px 16px;
         position: relative;
         cursor: pointer;
           &-active {
-            background-color: @tabs-page-active-bg-color;
+            background-color: @item-hover-bg;
             .@{tab-prefix-cls}-title {
-              color: @tabs-page-active-title-color;
+              color: @text-color;
             }
           }
           &:hover {
             background-color: @item-hover-bg;
             .@{tab-prefix-cls}-title {
-              color: @tabs-page-active-title-color;
+              color: @text-color;
             }
           }
           .@{tab-prefix-cls}-closeIcon {
             margin-left:10px;
             &:hover {
-              color: @tabs-page-closeIcon-hover-color;
+              color: @primary-color;
             }
 
           }
@@ -113,7 +139,7 @@
             right: 0;
             height: 24px;
             width: 1px;
-            background-color: @tabs-page-fence-bg-color;
+            background-color: @tabs-active-border-color;
           }
       }
     }

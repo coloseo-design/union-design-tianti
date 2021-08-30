@@ -10,7 +10,7 @@ import { warning } from '../utils/warning';
 import { uuid } from '../utils/uuid';
 import Pane from './pane';
 
-export type TabsType = 'line' | 'card' | 'page';
+export type TabsType = 'line' | 'card' | 'page' | 'plain';
 
 export interface TitleType {
   key: string;
