@@ -57,9 +57,10 @@ const LayoutDemo = () => {
           collapsible
           collapsed={collapsed}
           onCollapse={(_collapsed) => { setCollapsed(_collapsed); }}
+          theme="light"
         >
           logo
-          <Menu>
+          <Menu style={{ boxShadow: 'none' }}>
             <Menu.Item icon="image">
               工作台1
             </Menu.Item>

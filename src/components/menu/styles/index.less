@@ -46,6 +46,17 @@
   &:hover{
     color: @menu-dark-hover-color;
   }
+
+  .@{menu-sub-menu},.@{menu-item} {
+    &:hover {
+      .@{menu-left-icon} {
+        color: @menu-dark-hover-color;
+      }
+      .@{menu-right-icon} {
+        color: @menu-dark-hover-color;
+      }
+    }
+  }
 }
 
 .@{menu-light} {
@@ -54,6 +65,17 @@
 
   &:hover{
     color: @menu-light-hover-color;
+  }
+
+  .@{menu-sub-menu},.@{menu-item} {
+    &:hover {
+      .@{menu-left-icon} {
+        color: @menu-light-hover-color;
+      }
+      .@{menu-right-icon} {
+        color: @menu-light-hover-color;
+      }
+    }
   }
 }
 
@@ -176,10 +198,22 @@
 
 .@{menu-sub-menu-selected}.@{menu-light} {
   color: @menu-light-submenu-selected-color;
+  .@{menu-left-icon} {
+    color: @menu-light-hover-color;
+  }
+  .@{menu-right-icon} {
+    color: @menu-light-hover-color;
+  }
 }
 
 .@{menu-sub-menu-selected}.@{menu-dark} {
   color: @menu-dark-submenu-selected-color;
+  .@{menu-left-icon} {
+    color: @menu-dark-hover-color;
+  }
+  .@{menu-right-icon} {
+    color: @menu-dark-hover-color;
+  }
 }
 
 .@{menu-item-group} {

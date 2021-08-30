@@ -3,11 +3,14 @@
 
 @radio-prefix-cls: ~'@{uni-prefix}-radio';
 
+.@{radio-prefix-cls} + .@{radio-prefix-cls} {
+  margin-left: 16px;
+}
+
 .@{radio-prefix-cls} {
   position: relative;
   transition: all .3s;
   display: inline-block;
-  margin-right: 8px;
   cursor: pointer;
   input[type="radio"] {
     opacity: 0; //设置透明度，隐藏原有input样式
