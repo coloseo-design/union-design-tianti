@@ -1,3 +1,30 @@
+## [1.0.14](http://10.124.128.2:8888/muses/union-design/compare/v1.0.11...v1.0.14) (2021-08-31)
+
+
+### Bug Fixes
+
+* 🐛 调整tabs的颜色 ([cfac3b2](http://10.124.128.2:8888/muses/union-design/commits/cfac3b253631a4f0af518d63a57d43594f1a8b4b))
+* 🐛 升级union-tool的版本 ([e978d3c](http://10.124.128.2:8888/muses/union-design/commits/e978d3ce326b20c13dee5561afd38b264f7b722e))
+* 🐛 修复labelalign的拼写错误 ([bf1f744](http://10.124.128.2:8888/muses/union-design/commits/bf1f744ca7675a03d2e9f92070e51373767ae6c0))
+* 🐛 修复table的样式问题 ([8dacaf5](http://10.124.128.2:8888/muses/union-design/commits/8dacaf515e6271aad3c7c3eddf2a2ddaf68431bf))
+* 🐛 修复typescript打包类型的错误 ([8c6b180](http://10.124.128.2:8888/muses/union-design/commits/8c6b1805671377ba43000c9f0cfaecfd90b39088))
+* 🐛 修改调试模式背景色为白色 ([bdd609b](http://10.124.128.2:8888/muses/union-design/commits/bdd609b6adaf5c6c7ed93fbd78eff38ac9d446ec))
+* 🐛 alert icon 颜色修改 ([d4495de](http://10.124.128.2:8888/muses/union-design/commits/d4495dec15d3cce466b1ecdc569895084d8bba3b))
+* 🐛 layout sider 判断修改 ([c3139dd](http://10.124.128.2:8888/muses/union-design/commits/c3139dd3b397517c127431c24c8e3b109843e847))
+* 🐛 menu select 问题 ([9ce00e0](http://10.124.128.2:8888/muses/union-design/commits/9ce00e0f2ae42dd08cac01b05c0150d5764a1327))
+* 🐛 tabs.pane增加closable, 调整list样式，重构table代码 ([765ba17](http://10.124.128.2:8888/muses/union-design/commits/765ba17920a00fc13a2ac200a9a2706db8f6408c))
+
+
+### Features
+
+* 🎸 组件颜色替换 ([f5d0f26](http://10.124.128.2:8888/muses/union-design/commits/f5d0f26cabbd2db6713da1bc2886b9f0f5aa05e3))
+* 🎸 alert markdown 修改 ([4122fe4](http://10.124.128.2:8888/muses/union-design/commits/4122fe4c00b62ebd0cb0585091294403f668b723))
+* 🎸 formitem增加labelStyle属性去修改label样式 ([a542d6d](http://10.124.128.2:8888/muses/union-design/commits/a542d6d0e9742042bb35073798ed8a747bf92f04))
+* 🎸 layout sider 收起默认宽度改为62 ([746617b](http://10.124.128.2:8888/muses/union-design/commits/746617b45837d13e1bfd681f8154ae5930beba89))
+* 🎸 pagination 增加style属性 ([b5f9187](http://10.124.128.2:8888/muses/union-design/commits/b5f9187f691454251ee9b231cd6f919e9e4eb7ef))
+
+
+
 ## [1.0.13](http://10.124.128.2:8888/muses/union-design/compare/v1.0.8...v1.0.13) (2021-08-24)
 
 
