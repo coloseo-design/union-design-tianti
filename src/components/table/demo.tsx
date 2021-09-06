@@ -79,6 +79,7 @@ const spanColumns = [
   {
     title: 'Name',
     dataIndex: 'name',
+    align: 'center',
     render: (text: unknown | null | undefined, row: any, index: number) => {
       if (index < 4) {
         return <span style={{ color: '#b30000' }}>{text}</span>;
