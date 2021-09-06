@@ -97,7 +97,7 @@ const Demo = () => {
         onClick={console.log}
         theme={theme}
         mode="inline"
-        defaultSelectedKeys={['1']}
+        defaultSelectedKeys={['2', '3']}
         defaultOpenKeys={['2', '7']}
         triggerSubMenuAction="click"
         inlineCollapsedIcon
