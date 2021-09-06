@@ -1,3 +1,26 @@
+## [1.0.19](http://10.124.128.2:8888/muses/union-design/compare/v1.0.13...v1.0.19) (2021-09-06)
+
+
+### Bug Fixes
+
+* 🐛 调整tabs的颜色 ([cfac3b2](http://10.124.128.2:8888/muses/union-design/commits/cfac3b253631a4f0af518d63a57d43594f1a8b4b))
+* 🐛 升级union-tool的版本 ([e978d3c](http://10.124.128.2:8888/muses/union-design/commits/e978d3ce326b20c13dee5561afd38b264f7b722e))
+* 🐛 修复column的align属性在table的header上无效的bug ([1badb2c](http://10.124.128.2:8888/muses/union-design/commits/1badb2cf27457a7f2b4587e67682e6e64dbcc53a))
+* 🐛 修复labelalign的拼写错误 ([bf1f744](http://10.124.128.2:8888/muses/union-design/commits/bf1f744ca7675a03d2e9f92070e51373767ae6c0))
+* 🐛 修改调试模式背景色为白色 ([bdd609b](http://10.124.128.2:8888/muses/union-design/commits/bdd609b6adaf5c6c7ed93fbd78eff38ac9d446ec))
+* 🐛 layout sider 判断修改 ([c3139dd](http://10.124.128.2:8888/muses/union-design/commits/c3139dd3b397517c127431c24c8e3b109843e847))
+* 🐛 menu select 问题 ([9ce00e0](http://10.124.128.2:8888/muses/union-design/commits/9ce00e0f2ae42dd08cac01b05c0150d5764a1327))
+
+
+### Features
+
+* 🎸 alert icon 位置修改 ([1055ee2](http://10.124.128.2:8888/muses/union-design/commits/1055ee265b0c5308358af068451742d5597cf340))
+* 🎸 formitem增加labelStyle属性去修改label样式 ([a542d6d](http://10.124.128.2:8888/muses/union-design/commits/a542d6d0e9742042bb35073798ed8a747bf92f04))
+* 🎸 layout sider 收起默认宽度改为62 ([746617b](http://10.124.128.2:8888/muses/union-design/commits/746617b45837d13e1bfd681f8154ae5930beba89))
+* 🎸 pagination 增加style属性 ([b5f9187](http://10.124.128.2:8888/muses/union-design/commits/b5f9187f691454251ee9b231cd6f919e9e4eb7ef))
+
+
+
 ## [1.0.18](http://10.124.128.2:8888/muses/union-design/compare/v1.0.17...v1.0.18) (2021-09-06)
 
 
