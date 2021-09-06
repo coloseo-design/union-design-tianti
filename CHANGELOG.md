@@ -1,3 +1,17 @@
+## [1.0.15](http://10.124.128.2:8888/muses/union-design/compare/v1.0.14...v1.0.15) (2021-09-06)
+
+
+### Bug Fixes
+
+* 🐛 修复column的align属性在table的header上无效的bug ([1badb2c](http://10.124.128.2:8888/muses/union-design/commits/1badb2cf27457a7f2b4587e67682e6e64dbcc53a))
+
+
+### Features
+
+* 🎸 alert icon 位置修改 ([1055ee2](http://10.124.128.2:8888/muses/union-design/commits/1055ee265b0c5308358af068451742d5597cf340))
+
+
+
 ## [1.0.14](http://10.124.128.2:8888/muses/union-design/compare/v1.0.11...v1.0.14) (2021-08-31)
 
 
