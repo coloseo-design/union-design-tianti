@@ -253,6 +253,8 @@ const tableT1 = (
               dataIndex: 'name',
               key: 'name',
               width: 150,
+              className: 'ttt',
+              align: 'right',
             },
             {
               title: '年龄',

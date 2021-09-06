@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import classNames from 'classnames';
 import { ColumnsProps } from './type';
 import {
   Icon,
@@ -26,7 +27,7 @@ const TableHeader: React.FC<TableHeaderProps> = (props: TableHeaderProps) => {
       <tr>
         {
           columns.map((column) => {
-            const { colSpan = 1 } = column;
+            const { colSpan = 1, className = '', align = '' } = column;
             if (colSpan === 0) {
               return null;
             }
@@ -35,10 +36,14 @@ const TableHeader: React.FC<TableHeaderProps> = (props: TableHeaderProps) => {
               label: item.text,
             }));
             const key = column.key || column.dataIndex || '';
+            const clsName = classNames({
+              [`${prefixCls}-header-${align}`]: align,
+            }, className);
             return (
               <th
                 key={key}
                 colSpan={column.colSpan}
+                className={clsName}
               >
                 <span>
                   {column.title}
