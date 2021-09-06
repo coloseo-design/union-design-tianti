@@ -6,7 +6,7 @@ import '../switch/styles/index';
 
 const Demo = () => {
   const [theme, setTheme] = useState<'light' | 'dark'>('light');
-  const [seleckey, setKeys] = useState(['2', '3']);
+  const [seleckey, setKeys] = useState([]);
   console.log('--seleckey>>>', seleckey);
   return (
     <div style={{ padding: '30px 40px' }}>
@@ -95,10 +95,10 @@ const Demo = () => {
 
       <Menu
         style={{ height: '40vh', width: 300 }}
-        onClick={(key) => { console.log('===keys', key); setKeys(['2', '5']); }}
+        onClick={(key) => { console.log('===keys', key); setKeys(['2', '3']); }}
         theme={theme}
         mode="inline"
-        defaultSelectedKeys={['7', '8']}
+        // defaultSelectedKeys={['7', '8']}
         defaultOpenKeys={['2', '7']}
         selectedKeys={seleckey}
         // openKeys={[]}
