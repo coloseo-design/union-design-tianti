@@ -111,13 +111,19 @@ export default class Menu extends MenuBase<MenuProps, MenuState> {
     super(props);
     this.initState();
     const newSelectedKeys = (props.selectedKeys && props.selectedKeys.length) ? props.selectedKeys : (props.defaultSelectedKeys || []);
+    console.log('--newSelectedKeys', newSelectedKeys);
     const newSelectedKeyPaths = { [newSelectedKeys[newSelectedKeys?.length - 1]]: newSelectedKeys };
+    const newOpenKeys = (props.openKeys && props.openKeys.length) ? props.openKeys : (props.defaultOpenKeys || []);
+    console.log('newOpenKeys', newOpenKeys);
     setTimeout(() => {
-      this.setState({ selectedKeys: [...newSelectedKeys], selectedKeyPaths: newSelectedKeyPaths, openKeys: (props.openKeys && props.openKeys.length) ? props.openKeys : (props.defaultOpenKeys || []) });
+      this.setState({ selectedKeys: [...newSelectedKeys], selectedKeyPaths: newSelectedKeyPaths, openKeys: [...newOpenKeys] });
     });
   }
 
   public componentDidUpdate = (preProps: MenuProps) => {
+    console.log('props.selectedKeys', this.props.selectedKeys);
+    console.log('props.openKeys', this.props.openKeys);
+
     if (preProps.selectedKeys !== this.props.selectedKeys) {
       const newSelectedKeyPaths = { [this.props.selectedKeys[this.props.selectedKeys?.length - 1]]: this.props.selectedKeys };
       this.setState({ selectedKeys: this.props.selectedKeys ?? [], selectedKeyPaths: newSelectedKeyPaths });
