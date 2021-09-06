@@ -18,7 +18,7 @@ const Demo = () => {
         <Switch onChange={(s) => setTheme(s ? 'dark' : 'light')} />
       </div>
 
-      <div style={{
+      {/* <div style={{
         width: 180,
         height: '50vh',
         position: 'relative',
@@ -88,7 +88,7 @@ const Demo = () => {
           </Menu.SubMenu>
         </Menu>
 
-      </div>
+      </div> */}
 
       <div style={{ height: 20 }} />
 
@@ -97,8 +97,10 @@ const Demo = () => {
         onClick={console.log}
         theme={theme}
         mode="inline"
-        defaultSelectedKeys={['2', '3']}
-        defaultOpenKeys={['2', '7']}
+        // defaultSelectedKeys={['2', '3']}
+        // defaultOpenKeys={['2', '7']}
+        selectedKeys={['2', '3']}
+        openKeys={['2', '7']}
         triggerSubMenuAction="click"
         inlineCollapsedIcon
       >
@@ -133,7 +135,7 @@ const Demo = () => {
         </Menu.SubMenu>
       </Menu>
 
-      <div style={{ height: 20 }} />
+      {/* <div style={{ height: 20 }} />
 
       <Menu style={{ width: 300, height: '40vh' }}>
         <Menu.Item>
@@ -229,7 +231,7 @@ const Demo = () => {
           工作台23
         </Menu.Item>
       </Menu>
-      <div style={{ height: '60vh' }} />
+      <div style={{ height: '60vh' }} /> */}
     </div>
   );
 };

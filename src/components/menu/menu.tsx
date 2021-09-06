@@ -113,7 +113,7 @@ export default class Menu extends MenuBase<MenuProps, MenuState> {
     const newSelectedKeys = props.selectedKeys || props.defaultSelectedKeys || [];
     const newSelectedKeyPaths = { [newSelectedKeys[newSelectedKeys?.length - 1]]: newSelectedKeys };
     setTimeout(() => {
-      this.setState({ selectedKeyPaths: newSelectedKeyPaths });
+      this.setState({ selectedKeys: [...newSelectedKeys], selectedKeyPaths: newSelectedKeyPaths, openKeys: props.openKeys || props.defaultOpenKeys || [] });
     });
   }
 
