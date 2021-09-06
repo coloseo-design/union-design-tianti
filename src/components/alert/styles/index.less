@@ -77,10 +77,19 @@
     display: block;
     margin-top: 4px;
   }
-  &-close {
+  &-des-close {
     position: absolute;
     right: 16px;
     top: 10px;
+    color: @border;
+    cursor: pointer;
+  }
+  &-close {
+    position: absolute;
+    right: 16px;
+    // top: 10px;
+    top: 50%;
+    transform: translateY(-50%);
     color: @border;
     cursor: pointer;
   }

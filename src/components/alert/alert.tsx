@@ -86,7 +86,7 @@ class Alert extends React.Component<AlertProps, AlertState> {
       [`${prefix}-message-hasDes`]: description,
     });
     const alertDes = classNames(`${prefix}-description`);
-    const alertClose = classNames(`${prefix}-close`);
+    const alertClose = classNames(description ? `${prefix}-des-close` : `${prefix}-close`);
     const typeMapping: MappString = {
       error: 'delete',
       success: 'success',

@@ -84,6 +84,16 @@ const AlertDemo = () => (
         onClose={(evt) => { console.log('dd', evt); }}
       />
     </div>
+    <div style={{ margin: 24 }}>
+      <Alert
+        message="恭喜！你所提交的信息已经审核通过，如有问题请联系客服。"
+        type="error"
+        showIcon
+        // banner
+        closeText="查看详情"
+        style={{ height: 40 }}
+      />
+    </div>
   </div>
 
 );
