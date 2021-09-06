@@ -1,6 +1,6 @@
 {
 	"name": "union-design",
-	"version": "1.0.15",
+	"version": "1.0.16",
 	"license": "MIT",
 	"files": [
 		"lib",
