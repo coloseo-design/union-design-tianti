@@ -6,7 +6,7 @@ import '../switch/styles/index';
 
 const Demo = () => {
   const [theme, setTheme] = useState<'light' | 'dark'>('light');
-
+  const [seleckey, setKeys] = useState(['2', '3']);
   return (
     <div style={{ padding: '30px 40px' }}>
       <div style={{
@@ -94,13 +94,13 @@ const Demo = () => {
 
       <Menu
         style={{ height: '40vh', width: 300 }}
-        onClick={console.log}
+        onClick={(key) => { console.log('===keys', key); setKeys(['2', '3']); }}
         theme={theme}
         mode="inline"
-        // defaultSelectedKeys={['2', '3']}
-        // defaultOpenKeys={['2', '7']}
-        selectedKeys={['2', '3']}
-        openKeys={['2', '7']}
+        defaultSelectedKeys={['2', '3']}
+        defaultOpenKeys={['2', '7']}
+        selectedKeys={seleckey}
+        openKeys={[]}
         triggerSubMenuAction="click"
         inlineCollapsedIcon
       >

@@ -110,10 +110,10 @@ export default class Menu extends MenuBase<MenuProps, MenuState> {
   public constructor(props: MenuProps) {
     super(props);
     this.initState();
-    const newSelectedKeys = props.selectedKeys || props.defaultSelectedKeys || [];
+    const newSelectedKeys = (props.selectedKeys && props.selectedKeys.length) ? props.selectedKeys : (props.defaultSelectedKeys || []);
     const newSelectedKeyPaths = { [newSelectedKeys[newSelectedKeys?.length - 1]]: newSelectedKeys };
     setTimeout(() => {
-      this.setState({ selectedKeys: [...newSelectedKeys], selectedKeyPaths: newSelectedKeyPaths, openKeys: props.openKeys || props.defaultOpenKeys || [] });
+      this.setState({ selectedKeys: [...newSelectedKeys], selectedKeyPaths: newSelectedKeyPaths, openKeys: (props.openKeys && props.openKeys.length) ? props.openKeys : (props.defaultOpenKeys || []) });
     });
   }
 
