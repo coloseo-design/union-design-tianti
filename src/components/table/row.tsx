@@ -1,3 +1,4 @@
+/* eslint-disable react/require-default-props */
 import React from 'react';
 import classnames from 'classnames';
 import { ColProps } from './type';
