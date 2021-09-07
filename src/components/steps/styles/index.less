@@ -172,7 +172,7 @@
     }
 
     & > .@{step-tag-title} {
-        font-weight: bold;
+        font-weight: 500;
         padding: 0 8px;
         color: @steps-step-tag-title-color;
         cursor: pointer;
@@ -190,10 +190,12 @@
 
     & > .@{step-tag-title}.@{step-tag-wait} {
         color: @steps-step-tag-wait-color;
+        font-weight: 400;
     }
 
     & > .@{step-tag-title}.@{step-tag-finish} {
         color: @steps-step-tag-finish-color;
+        font-weight: 400;
     }
 
     & .@{step-tag-description} {
@@ -213,10 +215,10 @@
     }
 
     & .@{step-tag-description}.@{step-tag-wait} {
-        color: @steps-step-tag-wait-color;
+        color: @steps-step-tag-wait-description-color;
     }
 
     & .@{step-tag-description}.@{step-tag-finish} {
-        color: @steps-step-tag-finish-color;
+        color: @steps-step-tag-finish-description-color;
     }
 }

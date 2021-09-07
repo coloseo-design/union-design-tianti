@@ -21,7 +21,7 @@
   border-radius: @border-radius-base;
   font-size: @font-size-base;
   border: @border-width-base @border-style-base @auto-complete-border-color;
-  &:hover, &:active, &:focus{
+  &:hover, &:active, &:focus {
     outline: none;
     border-color: @auto-complete-border-hover-color;
   }
@@ -47,6 +47,7 @@
 }
 .@{auto-complete-cls}-disabled {
   cursor: not-allowed;
+  color: @auto-complete-disabled-color;
   background: @auto-complete-disabled-bg;
   border-color: @auto-complete-disabled-border;
   &:hover {
@@ -74,6 +75,7 @@
   z-index: 1050;
   box-shadow: 0px 1px 4px 1px @auto-complete-dropdwon-boxshdow;
   margin: 0;
+  color: @auto-complete-dropdown-color;
 }
 
 .@{auto-complete-select} {

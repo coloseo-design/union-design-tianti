@@ -236,9 +236,10 @@
 
 // Checkbox
 @checkbox-bg: @white;
+@checkbox-text-color: @secondary-text-color;
 @checnbox-after-border: #fff;
 @checkbox-border-color: @border;
-@checkbox-diabled-color: @disabled-color;
+@checkbox-diabled-color: rgba(0,0,0,0.35);
 @checkbox-checked-bg: @primary-color;
 @checkbox-checked-border-colors: @primary-color;
 @checkbox-indeterminate-bg: #fff;
@@ -380,6 +381,7 @@
 //Dropdown
 @dropdown-containter-bg: @white;
 @dropdown-boxshadow: rgba(147,147,147,0.35);
+@dropdown-btn-text-color: @secondary-text-color;
 @dropdown-btn-default-border-color: @border;
 @dropdown-btn-default-hover-border-color: @primary-5;
 @dropdown-btn-default-hover-color: @primary-5;
@@ -520,7 +522,7 @@
 @cascader-disabled-bg: @disabled-background-color;
 @cascader-disabled-color: @disabled-color;
 @cascader-disabled-border-color: @disabled-border-color;
-@cascader-placeholder-color: hsv(0, 0, 75%);
+@cascader-placeholder-color: @placeholder;
 @cascader-icon-color: @border;
 @cascader-icon-disbled-color: rgba(0,0,0,.45);
 @cascader-dropdwon-boxshadow: @shadow-color;
@@ -643,7 +645,7 @@
 @menu-dark-color: @disabled-border-color;
 @menu-dark-bg: #2E3343;
 @menu-dark-hover-color: @white;
-@menu-light-color: rgba(0,0,0,0.85);
+@menu-light-color: @text-color;
 @menu-light-bg: @disabled-background-color;
 @menu-light-hover-color: @primary-color;
 @menu-horizontal-background-image: linear-gradient(90deg, @primary-color 0%, @new-primary-red 64%, @primary-color 100%);
@@ -656,7 +658,7 @@
 @menu-item-icon-color: #444A5E;
 @menu-item-selected-bg: @white;
 @menu-item-selected-right-line-bg: @primary-color;
-@menu-dark-item-selected-color: rgba(0,0,0,0.85);
+@menu-dark-item-selected-color: @text-color;
 @menu-dark-item-selected-hover-color: @black;
 @menu-light-submenu-selected-color: @primary-color;
 @menu-dark-submenu-selected-color: @white;
@@ -835,7 +837,8 @@
 
 // Pagination
 // ---
-@pagination-color: #595959;
+// @pagination-color: #595959;
+@pagination-color: @secondary-text-color;
 @pagination-item-border: @border;
 @pagination-item-hover-bg: rgb(230, 231, 234);
 @pagination-item-hover-border-color: rgb(230, 231, 234);
@@ -975,14 +978,16 @@
 @auto-complete-text-color: @text-color;
 @auto-complete-border-color: @border;
 @auto-complete-border-hover-color: #4AA1F7;
-@auto-complete-placeholer: hsv(0, 0, 75%);
+@auto-complete-placeholer: @placeholder;
 @auto-complete-disabled-bg: @disabled-background-color;
 @auto-complete-disabled-border: @disabled-border-color;
+@auto-complete-disabled-color: @disabled-color;
 @auto-complete-search-icon-color: @border;
 @auto-complete-dropdwon-boxshdow: @shadow-color;
 @auto-complete-dropdown-bg: @white;
 @auto-complete-dropdown-item-hover-bg: @item-hover-bg;
 @auto-complete-dropdown-item-border: @border;
+@auto-complete-dropdown-color: @text-color;
 
 // List
 // ---
@@ -1083,4 +1088,6 @@
 @steps-step-process-color: @primary-color;
 @steps-step-tag-title-color: rgba(0,0,0,0.85);
 @steps-step-tag-wait-color: @disabled-color;
-@steps-step-tag-finish-color: @text-color;
+@steps-step-tag-finish-color: @secondary-text-color;
+@steps-step-tag-wait-description-color: @disabled-color;
+@steps-step-tag-finish-description-color: @disabled-color;

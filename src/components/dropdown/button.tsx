@@ -119,7 +119,7 @@ class DropButton extends React.Component<DropMenuProps, DropMenuState> {
 
   compute = (first: boolean, evt?: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
     evt && evt.stopPropagation();
-    evt.nativeEvent.stopImmediatePropagation();
+    evt?.nativeEvent.stopImmediatePropagation();
     const { visible } = this.state;
     const { placement = 'bottomRight', onVisibleChange, visible: propsVisible } = this.props;
     if (!visible || first) {
