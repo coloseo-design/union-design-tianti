@@ -9,9 +9,9 @@ const AvatarDemo = () => (
     <Avatar src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png" style={{ marginLeft: 100 }} />
     <Avatar src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png" style={{ marginLeft: 100 }} size={50} />
     <Avatar src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png" style={{ marginLeft: 100 }} size={100} />
-    <Avatar icon={<Icon type="user-circle" />} style={{ marginLeft: 100 }} />
-    <Avatar icon={<Icon type="user-circle" />} style={{ marginLeft: 100 }} size={50} />
-    <Avatar icon={<Icon type="user-circle" />} style={{ marginLeft: 100 }} size={100} />
+    <Avatar icon={<Icon type="user-circle" />} style={{ marginLeft: 100, color: '#656A7B' }} />
+    <Avatar icon={<Icon type="user-circle" />} style={{ marginLeft: 100, color: '#656A7B' }} size={50} />
+    <Avatar icon={<Icon type="user-circle" />} style={{ marginLeft: 100, color: '#656A7B' }} size={100} />
     <div style={{ paddingTop: 100 }}>
       <Badge dot>
         <Avatar src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png" />

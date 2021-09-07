@@ -183,13 +183,13 @@
 @btn-primary-color: @white;
 @btn-primary-bg: @primary-color;
 
-@btn-default-color: @text-color;
+@btn-default-color: @secondary-text-color;
 @btn-default-border-color: @border;
 @btn-default-bg: @component-background;
 
 @btn-disabled-border-color: @border;
 
-@btn-dashed-color: @text-color;
+@btn-dashed-color: @secondary-text-color;
 @btn-dashed-border-color: @border;
 @btn-dashed-bg: @component-background;
 
@@ -376,7 +376,9 @@
 @collapse-item-border-color: @normal-color;
 @collapse-item-header-bg: #F4F5F7;
 @collapse-item-content-bg: @content-bg;
+@collapse-item-content-color: @secondary-text-color;
 @collapse-panel-border-radius: @border-radius-base;
+@collapse-item-collapsible: rgba(0, 0, 0, 0.45);
 
 //Dropdown
 @dropdown-containter-bg: @white;
@@ -605,7 +607,7 @@
 @popconfirm-bg: @white;
 @popconfirm-boxshadow: rgba(147,147,147,0.35);
 @popconfirm-icon-color: @warning-color;
-
+@popconfirm-content-inner-title: @secondary-text-color;
 // Modal
 // --
 @modal-body-padding: 24px;
@@ -618,12 +620,14 @@
 @modal-mask-bg: fade(@black, 45%);
 @modal-content-bg: @white;
 @modal-content-boxshadow: rgba(0,0,0,0.03), 0 9px 4px 0 rgba(0,0,0,0.05), 0 6px 16px 0 rgba(0,0,0,0.08);
+@modal-content-color: @secondary-text-color;
 
 // Notification
 
 @notification-container-bg: @white;
 @notification-container-boxshadow: @shadow-2;
-@notification-container-text-color: @text-color;
+@notification-container-text-color: @secondary-text-color;
+@notification-close-color: @border;
 
 
 // Progress
@@ -769,7 +773,7 @@
 @result-success-color: #44BF30;
 @result-error-color: @red-6;
 @result-title-color: rgba(0,0,0,0.85);
-@result-subtitle-color: @disabled-color;
+@result-subtitle-color: @placeholder;
 
 // Card
 // ---
@@ -949,7 +953,7 @@
 // ---
 @message-bg: @white;
 @message-boxshadow: @shadow-2;
-@message-content-text-color: @text-color;
+@message-content-text-color: @secondary-text-color;
 @message-notice-content-padding: 10px 16px;
 
 // Motion
@@ -970,7 +974,8 @@
 @alert-error-border-color: ~`colorPalette('@{error-color}', 3) `;
 @alert-error-bg-color: ~`colorPalette('@{error-color}', 1) `;
 @alert-error-icon-color: @error-color;
-@alert-description-color: rgba(0,0,0,0.85);
+@alert-message-color: @text-color;
+@alert-description-color: @secondary-text-color;
 
 
 // AutoComplete
@@ -1049,9 +1054,9 @@
 @typography-success-color: #44BF30;
 @typography-warning-color: #FAAD14;
 @typography-danger-color: @red-5;
-@typography-link-color: @link-color;
-@typography-link-visited-color: @link-active-color;
-@typography-link-hover-color: @link-hover-color;
+@typography-link-color: #207EEA;
+@typography-link-visited-color: color(~`colorPalette('@{typography-link-color}', 7) `);
+@typography-link-hover-color: color(~`colorPalette('@{typography-link-color}', 5) `);
 
 // upload
 @upload-error-color: @error-color;
