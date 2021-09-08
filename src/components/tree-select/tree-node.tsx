@@ -51,9 +51,11 @@ class TreeNode extends React.Component<TreeNodeProps> {
       isSelected,
       isChecked,
       style,
+      className,
     } = this.props;
     const { treeType, treeDisabled } = this.context;
     const tree = getPrefixCls(`${treeType}`, prefixCls);
+    const treeNodeClass = classNames(tree, className);
     const titleStyle = classNames(`${tree}-node-title`, {
       [`${tree}-node-title-selected`]: isSelected,
       [`${tree}-node-title-disabled`]: disabled || treeDisabled,
@@ -63,7 +65,7 @@ class TreeNode extends React.Component<TreeNodeProps> {
       <TreeNodeContext.Consumer>
         {({ treeCheckable, expandKeys }) => (
           <div
-            className={tree}
+            className={treeNodeClass}
             onClick={(evt: React.MouseEvent<HTMLSpanElement, MouseEvent>) => { evt.stopPropagation(); evt.nativeEvent.stopImmediatePropagation(); }}
             style={style}
           >

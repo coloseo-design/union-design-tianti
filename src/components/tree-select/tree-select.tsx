@@ -359,14 +359,16 @@ class TreeSelect extends React.Component<TreeSelectProps, TreeSelectStates> {
       maxTagCount,
       placeholder = '请选择',
       getPopupContainer,
-      style,
+      style = {},
       dropdownClassName,
       disabled,
+      className,
     } = this.props;
     const {
       border, left, top, width, values, childrenList, multiple,
     } = this.state;
     const treeSelect = getPrefixCls('tree-select', prefixCls);
+    const treeSelectClass = classNames(treeSelect, className);
     const selection = classNames(`${treeSelect}-selection`, {
       [`${treeSelect}-selection-focus`]: border,
       [`${treeSelect}-selection-disabled`]: disabled,
@@ -377,8 +379,16 @@ class TreeSelect extends React.Component<TreeSelectProps, TreeSelectStates> {
 
     return (
       <>
-        <span className={treeSelect}>
-          <span className={selection} style={style} onClick={this.handleClick} ref={this.getNode}>
+        <span className={treeSelectClass}>
+          <span
+            className={selection}
+            style={{
+              padding: multiple && values && values.length > 0 ? '3px 12px' : '5px 12px',
+              ...style,
+            }}
+            onClick={this.handleClick}
+            ref={this.getNode}
+          >
             {
               values && values.length > 0
                 ? (

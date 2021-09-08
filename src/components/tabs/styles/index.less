@@ -8,12 +8,17 @@
   .reset-component();
   overflow: hidden;
   position: relative;
-  font-family: PingFangSC-Medium;
   &-nav {
     display: flex;
     justify-content: flex-start;
     position: relative;
     height: @tabs-card-height;
+  }
+
+  &-title {
+    font-family: PingFangSC-Medium;
+    font-weight: 500;
+    color: @tabs-title-text-color;
   }
 
   &-line {
@@ -129,6 +134,7 @@
           }
           .@{tab-prefix-cls}-closeIcon {
             margin-left:10px;
+            color: @tabs-close-icon-color;
             &:hover {
               color: @primary-color;
             }

@@ -25,7 +25,7 @@ const TabsDemo = () => {
             key="4"
             tab={(
               <span>
-                <Icon type="apps" />
+                <Icon type="apps" style={{ marginRight: 8, color: '#444A5E' }} />
                 带icon页签
               </span>
             )}
@@ -51,7 +51,7 @@ const TabsDemo = () => {
             key="4"
             tab={(
               <span>
-                <Icon type="apps" />
+                <Icon type="apps" style={{ marginRight: 8, color: '#444A5E' }} />
                 带icon页签
               </span>
   )}
@@ -76,7 +76,7 @@ const TabsDemo = () => {
             key="4"
             tab={(
               <span>
-                <Icon type="apps" />
+                <Icon type="apps" style={{ marginRight: 8, color: '#444A5E' }} />
                 带icon页签
               </span>
   )}

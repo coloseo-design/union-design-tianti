@@ -77,7 +77,9 @@ export interface TreeSelectProps {
   children?: any;
 
   // 是否禁用
-  disabled?: boolean
+  disabled?: boolean;
+
+  className?: string;
 
 }
 
@@ -106,4 +108,5 @@ export interface TreeNodeProps {
   currentNode?: any;
   isChecked?: boolean;
   style?: React.CSSProperties;
+  className?: string;
 }

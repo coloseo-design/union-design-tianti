@@ -14,8 +14,8 @@
   &-selection {
     display: block;
     width: 100%;
+    height: 32px;
     min-height: @input-height-base;
-    background: @tree-select-background;
     padding: 3px @input-padding-horizontal-base;
     border-radius: @border-radius-base;
     position: relative;
@@ -23,6 +23,8 @@
     outline: none;
     transition: all 0.3s linear;
     cursor: text;
+    font-size: 14px;
+    background-color: @tree-select-background;
     &:not(&-disabled):hover {
       border-color: @tree-select-hover-border-color;
     }
@@ -32,10 +34,6 @@
     }
     &-placholder {
       color: @tree-select-placeholder-color;
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      left: 12px;
       border: none;
     }
     &-tag {

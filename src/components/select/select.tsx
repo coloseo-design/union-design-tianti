@@ -383,6 +383,7 @@ class Select extends React.Component<SelectProps, SelectState> {
           style={{
             minHeight: type === 'multiple' ? 32 : undefined,
             height: type !== 'multiple' ? 32 : undefined,
+            padding: type === 'multiple' || type === 'tags' ? '3px 12px' : '5px 12px',
             ...style,
           }}
         >
