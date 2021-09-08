@@ -379,7 +379,7 @@
 @collapse-item-content-bg: @content-bg;
 @collapse-item-content-color: @secondary-text-color;
 @collapse-panel-border-radius: @border-radius-base;
-@collapse-item-collapsible: rgba(0, 0, 0, 0.45);
+@collapse-item-disabled: rgba(0, 0, 0, 0.45);
 
 //Dropdown
 @dropdown-containter-bg: @white;
@@ -607,7 +607,7 @@
 @popover-bg: @white;
 @popover-boxshadow: rgba(147,147,147,0.35);
 @popover-title-border:#D8D8D8;
-
+@popover-content-inner-content-color: @secondary-text-color;
 // Popconfirm
 
 @popconfirm-bg: @white;
@@ -733,7 +733,7 @@
 
 // Tag
 // --
-@tag-default-color: @text-color;
+@tag-default-color: @secondary-text-color;
 @tag-font-size: @font-size-sm;
 @tag-line-height: 20px;
 @tag-bg-color: @disabled-background-color;
@@ -893,9 +893,10 @@
 @calendar-year-item-select-bg-color: @red-1;
 @calendar-year-item-hover-bg-color: @red-1;
 @calendar-month-not-cur-color: @placeholder;
-@calendar-month-cur-color: @text-color;
+@calendar-month-cur-color: @secondary-text-color;
 @calendar-month-item-hover-color: @red-1;
 @calendar-month-item-selected-color: @primary-6;
+@calendar-tag-icon-color: @border;
 
 // Slider
 // ---
@@ -1008,7 +1009,7 @@
 @list-bg: @white;
 @list-item-border: @border-color-split;
 @list-item-meta-title-color: rgba(0,0,0,0.85);
-@list-item-meta-description-color: @text-color;
+@list-item-meta-description-color: @secondary-text-color;
 @list-header-background: transparent;
 @list-footer-background: transparent;
 @list-empty-text-padding: @padding-md;
@@ -1028,7 +1029,7 @@
 @statistic-content-font-weight: 500;
 @statistic-unit-font-size: 16px;
 @statistic-font-family: @font-family;
-@statistic-title-color: @text-color;
+@statistic-title-color: @secondary-text-color;
 @statistic-content-color: rgba(0,0,0,0.85);
 
 // Drawer
@@ -1050,7 +1051,7 @@
 @timeline-head-border-color: @primary-color;
 @timeline-head-bg-color: @white;
 @timeline-last-border-color: @border;
-
+@timeline-item-content-color: @secondary-text-color;
 // Typography
 // ---
 @typography-title-font-weight: 600;
