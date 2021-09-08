@@ -389,8 +389,11 @@ class TreeSelect extends React.Component<TreeSelectProps, TreeSelectStates> {
                     {
                   maxTagCount && multiple && values.length > maxTagCount && (
                   <span className={`${treeSelect}-selection-tag`}>
-                    ...+
-                    {values.length - maxTagCount}
+                    <span className={`${treeSelect}-selection-tag-add`}>+</span>
+                    <span className={`${treeSelect}-selection-tag-num`}>
+                      {values.length - maxTagCount}
+                      ...
+                    </span>
                   </span>
                   )
                 }
@@ -399,7 +402,7 @@ class TreeSelect extends React.Component<TreeSelectProps, TreeSelectStates> {
                 : <span className={`${treeSelect}-selection-placholder`}>{placeholder}</span>
             }
             <span className={`${treeSelect}-icon`}>
-              <Icon type={border ? 'up' : 'down'} style={{ color: '#ACAFB9', fontSize: 16 }} />
+              <Icon type={border ? 'up' : 'down'} />
             </span>
           </span>
         </span>

@@ -43,10 +43,10 @@ const SelectDemo = () => {
             console.log('--- value ', value, label);
           }
         }
-        disabled
+        // disabled
         placeholder="请选择选项"
         style={{ width: 220 }}
-        value="1"
+        // value="1"
       >
         {dataT.map((item: any) => (
           <Option value={item.value} key={item.value}>{item.label}</Option>
@@ -82,7 +82,7 @@ const SelectDemo = () => {
           }
         }
         placeholder="请选择选项"
-        style={{ width: 220 }}
+        style={{ width: 220, marginBottom: 36 }}
         type="search"
         onSearch={(val) => { console.log('--- val ', val); }}
       >

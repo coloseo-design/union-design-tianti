@@ -418,6 +418,7 @@ class Select extends React.Component<SelectProps, SelectState> {
                                       textOverflow: 'ellipsis',
                                       wordBreak: 'break-all',
                                       whiteSpace: 'nowrap',
+                                      color: 'rgba(0,0,0,0.65)',
                                     }}
                                   >
                                     {temp ? `${_label.substr(0, maxTagTextLength)}...` : _label}
@@ -426,7 +427,7 @@ class Select extends React.Component<SelectProps, SelectState> {
                                     onClick={(el) => this.handleItemDelete(el, i)}
                                     style={{ float: 'right', display: 'inline-block', marginRight: 4 }}
                                   >
-                                    <Icon type="close" style={{ marginTop: -5, color: '#ACAFB9' }} />
+                                    <Icon type="close" style={{ marginTop: -5, color: '#ACAFB9', fontSize: 12 }} />
                                   </span>
                                 </div>
                               );
@@ -442,6 +443,7 @@ class Select extends React.Component<SelectProps, SelectState> {
                                       textOverflow: 'ellipsis',
                                       whiteSpace: 'nowrap',
                                       wordBreak: 'break-all',
+                                      color: 'rgba(0,0,0,0.65)',
                                     }}
                                     title={i.label || ''}
                                   >
@@ -451,16 +453,18 @@ class Select extends React.Component<SelectProps, SelectState> {
                                     onClick={(el) => this.handleItemDelete(el, i)}
                                     style={{ float: 'right', display: 'inline-block', marginRight: 4 }}
                                   >
-                                    <Icon type="close" style={{ color: '#ACAFB9' }} />
+                                    <Icon type="close" style={{ color: '#ACAFB9', fontSize: 12 }} />
                                   </span>
                                 </div>
                               ))
                             )}
                           {num ? (
                             <span className={itemClass}>
-                              +
-                              {num}
-                              ...
+                              <span>+</span>
+                              <span>
+                                {num}
+                                ...
+                              </span>
                             </span>
                           ) : null}
                         </div>

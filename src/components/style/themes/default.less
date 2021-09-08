@@ -268,11 +268,12 @@
 @empty-font-size: @font-size-base;
 
 // Radio
+@radio-text-color: @secondary-text-color;
 @radio-border-color: @border;
 @radio-hover-border-color: @primary-color;
 @radio-diabled-bg: @disabled-background-color;
 @radio-diabled-border-color: @disabled-border-color;
-@radio-diabled-text-color: @disabled-color;
+@radio-diabled-text-color: rgba(0,0,0,0.35);
 @radio-checked-bg: @white;
 @radio-checked-border-color: @primary-color;
 @radio-checked-diabled-border-color: @border;
@@ -414,6 +415,7 @@
 
 // Form
 // ---
+@form-label-text-color: @secondary-text-color;
 @form-label-required-color: @red-6;
 @label-color: @heading-color;
 @form-error-color: @red-6;
@@ -451,7 +453,7 @@
 @input-padding-vertical-base: 5px;
 @input-padding-vertical-sm: 1px;
 @input-padding-vertical-lg: 6px;
-@input-placeholder-color: hsv(0, 0, 75%);
+@input-placeholder-color: @placeholder;
 @input-color: @text-color;
 @input-border-color: @border;
 @input-bg: @component-background;
@@ -477,7 +479,7 @@
 
 
 // InputNumber
-
+@input-number-text-color: @text-color;
 @input-number-border-color: @border;
 @input-number-disabled-bg: @disabled-background-color;
 @input-number-disabled-border-color: @disabled-border-color;
@@ -510,9 +512,11 @@
 @select-disabled-bg-color: @disabled-background-color;
 @select-disabled-border-color: @disabled-border-color;
 @select-value-color: @text-color;
-@select-placeholder-color: hsv(0, 0, 75%);
+@select-tag-text-color: @secondary-text-color;
+@select-placeholder-color: @placeholder;
 @select-dropdown-box-shadow: 0 3px 6px -4px rgba(0,0,0,.12), 0 6px 16px 0 rgba(0,0,0,.08), 0 9px 28px 8px rgba(0,0,0,.05);
 @select-dropdown-item-hover-bg-color: @red-1;
+@select-dropdown-text-color: @text-color;
 
 // Cascader
 // ----
@@ -543,9 +547,10 @@
 @dpcolor-input-border-normal: @border;
 @dpcolor-input-border-hover: #4AA1F7;
 @dpcolor-input-border-focus: #4AA1F7;
+@dpcolor-input-placeholder: @placeholder;
 
-@dpcolor-text-85: rgba(0,0,0,0.85);
-@dpcolor-text-65: @text-color;
+@dpcolor-text-85: @text-color;
+@dpcolor-text-65: @secondary-text-color;
 @dpcolor-text-45: @text-color-secondary;
 @dpcolor-text-35: @placeholder;
 @dpcolor-text-selected: @white;
@@ -558,6 +563,7 @@
 
 @dpcolor-border-disabled: @disabled-border-color;
 
+@dpcolor-dropdown-text-color: @secondary-text-color;
 @dpborder-input-normal: 1px solid @dpcolor-input-border-normal;
 @dpborder-input-hover: 1px solid @dpcolor-input-border-hover;
 @dpborder-input-focus: 1px solid @dpcolor-input-border-focus;
@@ -945,6 +951,8 @@
 @transfer-list-height: 200px;
 @transfer-background-color: @white;
 @transfer-list-border-color: @border;
+@transfer-herder-right-text-color: @secondary-text-color;
+@transfer-content-text-color: @secondary-text-color;
 @transfer-list-header-left-color: @placeholder;
 @transfer-body-disabled-bg-color: @disabled-background-color;
 @transfer-body-content-item-selected-bg-color: @red-1;
@@ -1071,20 +1079,22 @@
 // tree-select
 @tree-select-background: #fff;
 @tree-select-border: @border;
+@tree-select-icon-color: #ACAFB9;
 @tree-select-hover-border-color: #4AA1F7;
 @tree-select-placeholder-color: @placeholder;
 @tree-select-tag-background: @disabled-background-color;
 @tree-select-tag-border-color: @disabled-border-color;
-@tree-select-tag-value: @text-color;
+@tree-select-tag-value: @secondary-text-color;
 @tree-select-tag-close: @border;
 @tree-select-disabled-color: @disabled-color;
 @tree-select-disabled-border-color: @disabled-border-color;
 @tree-select-disabled-background-color: @disabled-background-color;
 @tree-select-drop-background-color: @white;
 @tree-select-drop-box-shadow-color: rgba(147,147,147,0.35);
-@tree_select-node-hover-background-color: @red-1;
-@tree_select-selected-color: @primary-color;
-@tree_select-disabled-color: @disabled-color;
+@tree-select-dropdown-text-color: @text-color;
+@tree-select-node-hover-background-color: @red-1;
+@tree-select-selected-color: @primary-color;
+@tree-select-dropdown-disabled-color: @disabled-color;
 
 // steps
 @steps-step-bg: #D8D8D8;

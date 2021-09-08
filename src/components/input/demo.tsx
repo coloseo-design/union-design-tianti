@@ -31,7 +31,7 @@ const InputDemo = () => {
       <Input addonAfter={<Icon type="user" />} />
       <br />
       <br />
-      <Search onSearch={(value: any) => { console.log('searchValue', value); }} />
+      <Search placeholder="请输入" onSearch={(value: any) => { console.log('searchValue', value); }} />
       <br />
       <br />
       <TextArea

@@ -134,7 +134,7 @@ export default class Upload extends BaseComponent<UploadPorps> {
               fontSize: 14,
               width: 104,
               lineHeight: '22px',
-              color: 'rgba(0, 0, 0, 0.65)',
+              color: 'rgba(0, 0, 0, 0.35)',
             }}
           >
             <span>{btnDesc}</span>
@@ -198,7 +198,7 @@ export default class Upload extends BaseComponent<UploadPorps> {
                   fontSize: 14,
                   lineHeight: '22px',
                   textAlign: 'center',
-                  color: 'rgba(0, 0, 0, 0.65)',
+                  color: 'rgba(0, 0, 0, 0.35)',
                 }}
               >
                 <span>{btnDesc}</span>

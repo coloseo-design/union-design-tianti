@@ -82,6 +82,9 @@
 
 .@{select-prefix-cls}-value {
   color: @select-value-color;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 .@{select-prefix-cls}-placeholder {
@@ -114,10 +117,14 @@
   margin-right: 8px;
   padding: 0px 8px;
   font-size: 12px;
-  color: @select-value-color;
+  color: @select-tag-text-color;
   line-height: 20px;
   span {
+    font-size: 12px;
     margin-right: 4px;
+  }
+  & > span:first-child {
+    color: #ACAFB9;
   }
 }
 
@@ -132,6 +139,7 @@
   background: @select-bg-color;
   border-radius: @border-radius-sm;
   box-shadow: @select-dropdown-box-shadow;
+  color: @select-dropdown-text-color;
 }
 
 .@{select-dropdown-match-select-width} {

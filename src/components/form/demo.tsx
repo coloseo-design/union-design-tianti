@@ -24,8 +24,8 @@ const FormDemo = () => {
   };
 
   const layout = {
-    // labelCol: { span: 2 },
-    // wrapperCol: { span: 16 },
+    labelCol: { span: 2 },
+    wrapperCol: { span: 16 },
   };
 
   const tailFormItemLayout = {
