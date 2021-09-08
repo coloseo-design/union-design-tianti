@@ -43,6 +43,7 @@ export type CalendarProps = {
   dateCellRender?: (date: Dayjs) => ReactNode;
   /** 自定义渲染日期单元格，返回内容覆盖单元格 */
   dateFullCellRender?: (date: Dayjs) => ReactNode;
+  style?: React.CSSProperties;
 } & BaseProps;
 
 export type CalendarState = {
@@ -79,12 +80,12 @@ export default class extends BaseComponent<CalendarProps, CalendarState> {
 
   protected view = () => {
     const { mode, selectDate } = this.state;
-    const { yearRange } = this.props;
+    const { yearRange, style } = this.props;
     const yearData = handleYearData(yearRange?.[0] as number, yearRange?.[1] as number);
     const { dim1 } = handleMonthData(selectDate.get('year'));
 
     return (
-      <div className={this.getPrefixClass('container')}>
+      <div className={this.getPrefixClass('container')} style={style}>
         <div className={this.gpc('tag-title')}>
           日程日历
         </div>
