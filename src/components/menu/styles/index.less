@@ -135,16 +135,52 @@
     }
 }
 
-.@{menu-fold-icon} {
-  position: relative;
-  height: 36px;
-  line-height: 36px;
-  text-align: center;
-  animation: 0.5s @menu-foldbtn-animation;
-  font-size: 16px;
-  user-select: none;
-  cursor: pointer;
+.@{menu-dark} {
+  .@{menu-fold-icon} {
+    position: relative;
+    height: 36px;
+    line-height: 36px;
+    text-align: center;
+    animation: 0.5s @menu-foldbtn-animation;
+    font-size: 16px;
+    user-select: none;
+    cursor: pointer;
+    color: @menu-item-dark-icon-color;
+  }
+  .@{menu-left-icon} {
+    float: left;
+    color: @menu-item-dark-icon-color;
+  }
+
+  .@{menu-right-icon} {
+    float: right;
+    color: @menu-item-dark-icon-color;
+  }
 }
+
+.@{menu-light} {
+  .@{menu-fold-icon} {
+    position: relative;
+    height: 36px;
+    line-height: 36px;
+    text-align: center;
+    animation: 0.5s @menu-foldbtn-animation;
+    font-size: 16px;
+    user-select: none;
+    cursor: pointer;
+    color: @menu-item-light-icon-color;
+  }
+  .@{menu-left-icon} {
+    float: left;
+    color: @menu-item-light-icon-color;
+  }
+
+  .@{menu-right-icon} {
+    float: right;
+    color: @menu-item-light-icon-color;
+  }
+}
+
 
 .@{menu-sub-menu},
 .@{menu-item} {
@@ -157,15 +193,17 @@
   font-size: 16px;
   overflow: hidden;
 
-  .@{menu-left-icon} {
-    float: left;
-    color: @menu-item-icon-color;
-  }
+  // .@{menu-left-icon} {
+  //   float: left;
+  //   // color: @menu-item-icon-color;
+  //   color: @menu-item-light-icon-color;
+  // }
 
-  .@{menu-right-icon} {
-    float: right;
-    color: @menu-item-icon-color;
-  }
+  // .@{menu-right-icon} {
+  //   float: right;
+  //   // color: @menu-item-icon-color;
+  //   color: @menu-item-light-icon-color;
+  // }
 
   .@{menu-title} {
     font-size: 14px;
