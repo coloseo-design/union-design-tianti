@@ -5,6 +5,7 @@
 @checkbox-wrapper-prefix-cls: ~'@{checkbox-prefix-cls}-wrapper';
 @checkbox-inner-prefix-cls: ~'@{checkbox-prefix-cls}-inner';
 @checkbox-input-prefix-cls: ~'@{checkbox-prefix-cls}-input';
+@checkbox-group-cls: ~'@{checkbox-prefix-cls}-group';
 
 
 
@@ -19,6 +20,12 @@
   height: 100%;
   cursor: pointer;
   opacity: 0;
+}
+
+.@{checkbox-group-cls} {
+  .@{checkbox-wrapper-prefix-cls} + .@{checkbox-wrapper-prefix-cls} {
+    margin-left: 8px;
+  }
 }
 
 .@{checkbox-inner-prefix-cls} {
