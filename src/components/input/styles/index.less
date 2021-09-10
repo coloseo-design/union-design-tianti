@@ -6,15 +6,15 @@
 @textarea-prefix-cls: ~'@{uni-prefix}-textarea';
 
 .@{input-prefix-cls} {
-  .input(100%);
+  .input();
 }
 
 .@{textarea-prefix-cls} {
-  .input(none; none);
+  .input(@input-width-base; none);
 }
 
 .@{input-prefix-cls}-search {
-  .input(none);
+  .input();
   position: relative;
   padding: 0;
   display: inline-block;
@@ -30,6 +30,8 @@
 }
 
 .@{input-prefix-cls}-group {
+  position: relative;
+  width: @input-width-base;
   display: inline-block;
   height: @input-height-base;
   display: flex;
@@ -39,8 +41,8 @@
   .@{uni-prefix}-input {
     flex: auto;
     -webkit-box-flex: 1;
-    -ms-flex: auto;
-    -webkit-flex: auto;
+    -ms-flex: 1;
+    -webkit-flex: 1;
     .input(100%, 100%);
   }
   >.@{uni-prefix}-input:not(:first-child):not(:last-child) {
@@ -61,7 +63,7 @@
     box-sizing: border-box;
     background: @input-disabled-bg;
     height: 100%;
-    vertical-align: bottom;
+    // vertical-align: middle;
     color: @input-group-addon-color;
     .uniicon {
       color: @input-group-addon-icon-color;
@@ -80,7 +82,7 @@
   }
 }
 
-.@{input-prefix-cls}-wapper {
+.@{input-prefix-cls}-wrapper {
   display: inline-flex;
   align-items: center;
   >.@{uni-prefix}-input:not(:first-child):not(:last-child) {
@@ -121,7 +123,8 @@
 }
 
 .@{input-prefix-cls}-allowClear {
-  .input(none);
+  flex: 1;
+  .input();
   padding: 0;
   display: inline-block;
   border: none;
