@@ -105,7 +105,7 @@ class TextArea extends Component<BaseTextAreaProps, TextAreaState> {
     const prefixCls = getPrefixCls('textarea', customizedPrefixCls);
     const clear: string = allowClear ? 'allowClear' : '';
 
-    const classes: string = classNames(prefixCls, className, {
+    const classes: string = classNames(prefixCls, {
       // [`${prefixCls}-${type}`]: type,
     });
 
@@ -134,7 +134,7 @@ class TextArea extends Component<BaseTextAreaProps, TextAreaState> {
     if (allowClear) {
       return (
         <span className={containerClasses}>
-          <textarea value={value} style={style} className={classes} ref={this.deletgateRef} onChange={onchange} />
+          <textarea {...rest} value={value} style={style} className={classes} ref={this.deletgateRef} onChange={onchange} />
           <span onClick={handleDelete} style={{ visibility: value ? 'visible' : 'hidden' }}>
             <Icon type="delete" />
           </span>

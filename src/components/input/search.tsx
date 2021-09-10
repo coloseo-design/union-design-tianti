@@ -45,7 +45,7 @@ class Search extends Component<BaseInputProps, InputState> {
     const classes: string = classNames(prefixCls, className);
 
     const type = 'search';
-    const _enterButton = enterButton ? 'wapper' : '';
+    const _enterButton = enterButton ? 'wrapper' : '';
     const containerClasses: string = classNames(className, {
       [`${prefixCls}-${type}`]: type,
       [`${prefixCls}-${_enterButton}`]: _enterButton,

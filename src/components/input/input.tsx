@@ -5,6 +5,7 @@
 /* eslint-disable @typescript-eslint/ban-types */
 import React, { Component, ReactNode } from 'react';
 import classNames from 'classnames';
+import omit from 'omit.js';
 import { ConfigConsumer, ConfigConsumerProps } from '../config-provider/context';
 import TextArea from './textarea';
 import Search from './search';
@@ -16,7 +17,7 @@ const InputTypes = tuple('button', 'checkbox', 'color', 'date', 'datetime-local'
 
 export type InputType = (typeof InputTypes)[number];
 
-export interface BaseInputProps extends React.HTMLAttributes<HTMLInputElement> {
+export interface BaseInputProps extends Omit<React.HTMLAttributes<HTMLInputElement>, 'forwardedRef'> {
   type?: InputType;
   /* 用户自定义类前缀，默认uni-input */
   prefixCls?: string;
@@ -143,19 +144,24 @@ class Input extends Component<BaseInputProps, InputState> {
 
   renderInput = ({ getPrefixCls }: ConfigConsumerProps) => {
     const {
-      allowClear, style, addonAfter, addonBefore, onChange, prefixCls: customizedPrefixCls, className, type, defaultValue, onSearch, onPressEnter, ...rest
+      allowClear, style, addonAfter, addonBefore, onChange, prefixCls: customizedPrefixCls, className, type,
+      // defaultValue, onSearch, onPressEnter, ...rest
     } = this.props;
+    const rest = omit(this.props, ['defaultValue', 'onSearch', 'onPressEnter', 'allowClear', 'forwardedRef', 'addonBefore', 'addonAfter']);
     const { value } = this.state;
     const group: string = (addonAfter || addonBefore) ? 'group' : '';
     const clear: string = allowClear ? 'allowClear' : '';
     const prefixCls = getPrefixCls('input', customizedPrefixCls);
 
-    const classes: string = classNames(prefixCls, className, {
+    const inputClassName: string = classNames(prefixCls, className, {
       [`${prefixCls}-${type}`]: type,
     });
 
-    const containerClasses: string = classNames(className, {
+    const containerClasses: string = classNames({
       [`${prefixCls}-${group}`]: group,
+    });
+
+    const inputWrapperClassName = classNames({
       [`${prefixCls}-${clear}`]: clear,
     });
 
@@ -189,13 +195,34 @@ class Input extends Component<BaseInputProps, InputState> {
     );
 
     return (
+      // <span className={containerClasses} style={style}>
+      //   {addonBefore && <span className="addon">{addonBefore}</span>}
+      //   <span className={containerClasses} style={style}>
+      //     <input
+      //       {...rest}
+      //       value={value}
+      //       className={classes}
+      //       style={{
+      //         borderTopLeftRadius: (!addonBefore && !addonAfter) ? '3px' : (addonBefore && !addonAfter) ? 0 : (addonBefore && addonAfter ? 0 : '3px'),
+      //         borderTopRightRadius: (!addonBefore && !addonAfter) ? '3px' : (addonBefore && !addonAfter) ? '3px' : '0',
+      //         borderBottomLeftRadius: (!addonBefore && !addonAfter) ? '3px' : (addonBefore && !addonAfter) ? 0 : (addonBefore && addonAfter ? 0 : '3px'),
+      //         borderBottomRightRadius: (!addonBefore && !addonAfter) ? '3px' : (addonBefore && !addonAfter) ? '3px' : '0',
+      //       }}
+      //       type={type}
+      //       ref={this.deletgateRef}
+      //       onChange={onchange}
+      //     />
+      //     { allowClear && cleanButton}
+      //   </span>
+      //   {addonAfter && <span className="addon">{addonAfter}</span>}
+      // </span>
       <span className={containerClasses} style={style}>
         {addonBefore && <span className="addon">{addonBefore}</span>}
-        <span className={containerClasses} style={style}>
+        <span className={inputWrapperClassName} style={{ flex: '1', position: 'relative', display: 'inline-block' }}>
           <input
             {...rest}
             value={value}
-            className={classes}
+            className={inputClassName}
             style={{
               borderTopLeftRadius: (!addonBefore && !addonAfter) ? '3px' : (addonBefore && !addonAfter) ? 0 : (addonBefore && addonAfter ? 0 : '3px'),
               borderTopRightRadius: (!addonBefore && !addonAfter) ? '3px' : (addonBefore && !addonAfter) ? '3px' : '0',
@@ -206,7 +233,7 @@ class Input extends Component<BaseInputProps, InputState> {
             ref={this.deletgateRef}
             onChange={onchange}
           />
-          { allowClear && cleanButton}
+          {allowClear && cleanButton}
         </span>
         {addonAfter && <span className="addon">{addonAfter}</span>}
       </span>
