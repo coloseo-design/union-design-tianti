@@ -114,7 +114,7 @@ const TreeSelectDEmo = () => {
           onChange={onChange}
           onSelect={onSelect}
           disabled
-          style={{ width: 256 }}
+          style={{ width: 256, height: 52 }}
         >
           <TreeNode title="顶级" key="a" value="a">
             <TreeNode title="哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈" key="1" value="1">

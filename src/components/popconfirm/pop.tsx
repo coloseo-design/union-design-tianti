@@ -66,16 +66,13 @@ class PopComponent extends React.Component<PopProps, PopconfirmState> {
   visibleOnClick = (target: HTMLElement) => {
     const { onVisibleChange, visible: propsVisible } = this.props;
     if (target.nodeName !== '#document' && target.getAttribute('data-tag') === this.tag) return;
-    if (target.nodeName === 'BODY') {
-      const { visible } = this.state;
-      if (visible) {
-        if (propsVisible === undefined) {
-          this.setState({ visible: false });
-        }
-        onVisibleChange && onVisibleChange(false);
+    const { visible } = this.state;
+    if (visible) {
+      if (propsVisible === undefined) {
+        this.setState({ visible: false });
       }
+      onVisibleChange && onVisibleChange(false);
     }
-    target.parentNode && this.visibleOnClick(target.parentNode as HTMLElement);
   }
 
   documentBodyOnClick = (event: Event) => {

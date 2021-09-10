@@ -43,9 +43,9 @@ const SelectDemo = () => {
             console.log('--- value ', value, label);
           }
         }
-        disabled
+        // disabled
         placeholder="请选择选项"
-        style={{ width: 220 }}
+        style={{ width: 220, height: 42 }}
         value="2"
       >
         {dataT.map((item: any) => (

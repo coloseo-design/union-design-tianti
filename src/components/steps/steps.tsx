@@ -73,6 +73,10 @@ export default class Steps extends BaseComponent<StepsProps> {
       this.handleHorizontal();
     }
 
+    static getDerivedStateFromProps() {
+      console.log('==11');
+    }
+
     protected view = () => {
       const { className, style, direction } = this.props;
       this.handleHorizontal();
@@ -137,20 +141,21 @@ export default class Steps extends BaseComponent<StepsProps> {
       const step = this.stepRefs.slice(-1)[0];
       const otherSteps = this.stepRefs.slice(0, -1);
       const containerWidth = this.containerRef.current.offsetWidth;
-      const minWidth = containerWidth / this.stepRefs.length;
+      // const minWidth = containerWidth / this.stepRefs.length;
+      const minWidth = 100 / this.stepRefs.length;
 
       if (otherSteps.length > 0) {
         const lastStep = step.containerRef.current;
         const width = (containerWidth - (lastStep?.offsetWidth ?? 0)) / otherSteps.length;
 
         if (lastStep) {
-          lastStep.style.maxWidth = `${minWidth}px`;
+          lastStep.style.maxWidth = `${minWidth}%`;
         }
 
         otherSteps.forEach((item) => {
           const temp = item.containerRef.current;
           if (temp) {
-            temp.style.minWidth = `${minWidth}px`;
+            temp.style.minWidth = `${minWidth}%`;
             temp.style.width = `${width}px`;
           }
         });

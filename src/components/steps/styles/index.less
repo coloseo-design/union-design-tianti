@@ -31,6 +31,8 @@
 }
 
 .@{steps}-horizontal {
+    white-space: nowrap;
+    overflow: hidden;
     & > div {
         display: inline-block;
         vertical-align: top;
@@ -204,6 +206,7 @@
         font-weight: normal;
         color: @steps-step-tag-title-color;
         cursor: default;
+        white-space: normal;
     }
 
     & .@{step-tag-description}.@{step-tag-default} {

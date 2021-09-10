@@ -6,7 +6,7 @@ const CalendarDemo = () => (
   <div style={{ display: 'flex', flexFlow: 'column nowrap', alignItems: 'flex-start' }}>
     <h1>Base</h1>
     <Calendar
-      mode="year"
+      mode="month"
       onSelect={(date) => console.log('onSelect:', date.format())}
       onChange={(date) => console.log('onChange:', date.format())}
       onPanelChange={(date, mode) => console.log('onPanelChange:', date.format(), mode)}

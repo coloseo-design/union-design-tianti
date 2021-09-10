@@ -12,10 +12,11 @@ const Demo = () => (
     <Steps isShowPop={false} onClick={(cur) => console.log(cur)} current={0} size="default" direction="horizontal" style={{ width: '100%' }}>
       <Steps.Step title="正在处理" description="这里是描述文案，超出折行显示" />
       <Steps.Step title="等待处理" description="这里是描述文案，超出折行显示" />
+      <Steps.Step title="等待处理" description="这里是描述文案，超出折行显示" />
       <Steps.Step title="等待处理" description="这里是描述文案，超出折行显示这里是描述文案，超出折行显示这里是描述文案，超出折行显示这里是描述文案，超出折行显示这里是描述文案，超出折行显示这里是描述文案，超出折行显示这里是描述文案，超出折行显示这里是描述文案，超出折行显示这里是描述文案，超出折行显示" />
     </Steps>
     <div style={{ height: 20 }} />
-    <Steps current={2} size="default" direction="horizontal" style={{ width: '100%' }}>
+    <Steps current={2} size="default" direction="horizontal" style={{ width: '80%' }}>
       <Steps.Step title="处理完成" description="这里是描述文案，超出折行显示" />
       <Steps.Step title="处理完成" description="这里是描述文案，超出折行显示" />
       <Steps.Step status="error" title="处理错误" description="这里是描述文案，超出折行显示" />
