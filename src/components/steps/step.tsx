@@ -33,6 +33,7 @@ export class Step extends BaseComponent<StepProps> {
       _direction,
       _size,
       _onClick,
+      isShowPop,
     } = this.props;
     const _status = status ?? _defaultStatus;
     this.handleHorizontal();
@@ -108,11 +109,24 @@ export class Step extends BaseComponent<StepProps> {
         >
           {title}
         </div>
-        <Popover
-          content={description}
-          overlayStyle={{ width: '30%' }}
-          trigger="click"
-        >
+        {isShowPop ? (
+          <Popover
+            content={description}
+            overlayStyle={{ width: '30%' }}
+            trigger="click"
+          >
+            <Typography
+              className={this.classNames(
+                this.gpc(`tag-${_status}`),
+                this.gpc('tag-description'),
+                this.gpc(`tag-${_size}`),
+              )}
+              rows={3}
+            >
+              {description}
+            </Typography>
+          </Popover>
+        ) : (
           <Typography
             className={this.classNames(
               this.gpc(`tag-${_status}`),
@@ -123,7 +137,7 @@ export class Step extends BaseComponent<StepProps> {
           >
             {description}
           </Typography>
-        </Popover>
+        )}
       </div>
     );
   };

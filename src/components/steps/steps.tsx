@@ -27,6 +27,8 @@ export type StepsProps = {
     size?: StepsSize;
     /** 点击切换步骤时触发 */
     onClick?: (current: number) => void;
+    /** 点击详情是否展示popover */
+    isShowPop?: boolean;
 } & BaseProps;
 
 export type StepProps = {
@@ -46,6 +48,7 @@ export type StepProps = {
     _direction?: StepsDirection;
     _serialNumber?: number;
     _size?: StepsSize;
+    isShowPop?: boolean;
 } & BaseProps;
 
 export default class Steps extends BaseComponent<StepsProps> {
@@ -55,6 +58,7 @@ export default class Steps extends BaseComponent<StepsProps> {
       size: 'default',
       initial: 1,
       current: 0,
+      isShowPop: true,
     };
 
     public static Step = Step;
@@ -89,7 +93,7 @@ export default class Steps extends BaseComponent<StepsProps> {
 
     private handleChildren = () => {
       const {
-        children, initial, size, direction, current, onClick,
+        children, initial, size, direction, current, onClick, isShowPop,
       } = this.props;
       let serialNumber = initial!;
       this.stepRefs = [];
@@ -113,6 +117,7 @@ export default class Steps extends BaseComponent<StepsProps> {
           _direction: direction,
           _serialNumber: serialNumber,
           _onClick: onClick,
+          isShowPop,
           ref: (ref: Step) => ref && this.stepRefs.push(ref),
         });
 
