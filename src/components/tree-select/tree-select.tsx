@@ -205,7 +205,7 @@ class TreeSelect extends React.Component<TreeSelectProps, TreeSelectStates> {
     const current = (smooth || []).find((i: any) => `${i.value}` === `${value}`) || { title: '' };
     return (
       <span key={value}>
-        {isSingle ? current.title
+        {isSingle ? <span className={`${treeSelect}-selection-single-value`} title={current.title}>{current.title}</span>
           : (
             <span className={`${treeSelect}-selection-tag`}>
               <span className={`${treeSelect}-selection-tag-value`} title={current?.title}>{current?.title}</span>
@@ -372,6 +372,7 @@ class TreeSelect extends React.Component<TreeSelectProps, TreeSelectStates> {
     const selection = classNames(`${treeSelect}-selection`, {
       [`${treeSelect}-selection-focus`]: border,
       [`${treeSelect}-selection-disabled`]: disabled,
+      [`${treeSelect}-selection-single`]: !(multiple && values && values.length > 0),
     });
     const dropdown = classNames(`${treeSelect}-drop`, dropdownClassName, {
       [`${treeSelect}-drop-show`]: border,
@@ -382,32 +383,34 @@ class TreeSelect extends React.Component<TreeSelectProps, TreeSelectStates> {
         <span className={treeSelectClass}>
           <span
             className={selection}
-            style={{
-              padding: multiple && values && values.length > 0 ? '3px 12px' : '5px 12px',
-              ...style,
-            }}
+            style={style}
             onClick={this.handleClick}
             ref={this.getNode}
           >
             {
               values && values.length > 0
                 ? (
-                  <span style={{ marginRight: 24, display: 'inline-block' }}>
-                    {!multiple
-                      ? this.tags(values[0], treeSelect, true)
-                      : values.slice(0, maxTagCount).map((item: string) => this.tags(item, treeSelect, false))}
-                    {
-                  maxTagCount && multiple && values.length > maxTagCount && (
-                  <span className={`${treeSelect}-selection-tag`}>
-                    <span className={`${treeSelect}-selection-tag-add`}>+</span>
-                    <span className={`${treeSelect}-selection-tag-num`}>
-                      {values.length - maxTagCount}
-                      ...
-                    </span>
-                  </span>
-                  )
-                }
-                  </span>
+                  <>
+                    {!multiple ? <span>{this.tags(values[0], treeSelect, true)}</span>
+                      : (
+                        <>
+                          <span style={{ marginRight: 24, display: 'inline-block' }}>
+                            <span>{values.slice(0, maxTagCount).map((item: string) => this.tags(item, treeSelect, false))}</span>
+                          </span>
+                          <>
+                            {maxTagCount && multiple && values.length > maxTagCount && (
+                            <span className={`${treeSelect}-selection-tag`}>
+                              <span className={`${treeSelect}-selection-tag-add`}>+</span>
+                              <span className={`${treeSelect}-selection-tag-num`}>
+                                {values.length - maxTagCount}
+                                ...
+                              </span>
+                            </span>
+                            )}
+                          </>
+                        </>
+                      )}
+                  </>
                 )
                 : <span className={`${treeSelect}-selection-placholder`}>{placeholder}</span>
             }

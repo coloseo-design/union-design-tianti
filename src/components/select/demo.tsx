@@ -12,7 +12,7 @@ const SelectDemo = () => {
     },
     {
       value: 2,
-      label: '和哈哈哈哈',
+      label: '和哈哈哈哈和哈哈哈哈和哈哈哈',
     },
   ];
   const [dataT, setData] = React.useState([]);
@@ -43,10 +43,10 @@ const SelectDemo = () => {
             console.log('--- value ', value, label);
           }
         }
-        // disabled
+        disabled
         placeholder="请选择选项"
         style={{ width: 220 }}
-        // value="1"
+        value="2"
       >
         {dataT.map((item: any) => (
           <Option value={item.value} key={item.value}>{item.label}</Option>

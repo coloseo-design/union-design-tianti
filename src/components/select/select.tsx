@@ -140,13 +140,13 @@ class Select extends React.Component<SelectProps, SelectState> {
           || (defaultValue && typeof defaultValue !== 'string')) {
             throw new Error('单选选模式value和defaultValue 类型应是 String');
           } else {
-            currentLabel = (childrenProps || []).find((i: any) => i.props.value === value || i.props.value === defaultValue);
+            currentLabel = (childrenProps || []).find((i: any) => i.props.value?.toString() === value?.toString() || i.props.value?.toString() === defaultValue?.toString());
           }
         }
         if (currentLabel) {
           Object.assign(temp, {
             value: defaultValue,
-            label: currentLabel.props.children,
+            label: currentLabel?.props.children,
           });
         }
         return {
@@ -352,6 +352,7 @@ class Select extends React.Component<SelectProps, SelectState> {
     const mainClass = classnames(`${prefix}`, {
       [`${prefix}-disabled`]: disabled,
       [`${prefix}-active`]: showDropdown,
+      [`${prefix}-single`]: !(type === 'multiple' || type === 'tags'),
     });
     const itemClass = classnames(`${prefix}-item`);
     const inputClass = classnames(`${prefix}-input`);
@@ -374,6 +375,7 @@ class Select extends React.Component<SelectProps, SelectState> {
       }
     }
 
+    console.log('==renderObj', renderObj);
     return (
       <div className={wrapperClass}>
         <div
@@ -383,7 +385,6 @@ class Select extends React.Component<SelectProps, SelectState> {
           style={{
             minHeight: type === 'multiple' ? 32 : undefined,
             height: type !== 'multiple' ? 32 : undefined,
-            padding: type === 'multiple' || type === 'tags' ? '3px 12px' : '5px 12px',
             ...style,
           }}
         >
@@ -470,7 +471,7 @@ class Select extends React.Component<SelectProps, SelectState> {
                           ) : null}
                         </div>
                       )
-                      : <span className={`${prefix}-value`} style={{ color: disabled ? 'rgba(0,0,0,0.45)' : undefined }}>{renderObj?.label}</span>
+                      : <span className={`${prefix}-value`} title={renderObj?.label || ''} style={{ color: disabled ? 'rgba(0,0,0,0.45)' : undefined }}>{renderObj?.label}</span>
                   )
                   : <span className={`${prefix}-placeholder`}>{placeholder}</span>}
                 {allowClear && renderObj?.label
