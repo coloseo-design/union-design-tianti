@@ -99,7 +99,6 @@ class PopComponent extends React.Component<PopProps, PopconfirmState> {
     const { visible } = this.props;
     if (visible !== prevProps.visible) {
       if (visible) {
-        console.log('==update');
         const target: HTMLElement | null = document.getElementById(this.tag);
         this.compute(target);
       }
@@ -241,6 +240,8 @@ class PopComponent extends React.Component<PopProps, PopconfirmState> {
   };
 
   handleCancel = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
+    e.stopPropagation();
+    e.nativeEvent.stopImmediatePropagation();
     this.setState({ visible: false });
     const { onCancel, onVisibleChange } = this.props;
     onCancel && onCancel(e);
@@ -248,6 +249,8 @@ class PopComponent extends React.Component<PopProps, PopconfirmState> {
   }
 
   handleOk = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
+    e.stopPropagation();
+    e.nativeEvent.stopImmediatePropagation();
     const { visible } = this.props;
     if (visible === undefined) {
       this.setState({ visible: false });
@@ -353,6 +356,7 @@ class PopComponent extends React.Component<PopProps, PopconfirmState> {
             onClick={(e) => {
               e.stopPropagation();
               e.nativeEvent.stopImmediatePropagation();
+              this.setState({ visible: true });
             }}
             onMouseOver={this.showPop}
             onMouseOut={this.hidePop}
