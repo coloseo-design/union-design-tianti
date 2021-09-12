@@ -1,3 +1,17 @@
+## [1.0.22](http://10.124.128.2:8888/muses/union-design/compare/v1.0.21...v1.0.22) (2021-09-12)
+
+
+### Bug Fixes
+
+* 🐛 调整checkbox间距 ([428b358](http://10.124.128.2:8888/muses/union-design/commits/428b3583c5886047144c123b0e16e81f6f09d42d))
+
+
+### Features
+
+* 🎸 menu ,select icon颜色大小修改 ([48087ea](http://10.124.128.2:8888/muses/union-design/commits/48087eafc06e631307cfcb3bd8e14aea68aea089))
+
+
+
 ## [1.0.21](http://10.124.128.2:8888/muses/union-design/compare/v1.0.20...v1.0.21) (2021-09-08)
 
 
