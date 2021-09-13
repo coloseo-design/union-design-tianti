@@ -4,17 +4,27 @@
 
 @input-prefix-cls: ~'@{uni-prefix}-input';
 @textarea-prefix-cls: ~'@{uni-prefix}-textarea';
+@input-container: ~'@{input-prefix-cls}-container';
 
 .@{input-prefix-cls} {
-  .input();
+  .input(100%);
+}
+
+.@{input-container} {
+  width: 100%;
 }
 
 .@{textarea-prefix-cls} {
-  .input(@input-width-base; none);
+  .input(100%; none);
+  &::placeholder {
+    position: unset;
+    top: unset;
+    transform: unset;
+  }
 }
 
 .@{input-prefix-cls}-search {
-  .input();
+  .input(100%);
   position: relative;
   padding: 0;
   display: inline-block;
@@ -31,13 +41,9 @@
 
 .@{input-prefix-cls}-group {
   position: relative;
-  width: @input-width-base;
-  display: inline-block;
+  width: 100%;
   height: @input-height-base;
   display: flex;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: -webkit-flex;
   .@{uni-prefix}-input {
     flex: auto;
     -webkit-box-flex: 1;
@@ -124,7 +130,7 @@
 
 .@{input-prefix-cls}-allowClear {
   flex: 1;
-  .input();
+  .input(100%);
   padding: 0;
   display: inline-block;
   border: none;

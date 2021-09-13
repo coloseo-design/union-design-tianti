@@ -15,7 +15,7 @@
   font-feature-settings: "tnum";
   font-size: @font-size-base;
   // vertical-align: middle;
-  line-height: 1;
+  // line-height: 1;
   &:focus,
   &:not([disabled]):not(.@{input-prefix-cls}-group):hover {
     border-color: @input-hover-border-color;
@@ -33,6 +33,9 @@
   &::placeholder {
     font-size: @font-size-base;
     color: @input-placeholder-color;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
   }
   &[disabled] {
     background: @input-disabled-bg;

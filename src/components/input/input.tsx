@@ -216,9 +216,9 @@ class Input extends Component<BaseInputProps, InputState> {
       //   </span>
       //   {addonAfter && <span className="addon">{addonAfter}</span>}
       // </span>
-      <span className={containerClasses} style={style}>
+      <span className={`${prefixCls}-container ${containerClasses}`} style={{ ...style, display: containerClasses ? 'flex' : 'inline-block' }}>
         {addonBefore && <span className="addon">{addonBefore}</span>}
-        <span className={inputWrapperClassName} style={{ flex: '1', position: 'relative', display: 'inline-block' }}>
+        <span className={inputWrapperClassName} style={{ flex: '1', position: 'relative' }}>
           <input
             {...rest}
             value={value}

@@ -11,11 +11,12 @@ const InputDemo = () => {
   return (
     <div>
       <Input
-        // allowClear
+        allowClear
         placeholder="基本输入"
         onChange={({ target: { value } }) => { console.log('value', value); }}
         onSearch={(value) => { console.log('searchValue', value); }}
         ref={ref}
+        style={{ width: 100 }}
       />
       <br />
       <br />
@@ -39,7 +40,7 @@ const InputDemo = () => {
         placeholder="多行输入"
         // rows={10}
         onChange={({ target: { value } }) => { console.log('value', value); }}
-        // style={{ width: 500 }}
+        style={{ width: 500 }}
       />
       <br />
     </div>
