@@ -63,7 +63,9 @@ const Checkbox: React.FC<CheckboxProps> = (props: CheckboxProps) => {
         <input type="checkbox" className={inputClass} onClick={onClick} />
         <span className={innerClass} />
       </span>
-      <span>{children}</span>
+      {
+        children && (<span>{children}</span>)
+      }
     </label>
   );
 };

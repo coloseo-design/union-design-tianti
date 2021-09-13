@@ -118,7 +118,7 @@ const FormDemo = () => {
               { required: true, message: '请选择性别' },
             ]}
           >
-            <Select style={{ width: '100%' }} placeholder="请选择">
+            <Select placeholder="请选择">
               <Select.Option value="男">男</Select.Option>
               <Select.Option value="女">女</Select.Option>
             </Select>
