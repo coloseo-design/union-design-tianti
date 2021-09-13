@@ -102,8 +102,8 @@ const Slider: React.FC<SliderProps> = (props: SliderProps) => {
 
   const onMouseDown = (evt: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     if (disabled) return;
-    document.addEventListener('mousemove', onMouseMove, true);
-    document.addEventListener('mouseup', onMouseUp, true);
+    document.addEventListener('mousemove', onMouseMove, false);
+    document.addEventListener('mouseup', onMouseUp, false);
     evt.stopPropagation();
     evt.preventDefault();
     canDrop = true;
