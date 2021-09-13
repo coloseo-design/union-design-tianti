@@ -1,8 +1,11 @@
 import React, { DOMAttributes } from 'react';
-import { BaseComponent, BaseProps, BaseState } from '../common/base-component';
+import classnames from 'classnames';
+import Portal from '../common/portal';
+import { BaseProps, BaseState } from '../common/base-component';
 import { animation } from '../utils/animation';
 import { uuid } from '../cascader/utils';
 import Icon from '../icon';
+import { ConfigConsumer, ConfigConsumerProps } from '../config-provider/context';
 
 export type SelectBaseData = {
   key: string | number;
@@ -13,13 +16,21 @@ export type SelectProps<T extends SelectBaseData> = {
   data: T[];
   value: string;
   onChange?: (item: T) => void;
+  getPopupContainer?: () => HTMLElement | null;
 } & BaseProps;
 
 export type SelectState = {
   popupVisible: boolean;
+  left: number;
+  top: number;
+  width: number;
 } & BaseState;
 
-export class Select<T extends SelectBaseData> extends BaseComponent<SelectProps<T>, SelectState> {
+export class Select<T extends SelectBaseData> extends React.Component<SelectProps<T>, SelectState> {
+  node: HTMLSpanElement | undefined;
+
+  node1: HTMLSpanElement | undefined;
+
   public static defaultProps: Omit<SelectProps<SelectBaseData>, 'data' | 'value'> = {
     onChange: () => ({}),
   };
@@ -32,6 +43,9 @@ export class Select<T extends SelectBaseData> extends BaseComponent<SelectProps<
     super(props);
     this.state = {
       popupVisible: false,
+      left: 0,
+      top: 0,
+      width: 0,
     };
   }
 
@@ -43,49 +57,45 @@ export class Select<T extends SelectBaseData> extends BaseComponent<SelectProps<
     document.body.removeEventListener('click', this.clickBody);
   };
 
-  protected view = () => {
-    const { data, value } = this.props;
-    const { popupVisible } = this.state;
+  getNode = (node: HTMLDivElement) => {
+    this.node = node;
+  };
 
-    return (
-      <div
-        className={this.getPrefixClass('select')}
-        onClick={this.clickSelect}
-      >
-        <div className={this.gpc('tag-value')}>{value}</div>
-        <div className={this.gpc('tag-icon')}><Icon type={popupVisible ? 'up' : 'down'} /></div>
-        {popupVisible && (
-          <div
-            id={`${this.uuid}-container`}
-            className={this.gpc('tag-popup')}
-            data-uuid={this.uuid}
-          >
-            {data.map((item) => (
-              <div
-                key={item.key}
-                className={this.classNames(this.gpc('tag-item'), {
-                  [this.gpc('tag-item-selected')]: item.value === value,
-                })}
-                id={`${this.uuid}-${item.value}`}
-                onClick={() => this.clickItem(item)}
-              >
-                {item.value}
-              </div>
-            ))}
-          </div>
-        )}
-      </div>
-    );
+  getNode1 = (node: HTMLDivElement) => {
+    this.node1 = node;
   };
 
   private clickSelect: DOMAttributes<HTMLDivElement>['onClick'] = (event) => {
     event.stopPropagation();
     const { popupVisible } = this.state;
-    this.setState({ popupVisible: !popupVisible }, () => {
-      if (this.state.popupVisible) {
-        scrollToY(`${this.uuid}-container`, `${this.uuid}-${this.props.value}`, 200);
+    const { value } = this.props;
+    const bodyH = document.body.scrollHeight;
+
+    if (this.node && this.node1) {
+      const { height: contentHeight } = this.node.getBoundingClientRect();
+      const {
+        left,
+        top,
+        width,
+        height,
+      } = this.node1.getBoundingClientRect();
+      const offsetTop = Math.ceil(window.pageYOffset + top);
+      const offsetLeft = Math.ceil(window.pageXOffset + left);
+      let y = offsetTop + height + 4;
+      if ((bodyH - offsetTop) < contentHeight + 4) {
+        y = offsetTop - contentHeight - 4;
       }
-    });
+      this.setState({
+        top: y,
+        left: offsetLeft,
+        width,
+      });
+      this.setState({ popupVisible: !popupVisible }, () => {
+        if (popupVisible) {
+          scrollToY(`${this.uuid}-container`, `${this.uuid}-${value}`, 200);
+        }
+      });
+    }
   }
 
   private clickItem = (item: T) => {
@@ -116,6 +126,59 @@ export class Select<T extends SelectBaseData> extends BaseComponent<SelectProps<
     if (!popupVisible) return;
     event.target && this.handleClickBodyWithoutCur(event.target as HTMLElement);
   };
+
+  renderSelect = ({ getPrefixCls }: ConfigConsumerProps) => {
+    const { data, value, getPopupContainer } = this.props;
+    const {
+      popupVisible, left, top, width,
+    } = this.state;
+    const prefix = getPrefixCls('calendar');
+    const tagPop = classnames(`${prefix}-tag-popup`, {
+      [`${prefix}-tag-popup-show`]: popupVisible,
+    });
+    return (
+      <div
+        className={classnames(`${prefix}-select`)}
+        onClick={this.clickSelect}
+        ref={this.getNode1}
+      >
+        <div className={classnames(`${prefix}-tag-value`)}>
+          {value}
+          <div className={classnames(`${prefix}-tag-icon`)}><Icon type={popupVisible ? 'up' : 'down'} /></div>
+        </div>
+        <Portal {...({ getPopupContainer })}>
+          <div
+            id={`${this.uuid}-container`}
+            className={tagPop}
+            data-uuid={this.uuid}
+            ref={this.getNode}
+            style={{ left, top, width }}
+          >
+            {data.map((item) => (
+              <div
+                key={item.key}
+                className={classnames(`${prefix}-tag-item`, {
+                  [`${prefix}-tag-item-selected`]: item.value === value,
+                })}
+                id={`${this.uuid}-${item.value}`}
+                onClick={() => this.clickItem(item)}
+              >
+                {item.value}
+              </div>
+            ))}
+          </div>
+        </Portal>
+      </div>
+    );
+  }
+
+  render() {
+    return (
+      <ConfigConsumer>
+        {this.renderSelect}
+      </ConfigConsumer>
+    );
+  }
 }
 
 const scrollToY = (containerId: string, targetId: string, duration: number) => {

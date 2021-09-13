@@ -49,6 +49,7 @@ export type StepProps = {
     _serialNumber?: number;
     _size?: StepsSize;
     isShowPop?: boolean;
+    width?: string;
 } & BaseProps;
 
 export default class Steps extends BaseComponent<StepsProps> {
@@ -69,13 +70,13 @@ export default class Steps extends BaseComponent<StepsProps> {
 
     private stepRefs: Step[] = [];
 
-    public componentDidMount() {
-      this.handleHorizontal();
-    }
+    // public componentDidMount() {
+    //   this.handleHorizontal();
+    // }
 
     protected view = () => {
       const { className, style, direction } = this.props;
-      this.handleHorizontal();
+      // this.handleHorizontal();
       return (
         <div
           ref={this.containerRef}
@@ -105,7 +106,7 @@ export default class Steps extends BaseComponent<StepsProps> {
         }
         return null;
       }) ?? [];
-
+      const width = 100 / React.Children.toArray(children).length;
       const content = React.Children.map(all, (child: ReactElement, index: number) => {
         let status: StepsStatus = 'wait';
         if (current! > index) status = 'finish';
@@ -119,6 +120,7 @@ export default class Steps extends BaseComponent<StepsProps> {
           _onClick: onClick,
           isShowPop,
           ref: (ref: Step) => ref && this.stepRefs.push(ref),
+          width: direction === 'horizontal' ? `${width}%` : undefined,
         });
 
         serialNumber += 1;
@@ -129,32 +131,32 @@ export default class Steps extends BaseComponent<StepsProps> {
       return content;
     };
 
-    private handleHorizontal = () => {
-      if (this.props.direction !== 'horizontal') return;
-      if (!this.containerRef.current) return;
-      if (this.stepRefs.length === 0) return;
+  // private handleHorizontal = () => {
+  //   if (this.props.direction !== 'horizontal') return;
+  //   if (!this.containerRef.current) return;
+  //   if (this.stepRefs.length === 0) return;
 
-      const step = this.stepRefs.slice(-1)[0];
-      const otherSteps = this.stepRefs.slice(0, -1);
-      const containerWidth = this.containerRef.current.offsetWidth;
-      // const minWidth = containerWidth / this.stepRefs.length;
-      const minWidth = 100 / this.stepRefs.length;
+  //   const step = this.stepRefs.slice(-1)[0];
+  //   const otherSteps = this.stepRefs.slice(0, -1);
+  //   const containerWidth = this.containerRef.current.offsetWidth;
+  //   // const minWidth = containerWidth / this.stepRefs.length;
+  //   const minWidth = 100 / this.stepRefs.length;
 
-      if (otherSteps.length > 0) {
-        const lastStep = step.containerRef.current;
-        const width = (containerWidth - (lastStep?.offsetWidth ?? 0)) / otherSteps.length;
+  //   if (otherSteps.length > 0) {
+  //     const lastStep = step.containerRef.current;
+  //     const width = (containerWidth - (lastStep?.offsetWidth ?? 0)) / otherSteps.length;
 
-        if (lastStep) {
-          lastStep.style.maxWidth = `${minWidth}%`;
-        }
+  //     if (lastStep) {
+  //       lastStep.style.maxWidth = `${minWidth}%`;
+  //     }
 
-        otherSteps.forEach((item) => {
-          const temp = item.containerRef.current;
-          if (temp) {
-            temp.style.minWidth = `${minWidth}%`;
-            temp.style.width = `${width}px`;
-          }
-        });
-      }
-    };
+  //     otherSteps.forEach((item) => {
+  //       const temp = item.containerRef.current;
+  //       if (temp) {
+  //         temp.style.minWidth = `${minWidth}%`;
+  //         temp.style.width = `${width}px`;
+  //       }
+  //     });
+  //   }
+  // };
 }

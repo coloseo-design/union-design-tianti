@@ -33,8 +33,8 @@ const CalendarDemo = () => (
       dateCellRender={() => (
         <div style={{
           position: 'absolute',
-          top: 1,
-          right: 11,
+          top: -1,
+          right: 9,
           width: 4,
           height: 4,
           backgroundColor: '#B30000',

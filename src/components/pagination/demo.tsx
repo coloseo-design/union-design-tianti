@@ -11,16 +11,19 @@ const Demo = () => (
       hideOnSinglePage
     />
     <div style={{ height: 20 }} />
-    <Pagination
-      total={137}
-      showSizeChanger
-      showQuickJumper
-      showTotal={(page, pageSize) => (
-        <div style={{ lineHeight: '24px', marginRight: 5 }}>
-          {`${(page - 1) * pageSize}-${pageSize * page}`}
-        </div>
-      )}
-    />
+    <div style={{ marginTop: 320 }}>
+      <Pagination
+        total={137}
+        showSizeChanger
+        showQuickJumper
+        showTotal={(page, pageSize) => (
+          <div style={{ lineHeight: '24px', marginRight: 5 }}>
+            {`${(page - 1) * pageSize}-${pageSize * page}`}
+          </div>
+        )}
+      />
+    </div>
+
   </div>
 );
 

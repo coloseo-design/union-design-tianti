@@ -209,41 +209,41 @@
     & > .@{calendar-tag-value} {
         float: left;
         padding-left: 8px;
-    }
-
-    & > .@{calendar-tag-icon} {
-        float: right;
-        font-size: 16px;
-        margin-left: 8px;
-        margin-right: 8px;
-        color: @calendar-tag-icon-color;
-    }
-
-    & > .@{calendar-tag-popup} {
-        position: absolute;
-        top: 26px;
-        width: 100%;
-        z-index: 99999;
-        max-height: 200px;
-        box-shadow: @shadow-2;
-        background-color: @white;
-        overflow: auto;
-        border-radius: @border-radius-base;
-        padding: 5px 0px;
-
-        & > .@{calendar-tag-item} {
-            height: 24px;
-            text-align: center;
-
-            &:hover{
-                background-color: @calendar-year-item-hover-bg-color;
-            }
-        }
-
-        & > .@{calendar-tag-item-selected} {
-            background-color: @calendar-year-item-select-bg-color;
+        & > .@{calendar-tag-icon} {
+            float: right;
+            font-size: 16px;
+            margin-left: 8px;
+            margin-right: 8px;
+            color: @calendar-tag-icon-color;
         }
     }
+
+
+    // & > .@{calendar-tag-popup} {
+    //     position: absolute;
+    //     top: 26px;
+    //     width: 100%;
+    //     z-index: 99999;
+    //     max-height: 200px;
+    //     box-shadow: @shadow-2;
+    //     background-color: @white;
+    //     overflow: auto;
+    //     border-radius: @border-radius-base;
+    //     padding: 5px 0px;
+
+    //     & > .@{calendar-tag-item} {
+    //         height: 24px;
+    //         text-align: center;
+
+    //         &:hover{
+    //             background-color: @calendar-year-item-hover-bg-color;
+    //         }
+    //     }
+
+    //     & > .@{calendar-tag-item-selected} {
+    //         background-color: @calendar-year-item-select-bg-color;
+    //     }
+    // }
 }
 
 .@{calendar}-buttongroup {
@@ -270,5 +270,34 @@
 
     & > [data-active="true"] {
         color: @calendar-head-button-active-color;
+    }
+}
+
+
+ .@{calendar-tag-popup} {
+    position: absolute;
+    width: 100%;
+    z-index: 99999;
+    max-height: 200px;
+    box-shadow: @shadow-2;
+    background-color: @white;
+    visibility: hidden;
+    overflow: auto;
+    border-radius: @border-radius-base;
+    padding: 5px 0px;
+    &-show {
+        visibility: visible;
+    }
+    & > .@{calendar-tag-item} {
+        height: 24px;
+        text-align: center;
+
+        &:hover{
+            background-color: @calendar-year-item-hover-bg-color;
+        }
+    }
+
+    & > .@{calendar-tag-item-selected} {
+        background-color: @calendar-year-item-select-bg-color;
     }
 }

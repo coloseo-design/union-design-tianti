@@ -34,6 +34,7 @@ export class Step extends BaseComponent<StepProps> {
       _size,
       _onClick,
       isShowPop,
+      width,
     } = this.props;
     const _status = status ?? _defaultStatus;
     this.handleHorizontal();
@@ -42,6 +43,7 @@ export class Step extends BaseComponent<StepProps> {
       <div
         ref={this.containerRef}
         className={`${this.getPrefixClass('wrap')}`}
+        style={{ width }}
       >
         <div
           ref={this.lineRef}
