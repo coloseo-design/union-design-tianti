@@ -73,10 +73,6 @@ export default class Steps extends BaseComponent<StepsProps> {
       this.handleHorizontal();
     }
 
-    static getDerivedStateFromProps() {
-      console.log('==11');
-    }
-
     protected view = () => {
       const { className, style, direction } = this.props;
       this.handleHorizontal();

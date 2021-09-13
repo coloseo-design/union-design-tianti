@@ -375,7 +375,6 @@ class Select extends React.Component<SelectProps, SelectState> {
       }
     }
 
-    console.log('==renderObj', renderObj);
     return (
       <div className={wrapperClass}>
         <div
