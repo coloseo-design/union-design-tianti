@@ -1,3 +1,17 @@
+## [1.0.24](http://10.124.128.2:8888/muses/union-design/compare/v1.0.23...v1.0.24) (2021-09-13)
+
+
+### Bug Fixes
+
+* 🐛 修复table默认对齐方式 ([1dc804b](http://10.124.128.2:8888/muses/union-design/commits/1dc804be64d77c0682cb91c12add7dd858b4ee2e))
+
+
+### Features
+
+* 🎸 分页下拉框展示bug， steps随屏幕改变而改变 ([d92b2e2](http://10.124.128.2:8888/muses/union-design/commits/d92b2e2e2640b465c331f84e3f1f139a64e19b6f))
+
+
+
 ## [1.0.23](http://10.124.128.2:8888/muses/union-design/compare/v1.0.22...v1.0.23) (2021-09-13)
 
 
