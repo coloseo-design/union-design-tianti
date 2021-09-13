@@ -1,3 +1,12 @@
+## [1.0.23](http://10.124.128.2:8888/muses/union-design/compare/v1.0.22...v1.0.23) (2021-09-13)
+
+
+### Bug Fixes
+
+* 🐛 修复checkbox排列自动换行的bug ([e3a5cf7](http://10.124.128.2:8888/muses/union-design/commits/e3a5cf78aa0b0953ee18e3bd94c3dd7dfb437806))
+
+
+
 ## [1.0.22](http://10.124.128.2:8888/muses/union-design/compare/v1.0.21...v1.0.22) (2021-09-12)
 
 
