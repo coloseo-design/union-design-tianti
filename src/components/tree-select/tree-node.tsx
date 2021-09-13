@@ -99,7 +99,7 @@ class TreeNode extends React.Component<TreeNodeProps> {
                 className={titleStyle}
                 style={{
                   width: `calc(100% - ${(treeCheckable && checkable) ? 56 : 24}px)`,
-                  marginLeft: treeCheckable ? -10 : 0,
+                  marginLeft: treeCheckable ? 8 : 0,
                 }}
                 title={title}
                 onClick={this.handleSelect}
