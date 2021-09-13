@@ -87,12 +87,12 @@ class PopComponent extends React.Component<PopProps, PopconfirmState> {
     if (target && visible) {
       this.compute(target);
     }
-    document.body.addEventListener('click', this.documentBodyOnClick);
+    document.addEventListener('click', this.documentBodyOnClick);
   }
 
   componentWillUnmount = () => {
     this.setState({ visible: false });
-    document.body.removeEventListener('click', this.documentBodyOnClick);
+    document.removeEventListener('click', this.documentBodyOnClick);
   }
 
   componentDidUpdate = (prevProps: PopProps) => {
@@ -356,7 +356,6 @@ class PopComponent extends React.Component<PopProps, PopconfirmState> {
             onClick={(e) => {
               e.stopPropagation();
               e.nativeEvent.stopImmediatePropagation();
-              this.setState({ visible: true });
             }}
             onMouseOver={this.showPop}
             onMouseOut={this.hidePop}
