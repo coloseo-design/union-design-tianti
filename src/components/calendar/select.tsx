@@ -85,16 +85,20 @@ export class Select<T extends SelectBaseData> extends React.Component<SelectProp
       if ((bodyH - offsetTop) < contentHeight + 4) {
         y = offsetTop - contentHeight - 4;
       }
+      if (!popupVisible) {
+        scrollToY(`${this.uuid}-container`, `${this.uuid}-${value}`, 200);
+      }
       this.setState({
         top: y,
         left: offsetLeft,
         width,
+        popupVisible: !popupVisible,
       });
-      this.setState({ popupVisible: !popupVisible }, () => {
-        if (popupVisible) {
-          scrollToY(`${this.uuid}-container`, `${this.uuid}-${value}`, 200);
-        }
-      });
+      // this.setState({ popupVisible: !popupVisible }, () => {
+      //   if (popupVisible) {
+      //     scrollToY(`${this.uuid}-container`, `${this.uuid}-${value}`, 200);
+      //   }
+      // });
     }
   }
 
@@ -182,6 +186,7 @@ export class Select<T extends SelectBaseData> extends React.Component<SelectProp
 }
 
 const scrollToY = (containerId: string, targetId: string, duration: number) => {
+  console.log('====');
   const target = document.getElementById(targetId);
   const container = document.getElementById(containerId);
   if (!target || !container) return;
