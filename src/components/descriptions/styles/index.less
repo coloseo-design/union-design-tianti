@@ -10,6 +10,7 @@
     tbody {
       tr {
         .@{checkbox-prefix-cls}-item {
+          display: flex;
           padding-bottom: @table-padding-vertical;
           vertical-align: top;
           &-label, &-content {
@@ -21,11 +22,11 @@
           &-label {
             color: @descriptions-label-color;
             text-align: right;
-            width: @descriptions-label-width;
+            // width: @descriptions-label-width;
           }
           &-content {
             color: @descriptions-content-color;
-            width: @descriptions-content-width;
+            // width: @descriptions-content-width;
             vertical-align: top;
           }
         }
