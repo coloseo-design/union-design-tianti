@@ -1,3 +1,22 @@
+## [1.0.26](http://10.124.128.2:8888/muses/union-design/compare/v1.0.19...v1.0.26) (2021-09-14)
+
+
+### Bug Fixes
+
+* 🐛 调整checkbox间距 ([428b358](http://10.124.128.2:8888/muses/union-design/commits/428b3583c5886047144c123b0e16e81f6f09d42d))
+* 🐛 修复checkbox排列自动换行的bug ([e3a5cf7](http://10.124.128.2:8888/muses/union-design/commits/e3a5cf78aa0b0953ee18e3bd94c3dd7dfb437806))
+* 🐛 修复table默认对齐方式 ([1dc804b](http://10.124.128.2:8888/muses/union-design/commits/1dc804be64d77c0682cb91c12add7dd858b4ee2e))
+
+
+### Features
+
+* 🎸 分页下拉框展示bug， steps随屏幕改变而改变 ([d92b2e2](http://10.124.128.2:8888/muses/union-design/commits/d92b2e2e2640b465c331f84e3f1f139a64e19b6f))
+* 🎸 修改文字颜色 ([2d95bb2](http://10.124.128.2:8888/muses/union-design/commits/2d95bb2eca32d101c203a7d040952493dc915ded))
+* 🎸 menu ,select icon颜色大小修改 ([48087ea](http://10.124.128.2:8888/muses/union-design/commits/48087eafc06e631307cfcb3bd8e14aea68aea089))
+* 🎸 treeselect高度不应该写死 ([0a10e26](http://10.124.128.2:8888/muses/union-design/commits/0a10e26fb3213ce310615ee4c9d1e929fd29f0ac))
+
+
+
 ## [1.0.25](http://10.124.128.2:8888/muses/union-design/compare/v1.0.24...v1.0.25) (2021-09-14)
 
 
