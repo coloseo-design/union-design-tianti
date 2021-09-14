@@ -1,3 +1,12 @@
+## [1.0.29](http://10.124.128.2:8888/muses/union-design/compare/v1.0.25...v1.0.29) (2021-09-14)
+
+
+### Features
+
+* 🎸 steps 宽度不平均分配，最后一步的宽度由自己决定 ([ea1d376](http://10.124.128.2:8888/muses/union-design/commits/ea1d37673372c2c5de32a6a27218fef8d4fd7fb7))
+
+
+
 ## [1.0.28](http://10.124.128.2:8888/muses/union-design/compare/v1.0.27...v1.0.28) (2021-09-14)
 
 
