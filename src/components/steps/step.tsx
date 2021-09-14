@@ -1,3 +1,5 @@
+/* eslint-disable no-nested-ternary */
+/* eslint-disable max-len */
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import React, { createRef } from 'react';
@@ -34,16 +36,14 @@ export class Step extends BaseComponent<StepProps> {
       _size,
       _onClick,
       isShowPop,
-      width,
+      isLast = false,
     } = this.props;
     const _status = status ?? _defaultStatus;
     this.handleHorizontal();
-
     return (
       <div
         ref={this.containerRef}
         className={`${this.getPrefixClass('wrap')}`}
-        style={{ width }}
       >
         <div
           ref={this.lineRef}
@@ -58,6 +58,7 @@ export class Step extends BaseComponent<StepProps> {
             this.gpc(`tag-icon-${_size}`),
           )}
           onClick={() => _onClick?.(_serialNumber!)}
+          style={{ verticalAlign: 'top' }}
         >
           {icon || (
             <>
@@ -123,6 +124,9 @@ export class Step extends BaseComponent<StepProps> {
                 this.gpc('tag-description'),
                 this.gpc(`tag-${_size}`),
               )}
+              style={{
+                maxWidth: _direction === 'horizontal' ? (isLast ? 240 : '55%') : undefined,
+              }}
               rows={3}
             >
               {description}
@@ -135,6 +139,9 @@ export class Step extends BaseComponent<StepProps> {
               this.gpc('tag-description'),
               this.gpc(`tag-${_size}`),
             )}
+            style={{
+              maxWidth: _direction === 'horizontal' ? (isLast ? 240 : '55%') : undefined,
+            }}
             rows={3}
           >
             {description}
@@ -149,9 +156,12 @@ export class Step extends BaseComponent<StepProps> {
     setTimeout(() => {
       if (!this.lineRef.current) return;
       if (!this.titleRef.current) return;
+      const tempRight = this.containerRef?.current?.style.marginRight || '-0px';
+      const right = tempRight.toString().slice(1, tempRight.toString().length - 2);
       const width = this.props._size === 'default' ? 24 : 32;
       const titleWidth = this.titleRef.current.offsetWidth;
       this.lineRef.current.style.left = `${titleWidth + width}px`;
+      this.lineRef.current.style.right = `${Number(right) + 8}px`;
     });
   };
 }

@@ -49,7 +49,14 @@ export type StepProps = {
     _serialNumber?: number;
     _size?: StepsSize;
     isShowPop?: boolean;
-    width?: string;
+    /* 除去最后一个，其他步骤的宽度 */
+    width?: number;
+    /* 其他步骤宽度除以 其他步骤的个数的 */
+    tempWidth?: number;
+    /* children的length -1 */
+    len?: number;
+    /* 是否是最后一步 */
+    isLast?: boolean;
 } & BaseProps;
 
 export default class Steps extends BaseComponent<StepsProps> {
@@ -70,13 +77,13 @@ export default class Steps extends BaseComponent<StepsProps> {
 
     private stepRefs: Step[] = [];
 
-    // public componentDidMount() {
-    //   this.handleHorizontal();
-    // }
+    public componentDidMount() {
+      this.handleHorizontal();
+    }
 
     protected view = () => {
       const { className, style, direction } = this.props;
-      // this.handleHorizontal();
+      this.handleHorizontal();
       return (
         <div
           ref={this.containerRef}
@@ -98,7 +105,6 @@ export default class Steps extends BaseComponent<StepsProps> {
       } = this.props;
       let serialNumber = initial!;
       this.stepRefs = [];
-
       const all = React.Children.map(children, (child) => {
         const tag = ((child as ReactElement)?.type as unknown as Record<string, unknown>)?.tag;
         if (React.isValidElement(child) && tag === STEP_NAME) {
@@ -106,12 +112,12 @@ export default class Steps extends BaseComponent<StepsProps> {
         }
         return null;
       }) ?? [];
-      const width = 100 / React.Children.toArray(children).length;
+      const width = 100 / (React.Children.toArray(children).length - 1);
+      const tempWidth = 100 / React.Children.toArray(children).length;
       const content = React.Children.map(all, (child: ReactElement, index: number) => {
         let status: StepsStatus = 'wait';
         if (current! > index) status = 'finish';
         if (current === index) status = 'process';
-
         const result = React.cloneElement(child, {
           _size: size,
           _defaultStatus: status,
@@ -120,7 +126,10 @@ export default class Steps extends BaseComponent<StepsProps> {
           _onClick: onClick,
           isShowPop,
           ref: (ref: Step) => ref && this.stepRefs.push(ref),
-          width: direction === 'horizontal' ? `${width}%` : undefined,
+          width: direction === 'horizontal' && index !== React.Children.toArray(children).length - 1 ? width : undefined,
+          tempWidth: direction === 'horizontal' && index !== React.Children.toArray(children).length - 1 ? tempWidth / (React.Children.toArray(children).length - 1) : undefined,
+          len: React.Children.toArray(children).length - 1,
+          isLast: index === React.Children.toArray(children).length - 1,
         });
 
         serialNumber += 1;
@@ -131,32 +140,32 @@ export default class Steps extends BaseComponent<StepsProps> {
       return content;
     };
 
-  // private handleHorizontal = () => {
-  //   if (this.props.direction !== 'horizontal') return;
-  //   if (!this.containerRef.current) return;
-  //   if (this.stepRefs.length === 0) return;
+  private handleHorizontal = () => {
+    if (this.props.direction !== 'horizontal') return;
+    if (!this.containerRef.current) return;
+    if (this.stepRefs.length === 0) return;
 
-  //   const step = this.stepRefs.slice(-1)[0];
-  //   const otherSteps = this.stepRefs.slice(0, -1);
-  //   const containerWidth = this.containerRef.current.offsetWidth;
-  //   // const minWidth = containerWidth / this.stepRefs.length;
-  //   const minWidth = 100 / this.stepRefs.length;
+    const step = this.stepRefs.slice(-1)[0];
+    const otherSteps = this.stepRefs.slice(0, -1);
+    // const containerWidth = this.containerRef.current.offsetWidth;
+    // const tempWidth = containerWidth / this.stepRefs.length;
+    const minWidth = 100 / (this.stepRefs.length - 1);
 
-  //   if (otherSteps.length > 0) {
-  //     const lastStep = step.containerRef.current;
-  //     const width = (containerWidth - (lastStep?.offsetWidth ?? 0)) / otherSteps.length;
+    if (otherSteps.length > 0) {
+      const lastStep = step.containerRef.current;
+      // const width = (containerWidth - (lastStep?.offsetWidth ?? 0)) / otherSteps.length;
 
-  //     if (lastStep) {
-  //       lastStep.style.maxWidth = `${minWidth}%`;
-  //     }
-
-  //     otherSteps.forEach((item) => {
-  //       const temp = item.containerRef.current;
-  //       if (temp) {
-  //         temp.style.minWidth = `${minWidth}%`;
-  //         temp.style.width = `${width}px`;
-  //       }
-  //     });
-  //   }
-  // };
+      if (lastStep) {
+        lastStep.style.maxWidth = `${minWidth}%`;
+      }
+      const lastW = lastStep?.offsetWidth || 0;
+      otherSteps.forEach((item) => {
+        const temp = item.containerRef.current;
+        if (temp) {
+          temp.style.width = `${minWidth}%`;
+          temp.style.marginRight = `-${(lastW + 2) / (this.stepRefs.length - 1)}px`;
+        }
+      });
+    }
+  };
 }
