@@ -281,14 +281,14 @@ class Transfer extends React.Component<TransferProps, TransferState> {
         <div className={tranBody}>
           {showSearch
             && (
-            <Input.Search
-              style={{
-                margin: '0px 12px', position: 'absolute', top: 0, left: 0,
-              }}
-              onChange={direction === 'left' ? this.handleLeftSearch : this.handleRightSearch}
-              placeholder="请输入搜索内容"
-              disabled={disabled}
-            />
+            <div style={{ padding: '0px 12px' }}>
+              <Input.Search
+                style={{ width: '100%', marginBottom: 4 }}
+                onChange={direction === 'left' ? this.handleLeftSearch : this.handleRightSearch}
+                placeholder="请输入搜索内容"
+                disabled={disabled}
+              />
+            </div>
             )}
           <div className={tranContent} onScroll={this.handleScroll(direction)}>
             {data.map((item) => {

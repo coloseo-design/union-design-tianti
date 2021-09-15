@@ -60,7 +60,7 @@ const TransferDemo = () => {
           targetKeys={Keys}
           titles={['source', 'target']}
           showSearch
-          filterOption={(value, option) => option.name.indexOf(value) > -1}
+          filterOption={(value: any, option: any) => option.name.indexOf(value) > -1}
         />
       </div>
       <div style={{ margin: 32 }}>
