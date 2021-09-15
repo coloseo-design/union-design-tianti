@@ -58,7 +58,7 @@ export class Step extends BaseComponent<StepProps> {
             this.gpc(`tag-icon-${_size}`),
           )}
           onClick={() => _onClick?.(_serialNumber!)}
-          style={{ verticalAlign: 'top' }}
+          style={{ verticalAlign: 'middle' }}
         >
           {icon || (
             <>
