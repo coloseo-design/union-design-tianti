@@ -1,3 +1,12 @@
+## [1.0.30](http://10.124.128.2:8888/muses/union-design/compare/v1.0.29...v1.0.30) (2021-09-15)
+
+
+### Features
+
+* 🎸 steps icon 居中对齐 ([7881124](http://10.124.128.2:8888/muses/union-design/commits/78811245dd56e23204e98572da1a0f050ddf71c5))
+
+
+
 ## [1.0.29](http://10.124.128.2:8888/muses/union-design/compare/v1.0.25...v1.0.29) (2021-09-14)
 
 
