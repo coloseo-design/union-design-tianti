@@ -1,4 +1,10 @@
-import React, { useContext, useState } from 'react';
+import React, {
+  ForwardedRef,
+  ForwardRefRenderFunction,
+  useContext,
+  useImperativeHandle,
+  useState,
+} from 'react';
 import classnames from 'classnames';
 import { FormProvider } from './form-context';
 import { ConfigConsumerProps, ConfigContext } from '../config-provider/context';
@@ -7,7 +13,10 @@ import {
   ErrorCollection, FormErrors, FormInstance, FormProps, FormValues, ValueCollection,
 } from './type';
 
-const Form: React.FC<FormProps> = (props: FormProps) => {
+const Form: ForwardRefRenderFunction<FormInstance, FormProps> = (
+  props: FormProps,
+  ref: ForwardedRef<FormInstance>,
+) => {
   const { getPrefixCls } = useContext<ConfigConsumerProps>(ConfigContext);
   const {
     prefixCls: customizePrefixCls,
@@ -23,7 +32,6 @@ const Form: React.FC<FormProps> = (props: FormProps) => {
     labelAlign,
     labelStyle,
     initialValues,
-    forwardRef,
     ...rest
   } = props;
   const composedClassNames = classnames(getPrefixCls('form', customizePrefixCls), className);
@@ -85,11 +93,11 @@ const Form: React.FC<FormProps> = (props: FormProps) => {
     setIsValidating(false);
   };
 
-  const current: FormInstance = {
+  useImperativeHandle(ref, () => ({
     reset,
     setFieldsValue,
     submit: onSubmit,
-  };
+  }));
 
   const providerValue = {
     wrapperCol,
@@ -108,13 +116,6 @@ const Form: React.FC<FormProps> = (props: FormProps) => {
   return (
     <form
       {...rest}
-      ref={() => {
-        if (forwardRef) {
-          Object.assign(forwardRef, {
-            current,
-          });
-        }
-      }}
       className={composedClassNames}
     >
       <FormProvider value={providerValue}>
@@ -124,6 +125,6 @@ const Form: React.FC<FormProps> = (props: FormProps) => {
   );
 };
 
-const FormFC = React.forwardRef<FormInstance, Omit<FormProps, 'forwardRef'>>((props, ref) => <Form forwardRef={ref} {...props} />);
+const FormFC = React.forwardRef<FormInstance, FormProps>(Form);
 
 export default FormFC;
