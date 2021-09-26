@@ -5,7 +5,7 @@ title: Card
 subtitle: 卡片
 ---
 
-## Card
+## API
 
   
 | 属性 | 说明 | 类型 | 默认值 |
