@@ -162,8 +162,11 @@ class TreeSelect extends React.Component<TreeSelectProps, TreeSelectStates> {
     evt.stopPropagation();
     evt.nativeEvent.stopImmediatePropagation();
     const { border } = this.state;
-    this.setState({ border: !border });
-    this.getLocation();
+    const { disabled } = this.props;
+    if (!disabled) {
+      this.setState({ border: !border });
+      this.getLocation();
+    }
   };
 
   handleClose = (item: string) => (evt: React.MouseEvent) => {
