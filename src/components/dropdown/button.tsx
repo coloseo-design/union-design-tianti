@@ -3,7 +3,8 @@
 import React from 'react';
 import classNames from 'classnames';
 import Icon from '../icon';
-import Portal from '../popconfirm/portal';
+import { getOffset } from '../utils/getOffset';
+import Portal from '../common/portal';
 import { ConfigConsumer, ConfigConsumerProps } from '../config-provider';
 
 export interface DropMenuProps {
@@ -121,18 +122,20 @@ class DropButton extends React.Component<DropMenuProps, DropMenuState> {
     evt && evt.stopPropagation();
     evt?.nativeEvent.stopImmediatePropagation();
     const { visible } = this.state;
-    const { placement = 'bottomRight', onVisibleChange, visible: propsVisible } = this.props;
+    const {
+      placement = 'bottomRight', onVisibleChange, visible: propsVisible, getPopupContainer,
+    } = this.props;
     if (!visible || first) {
       if (this.nodeB && this.nodeC) {
         const { height: contentHeight, width: contentWidth } = this.nodeC.getBoundingClientRect();
         const {
           width,
           height,
-          left,
-          top,
         } = this.nodeB.getBoundingClientRect();
-        const offsetTop = Math.ceil(window.pageYOffset + top);
-        const offsetLeft = Math.ceil(window.pageXOffset + left);
+        const containter = getPopupContainer && getPopupContainer();
+        const { top: offsetTop, left: offsetLeft } = getOffset(this.nodeB, containter);
+        // const offsetTop = Math.ceil(window.pageYOffset + top);
+        // const offsetLeft = Math.ceil(window.pageXOffset + left);
         const placementMap = {
           topCenter: {
             x: offsetLeft + (width - contentWidth) / 2,

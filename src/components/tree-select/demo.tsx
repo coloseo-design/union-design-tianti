@@ -106,7 +106,7 @@ const TreeSelectDEmo = () => {
   }, []);
 
   return (
-    <div style={{ margin: '60px' }}>
+    <div id="tree-demo" style={{ margin: '60px', position: 'relative' }}>
       <h1>单选</h1>
       <div style={{ width: 320 }}>
         <TreeSelect
@@ -138,6 +138,7 @@ const TreeSelectDEmo = () => {
           onChange={onChange1}
           onSelect={onSelect}
           maxTagCount={2}
+          getPopupContainer={() => document.querySelector('#tree-demo')}
         />
       </div>
 

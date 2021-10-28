@@ -27,6 +27,7 @@ subtitle: 自动完成
 |onBlur|失去焦点时的回调|function()|-|
 |onFocus|获得焦点时的回调|function()|-|
 |rows | 多上输入框的行数, multiInput为true时有效| number| 2 |
+| getPopupContainer       | 菜单渲染父节点。默认渲染到 body 上，如果你遇到菜单滚动定位问题，试试修改为滚动的区域，并相对其定位。   | fucntion () => HTMLElement                                                             | document.body |
 
 ### DataSourceItemObject说明
 ```typescript

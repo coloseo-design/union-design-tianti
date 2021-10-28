@@ -22,7 +22,7 @@ const PopconfirmDemo: React.FC<unknown> = () => {
   };
 
   return (
-    <div id="pop" style={{ padding: 120 }}>
+    <div id="pop" style={{ padding: 120, position: 'relative' }}>
       <div>
         <Popconfirm
           title={(
@@ -32,7 +32,7 @@ const PopconfirmDemo: React.FC<unknown> = () => {
             </div>
 )}
           placement="topLeft"
-          getPopupContainer={() => document.getElementById('pop') || document.body}
+          getPopupContainer={() => document.getElementById('pop')}
           onConfirm={onConfirm}
           overlayStyle={{ maxWidth: 200 }}
           onCancel={() => setVisible(false)}
@@ -45,6 +45,7 @@ const PopconfirmDemo: React.FC<unknown> = () => {
           title="你是否确定这是一个气泡确认框"
           placement="top"
           onVisibleChange={handleVisibleChange}
+          getPopupContainer={() => document.getElementById('pop')}
           // defaultVisible
         >
           <Button style={{ margin: 24 }}>top</Button>

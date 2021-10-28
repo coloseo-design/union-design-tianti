@@ -5,7 +5,8 @@ import classNames from 'classnames';
 import { TreeNodeContext } from './context';
 import Icon from '../icon';
 import TreeNode from './tree-node';
-import TreePopup from './tree-popup';
+import TreePopup from '../common/portal';
+import { getOffset } from '../utils/getOffset';
 import { TreeSelectProps, TreeSelectStates, TreeSelectData } from './type';
 import { ConfigConsumer, ConfigConsumerProps } from '../config-provider';
 import {
@@ -142,13 +143,14 @@ class TreeSelect extends React.Component<TreeSelectProps, TreeSelectStates> {
   };
 
   getLocation = () => {
+    const { getPopupContainer } = this.props;
     setTimeout(() => {
-      if (this.node?.getBoundingClientRect) {
+      if (this.node) {
         const {
-          height, width, top, left,
+          height, width,
         } = this.node.getBoundingClientRect();
-        const offsetTop = Math.ceil(window.pageYOffset + top);
-        const offsetLeft = Math.ceil(window.pageXOffset + left);
+        const containter = getPopupContainer && getPopupContainer();
+        const { left: offsetLeft, top: offsetTop } = getOffset(this.node, containter);
         this.setState({
           left: offsetLeft,
           top: offsetTop + height + 4,

@@ -37,7 +37,7 @@ export interface TreeSelectProps {
   // 最多展示个数
   maxTagCount?: number;
   // 节点挂在在何处默认document.body
-  getPopupContainer?: () => HTMLElement;
+  getPopupContainer?: () => HTMLElement | null;
   // 下拉列表样式
   dropdownStyle?: React.CSSProperties;
   // 是否可勾选

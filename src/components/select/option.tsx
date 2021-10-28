@@ -54,7 +54,7 @@ class Option extends React.Component<OptionProps, OptionState> {
                 disabled={disabled}
               />
             )}
-            {children}
+            <span style={{ paddingLeft: multiple ? 8 : 0 }}>{children}</span>
           </section>
         )}
       </SelectContext.Consumer>

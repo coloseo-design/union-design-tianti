@@ -4,14 +4,19 @@ import './styles/index';
 import '../button/styles/index';
 
 const TooltipDemo = () => (
-  <div style={{ padding: 20 }}>
+  <div style={{ padding: 20, position: 'relative' }} id="toolTip-demo">
     <div style={{ marginBottom: 20 }}>
       <Tooltip message="hi billy" placement="bottom" trigger="hover">
         <span>hello, this is my little friend billy,</span>
       </Tooltip>
     </div>
     <div>
-      <Tooltip message="hi billy" placement="top" trigger="click">
+      <Tooltip
+        message="hi billy"
+        placement="top"
+        trigger="click"
+        getPopupContainer={() => document.querySelector('#toolTip-demo')}
+      >
         <Button onClick={() => console.log('accc')}>clickMe</Button>
       </Tooltip>
     </div>

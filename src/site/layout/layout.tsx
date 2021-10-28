@@ -115,7 +115,7 @@ const Layout: React.FC<LayoutProps> = (props) => {
   });
   // console.log('routeConfig:', routeConfig);
   return (
-    <div className="g-layout">
+    <div className="g-layout" style={{ overflow: 'hidden' }}>
       <div className="g-left">
         <a className="g-logo" href="#">
           <img className="logo" src={require('../assets/images/logo.png')} />
@@ -135,7 +135,14 @@ const Layout: React.FC<LayoutProps> = (props) => {
         </div>
         <Menus menus={menus} routeConfig={routeConfig} />
       </div>
-      <div className="g-content">
+      <div
+      className="g-content"
+      // style={{
+      //   height: 600,
+      //   overflow: 'auto',
+      //   border: '1px solid red',
+      // }}
+      >
         {
           routeConfig.title && <header className={headerCls} style={{ backgroundColor: routeConfig.themeColor, height }}>{fixed ? `${routeConfig.title}-${routeConfig.subTitle}` : routeConfig.title}</header>
         }

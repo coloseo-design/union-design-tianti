@@ -10,6 +10,7 @@ import classnames from 'classnames';
 import { ConfigConsumer, ConfigConsumerProps } from '../config-provider/context';
 import Icon from '../icon';
 import Option from './option';
+import { getOffset } from '../utils/getOffset';
 import { SelectContext } from './context';
 import Portal from '../common/portal';
 
@@ -51,7 +52,7 @@ export interface SelectProps extends CommonParams {
   onSelect?: (value: string | string[], label: string | obj[], checked?: boolean) => void,
   onSearch?: (value: string) => void,
   onClick?: () => void,
-  getPopupContainer?: () => HTMLElement;
+  getPopupContainer?: () => HTMLElement | null;
 }
 
 export interface obj {
@@ -194,13 +195,14 @@ class Select extends React.Component<SelectProps, SelectState> {
   }
 
   getLocation = () => {
+    const { getPopupContainer } = this.props;
     setTimeout(() => {
-      if (this.node?.getBoundingClientRect) {
+      if (this.node) {
         const {
-          height, top, left, width,
+          height, width,
         } = this.node.getBoundingClientRect();
-        const offsetTop = Math.ceil(window.pageYOffset + top);
-        const offsetLeft = Math.ceil(window.pageXOffset + left);
+        const containter = getPopupContainer && getPopupContainer();
+        const { left: offsetLeft, top: offsetTop } = getOffset(this.node, containter);
         this.setState({
           left: offsetLeft,
           top: offsetTop + height + 4,

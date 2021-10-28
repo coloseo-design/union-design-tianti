@@ -34,7 +34,7 @@ const SelectDemo = () => {
 
   const [value1, setvalue] = React.useState(['1']);
   return (
-    <div style={{ margin: 16 }}>
+    <div style={{ margin: 16, position: 'relative' }} id="select-demo">
       <hr style={{ marginTop: 16 }} />
       <h1>基础选择框</h1>
       <Select
@@ -43,9 +43,10 @@ const SelectDemo = () => {
             console.log('--- value ', value, label);
           }
         }
+        getPopupContainer={() => document.querySelector('#select-demo')}
         // disabled
         placeholder="请选择选项"
-        style={{ width: 220, height: 42 }}
+        style={{ width: 220 }}
         value="2"
       >
         {dataT.map((item: any) => (

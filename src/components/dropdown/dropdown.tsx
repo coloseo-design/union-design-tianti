@@ -1,7 +1,8 @@
 import React, { ReactNode } from 'react';
 import classNames from 'classnames';
 import DropButton from './button';
-import Portal from '../popconfirm/portal';
+import { getOffset } from '../utils/getOffset';
+import Portal from '../common/portal';
 import { ConfigConsumer, ConfigConsumerProps } from '../config-provider';
 import { MENU_TAG_MENU } from '../menu/menu';
 
@@ -117,7 +118,7 @@ class Dropdown extends React.Component<DropdownProps, DropdownState> {
     const { visible } = this.state;
     const { visible: propsVisible } = this.props;
     const {
-      placement = 'bottomCenter', arrow = false, onVisibleChange,
+      placement = 'bottomCenter', arrow = false, onVisibleChange, getPopupContainer,
     } = this.props;
     const target = evt.nativeEvent.target as HTMLSpanElement;
     if (!visible || propsVisible) {
@@ -126,11 +127,9 @@ class Dropdown extends React.Component<DropdownProps, DropdownState> {
         const {
           width,
           height,
-          left,
-          top,
         } = target.getBoundingClientRect();
-        const offsetTop = Math.ceil(window.pageYOffset + top);
-        const offsetLeft = Math.ceil(window.pageXOffset + left);
+        const containter = getPopupContainer && getPopupContainer();
+        const { top: offsetTop, left: offsetLeft } = getOffset(target, containter);
         const placementMap = {
           topCenter: {
             x: offsetLeft + (width - contentWidth) / 2,

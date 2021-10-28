@@ -22,7 +22,7 @@ popConfirm的属性说明如下：
 | onCancel | 点击取消的回调 | function(e) | 无 |  |
 | onConfirm | 点击确认的回调 | function(e)| 无 |  |
 | icon | 自定义弹出气泡 Icon 图标 | ReactNode | <Icon type="exclamation-circle" /> |  |
-| getPopupContainer | 浮层渲染父节点，默认渲染到 body 上 | Function(triggerNode)  | () => document.body  |
+| getPopupContainer | 菜单渲染父节点。默认渲染到 body 上，如果你遇到弹窗滚动定位问题，试试修改为滚动的区域，并相对其定位。 | Function(triggerNode)  | () => document.body  |
 | mouseEnterDelay | 鼠标移入后延时多少才显示 Tooltip，单位：秒 | number | - |  |
 | mouseLeaveDelay | 鼠标移出后延时多少才隐藏 Tooltip，单位：秒 | number | - |  |
 | overlayStyle | 卡片样式 | 无 | - |  |

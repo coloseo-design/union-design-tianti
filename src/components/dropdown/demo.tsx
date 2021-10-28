@@ -54,7 +54,7 @@ const DropdownDemo = () => {
 
   return (
     <div style={{ padding: 32 }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+      <div id="drop-demo" style={{ position: 'relative', display: 'flex', justifyContent: 'space-between' }}>
         <div>
           <Dropdown
             placement="bottomLeft"
@@ -64,12 +64,20 @@ const DropdownDemo = () => {
             onVisibleChange={onVisibleChange}
             trigger={['click']}
             overlayStyle={{ width: 130 }}
+            getPopupContainer={() => document.querySelector('#drop-demo')}
           >
             <Button onClick={handleButtonClick}>open bottomLeft</Button>
           </Dropdown>
         </div>
         <div>
-          <Dropdown placement="bottomCenter" overlayStyle={{ width: '200px' }} trigger={['click']} overlay={menu} arrow>
+          <Dropdown
+            placement="bottomCenter"
+            overlayStyle={{ width: '200px' }}
+            trigger={['click']}
+            overlay={menu}
+            arrow
+            getPopupContainer={() => document.querySelector('#drop-demo')}
+          >
             <Button>click bottomCenter</Button>
           </Dropdown>
         </div>
@@ -103,6 +111,7 @@ const DropdownDemo = () => {
           onClick={handleButtonClick}
           onVisibleChange={onVisibleChange}
           trigger={['click']}
+          getPopupContainer={() => document.querySelector('#drop-demo')}
         >
           primary dropdown
         </Dropdown.Button>

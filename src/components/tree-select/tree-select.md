@@ -25,7 +25,7 @@ subtitle: 树选择
 | onChange                | 输入框内容改变     | function (valuenode)                   | -             |
 |                         |
 | onTreeExpand            | 展开树节点         | function (key: string, value: string) => void key:选中节点唯一标识， value：选中节点值 | -             |
-| getPopupContainer       | 下拉列表展示位置   | fucntion () => HTMLElement                                                             | document.body |
+| getPopupContainer       | 菜单渲染父节点。默认渲染到 body 上，如果你遇到菜单滚动定位问题，试试修改为滚动的区域，并相对其定位。   | fucntion () => HTMLElement                                                             | document.body |
 |onSelect | 被选中时调用| function(value, node) | - |
 |showCheckedStrategy|定义选中项回填的方式。SHOW_ALL: 显示所有选中节点(包括父节点). SHOW_PARENT: 只显示父节点(当父节点下所有子节点都选中时). 默认只显示子节点. ｜ SHOW_ALL, SHOW_PARENT,SHOW_CHILD | SHOW_CHILD|
 |disabled|是否禁用  | boolean | - |

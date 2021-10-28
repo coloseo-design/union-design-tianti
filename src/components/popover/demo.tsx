@@ -4,10 +4,9 @@ import './styles/index';
 import '../button/styles/index';
 
 const PopoverDemo = () => (
-  <div style={{ paddingTop: 120 }}>
+  <div id="popover-demo" style={{ paddingTop: 120, position: 'relative' }}>
     <Popover
       content="和哈哈哈哈1"
-      defaultVisible
     >
       <Button>hover</Button>
     </Popover>
@@ -15,6 +14,8 @@ const PopoverDemo = () => (
       title={<div>Title3</div>}
       trigger="click"
       content={<div>和哈哈哈哈3</div>}
+      defaultVisible
+      getPopupContainer={() => document.querySelector('#popover-demo')}
     >
       <Button style={{ margin: 24 }}>click</Button>
     </Popover>

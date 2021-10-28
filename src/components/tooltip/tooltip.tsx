@@ -1,6 +1,7 @@
 import React, { ReactNode } from 'react';
 import classnames from 'classnames';
 import Popup from '../common/portal';
+import { getOffset } from '../utils/getOffset';
 import { ConfigConsumer, ConfigConsumerProps } from '../config-provider';
 import { tuple } from '../utils/type';
 
@@ -10,7 +11,7 @@ type PlacementType = (typeof PlacementTypes)[number];
 type TriggerType = (typeof TriggerTypes)[number];
 
 export interface TooltipProps {
-  getPopupContainer?: () => HTMLElement;
+  getPopupContainer?: () => HTMLElement | null;
   className?: string;
   prefixCls?: string;
   /** 内容 */
@@ -67,13 +68,17 @@ class Tooltip extends React.Component<TooltipProps, TooltipState> {
     evt.nativeEvent.stopImmediatePropagation();
     evt.stopPropagation();
     const target = evt.nativeEvent.target as HTMLSpanElement;
+    const { getPopupContainer } = this.props;
+    const { visible } = this.state;
     if (target && this.node) {
       const { height: contentHeight, width: contentWidth } = this.node.getBoundingClientRect();
       const { width, height } = target.getBoundingClientRect();
-      const { pageXOffset, pageYOffset } = window;
-      const { left, top } = target.getBoundingClientRect();
-      const offsetLeft = Math.ceil(pageXOffset + left);
-      const offsetTop = Math.ceil(pageYOffset + top);
+      // const { pageXOffset, pageYOffset } = window;
+      // const { left, top } = target.getBoundingClientRect();
+      const container = getPopupContainer && getPopupContainer();
+      const { top: offsetTop, left: offsetLeft } = getOffset(target, container);
+      // const offsetLeft = Math.ceil(pageXOffset + left);
+      // const offsetTop = Math.ceil(pageYOffset + top);
       const { placement = 'top' } = this.props;
       const gap = 10;
       const position: {
@@ -97,7 +102,7 @@ class Tooltip extends React.Component<TooltipProps, TooltipState> {
         },
       };
       const state = {
-        visible: true,
+        visible: !visible,
         ...(position[placement]),
       };
       this.setState(state);

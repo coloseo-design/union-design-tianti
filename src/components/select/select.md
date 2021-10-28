@@ -29,7 +29,7 @@ subtitle: 选择框
 |onChange|value改变时触发|(value: string \| string[], label: string) => void|--|
 |onSelect|点击选项时触发|(value: string \| string[], label: string) => void|--|
 |onSearch|搜索时触发|(value: string) => void|--|
-
+| getPopupContainer       | 菜单渲染父节点。默认渲染到 body 上，如果你遇到菜单滚动定位问题，试试修改为滚动的区域，并相对其定位。   | fucntion () => HTMLElement                                                             | document.body |
 
 ### Option
 

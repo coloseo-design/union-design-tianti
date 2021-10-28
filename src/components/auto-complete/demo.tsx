@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { AutoComplete, Button } from '../index';
+import { AutoComplete } from '../index';
 import './styles/index';
 
 const { Option, OptGroup } = AutoComplete;
@@ -99,7 +99,7 @@ export default () => {
   };
 
   return (
-    <div>
+    <div id="autoplate" style={{ position: 'relative' }}>
       <h2>基本的</h2>
       <div style={{ width: 256, margin: 32 }}>
         <AutoComplete
@@ -108,6 +108,7 @@ export default () => {
           dataSource={children}
           onFocus={handleFocus}
           onBlur={handleBlur}
+          getPopupContainer={() => document.querySelector('#autoplate')}
         />
       </div>
       <h2>多行的</h2>

@@ -4,6 +4,7 @@ import React, { ChangeEvent } from 'react';
 import classNames from 'classnames';
 import { ConfigConsumer, ConfigConsumerProps } from '../config-provider/context';
 import { AutoCompleteProps } from './type';
+import { getOffset } from '../utils/getOffset';
 import Portal from '../common/portal';
 import Option from './option';
 import OptGroup from './opt-group';
@@ -132,13 +133,26 @@ class AutoComplete extends React.Component<AutoCompleteProps, autoState> {
   };
 
   getLocation = () => {
+    const { getPopupContainer } = this.props;
+    // if (this.node) {
+    //   const {
+    //     height, width,
+    //   } = this.node.getBoundingClientRect();
+    //   const containter = getPopupContainer && getPopupContainer();
+    //   const { top: offsetTop, left: offsetLeft } = getOffset(this.node, containter);
+    //   this.setState({
+    //     left: offsetLeft,
+    //     top: offsetTop + height + 4,
+    //     width,
+    //   });
+    // }
     setTimeout(() => {
       if (this.node) {
         const {
-          height, top, left, width,
+          height, width,
         } = this.node.getBoundingClientRect();
-        const offsetTop = Math.ceil(window.pageYOffset + top);
-        const offsetLeft = Math.ceil(window.pageXOffset + left);
+        const containter = getPopupContainer && getPopupContainer();
+        const { left: offsetLeft, top: offsetTop } = getOffset(this.node, containter);
         this.setState({
           left: offsetLeft,
           top: offsetTop + height + 4,
@@ -162,6 +176,7 @@ class AutoComplete extends React.Component<AutoCompleteProps, autoState> {
       className,
       rows = 2,
       dropdownMenuStyle = {},
+      getPopupContainer,
     } = this.props;
     const {
       showAutoDrop, inputValue, isSearch, searchData, left, top, width,
@@ -247,7 +262,7 @@ class AutoComplete extends React.Component<AutoCompleteProps, autoState> {
         </div>
 
         {showAutoDrop && optionChildren && optionChildren.length > 0 && (
-        <Portal>
+        <Portal {...({ getPopupContainer })}>
           <div
             className={dropSelect}
             style={{

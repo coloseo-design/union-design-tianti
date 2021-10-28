@@ -1,7 +1,9 @@
+/* eslint-disable max-len */
 import React from 'react';
 import classnames from 'classnames';
 import Icon from '../icon';
-import Portal from './portal';
+import Portal from '../common/portal';
+import { getOffset } from '../utils/getOffset';
 import { BaseButtonProps } from '../button/type';
 import { Button } from '../index';
 import { ConfigConsumer, ConfigConsumerProps } from '../config-provider';
@@ -24,7 +26,7 @@ export interface PopProps {
   placement?: PlacementType;
   onCancel?: (e: React.MouseEvent<HTMLElement, MouseEvent>) => void;
   onConfirm?: (e: React.MouseEvent<HTMLElement, MouseEvent>) => void;
-  getPopupContainer?: () => HTMLElement;
+  getPopupContainer?: () => HTMLElement | null;
   icon?: React.ReactNode;
   autoAdjustOverflow?: boolean;
   componentType?: 'pop-over' | 'pop-confirm';
@@ -108,55 +110,95 @@ class PopComponent extends React.Component<PopProps, PopconfirmState> {
 
   compute = (target: any) => {
     const { direction } = this.state;
-    const { autoAdjustOverflow = true, onVisibleChange, visible: propsVisible } = this.props;
+    const {
+      autoAdjustOverflow = true, onVisibleChange, visible: propsVisible, getPopupContainer,
+    } = this.props;
     const bodyW = document.body.scrollWidth;
     const bodyH = document.body.scrollHeight;
-    let dT: PlacementType;
+    let dT: PlacementType = direction;
     if (target && this.node) {
       const { height: contentHeight, width: contentWidth } = this.node.getBoundingClientRect();
       const {
         width,
         height,
-        left,
-        top,
       } = target.getBoundingClientRect();
-      const offsetTop = Math.ceil(window.pageYOffset + top);
-      const offsetLeft = Math.ceil(window.pageXOffset + left);
-      if (direction.indexOf('top') >= 0 || direction.indexOf('bottom') >= 0) {
-        // 上下的pop ['top', 'bottom', 'topLeft', topRight', 'bottomLeft', 'bottomRight']
-        dT = direction;
-        if (autoAdjustOverflow && direction.indexOf('top') >= 0 && offsetTop < contentHeight + 10) {
-          dT = changeTopDir[direction]; // 上面超出，自动展示下面
+      const containter = getPopupContainer && getPopupContainer();
+      const { top: offsetTop, left: offsetLeft } = getOffset(target, containter);
+      if (autoAdjustOverflow && !getPopupContainer) { // 超出屏幕自动切换到对应的placement
+        if (direction.indexOf('top') >= 0 || direction.indexOf('bottom') >= 0) {
+          dT = direction;
+          if (autoAdjustOverflow && direction.indexOf('top') >= 0 && offsetTop < contentHeight + 10) {
+            dT = changeTopDir[direction]; // 上面超出，自动展示下面
+          }
+          if (autoAdjustOverflow && direction.indexOf('bottom') >= 0 && (bodyH - offsetTop) < contentHeight + 10) {
+            dT = changeBottomDir[direction]; // 下面超出自动展示上面
+          }
         }
-        if (autoAdjustOverflow && direction.indexOf('bottom') >= 0 && (bodyH - offsetTop) < contentHeight + 10) {
-          dT = changeBottomDir[direction]; // 下面超出自动展示上面
+        if (direction.indexOf('left') >= 0 || direction.indexOf('right') >= 0) {
+          dT = direction;
+          if (autoAdjustOverflow && direction.indexOf('left') >= 0 && offsetLeft < contentWidth + 10) {
+            dT = changeLeftDir[direction];
+          }
+          if (autoAdjustOverflow && direction.indexOf('right') >= 0 && (bodyW - offsetLeft) < contentWidth + 10) {
+            dT = changeRightDir[direction];
+          }
         }
-        const xT: number = dT.indexOf('Left') >= 0 ? offsetLeft : dT.indexOf('Right') >= 0 ? (offsetLeft - contentWidth + width) : (offsetLeft + (width - contentWidth) / 2);
-        const yT: number = dT.indexOf('top') >= 0 ? (offsetTop - contentHeight - 10) : offsetTop + height + 10;
-        this.setState({
-          x: xT,
-          y: yT,
-          direction: dT,
-        });
       }
-      if (direction.indexOf('left') >= 0 || direction.indexOf('right') >= 0) { // 左右的pop
-        // ['leftTop', leftBottom', 'left', 'rightTop', rightBottom', 'right']
-        dT = direction;
-        if (autoAdjustOverflow && direction.indexOf('left') >= 0 && offsetLeft < contentWidth + 10) {
-          dT = changeLeftDir[direction];
-        }
-        if (autoAdjustOverflow && direction.indexOf('right') >= 0 && (bodyW - offsetLeft) < contentWidth + 10) {
-          dT = changeRightDir[direction];
-        }
-        const xT: number = dT.indexOf('left') >= 0 ? offsetLeft - contentWidth - 10 : offsetLeft + width + 10;
-        /* eslint no-nested-ternary: 0 */
-        const yT: number = dT.indexOf('Top') >= 0 ? offsetTop : dT.indexOf('Bottom') >= 0 ? (offsetTop - contentHeight + height) : offsetTop + (height - contentHeight) / 2;
-        this.setState({
-          x: xT,
-          y: yT,
-          direction: dT,
-        });
-      }
+      const placementMap = {
+        top: {
+          x: offsetLeft + (width - contentWidth) / 2,
+          y: offsetTop - contentHeight - 10,
+        },
+        topLeft: {
+          x: offsetLeft,
+          y: offsetTop - contentHeight - 10,
+        },
+        topRight: {
+          x: offsetLeft - (contentWidth - width),
+          y: offsetTop - contentHeight - 10,
+        },
+        bottom: {
+          x: offsetLeft + (width - contentWidth) / 2,
+          y: offsetTop + height + 10,
+        },
+        bottomRight: {
+          x: offsetLeft - (contentWidth - width),
+          y: offsetTop + height + 10,
+        },
+        bottomLeft: {
+          x: offsetLeft,
+          y: offsetTop + height + 10,
+        },
+        left: {
+          x: offsetLeft - contentWidth - 10,
+          y: offsetTop + (height - contentHeight) / 2,
+        },
+        leftTop: {
+          x: offsetLeft - contentWidth - 10,
+          y: offsetTop,
+        },
+        leftBottom: {
+          x: offsetLeft - contentWidth - 10,
+          y: offsetTop - contentHeight + height,
+        },
+        right: {
+          x: offsetLeft + width + 10,
+          y: offsetTop + (height - contentHeight) / 2,
+        },
+        rightTop: {
+          x: offsetLeft + width + 10,
+          y: offsetTop,
+        },
+        rightBottom: {
+          x: offsetLeft + width + 10,
+          y: offsetTop - contentHeight + height,
+        },
+      };
+      this.setState({
+        x: placementMap[dT].x,
+        y: placementMap[dT].y,
+        direction: dT,
+      });
       onVisibleChange && onVisibleChange(propsVisible !== undefined ? propsVisible : true);
     }
   }

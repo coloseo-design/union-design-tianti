@@ -41,5 +41,6 @@ export interface AutoCompleteProps {
   className?: string;
   onFocus?: () => void;
   onBlur?: () => void;
-  rows?: number
+  rows?: number;
+  getPopupContainer?: () => HTMLElement | null;
 }
