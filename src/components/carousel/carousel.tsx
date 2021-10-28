@@ -125,21 +125,24 @@ class Carousel extends Component<CarouselProps, CarouselState> {
     } = this.props;
     const childrenArray = React.Children.toArray(children);
     if (effect === 'scrollx') {
-      if (active === childrenArray.length - 1) {
-        this.setState({
-          translateX: -(active + 1) * width,
-        });
-        setTimeout(() => {
-          this.setState({ time: 0, translateX: 0 });
-          setTimeout(() => {
-            this.setState({ time: 500 });
-          }, 10);
-        }, 500);
-      } else {
-        this.setState({
-          translateX: -(item) * width,
-        });
-      }
+      this.setState({
+        translateX: -(item) * width,
+      });
+      // if (active === childrenArray.length - 1) {
+      //   this.setState({
+      //     translateX: -(active + 1) * width,
+      //   });
+      //   setTimeout(() => {
+      //     this.setState({ time: 0, translateX: 0 });
+      //     setTimeout(() => {
+      //       this.setState({ time: 500 });
+      //     }, 10);
+      //   }, 500);
+      // } else {
+      //   this.setState({
+      //     translateX: -(item) * width,
+      //   });
+      // }
     }
     if (autoplay) {
       clearInterval(timer);
@@ -148,7 +151,8 @@ class Carousel extends Component<CarouselProps, CarouselState> {
     } else {
       afterChange && setTimeout(() => { afterChange(item); }, 500);
       beforeChange && beforeChange(active, item);
-      this.setState({ active: active === childrenArray.length - 1 ? childrenArray.length : item });
+      // this.setState({ active: active === childrenArray.length - 1 ? childrenArray.length : item });
+      this.setState({ active: item });
     }
   }
 

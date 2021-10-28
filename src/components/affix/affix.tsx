@@ -1,141 +1,196 @@
-import React, {
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
-import classNames from 'classnames';
-import shallowequal from 'shallowequal';
-import { ConfigContext } from '../config-provider/context';
+/* eslint-disable no-param-reassign */
+/* eslint-disable max-len */
+import React from 'react';
+import omitProps from 'omit.js';
+import { ConfigConsumer, ConfigConsumerProps } from '../config-provider/context';
 import { Omit } from '../utils/type';
 
 export interface AffixProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onChange'> {
   prefixCls?: string;
-  target?: () => HTMLElement;
+  target?: () => HTMLElement | null;
   offsetBottom?: number;
   offsetTop?: number;
   onChange?: (affixed: boolean) => void;
 }
 
-const Affix: React.FC<AffixProps> = (props: AffixProps) => {
-  const {
-    target = (() => window),
-    offsetBottom,
-    onChange,
-    className,
-    children,
-  } = props;
+export interface AffixState {
+  fixStyle: React.CSSProperties | undefined;
+  containterStyle: React.CSSProperties | undefined;
+}
 
-  let { prefixCls, offsetTop } = props;
+export type BindElement = HTMLElement | Window | null | undefined;
+export type Rect = ClientRect | DOMRect;
 
-  const { getPrefixCls } = useContext(ConfigContext);
-  prefixCls = getPrefixCls('affix', prefixCls);
+const getTargetRect = (target: BindElement): ClientRect => (target !== window
+  ? (target as HTMLElement).getBoundingClientRect()
+  : ({ top: 0, bottom: window.innerHeight } as ClientRect));
 
-  const offset = useRef({});
-  const [fixedStyle, setFixedStyle] = useState({});
-  const [placeholderStyle, setPlaceholderStyle] = useState({});
-  const fixedRef = useRef();
-  const placeholderRef = useRef();
-  const targetProp = target();
-  const targetDom = targetProp === window ? document.documentElement : targetProp;
-  let placeholderElmentDom = null;
+const getFixedTop = (
+  placeholderReact: Rect,
+  targetRect: Rect,
+  offsetTop: number | undefined,
+) => {
+  if (offsetTop !== undefined && targetRect.top > placeholderReact.top - offsetTop) {
+    return offsetTop + targetRect.top;
+  }
+  return undefined;
+};
 
-  const getOffset = () => {
-    if (offsetTop === undefined && offsetBottom === undefined) {
-      offsetTop = 0;
-    }
-    const placeholderRect = placeholderElmentDom.getBoundingClientRect();
-    const targetRect = targetDom !== document.documentElement
-      ? targetDom.getBoundingClientRect()
-      : { top: 0, bottom: document.body.clientHeight, height: document.body.clientHeight };
-    const scrolldown = placeholderRect.bottom - targetRect.bottom
-    + targetDom.scrollTop + offsetBottom;
-    return {
-      scrollTop: offsetTop !== undefined
-        ? (placeholderRect.top - targetRect.top + targetDom.scrollTop - offsetTop) : null,
-      scrollBottom: offsetBottom !== undefined
-      && scrolldown > 0 ? scrolldown : null,
-      left: placeholderRect.left,
-      top: offsetTop !== undefined
-        ? (targetRect.top + offsetTop) : null,
-      bottom: offsetBottom !== undefined
-        ? (targetRect.bottom - offsetBottom - placeholderRect.height)
-        : null,
-      width: placeholderRect.width,
-      height: placeholderRect.height,
+const getDefaultTarget = () => (typeof window !== 'undefined' ? window : null);
+
+const getFixedBottom = (
+  placeholderReact: Rect,
+  targetRect: Rect,
+  offsetBottom: number | undefined,
+) => {
+  if (offsetBottom !== undefined && targetRect.bottom < placeholderReact.bottom + offsetBottom) {
+    const targetBottomOffset = window.innerHeight - targetRect.bottom;
+    return offsetBottom + targetBottomOffset;
+  }
+  return undefined;
+};
+
+class Affix extends React.Component<AffixProps, AffixState> {
+  node: HTMLSpanElement | undefined;
+
+  containterNode: HTMLSpanElement | undefined;
+
+  constructor(props: AffixProps) {
+    super(props);
+    this.state = {
+      fixStyle: undefined,
+      containterStyle: undefined,
     };
+  }
+
+  componentDidMount() {
+    const { target = (() => window) } = this.props;
+    if (target) {
+      const targetProp = target();
+      console.log('=>targetProp>', targetProp);
+      targetProp && targetProp.addEventListener('scroll', this.getScroll);
+      window.addEventListener('scroll', this.getScroll);
+    }
+  }
+
+  componentDidUpdate(preProps: AffixProps) {
+    const { target } = this.props;
+    if (preProps.target !== target) {
+      const targetProp = target ? target() : null;
+      targetProp && targetProp.addEventListener('scroll', this.getScroll);
+    }
+  }
+
+  componentWillUnmount() {
+    const { target = (() => window) } = this.props;
+    if (target) {
+      const targetProp = target();
+      targetProp && targetProp.removeEventListener('scroll', this.getScroll);
+      window.removeEventListener('scroll', this.getScroll);
+    }
+  }
+
+  getNode = (node: HTMLDivElement) => {
+    this.node = node;
   };
 
-  const setAffixStyle = (affixStyle) => {
-    if (!shallowequal(fixedStyle, affixStyle)) {
-      setFixedStyle(affixStyle);
-      if (shallowequal({}, affixStyle)) {
-        onChange?.(false);
-      } else if (shallowequal({}, fixedStyle)) {
-        onChange?.(true);
+  getContainterNode = (node: HTMLDivElement) => {
+    this.containterNode = node;
+  }
+
+   getTargetFunc = () => {
+     const { target } = this.props;
+     if (target !== undefined) {
+       return target;
+     }
+
+     return getDefaultTarget;
+   }
+
+  getScroll = () => {
+    const {
+      offsetTop, offsetBottom, onChange,
+    } = this.props;
+    const targetNode = this.getTargetFunc();
+    if (targetNode && this.containterNode) {
+      const targetRect = getTargetRect(targetNode());
+      const placeholderReact = getTargetRect(this.containterNode);
+      const fixedTop = getFixedTop(placeholderReact, targetRect, offsetTop);
+      const fixedBottom = getFixedBottom(placeholderReact, targetRect, offsetBottom);
+      console.log('====containercontainer');
+      if (fixedTop !== undefined) {
+        this.setState({
+          fixStyle: {
+            position: 'fixed',
+            top: fixedTop,
+            width: placeholderReact.width,
+            height: placeholderReact.height,
+            zIndex: 10,
+          },
+        });
+        this.setState({
+          containterStyle: {
+            width: placeholderReact.width,
+            height: placeholderReact.height,
+          },
+        });
+      } else if (fixedBottom !== undefined) {
+        this.setState({
+          fixStyle: {
+            position: 'fixed',
+            zIndex: 10,
+            bottom: fixedBottom,
+            width: placeholderReact.width,
+            height: placeholderReact.height,
+          },
+        });
+        this.setState({
+          containterStyle: {
+            width: placeholderReact.width,
+            height: placeholderReact.height,
+          },
+        });
+      } else {
+        this.setState({ fixStyle: undefined, containterStyle: undefined });
+      }
+      if (fixedTop !== undefined || fixedBottom !== undefined) {
+        onChange && onChange(true);
+      } else {
+        onChange && onChange(false);
       }
     }
   };
 
-  const scrollFix = () => {
-    let affixStyle = {};
-    if (offset.current.scrollTop !== null && targetDom.scrollTop > offset.current.scrollTop) {
-      affixStyle = {
-        position: 'fixed',
-        top: offset.current.top,
-        left: offset.current.left,
-      };
-    } else if (offset.current.scrollBottom !== null
-      && targetDom.scrollTop < offset.current.scrollBottom) {
-      affixStyle = {
-        position: 'fixed',
-        top: offset.current.bottom,
-        left: offset.current.left,
-      };
-    }
-    setAffixStyle(affixStyle);
-  };
-
-  useEffect(() => {
-    placeholderElmentDom = placeholderRef.current;
-    offset.current = getOffset();
-    setPlaceholderStyle({
-      width: offset.current.width,
-      height: offset.current.height,
-    });
-    scrollFix();
-  }, [targetDom]);
-
-  const rerender = () => { offset.current = getOffset(); scrollFix(); };
-
-  useEffect(() => {
-    placeholderElmentDom = placeholderRef.current;
-    window.addEventListener('scroll', rerender);
-    targetProp.addEventListener('resize', rerender);
-    targetProp.addEventListener('scroll', scrollFix);
-    return () => {
-      window.removeEventListener('scroll', rerender);
-      targetProp.removeEventListener('resize', rerender);
-      targetProp.removeEventListener('scroll', scrollFix);
-    };
-  });
-
-  const affixClassName = classNames(prefixCls, className);
-
-  const placeholderClassName = prefixCls;
-
-  return (
-    <div ref={placeholderRef} className={placeholderClassName} style={placeholderStyle}>
-      <div
-        ref={fixedRef}
-        className={affixClassName}
-        style={fixedStyle}
-        onClick={() => setFixedStyle({})}
-      >
-        {children}
+  renderAffix = ({ getPrefixCls }: ConfigConsumerProps) => {
+    const {
+      prefixCls,
+      children,
+      ...rest
+    } = this.props;
+    const restProps = omitProps(rest, ['offsetTop', 'offsetBottom', 'target']) as AffixProps;
+    const { fixStyle, containterStyle } = this.state;
+    const prefix = getPrefixCls('affix', prefixCls);
+    return (
+      <div {...restProps} ref={this.getContainterNode}>
+        {fixStyle && <div style={containterStyle} aria-hidden="true" />}
+        <div
+          className={prefix}
+          style={fixStyle}
+          ref={this.getNode}
+        >
+          {children}
+        </div>
       </div>
-    </div>
-  );
-};
+    );
+  }
+
+  render() {
+    return (
+      <ConfigConsumer>
+        {this.renderAffix}
+      </ConfigConsumer>
+    );
+  }
+}
 
 export default Affix;
