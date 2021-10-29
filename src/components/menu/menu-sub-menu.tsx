@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import React, { createRef, ReactElement, ReactNode } from 'react';
 
@@ -32,12 +33,15 @@ export class SubMenu extends MenuBase<SubMenuProps> {
 
   protected getView = () => {
     const {
-      title, icon, _level, _keyPath, _inItemGroup,
+      title, icon, _level, _keyPath, _inItemGroup, _key,
     } = this.props;
     const {
       inlineCollapsed, theme, mode, selectedKeyPaths, handleLevelLeft, menuPopups = [],
+      hoverKeyPaths = [], triggerSubMenuAction,
     } = this.menuCtx;
-    const selected = Object.values(selectedKeyPaths!).some((item) => item.join('-').startsWith(_keyPath!.join('-')));
+    // const selected = Object.values(selectedKeyPaths!).some((item) => item.join('-').startsWith(_keyPath!.join('-')));
+    const selected = Object.values(selectedKeyPaths!).some((item) => item.includes(_key));
+    const slide = triggerSubMenuAction === 'hover' && menuPopups.length === 0 ? false : hoverKeyPaths.includes(_key);
     const inlineCollapsedIcon = this.inlineCollapsedIcon();
 
     return (
@@ -50,12 +54,14 @@ export class SubMenu extends MenuBase<SubMenuProps> {
           }}
           onClick={this.subMenuTitleOnClick}
           onMouseEnter={this.subMenuTitleOnMouseEnter}
+          onMouseLeave={this.subMenuTitleOnMouseLeave}
           className={this.classNames(
             this.gpc('sub-menu'),
             this.gpc(`${theme}`),
             {
-              [this.gpc('sub-menu-selected')]: selected && !inlineCollapsed,
-              [this.gpc('item-selected')]: selected && inlineCollapsed,
+              [this.gpc('sub-menu-selected')]: (slide || selected) && !inlineCollapsed,
+              [this.gpc('item-selected')]: (slide || selected) && inlineCollapsed,
+              [this.gpc('item-selected-no-last')]: (selected || slide) && inlineCollapsed && _level !== 0,
             },
           )}
         >
@@ -184,7 +190,9 @@ export class SubMenu extends MenuBase<SubMenuProps> {
   };
 
   private subMenuTitleOnClick = () => {
-    const { _level, onTitleClick, _key } = this.props;
+    const {
+      _level, onTitleClick, _key, _keyPath,
+    } = this.props;
     const {
       handleSubMenuOnClick, mode, triggerSubMenuAction, openMenuPopup, inlineCollapsed,
     } = this.menuCtx;
@@ -196,19 +204,30 @@ export class SubMenu extends MenuBase<SubMenuProps> {
     if (triggerSubMenuAction === 'click') {
       if (!this.subMenuRef.current) return;
       if (mode === 'horizontal' || mode === 'vertical' || inlineCollapsed) {
-        openMenuPopup!(_level!, _key!, this.subMenuRef.current, this.handleChildren());
+        openMenuPopup!(_level!, _key!, _keyPath, this.subMenuRef.current, this.handleChildren());
       }
     }
   };
 
   private subMenuTitleOnMouseEnter = () => {
-    const { _level, _key } = this.props;
+    const { _level, _key, _keyPath } = this.props;
+
     const {
-      mode, triggerSubMenuAction, inlineCollapsed, openMenuPopup,
+      mode, triggerSubMenuAction, inlineCollapsed, openMenuPopup, updateHoverKeyPaths,
     } = this.menuCtx;
+    updateHoverKeyPaths?.(_keyPath);
     if (triggerSubMenuAction === 'click') return;
     if (mode === 'inline' && !inlineCollapsed) return;
     if (!this.subMenuRef.current) return;
-    openMenuPopup!(_level!, _key!, this.subMenuRef.current, this.handleChildren());
+    openMenuPopup!(_level!, _key!, _keyPath, this.subMenuRef.current, this.handleChildren());
+  };
+
+  private subMenuTitleOnMouseLeave = () => {
+    const {
+      mode, triggerSubMenuAction, inlineCollapsed, updateHoverKeyPaths,
+    } = this.menuCtx;
+    if ((triggerSubMenuAction === 'click') || (mode === 'inline' && !inlineCollapsed)) {
+      updateHoverKeyPaths?.([]);
+    }
   };
 }

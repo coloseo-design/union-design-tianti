@@ -76,8 +76,10 @@ export type MenuState = BaseStateV2<{
   handleLevelLeft: (level: number) => number;
   handleSubMenuOnClick: (key: string) => void;
   handleItemOnClick: (key: string, keyPath: string[], ext: unknown) => void;
-  openMenuPopup: (level: number, key: string, dom?: HTMLDivElement, children?: ReactNode) => void;
+  openMenuPopup: (level: number, key: string, keyPath?: string[], dom?: HTMLDivElement, children?: ReactNode) => void;
   closeMenuPopup: () => void;
+  updateHoverKeyPaths: (hoverKeyPaths?: string[]) => void;
+  hoverKeyPaths: string[];
 }>;
 
 export default class Menu extends MenuBase<MenuProps, MenuState> {
@@ -200,6 +202,7 @@ export default class Menu extends MenuBase<MenuProps, MenuState> {
     } = this.props;
 
     this.state = {
+      hoverKeyPaths: [],
       inlineCollapsed: inlineCollapsed ?? false,
       selectedKeys: defaultSelectedKeys ?? [],
       selectedKeyPaths: {},
@@ -210,7 +213,12 @@ export default class Menu extends MenuBase<MenuProps, MenuState> {
       handleItemOnClick: this.handleItemOnClick,
       openMenuPopup: this.openMenuPopup,
       closeMenuPopup: this.closeMenuPopup,
+      updateHoverKeyPaths: this.updateHoverKeyPaths,
     };
+  };
+
+  private updateHoverKeyPaths = (hoverKeyPaths: string[] = []) => {
+    this.setState({ hoverKeyPaths });
   };
 
   protected getContextValue = () => ({ ...this.props, ...this.state });
@@ -266,7 +274,7 @@ export default class Menu extends MenuBase<MenuProps, MenuState> {
 
   private inlineCollapsedIconOnClick = () => {
     const { inlineCollapsed } = this.state;
-    this.setState({ inlineCollapsed: !inlineCollapsed });
+    this.setState({ inlineCollapsed: !inlineCollapsed, hoverKeyPaths: [] });
     this.props.onCollapsed?.(!inlineCollapsed!);
   }
 
@@ -299,12 +307,15 @@ export default class Menu extends MenuBase<MenuProps, MenuState> {
   private openMenuPopup = (
     level: number,
     key: string,
+    keyPath?: string[],
     dom?: HTMLDivElement,
     children?: ReactNode,
   ) => {
     const { menuPopups } = this.state;
     const { popupClassName } = this.props;
     const newKey = `${level}-${key}`;
+
+    this.setState({ hoverKeyPaths: keyPath });
 
     if (!dom) {
       const newMenuPopups = [...menuPopups!].slice(0, level);
@@ -339,7 +350,7 @@ export default class Menu extends MenuBase<MenuProps, MenuState> {
   };
 
   private closeMenuPopup = () => {
-    this.setState({ menuPopups: [] });
+    this.setState({ menuPopups: [], hoverKeyPaths: [] });
   };
 
   private handleLevelLeft = (level: number) => {

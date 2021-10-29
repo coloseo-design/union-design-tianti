@@ -35,7 +35,7 @@ const Group: React.FC<RadioGroupProps> = (props: RadioGroupProps) => {
     } else {
       setCounter(true);
     }
-  }, [valueFromProps]);
+  }, [counter, valueFromProps]);
 
   const { getPrefixCls } = useContext(ConfigContext);
   const prefix = getPrefixCls('radio-group', prefixCls);
@@ -47,21 +47,19 @@ const Group: React.FC<RadioGroupProps> = (props: RadioGroupProps) => {
       (onChange as React.ChangeEventHandler<HTMLInputElement>)(e);
     }
   };
+  const newChildren = React.Children.toArray(children).map(((item) => React.cloneElement(item, {
+    key: item.props.value,
+    disabled: disabled || item.props.disabled,
+    value: item.props.value,
+    checked: value === item.props.value,
+    name,
+    onChange: onchange,
+  })));
+
   if (children) {
     return (
       <div {...rest} className={mainClass}>
-        {(React.Children.toArray(children) || []).map((item) => (
-          <Radio
-            key={item.props.value}
-            disabled={disabled || item.props.disabled}
-            value={item.props.value}
-            checked={value === item.props.value}
-            name={name}
-            onChange={onchange}
-          >
-            {item.props.children}
-          </Radio>
-        ))}
+        {newChildren}
       </div>
     );
   }

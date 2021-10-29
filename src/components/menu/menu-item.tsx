@@ -41,6 +41,7 @@ export class Item extends MenuBase<ItemProps> {
         }}
         onClick={this.handleItemOnClick}
         onMouseEnter={this.itemOnMouseEnter}
+        onMouseLeave={this.itemOnMouseLeave}
         className={this.classNames(
           className,
           this.gpc('item'),
@@ -107,12 +108,22 @@ export class Item extends MenuBase<ItemProps> {
   };
 
   private itemOnMouseEnter = () => {
-    const { _level, _key } = this.props;
+    const { _level, _key, _keyPath } = this.props;
     const {
-      mode, triggerSubMenuAction, inlineCollapsed, openMenuPopup,
+      mode, triggerSubMenuAction, inlineCollapsed, openMenuPopup, updateHoverKeyPaths,
     } = this.menuCtx;
+    updateHoverKeyPaths?.(_keyPath);
     if (triggerSubMenuAction === 'click') return;
     if (mode === 'inline' && !inlineCollapsed) return;
-    openMenuPopup!(_level!, _key!);
+    openMenuPopup!(_level!, _key!, _keyPath);
+  };
+
+  private itemOnMouseLeave = () => {
+    const {
+      mode, triggerSubMenuAction, inlineCollapsed, updateHoverKeyPaths,
+    } = this.menuCtx;
+    if ((triggerSubMenuAction === 'click') || (mode === 'inline' && !inlineCollapsed)) {
+      updateHoverKeyPaths?.([]);
+    }
   };
 }

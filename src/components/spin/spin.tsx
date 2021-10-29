@@ -7,23 +7,23 @@ export interface SpinProps extends React.HTMLAttributes<HTMLDivElement> {
   /* 用户自定义类前缀，默认uni-input */
   prefixCls?: string;
   /* 是否为加载中状态 */
-  spinning?: boolean;
+  spin?: boolean;
 }
 
 export interface SpinState {
   /* 是否为加载中状态 */
-  spinning?: boolean;
+  spin?: boolean;
 }
 
 class Spin extends Component<SpinProps, SpinState> {
   static defaultProps: SpinProps = {
-    spinning: true,
+    spin: true,
   };
 
   static getDerivedStateFromProps(props: SpinProps, state: SpinState) {
-    if (props.spinning !== state.spinning) {
+    if (props.spin !== state.spin) {
       return {
-        spinning: props.spinning,
+        spin: props.spin,
       };
     }
     return null;
@@ -32,20 +32,21 @@ class Spin extends Component<SpinProps, SpinState> {
   constructor(props: SpinProps) {
     super(props);
     this.state = {
-      spinning: props.spinning,
+      spin: props.spin,
     };
   }
 
   renderSpin = ({ getPrefixCls }: ConfigConsumerProps) => {
     const {
-      prefixCls, style, className, ...rest
+      prefixCls, className, ...rest
     } = this.props;
-    const { spinning } = this.state;
+    const { spin } = this.state;
     const prefix = getPrefixCls('spain', prefixCls);
     const mainClass = classNames(prefix, className);
+
     return (
-      <div {...rest} className={mainClass} style={{ ...style, display: spinning ? 'inline-block' : 'none' }}>
-        <Icon type="loading" />
+      <div {...rest} className={mainClass}>
+        <Icon type="loading" spin={spin} />
       </div>
     );
   };

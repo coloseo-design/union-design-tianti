@@ -20,9 +20,9 @@ export default () => {
       <Radio.Group options={['a', 'b', 'c']} defaultValue="a" value={value} name="radio2" onChange={(e) => { setValue(e.target.value); }} />
       <Radio.Group defaultValue="B" name="radio2" onChange={(e) => console.log('sss', e.target.value)}>
         <Radio value="A" style={{ display: 'block' }}>A</Radio>
-        <Radio value="B" style={{ display: 'block' }}>B</Radio>
-        <Radio value="C" style={{ display: 'block' }}>C</Radio>
-        <Radio value="D" style={{ display: 'block' }}>D</Radio>
+        <Radio value="B" style={{ display: 'block', marginLeft: 0 }}>B</Radio>
+        <Radio value="C" style={{ display: 'block', marginLeft: 0 }}>C</Radio>
+        <Radio value="D" style={{ display: 'block', marginLeft: 0 }}>D</Radio>
       </Radio.Group>
     </div>
   );

@@ -5,6 +5,7 @@ import './styles/index';
 const SpinDemo = () => (
   <div>
     <Spin
+      spin={false}
       className="my-spin"
       style={{
         padding: 20,
