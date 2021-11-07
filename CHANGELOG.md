@@ -1,3 +1,41 @@
+## [1.0.31](http://10.124.128.2:8888/muses/union-design/compare/v1.0.12...v1.0.31) (2021-11-07)
+
+
+### Bug Fixes
+
+* 🐛 layout sider 判断修改 ([c3139dd](http://10.124.128.2:8888/muses/union-design/commits/c3139dd3b397517c127431c24c8e3b109843e847))
+* 🐛 menu select 问题 ([9ce00e0](http://10.124.128.2:8888/muses/union-design/commits/9ce00e0f2ae42dd08cac01b05c0150d5764a1327))
+* 🐛 修复checkbox排列自动换行的bug ([e3a5cf7](http://10.124.128.2:8888/muses/union-design/commits/e3a5cf78aa0b0953ee18e3bd94c3dd7dfb437806))
+* 🐛 修复column的align属性在table的header上无效的bug ([1badb2c](http://10.124.128.2:8888/muses/union-design/commits/1badb2cf27457a7f2b4587e67682e6e64dbcc53a))
+* 🐛 修复form-item中可能因为name中存在_而导致的bug ([ac156a9](http://10.124.128.2:8888/muses/union-design/commits/ac156a981f503d044ba73fbe4ff3b3c3b99839be))
+* 🐛 修复labelalign的拼写错误 ([bf1f744](http://10.124.128.2:8888/muses/union-design/commits/bf1f744ca7675a03d2e9f92070e51373767ae6c0))
+* 🐛 修复table默认对齐方式 ([1dc804b](http://10.124.128.2:8888/muses/union-design/commits/1dc804be64d77c0682cb91c12add7dd858b4ee2e))
+* 🐛 修改调试模式背景色为白色 ([bdd609b](http://10.124.128.2:8888/muses/union-design/commits/bdd609b6adaf5c6c7ed93fbd78eff38ac9d446ec))
+* 🐛 升级union-tool的版本 ([e978d3c](http://10.124.128.2:8888/muses/union-design/commits/e978d3ce326b20c13dee5561afd38b264f7b722e))
+* 🐛 弹窗定位跟随问题修复 ([1d9acf2](http://10.124.128.2:8888/muses/union-design/commits/1d9acf280c0121552bc61c61d3cd62025b7fef49))
+* 🐛 调整checkbox间距 ([428b358](http://10.124.128.2:8888/muses/union-design/commits/428b3583c5886047144c123b0e16e81f6f09d42d))
+* 🐛 调整tabs的颜色 ([cfac3b2](http://10.124.128.2:8888/muses/union-design/commits/cfac3b253631a4f0af518d63a57d43594f1a8b4b))
+
+
+### Features
+
+* 🎸 affix 定位修改 ([293f9b4](http://10.124.128.2:8888/muses/union-design/commits/293f9b402449da32ebc340f8e8f852c1d8c982f2))
+* 🎸 alert icon 位置修改 ([1055ee2](http://10.124.128.2:8888/muses/union-design/commits/1055ee265b0c5308358af068451742d5597cf340))
+* 🎸 formitem增加labelStyle属性去修改label样式 ([a542d6d](http://10.124.128.2:8888/muses/union-design/commits/a542d6d0e9742042bb35073798ed8a747bf92f04))
+* 🎸 layout sider 收起默认宽度改为62 ([746617b](http://10.124.128.2:8888/muses/union-design/commits/746617b45837d13e1bfd681f8154ae5930beba89))
+* 🎸 menu ,select icon颜色大小修改 ([48087ea](http://10.124.128.2:8888/muses/union-design/commits/48087eafc06e631307cfcb3bd8e14aea68aea089))
+* 🎸 pagination 增加style属性 ([b5f9187](http://10.124.128.2:8888/muses/union-design/commits/b5f9187f691454251ee9b231cd6f919e9e4eb7ef))
+* 🎸 steps icon 居中对齐 ([7881124](http://10.124.128.2:8888/muses/union-design/commits/78811245dd56e23204e98572da1a0f050ddf71c5))
+* 🎸 steps 宽度不平均分配，最后一步的宽度由自己决定 ([ea1d376](http://10.124.128.2:8888/muses/union-design/commits/ea1d37673372c2c5de32a6a27218fef8d4fd7fb7))
+* 🎸 transfer 搜索框位置修改 ([9e29513](http://10.124.128.2:8888/muses/union-design/commits/9e29513d3a3b606381e80899aecfbb9107f1b14d))
+* 🎸 treeselect高度不应该写死 ([0a10e26](http://10.124.128.2:8888/muses/union-design/commits/0a10e26fb3213ce310615ee4c9d1e929fd29f0ac))
+* 🎸 修改文字颜色 ([2d95bb2](http://10.124.128.2:8888/muses/union-design/commits/2d95bb2eca32d101c203a7d040952493dc915ded))
+* 🎸 分页下拉框展示bug， steps随屏幕改变而改变 ([d92b2e2](http://10.124.128.2:8888/muses/union-design/commits/d92b2e2e2640b465c331f84e3f1f139a64e19b6f))
+* 🎸 组件颜色替换 ([f5d0f26](http://10.124.128.2:8888/muses/union-design/commits/f5d0f26cabbd2db6713da1bc2886b9f0f5aa05e3))
+* 🎸 调整form和button的ref引用 ([7e23303](http://10.124.128.2:8888/muses/union-design/commits/7e2330343188c27860d8af0e7834d15d294e3bbe))
+
+
+
 ## [1.0.30](http://10.124.128.2:8888/muses/union-design/compare/v1.0.29...v1.0.30) (2021-09-15)
 
 

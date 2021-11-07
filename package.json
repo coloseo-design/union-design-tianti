@@ -1,8 +1,8 @@
 {
 	"name": "union-design",
-	"version": "1.0.30",
+	"version": "1.0.31",
 	"license": "MIT",
-  "description": "设计系统本地开发",
+	"description": "设计系统本地开发",
 	"files": [
 		"lib",
 		"es"
