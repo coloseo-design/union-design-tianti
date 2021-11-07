@@ -1,5 +1,3 @@
-## [1.0.32](http://10.124.128.2:8888/muses/union-design/compare/v1.0.30...v1.0.32) (2021-11-07)
-
 
 ### Bug Fixes
 
