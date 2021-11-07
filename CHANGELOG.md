@@ -1,3 +1,20 @@
+## [1.0.32](http://10.124.128.2:8888/muses/union-design/compare/v1.0.30...v1.0.32) (2021-11-07)
+
+
+### Bug Fixes
+
+* 🐛 弹窗定位跟随问题修复 ([1d9acf2](http://10.124.128.2:8888/muses/union-design/commits/1d9acf280c0121552bc61c61d3cd62025b7fef49))
+* 🐛 修复form-item中可能因为name中存在_而导致的bug ([ac156a9](http://10.124.128.2:8888/muses/union-design/commits/ac156a981f503d044ba73fbe4ff3b3c3b99839be))
+
+
+### Features
+
+* 🎸 调整form和button的ref引用 ([7e23303](http://10.124.128.2:8888/muses/union-design/commits/7e2330343188c27860d8af0e7834d15d294e3bbe))
+* 🎸 affix 定位修改 ([293f9b4](http://10.124.128.2:8888/muses/union-design/commits/293f9b402449da32ebc340f8e8f852c1d8c982f2))
+* 🎸 transfer 搜索框位置修改 ([9e29513](http://10.124.128.2:8888/muses/union-design/commits/9e29513d3a3b606381e80899aecfbb9107f1b14d))
+
+
+
 ## [1.0.31](http://10.124.128.2:8888/muses/union-design/compare/v1.0.12...v1.0.31) (2021-11-07)
 
 
