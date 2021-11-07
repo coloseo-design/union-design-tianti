@@ -45,7 +45,7 @@ title: Form
 
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | ---    |
-| name | 字段名称 | string | null |
+| name | 字段名称 可以通过.来标记层级 如address.province, address.city等 | string | null |
 | label | 字段标签 | React.ReactNode \| string | null |
 | valuePropName | 子节点的值的属性，如 Switch 的是 'checked'。该属性为 getValueProps 的封装，自定义 getValueProps 后会失效 | string | value |
 | trigger | 设置收集字段值变更的时机。 | string | onChange |

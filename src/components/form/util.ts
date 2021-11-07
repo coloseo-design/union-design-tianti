@@ -116,19 +116,17 @@ export const validateRules = (name: string, value: unknown, rules: ValidatorRule
  * @param name keypath 数组
  * @param values 值
  */
-export const getValueFromKeypaths = (name: string | string[], values: {[key: string]: any}) => {
+export const getValueFromKeypaths = (name: string, values: {[key: string]: any}) => {
   try {
-    if (Array.isArray(name)) {
-      const [key, ...rest] = [...name].reverse();
-      // eslint-disable-next-line no-shadow
-      const current = rest.reduceRight((composed, key) => {
-        // eslint-disable-next-line no-param-reassign
-        composed = composed[key];
-        return composed;
-      }, values);
-      return current[key];
-    }
-    return values[name];
+    const names = name.split('.');
+    const [key, ...rest] = [...names].reverse();
+    // eslint-disable-next-line no-shadow
+    const current = rest.reduceRight((composed, key) => {
+      // eslint-disable-next-line no-param-reassign
+      composed = composed[key];
+      return composed;
+    }, values);
+    return current[key];
   // eslint-disable-next-line no-empty
   } catch (e) {}
   return '';
@@ -140,13 +138,10 @@ export const getValueFromKeypaths = (name: string | string[], values: {[key: str
  * @param fieldName 字段的名称
  * @returns
  */
-export const composeFieldName = (formName = '', fieldName: string | string[] = '') => {
-  const filedNameStringify = Array.isArray(fieldName) ? fieldName.join('_') : fieldName;
-  return `${formName}_${filedNameStringify}`;
-};
+export const composeFieldName = (formName = '', fieldName = '') => `${formName}.${fieldName}`;
 
 export const decomposeFiledName = (fieldName: string) => {
-  const arr = fieldName.split('_');
+  const arr = fieldName.split('.');
   return arr.slice(1);
 };
 

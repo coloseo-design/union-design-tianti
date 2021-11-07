@@ -96,14 +96,14 @@ const FormDemo = () => {
             <Input type="password" placeholder="请输入" style={{ width: '100%' }} />
           </FormItem>
           <FormItem
-            name={['address', 'province']}
+            name="address.province"
             label="省份"
             required
           >
             <Input placeholder="请输入省份" style={{ width: '100%' }} />
           </FormItem>
           <FormItem
-            name={['address', 'city']}
+            name="address.city"
             label={<span>地址</span>}
             colon={false}
             required
