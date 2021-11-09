@@ -1,3 +1,23 @@
+## [1.0.33](http://10.124.128.2:8888/muses/union-design/compare/v1.0.30...v1.0.33) (2021-11-09)
+
+
+### Bug Fixes
+
+* 🐛 弹窗定位跟随问题修复 ([1d9acf2](http://10.124.128.2:8888/muses/union-design/commits/1d9acf280c0121552bc61c61d3cd62025b7fef49))
+* 🐛 修复form-item中可能因为name中存在_而导致的bug ([ac156a9](http://10.124.128.2:8888/muses/union-design/commits/ac156a981f503d044ba73fbe4ff3b3c3b99839be))
+* 🐛 修复formitem上initialvalue无法被收集的错误 ([4063726](http://10.124.128.2:8888/muses/union-design/commits/4063726e152e74f6d579110403a4e87e64f396c2))
+* 🐛 修复table在渲染的时候，cell的值为null引起的in操作符错误的bug ([4b80139](http://10.124.128.2:8888/muses/union-design/commits/4b801397ef83b886c1f530649dd9f2dc942b0431))
+
+
+### Features
+
+* 🎸 调整form和button的ref引用 ([7e23303](http://10.124.128.2:8888/muses/union-design/commits/7e2330343188c27860d8af0e7834d15d294e3bbe))
+* 🎸 affix 定位修改 ([293f9b4](http://10.124.128.2:8888/muses/union-design/commits/293f9b402449da32ebc340f8e8f852c1d8c982f2))
+* 🎸 casecader,datePicker弹窗使用createPortal ([105021b](http://10.124.128.2:8888/muses/union-design/commits/105021b68ef25303c24e841c50113a9c3b038a9b))
+* 🎸 transfer 搜索框位置修改 ([9e29513](http://10.124.128.2:8888/muses/union-design/commits/9e29513d3a3b606381e80899aecfbb9107f1b14d))
+
+
+
 
 ### Bug Fixes
 
