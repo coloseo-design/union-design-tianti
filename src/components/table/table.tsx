@@ -158,7 +158,7 @@ export default class Table extends React.Component<TableProps, TableState> {
           }
           const objectRendered = rendered as RenderReturnObjectType;
           let ext = {};
-          if (typeof objectRendered === 'object' && 'children' in objectRendered) {
+          if (objectRendered && typeof objectRendered === 'object' && 'children' in objectRendered) {
             const { children, props } = objectRendered;
             rendered = children;
             props && (ext = props);
