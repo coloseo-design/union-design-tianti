@@ -47,8 +47,8 @@ const FormDemo = () => {
           {...layout}
           name="test"
           initialValues={{
-            username: 'zhansgan',
-            password: 'lisi',
+            // username: 'zhansgan',
+            // password: 'lisi',
           }}
           ref={formRef}
           onFinish={onSubmit}
@@ -62,6 +62,7 @@ const FormDemo = () => {
             validateFirst
             label="用户名"
             labelAlign="right"
+            initialValue="zhangsan"
             labelStyle={{ marginBottom: 10 }}
             rules={[
               { required: true, message: '请输入用户名' },
@@ -82,6 +83,7 @@ const FormDemo = () => {
             label="密码"
             required
             validateFirst
+            initialValue="lisi"
             rules={[
               {
                 validator: (_, value) => {

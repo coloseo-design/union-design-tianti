@@ -41,7 +41,7 @@ const Form: ForwardRefRenderFunction<FormInstance, FormProps> = (
       id: name,
     });
   }
-  const [values, setValues] = useState<FormValues>(initialValues || {});
+  const [values, setValues] = useState<FormValues>({ ...initialValues });
   const [errors, setErrors] = useState<FormErrors>({});
   const [isValidating, setIsValidating] = useState<boolean>(false);
 
@@ -89,7 +89,7 @@ const Form: ForwardRefRenderFunction<FormInstance, FormProps> = (
   };
 
   const reset = () => {
-    setValues({});
+    setValues({ ...initialValues });
     setIsValidating(false);
   };
 
@@ -98,7 +98,6 @@ const Form: ForwardRefRenderFunction<FormInstance, FormProps> = (
     setFieldsValue,
     submit: onSubmit,
   }));
-
   const providerValue = {
     wrapperCol,
     labelCol,

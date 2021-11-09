@@ -120,10 +120,10 @@ const Item: React.FC<FormItemProps> = (props: FormItemProps) => {
   // 当重置之后，再次校验
   useEffect(() => {
     if (name) {
-      validate(value).catch((newErrors) => {
+      validate(value || initialValue).catch((newErrors) => {
         onError(composedName, { event: trigger, errors: newErrors });
       });
-      onCollect(composedName, { event: trigger, value });
+      onCollect(composedName, { event: trigger, value: value || initialValue });
     }
   }, [isValidating]);
 

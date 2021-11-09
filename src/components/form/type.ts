@@ -67,8 +67,6 @@ export interface FormProps extends FormCommmonProps, BaseProps, React.HTMLAttrib
   validateTrigger?: 'onChange',
   /** 默认值 */
   initialValues?: FormValues;
-
-  forwardRef: React.LegacyRef<FormInstance | null>;
 }
 
 export type ValueCollection = {
