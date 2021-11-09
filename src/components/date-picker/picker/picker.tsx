@@ -5,6 +5,8 @@ import dayjs, { Dayjs } from 'dayjs';
 import React, { ReactNode, createRef, RefObject } from 'react';
 import { BaseComponent } from '../../common/base-component';
 import { uuid } from '../../utils/uuid';
+import { getOffset } from '../../utils/getOffset';
+import Portal from '../../common/portal';
 import { InputIcon } from '../components/input';
 import {
   PickerMode, PickerModeType, PickerPosition, PickerProps, PickerState, PickerType,
@@ -42,15 +44,17 @@ export abstract class Picker<
       popupVisible: false,
       modeType: this.getModeType(mode!, type!),
       date: defaultValue ?? value,
+      left: 0,
+      top: 0,
     } as S;
   }
 
   public componentDidMount = () => {
-    document.body.addEventListener('click', this.clickBody);
+    document.addEventListener('click', this.clickBody);
   };
 
   public componentWillUnmount = () => {
-    document.body.removeEventListener('click', this.clickBody);
+    document.removeEventListener('click', this.clickBody);
   };
 
   public componentDidUpdate = (preProps: PickerProps<T>) => {
@@ -61,9 +65,9 @@ export abstract class Picker<
 
   protected view = () => {
     const {
-      style, width, size, className = '',
+      style, width, size, className = '', getPopupContainer,
     } = this.props;
-    const { popupVisible } = this.state;
+    const { popupVisible, left, top } = this.state;
 
     return (
       <div
@@ -74,12 +78,24 @@ export abstract class Picker<
       >
         {this.inputView()}
         {popupVisible && (
-          <div
-            style={{ top: (this.container?.current?.offsetHeight ?? 0) + 3 }}
-            className={this.gpc('picker-popup')}
-          >
-            {popupVisible && this.popupView()}
-          </div>
+          <Portal {...({ getPopupContainer })}>
+            <div
+              style={{
+                display: 'block', position: 'absolute', top, left, zIndex: 9999,
+              }}
+              className={`${this.getClass('picker', { [size!]: true })} ${className}`}
+            >
+              <div
+                className={this.gpc('picker-popup')}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  e.nativeEvent.stopImmediatePropagation();
+                }}
+              >
+                {popupVisible && this.popupView()}
+              </div>
+            </div>
+          </Portal>
         )}
       </div>
     );
@@ -113,6 +129,16 @@ export abstract class Picker<
   }));
 
   protected openPopup = (obj?: ((state: S, props: P) => Partial<S>) | Partial<S>) => {
+    const { getPopupContainer } = this.props;
+    if (this.container?.current) {
+      const { height } = this.container?.current.getBoundingClientRect();
+      const containter = getPopupContainer && getPopupContainer();
+      const { left: offsetLeft, top: offsetTop } = getOffset(this.container?.current, containter);
+      this.setState({
+        left: offsetLeft,
+        top: offsetTop + height + 4,
+      });
+    }
     this.setState((state, props) => ({
       ...state,
       ...typeof obj === 'function' ? obj(state, props) : obj,

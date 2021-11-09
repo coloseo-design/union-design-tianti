@@ -27,3 +27,4 @@ subtitle: 日期选择框
 | onChange     | 选择变化       | (date?:Dayjs or \[Dayjs,Dayjs\],format?: string or \[string,string\])=>void | -               |
 | allowClear   | 显示清除按钮   | boolean                                                                     | true            |
 | allowClear   | 显示清除按钮   | boolean                                                                     | true            |
+|getPopupContainer|菜单渲染父节点。默认渲染到 body 上，如果你遇到菜单滚动定位问题，试试修改为滚动的区域，并相对其定位。|fucntion () => HTMLElement|document.body |

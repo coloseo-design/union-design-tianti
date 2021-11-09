@@ -9,6 +9,8 @@ import Icon from '../icon';
 import { ConfigConsumer, ConfigConsumerProps } from '../config-provider';
 import Menus from './menus';
 import Result from './result';
+import { getOffset } from '../utils/getOffset';
+import Portal from '../common/portal';
 import { CascaderOptionType } from './types/common';
 import { CascaderProps } from './types/cascader';
 import { arrayTreeFilter, uuid, getFieldName } from './utils';
@@ -22,6 +24,8 @@ export interface CascaderState {
   // prevProps: CascaderProps;
   actionValue: string[],
   currentIcon: string,
+  left: number,
+  top: number,
 }
 
 function flattenTree(
@@ -46,6 +50,8 @@ function flattenTree(
 // 用于渲染默认的label展示
 const defaultDisplayRender = (label: string[]) => label.join(' / ');
 class Cascader extends React.Component<CascaderProps, CascaderState> {
+  node: HTMLSpanElement | undefined;
+
   static defaultProps = {
     transitionname: 'slide-up',
     popupPlacement: 'bottomLeft',
@@ -65,6 +71,8 @@ class Cascader extends React.Component<CascaderProps, CascaderState> {
       popupVisible: props.popupVisible,
       flattenOptions: props.showSearch ? flattenTree(props.options, props) : undefined,
       currentIcon: 'expand',
+      left: 0,
+      top: 0,
     };
   }
 
@@ -94,14 +102,14 @@ class Cascader extends React.Component<CascaderProps, CascaderState> {
   };
 
   componentDidMount = () => {
-    document.body.addEventListener('click', this.documentBodyOnClick);
+    document.addEventListener('click', this.documentBodyOnClick);
     if (!this.props.showSearch) {
       this.input.readOnly = true;
     }
   };
 
   componentWillUnmount = () => {
-    document.body.removeEventListener('click', this.documentBodyOnClick);
+    document.removeEventListener('click', this.documentBodyOnClick);
   }
 
   private input!: HTMLInputElement;
@@ -109,6 +117,10 @@ class Cascader extends React.Component<CascaderProps, CascaderState> {
   saveInput = (node: HTMLInputElement) => {
     this.input = node;
   }
+
+  getNode = (node: HTMLDivElement) => {
+    this.node = node;
+  };
 
   getSelectOptions() {
     const { options, fieldNames } = this.props;
@@ -133,10 +145,23 @@ class Cascader extends React.Component<CascaderProps, CascaderState> {
   }
 
   handlePopupVisibleChange = (popupVisible: boolean) => {
-    const { onPopupVisibleChange } = this.props;
+    const { onPopupVisibleChange, getPopupContainer } = this.props;
     if (onPopupVisibleChange) {
       onPopupVisibleChange(popupVisible);
       return;
+    }
+    if (popupVisible) {
+      if (this.node) {
+        const {
+          height,
+        } = this.node.getBoundingClientRect();
+        const containter = getPopupContainer && getPopupContainer();
+        const { left: offsetLeft, top: offsetTop } = getOffset(this.node, containter);
+        this.setState({
+          left: offsetLeft,
+          top: offsetTop + height + 4,
+        });
+      }
     }
     this.setState({ popupVisible });
     if (!popupVisible) {
@@ -204,6 +229,8 @@ class Cascader extends React.Component<CascaderProps, CascaderState> {
   };
 
   handleMenuSelect = (targetOption: CascaderOptionType, index: number, e: React.MouseEvent<HTMLElement>) => {
+    e.stopPropagation();
+    e.nativeEvent.stopImmediatePropagation();
     if (targetOption.disabled) return;
     const childrenKeyName = getFieldName('children', this.props.fieldNames);
     const valueKeyName = getFieldName('value', this.props.fieldNames);
@@ -252,8 +279,11 @@ class Cascader extends React.Component<CascaderProps, CascaderState> {
       children,
       style,
       placeholder = '请选择',
+      getPopupContainer,
     } = props;
-    const { value, inputFocused, currentIcon } = state;
+    const {
+      value, inputFocused, currentIcon, left, top,
+    } = state;
 
     const prefixCls = getPrefixCls('cascader', customizePrefixCls);
 
@@ -281,6 +311,7 @@ class Cascader extends React.Component<CascaderProps, CascaderState> {
         onClick={this.handleInputClick}
         onMouseEnter={this.handleMouseEnter}
         onMouseLeave={this.handleMouseLeave}
+        ref={this.getNode}
       >
         <span className={`${prefixCls}-label`} />
         <input
@@ -307,28 +338,30 @@ class Cascader extends React.Component<CascaderProps, CascaderState> {
       >
         {input}
         {state.popupVisible && (
-          <div className={`${prefixCls}-menus-wrapper`}>
-            <div className={`${prefixCls}-menus`} style={menusWidthStyle}>
-              {state.inputValue ? (
-                <Result
-                  {...this.props}
-                  prefixCls={prefixCls}
-                  fieldNames={this.props.fieldNames}
-                  flattenOptions={state.flattenOptions}
-                  inputValue={state.inputValue}
-                  onSelect={this.handleMenuSelect}
-                />
-              ) : (
-                <Menus
-                  {...this.props}
-                  prefixCls={prefixCls}
-                  fieldNames={this.props.fieldNames}
-                  onSelect={this.handleMenuSelect}
-                  activeValue={state.actionValue}
-                />
-              )}
+          <Portal {...({ getPopupContainer })}>
+            <div style={{ left, top }} className={`${prefixCls}-menus-wrapper`}>
+              <div className={`${prefixCls}-menus`} style={menusWidthStyle}>
+                {state.inputValue ? (
+                  <Result
+                    {...this.props}
+                    prefixCls={prefixCls}
+                    fieldNames={this.props.fieldNames}
+                    flattenOptions={state.flattenOptions}
+                    inputValue={state.inputValue}
+                    onSelect={this.handleMenuSelect}
+                  />
+                ) : (
+                  <Menus
+                    {...this.props}
+                    prefixCls={prefixCls}
+                    fieldNames={this.props.fieldNames}
+                    onSelect={this.handleMenuSelect}
+                    activeValue={state.actionValue}
+                  />
+                )}
+              </div>
             </div>
-          </div>
+          </Portal>
         )}
       </span>
     );

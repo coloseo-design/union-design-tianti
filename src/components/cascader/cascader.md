@@ -16,6 +16,7 @@ subtitle: 级联选择
 | showSearch | 是否支持搜索 | boolean | - |
 | disabled | 是否禁用 | boolean | - |
 | onChange | 选择完成后的回调|(value: string[], Option[]) => void | - |
+| getPopupContainer       | 菜单渲染父节点。默认渲染到 body 上，如果你遇到菜单滚动定位问题，试试修改为滚动的区域，并相对其定位。   | fucntion () => HTMLElement                                                             | document.body |
 
 
 ### Option

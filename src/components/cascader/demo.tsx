@@ -55,14 +55,15 @@ const handleCascaderChange = (value: string[], selectedOptions: {[key: string] :
 };
 
 const CascaderDemo = () => (
-  <div>
-    <div style={{ margin: 16 }}>
+  <div style={{ height: 1000 }}>
+    <div id="case" style={{ margin: 16, position: 'relative' }}>
       <hr style={marginBottomStyle} />
       <div style={sectionStyle}>
         <h3>基本</h3>
         <Cascader
           options={options}
           onChange={handleCascaderChange}
+          getPopupContainer={() => document.querySelector('#case')}
         />
       </div>
       <div style={sectionStyle}>

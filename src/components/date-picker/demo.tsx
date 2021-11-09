@@ -14,7 +14,7 @@ const DatePickerDemo = () => {
     onChange: (...p: unknown[]) => console.log(p),
   };
   return (
-    <div style={{ padding: '15px 30px' }}>
+    <div id="date" style={{ padding: '15px 30px', position: 'relative' }}>
       <div style={{ margin: '15px 0' }}>
         <h1 style={{ display: 'inline-block', marginRight: 15 }}>选择器大小</h1>
         <button type="button" onClick={changeSize('small')}>small</button>
@@ -24,7 +24,7 @@ const DatePickerDemo = () => {
       <h1 style={{ textAlign: 'center' }}>type=single:时间选择器</h1>
       <div style={{ margin: '15px 0' }}>
         <h1 style={{ display: 'inline-block', marginRight: 15 }}>mode=time-full</h1>
-        <DatePicker disabled mode="time-full" {...commonProps} />
+        <DatePicker getPopupContainer={() => document.querySelector('#date')} mode="time-full" {...commonProps} />
       </div>
       <div style={{ margin: '15px 0 15px 0' }}>
         <h1 style={{ display: 'inline-block', marginRight: 15 }}>mode=time-ymd</h1>

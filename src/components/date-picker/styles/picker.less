@@ -33,12 +33,12 @@
   color: @dpcolor-text-85;
   text-align: center;
 
-  & > .@{datepicker-picker-popup} {
+  .@{datepicker-picker-popup} {
     white-space: nowrap;
-    position: absolute;
+    // position: absolute;
     border-radius: @dpborder-radius;
-    z-index: 999999;
-    left: 0;
+    // z-index: 999999;
+    // left: 0;
     background-color: @dpcolor-bg;
     box-shadow: @dpstyle-popup;
 
@@ -173,6 +173,7 @@
     }
   }
 }
+
 
 each(@dpsize-list , {
   .@{dpalias-picker}-@{value} {

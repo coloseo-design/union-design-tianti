@@ -52,5 +52,6 @@ export interface CascaderProps {
   /** 控制浮层显隐 */
   popupVisible?: boolean;
   /** 自定义 options 中 label value children的字段 */
-  fieldNames?: FieldNamesType,
+  fieldNames?: FieldNamesType;
+  getPopupContainer?: () => HTMLElement | null;
 }

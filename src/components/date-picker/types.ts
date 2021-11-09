@@ -46,6 +46,7 @@ export type PickerProps<T extends PickerType> = {
         format?: PickerTypeSplit<T, string, [string?, string?]>
     ) => void;
     disabledValue?: (date: Dayjs) => boolean;
+    getPopupContainer?: () => HTMLElement | null;
 } & BaseProps;
 
 export type PickerState<T extends PickerType> = {
@@ -53,6 +54,8 @@ export type PickerState<T extends PickerType> = {
     popupVisible: boolean;
     position?: PickerPosition;
     hoverDate?: Dayjs;
+    left: number,
+    top: number,
 } & Pick<PopupProps<T>, 'date' | 'selectedDate'>
     & Partial<Pick<PopupProps<T>, 'viewDate'>>
     & BaseState;
