@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import React from 'react';
 import {
   Dropdown, Button, Icon, Menu,
@@ -37,20 +38,26 @@ const menu = (
     </Menu.SubMenu>
   </Menu>
 );
-const test = (
-  <div style={{ width: 130, padding: 12 }}>
-    <div style={{ height: 32 }}>和哈哈哈哈</div>
-    <div style={{ height: 32 }}>和哈哈哈哈</div>
-  </div>
-);
+
 const DropdownDemo = () => {
   const [visible, setVisible] = React.useState(false);
+  const [visible1, setVisible1] = React.useState(false);
   const handleButtonClick = () => {
     setVisible(!visible);
   };
-  const onVisibleChange = (vis: boolean) => {
-    console.log('--change', vis);
+
+  const handleClick = () => {
+    setVisible(false);
   };
+  const test = (
+    <div style={{
+      width: 160, padding: 12, display: 'flex', justifyContent: 'space-between',
+    }}
+    >
+      <Button>重置</Button>
+      <Button type="primary" onClick={() => setVisible(false)}>关闭</Button>
+    </div>
+  );
 
   return (
     <div style={{ padding: 32 }}>
@@ -61,12 +68,12 @@ const DropdownDemo = () => {
             overlay={test}
             arrow
             visible={visible}
-            onVisibleChange={onVisibleChange}
+            onVisibleChange={(v) => setVisible(v)}
             trigger={['click']}
-            overlayStyle={{ width: 130 }}
+            overlayStyle={{ width: 160 }}
             getPopupContainer={() => document.querySelector('#drop-demo')}
           >
-            <Button onClick={handleButtonClick}>open bottomLeft</Button>
+            <Button>open bottomLeft</Button>
           </Dropdown>
         </div>
         <div>
@@ -92,13 +99,13 @@ const DropdownDemo = () => {
           </Dropdown>
         </div>
         <div>
-          <Dropdown placement="topCenter" overlay={menu}>
-            <Button>hover topCenter</Button>
+          <Dropdown placement="topRight" overlay={menu} trigger={['contextMenu']}>
+            <Button>右键点击 topRight</Button>
           </Dropdown>
         </div>
         <div>
-          <Dropdown placement="topRight" overlay={menu} trigger={['contextMenu']}>
-            <Button>右键点击 topRight</Button>
+          <Dropdown placement="topCenter" overlay={menu}>
+            <Button>hover topCenter</Button>
           </Dropdown>
         </div>
       </div>
@@ -108,12 +115,12 @@ const DropdownDemo = () => {
           overlay={menu}
           type="primary"
           icon={<Icon style={{ fontSize: 14 }} type="zoomout" />}
-          onClick={handleButtonClick}
-          onVisibleChange={onVisibleChange}
           trigger={['click']}
+          visible={visible1}
+          onVisibleChange={(v) => setVisible1(v)}
           getPopupContainer={() => document.querySelector('#drop-demo')}
         >
-          primary dropdown
+          <div>primary dropdown</div>
         </Dropdown.Button>
       </div>
       <div style={{ marginTop: 32 }}>

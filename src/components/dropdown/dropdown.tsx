@@ -58,11 +58,11 @@ class Dropdown extends React.Component<DropdownProps, DropdownState> {
   }
 
   dropHidden = () => {
-    const { visible: propsVisible } = this.props;
-    if (propsVisible === undefined) {
-      this.setState({ visible: false });
-      const { onVisibleChange } = this.props;
+    const { onVisibleChange, visible: propsVisisble } = this.props;
+    if (propsVisisble !== undefined) {
       onVisibleChange && onVisibleChange(false);
+    } else {
+      this.setState({ visible: false });
     }
   };
 
@@ -80,27 +80,19 @@ class Dropdown extends React.Component<DropdownProps, DropdownState> {
   out = () => {
     const { trigger = ['hover'], onVisibleChange, visible: propsVisible } = this.props;
     if (trigger.indexOf('hover') >= 0) {
+      onVisibleChange && onVisibleChange(false);
       if (propsVisible === undefined) {
         this.setState({ visible: false });
       }
-      onVisibleChange && onVisibleChange(false);
     }
   };
 
   click = (evt: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
     const {
-      trigger = ['hover'], onVisibleChange, disabled, visible: propsVisible,
+      trigger = ['hover'], disabled,
     } = this.props;
-    const { visible } = this.state;
     if (trigger.indexOf('click') >= 0 && !disabled) {
-      if (!visible) {
-        this.compute(evt);
-      } else { // 传了visible之后 visible完全由外面控制
-        onVisibleChange && onVisibleChange(false);
-        if (propsVisible === undefined) {
-          this.setState({ visible: false });
-        }
-      }
+      this.compute(evt);
     }
   };
 
@@ -121,53 +113,53 @@ class Dropdown extends React.Component<DropdownProps, DropdownState> {
       placement = 'bottomCenter', arrow = false, onVisibleChange, getPopupContainer,
     } = this.props;
     const target = evt.nativeEvent.target as HTMLSpanElement;
-    if (!visible || propsVisible) {
-      if (target && this.node) {
-        const { height: contentHeight, width: contentWidth } = this.node.getBoundingClientRect();
-        const {
-          width,
-          height,
-        } = target.getBoundingClientRect();
-        const containter = getPopupContainer && getPopupContainer();
-        const { top: offsetTop, left: offsetLeft } = getOffset(target, containter);
-        const placementMap = {
-          topCenter: {
-            x: offsetLeft + (width - contentWidth) / 2,
-            y: offsetTop - contentHeight - 4 - (arrow ? 5 : 0),
-          },
-          topLeft: {
-            x: offsetLeft,
-            y: offsetTop - contentHeight - 4 - (arrow ? 5 : 0),
-          },
-          topRight: {
-            x: offsetLeft - (contentWidth - width),
-            y: offsetTop - contentHeight - 4 - (arrow ? 5 : 0),
-          },
-          bottomCenter: {
-            x: offsetLeft + (width - contentWidth) / 2,
-            y: offsetTop + height + 4 + (arrow ? 5 : 0),
-          },
-          bottomRight: {
-            x: offsetLeft - (contentWidth - width),
-            y: offsetTop + height + 4 + (arrow ? 5 : 0),
-          },
-          bottomLeft: {
-            x: offsetLeft,
-            y: offsetTop + height + 4 + (arrow ? 5 : 0),
-          },
-        };
-        this.setState({
-          x: placementMap[placement].x,
-          y: placementMap[placement].y,
-          visible: propsVisible !== undefined ? propsVisible : true,
-        });
-        onVisibleChange && onVisibleChange(propsVisible !== undefined ? propsVisible : true);
+    if (target && this.node) {
+      const { height: contentHeight, width: contentWidth } = this.node.getBoundingClientRect();
+      const {
+        width,
+        height,
+      } = target.getBoundingClientRect();
+      const containter = getPopupContainer && getPopupContainer();
+      const { top: offsetTop, left: offsetLeft } = getOffset(target, containter);
+      const placementMap = {
+        topCenter: {
+          x: offsetLeft + (width - contentWidth) / 2,
+          y: offsetTop - contentHeight - 4 - (arrow ? 5 : 0),
+        },
+        topLeft: {
+          x: offsetLeft,
+          y: offsetTop - contentHeight - 4 - (arrow ? 5 : 0),
+        },
+        topRight: {
+          x: offsetLeft - (contentWidth - width),
+          y: offsetTop - contentHeight - 4 - (arrow ? 5 : 0),
+        },
+        bottomCenter: {
+          x: offsetLeft + (width - contentWidth) / 2,
+          y: offsetTop + height + 4 + (arrow ? 5 : 0),
+        },
+        bottomRight: {
+          x: offsetLeft - (contentWidth - width),
+          y: offsetTop + height + 4 + (arrow ? 5 : 0),
+        },
+        bottomLeft: {
+          x: offsetLeft,
+          y: offsetTop + height + 4 + (arrow ? 5 : 0),
+        },
+      };
+      this.setState({
+        x: placementMap[placement].x,
+        y: placementMap[placement].y,
+      });
+      onVisibleChange && onVisibleChange(!visible);
+      if (propsVisible === undefined) { // 用户控制visible 必须使用onVisibleChange 或者 传入更新的visible props
+        this.setState({ visible: !visible });
       }
     }
   };
 
   renderDropdown = ({ getPrefixCls }: ConfigConsumerProps) => {
-    const { visible } = this.state;
+    const { visible, x, y } = this.state;
     const {
       children,
       prefixCls,
@@ -179,7 +171,6 @@ class Dropdown extends React.Component<DropdownProps, DropdownState> {
       overlayStyle,
       trigger = ['hover'],
     } = this.props;
-    const { x, y } = this.state;
     const prefix = getPrefixCls('drop-down', prefixCls);
     const dropwrapper = classNames(prefix, overlayClassName, {
       [`${prefix}-show`]: visible,
@@ -205,6 +196,7 @@ class Dropdown extends React.Component<DropdownProps, DropdownState> {
             ref={this.getNode}
             onMouseOver={() => trigger.indexOf('hover') >= 0 && this.setState({ visible: true })}
             onMouseOut={() => trigger.indexOf('hover') >= 0 && this.setState({ visible: false })}
+            onClick={(e) => { e.stopPropagation(); e.nativeEvent.stopImmediatePropagation(); }}
           >
             {arrow && <div className={arrowStyle} />}
             <div className={containter}>

@@ -47,7 +47,7 @@ class DropButton extends React.Component<DropMenuProps, DropMenuState> {
   componentDidMount() {
     const { visible } = this.props;
     if (visible) {
-      this.compute(true);
+      this.compute();
     }
     document.addEventListener('click', this.dropHidden);
   }
@@ -56,7 +56,7 @@ class DropButton extends React.Component<DropMenuProps, DropMenuState> {
     const { visible } = this.props;
     if (visible !== prevProps.visible) {
       if (visible) {
-        this.compute(true);
+        this.compute();
       }
       this.setState({ visible });
     }
@@ -67,11 +67,11 @@ class DropButton extends React.Component<DropMenuProps, DropMenuState> {
   }
 
   dropHidden = () => {
-    const { visible: propsVisible } = this.props;
-    if (propsVisible === undefined) { // 没有传值visible时候， visisble由自己改变
-      this.setState({ visible: false });
-      const { onVisibleChange } = this.props;
+    const { onVisibleChange, visible: propsVisisble } = this.props;
+    if (propsVisisble !== undefined) {
       onVisibleChange && onVisibleChange(false);
+    } else {
+      this.setState({ visible: false });
     }
   };
 
@@ -86,22 +86,24 @@ class DropButton extends React.Component<DropMenuProps, DropMenuState> {
   over = (evt: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
     const { trigger = ['hover'], disabled } = this.props;
     if (trigger.indexOf('hover') >= 0 && !disabled) {
-      this.compute(false, evt);
+      this.compute(evt);
     }
   };
 
   out = () => {
-    const { trigger = ['hover'], onVisibleChange } = this.props;
+    const { trigger = ['hover'], onVisibleChange, visible: propsVisible } = this.props;
     if (trigger.indexOf('hover') >= 0) {
-      this.setState({ visible: false });
       onVisibleChange && onVisibleChange(false);
+      if (propsVisible === undefined) {
+        this.setState({ visible: false });
+      }
     }
   };
 
   click = (evt: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
-    const { trigger = ['hover'], disabled, visible: propsVisible } = this.props;
-    if (trigger.indexOf('click') >= 0 && !disabled && propsVisible === undefined) {
-      this.compute(false, evt);
+    const { trigger = ['hover'], disabled } = this.props;
+    if (trigger.indexOf('click') >= 0 && !disabled) {
+      this.compute(evt);
     }
   };
 
@@ -109,7 +111,7 @@ class DropButton extends React.Component<DropMenuProps, DropMenuState> {
     const { trigger = ['hover'], disabled } = this.props;
     if (trigger.indexOf('contextMenu') >= 0 && !disabled) {
       evt.preventDefault();
-      this.compute(false, evt);
+      this.compute(evt);
     }
   };
 
@@ -118,62 +120,55 @@ class DropButton extends React.Component<DropMenuProps, DropMenuState> {
     onClick && onClick(evt);
   };
 
-  compute = (first: boolean, evt?: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
+  compute = (evt?: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
     evt && evt.stopPropagation();
     evt?.nativeEvent.stopImmediatePropagation();
     const { visible } = this.state;
     const {
       placement = 'bottomRight', onVisibleChange, visible: propsVisible, getPopupContainer,
     } = this.props;
-    if (!visible || first) {
-      if (this.nodeB && this.nodeC) {
-        const { height: contentHeight, width: contentWidth } = this.nodeC.getBoundingClientRect();
-        const {
-          width,
-          height,
-        } = this.nodeB.getBoundingClientRect();
-        const containter = getPopupContainer && getPopupContainer();
-        const { top: offsetTop, left: offsetLeft } = getOffset(this.nodeB, containter);
-        // const offsetTop = Math.ceil(window.pageYOffset + top);
-        // const offsetLeft = Math.ceil(window.pageXOffset + left);
-        const placementMap = {
-          topCenter: {
-            x: offsetLeft + (width - contentWidth) / 2,
-            y: offsetTop - contentHeight - 4,
-          },
-          topLeft: {
-            x: offsetLeft,
-            y: offsetTop - contentHeight - 4,
-          },
-          topRight: {
-            x: offsetLeft - (contentWidth - width),
-            y: offsetTop - contentHeight - 4,
-          },
-          bottomCenter: {
-            x: offsetLeft + (width - contentWidth) / 2,
-            y: offsetTop + height + 4,
-          },
-          bottomRight: {
-            x: offsetLeft - (contentWidth - width),
-            y: offsetTop + height + 4,
-          },
-          bottomLeft: {
-            x: offsetLeft,
-            y: offsetTop + height + 4,
-          },
-        };
-        this.setState({
-          x: placementMap[placement].x,
-          y: placementMap[placement].y,
-          visible: true,
-        });
-        onVisibleChange && onVisibleChange(true);
+    if (this.nodeB && this.nodeC) {
+      const { height: contentHeight, width: contentWidth } = this.nodeC.getBoundingClientRect();
+      const {
+        width,
+        height,
+      } = this.nodeB.getBoundingClientRect();
+      const containter = getPopupContainer && getPopupContainer();
+      const { top: offsetTop, left: offsetLeft } = getOffset(this.nodeB, containter);
+      const placementMap = {
+        topCenter: {
+          x: offsetLeft + (width - contentWidth) / 2,
+          y: offsetTop - contentHeight - 4,
+        },
+        topLeft: {
+          x: offsetLeft,
+          y: offsetTop - contentHeight - 4,
+        },
+        topRight: {
+          x: offsetLeft - (contentWidth - width),
+          y: offsetTop - contentHeight - 4,
+        },
+        bottomCenter: {
+          x: offsetLeft + (width - contentWidth) / 2,
+          y: offsetTop + height + 4,
+        },
+        bottomRight: {
+          x: offsetLeft - (contentWidth - width),
+          y: offsetTop + height + 4,
+        },
+        bottomLeft: {
+          x: offsetLeft,
+          y: offsetTop + height + 4,
+        },
+      };
+      this.setState({
+        x: placementMap[placement].x,
+        y: placementMap[placement].y,
+      });
+      onVisibleChange && onVisibleChange(!visible);
+      if (propsVisible === undefined) { // 用户控制visible 必须使用onVisibleChange 或者 传入更新的visible props
+        this.setState({ visible: !visible });
       }
-    } else {
-      if (propsVisible === undefined) {
-        this.setState({ visible: false });
-      }
-      onVisibleChange && onVisibleChange(false);
     }
   };
 
@@ -233,6 +228,7 @@ class DropButton extends React.Component<DropMenuProps, DropMenuState> {
             ref={this.getNodeC}
             onMouseOver={() => trigger.indexOf('hover') >= 0 && this.setState({ visible: true })}
             onMouseOut={() => trigger.indexOf('hover') >= 0 && this.setState({ visible: false })}
+            onClick={(e) => { e.stopPropagation(); e.nativeEvent.stopImmediatePropagation(); }}
           >
             <div className={containter}>
               {overlay && React.isValidElement(overlay) ? React.cloneElement(
