@@ -69,9 +69,10 @@ const TableHeader: React.FC<TableHeaderProps> = (props: TableHeaderProps) => {
                     <Dropdown
                       placement="bottomCenter"
                       visible={visible}
-                      // onVisibleChange={(isVisible) => {
-                      //   setVisible(isVisible);
-                      // }}
+                      onVisibleChange={(isVisible) => {
+                        setVisible(isVisible);
+                      }}
+                      trigger={['click']}
                       overlay={(
                         <Filter
                           prefix={prefixCls}
@@ -82,7 +83,7 @@ const TableHeader: React.FC<TableHeaderProps> = (props: TableHeaderProps) => {
                         />
                       )}
                     >
-                      <span onClick={() => setVisible(true)}>
+                      <span>
                         {filterIcon}
                       </span>
                     </Dropdown>

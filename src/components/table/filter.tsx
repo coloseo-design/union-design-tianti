@@ -70,6 +70,7 @@ export default class Filter extends React.Component<FilterProps, FilterState> {
           className={`${prefix}-filter-body`}
           onClick={(e: React.MouseEvent<HTMLDivElement>) => {
             e.stopPropagation();
+            e.nativeEvent.stopImmediatePropagation();
           }}
         >
           <Group
