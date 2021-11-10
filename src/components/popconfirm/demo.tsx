@@ -4,21 +4,15 @@ import './styles/index';
 import '../button/styles/index';
 
 const PopconfirmDemo: React.FC<unknown> = () => {
-  const handleVisibleChange = (visible: boolean) => {
-    console.log('-visible-', visible);
-  };
   const [loading, setLoading] = React.useState(false);
   const [visible, setVisible] = React.useState(false);
+  const [visible1, setVisible1] = React.useState(false);
   const onConfirm = () => {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
       setVisible(false);
     }, 2000);
-  };
-
-  const handleClick = () => {
-    setVisible(true);
   };
 
   return (
@@ -39,20 +33,21 @@ const PopconfirmDemo: React.FC<unknown> = () => {
           okButtonProps={{ loading }}
           visible={visible}
         >
-          <Button onClick={handleClick}>topLeft</Button>
+          <Button onClick={() => setVisible(!visible)}>topLeft</Button>
         </Popconfirm>
         <Popconfirm
           title="你是否确定这是一个气泡确认框"
           placement="top"
-          onVisibleChange={handleVisibleChange}
+          onVisibleChange={(v) => setVisible1(v)}
           getPopupContainer={() => document.getElementById('pop')}
-          // defaultVisible
+          visible={visible1}
         >
           <Button style={{ margin: 24 }}>top</Button>
         </Popconfirm>
         <Popconfirm
           title="你是否确定这是一个气泡确认框？"
           placement="topRight"
+          // defaultVisible
         >
           <Button style={{ margin: 24 }}>topRight</Button>
         </Popconfirm>
@@ -135,6 +130,7 @@ const PopconfirmDemo: React.FC<unknown> = () => {
         <Popconfirm
           title="你是否确定这是一个气泡确认框？"
           placement="top"
+          trigger="hover"
         >
           <span>top</span>
         </Popconfirm>

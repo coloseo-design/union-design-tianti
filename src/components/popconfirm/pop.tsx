@@ -66,14 +66,12 @@ class PopComponent extends React.Component<PopProps, PopconfirmState> {
   }
 
   visibleOnClick = (target: HTMLElement) => {
-    const { onVisibleChange, visible: propsVisible } = this.props;
     if (target.nodeName !== '#document' && target.getAttribute('data-tag') === this.tag) return;
-    const { visible } = this.state;
-    if (visible) {
-      if (propsVisible === undefined) {
-        this.setState({ visible: false });
-      }
+    const { onVisibleChange, visible: propsVisisble } = this.props;
+    if (propsVisisble !== undefined) {
       onVisibleChange && onVisibleChange(false);
+    } else {
+      this.setState({ visible: false });
     }
   }
 
@@ -87,7 +85,7 @@ class PopComponent extends React.Component<PopProps, PopconfirmState> {
     const { visible } = this.state;
     const target: HTMLElement | null = document.getElementById(this.tag);
     if (target && visible) {
-      this.compute(target);
+      this.compute(target, true);
     }
     document.addEventListener('click', this.documentBodyOnClick);
   }
@@ -100,16 +98,12 @@ class PopComponent extends React.Component<PopProps, PopconfirmState> {
   componentDidUpdate = (prevProps: PopProps) => {
     const { visible } = this.props;
     if (visible !== prevProps.visible) {
-      if (visible) {
-        const target: HTMLElement | null = document.getElementById(this.tag);
-        this.compute(target);
-      }
       this.setState({ visible });
     }
   }
 
-  compute = (target: any) => {
-    const { direction } = this.state;
+  compute = (target: any, defaultV?: boolean) => {
+    const { direction, visible } = this.state;
     const {
       autoAdjustOverflow = true, onVisibleChange, visible: propsVisible, getPopupContainer,
     } = this.props;
@@ -199,26 +193,20 @@ class PopComponent extends React.Component<PopProps, PopconfirmState> {
         y: placementMap[dT].y,
         direction: dT,
       });
-      onVisibleChange && onVisibleChange(propsVisible !== undefined ? propsVisible : true);
+      onVisibleChange && onVisibleChange(defaultV || !visible);
+      if (propsVisible === undefined) { // 用户控制visible 必须使用onVisibleChange 或者 传入更新的visible props
+        this.setState({ visible: defaultV || !visible });
+      }
     }
   }
 
   handleClick = (evt: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
     evt.nativeEvent.stopImmediatePropagation();
     evt.stopPropagation();
-    const { trigger, visible: popupVisible, onVisibleChange } = this.props;
-    const { visible } = this.state;
+    const { trigger } = this.props;
     const target = evt.nativeEvent.target as HTMLSpanElement;
     if (trigger === 'click' && target) {
-      if (popupVisible === undefined) { // 用户传了 visible 后完全由 用户自己控制 弹窗的显隐（默认组件控制）
-        if (!visible) {
-          this.compute(target);
-          this.setState({ visible: true });
-        } else {
-          onVisibleChange && onVisibleChange(false);
-          this.setState({ visible: false });
-        }
-      }
+      this.compute(target);
     }
   };
 
@@ -226,22 +214,13 @@ class PopComponent extends React.Component<PopProps, PopconfirmState> {
     evt.nativeEvent.stopImmediatePropagation();
     evt.stopPropagation();
     const {
-      trigger, mouseEnterDelay = 0, onVisibleChange, visible: popupVisible,
+      trigger, mouseEnterDelay = 0,
     } = this.props;
-    const { visible } = this.state;
     const target = evt.nativeEvent.target as HTMLSpanElement;
-    if (popupVisible === undefined) { // 用户传了 visible 后完全由 用户自己控制 弹窗的显隐（默认组件控制）
-      if (trigger === 'hover' && target) {
-        if (!visible) {
-          setTimeout(() => {
-            this.compute(target);
-            this.setState({ visible: true });
-          }, mouseEnterDelay);
-        } else {
-          onVisibleChange && onVisibleChange(false);
-          this.setState({ visible: false });
-        }
-      }
+    if (trigger === 'hover' && target) {
+      setTimeout(() => {
+        this.compute(target);
+      }, mouseEnterDelay);
     }
   };
 
@@ -265,19 +244,10 @@ class PopComponent extends React.Component<PopProps, PopconfirmState> {
   handleFocus = (evt: React.FocusEvent<HTMLSpanElement>) => {
     evt.nativeEvent.stopImmediatePropagation();
     evt.stopPropagation();
-    const { trigger = 'hover', visible: popupVisible, onVisibleChange } = this.props;
-    const { visible } = this.state;
+    const { trigger = 'hover' } = this.props;
     const target = evt.nativeEvent.target as HTMLSpanElement;
     if (trigger === 'focus' && target) {
-      if (popupVisible === undefined) { // 用户传了 visible 后完全由 用户自己控制 弹窗的显隐（默认组件控制）
-        if (!visible) {
-          this.compute(target);
-          this.setState({ visible: true });
-        } else {
-          onVisibleChange && onVisibleChange(false);
-          this.setState({ visible: false });
-        }
-      }
+      this.compute(target);
     }
   };
 
@@ -293,11 +263,10 @@ class PopComponent extends React.Component<PopProps, PopconfirmState> {
   handleOk = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
     e.stopPropagation();
     e.nativeEvent.stopImmediatePropagation();
-    const { visible } = this.props;
+    const { visible, onConfirm, onVisibleChange } = this.props;
     if (visible === undefined) {
       this.setState({ visible: false });
     }
-    const { onConfirm, onVisibleChange } = this.props;
     onVisibleChange && onVisibleChange(false);
     onConfirm && onConfirm(e);
   }
