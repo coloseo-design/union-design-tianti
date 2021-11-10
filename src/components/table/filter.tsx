@@ -4,7 +4,6 @@ import {
   Button,
   Radio,
 } from '..';
-import { CheckboxGroupProps } from '../checkbox';
 
 export interface FilterProps {
   dataSource: {text: React.ReactNode; value: string}[];
@@ -34,7 +33,7 @@ export default class Filter extends React.Component<FilterProps, FilterState> {
   }
 
   onChange = (values: string[] | React.ChangeEventHandler<HTMLInputElement>) => {
-    const { filterMultiple } = this.props;
+    const { filterMultiple = true } = this.props;
     if (filterMultiple) {
       this.setState({ values: values as string[] });
     } else {

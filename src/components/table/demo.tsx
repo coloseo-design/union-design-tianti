@@ -26,7 +26,7 @@ const columns: ColumnsProps[] = [
     width: 150,
     fixed: true,
     // defaultFilteredValue: [],
-    filterMultiple: false,
+    // filterMultiple: true,
     filters: [
       {
         text: 'Jim family',
