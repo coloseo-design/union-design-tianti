@@ -1,5 +1,6 @@
 import React from 'react';
 import classnames from 'classnames';
+import omit from 'omit.js';
 import { withGlobalConfig } from '../config-provider';
 import {
   Icon,
@@ -37,7 +38,7 @@ export default class Table extends React.Component<TableProps, TableState> {
     this.rightTableBodyRef = React.createRef<HTMLDivElement>();
     this.mainTableHeaderRef = React.createRef<HTMLDivElement>();
     this.mainTableBodyRef = React.createRef<HTMLDivElement>();
-    const { rowSelection: { selectedRowKeys = [] } = {}, columns } = props;
+    const { rowSelection: { selectedRowKeys, defaultSelectedRowKeys } = {}, columns } = props;
     const filters = columns.reduce<{[key: string]: string[]}>((c, i) => {
       // if (i.filteredValue || i.defaultFilteredValue) {
       const key = i.dataIndex || i.key || '';
@@ -46,7 +47,7 @@ export default class Table extends React.Component<TableProps, TableState> {
       return c;
     }, {});
     this.state = {
-      selectedRowKeys: [...selectedRowKeys] || [],
+      selectedRowKeys: selectedRowKeys || defaultSelectedRowKeys || [],
       selectedRowKey: '',
       filters,
       // eslint-disable-next-line react/no-unused-state
@@ -71,7 +72,7 @@ export default class Table extends React.Component<TableProps, TableState> {
   // 渲染表头
   renderHeader = (columns: ColumnsProps[]) => {
     const { filters } = this.state;
-    const onSubmit = (name: string, values: string[]) => {
+    const onSubmit = (name: string, values: string | string[]) => {
       this.setState({
         filters: {
           ...filters,
@@ -265,6 +266,7 @@ export default class Table extends React.Component<TableProps, TableState> {
       onChange,
       getCheckboxProps,
       selectedRowKeys: defaultSelectdRowKeys = [],
+      onSelectAll,
     } = rowSelection;
     // 冻结不可操作的数据
     const disabledKeys = dataSource.filter((item) => {
@@ -286,7 +288,7 @@ export default class Table extends React.Component<TableProps, TableState> {
     const allCheckboxProps = {
       indeterminate: someoneChecked && !selectedAll,
       checked: selectedAll,
-      onChange: () => {
+      onChange: (checked: boolean) => {
         let currentSelectedRowKeys: unknown[] = [];
         if (!selectedAll) {
           const allcheckableKeys = dataSource.filter((item) => {
@@ -300,9 +302,13 @@ export default class Table extends React.Component<TableProps, TableState> {
           selectedRowKeys: [...currentSelectedRowKeys, ...disabledKeys],
         };
         this.setState(newState);
+        const data = dataSource.filter(
+          (item) => newState.selectedRowKeys.indexOf(this.rowKey(item)) >= 0,
+        );
+        onSelectAll && onSelectAll(data, checked);
         onChange && onChange(
           newState.selectedRowKeys,
-          dataSource.filter((item) => newState.selectedRowKeys.indexOf(this.rowKey(item)) >= 0),
+          data,
         );
       },
     };
@@ -322,6 +328,8 @@ export default class Table extends React.Component<TableProps, TableState> {
       columnWidth,
       onChange,
       selectedRowKeys: defaultSelectdRowKeys = [],
+      onSelect,
+      type,
     } = rowSelection as TableRowSelectionType;
     return {
       title: columnTitle || this.selectAllCheckbox(),
@@ -336,7 +344,9 @@ export default class Table extends React.Component<TableProps, TableState> {
         const key = this.rowKey(record);
         const index = selectedRowKeys.indexOf(key);
         const checked = index >= 0;
-        const onCheckboxChange = (isChecked: boolean) => {
+        const onCheckboxChange = (isChecked: boolean, ...args) => {
+          const current = dataSource.find((item) => this.rowKey(item) === key);
+          onSelect && onSelect(current, isChecked);
           if (!isChecked) {
             (checked && selectedRowKeys.splice(index, 1));
           } else {
@@ -465,8 +475,17 @@ export default class Table extends React.Component<TableProps, TableState> {
       loading = false,
       scroll,
       bordered,
+      rowSelection,
+      getPrefixCls,
+      pagination: _page,
       ...rest
     } = this.props;
+    const restParams = omit(rest, [
+      'rowSelection',
+      'getPrefixCls',
+      'pagination',
+      'rowKey',
+    ]);
     const prefix = this.getPrefixCls();
     const tableContainerCls = classnames(`${prefix}-spain-container`, {
       [`${prefix}-spain-container-blur`]: loading,
@@ -487,11 +506,11 @@ export default class Table extends React.Component<TableProps, TableState> {
     const filteredDataSource = dataSource.filter(this.filterDataSourceFilter());
     const paginateDataSource = this.paginateDataSource(filteredDataSource);
 
-    const mainColumns = columns.slice();
+    // const mainColumns = columns.slice();
     // eslint-disable-next-line no-nested-ternary
     const maxHeight = scroll ? (typeof scroll.y === 'boolean' ? 'auto' : scroll.y) : 'auto';
     return (
-      <div {...rest} className={`${prefix}-container`}>
+      <div {...restParams} className={`${prefix}-container`}>
         <div className={`${prefix}-container-with-spin`}>
           {
             loading && (

@@ -8,6 +8,7 @@ import './styles/index';
 import '../popconfirm/styles/index';
 import '../tabs/styles/index';
 import '../tooltip/styles/index';
+import { ColumnsProps, TableRowSelectionType } from './type';
 
 const render1 = (k: string, row: any) => (
   <div>
@@ -17,14 +18,15 @@ const render1 = (k: string, row: any) => (
   </div>
 );
 
-const columns = [
+const columns: ColumnsProps[] = [
   {
     title: '姓名',
     dataIndex: 'name',
     key: 'name',
     width: 150,
     fixed: true,
-    filteredValue: ['Jim', 'Joe'],
+    // defaultFilteredValue: [],
+    filterMultiple: false,
     filters: [
       {
         text: 'Jim family',
@@ -187,15 +189,22 @@ const data = [
   },
 ];
 
-const rowSelection = {
+const rowSelection: TableRowSelectionType = {
   onChange: (selectedRowKeys: any, selectedRows: any) => {
-    console.log(`selectedRowKeys: ${selectedRowKeys}`, selectedRowKeys, 'selectedRows: ', selectedRows);
+    console.log(`onChange: ${selectedRowKeys}`, selectedRowKeys, 'selectedRows: ', selectedRows);
   },
   getCheckboxProps: (record: { name: string; }) => ({
     disabled: record.name === 'Jim Red', // Column configuration not to be checked
     name: record.name,
   }),
-  selectedRowKeys: ['4'],
+  defaultSelectedRowKeys: ['1', '2'],
+  onSelect: (record, checked) => {
+    console.log('onSelect', record, checked);
+  },
+  onSelectAll: (records, checked) => {
+    console.log('onSelectAll', records, checked);
+  },
+  // selectedRowKeys: ['1', '2'],
 };
 
 const tableT1 = (

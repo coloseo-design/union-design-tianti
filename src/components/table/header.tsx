@@ -10,15 +10,16 @@ import Filter from './filter';
 interface TableHeaderProps {
   columns: ColumnsProps[];
   prefixCls: string;
-  onChange: (name: string, values: string[]) => void;
+  onChange: (name: string, values: string | string[]) => void;
   filteredValueMap: {
-    [key: string]: string[];
+    [key: string]: string | string[];
   }
 }
 
 const TableHeader: React.FC<TableHeaderProps> = (props: TableHeaderProps) => {
   const { columns, prefixCls, filteredValueMap } = props;
-  const onChange = (name: string) => (_values: string[]) => {
+  const onChange = (name: string) => (_values: string | string[]) => {
+    setVisible(false);
     props.onChange && props.onChange(name, _values);
   };
   const [visible, setVisible] = useState(false);
@@ -39,6 +40,23 @@ const TableHeader: React.FC<TableHeaderProps> = (props: TableHeaderProps) => {
             const clsName = classNames({
               [`${prefixCls}-header-${align}`]: align,
             }, className);
+            let filterIcon = (
+              <Icon
+                type="sizer"
+                style={{
+                  marginLeft: 5, display: 'inline-block', width: 20, color: visible ? '#207EEA' : '#ACAFB9',
+                }}
+              />
+            );
+            if (column.filterIcon) {
+              let icon = column.filterIcon;
+              if (typeof icon === 'function') {
+                icon = icon();
+              }
+              if (React.isValidElement(icon)) {
+                filterIcon = icon;
+              }
+            }
             return (
               <th
                 key={key}
@@ -50,25 +68,23 @@ const TableHeader: React.FC<TableHeaderProps> = (props: TableHeaderProps) => {
                   { column.filters && column.filters?.length > 0 ? (
                     <Dropdown
                       placement="bottomCenter"
-                      onVisibleChange={(isVisible) => {
-                        setVisible(isVisible);
-                      }}
+                      visible={visible}
+                      // onVisibleChange={(isVisible) => {
+                      //   setVisible(isVisible);
+                      // }}
                       overlay={(
                         <Filter
                           prefix={prefixCls}
                           onChange={onChange(key)}
                           values={filteredValueMap[key]}
                           dataSource={filters}
+                          filterMultiple={column.filterMultiple}
                         />
                       )}
-                      trigger={['click']}
                     >
-                      <Icon
-                        type="sizer"
-                        style={{
-                          marginLeft: 5, display: 'inline-block', width: 20, color: visible ? '#207EEA' : '#ACAFB9',
-                        }}
-                      />
+                      <span onClick={() => setVisible(true)}>
+                        {filterIcon}
+                      </span>
                     </Dropdown>
                   ) : null}
                 </span>

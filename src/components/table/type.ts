@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { PaginationProps } from '../pagination/pagination';
 
 export type ColumnsAlign = 'left' | 'right' | 'center';
@@ -42,15 +42,19 @@ export interface ColumnsProps {
   filteredValue?: string[];
   /** 筛选控制 */
   defaultFilteredValue?: string[];
+  /** 自定义筛选图标 */
+  filterIcon: ReactNode | (() => ReactNode),
+  /** 是否多选 */
+  filterMultiple: boolean,
 }
 
 export type RowKeyType = string | ((record: unknown) => string);
 
 export type TableRowSelectionType = {
   /** 用户手动选择/取消选择某行的回调 */
-  onSelect?: () => void;
+  onSelect?: (record: unknown, selected: boolean) => void;
   /** 用户手动选择/取消选择所有行的回调 */
-  onSelectAll?: () => void;
+  onSelectAll?: (selectedRows: unknown[], selected: boolean) => void;
   /** 选中项发生变化时的回调 */
   onChange?: (selectedRowKeys: unknown[], selectedRows: unknown[]) => void;
   /** 列宽 */
@@ -62,8 +66,12 @@ export type TableRowSelectionType = {
     disabled?: boolean;
     name?: React.ReactNode;
   };
-  /** 默认选中 */
+  /** 选中可控 */
   selectedRowKeys?: unknown[];
+  /** 默认选中 */
+  defaultSelectedRowKeys: unknown[];
+  /** 选择类型 */
+  type: 'checkbox' | 'radio',
 }
 
 export interface TableProps extends React.HTMLAttributes<HTMLTableElement> {
@@ -98,7 +106,7 @@ export interface TableState {
   selectedRowKeys: unknown[];
   selectedRowKey: string;
   filters: {
-    [key: string]: string[]
+    [key: string]: string | string[]
   }
   pagination: boolean | PaginationProps;
 }

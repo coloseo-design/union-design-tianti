@@ -2,13 +2,16 @@ import React from 'react';
 import {
   Checkbox,
   Button,
+  Radio,
 } from '..';
+import { CheckboxGroupProps } from '../checkbox';
 
 export interface FilterProps {
   dataSource: {text: React.ReactNode; value: string}[];
-  onChange?: (values: string[]) => void;
+  onChange?: (values: string | string[]) => void;
   values: string[];
   prefix?: string;
+  filterMultiple: boolean,
 }
 
 interface FilterState {
@@ -30,8 +33,16 @@ export default class Filter extends React.Component<FilterProps, FilterState> {
     }
   }
 
-  onChange = (values: string[]) => {
-    this.setState({ values });
+  onChange = (values: string[] | React.ChangeEventHandler<HTMLInputElement>) => {
+    const { filterMultiple } = this.props;
+    if (filterMultiple) {
+      this.setState({ values: values as string[] });
+    } else {
+      const { target: { value } } = (values as React.ChangeEventHandler<HTMLInputElement>);
+      this.setState({
+        values: [value],
+      });
+    }
   }
 
   onSubmit = (evt: React.MouseEvent<HTMLButtonElement>) => {
@@ -41,14 +52,16 @@ export default class Filter extends React.Component<FilterProps, FilterState> {
     onChange && onChange(values);
   }
 
-  onReset = (evt: React.MouseEvent<HTMLButtonElement>) => {
+  onReset = () => {
     const { onChange } = this.props;
     onChange && onChange([]);
   }
 
   render() {
-    const { dataSource, prefix = '' } = this.props;
+    const { dataSource, prefix = '', filterMultiple = true } = this.props;
     const { values } = this.state;
+    const Group = filterMultiple ? Checkbox.Group : Radio.Group;
+    const Selector = filterMultiple ? Checkbox : Radio;
     return (
       <div
         className={`${prefix}-filter`}
@@ -59,19 +72,19 @@ export default class Filter extends React.Component<FilterProps, FilterState> {
             e.stopPropagation();
           }}
         >
-          <Checkbox.Group
+          <Group
             style={{ padding: 5 }}
             onChange={this.onChange}
-            value={values}
+            value={filterMultiple ? values : values[0]}
           >
             {
               dataSource.map((item) => (
                 <div className={`${prefix}-filter-item`} key={item.value}>
-                  <Checkbox value={item.value}>{item.text}</Checkbox>
+                  <Selector value={item.value}>{item.text}</Selector>
                 </div>
               ))
             }
-          </Checkbox.Group>
+          </Group>
         </div>
         <div className={`${prefix}-filter-footer`}>
           <Button size="small" type="default" onClick={this.onReset}>重置</Button>

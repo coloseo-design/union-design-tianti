@@ -83,18 +83,14 @@ const columns = [
 | colSpan | 表头列合并,设置为 0 时，不渲染 | number | - |
 | dataIndex | 列数据在数据项中对应的路径，支持通过数组查询嵌套路径 | string \| string\[] | - |
 | defaultFilteredValue | 默认筛选值 | string\[] | - |
-| defaultSortOrder | 默认排序顺序 | `ascend` \| `descend` | - |
-| editable | 是否可编辑 | boolean | false |
-| filterDropdownVisible | 用于控制自定义筛选菜单是否可见 | boolean | - |
 | filtered | 标识数据是否经过过滤，筛选图标会高亮 | boolean | false |
 | filteredValue | 筛选的受控属性，外界可用此控制列的筛选状态，值为已筛选的 value 数组 | string\[] | - |
 | filterIcon | 自定义 filter 图标。 | ReactNode \| (filtered: boolean) => ReactNode | false |
 | filterMultiple | 是否多选 | boolean | true |
 | filters | 表头的筛选菜单项 | object\[] | - |
-| fixed | （IE 下无效）列是否固定，可选 true (等效于 left) `left` `right` | boolean \| string | false |
+| fixed | 列是否固定，可选 true (等效于 left) `left` `right` | boolean \| string | false |
 | key | React 需要的 key，如果已经设置了唯一的 `dataIndex`，可以忽略这个属性 | string | - |
 | render | 生成复杂数据的渲染函数，参数分别为当前行的值，当前行数据，行索引，@return 里面可以设置表格[行/列合并] | function(text, record, index) {} | - |
-| sortOrder | 排序的受控属性，外界可用此控制列的排序，可设置为 `ascend` `descend` false | boolean \| string | - |
 | title | 列头显示文字 | ReactNode \| ({ sortOrder, sortColumn, filters }) => ReactNode | - |
 | width | 列宽度 | string \| number | - |
 
@@ -120,14 +116,14 @@ const columns = [
 
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | ---  | ---   |
-| checkStrictly | checkable 状态下节点选择完全受控（父子数据选中状态不再关联） | boolean | true |
 | columnTitle | 自定义列表选择框标题 | ReactNode | - |
 | columnWidth | 自定义列表选择框宽度 | string \| number | `32px` |
 | getCheckboxProps | 选择框的默认属性配置 | function(record) | - |
 | selectedRowKeys | 指定选中项的 key 数组，需要和 onChange 进行配合 | string\[] \| number\[] | \[] |
 | defaultSelectedRowKeys | 默认选中项的 key 数组 | string\[] \| number\[] | \[] |
-| selections | 自定义选择项 \[配置项], 设为 `true` 时使用默认选择项 | object\[] \| boolean | true |
 | onChange | 选中项发生变化时的回调 | function(selectedRowKeys, selectedRows) | - |
+| onSelect | 用户手动选择/取消选择某行的回调 | Function(record, selected) | - |
+| onSelectAll | 用户手动选择/取消全选回调 | Function(records, selected) | - |
 
 ## 注意
 
