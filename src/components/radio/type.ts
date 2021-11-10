@@ -42,3 +42,8 @@ export interface RadioGroupProps extends React.HTMLAttributes<HTMLDivElement> {
   // 禁选所有子单选器
   disabled?: boolean;
 }
+
+export interface GroupRadioContextProps {
+  value?: string;
+  onGroupChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}

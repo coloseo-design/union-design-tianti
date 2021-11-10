@@ -8,6 +8,7 @@ import React, {
 import classNames from 'classnames';
 import { ConfigContext } from '../config-provider/context';
 import { RadioProps } from './type';
+import { RadioGroupContext } from './group';
 
 const AnotherRadio: React.FC<RadioProps> = (props: RadioProps) => {
   const {
@@ -22,23 +23,30 @@ const AnotherRadio: React.FC<RadioProps> = (props: RadioProps) => {
     checked: checkedFromProps = false,
     ...rest
   } = props;
-  const [checked, setChecked] = useState(checkedFromProps || defaultChecked);
+  // eslint-disable-next-line prefer-const
+  let [checked, setChecked] = useState(checkedFromProps || defaultChecked);
   useEffect(() => {
     setChecked(checkedFromProps);
   }, [checkedFromProps]);
   const { getPrefixCls } = useContext(ConfigContext);
   const prefix = getPrefixCls('radio', prefixCls);
+  const { onGroupChange, value: valueFromContext } = useContext(RadioGroupContext);
+  if (valueFromContext) {
+    checked = valueFromContext === value;
+  }
   const mainClass = classNames(prefix, {
     [`${prefix}-checked`]: checked,
     [`${prefix}-disabled`]: disabled,
   }, className);
 
   const onchange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
+    onGroupChange && onGroupChange(e);
     setChecked(e.target.checked);
     if (onChange) {
       (onChange as React.ChangeEventHandler<HTMLInputElement>)(e);
     }
   };
+
   return (
     <label {...rest as HTMLAttributes<HTMLLabelElement>} className={mainClass}>
       <input

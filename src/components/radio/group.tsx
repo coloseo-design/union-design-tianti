@@ -1,8 +1,12 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, {
+  useContext, useEffect, useState, createContext, useCallback,
+} from 'react';
 import classNames from 'classnames';
 import Radio from './radio';
 import { ConfigContext } from '../config-provider/context';
-import { RadioGroupProps, RadioOptions } from './type';
+import { GroupRadioContextProps, RadioGroupProps, RadioOptions } from './type';
+
+export const RadioGroupContext = createContext<GroupRadioContextProps>({});
 
 const getOptions = (options: RadioOptions) => options.map((item) => {
   if (typeof item === 'string') {
@@ -18,66 +22,58 @@ const Group: React.FC<RadioGroupProps> = (props: RadioGroupProps) => {
   const {
     onChange,
     prefixCls,
-    children,
     options,
     name,
     disabled,
     className,
     defaultValue,
-    value: valueFromProps = '',
+    value: valueFromProps,
     ...rest
   } = props;
-  const [value, setValue] = useState(valueFromProps || defaultValue);
-  const [counter, setCounter] = useState(false);
+  let { children } = props;
+  const [value, setValue] = useState<string>(valueFromProps || defaultValue || '');
   useEffect(() => {
-    if (counter) {
+    if (valueFromProps) {
       setValue(valueFromProps);
-    } else {
-      setCounter(true);
     }
-  }, [counter, valueFromProps]);
+  }, [valueFromProps]);
 
   const { getPrefixCls } = useContext(ConfigContext);
   const prefix = getPrefixCls('radio-group', prefixCls);
   const mainClass = classNames(prefix, className);
 
-  const onchange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onGroupChange = useCallback((e) => {
     setValue(e.target.value);
     if (onChange) {
       (onChange as React.ChangeEventHandler<HTMLInputElement>)(e);
     }
-  };
-  const newChildren = React.Children.toArray(children).map(((item) => React.cloneElement(item, {
-    key: item.props.value,
-    disabled: disabled || item.props.disabled,
-    value: item.props.value,
-    checked: value === item.props.value,
-    name,
-    onChange: onchange,
-  })));
+  }, [onChange]);
 
-  if (children) {
-    return (
-      <div {...rest} className={mainClass}>
-        {newChildren}
-      </div>
-    );
+  if (!children && options) {
+    children = getOptions(options || []).map((item) => (
+      <Radio
+        {...item}
+        key={item.value}
+        disabled={disabled || item.disabled}
+        value={item.value}
+        checked={value === item.value}
+        name={name}
+      >
+        {item.label}
+      </Radio>
+    ));
   }
 
   return (
     <div {...rest} className={mainClass}>
-      {getOptions(options || []).map((item) => (
-        <Radio
-          key={item.value}
-          disabled={disabled || item.disabled}
-          value={item.value}
-          checked={value === item.value}
-          name={name}
-          onChange={onchange}
-        >
-          {item.label}
-        </Radio>
-      ))}
+      <RadioGroupContext.Provider
+        value={{
+          value,
+          onGroupChange,
+        }}
+      >
+        {children}
+      </RadioGroupContext.Provider>
     </div>
   );
 };
