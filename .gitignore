@@ -12,3 +12,4 @@ src/site/dist/
 .npmrc
 yarn.lock
 package-lock.json
+yarn-error.log

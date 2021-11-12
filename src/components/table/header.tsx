@@ -17,10 +17,12 @@ interface TableHeaderProps {
 }
 
 const TableHeader: React.FC<TableHeaderProps> = (props: TableHeaderProps) => {
-  const { columns, prefixCls, filteredValueMap } = props;
+  const {
+    columns, prefixCls, filteredValueMap, onChange: onChangeFromProps,
+  } = props;
   const onChange = (name: string) => (_values: string | string[]) => {
     setVisible(false);
-    props.onChange && props.onChange(name, _values);
+    onChangeFromProps && onChangeFromProps(name, _values);
   };
   const [visible, setVisible] = useState(false);
   return (
