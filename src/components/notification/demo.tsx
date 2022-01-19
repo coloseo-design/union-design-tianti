@@ -2,6 +2,10 @@ import React from 'react';
 import { Notification, Button } from '../index';
 import './styles/index';
 
+Notification.config = {
+  zIndex: 3400,
+};
+
 const NotificationDemo = () => (
   <div style={{
     display: 'flex', flexFlow: 'column nowrap', alignItems: 'flex-start', padding: '20px 40px',
@@ -65,6 +69,7 @@ const NotificationDemo = () => (
         description: '这是一条常驻消息，会主动消失。',
         key: 'abc',
         duration: 0,
+        zIndex: 1400,
       })}
     >
       open

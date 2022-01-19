@@ -18,6 +18,7 @@ type MessageConfig = {
   style?: CSSProperties;
   onClose?: () => void;
   onClick?: () => void;
+  zIndex?: number;
 };
 
 type MessageAPI = (
@@ -93,10 +94,11 @@ export default class Message extends BaseComponent<MessageProps> {
     props.onClick ??= () => { };
     props.key ??= uuid();
     props.style ??= {};
+    props.zIndex ??= 1050;
 
     Message.msgs[`${props.key}`] = <Message {...props} key={`${props.key}`} uuid={`${props.key}`} type={type ?? 'info'} />;
 
-    Message.renderToBody();
+    Message.renderToBody(props);
   }
 
   public static destroy = (key: string | number) => {
@@ -108,7 +110,7 @@ export default class Message extends BaseComponent<MessageProps> {
 
   private static bodyMessageNode: HTMLDivElement = document.createElement('div');
 
-  private static renderToBody = () => {
+  private static renderToBody = (config?: MessageConfig) => {
     const msgs = Object.values(Message.msgs);
     if (msgs.length > 0) {
       Object.assign(Message.bodyMessageNode.style, {
@@ -116,6 +118,7 @@ export default class Message extends BaseComponent<MessageProps> {
         top: 0,
         width: '100%',
         pointerEvents: 'none',
+        zIndex: config?.zIndex ?? 1050,
       } as CSSProperties);
     } else {
       Message.bodyMessageNode.style.width = '0px';

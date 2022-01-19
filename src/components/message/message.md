@@ -32,6 +32,7 @@ subtitle: 全局提示
 | style     | 自定义内联样式                            | CSSProperties    | -      |
 | onClose   | 关闭时触发的回调函数                      | ()=>void         | -      |
 | onClick   | 点击 message 时触发的回调函数             | ()=>void         | -      |
+|zIndex      | 设置zindex                              |number           |1050     |
 
 * Message.config={...} 全局配置
 * Message.destroy(key); 可以关闭 提示

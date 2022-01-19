@@ -20,6 +20,7 @@ type NotificationConfig = {
   btn?: ReactNode;
   onClose?: () => void;
   onClick?: () => void;
+  zIndex?: number;
 };
 
 type NotificationType = 'success' | 'error' | 'info' | 'warning';
@@ -66,10 +67,11 @@ export default class Notification extends BaseComponent<NotificationProps> {
     props.key ??= uuid();
     props.style ??= {};
     props.message ??= '';
+    props.zIndex ??= 1050;
 
     Notification.msgs[`${props.key}`] = <Notification {...props} key={`${props.key}`} uuid={`${props.key}`} type={type ?? 'info'} />;
 
-    Notification.renderToBody();
+    Notification.renderToBody(props);
   }
 
   public static destroy = (key: string | number) => {
@@ -81,7 +83,7 @@ export default class Notification extends BaseComponent<NotificationProps> {
 
   private static bodyMessageNode: HTMLDivElement = document.createElement('div');
 
-  private static renderToBody = () => {
+  private static renderToBody = (config?: NotificationConfig) => {
     const msgs = Object.values(Notification.msgs);
     if (msgs.length > 0) {
       Object.assign(Notification.bodyMessageNode.style, {
@@ -89,7 +91,7 @@ export default class Notification extends BaseComponent<NotificationProps> {
         top: 0,
         right: 0,
         pointerEvents: 'none',
-        zIndex: 1055,
+        zIndex: config?.zIndex ?? 1050,
       } as CSSProperties);
     }
     ReactDOM.render(

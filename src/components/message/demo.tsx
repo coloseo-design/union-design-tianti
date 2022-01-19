@@ -3,6 +3,10 @@ import { Message, Button } from '../index';
 import './styles/index';
 import '../button/styles/index';
 
+Message.config = {
+  zIndex: 3200,
+};
+
 const MessageDemo = () => (
   <div style={{
     display: 'flex', flexFlow: 'column nowrap', alignItems: 'flex-start', padding: '20px 40px',
@@ -23,6 +27,7 @@ const MessageDemo = () => (
         content: '这是一条常驻消息，会主动消失。',
         key: 'abc',
         duration: 0,
+        zIndex: 1200,
       })}
     >
       open
