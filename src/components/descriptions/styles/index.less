@@ -1,15 +1,15 @@
 @import '../../style/themes/index';
 @import '../../style/mixins/index';
 
-@checkbox-prefix-cls: ~'@{uni-prefix}-descriptions';
+@descriptions-prefix-cls: ~'@{uni-prefix}-descriptions';
 
-.@{checkbox-prefix-cls} {
+.@{descriptions-prefix-cls} {
   table {
     width: 100%;
     table-layout: fixed;
     tbody {
       tr {
-        .@{checkbox-prefix-cls}-item {
+        .@{descriptions-prefix-cls}-item {
           padding-bottom: @table-padding-vertical;
           vertical-align: top;
           &-label, &-content {
@@ -34,7 +34,7 @@
   }
 }
 
-.@{checkbox-prefix-cls}-bordered {
+.@{descriptions-prefix-cls}-bordered {
   border: 1px solid @descriptions-border-color;
   border-radius: @descriptions-border-radius;
   width: 100%;

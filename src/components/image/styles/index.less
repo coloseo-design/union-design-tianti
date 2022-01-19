@@ -1,9 +1,9 @@
 @import '../../style/themes/index';
 @import '../../style/mixins/index';
 
-@input-prefix-cls: ~'@{uni-prefix}-image';
+@image-prefix-cls: ~'@{uni-prefix}-image';
 
-.@{input-prefix-cls} {
+.@{image-prefix-cls} {
   position: relative;
   &-img {
     // cursor: pointer;
@@ -32,19 +32,19 @@
     z-index: 1080;
     background: @image-mask-bg;
     display: none;
-    .@{input-prefix-cls}-preview {
+    .@{image-prefix-cls}-preview {
       text-align: center;
       pointer-events: none;
       height: 100%;
       &-content {
-        .@{input-prefix-cls}-preview-body {
+        .@{image-prefix-cls}-preview-body {
           position: absolute;
           top: 30px;
           right: 0;
           bottom: 30px;
           left: 0;
           overflow: hidden;
-          .@{input-prefix-cls}-preview-operations {
+          .@{image-prefix-cls}-preview-operations {
             list-style: none;
             position: absolute;
             left: 0;
@@ -68,14 +68,14 @@
               // pointer-events: none;
             }
           }
-          .@{input-prefix-cls}-preview-img-wrapper {
+          .@{image-prefix-cls}-preview-img-wrapper {
             position: absolute;
             top: 0;
             right: 0;
             bottom: 50px;
             left: 0;
             transition: transform 0.3s @ease-out 0s;
-            .@{input-prefix-cls}-preview-img {
+            .@{image-prefix-cls}-preview-img {
               max-width: 100%;
               max-height: 100%;
               cursor: grab;
@@ -93,7 +93,7 @@
               content: "";
             }
           }
-          .@{input-prefix-cls}-preview-switch-left, .@{input-prefix-cls}-preview-switch-right {
+          .@{image-prefix-cls}-preview-switch-left, .@{image-prefix-cls}-preview-switch-right {
             color: @white;
             font-size: 38px;
             position: absolute;
@@ -102,10 +102,10 @@
             pointer-events: auto;
             // display: none;
           }
-          .@{input-prefix-cls}-preview-switch-left {
+          .@{image-prefix-cls}-preview-switch-left {
             left: 10px;
           }
-          .@{input-prefix-cls}-preview-switch-right {
+          .@{image-prefix-cls}-preview-switch-right {
             right: 10px;
           }
         }
