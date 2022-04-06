@@ -4,7 +4,7 @@ import './styles/index';
 import '../button/styles';
 
 const ImageDemo = () => {
-  const [random, setRandom] = React.useState();
+  const [random, setRandom] = React.useState<number>();
   return (
     <div>
       <Image

@@ -1,6 +1,7 @@
 /* eslint-disable react/no-array-index-key */
 import React, { Component } from 'react';
 import classNames from 'classnames';
+import omit from 'omit.js';
 import { ConfigConsumer, ConfigConsumerProps } from '../config-provider';
 import Item from './item';
 
@@ -100,8 +101,9 @@ class Descriptions extends Component<DescriptionsProps, DescriptionsState> {
       refactorChildren.splice(refactorChildren.length - 1, 1, lastItemChildren);
     }
 
+    const omitRest = omit(rest, ['bordered']);
     return (
-      <div {...rest} className={mainClass}>
+      <div {...omitRest} className={mainClass}>
         <table>
           <tbody>
             {(refactorChildren || []).map((item: unknown, index: number) => (

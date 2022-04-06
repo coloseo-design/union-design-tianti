@@ -6,6 +6,7 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 import React, { Component } from 'react';
 import classNames from 'classnames';
+import omit from 'omit.js';
 import { ConfigConsumer, ConfigConsumerProps } from '../config-provider';
 import Icon from '../icon/index';
 
@@ -80,9 +81,10 @@ class Rate extends Component<RateProps, RateState> {
       }
     };
 
+    const omitRest = omit(rest, ['value', 'count', 'defaultValue']);
     if (allowHalf) {
       return (
-        <div {...rest} className={mainClass} ref={forwardedRef}>
+        <div {...omitRest} className={mainClass} ref={forwardedRef}>
           {(arr || []).map((item, index) => (
             <div
               className="allowHalf"

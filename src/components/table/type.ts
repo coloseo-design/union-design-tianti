@@ -37,15 +37,15 @@ export interface ColumnsProps {
   /** filter数据列表 */
   filters?: {text: React.ReactNode; value: string }[];
   /** 过滤器 */
-  onFilter?: (value: unknown, record: unknown) => boolean;
+  onFilter?: (value: unknown, record: any) => boolean;
   /** 筛选控制 */
   filteredValue?: string[];
   /** 筛选控制 */
   defaultFilteredValue?: string[];
   /** 自定义筛选图标 */
-  filterIcon: ReactNode | (() => ReactNode),
+  filterIcon?: ReactNode | (() => ReactNode),
   /** 是否多选 */
-  filterMultiple: boolean,
+  filterMultiple?: boolean,
 }
 
 export type RowKeyType = string | ((record: unknown) => string);
@@ -71,7 +71,7 @@ export type TableRowSelectionType = {
   /** 默认选中 */
   defaultSelectedRowKeys: unknown[];
   /** 选择类型 */
-  type: 'checkbox' | 'radio',
+  type?: 'checkbox' | 'radio',
 }
 
 export interface TableProps extends React.HTMLAttributes<HTMLTableElement> {
@@ -85,7 +85,7 @@ export interface TableProps extends React.HTMLAttributes<HTMLTableElement> {
   /** 是否加载中 */
   loading?: boolean;
   /** 表格行是否可选择 */
-  rowSelection: TableRowSelectionType;
+  rowSelection?: TableRowSelectionType;
   scroll?: {
     /** 设置横向滚动，也可用于指定滚动区域的宽 */
     x?: number | boolean;

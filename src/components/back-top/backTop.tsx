@@ -11,7 +11,7 @@ export interface BackTopProps extends Omit<React.HTMLAttributes<HTMLDivElement>,
   /* 回到顶部所需时间（ms） */
   duration?: number;
   /* 设置需要监听其滚动事件的元素，值为一个返回对应 DOM 元素的函数 */
-  target?: () => HTMLElement;
+  target?: () => HTMLElement | null;
   /* 滚动高度达到此参数值才出现 BackTop */
   visibilityHeight?: number;
   /* 点击按钮的回调函数 */

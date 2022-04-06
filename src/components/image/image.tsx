@@ -27,6 +27,7 @@ export interface ImageProps extends Omit<React.HTMLAttributes<HTMLImageElement>,
   prefixCls?: string;
   current?: number;
   style?: CSSProperties;
+  preview?: boolean;
 }
 
 export interface ImageState {

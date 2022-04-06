@@ -331,7 +331,7 @@ class PopComponent extends React.Component<PopProps, PopconfirmState> {
     const confirmContent = (
       <div className={`${contentStyle}-inner`}>
         <div>
-          <div>{icon || <Icon type="exclamation-circle" className={`${contentStyle}-inner-icon`} />}</div>
+          <div className={`${contentStyle}-inner-icon`}>{icon || <Icon type="exclamation-circle" />}</div>
           <div className={`${contentStyle}-inner-title`}>{title}</div>
         </div>
         <div className={btnStyle}>

@@ -15,8 +15,8 @@ const SelectDemo = () => {
       label: '和哈哈哈哈和哈哈哈哈和哈哈哈',
     },
   ];
-  const [dataT, setData] = React.useState([]);
-  const [data1, setData1] = React.useState([]);
+  const [dataT, setData] = React.useState<any[]>([]);
+  const [data1, setData1] = React.useState<any[]>([]);
   const [lastFetchId, setlastFetchId] = React.useState(0);
   React.useEffect(() => {
     setTimeout(() => {

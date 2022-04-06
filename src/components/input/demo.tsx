@@ -6,7 +6,7 @@ import '../icon/styles/index';
 const { Search, TextArea } = Input;
 
 const InputDemo = () => {
-  const ref = useRef();
+  const ref = useRef(null);
   console.log('ref', ref);
   return (
     <div>
@@ -17,6 +17,7 @@ const InputDemo = () => {
         onSearch={(value) => { console.log('searchValue', value); }}
         ref={ref}
         style={{ width: 100 }}
+        defaultValue="100"
       />
       <br />
       <br />

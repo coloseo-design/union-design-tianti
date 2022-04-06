@@ -86,7 +86,7 @@ export interface BaseInputProps extends Omit<React.HTMLAttributes<HTMLInputEleme
   onBlur?: React.FocusEventHandler<HTMLInputElement>;
   onPressEnter?: React.KeyboardEventHandler<HTMLInputElement>;
   // 输入框默认内容
-  // defaultValue?: string | number;
+  defaultValue?: string | number;
   // 带标签的 input，设置后置标签
   addonAfter?: ReactNode;
   // 带标签的 input，设置前置标签

@@ -2,7 +2,7 @@
 import React from 'react';
 import classnames from 'classnames';
 import { BaseProps } from '../common/base-component';
-import { ConfigConsumerProps, withGlobalConfig } from '../config-provider/context';
+import { withGlobalConfig } from '../config-provider/context';
 
 interface SkeletonAvatarProps {
   /** 指定头像的形状 */
@@ -21,7 +21,7 @@ interface SkeletonParagraphProps {
   width?: number | string | Array<string | number>;
 }
 
-interface SkeletonProps extends BaseProps, ConfigConsumerProps {
+interface SkeletonProps extends BaseProps {
   /* 为 true 时，显示占位图。反之则直接展示子组件 */
   loading?: boolean;
   /** 是否展示动画 */
@@ -32,6 +32,8 @@ interface SkeletonProps extends BaseProps, ConfigConsumerProps {
   title?: boolean | SkeletonTitleProps;
   /** 是否显示段落占位图 */
   paragraph?: boolean | SkeletonParagraphProps;
+
+  getPrefixCls?: string;
 }
 
 @withGlobalConfig

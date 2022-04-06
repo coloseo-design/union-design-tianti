@@ -8,9 +8,9 @@ import './styles/index';
 import '../popconfirm/styles/index';
 import '../tabs/styles/index';
 import '../tooltip/styles/index';
-import { ColumnsProps, TableRowSelectionType } from './type';
+import { ColumnsProps, TableRowSelectionType, ColumnsAlign } from './type';
 
-const render1 = (k: string, row: any) => (
+const render1 = (k: React.ReactNode, row: any) => (
   <div>
     {row.name}
     @
@@ -69,7 +69,7 @@ const columns: ColumnsProps[] = [
 const renderContent = (value: any, row: any, index: number) => {
   const obj = {
     children: value,
-    props: {},
+    props: {} as { colSpan?: number },
   };
   if (index === 4) {
     obj.props.colSpan = 0;
@@ -81,8 +81,8 @@ const spanColumns = [
   {
     title: 'Name',
     dataIndex: 'name',
-    align: 'center',
-    render: (text: unknown | null | undefined, row: any, index: number) => {
+    align: 'center' as ColumnsAlign,
+    render: (text: React.ReactNode, row: any, index: number) => {
       if (index < 4) {
         return <span style={{ color: '#b30000' }}>{text}</span>;
       }
@@ -96,7 +96,7 @@ const spanColumns = [
   },
   {
     title: 'Age',
-    align: 'right',
+    align: 'right' as ColumnsAlign,
     dataIndex: 'age',
     render: renderContent,
   },
@@ -107,7 +107,7 @@ const spanColumns = [
     render: (value: any, row: any, index: number) => {
       const obj = {
         children: value,
-        props: {},
+        props: {} as { rowSpan?: number; colSpan?: number },
       };
       if (index === 2) {
         obj.props.rowSpan = 2;
@@ -276,7 +276,7 @@ const tableT1 = (
               title: '住址',
               dataIndex: 'address',
               key: 'address',
-              render: (k: string, row: any) => (
+              render: (k: React.ReactNode, row: any) => (
                 <div>
                   {row.name}
                   @
@@ -368,7 +368,7 @@ const tableT1 = (
               title: '住址',
               dataIndex: 'address',
               key: 'address',
-              render: (k: string, row: any) => (
+              render: (k: React.ReactNode, row: any) => (
                 <div>
                   {row.name}
                   @

@@ -8,7 +8,6 @@ const {
 } = Layout;
 
 const LayoutDemo = () => {
-  const layoutStyle = { color: 'white', textAlign: 'center' };
   const headerStyle = { background: '#7dbcea' };
   const contentStyle = { background: 'rgba(16, 142, 233, 1)', height: 120, lineHeight: '120px' };
   const siderStyle = { background: '#3ba0e9', lineHeight: '120px' };
@@ -22,14 +21,14 @@ const LayoutDemo = () => {
   return (
     <>
       <h3>基本结构</h3>
-      <Layout style={layoutStyle}>
+      <Layout style={{ color: 'white', textAlign: 'center' }}>
         <Header style={headerStyle}>Header</Header>
         <Content style={contentStyle}>Content</Content>
         <Footer style={headerStyle}>Footer</Footer>
       </Layout>
       <br />
       <br />
-      <Layout style={layoutStyle}>
+      <Layout style={{ color: 'white', textAlign: 'center' }}>
         <Header style={headerStyle}>Header</Header>
         <Layout>
           <Sider style={siderStyle}>Sider</Sider>
@@ -39,7 +38,7 @@ const LayoutDemo = () => {
       </Layout>
       <br />
       <br />
-      <Layout style={layoutStyle}>
+      <Layout style={{ color: 'white', textAlign: 'center' }}>
         <Header style={headerStyle}>Header</Header>
         <Layout>
           <Content style={contentStyle}>Content</Content>
@@ -104,7 +103,7 @@ const LayoutDemo = () => {
           </Menu>
         </Sider>
         )}
-        <Layout style={layoutStyle}>
+        <Layout style={{ color: 'white', textAlign: 'center' }}>
           <Header style={headerStyle}>Header</Header>
           <Content style={contentStyle}>Content</Content>
           <Footer style={headerStyle}>Footer</Footer>

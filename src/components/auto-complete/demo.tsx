@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { AutoComplete } from '../index';
 import './styles/index';
 
 const { Option, OptGroup } = AutoComplete;
 export default () => {
-  const inputRef = React.createRef();
-  const [data, SetData] = useState([]);
-  const handleSearch = (value) => {
-    let result;
+  const inputRef = useRef(null);
+  const [data, SetData] = useState<any[]>([]);
+  const handleSearch = (value: string) => {
+    let result: any[];
     if (!value || value.indexOf('@') >= 0) {
       result = [];
     } else {
@@ -55,7 +55,7 @@ export default () => {
       ],
     },
   ];
-  function renderTitle(title) {
+  function renderTitle(title: string) {
     return (
       <span>
         {title}

@@ -23,7 +23,7 @@ export interface AnchorProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 
   /* click 事件的 handler */
   onClick?: (link: { id: string, name: string }, e: Event) => void;
   /* 指定滚动的容器 */
-  getContainer?: () => HTMLElement;
+  getContainer?: () => HTMLElement | null;
 }
 
 class Anchor extends Component<AnchorProps, AnchorState> {

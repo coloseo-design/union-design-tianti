@@ -83,8 +83,8 @@ const data = [
   },
 ];
 const TreeSelectDEmo = () => {
-  const [value1, setValue1] = React.useState('1');
-  const [value2, setValue2] = React.useState(['node-0-1']);
+  const [value1, setValue1] = React.useState<string | string[]>('1');
+  const [value2, setValue2] = React.useState<string | string[]>(['node-0-1']);
   const onChange = (value: string | string[], node: any) => {
     console.log('---change', value, node);
     setValue1(value);
@@ -98,7 +98,7 @@ const TreeSelectDEmo = () => {
     console.log('---change', value, node);
   };
 
-  const [dataT, setData] = React.useState([]);
+  const [dataT, setData] = React.useState<any[]>([]);
   React.useEffect(() => {
     setTimeout(() => {
       setData(data);

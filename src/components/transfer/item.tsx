@@ -11,8 +11,8 @@ interface ItemProps {
   chDirection: TransferDirection;
   checked: boolean;
   disabled?: boolean;
-  render?: (record: {[key: string] : unknown}) => React.ReactNode;
-  renderedText?: string | number;
+  // render?: (record: {[key: string] : unknown}) => React.ReactNode;
+  // renderedText?: string | number;
   renderedEl?: React.ReactNode;
 }
 

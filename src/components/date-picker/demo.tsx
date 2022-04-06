@@ -5,7 +5,7 @@ import { PickerSize } from './types';
 import './styles/index';
 
 const DatePickerDemo = () => {
-  const [size, setSize] = React.useState('middle');
+  const [size, setSize] = React.useState<PickerSize>('middle');
   const changeSize = (s: PickerSize) => () => {
     setSize(s);
   };

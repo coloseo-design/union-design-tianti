@@ -123,7 +123,7 @@ const data = [
   },
 ];
 const TreeDemo = () => {
-  const [dataT, setData] = React.useState([]);
+  const [dataT, setData] = React.useState<any[]>([]);
   React.useEffect(() => {
     setTimeout(() => {
       setData(data);

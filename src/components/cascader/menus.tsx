@@ -14,11 +14,11 @@ interface MenusProps {
   activeValue?: (string | number)[];
   options?: CascaderOptionType[];
   prefixCls?: string;
-  expandTrigger?: string;
+  // expandTrigger?: string;
   onSelect?: (targetOption: CascaderOptionType, index: number, e: React.MouseEvent<HTMLElement>) => void;
   dropdownMenuColumnStyle?: React.CSSProperties;
   fieldNames?: FieldNamesType;
-  expandIcon?: React.ReactNode;
+  // expandIcon?: React.ReactNode;
   // loadingIcon?: React.ReactNode;
 }
 
@@ -28,7 +28,7 @@ class Menus extends React.Component<MenusProps> {
     value: [],
     activeValue: [],
     onSelect: () => {},
-    expandTrigger: 'click',
+    // expandTrigger: 'click',
   }
 
   getActiveOptions(values?: CascaderOptionType[]): CascaderOptionType[] {

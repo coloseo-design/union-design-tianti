@@ -232,6 +232,7 @@ class AutoComplete extends React.Component<AutoCompleteProps, autoState> {
       value: inputValue,
       className: inputClass,
       onBlur: handleBlur,
+      disabled,
     };
 
     return (
@@ -292,7 +293,8 @@ class AutoComplete extends React.Component<AutoCompleteProps, autoState> {
     );
   }
 }
-const AutoCompleteRef = React.forwardRef((props: AutoCompleteProps, ref: React.MutableRefObject<HTMLInputElement | HTMLTextAreaElement>) => <AutoComplete {...props} forwardedRef={ref} />);
+// const AutoCompleteRef = React.forwardRef((props: AutoCompleteProps, ref: React.MutableRefObject<HTMLInputElement | HTMLTextAreaElement>) => <AutoComplete {...props} forwardedRef={ref} />);
+const AutoCompleteRef: React.ForwardRefExoticComponent<AutoCompleteProps & React.RefAttributes<HTMLInputElement | HTMLTextAreaElement>> & { Option: any; OptGroup: any; isSelectOptGroup: boolean} = React.forwardRef<HTMLInputElement, AutoCompleteProps>((props: AutoCompleteProps, ref: React.MutableRefObject<HTMLInputElement | HTMLTextAreaElement>) => <AutoComplete {...props} forwardedRef={ref} />);
 
 AutoCompleteRef.Option = Option;
 AutoCompleteRef.Option.isSelectOption = true;

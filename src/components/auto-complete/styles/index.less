@@ -21,7 +21,7 @@
   border-radius: @border-radius-base;
   font-size: @font-size-base;
   border: @border-width-base @border-style-base @auto-complete-border-color;
-  &:hover, &:active, &:focus {
+  &:hover, &:active, &:focus, :not(.@{auto-complete-cls}-disabled) {
     outline: none;
     border-color: @auto-complete-border-hover-color;
   }

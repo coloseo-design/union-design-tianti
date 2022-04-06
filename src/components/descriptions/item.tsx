@@ -17,7 +17,7 @@ React.HTMLAttributes<HTMLTableDataCellElement | HTMLTableHeaderCellElement> {
 class Item extends Component<ItemProps> {
   renderItem = ({ getPrefixCls }: ConfigConsumerProps) => {
     const {
-      prefixCls, children, label, span = 1, bordered, className, ...rest
+      prefixCls, children, label, span = 1, bordered, className,
     } = this.props;
     const prefix = getPrefixCls('descriptions-item', prefixCls);
     const mainClass = classNames(prefix, className, {
@@ -32,7 +32,7 @@ class Item extends Component<ItemProps> {
       );
     }
     return (
-      <td {...rest} colSpan={span} className={mainClass}>
+      <td colSpan={span} className={mainClass}>
         <span className={`${prefix}-label`}>{label}</span>
         <span className={`${prefix}-content`}>{children}</span>
       </td>
