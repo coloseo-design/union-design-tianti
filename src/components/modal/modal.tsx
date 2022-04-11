@@ -250,7 +250,7 @@ class Modal extends React.Component<ModalProps, ModalState, ModalMethodProps> {
     return v
     && (
     <Portal {...({ getPopupContainer })}>
-      <div id="uni-modal-root1">
+      <div id={destroyOnClose ? undefined : 'uni-modal-root1'}>
         <div className={container}>
           <div className={maskCalss} style={{ ...maskStyle, zIndex }} />
           <div className={wrapper} style={{ zIndex }} onClick={this.handleParent}>
