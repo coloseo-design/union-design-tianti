@@ -38,6 +38,11 @@ module.exports = {
     'linebreak-style': 'off',
     'react/no-array-index-key': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
+    'react/require-default-props': 'off',
+    'react/prop-types': 'off',
+    'react/display-name': 'off',
+    'react/no-unused-prop-types': 'off',
+    'react/default-props-match-prop-types': 'off',
   },
   settings: {
     'import/resolver': {

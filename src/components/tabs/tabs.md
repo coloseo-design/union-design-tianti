@@ -24,3 +24,5 @@ subtitle: 标签页
 | tab | 选项卡头显示文字 | React.ReactNode \|string | - |
 | key | 默认选中tab | string | - |
 | closable | 是否可以关闭，type为page的时候有效 | boolean | - |
+| forceRender | 被隐藏时是否渲染 DOM 结构 | boolean | false |
+

@@ -12,13 +12,13 @@ const TabsDemo = () => {
       <div style={{ margin: 20, backgroundColor: '#FFF' }}>
         <p>type为line示例</p>
         <Tabs defaultActiveKey="3" type="line">
-          <Pane key="1" tab="页签" closable>
+          <Pane key="1" tab="页签" closable forceRender>
             <div style={{ background: 'red' }}>a</div>
           </Pane>
-          <Pane key="2" tab="四字页签" closable>
+          <Pane key="2" tab="四字页签" closable forceRender>
             <div style={{ background: 'white' }}>b</div>
           </Pane>
-          <Pane tab="五个字页签" key="3" closable>
+          <Pane tab="五个字页签" key="3" closable forceRender>
             <div style={{ background: 'green' }}>c</div>
           </Pane>
           <Pane

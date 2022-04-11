@@ -7,17 +7,22 @@ export interface TabPaneBase extends React.HTMLAttributes<HTMLDivElement> {
   tab: React.ReactNode;
   key: string;
   closable?: boolean;
+  forceRender?: boolean;
+  active?: boolean;
 }
 
 export default class Pane extends React.Component<TabPaneBase> {
   renderPane = ({ getPrefixCls }: ConfigConsumerProps) => {
-    const { children, className } = this.props;
+    const {
+      children, className, active = false, forceRender = false,
+    } = this.props;
     let { prefixCls } = this.props;
     prefixCls = getPrefixCls('tabpane', prefixCls);
+
     const paneClassName = classNames(prefixCls, className);
     return (
       <div className={paneClassName}>
-        {children}
+        {(active || forceRender) ? children : null}
       </div>
     );
   }

@@ -1,4 +1,5 @@
 import React, {
+  Key,
   useContext,
   useEffect,
   useState,
@@ -45,7 +46,7 @@ const Tabs: React.FC<TabsProps> & { Pane: typeof Pane} = (props: TabsProps) => {
 
   const [checkedKey, setCheckedKey] = useState(defaultActiveKey);
   const [offsetBar, setOffsetBar] = useState([0, 0]);
-  const [closed, setClosed] = useState<string[]>([]);
+  const [closed, setClosed] = useState<Key[]>([]);
   const navRef = React.createRef<HTMLDivElement>();
 
   useEffect(() => {
@@ -157,6 +158,8 @@ const Tabs: React.FC<TabsProps> & { Pane: typeof Pane} = (props: TabsProps) => {
           React.Children.map(children, (item, i) => {
             if (item && typeof item === 'object' && 'props' in item) {
               const key = item.key || uuid();
+              console.log('item', item);
+
               if (closed.indexOf(key) >= 0) {
                 return null;
               }
@@ -164,7 +167,8 @@ const Tabs: React.FC<TabsProps> & { Pane: typeof Pane} = (props: TabsProps) => {
                 return null;
               }
             }
-            return item;
+            // eslint-disable-next-line max-len
+            return React.isValidElement(item) ? React.cloneElement(item, { active: i === index }) : null;
           }) || []
         }
       </div>
