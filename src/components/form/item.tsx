@@ -138,7 +138,7 @@ const Item: React.FC<FormItemProps> = (props: FormItemProps) => {
       const extProps: { [key: string]: unknown } = {
         ...child.props,
         id: name,
-        [valuePropName]: value || initialValue,
+        [valuePropName]: value,
         [trigger]: (...args: unknown[]) => {
           if (child.props && child.props[trigger]) {
             child.props[trigger](...args);

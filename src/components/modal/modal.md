@@ -35,6 +35,7 @@ subtitle: 对话框
 | onCancel | 点击遮罩层或右上角叉或取消按钮的回调 | function(e) | - |
 | onOk | 点击确定回调 | function(e) | - |
 | centered | 垂直居中展示 Modal | boolean | false |
+|destroyOnClose | 关闭时销毁 Modal 里的子元素 | boolean | false|
 
 
 ### Modal.method()

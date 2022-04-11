@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import React from 'react';
 import classNames from 'classnames';
 import Icon from '../icon';
@@ -41,6 +42,7 @@ export interface ModalProps {
   methodType?: string, // 代表modal.method方法（method不需要header)
   icon?: string| React.ReactNode,
   okCancel?: boolean, // modal提示框不需要展示 OK按钮
+  destroyOnClose?: boolean, // 关闭提示框是否销毁子元素
 }
 export interface ModalState {
   visible?: boolean;
@@ -181,6 +183,7 @@ class Modal extends React.Component<ModalProps, ModalState, ModalMethodProps> {
       icon,
       centered,
       getPopupContainer,
+      destroyOnClose = false,
     } = this.props;
     const { visible, modalTransition } = this.state;
     const prefix = getPrefixCls('modal', prefixCls);
@@ -228,8 +231,8 @@ class Modal extends React.Component<ModalProps, ModalState, ModalMethodProps> {
     const methodRender = (
       <>
         <div className={`${wrapperContent}-methodBody`}>
-          <span className={`${wrapperContent}-methodBody-icon`} style={{ transform: methodType === 'info' ? 'rotate(180deg)' : 'rotate(0deg)' }}>
-            {icon && React.isValidElement(icon) ? icon : <Icon type={icon && typeof icon === 'string' ? icon : methodType && IconMapping[methodType]} className={iconStyle} style={{ fontSize: 24 }} />}
+          <span className={classNames(`${wrapperContent}-methodBody-icon`, iconStyle)} style={{ transform: methodType === 'info' ? 'rotate(180deg)' : 'rotate(0deg)' }}>
+            {icon && React.isValidElement(icon) ? icon : <Icon type={icon && typeof icon === 'string' ? icon : methodType && IconMapping[methodType]} style={{ fontSize: 24 }} />}
           </span>
           <span className={`${wrapperContent}-methodBody-title`}>{title}</span>
           <span className={`${wrapperContent}-methodBody-content`}>{content}</span>
@@ -241,8 +244,13 @@ class Modal extends React.Component<ModalProps, ModalState, ModalMethodProps> {
       </>
     );
 
-    return visible && (
-      <Portal {...({ getPopupContainer })}>
+    const hasRoot = document.querySelector('#uni-modal-root1');
+    const v = destroyOnClose ? visible : hasRoot ? true : visible;
+
+    return v
+    && (
+    <Portal {...({ getPopupContainer })}>
+      <div id="uni-modal-root1">
         <div className={container}>
           <div className={maskCalss} style={{ ...maskStyle, zIndex }} />
           <div className={wrapper} style={{ zIndex }} onClick={this.handleParent}>
@@ -250,12 +258,12 @@ class Modal extends React.Component<ModalProps, ModalState, ModalMethodProps> {
               className={wrapperContent1}
               style={{ ...style, width }}
             >
-              {!methodType && normalRender}
-              {methodType && methodRender}
+              {methodType ? methodRender : normalRender}
             </div>
           </div>
         </div>
-      </Portal>
+      </div>
+    </Portal>
     );
   }
 

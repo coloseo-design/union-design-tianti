@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {
-  Modal, Button, Select, TreeSelect,
+  Modal, Button, Select, TreeSelect, Form, Input,
 } from '../index';
 import './styles/index';
 import '../button/styles/index';
@@ -9,6 +9,9 @@ import '../tree-select/styles/index';
 
 const { Option } = Select;
 const { TreeNode } = TreeSelect;
+
+const { Item: FormItem } = Form;
+
 const ModalDemo: React.FC<unknown> = () => {
   const [visible, setVisible] = useState(false);
   const [visible1, setVisible1] = useState(false);
@@ -108,7 +111,20 @@ const ModalDemo: React.FC<unknown> = () => {
         bodyStyle={{ height: 500, overflow: 'auto' }}
         cancelText="取消"
         centered
+        destroyOnClose
       >
+        <Form name="modelForm">
+          <FormItem>
+            <Input />
+          </FormItem>
+          {/* <FormItem>
+            <Select style={{ marginBottom: 32, width: 200 }}>
+              <Option key="1" value="1">选项111swdewdw是我的我的午饭人反而更</Option>
+              <Option key="2" value="2">选项1222</Option>
+              <Option disabled key="3" value="3">选项33333</Option>
+            </Select>
+          </FormItem> */}
+        </Form>
         <div>modal基本样式</div>
         <div>一系列的信息描述，可能会很长。也可以是很短同样也可以带标点</div>
         <div>一系列的信息描述，可能会很长。也可以是很短同样也可以带标点</div>

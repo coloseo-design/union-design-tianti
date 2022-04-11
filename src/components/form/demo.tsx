@@ -40,9 +40,12 @@ const FormDemo = () => {
       },
     },
   };
+
+  const [open, setOpen] = React.useState(false);
   return (
     <div>
       <div className="form-demo">
+        <Button onClick={() => setOpen(!open)}>操作</Button>
         <Form
           {...layout}
           name="test"
@@ -104,27 +107,32 @@ const FormDemo = () => {
           >
             <Input placeholder="请输入省份" style={{ width: '100%' }} />
           </FormItem>
-          <FormItem
-            name="address.city"
-            label={<span>地址</span>}
-            colon={false}
-            required
-          >
-            <Input placeholder="请输入城市" style={{ width: '100%' }} />
-          </FormItem>
-          <FormItem
-            name="sex"
-            label="性别"
-            validateFirst
-            rules={[
-              { required: true, message: '请选择性别' },
-            ]}
-          >
-            <Select placeholder="请选择">
-              <Select.Option value="男">男</Select.Option>
-              <Select.Option value="女">女</Select.Option>
-            </Select>
-          </FormItem>
+          {open && (
+          <div>
+            <FormItem
+              name="address.city"
+              label={<span>地址</span>}
+              colon={false}
+              required
+            >
+              <Input placeholder="请输入城市" style={{ width: '100%' }} />
+            </FormItem>
+            <FormItem
+              name="sex"
+              label="性别"
+              initialValue="男"
+              validateFirst
+              rules={[
+                { required: true, message: '请选择性别' },
+              ]}
+            >
+              <Select placeholder="请选择">
+                <Select.Option value="男">男</Select.Option>
+                <Select.Option value="女">女</Select.Option>
+              </Select>
+            </FormItem>
+          </div>
+          )}
           <FormItem {...tailFormItemLayout}>
             <Button type="primary" htmlType="submit" style={{ marginRight: 20 }}>提交</Button>
             <Button

@@ -481,8 +481,8 @@ class Select extends React.Component<SelectProps, SelectState> {
               </>
             )}
         </div>
+        {showDropdown && (
         <Portal {...({ getPopupContainer })}>
-          {showDropdown && (
           <div
             className={dropdownClass}
             style={{
@@ -516,8 +516,8 @@ class Select extends React.Component<SelectProps, SelectState> {
                   )}
             </SelectContext.Provider>
           </div>
-          )}
         </Portal>
+        )}
       </div>
     );
   }

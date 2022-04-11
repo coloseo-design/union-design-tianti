@@ -424,8 +424,8 @@ class TreeSelect extends React.Component<TreeSelectProps, TreeSelectStates> {
             </span>
           </span>
         </span>
+        {border && (
         <TreePopup {...({ getPopupContainer })}>
-          {border && (
           <div
             className={dropdown}
             style={{
@@ -434,8 +434,8 @@ class TreeSelect extends React.Component<TreeSelectProps, TreeSelectStates> {
           >
             {this.renderTreeNode(treeData || childrenList)}
           </div>
-          )}
         </TreePopup>
+        )}
       </>
     );
   };
