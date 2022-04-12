@@ -50,8 +50,13 @@ const FormDemo = () => {
           {...layout}
           name="test"
           initialValues={{
-            // username: 'zhansgan',
-            // password: 'lisi',
+            username: 'zhansgan',
+            password: 'lisi',
+            address: {
+              province: 'sichuan',
+              city: 'chengdu',
+            },
+            sex: '男',
           }}
           ref={formRef}
           onFinish={onSubmit}

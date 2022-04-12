@@ -55,7 +55,7 @@ const Form: ForwardRefRenderFunction<FormInstance, FormProps> = (
           [prefix]: {},
         });
       }
-      return composed[prefix];
+      return composed[prefix] as FormValues;
     }, values);
     changeValue = {
       [key]: value,
