@@ -32,6 +32,10 @@ export default class Table extends React.Component<TableProps, TableState> {
 
   mainTableBodyRef: React.RefObject<HTMLDivElement>;
 
+  static defaultProps = {
+    rowKey: 'key',
+  }
+
   constructor(props: TableProps) {
     super(props);
     this.leftTableBodyRef = React.createRef<HTMLDivElement>();
@@ -91,7 +95,7 @@ export default class Table extends React.Component<TableProps, TableState> {
   }
 
   rowKey = (data: unknown) => {
-    const { rowKey } = this.props;
+    const { rowKey = 'key' } = this.props;
     let key = '';
     if (rowKey && typeof rowKey === 'string') {
       key = (data as ({[key: string]: unknown}))[rowKey] as string;
@@ -131,7 +135,7 @@ export default class Table extends React.Component<TableProps, TableState> {
     const { pagination: paginationProps } = this.state;
     let paginatedData = dataSource;
     if (paginationProps !== false) {
-      const pagination = { ...paginationProps };
+      const pagination = { ...(paginationProps as PaginationProps) };
       const { current = 1, pageSize = 10 } = pagination as PaginationProps;
       const start = pageSize * (current - 1);
       paginatedData = dataSource.slice(start, start + pageSize);

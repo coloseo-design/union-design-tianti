@@ -295,7 +295,6 @@ const tableT1 = (
               ),
             },
           ]}
-          rowKey="key"
           bordered
           pagination={false}
         />
@@ -383,7 +382,6 @@ const tableT1 = (
               width: 200,
             },
           ]}
-          rowKey="key"
           bordered
           scroll={{ x: 1200 }}
         />
@@ -441,7 +439,6 @@ const tableT1 = (
               province: 'e',
             },
           ]}
-          rowKey="key"
           bordered
         />
       </div>
@@ -522,7 +519,6 @@ const tableT1 = (
               province: 'e',
             },
           ]}
-          rowKey="key"
           // scroll={{ y: 200, x: 1500 }}
         />
       </div>
@@ -584,7 +580,6 @@ const tableT1 = (
               province: 'e',
             },
           ]}
-          rowKey="key"
           scroll={{ y: 200, x: 1500 }}
         />
       </div>
