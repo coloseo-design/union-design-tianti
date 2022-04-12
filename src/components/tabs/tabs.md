@@ -15,7 +15,9 @@ subtitle: 标签页
 | activeKey | 选中tab | string | - |
 | type | 标签页样式 | 'line' \| 'plain' \| 'card' \|  'page' | 'line' |
 | onClose | 点击关闭标志响应函数 | (key:string) => void | - |
-| onChoose | 选中标签响应函数 | (key:string) => void | - |
+| onChange | 切换面板的回调	 | (activeKey:string) => void | - |
+| onTabClick | tab 被点击的回调		 | (activeKey:string, e: MouseEvent) => void | - |
+| tabBarExtraContent | tab bar 上额外的元素 | ReactNode \| {left?: ReactNode, right?: ReactNode} | - |
 
 ### Tabs.Pane
 

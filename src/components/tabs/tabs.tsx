@@ -19,13 +19,20 @@ export interface TitleType {
   closable?: boolean;
 }
 
+interface TabBarExtraContent {
+  left?: React.ReactNode;
+  right?: React.ReactNode
+}
+
 export interface TabsProps extends Omit<React.HTMLAttributes<unknown>, 'onChange'> {
   prefixCls?: string;
   defaultActiveKey?: string;
   activeKey?: string;
   type?: TabsType;
   onChange?: (key: string) => void;
+  onTabClick?: (key: string, e: React.MouseEvent<HTMLDivElement>) => void;
   onClose?: (key: string) => void;
+  tabBarExtraContent?: React.ReactNode | TabBarExtraContent;
 }
 
 const Tabs: React.FC<TabsProps> & { Pane: typeof Pane} = (props: TabsProps) => {
@@ -34,9 +41,11 @@ const Tabs: React.FC<TabsProps> & { Pane: typeof Pane} = (props: TabsProps) => {
     type = 'line',
     className,
     onChange,
+    onTabClick,
     children,
     activeKey,
     onClose,
+    tabBarExtraContent,
     ...others
   } = props;
   let { prefixCls } = props;
@@ -68,7 +77,7 @@ const Tabs: React.FC<TabsProps> & { Pane: typeof Pane} = (props: TabsProps) => {
         }
       }
     }
-  }, [prefixCls]);
+  }, [prefixCls, type]);
 
   useEffect(() => {
     setClosed([]);
@@ -81,6 +90,7 @@ const Tabs: React.FC<TabsProps> & { Pane: typeof Pane} = (props: TabsProps) => {
     }
     setCheckedKey(key);
     onChange?.(key);
+    onTabClick?.(key, e);
   };
 
   const closeClick = (key: string, e: React.MouseEvent<HTMLSpanElement>): void => {
@@ -135,22 +145,33 @@ const Tabs: React.FC<TabsProps> & { Pane: typeof Pane} = (props: TabsProps) => {
   const tabContentStyle = {
     marginLeft: `-${index * 100}%`,
   };
-
   return (
     <div className={tabCls}>
-      <div ref={navRef} className={`${prefixCls}-nav`} {...others}>
-        {
-          titles.filter((item) => closed.indexOf(item.key) === -1).map((title, i) => (
-            <div
-              key={title.key}
-              className={classNames({ [`${prefixCls}-tab`]: true, [`${prefixCls}-tab-active`]: (title.key === checkedKey || (!checkedKey && i === 0)) })}
-              onClick={(e) => changeKey(title.key, e)}
-            >
-              {tabNode(title)}
-            </div>
-          ))
-        }
-        <div className={`${prefixCls}-bar`} style={{ left: offsetBar[0], width: offsetBar[1] }} />
+      <div className={`${prefixCls}-nav`} {...others}>
+        <div className={`${prefixCls}-extra-content`}>
+          {tabBarExtraContent && (tabBarExtraContent as TabBarExtraContent).left}
+        </div>
+        <div className={`${prefixCls}-nav-content`} ref={navRef}>
+          {
+            titles.filter((item) => closed.indexOf(item.key) === -1).map((title, i) => (
+              <div
+                key={title.key}
+                className={classNames({ [`${prefixCls}-tab`]: true, [`${prefixCls}-tab-active`]: (title.key === checkedKey || (!checkedKey && i === 0)) })}
+                onClick={(e) => changeKey(title.key, e)}
+              >
+                {tabNode(title)}
+              </div>
+            ))
+          }
+          <div className={`${prefixCls}-bar`} style={{ left: offsetBar[0], width: offsetBar[1] }} />
+        </div>
+        <div className={`${prefixCls}-extra-content`}>
+          {
+            React.isValidElement(tabBarExtraContent)
+              ? tabBarExtraContent
+              : tabBarExtraContent && (tabBarExtraContent as TabBarExtraContent).right
+          }
+        </div>
       </div>
       <div className={contentClassName} style={type === 'page' ? {} : tabContentStyle}>
         {/* {children} */}
@@ -158,8 +179,6 @@ const Tabs: React.FC<TabsProps> & { Pane: typeof Pane} = (props: TabsProps) => {
           React.Children.map(children, (item, i) => {
             if (item && typeof item === 'object' && 'props' in item) {
               const key = item.key || uuid();
-              console.log('item', item);
-
               if (closed.indexOf(key) >= 0) {
                 return null;
               }

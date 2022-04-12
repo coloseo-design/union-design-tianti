@@ -11,8 +11,15 @@
   &-nav {
     display: flex;
     justify-content: flex-start;
-    position: relative;
+    // position: relative;
     height: @tabs-card-height;
+  }
+  &-nav-content {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    position: relative;
+    flex: auto;
   }
 
   &-title {
@@ -22,8 +29,8 @@
   }
 
   &-line {
-    &>.@{tab-prefix-cls}-nav {
-      &>.@{tab-prefix-cls}-tab {
+    .@{tab-prefix-cls}-nav {
+      .@{tab-prefix-cls}-tab {
         display: inline-block;
         height: @tabs-line-height;
         padding: 5px 20px;
@@ -39,7 +46,7 @@
           }
         }
       }
-      &>.@{tab-prefix-cls}-bar {
+      .@{tab-prefix-cls}-bar {
         display: block;
         position: absolute;
         bottom: 0;
@@ -55,7 +62,7 @@
       background-color: @tabs-bg;
       border-top: 1px solid @tabs-border-color;
       border-bottom: 1px solid @tabs-border-color;
-      &>.@{tab-prefix-cls}-tab {
+      .@{tab-prefix-cls}-tab {
         margin-top: -1px;
         height: @tabs-card-height;
         padding: 5px 20px;
@@ -76,7 +83,7 @@
           }
         }
       }
-      &>.@{tab-prefix-cls}-bar {
+      .@{tab-prefix-cls}-bar {
         display: none;
       }
     }
@@ -85,7 +92,7 @@
   &-plain {
     .@{tab-prefix-cls}-nav {
       background-color: @tabs-bg;
-      &>.@{tab-prefix-cls}-tab {
+      .@{tab-prefix-cls}-tab {
         height: @tabs-card-height;
         padding: 0 20px;
         cursor: pointer;
@@ -104,7 +111,7 @@
           }
         }
       }
-      &>.@{tab-prefix-cls}-bar {
+      .@{tab-prefix-cls}-bar {
         display: none;
       }
     }
@@ -115,7 +122,7 @@
       background-color: @content-bg;
       height: 40px;
       box-shadow: 0 2px 2px 0 @card-shadow;
-      &>.@{tab-prefix-cls}-tab {
+      .@{tab-prefix-cls}-tab {
         height: 40px;
         padding: 10px 16px;
         position: relative;

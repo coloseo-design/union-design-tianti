@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Tabs, Icon } from '../index';
+import { Tabs, Icon, Button } from '../index';
 import './styles/index';
 import '../icon/styles/index';
 
@@ -11,7 +11,7 @@ const TabsDemo = () => {
     <>
       <div style={{ margin: 20, backgroundColor: '#FFF' }}>
         <p>type为line示例</p>
-        <Tabs defaultActiveKey="3" type="line">
+        <Tabs defaultActiveKey="3" type="line" tabBarExtraContent={<Button>tabBarExtraContent</Button>}>
           <Pane key="1" tab="页签" closable forceRender>
             <div style={{ background: 'red' }}>a</div>
           </Pane>
@@ -79,7 +79,7 @@ const TabsDemo = () => {
                 <Icon type="apps" style={{ marginRight: 8, color: '#444A5E' }} />
                 带icon页签
               </span>
-  )}
+            )}
             closable
           >
             <div style={{ background: 'purple' }}>d</div>
