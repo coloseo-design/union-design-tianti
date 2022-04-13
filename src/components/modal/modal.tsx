@@ -47,7 +47,7 @@ export interface ModalProps {
 export interface ModalState {
   visible?: boolean;
   modalTransition?: boolean;
-  idx?: number;
+  idx: number | string;
 }
 
 export interface MappString {
