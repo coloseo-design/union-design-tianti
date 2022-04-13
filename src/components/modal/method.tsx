@@ -28,6 +28,7 @@ export interface ModalMethodProps {
   icon?: string| React.ReactNode,
   okCancel?: boolean, // modal提示框（除confirm外）不需要展示 OK按钮
   visible?: boolean,
+  destroyOnClose?: boolean,
 }
 
 export function success(props: ModalMethodProps) {
@@ -39,6 +40,7 @@ export function success(props: ModalMethodProps) {
     visible: true,
     footer: null,
     maskClosable: maskClosable || false,
+    destroyOnClose: true,
   };
 }
 export function error(props: ModalMethodProps) {
@@ -50,6 +52,7 @@ export function error(props: ModalMethodProps) {
     visible: true,
     footer: null,
     maskClosable: maskClosable || false,
+    destroyOnClose: true,
   };
 }
 
@@ -62,6 +65,7 @@ export function info(props: ModalMethodProps) {
     visible: true,
     footer: null,
     maskClosable: maskClosable || false,
+    destroyOnClose: true,
   };
 }
 
@@ -74,6 +78,7 @@ export function warning(props: ModalMethodProps) {
     visible: true,
     footer: null,
     maskClosable: maskClosable || false,
+    destroyOnClose: true,
   };
 }
 export function confirm(props: ModalMethodProps) {
@@ -85,6 +90,7 @@ export function confirm(props: ModalMethodProps) {
     visible: true,
     footer: null,
     maskClosable: maskClosable || false,
+    destroyOnClose: true,
   };
 }
 export function renderMethod(props: ModalMethodProps) {

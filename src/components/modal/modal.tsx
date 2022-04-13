@@ -47,6 +47,7 @@ export interface ModalProps {
 export interface ModalState {
   visible?: boolean;
   modalTransition?: boolean;
+  idx?: number;
 }
 
 export interface MappString {
@@ -78,6 +79,7 @@ class Modal extends React.Component<ModalProps, ModalState, ModalMethodProps> {
     this.state = {
       visible: visible || false,
       modalTransition: false,
+      idx: (Math.random() * 100).toFixed(0),
     };
   }
 
@@ -185,7 +187,7 @@ class Modal extends React.Component<ModalProps, ModalState, ModalMethodProps> {
       getPopupContainer,
       destroyOnClose = false,
     } = this.props;
-    const { visible, modalTransition } = this.state;
+    const { visible, modalTransition, idx } = this.state;
     const prefix = getPrefixCls('modal', prefixCls);
     const container = classNames(prefix, className, {
       [`${prefix}-show`]: visible,
@@ -244,13 +246,13 @@ class Modal extends React.Component<ModalProps, ModalState, ModalMethodProps> {
       </>
     );
 
-    const hasRoot = document.querySelector('#uni-modal-root1');
+    const hasRoot = document.querySelector(`#uni-modal-root${idx}`);
     const v = destroyOnClose ? visible : hasRoot ? true : visible;
 
     return v
     && (
     <Portal {...({ getPopupContainer })}>
-      <div id={destroyOnClose ? undefined : 'uni-modal-root1'}>
+      <div id={destroyOnClose ? undefined : `uni-modal-root${idx}`}>
         <div className={container}>
           <div className={maskCalss} style={{ ...maskStyle, zIndex }} />
           <div className={wrapper} style={{ zIndex }} onClick={this.handleParent}>

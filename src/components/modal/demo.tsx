@@ -88,7 +88,7 @@ const ModalDemo: React.FC<unknown> = () => {
   return (
     <div style={{ padding: 32 }}>
       <div>
-        <h2>基本的Modal</h2>
+        <h2>基本的Modal(destroyOnClose为true，关闭时会销毁子元素)</h2>
         <Button onClick={handleClick}>open</Button>
       </div>
       <div>
