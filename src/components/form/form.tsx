@@ -94,6 +94,7 @@ const Form: ForwardRefRenderFunction<FormInstance, FormProps> = (
   };
 
   useImperativeHandle(ref, () => ({
+    ...props,
     reset,
     setFieldsValue,
     submit: onSubmit,
