@@ -100,7 +100,7 @@ export interface FormItemProps extends BaseProps, React.HTMLAttributes<HTMLDivEl
   /** 输入框栅格布局 */
   wrapperCol?: ResponsiveColProps;
   /** 字段名称 */
-  name?: string | string[];
+  name?: string;
   /** 标签 */
   label?: React.ReactNode;
   labelStyle?: React.CSSProperties;
