@@ -4,7 +4,11 @@ import { Col, Row } from '../grid';
 import { FormContextProps, FormItemProps, ValidatorRule } from './type';
 import FormItemError from './form-item-error';
 import {
-  composeFieldName, defaultGetValueFromEvent, getValueFromKeypaths, toArray, validateRules,
+  composeFieldName,
+  defaultGetValueFromEvent,
+  getValueFromKeypaths,
+  toArray,
+  validateRules,
 } from './util';
 import { FormContext } from './form-context';
 import { ConfigContext } from '../config-provider/context';
