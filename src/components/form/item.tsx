@@ -39,9 +39,10 @@ const Item: React.FC<FormItemProps> = (props: FormItemProps) => {
     values,
     errors,
     onSubmit,
-    isValidating = false,
     onError,
     onCollect,
+    onStatus,
+    status,
   } = context;
   const composedName = composeFieldName(formName, name);
   const value = getValueFromKeypaths(name, values);
@@ -55,7 +56,8 @@ const Item: React.FC<FormItemProps> = (props: FormItemProps) => {
       isRequired = true;
     }
   }
-  const hasError = isValidating && error.length > 0;
+
+  const hasError = status[composedName] && error.length > 0;
   // 检查是否为必填
   // 布局相关
   const prefix = getPrefixCls('form-item', customizePrefixCls);
@@ -107,25 +109,37 @@ const Item: React.FC<FormItemProps> = (props: FormItemProps) => {
       }
       validate(newValue)
         .then((newErrors) => {
+          onStatus(composedName, false);
           onError(composedName, { event: trigger, errors: newErrors });
         })
         .catch((newErrors) => {
           // 更新错误信息
+          onStatus(composedName, true);
           onError(composedName, { event: trigger, errors: newErrors });
         });
       // 收集用户输入
       onCollect(composedName, { event: trigger, value: newValue });
     }
   };
-  // 当重置之后，再次校验
+
+  useEffect(() => {
+    if (name) {
+      onStatus(composedName, false);
+      validate(value || initialValue).catch((newErrors) => {
+        onError(composedName, { event: trigger, errors: newErrors });
+      });
+      onCollect(composedName, { event: trigger, value });
+    }
+  }, [name]);
+
   useEffect(() => {
     if (name) {
       validate(value || initialValue).catch((newErrors) => {
         onError(composedName, { event: trigger, errors: newErrors });
       });
-      onCollect(composedName, { event: trigger, value: value || initialValue });
+      onCollect(composedName, { event: trigger, value });
     }
-  }, [isValidating]);
+  }, [status]);
 
   /** 处理提交按钮 */
   const cloneElement = React.Children.map(children, (child) => {

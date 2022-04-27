@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import React, { createRef } from 'react';
 import {
   Form,
@@ -44,20 +45,75 @@ const FormDemo = () => {
   const [open, setOpen] = React.useState(false);
   return (
     <div>
+      {/* <div>
+        <span
+          style={{ padding: '0px 32px', cursor: 'pointer', color: open ? 'red' : undefined }}
+          onClick={() => {
+            setOpen(true);
+          }}
+        >
+          短信
+
+        </span>
+        <span
+          style={{ cursor: 'pointer', color: !open ? 'red' : undefined }}
+          onClick={() => {
+            setOpen(false);
+          }}
+        >
+          手机号
+
+        </span>
+
+        <Form
+          name="test1"
+          ref={formRef}
+          onFinish={(values) => {
+            console.log('==values', values);
+          }}
+          labelAlign="right"
+          labelStyle={{ marginBottom: 8 }}
+        >
+          {open ? (
+            <FormItem label="用户名" name="username" rules={[{ required: true, message: '请输入用户名' }]}>
+              <Input style={{ width: 256 }} placeholder="请输入用户名" />
+            </FormItem>
+          )
+            : (
+              <FormItem label="手机号" name="phone" rules={[{ required: true, message: '请输入手机号' }]}>
+                <Input style={{ width: 256 }} placeholder="请输入手机号" />
+              </FormItem>
+            )}
+          <FormItem label="密码" rules={[{ required: true, message: '请输入密码' }]} name="password">
+            <Input style={{ width: 256 }} placeholder="请输入" />
+          </FormItem>
+          <FormItem {...tailFormItemLayout}>
+            <Button type="primary" htmlType="submit" style={{ marginRight: 20 }}>提交</Button>
+            <Button
+              htmlType="reset"
+              onClick={() => {
+                formRef.current?.reset();
+              }}
+            >
+              重置
+            </Button>
+          </FormItem>
+        </Form>
+      </div> */}
       <div className="form-demo">
         <Button onClick={() => setOpen(!open)}>操作</Button>
         <Form
           {...layout}
           name="test"
-          initialValues={{
-            username: 'zhansgan',
-            password: 'lisi',
-            address: {
-              province: 'sichuan',
-              city: 'chengdu',
-            },
-            sex: '男',
-          }}
+          // initialValues={{
+          //   username: 'zhansgan',
+          //   password: 'lisi',
+          //   address: {
+          //     province: 'sichuan',
+          //     city: 'chengdu',
+          //   },
+          //   sex: '男',
+          // }}
           ref={formRef}
           onFinish={onSubmit}
           onFinishFailed={onFinishFailed}
@@ -91,7 +147,7 @@ const FormDemo = () => {
             label="密码"
             required
             validateFirst
-            initialValue="lisi"
+            // initialValue="lisi"
             rules={[
               {
                 validator: (_, value) => {
@@ -125,7 +181,7 @@ const FormDemo = () => {
             <FormItem
               name="sex"
               label="性别"
-              initialValue="男"
+              // initialValue="男"
               validateFirst
               rules={[
                 { required: true, message: '请选择性别' },

@@ -1,3 +1,5 @@
+/* eslint-disable no-restricted-syntax */
+/* eslint-disable guard-for-in */
 import React, {
   ForwardedRef,
   ForwardRefRenderFunction,
@@ -10,7 +12,7 @@ import { FormProvider } from './form-context';
 import { ConfigConsumerProps, ConfigContext } from '../config-provider/context';
 import { decomposeFiledName } from './util';
 import {
-  ErrorCollection, FormErrors, FormInstance, FormProps, FormValues, ValueCollection,
+  ErrorCollection, FormErrors, FormInstance, FormProps, FormValues, ValueCollection, FormStatus,
 } from './type';
 
 const Form: ForwardRefRenderFunction<FormInstance, FormProps> = (
@@ -43,7 +45,7 @@ const Form: ForwardRefRenderFunction<FormInstance, FormProps> = (
   }
   const [values, setValues] = useState<FormValues>({ ...initialValues });
   const [errors, setErrors] = useState<FormErrors>({});
-  const [isValidating, setIsValidating] = useState<boolean>(false);
+  const [status, setStatus] = useState<FormStatus>({});
 
   const onCollect = (fieldName: string, { value }: ValueCollection) => {
     let changeValue = {};
@@ -72,10 +74,22 @@ const Form: ForwardRefRenderFunction<FormInstance, FormProps> = (
     setErrors({ ...errors });
   };
 
+  const onStatus = (itemName: string, s: boolean) => {
+    Object.assign(status, {
+      [itemName]: s || false,
+    });
+    setStatus({ ...status });
+  };
+
   const onSubmit = (evt?: React.FormEvent<HTMLFormElement>) => {
     evt && evt.preventDefault();
     const hasError = Object.keys(errors).some((key) => errors[key].length > 0);
-    setIsValidating(true);
+    for (const key in status) {
+      Object.assign(status, {
+        [key]: true,
+      });
+    }
+    setStatus({ ...status });
     if (hasError) {
       onFinishFailed && onFinishFailed({ errors });
     } else {
@@ -88,15 +102,23 @@ const Form: ForwardRefRenderFunction<FormInstance, FormProps> = (
     setValues({ ...values });
   };
 
+  const getFieldValue = (value: string) => values[value];
+
   const reset = () => {
     setValues({ ...initialValues });
-    setIsValidating(false);
+    for (const key in status) {
+      Object.assign(status, {
+        [key]: false,
+      });
+    }
+    setStatus({ ...status });
   };
 
   useImperativeHandle(ref, () => ({
     ...props,
     reset,
     setFieldsValue,
+    getFieldValue,
     submit: onSubmit,
   }));
   const providerValue = {
@@ -109,10 +131,12 @@ const Form: ForwardRefRenderFunction<FormInstance, FormProps> = (
     errors,
     onSubmit,
     validateTrigger,
-    isValidating,
     labelAlign,
     labelStyle,
+    status,
+    onStatus,
   };
+
   return (
     <form
       {...rest}

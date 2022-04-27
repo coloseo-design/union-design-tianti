@@ -15,6 +15,10 @@ export interface FormErrors {
   [key: string]: string[] | React.ReactNode[];
 }
 
+export interface FormStatus {
+  [key: string]: boolean;
+}
+
 export interface FormCommmonProps {
   /** 是否需要冒号 */
   colon?: boolean;
@@ -50,7 +54,11 @@ export interface FormContextProps extends FormCommmonProps{
   /** 表单提交事件 */
   onSubmit: () => void;
   /** 表单的校验状态 */
-  isValidating: boolean;
+  // isValidating: boolean;
+  /** formItem的校验状态 */
+  status: FormStatus;
+
+  onStatus: (name: string, s: boolean) => void;
 }
 
 // eslint-disable-next-line max-len
@@ -91,6 +99,7 @@ export interface ValidatorRule {
 export type FormInstance = {
   reset: () => void;
   setFieldsValue: (value: FormValues) => void;
+  getFieldValue: (value: string) => void;
   submit: () => void;
 };
 
