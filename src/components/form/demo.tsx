@@ -105,15 +105,15 @@ const FormDemo = () => {
         <Form
           {...layout}
           name="test"
-          // initialValues={{
-          //   username: 'zhansgan',
-          //   password: 'lisi',
-          //   address: {
-          //     province: 'sichuan',
-          //     city: 'chengdu',
-          //   },
-          //   sex: '男',
-          // }}
+          initialValues={{
+            username: 'zhansgan',
+            // password: 'lisi',
+            // address: {
+            //   province: 'sichuan',
+            //   city: 'chengdu',
+            // },
+            // sex: '男',
+          }}
           ref={formRef}
           onFinish={onSubmit}
           onFinishFailed={onFinishFailed}
@@ -126,7 +126,7 @@ const FormDemo = () => {
             validateFirst
             label="用户名"
             labelAlign="right"
-            initialValue="zhangsan"
+            // initialValue="zhangsan"
             labelStyle={{ marginBottom: 10 }}
             rules={[
               { required: true, message: '请输入用户名' },
