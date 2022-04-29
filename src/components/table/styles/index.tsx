@@ -3,3 +3,4 @@ import './index.less';
 import '../../dropdown/styles/index';
 import '../../checkbox/styles/index';
 import '../../pagination/styles/index';
+import '../../radio/styles/index';
