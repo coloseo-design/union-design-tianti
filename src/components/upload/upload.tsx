@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable no-param-reassign */
-import React, { createRef, FC } from 'react';
+import React, { createRef, FC, ReactElement } from 'react';
 import Button from '../button';
 import Icon from '../icon';
 import { BaseComponent, BaseProps } from '../common/base-component';
@@ -59,6 +59,10 @@ export type UploadPorps = {
   onChange?: (fileList: UploadFile[]) => void;
   /** 能否拖拽文件 */
   canDrag?: boolean;
+  /** 自定义文件上传列表 */
+  renderList?: (files:UploadFile[])=> ReactElement;
+  /** 点击移除文件时的回调，返回值为 false 时不移除。支持返回一个 Promise 对象，Promise 对象 resolve(false) 或 reject 时不移除  */
+  onRemove?: (file:UploadFile)=> boolean | Promise<boolean>;
 } & BaseProps;
 
 export default class Upload extends BaseComponent<UploadPorps> {
@@ -271,7 +275,7 @@ export default class Upload extends BaseComponent<UploadPorps> {
           />
           {children}
         </div>
-        {listType === 'text' && this.viewListText()}
+        {this.props.renderList ? this.props.renderList(Object.values(this.files)) : listType === 'text' && this.viewListText()}
       </div>
     );
   };
@@ -375,8 +379,15 @@ export default class Upload extends BaseComponent<UploadPorps> {
     this.upload(file);
   };
 
-  private onDelete = (file: UploadFile) => {
+  private onDelete = async (file: UploadFile) => {
+    const { onRemove } = this.props;
     if (file.uid in this.files) {
+      if (onRemove) {
+        const res = await onRemove(file);
+        if (!res) {
+          return;
+        }
+      }
       delete this.files[file.uid];
       file.abort?.();
       this.updateView();

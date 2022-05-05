@@ -24,6 +24,8 @@ subtitle: 上传
 | onPreview       | 点击文件链接或预览图标时的回调                                                                                                                                                                           | (file: UploadFile) => void                                                                       | -      |
 | onChange        | 上传文件改变时回调                                                                                                                                                                                       | (fileList: UploadFile[]) => void                                                                 | -      |
 | canDrag         | 能否拖拽文件                                                                                                                                                                                             | boolean                                                                                          | false  |
+| renderList      | 自定义文件上传列表                                                                                                                                                                                       | (files:UploadFile[])=> ReactElement                                                              | -      |
+| onRemove        | 点击移除文件时的回调，返回值为 false 时不移除。支持返回一个 Promise 对象，Promise 对象 resolve(false) 或 reject 时不移除                                                                                 | (file:UploadFile)=> boolean \| Promise\<boolean\>                                                | -      |
 
 ### UploadFile
 
