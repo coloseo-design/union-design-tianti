@@ -62,14 +62,14 @@ export type TableRowSelectionType = {
   /** 列标题 */
   columnTitle?: React.ReactNode;
   /** checkbox默认设置 */
-  getCheckboxProps: (record: any) => {
+  getCheckboxProps?: (record: any) => {
     disabled?: boolean;
     name?: React.ReactNode;
   };
   /** 选中可控 */
   selectedRowKeys?: unknown[];
   /** 默认选中 */
-  defaultSelectedRowKeys: unknown[];
+  defaultSelectedRowKeys?: unknown[];
   /** 选择类型 */
   type?: 'checkbox' | 'radio',
 }

@@ -6,6 +6,7 @@ import {
   Icon,
   Checkbox,
   Pagination,
+  Radio,
 } from '..';
 import { PaginationProps } from '../pagination/pagination';
 import {
@@ -336,7 +337,7 @@ export default class Table extends React.Component<TableProps, TableState> {
       type,
     } = rowSelection as TableRowSelectionType;
     return {
-      title: columnTitle || this.selectAllCheckbox(),
+      title: columnTitle || (type === 'checkbox' && this.selectAllCheckbox()),
       dataIndex: 'selected',
       key: 'selected',
       width: columnWidth || 45,
@@ -365,6 +366,17 @@ export default class Table extends React.Component<TableProps, TableState> {
             dataSource.filter((item) => newSelectedRowKeys.indexOf(this.rowKey(item)) >= 0),
           );
         };
+        const onRadioChange = (e: { target: { checked: boolean; }; }) => {
+          const current = dataSource.find((item) => this.rowKey(item) === key);
+          onSelect && onSelect(current, e.target.checked);
+          this.setState({
+            selectedRowKeys: [key],
+          });
+          onChange(
+            [key],
+            dataSource.filter((item) => [key].indexOf(this.rowKey(item)) >= 0),
+          );
+        };
         Object.assign(props, {
           checked,
         });
@@ -372,6 +384,9 @@ export default class Table extends React.Component<TableProps, TableState> {
           Object.assign(props, {
             checked: defaultSelectdRowKeys.indexOf(key) >= 0,
           });
+        }
+        if (type === 'radio') {
+          return <Radio {...props} onChange={onRadioChange} />;
         }
         return (
           <Checkbox
