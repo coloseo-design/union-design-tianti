@@ -334,7 +334,7 @@ export default class Table extends React.Component<TableProps, TableState> {
       onChange,
       selectedRowKeys: defaultSelectdRowKeys = [],
       onSelect,
-      type,
+      type = 'checkbox',
     } = rowSelection as TableRowSelectionType;
     return {
       title: columnTitle || (type === 'checkbox' && this.selectAllCheckbox()),
