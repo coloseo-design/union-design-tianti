@@ -39,6 +39,8 @@ title: Form
 | name | 表单名称 | string | null |
 | colon | 配置 Form.Item 的 colon 的默认值 (只有在属性 layout 为 horizontal 时有效) | boolean | true |
 | validateTrigger | 配置Form校验触发器 | string | onChange |
+|getFieldsValue|获取一组字段名对应的值，会按照对应结构返回。默认返回现存字段值，当调用 getFieldsValue(true) 时返回所有值| (names: string[] | boolean) => void|--|
+|getFieldValue|获取一个字段名对应的值|(name: string) => void | --|
 
 
 ### FormItem

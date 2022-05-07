@@ -50,7 +50,8 @@ const FormDemo = () => {
   React.useEffect(() => {
     const { current } = formRef;
     const fileds = current?.getFieldsValue(['username', 'password', 'sex']);
-    console.log('==fileds', fileds);
+    const fileds1 = current?.getFieldsValue(true);
+    console.log('==fileds', fileds, fileds1);
   }, []);
   return (
     <div>

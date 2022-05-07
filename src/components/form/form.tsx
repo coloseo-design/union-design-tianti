@@ -104,14 +104,20 @@ const Form: ForwardRefRenderFunction<FormInstance, FormProps> = (
 
   const getFieldValue = (value: string) => values[value];
 
-  const getFieldsValue = (list: string[]) => {
-    const obj = {};
-    (list || []).forEach((item) => {
-      Object.assign(obj, {
-        [item]: values[item],
+  const getFieldsValue = (list: string[] | boolean) => {
+    if (typeof list === 'boolean' && list) {
+      return values;
+    }
+    if (Array.isArray(list)) {
+      const obj = {};
+      (list || []).forEach((item) => {
+        Object.assign(obj, {
+          [item]: values[item],
+        });
       });
-    });
-    return obj;
+      return obj;
+    }
+    return null;
   };
 
   const reset = () => {

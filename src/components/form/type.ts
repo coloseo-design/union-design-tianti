@@ -100,7 +100,7 @@ export type FormInstance = {
   reset: () => void;
   setFieldsValue: (value: FormValues) => void;
   getFieldValue: (value: string) => void;
-  getFieldsValue: (values: string[]) => void;
+  getFieldsValue: (values: string[] | boolean) => void;
   submit: () => void;
 };
 
