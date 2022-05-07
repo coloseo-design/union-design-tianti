@@ -136,7 +136,7 @@ const Item: React.FC<FormItemProps> = (props: FormItemProps) => {
         .catch((newErrors) => {
           onError(composedName, { event: trigger, errors: newErrors });
         });
-      onCollect(composedName, { event: trigger, value });
+      // onCollect(composedName, { event: trigger, value });
     }
     return () => {
       onError(composedName, { event: trigger, errors: [] });
@@ -152,7 +152,7 @@ const Item: React.FC<FormItemProps> = (props: FormItemProps) => {
         .catch((newErrors) => {
           onError(composedName, { event: trigger, errors: newErrors });
         });
-      onCollect(composedName, { event: trigger, value });
+      // onCollect(composedName, { event: trigger, value });
     }
   }, [status]);
 

@@ -11,7 +11,7 @@ import '../button/styles/index';
 import '../input/styles/index';
 import '../select/styles/index';
 import './styles/index';
-import { FormInstance } from './type';
+import { FormInstance, FormValues } from './type';
 
 const { Item: FormItem } = Form;
 const FormDemo = () => {
@@ -43,6 +43,15 @@ const FormDemo = () => {
   };
 
   const [open, setOpen] = React.useState(false);
+  const onValuesChange = (changedValues: FormValues, allValues: FormValues) => {
+    console.log('==?changedValues>', changedValues, allValues);
+  };
+
+  React.useEffect(() => {
+    const { current } = formRef;
+    const fileds = current?.getFieldsValue(['username', 'password', 'sex']);
+    console.log('==fileds', fileds);
+  }, []);
   return (
     <div>
       {/* <div>
@@ -112,8 +121,9 @@ const FormDemo = () => {
             //   province: 'sichuan',
             //   city: 'chengdu',
             // },
-            // sex: '男',
+            sex: '男',
           }}
+          onValuesChange={onValuesChange}
           ref={formRef}
           onFinish={onSubmit}
           onFinishFailed={onFinishFailed}

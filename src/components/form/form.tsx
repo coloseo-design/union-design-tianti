@@ -104,6 +104,16 @@ const Form: ForwardRefRenderFunction<FormInstance, FormProps> = (
 
   const getFieldValue = (value: string) => values[value];
 
+  const getFieldsValue = (list: string[]) => {
+    const obj = {};
+    (list || []).forEach((item) => {
+      Object.assign(obj, {
+        [item]: values[item],
+      });
+    });
+    return obj;
+  };
+
   const reset = () => {
     setValues({ ...initialValues });
     for (const key in status) {
@@ -120,6 +130,7 @@ const Form: ForwardRefRenderFunction<FormInstance, FormProps> = (
     setFieldsValue,
     getFieldValue,
     submit: onSubmit,
+    getFieldsValue,
   }));
   const providerValue = {
     wrapperCol,
