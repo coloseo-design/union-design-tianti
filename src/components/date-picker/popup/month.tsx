@@ -101,6 +101,7 @@ abstract class PopupYear<T extends PickerType> extends Popup<T> {
   };
 
   private clickDate = (item: PopupData) => {
+    if (this.props.disabledValue?.(item.date)) return;
     if (item.disabled) return;
     const { onDate = () => { }, viewDate } = this.props;
 

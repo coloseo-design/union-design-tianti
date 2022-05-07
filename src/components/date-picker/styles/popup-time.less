@@ -23,6 +23,15 @@
     display: inline-block;
     overflow: auto;
 
+    & .@{datepicker-item-disabled-time} {
+      cursor: not-allowed !important;
+      color: @dpcolor-text-35 !important;
+      background-color: @dpcolor-bg-disabled !important;
+      &:hover {
+        background-color: @dpcolor-bg-disabled !important;
+      }
+    }
+
     & > div:not(:empty) {
       height: @dpsize-popuptime-col-height;
       line-height: @dpsize-popuptime-col-height;

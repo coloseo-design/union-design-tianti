@@ -12,7 +12,9 @@ export type InputIconProps = {
   inputValue?: string;
   className?: string;
   onIcon?: () => void;
-} & InputHTMLAttributes<HTMLInputElement> & DOMAttributes<HTMLDivElement> & BaseProps;
+} & InputHTMLAttributes<HTMLInputElement> &
+  DOMAttributes<HTMLDivElement> &
+  BaseProps;
 
 export class InputIcon extends BaseComponent<InputIconProps> {
   protected classPrefix = 'datepicker';
@@ -36,7 +38,9 @@ export class InputIcon extends BaseComponent<InputIconProps> {
         className={className}
       >
         <div
-          onClick={onIcon}
+          onClick={() => {
+            this.props.disabled || onIcon?.();
+          }}
           className={this.gpc('picker-icon')}
         >
           <Icon type={suffixIcon} />
@@ -46,7 +50,7 @@ export class InputIcon extends BaseComponent<InputIconProps> {
           <input
             autoComplete="off"
             disabled
-            onChange={() => { }}
+            onChange={() => {}}
             {...input}
             value={inputValue}
             ref={inputRef}

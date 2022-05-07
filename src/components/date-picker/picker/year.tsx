@@ -86,6 +86,7 @@ export class PickerRangeYear extends PickerRange {
             {...common}
             viewDate={viewDate!}
             showDoubleRight={false}
+            disabledValue={this.props.disabledValue}
             {...this.popupSingleRangeYear}
           />
         </div>
@@ -94,6 +95,7 @@ export class PickerRangeYear extends PickerRange {
             {...common}
             showDoubleLeft={false}
             viewDate={viewDate!.add(10, 'year')}
+            disabledValue={this.props.disabledValue}
             {...this.popupSingleRangeYear}
           />
         </div>

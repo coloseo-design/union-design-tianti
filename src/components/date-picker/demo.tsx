@@ -1,4 +1,6 @@
+/* eslint-disable no-console */
 import React from 'react';
+import { Dayjs } from 'dayjs';
 
 import { DatePicker } from '../index';
 import { PickerSize } from './types';
@@ -13,71 +15,138 @@ const DatePickerDemo = () => {
     size,
     onChange: (...p: unknown[]) => console.log(p),
   };
+
+  const commonYearProps = {
+    disabledValue: (d: Dayjs) => [2020, 2021].includes(d.get('year')),
+  };
+
+  const commonMonthProps = {
+    disabledValue: (d: Dayjs) => [2, 9].includes(d.get('month')),
+  };
+
+  const commonDateProps = {
+    disabledValue: (d: Dayjs) => [2, 9].includes(d.get('month'))
+      || [2020, 2021].includes(d.get('year'))
+      || [3, 5, 12, 22].includes(d.get('date')),
+  };
+
   return (
     <div id="date" style={{ padding: '15px 30px', position: 'relative' }}>
       <div style={{ margin: '15px 0' }}>
         <h1 style={{ display: 'inline-block', marginRight: 15 }}>选择器大小</h1>
-        <button type="button" onClick={changeSize('small')}>small</button>
-        <button type="button" onClick={changeSize('middle')}>middle</button>
-        <button type="button" onClick={changeSize('large')}>large</button>
+        <button type="button" onClick={changeSize('small')}>
+          small
+        </button>
+        <button type="button" onClick={changeSize('middle')}>
+          middle
+        </button>
+        <button type="button" onClick={changeSize('large')}>
+          large
+        </button>
       </div>
+
       <h1 style={{ textAlign: 'center' }}>type=single:时间选择器</h1>
+
       <div style={{ margin: '15px 0' }}>
-        <h1 style={{ display: 'inline-block', marginRight: 15 }}>mode=time-full</h1>
-        <DatePicker getPopupContainer={() => document.querySelector('#date')} mode="time-full" {...commonProps} />
+        <h1 style={{ display: 'inline-block', marginRight: 15 }}>
+          mode=time-full
+        </h1>
+        <DatePicker
+          getPopupContainer={() => document.querySelector('#date')}
+          mode="time-full"
+          {...commonProps}
+        />
       </div>
+
       <div style={{ margin: '15px 0 15px 0' }}>
-        <h1 style={{ display: 'inline-block', marginRight: 15 }}>mode=time-ymd</h1>
+        <h1 style={{ display: 'inline-block', marginRight: 15 }}>
+          mode=time-ymd
+        </h1>
         <DatePicker mode="time-ymd" {...commonProps} />
       </div>
+
       <div style={{ margin: '15px 0 15px 0' }}>
-        <h1 style={{ display: 'inline-block', marginRight: 15 }}>mode=time-hms</h1>
+        <h1 style={{ display: 'inline-block', marginRight: 15 }}>
+          mode=time-hms
+        </h1>
         <DatePicker mode="time-hms" {...commonProps} />
       </div>
+
       <div style={{ margin: '15px 0 15px 0' }}>
         <h1 style={{ display: 'inline-block', marginRight: 15 }}>mode=year</h1>
-        <DatePicker mode="year" {...commonProps} />
+        <DatePicker mode="year" {...commonProps} {...commonYearProps} />
       </div>
+
       <div style={{ margin: '15px 0 15px 0' }}>
         <h1 style={{ display: 'inline-block', marginRight: 15 }}>mode=month</h1>
-        <DatePicker mode="month" {...commonProps} />
+        <DatePicker mode="month" {...commonProps} {...commonMonthProps} />
       </div>
-      <div />
+
       <div style={{ margin: '15px 0 15px 0' }}>
         <h1 style={{ display: 'inline-block', marginRight: 15 }}>mode=date</h1>
-        <DatePicker mode="date" {...commonProps} />
+        <DatePicker mode="date" {...commonProps} {...commonDateProps} />
       </div>
+
       <div style={{ margin: '15px 0 15px 0' }}>
-        <h1 style={{ display: 'inline-block', marginRight: 15 }}>mode=date-time</h1>
-        <DatePicker mode="date-time" {...commonProps} />
+        <h1 style={{ display: 'inline-block', marginRight: 15 }}>
+          mode=date-time
+        </h1>
+        <DatePicker mode="date-time" {...commonProps} {...commonDateProps} />
       </div>
-      <div />
+
       <h1 style={{ textAlign: 'center' }}>type=range:时间范围选择器</h1>
+
       <div style={{ margin: '15px 0 15px 0' }}>
-        <h1 style={{ display: 'inline-block', marginRight: 15 }}>mode=time-full-range</h1>
+        <h1 style={{ display: 'inline-block', marginRight: 15 }}>
+          mode=time-full-range
+        </h1>
         <DatePicker mode="time-full" type="range" {...commonProps} />
       </div>
+
       <div style={{ margin: '15px 0 15px 0' }}>
-        <h1 style={{ display: 'inline-block', marginRight: 15 }}>mode=time-ymd</h1>
+        <h1 style={{ display: 'inline-block', marginRight: 15 }}>
+          mode=time-ymd
+        </h1>
         <DatePicker mode="time-ymd" type="range" {...commonProps} />
       </div>
+
       <div style={{ margin: '15px 0 15px 0' }}>
-        <h1 style={{ display: 'inline-block', marginRight: 15 }}>mode=time-hms</h1>
+        <h1 style={{ display: 'inline-block', marginRight: 15 }}>
+          mode=time-hms
+        </h1>
         <DatePicker mode="time-hms" type="range" {...commonProps} />
       </div>
+
       <div style={{ margin: '15px 0 15px 0' }}>
         <h1 style={{ display: 'inline-block', marginRight: 15 }}>mode=year</h1>
-        <DatePicker mode="year" type="range" {...commonProps} />
+        <DatePicker
+          mode="year"
+          type="range"
+          {...commonProps}
+          {...commonYearProps}
+        />
       </div>
+
       <div style={{ margin: '15px 0 15px 0' }}>
         <h1 style={{ display: 'inline-block', marginRight: 15 }}>mode=month</h1>
-        <DatePicker mode="month" type="range" {...commonProps} />
+        <DatePicker
+          mode="month"
+          type="range"
+          {...commonProps}
+          {...commonMonthProps}
+        />
       </div>
-      <div />
+
       <div style={{ margin: '15px 0 15px 0' }}>
         <h1 style={{ display: 'inline-block', marginRight: 15 }}>mode=date</h1>
-        <DatePicker mode="date" type="range" {...commonProps} />
+        <DatePicker
+          mode="date"
+          type="range"
+          {...commonProps}
+          {...commonDateProps}
+        />
       </div>
+
       <div style={{ height: 600 }} />
     </div>
   );

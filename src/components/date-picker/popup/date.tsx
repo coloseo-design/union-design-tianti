@@ -25,8 +25,14 @@ const handleData = cacheFunc((year: number, month: number) => {
     const startDay = lAllDays - cFirstDay;
     for (let i = 0; i < cFirstDay; i++) {
       const value = `${startDay + i + 1}`;
-      const key = `${lYear}-${(`${lMonth + 1}`).padStart(2, '0')}-${value.padStart(2, '0')}`;
-      const date = dayjs().set('year', lYear).set('month', lMonth).set('date', startDay + i + 1);
+      const key = `${lYear}-${`${lMonth + 1}`.padStart(
+        2,
+        '0',
+      )}-${value.padStart(2, '0')}`;
+      const date = dayjs()
+        .set('year', lYear)
+        .set('month', lMonth)
+        .set('date', startDay + i + 1);
       temp.push({
         key,
         value,
@@ -43,14 +49,22 @@ const handleData = cacheFunc((year: number, month: number) => {
     const cAllDays = cTime.daysInMonth();
     for (let i = 0; i < cAllDays; i++) {
       const value = `${i + 1}`;
-      const key = `${cYear}-${(`${cMonth + 1}`).padStart(2, '0')}-${value.padStart(2, '0')}`;
-      const date = dayjs().set('year', cYear).set('month', cMonth).set('date', i + 1);
+      const key = `${cYear}-${`${cMonth + 1}`.padStart(
+        2,
+        '0',
+      )}-${value.padStart(2, '0')}`;
+      const date = dayjs()
+        .set('year', cYear)
+        .set('month', cMonth)
+        .set('date', i + 1);
       const curLinePos = (() => {
         let result = 'cur' as 'start' | 'end' | 'cur' | 'startend';
 
         if (date.day() === 0 || i + 1 === 1) result = 'start';
         if (date.day() === 6 || date.daysInMonth() === i + 1) result = 'end';
-        if (result === 'start' && date.daysInMonth() === i + 1) result = 'startend';
+        if (result === 'start' && date.daysInMonth() === i + 1) {
+          result = 'startend';
+        }
         if (result === 'end' && i + 1 === 1) result = 'startend';
 
         return result;
@@ -73,8 +87,14 @@ const handleData = cacheFunc((year: number, month: number) => {
     const len = 42 - temp.length;
     for (let i = 0; i < len; i++) {
       const value = `${i + 1}`;
-      const key = `${rYear}-${(`${rMonth + 1}`).padStart(2, '0')}-${value.padStart(2, '0')}`;
-      const date = dayjs().set('year', rYear).set('month', rMonth).set('date', i + 1);
+      const key = `${rYear}-${`${rMonth + 1}`.padStart(
+        2,
+        '0',
+      )}-${value.padStart(2, '0')}`;
+      const date = dayjs()
+        .set('year', rYear)
+        .set('month', rMonth)
+        .set('date', i + 1);
       temp.push({
         key,
         value,
@@ -98,7 +118,7 @@ const handleData = cacheFunc((year: number, month: number) => {
 
   for (let i = 0; i < 6; i++) {
     for (let j = 0; j < 7; j++) {
-      (result[i] ??= []).push(temp[(i * 7) + j]);
+      (result[i] ??= []).push(temp[i * 7 + j]);
     }
   }
 
@@ -164,18 +184,28 @@ abstract class PopupDate<T extends PickerType> extends Popup<T> {
   };
 
   protected viewBody = () => {
-    const { viewDate, onMouseEnter = () => { }, onMouseLeave = () => { } } = this.props;
+    const {
+      viewDate,
+      onMouseEnter = () => {},
+      onMouseLeave = () => {},
+    } = this.props;
     const data = handleData(viewDate.get('year'), viewDate.get('month'));
 
     return (
       <div className={this.getClass('popupdate-normal')}>
         <div
           onMouseLeave={onMouseLeave}
-          data-class={this.classNames(this.gpc('tag-head'), this.gpc('tag-row'))}
+          data-class={this.classNames(
+            this.gpc('tag-head'),
+            this.gpc('tag-row'),
+          )}
         >
           {this.weeks.map((item) => (
             <div
-              data-class={this.classNames(this.gpc('tag-head'), this.gpc('tag-col'))}
+              data-class={this.classNames(
+                this.gpc('tag-head'),
+                this.gpc('tag-col'),
+              )}
               key={item.key}
             >
               {item.value}
@@ -184,12 +214,18 @@ abstract class PopupDate<T extends PickerType> extends Popup<T> {
         </div>
         {data.map((line) => (
           <div
-            data-class={this.classNames(this.gpc('tag-content'), this.gpc('tag-row'))}
+            data-class={this.classNames(
+              this.gpc('tag-content'),
+              this.gpc('tag-row'),
+            )}
             key={line[0].key}
           >
             {line.map((item) => (
               <div
-                data-class={this.classNames(this.gpc('tag-content'), this.gpc('tag-col'))}
+                data-class={this.classNames(
+                  this.gpc('tag-content'),
+                  this.gpc('tag-col'),
+                )}
                 key={item.key}
                 onClick={() => this.clickDate(item)}
                 onMouseEnter={() => onMouseEnter(item.date)}
@@ -205,24 +241,35 @@ abstract class PopupDate<T extends PickerType> extends Popup<T> {
   };
 
   protected viewFooter = () => {
-    const { onNow = () => { }, showFooter = true } = this.props;
+    const { onNow = () => {}, showFooter = true } = this.props;
 
     if (!showFooter) return;
 
     return (
       <div className={this.getClass('popupdate-normal-footer')}>
-        <Button onClick={onNow} type="link" size="small">今天</Button>
+        <Button
+          onClick={onNow}
+          disabled={this.props.disabledValue?.(dayjs())}
+          type="link"
+          size="small"
+        >
+          今天
+        </Button>
       </div>
     );
   };
 
   private clickDate = (item: PopupData) => {
+    if (this.props.disabledValue?.(item.date)) return;
     if (item.disabled) return;
-    const { viewDate, onDate = () => { } } = this.props;
+    const { viewDate, onDate = () => {} } = this.props;
 
-    onDate(viewDate.set('year', item.date.get('year'))
-      .set('month', item.date.get('month'))
-      .set('date', item.date.get('date')));
+    onDate(
+      viewDate
+        .set('year', item.date.get('year'))
+        .set('month', item.date.get('month'))
+        .set('date', item.date.get('date')),
+    );
   };
 }
 
@@ -255,9 +302,7 @@ export class PopupSingleDatetime extends PopupDate<'single'> {
 
     return (
       <div>
-        <div>
-          {viewDate ? viewDate.format('HH:mm:ss') : ''}
-        </div>
+        <div>{viewDate ? viewDate.format('HH:mm:ss') : ''}</div>
         <PopupSingleTime
           date={date}
           selectedDate={selectedDate}
@@ -271,16 +316,30 @@ export class PopupSingleDatetime extends PopupDate<'single'> {
   };
 
   protected viewFooter = () => {
-    const { onOk, onNow = () => { } } = this.props;
+    const { onOk, onNow = () => {} } = this.props;
     const okDisabled = !(this.getDate() || this.getSelectDate());
 
     return (
       <div className={this.getClass('popuptime-footer')}>
         <div>
-          <Button onClick={onNow} type="link" size="small">此刻</Button>
+          <Button
+            onClick={onNow}
+            type="link"
+            size="small"
+            disabled={this.props.disabledValue?.(dayjs())}
+          >
+            此刻
+          </Button>
         </div>
         <div>
-          <Button onClick={onOk} disabled={okDisabled} type="primary" size="small">确定</Button>
+          <Button
+            onClick={onOk}
+            disabled={okDisabled}
+            type="primary"
+            size="small"
+          >
+            确定
+          </Button>
         </div>
       </div>
     );
@@ -310,15 +369,11 @@ export class PopupRangeDatetime extends PopupDate<'range'> {
   );
 
   protected viewRight = () => {
-    const {
-      onDate, viewDate,
-    } = this.props;
+    const { onDate, viewDate } = this.props;
 
     return (
       <div>
-        <div>
-          {viewDate ? viewDate.format('HH:mm:ss') : ''}
-        </div>
+        <div>{viewDate ? viewDate.format('HH:mm:ss') : ''}</div>
         <PopupSingleTime
           date={this.getDate()}
           selectedDate={this.getSelectDate()}
@@ -332,16 +387,25 @@ export class PopupRangeDatetime extends PopupDate<'range'> {
   };
 
   protected viewFooter = () => {
-    const { onOk, onNow = () => { } } = this.props;
+    const { onOk, onNow = () => {} } = this.props;
     const okDisabled = !(this.getDate() || this.getSelectDate());
 
     return (
       <div className={this.getClass('popuptime-footer')}>
         <div>
-          <Button onClick={onNow} type="link" size="small">此刻</Button>
+          <Button onClick={onNow} type="link" size="small">
+            此刻
+          </Button>
         </div>
         <div>
-          <Button onClick={onOk} disabled={okDisabled} type="primary" size="small">确定</Button>
+          <Button
+            onClick={onOk}
+            disabled={okDisabled}
+            type="primary"
+            size="small"
+          >
+            确定
+          </Button>
         </div>
       </div>
     );

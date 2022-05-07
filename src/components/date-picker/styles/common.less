@@ -67,6 +67,8 @@
 @datepicker-item-notcur: ~"@{datepicker}-item-notcur";
 @datepicker-item-hover: ~"@{datepicker}-item-hover";
 @datepicker-item-disabled: ~"@{datepicker}-item-disabled";
+@datepicker-item-disabled-date: ~"@{datepicker}-item-disabled-date";
+@datepicker-item-disabled-time: ~"@{datepicker}-item-disabled-time";
 @datepicker-item-selected: ~"@{datepicker}-item-selected";
 
 @datepicker-item-border-start: ~"@{datepicker}-item-border-start";
@@ -155,11 +157,22 @@
   }
 }
 
-.item-disabled-base() {
+.item-disabled-base(@width) {
   & .@{datepicker-item-disabled} {
     cursor: not-allowed;
     color: @dpcolor-text-35;
     background-color: @dpcolor-bg-disabled;
+  }
+
+  & .@{datepicker-item-disabled-date} {
+    cursor: not-allowed;
+    color: @dpcolor-text-35;
+    & span {
+      margin: 0 auto;
+      width: @width;
+      border-radius: @dpborder-radius;
+      background-color: @dpcolor-bg-disabled;
+    }
   }
 }
 

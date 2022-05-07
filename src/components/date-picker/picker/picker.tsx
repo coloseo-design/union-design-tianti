@@ -9,14 +9,19 @@ import { getOffset } from '../../utils/getOffset';
 import Portal from '../../common/portal';
 import { InputIcon } from '../components/input';
 import {
-  PickerMode, PickerModeType, PickerPosition, PickerProps, PickerState, PickerType,
+  PickerMode,
+  PickerModeType,
+  PickerPosition,
+  PickerProps,
+  PickerState,
+  PickerType,
 } from '../types';
 
 export abstract class Picker<
   T extends PickerType,
   P extends PickerProps<T> = PickerProps<T>,
-  S extends PickerState<T> = PickerState<T>,
-  > extends BaseComponent<P, S> {
+  S extends PickerState<T> = PickerState<T>
+> extends BaseComponent<P, S> {
   protected abstract inputView: () => ReactNode;
 
   protected abstract popupView: () => ReactNode;
@@ -65,7 +70,11 @@ export abstract class Picker<
 
   protected view = () => {
     const {
-      style, width, size, className = '', getPopupContainer,
+      style,
+      width,
+      size,
+      className = '',
+      getPopupContainer,
     } = this.props;
     const { popupVisible, left, top } = this.state;
 
@@ -78,12 +87,18 @@ export abstract class Picker<
       >
         {this.inputView()}
         {popupVisible && (
-          <Portal {...({ getPopupContainer })}>
+          <Portal {...{ getPopupContainer }}>
             <div
               style={{
-                display: 'block', position: 'absolute', top, left, zIndex: 9999,
+                display: 'block',
+                position: 'absolute',
+                top,
+                left,
+                zIndex: 9999,
               }}
-              className={`${this.getClass('picker', { [size!]: true })} ${className}`}
+              className={`${this.getClass('picker', {
+                [size!]: true,
+              })} ${className}`}
             >
               <div
                 className={this.gpc('picker-popup')}
@@ -92,14 +107,17 @@ export abstract class Picker<
                   e.nativeEvent.stopImmediatePropagation();
                 }}
               >
-                {popupVisible && this.popupView()}
+                {popupVisible
+                  && React.cloneElement(this.popupView() as any, {
+                    disabledValue: this.props.disabledValue,
+                  })}
               </div>
             </div>
           </Portal>
         )}
       </div>
     );
-  }
+  };
 
   protected onDoubleLeft = (num = 1) => {
     this.setState({ viewDate: this.getViewDate().subtract(num, 'year') });
@@ -117,23 +135,31 @@ export abstract class Picker<
     this.setState({ viewDate: this.getViewDate().add(num, 'month') });
   };
 
-  protected getModeType = (mode: PickerMode, type: PickerType): PickerModeType => `${mode}-${type}` as PickerModeType;
+  protected getModeType = (
+    mode: PickerMode,
+    type: PickerType,
+  ): PickerModeType => `${mode}-${type}` as PickerModeType;
 
   protected changeModeType = (
     modeType: PickerModeType,
     obj?: ((state: S, props: P) => Partial<S>) | Partial<S>,
   ) => this.setState((state, props) => ({
     ...state,
-    ...typeof obj === 'function' ? obj(state, props) : obj,
+    ...(typeof obj === 'function' ? obj(state, props) : obj),
     modeType,
   }));
 
-  protected openPopup = (obj?: ((state: S, props: P) => Partial<S>) | Partial<S>) => {
+  protected openPopup = (
+    obj?: ((state: S, props: P) => Partial<S>) | Partial<S>,
+  ) => {
     const { getPopupContainer } = this.props;
     if (this.container?.current) {
       const { height } = this.container?.current.getBoundingClientRect();
       const containter = getPopupContainer && getPopupContainer();
-      const { left: offsetLeft, top: offsetTop } = getOffset(this.container?.current, containter);
+      const { left: offsetLeft, top: offsetTop } = getOffset(
+        this.container?.current,
+        containter,
+      );
       this.setState({
         left: offsetLeft,
         top: offsetTop + height + 4,
@@ -141,7 +167,7 @@ export abstract class Picker<
     }
     this.setState((state, props) => ({
       ...state,
-      ...typeof obj === 'function' ? obj(state, props) : obj,
+      ...(typeof obj === 'function' ? obj(state, props) : obj),
       popupVisible: true,
       viewDate: this.getViewDate(),
     }));
@@ -152,16 +178,19 @@ export abstract class Picker<
   protected closePopup = (
     obj?: ((state: S, props: P) => Partial<S>) | Partial<S>,
     isCallPropsOnChange = false,
-  ) => this.setState((state, props) => ({
-    ...state,
-    ...typeof obj === 'function' ? obj(state, props) : obj,
-    popupVisible: false,
-    selectedDate: undefined,
-    viewDate: undefined,
-    hoverDate: undefined,
-    position: undefined,
-    modeType: this.getModeType(props.mode!, props.type!),
-  }), () => isCallPropsOnChange && this.callPropsOnChange());
+  ) => this.setState(
+    (state, props) => ({
+      ...state,
+      ...(typeof obj === 'function' ? obj(state, props) : obj),
+      popupVisible: false,
+      selectedDate: undefined,
+      viewDate: undefined,
+      hoverDate: undefined,
+      position: undefined,
+      modeType: this.getModeType(props.mode!, props.type!),
+    }),
+    () => isCallPropsOnChange && this.callPropsOnChange(),
+  );
 
   private handleClickBodyWithoutDatePicker = (target: HTMLElement) => {
     if (target.getAttribute('data-uuid') === this.uuid) {
@@ -184,7 +213,8 @@ export abstract class Picker<
 
     if (!popupVisible) return;
 
-    event.target && this.handleClickBodyWithoutDatePicker(event.target as HTMLElement);
+    event.target
+      && this.handleClickBodyWithoutDatePicker(event.target as HTMLElement);
   };
 }
 
@@ -197,7 +227,7 @@ export abstract class PickerSingle extends Picker<'single'> {
     const { date, viewDate } = this.state;
 
     return viewDate ?? date ?? this.getDefaultViewDate();
-  }
+  };
 
   protected getInputRef = () => this.inputRef;
 
@@ -248,8 +278,10 @@ export abstract class PickerSingle extends Picker<'single'> {
     const { disabled } = this.props;
     const { popupVisible } = this.state;
 
-    popupVisible || disabled || this.openPopup({ viewDate: this.getViewDate() });
-  }
+    popupVisible
+      || disabled
+      || this.openPopup({ viewDate: this.getViewDate() });
+  };
 
   protected onInputIcon = () => {
     if (this.suffixIcon === 'delete') {
@@ -278,7 +310,10 @@ export abstract class PickerSingle extends Picker<'single'> {
 }
 
 export abstract class PickerRange extends Picker<'range'> {
-  private inputRef = [createRef<HTMLInputElement>(), createRef<HTMLInputElement>()];
+  private inputRef = [
+    createRef<HTMLInputElement>(),
+    createRef<HTMLInputElement>(),
+  ];
 
   private position!: PickerPosition;
 
@@ -294,7 +329,7 @@ export abstract class PickerRange extends Picker<'range'> {
     }
 
     return viewDate ?? date[0] ?? this.getDefaultViewDate();
-  }
+  };
 
   protected callPropsOnChange = () => {
     const { onChange } = this.props;
@@ -330,14 +365,17 @@ export abstract class PickerRange extends Picker<'range'> {
     const inputValue = this.getFormatDate();
 
     return (
-      <div className={this.classNames(this.gpc('picker-input-range'), {
-        [this.gpc('picker-input-range-start-hover')]: !startDisabled,
-        [this.gpc('picker-input-range-end-hover')]: !endDisabled,
-        [this.gpc('picker-input-range-start-focus')]: !startDisabled && popupVisible && position === 'start',
-        [this.gpc('picker-input-range-end-focus')]: !endDisabled && popupVisible && position === 'end',
-        [this.gpc('picker-input-range-start-disabled')]: startDisabled,
-        [this.gpc('picker-input-range-end-disabled')]: endDisabled,
-      })}
+      <div
+        className={this.classNames(this.gpc('picker-input-range'), {
+          [this.gpc('picker-input-range-start-hover')]: !startDisabled,
+          [this.gpc('picker-input-range-end-hover')]: !endDisabled,
+          [this.gpc('picker-input-range-start-focus')]:
+            !startDisabled && popupVisible && position === 'start',
+          [this.gpc('picker-input-range-end-focus')]:
+            !endDisabled && popupVisible && position === 'end',
+          [this.gpc('picker-input-range-start-disabled')]: startDisabled,
+          [this.gpc('picker-input-range-end-disabled')]: endDisabled,
+        })}
       >
         <InputIcon
           inputRef={this.inputRef[0]}
@@ -391,15 +429,18 @@ export abstract class PickerRange extends Picker<'range'> {
     const [startSelectedDate, endSelectedDate] = selectedDate;
 
     const close = () => {
-      this.closePopup(({ selectedDate }) => ({
-        date: (() => {
-          const [start, end] = selectedDate ?? [];
-          if (dayjs(start).isAfter(dayjs(end))) {
-            return [end, start] as [Dayjs?, Dayjs?];
-          }
-          return selectedDate;
-        })(),
-      }), true);
+      this.closePopup(
+        ({ selectedDate }) => ({
+          date: (() => {
+            const [start, end] = selectedDate ?? [];
+            if (dayjs(start).isAfter(dayjs(end))) {
+              return [end, start] as [Dayjs?, Dayjs?];
+            }
+            return selectedDate;
+          })(),
+        }),
+        true,
+      );
     };
 
     if (startSelectedDate && endSelectedDate) {
@@ -409,26 +450,38 @@ export abstract class PickerRange extends Picker<'range'> {
 
     if (position === 'start') {
       if (endSelectedDate) {
-        this.setState({
-          selectedDate: [startSelectedDate ?? startDate, endSelectedDate],
-        }, () => close());
+        this.setState(
+          {
+            selectedDate: [startSelectedDate ?? startDate, endSelectedDate],
+          },
+          () => close(),
+        );
       } else {
-        this.setState({
-          selectedDate: [startSelectedDate ?? startDate, endSelectedDate],
-        }, () => this.onFocus('end'));
+        this.setState(
+          {
+            selectedDate: [startSelectedDate ?? startDate, endSelectedDate],
+          },
+          () => this.onFocus('end'),
+        );
       }
       return;
     }
 
     if (position === 'end') {
       if (startSelectedDate) {
-        this.setState({
-          selectedDate: [startSelectedDate, endSelectedDate ?? endDate],
-        }, () => close());
+        this.setState(
+          {
+            selectedDate: [startSelectedDate, endSelectedDate ?? endDate],
+          },
+          () => close(),
+        );
       } else {
-        this.setState({
-          selectedDate: [startSelectedDate, endSelectedDate ?? endDate],
-        }, () => this.onFocus('start'));
+        this.setState(
+          {
+            selectedDate: [startSelectedDate, endSelectedDate ?? endDate],
+          },
+          () => this.onFocus('start'),
+        );
       }
     }
   };

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable max-len */
 /* eslint-disable max-classes-per-file */
 import dayjs, { Dayjs } from 'dayjs';
@@ -110,6 +111,7 @@ export class PickerRangeMonth extends PickerRange {
               {...common}
               viewDate={viewDate!}
               showDoubleRight={false}
+              disabledValue={this.props.disabledValue}
               {...this.popupRangeMonth}
             />
           </div>
@@ -118,6 +120,7 @@ export class PickerRangeMonth extends PickerRange {
               {...common}
               showDoubleLeft={false}
               viewDate={viewDate?.add(1, 'year') as Dayjs}
+              disabledValue={this.props.disabledValue}
               {...this.popupRangeMonth}
             />
           </div>

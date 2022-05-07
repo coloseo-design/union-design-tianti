@@ -74,7 +74,7 @@ export type PopupProps<T extends PickerType> = {
     onMonth?: () => void;
     onMouseEnter?: (date: Dayjs) => void;
     onMouseLeave?: () => void;
-} & Pick<PickerProps<T>, 'mode' | 'yearRange'> & PopupHeadProps & BaseProps;
+} & Pick<PickerProps<T>, 'mode' | 'yearRange' | 'disabledValue'> & PopupHeadProps & BaseProps;
 
 export type PopupData = {
     key: string,
