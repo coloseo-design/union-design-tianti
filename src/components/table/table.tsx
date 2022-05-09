@@ -1,3 +1,5 @@
+/* eslint-disable no-param-reassign */
+/* eslint-disable max-len */
 import React from 'react';
 import classnames from 'classnames';
 import omit from 'omit.js';
@@ -21,7 +23,9 @@ import {
 import Row from './row';
 import ColGroup from './col-group';
 import TableHeader from './header';
-import { groupColums, sortColums } from './utils';
+import {
+  groupColums, sortColums, flattenColums,
+} from './utils';
 
 @withGlobalConfig
 export default class Table extends React.Component<TableProps, TableState> {
@@ -44,7 +48,8 @@ export default class Table extends React.Component<TableProps, TableState> {
     this.mainTableHeaderRef = React.createRef<HTMLDivElement>();
     this.mainTableBodyRef = React.createRef<HTMLDivElement>();
     const { rowSelection: { selectedRowKeys, defaultSelectedRowKeys } = {}, columns } = props;
-    const filters = columns.reduce<{[key: string]: string[]}>((c, i) => {
+    const flatColums: ColumnsProps[] = flattenColums(columns || []);
+    const filters = flatColums.reduce<{[key: string]: string[]}>((c, i) => {
       // if (i.filteredValue || i.defaultFilteredValue) {
       const key = i.dataIndex || i.key || '';
       Object.assign(c, { [key]: i.filteredValue || i.defaultFilteredValue || [] });
@@ -57,7 +62,29 @@ export default class Table extends React.Component<TableProps, TableState> {
       filters,
       // eslint-disable-next-line react/no-unused-state
       pagination: props.pagination === undefined ? { current: 1, pageSize: 10 } : props.pagination,
+      flatColums,
+      theadHeight: undefined,
     };
+  }
+
+  componentDidMount() {
+    const { scroll } = this.props;
+    const bodyRef = this.mainTableBodyRef;
+    const mainRef = this.mainTableHeaderRef;
+    if (bodyRef.current && (!scroll || scroll.y === 0)) {
+      const thead = bodyRef.current.getElementsByTagName('thead')[0];
+      if (thead) {
+        const { offsetHeight } = thead;
+        this.setState({ theadHeight: offsetHeight });
+      }
+    }
+    if (mainRef.current && scroll && scroll.y !== 0) {
+      const thead = mainRef.current.getElementsByTagName('thead')[0];
+      if (thead) {
+        const { offsetHeight } = thead;
+        this.setState({ theadHeight: offsetHeight });
+      }
+    }
   }
 
   componentDidUpdate(props: TableProps) {
@@ -75,8 +102,13 @@ export default class Table extends React.Component<TableProps, TableState> {
   }
 
   // 渲染表头
-  renderHeader = (columns: ColumnsProps[]) => {
-    const { filters } = this.state;
+  renderHeader = (
+    columns: ColumnsProps[],
+    propsColumns: ColumnsProps[],
+    // ref: React.LegacyRef<HTMLDivElement> | undefined,
+    isFixed?: boolean,
+  ) => {
+    const { filters, theadHeight } = this.state;
     const onSubmit = (name: string, values: string | string[]) => {
       this.setState({
         filters: {
@@ -91,6 +123,9 @@ export default class Table extends React.Component<TableProps, TableState> {
         prefixCls={this.getPrefixCls()}
         filteredValueMap={filters}
         onChange={onSubmit}
+        propsColumns={propsColumns}
+        isFixed={isFixed}
+        theadHeight={theadHeight}
       />
     );
   }
@@ -112,9 +147,9 @@ export default class Table extends React.Component<TableProps, TableState> {
    * @returns
    */
   filterDataSourceFilter = () => {
-    const { columns } = this.props;
-    const { filters } = this.state;
-    return columns.reduce((composed, column) => {
+    // const { columns } = this.props;
+    const { filters, flatColums } = this.state;
+    return flatColums.reduce((composed, column) => {
       const { onFilter, dataIndex, key } = column;
       const name = dataIndex || key || '';
       const values = filters[name];
@@ -224,9 +259,12 @@ export default class Table extends React.Component<TableProps, TableState> {
   renderFixedHeader = (
     prefix: string,
     columns: ColumnsProps[],
+    propsColumns: ColumnsProps[],
     tableStyle = {},
     ref?: React.LegacyRef<HTMLDivElement> | undefined,
     onScroll?: React.UIEventHandler<HTMLDivElement> | undefined,
+    isFixed = true,
+    position?: 'left' | 'right',
   ) => {
     const { scroll, bordered } = this.props;
     const tableCls = classnames(prefix, {
@@ -234,10 +272,15 @@ export default class Table extends React.Component<TableProps, TableState> {
       [`${prefix}-fixed`]: scroll && (scroll.x || scroll.y),
     });
     return scroll && (scroll.x || scroll.y) ? (
-      <div className={`${prefix}-header`} ref={ref} onScroll={onScroll}>
+      <div
+        className={`${prefix}-header`}
+        ref={ref}
+        onScroll={onScroll}
+        style={{ overflowY: scroll.y && (position === 'right' || !position) ? 'scroll' : 'auto' }}
+      >
         <table className={tableCls} style={tableStyle}>
           <ColGroup columns={columns} />
-          {this.renderHeader(columns)}
+          {this.renderHeader(columns, propsColumns, isFixed)}
         </table>
       </div>
     ) : null;
@@ -410,8 +453,9 @@ export default class Table extends React.Component<TableProps, TableState> {
       bordered,
       rowSelection,
     } = this.props;
+    const { flatColums } = this.state;
     const prefix = this.getPrefixCls();
-    const filteredColumns = groupColums(columns, position);
+    const filteredColumns = groupColums(flatColums, position);
     const tableOuterCls = classnames(`${prefix}-item`, {
       [`${prefix}-item-fixed-${position}`]: position,
     }, `${prefix}-item-fixed`);
@@ -430,18 +474,22 @@ export default class Table extends React.Component<TableProps, TableState> {
     return (
       <div className={tableOuterCls}>
         {
-          this.renderFixedHeader(prefix, filteredColumns)
+          this.renderFixedHeader(prefix, filteredColumns, columns, {}, undefined, undefined, true, position)
         }
         <div
-          className={`${prefix}-body`}
-          style={{ maxHeight, overflow: 'scroll' }}
+          className={classnames(`${prefix}-body`)}
+          style={{
+            maxHeight,
+            overflowX: scroll && scroll.x ? 'scroll' : 'auto',
+            overflowY: scroll && scroll.y ? 'scroll' : 'auto',
+          }}
           onScroll={this.onScroll}
           ref={ref}
         >
           <table className={tableCls}>
             <ColGroup columns={filteredColumns} />
             {
-              !scroll || scroll.y === 0 ? this.renderHeader(filteredColumns) : null
+              !scroll || scroll.y === 0 ? this.renderHeader(filteredColumns, columns, true) : null
             }
             {
               this.renderBody(filteredColumns, dataSource)
@@ -511,6 +559,7 @@ export default class Table extends React.Component<TableProps, TableState> {
     });
     const {
       pagination,
+      flatColums,
     } = this.state;
     const tableStyle = {};
     if (scroll && scroll.x) {
@@ -544,28 +593,35 @@ export default class Table extends React.Component<TableProps, TableState> {
                 // 固定头
                 this.renderFixedHeader(
                   prefix,
+                  this.getMainColums(flatColums),
                   this.getMainColums(columns),
                   tableStyle,
                   this.mainTableHeaderRef,
                   this.onScroll,
+                  false,
                 )
+                // 最后一个参数是isFixed传false，表示虽然进入renderFixedHeader但他并不是fixed的thead
               }
               <div
-                className={`${prefix}-body`}
-                style={{ maxHeight, overflow: 'scroll' }}
+                className={classnames(`${prefix}-body`)}
+                style={{
+                  maxHeight,
+                  overflowX: scroll && scroll.x ? 'scroll' : 'auto',
+                  overflowY: scroll && scroll.y ? 'scroll' : 'auto',
+                }}
                 onScroll={this.onScroll}
                 ref={this.mainTableBodyRef}
               >
                 <table className={tableCls} style={tableStyle}>
-                  <ColGroup columns={this.getMainColums(columns)} />
+                  <ColGroup columns={this.getMainColums(flatColums)} />
                   {
                     !scroll || scroll.y === 0
-                      ? this.renderHeader(this.getMainColums(columns))
+                      ? this.renderHeader(this.getMainColums(flatColums), this.getMainColums(columns))
                       : null
                   }
                   {
                     this.renderBody(
-                      this.getMainColums(columns),
+                      this.getMainColums(flatColums),
                       paginateDataSource,
                     )
                   }

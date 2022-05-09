@@ -40,11 +40,23 @@ const columns: ColumnsProps[] = [
     onFilter: (value: any, record: { name: string | any[]; }) => record.name.includes(value),
   },
   {
+    title: '电话',
+    dataIndex: 'phone',
+    key: 'phone',
+    width: 200,
+  },
+  {
     title: '年龄',
     dataIndex: 'age',
     key: 'age',
     width: 150,
     fixed: 'right',
+  },
+  {
+    title: '手机',
+    dataIndex: 'tel',
+    key: 'tel',
+    width: 200,
   },
   {
     title: '住址',
@@ -141,54 +153,6 @@ const spanColumns = [
   },
 ];
 
-const data = [
-  {
-    key: '1',
-    name: 'John Brown',
-    age: 32,
-    tel: '0571-22098909',
-    phone: 18889898989,
-    address: 'New York No. 1 Lake Park',
-    province: 'a',
-  },
-  {
-    key: '2',
-    name: 'Jim Green',
-    tel: '0571-22098333',
-    phone: 18889898888,
-    age: 42,
-    address: 'London No. 1 Lake Park',
-    province: 'b',
-  },
-  {
-    key: '3',
-    name: 'Joe Black',
-    age: 32,
-    tel: '0575-22098909',
-    phone: 18900010002,
-    address: 'Sidney No. 1 Lake Park',
-    province: 'c',
-  },
-  {
-    key: '4',
-    name: 'Jim Red',
-    age: 18,
-    tel: '0575-22098909',
-    phone: 18900010002,
-    address: 'London No. 2 Lake Park',
-    province: 'd',
-  },
-  {
-    key: '5',
-    name: 'Jake White',
-    age: 18,
-    tel: '0575-22098909',
-    phone: 18900010002,
-    address: 'Dublin No. 2 Lake Park',
-    province: 'e',
-  },
-];
-
 const rowSelection: TableRowSelectionType = {
   onChange: (selectedRowKeys: any, selectedRows: any) => {
     console.log(`onChange: ${selectedRowKeys}`, selectedRowKeys, 'selectedRows: ', selectedRows);
@@ -197,7 +161,7 @@ const rowSelection: TableRowSelectionType = {
     disabled: record.name === 'Jim Red', // Column configuration not to be checked
     name: record.name,
   }),
-  defaultSelectedRowKeys: ['1', '2'],
+  // defaultSelectedRowKeys: ['1', '2'],
   onSelect: (record, checked) => {
     console.log('onSelect', record, checked);
   },
@@ -205,10 +169,6 @@ const rowSelection: TableRowSelectionType = {
     console.log('onSelectAll', records, checked);
   },
 };
-
-// const tableT1 = (
-
-// );
 
 const TableDemo: React.FC<unknown> = () => {
   const [selectKeys, $keys] = React.useState(['1']);
@@ -231,57 +191,166 @@ const TableDemo: React.FC<unknown> = () => {
     },
   };
 
+  const columnsGroup = [
+    {
+      title: 'Name',
+      dataIndex: 'name',
+      key: 'name',
+      fixed: true,
+      width: 120,
+      filters: [
+        {
+          text: 'Joe',
+          value: 'Joe',
+        },
+        {
+          text: 'John',
+          value: 'John',
+        },
+      ],
+      onFilter: (value: unknown, record: any) => record.name.indexOf(value) === 0,
+    },
+    {
+      title: 'Other',
+      children: [
+        {
+          title: 'Age',
+          dataIndex: 'age',
+          key: 'age',
+          width: 150,
+        },
+        {
+          title: 'Address',
+          key: 'Address',
+          children: [
+            {
+              title: 'Street',
+              dataIndex: 'street',
+              key: 'street',
+              width: 150,
+            },
+            {
+              title: 'Block',
+              children: [
+                {
+                  title: 'Building',
+                  dataIndex: 'building',
+                  key: 'building',
+                  width: 100,
+                },
+                {
+                  title: 'Door No.',
+                  dataIndex: 'number',
+                  key: 'number',
+                  width: 100,
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+    {
+      title: 'Company',
+      children: [
+        {
+          title: 'Company Address',
+          dataIndex: 'companyAddress',
+          key: 'companyAddress',
+          width: 200,
+        },
+        {
+          title: 'Company Name',
+          dataIndex: 'companyName',
+          key: 'companyName',
+        },
+      ],
+    },
+    {
+      title: 'Gender',
+      dataIndex: 'gender',
+      key: 'gender',
+      width: 80,
+      fixed: 'right',
+    },
+  ];
+
+  const dataH = [];
+  // eslint-disable-next-line no-plusplus
+  for (let i = 0; i < 40; i++) {
+    dataH.push({
+      key: i,
+      name: 'John Brown',
+      age: i + 1,
+      street: 'Lake Park',
+      building: 'C',
+      number: 2035,
+      companyAddress: 'Lake Street 42',
+      companyName: 'SoftLake Co',
+      gender: 'M',
+    });
+  }
+
+  const data2 = [
+    {
+      key: '1',
+      name: '胡彦斌1',
+      sex: '男',
+      age: 32,
+      address: '西湖区湖底公园1号',
+    },
+    {
+      key: '2',
+      name: '胡彦祖2',
+      sex: '男',
+      age: 42,
+      address: '西湖区湖底公园2号',
+    },
+    {
+      key: '3',
+      name: '胡彦祖2',
+      sex: '男',
+      age: 42,
+      address: '西湖区湖底公园2号',
+    },
+    {
+      key: '4',
+      name: '胡彦祖2',
+      sex: '男',
+      age: 42,
+      address: '西湖区湖底公园2号',
+    },
+    {
+      key: '5',
+      name: '胡彦祖2',
+      sex: '男',
+      age: 42,
+      address: '西湖区湖底公园2号',
+    },
+    {
+      key: '6',
+      name: '胡彦祖2',
+      sex: '男',
+      age: 42,
+      address: '西湖区湖底公园2号',
+    },
+  ];
   return (
     <div style={{ padding: 32, background: '#fff' }}>
       <>
+        <h4>表头分组</h4>
+        <Table
+          columns={columnsGroup}
+          rowSelection={rowSelection}
+          dataSource={dataH}
+          bordered
+          scroll={{ x: 1500, y: 300 }}
+        />
         <div>
           <h4>基础表格</h4>
           <div>
             <Table
-              dataSource={[
-                {
-                  key: '1',
-                  name: '胡彦斌1',
-                  sex: '男',
-                  age: 32,
-                  address: '西湖区湖底公园1号',
-                },
-                {
-                  key: '2',
-                  name: '胡彦祖2',
-                  sex: '男',
-                  age: 42,
-                  address: '西湖区湖底公园2号',
-                },
-                {
-                  key: '3',
-                  name: '胡彦祖2',
-                  sex: '男',
-                  age: 42,
-                  address: '西湖区湖底公园2号',
-                },
-                {
-                  key: '4',
-                  name: '胡彦祖2',
-                  sex: '男',
-                  age: 42,
-                  address: '西湖区湖底公园2号',
-                },
-                {
-                  key: '5',
-                  name: '胡彦祖2',
-                  sex: '男',
-                  age: 42,
-                  address: '西湖区湖底公园2号',
-                },
-                {
-                  key: '6',
-                  name: '胡彦祖2',
-                  sex: '男',
-                  age: 42,
-                  address: '西湖区湖底公园2号',
-                },
-              ]}
+              dataSource={data2}
               columns={[
                 {
                   title: '姓名',
@@ -329,50 +398,7 @@ const TableDemo: React.FC<unknown> = () => {
           <h4>固定列表格</h4>
           <div>
             <Table
-              dataSource={[
-                {
-                  key: '1',
-                  name: '胡彦斌1',
-                  sex: '男',
-                  age: 32,
-                  address: '西湖区湖底公园1号',
-                },
-                {
-                  key: '2',
-                  name: '胡彦祖2',
-                  sex: '男',
-                  age: 42,
-                  address: '西湖区湖底公园2号',
-                },
-                {
-                  key: '3',
-                  name: '胡彦祖2',
-                  sex: '男',
-                  age: 42,
-                  address: '西湖区湖底公园2号',
-                },
-                {
-                  key: '4',
-                  name: '胡彦祖2',
-                  sex: '男',
-                  age: 42,
-                  address: '西湖区湖底公园2号',
-                },
-                {
-                  key: '5',
-                  name: '胡彦祖2',
-                  sex: '男',
-                  age: 42,
-                  address: '西湖区湖底公园2号',
-                },
-                {
-                  key: '6',
-                  name: '胡彦祖2',
-                  sex: '男',
-                  age: 42,
-                  address: '西湖区湖底公园2号',
-                },
-              ]}
+              dataSource={data2}
               columns={[
                 {
                   title: '姓名',
@@ -497,6 +523,7 @@ const TableDemo: React.FC<unknown> = () => {
                   key: 'address',
                 },
               ]}
+              scroll={{ y: 200 }}
               dataSource={[
                 {
                   key: '1',
@@ -698,7 +725,7 @@ const TableDemo: React.FC<unknown> = () => {
               rowSelection={rowSelection}
               columns={columns}
               pagination={{
-                pageSize: 2,
+                // pageSize: 2,
                 style: { marginTop: 8 },
               }}
               dataSource={[
@@ -748,7 +775,8 @@ const TableDemo: React.FC<unknown> = () => {
                   province: 'e',
                 },
               ]}
-              scroll={{ y: 200, x: 1500 }}
+              scroll={{ x: 1500 }}
+              bordered
             />
           </div>
         </div>

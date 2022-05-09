@@ -21,6 +21,8 @@ export interface ColumnsProps {
   className?: string;
   /** 列合并 */
   colSpan?: number;
+  /** 行合并 */
+  rowSpan?: number;
   /** key */
   dataIndex?: string;
   /** 固定列 */
@@ -46,6 +48,12 @@ export interface ColumnsProps {
   filterIcon?: ReactNode | (() => ReactNode),
   /** 是否多选 */
   filterMultiple?: boolean,
+
+  children?: ColumnsProps[];
+
+  /* 组件内用于分组表头属性 */
+  hasSubColumns?: boolean;
+
 }
 
 export type RowKeyType = string | ((record: unknown) => string);
@@ -109,6 +117,8 @@ export interface TableState {
     [key: string]: string | string[]
   }
   pagination: boolean | PaginationProps;
+  flatColums: ColumnsProps[];
+  theadHeight: number | undefined,
 }
 
 export interface ColProps {

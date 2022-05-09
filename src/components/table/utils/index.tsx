@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import { ColumnsProps } from '../type';
 
 // eslint-disable-next-line import/prefer-default-export
@@ -37,3 +38,65 @@ export const groupColums = (columns: ColumnsProps[], direction: 'left' | 'right'
   }
   return direction === columDirection;
 });
+
+export const flattenColums = (data: ColumnsProps[] = []): any => data.reduce((pre, cur) => {
+  const child = cur.children && cur.children.length > 0;
+  return pre.concat(child ? flattenColums(cur.children) : cur);
+}, []);
+
+export const renderColumns = (propsColumns: ColumnsProps[], idx: number) => {
+  const ColumnRows: ColumnsProps[][] = [];
+  const fillColumns = (
+    columns: ColumnsProps[],
+    colIndex: number,
+    rowIndex = 0,
+  ): number[] => {
+    ColumnRows[rowIndex] = ColumnRows[rowIndex] || [];
+
+    let currentColIndex = colIndex;
+    const colSpans: number[] = columns.filter(Boolean).map((column) => {
+      const cell:any = {
+        key: column.key || column.title,
+        ...column,
+      };
+
+      let colSpan = 1;
+
+      const subColumns = (column as ColumnsProps).children;
+      if (subColumns && subColumns.length > 0) {
+        colSpan = fillColumns(subColumns, currentColIndex, rowIndex + 1).reduce(
+          (total, count) => total + count,
+          0,
+        );
+        cell.hasSubColumns = true;
+      }
+
+      if ('colSpan' in column) {
+        ({ colSpan = 1 } = column);
+      }
+
+      if ('rowSpan' in column) {
+        cell.rowSpan = column.rowSpan;
+      }
+
+      cell.colSpan = colSpan;
+      ColumnRows[rowIndex].push(cell);
+
+      currentColIndex += colSpan;
+
+      return colSpan;
+    });
+
+    return colSpans;
+  };
+  fillColumns(propsColumns, idx);
+  const rowCount = ColumnRows.length;
+  for (let rowIndex = 0; rowIndex < rowCount; rowIndex += 1) {
+    ColumnRows[rowIndex].forEach((cell) => {
+      if (!('rowSpan' in cell) && !cell.hasSubColumns) {
+        cell.rowSpan = rowCount - rowIndex;
+      }
+    });
+  }
+  return ColumnRows;
+};
