@@ -1,5 +1,5 @@
 import '../../style/index.less';
 import './index.less';
-import '../../checkbox/styles/index';
-import '../../input/styles/index';
-import '../../button/styles/index';
+import '../../checkbox/styles/index.less';
+import '../../input/styles/index.less';
+import '../../button/styles/index.less';
