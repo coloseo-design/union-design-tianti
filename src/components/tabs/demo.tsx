@@ -6,7 +6,8 @@ import '../icon/styles/index';
 const { Pane } = Tabs;
 
 const TabsDemo = () => {
-  const [data, setData] = useState(['页签', '四字页签', '五个字页签']);
+  const initialData = Array.from({ length: 5 }, (_, i) => `${i}`);
+  const [data, setData] = useState(initialData);
   return (
     <>
       <div style={{ margin: 20, backgroundColor: '#FFF' }}>
@@ -88,19 +89,26 @@ const TabsDemo = () => {
       </div>
       <div style={{ margin: 20 }}>
         <p>type为page示例</p>
+        <Button onClick={() => {
+          data.push(`${Number(data[data.length - 1]) + 1}`);
+          setData([...data]);
+        }}
+        >
+          增加tab
+        </Button>
         <Tabs
           defaultActiveKey="1"
           type="page"
           onClose={(key) => {
-            // setTimeout(() => {
-            //   setData(['页签', '四字页签', '五个字页签']);
-            // }, 3000);
+            const index = data.indexOf(key);
+            data.splice(index, 1);
+            setData([...data]);
           }}
         >
           {
-            data.map((item, key) => (
-              <Pane key={`${key}`} tab={item} closable>
-                <div style={{ background: ['white', 'green', 'blue', 'yello'][key] }}>{item}</div>
+            data.map((item) => (
+              <Pane key={item} tab={`页签${item}`} closable>
+                <div>{`页签${item}-----${JSON.stringify(data)}`}</div>
               </Pane>
             ))
           }

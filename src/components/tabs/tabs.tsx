@@ -101,7 +101,7 @@ const Tabs: React.FC<TabsProps> & { Pane: typeof Pane} = (props: TabsProps) => {
     if (key === checkedKey) {
       setCheckedKey(titles[0].key);
     }
-    setClosed([...closed]);
+    // setClosed([...closed]);
   };
 
   const tabNode = (title: TitleType) => (
