@@ -80,8 +80,11 @@ const Tabs: React.FC<TabsProps> & { Pane: typeof Pane} = (props: TabsProps) => {
   }, [prefixCls, type]);
 
   useEffect(() => {
+    if (checkedKey && !titles.find((item) => item.key === checkedKey)) {
+      setCheckedKey(titles[0].key);
+    }
     setClosed([]);
-  }, [children]);
+  }, [checkedKey, children]);
 
   const changeKey = (key: string, e: React.MouseEvent<HTMLDivElement>): void => {
     const { offsetLeft, offsetWidth } = e.currentTarget;
@@ -98,9 +101,9 @@ const Tabs: React.FC<TabsProps> & { Pane: typeof Pane} = (props: TabsProps) => {
     closed.push(key);
     if (closed.length >= titles.length) return;
     onClose && onClose(key);
-    if (key === checkedKey) {
-      setCheckedKey(titles[0].key);
-    }
+    // if (key === checkedKey) {
+    //   setCheckedKey(titles[0].key);
+    // }
     // setClosed([...closed]);
   };
 
