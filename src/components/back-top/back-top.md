@@ -5,8 +5,6 @@ title: BackTop
 subtitle: 回到顶部
 ---
 
-回到顶部
-
 ## 何时使用
 
 当页面内容区域比较长时；

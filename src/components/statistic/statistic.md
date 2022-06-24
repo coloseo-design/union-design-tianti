@@ -5,8 +5,6 @@ title: Statistic
 subtitle: 统计数值
 ---
 
-统计数值
-
 ## 何时使用
 
 当需要突出某个或某组数字时。

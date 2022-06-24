@@ -5,8 +5,6 @@ title: Breadcrumb
 subtitle: 面包屑
 ---
 
-面包屑
-
 ## 何时使用
 
 当系统拥有超过两级以上的层级结构时；
