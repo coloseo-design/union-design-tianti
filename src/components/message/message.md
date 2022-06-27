@@ -12,7 +12,7 @@ subtitle: 全局提示
 * Message.error(content, duration, onClose);
 * Message.info(content, duration, onClose);
 * Message.warning(content, duration, onClose);
-* Message.loading(content, key:string, onClose);一直存在的提示 可以通过指定 key 来 关闭
+* Message.loading(content, key:string, onClose); 一直存在的提示，可以通过指定 key 来关闭。
 
 | 参数     | 说明                                        | 类型                | 默认值 |
 | :------- | :------------------------------------------ | :------------------ | :----- |
