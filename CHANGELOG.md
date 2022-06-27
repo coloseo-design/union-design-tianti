@@ -1,3 +1,39 @@
+## [1.0.36](http://10.124.128.2:8888/muses/union-design/compare/v1.0.28...v1.0.36) (2022-06-27)
+
+
+### Bug Fixes
+
+* 🐛 弹窗定位跟随问题修复 ([1d9acf2](http://10.124.128.2:8888/muses/union-design/commits/1d9acf280c0121552bc61c61d3cd62025b7fef49))
+* 🐛 动画样式引入 fix ([8f91cc3](http://10.124.128.2:8888/muses/union-design/commits/8f91cc3671ba8ebf3775b6d7673bf3f6cb896a5d))
+* 🐛 修复filterMultiple在不设置的情况会引起checkbox报错的bug ([36e4949](http://10.124.128.2:8888/muses/union-design/commits/36e4949eab02852762f2a5655aa24936e9ef494b))
+* 🐛 修复form-item中可能因为name中存在_而导致的bug ([ac156a9](http://10.124.128.2:8888/muses/union-design/commits/ac156a981f503d044ba73fbe4ff3b3c3b99839be))
+* 🐛 修复formitem上initialvalue无法被收集的错误 ([4063726](http://10.124.128.2:8888/muses/union-design/commits/4063726e152e74f6d579110403a4e87e64f396c2))
+* 🐛 修复radio.group在自定义组件层级里面无法正常工作 ([1504a73](http://10.124.128.2:8888/muses/union-design/commits/1504a73c5e2c0d58f58198c9d75c1af708d1d72a))
+* 🐛 修复table的headr的eslint的错误 ([29757a2](http://10.124.128.2:8888/muses/union-design/commits/29757a29a2b139bfc29caf0cbe500f3974fbb08a))
+* 🐛 修复table在渲染的时候，cell的值为null引起的in操作符错误的bug ([4b80139](http://10.124.128.2:8888/muses/union-design/commits/4b801397ef83b886c1f530649dd9f2dc942b0431))
+* 🐛 样式变量重名覆盖 fix ([b3ab6ef](http://10.124.128.2:8888/muses/union-design/commits/b3ab6ef880b7497eaaafcd9ec2f97de15d2d782a))
+* 🐛 组件样式引用 使用less ([f7333de](http://10.124.128.2:8888/muses/union-design/commits/f7333de9050ca078cc5ab069f2f65b18685a25bb))
+* 🐛 dropdown 弹窗显示问题修复 ([660a79b](http://10.124.128.2:8888/muses/union-design/commits/660a79bbdd98844f4624766dc94923aef6fb765d))
+* 🐛 upload组件内引入button样式 ([0886ea9](http://10.124.128.2:8888/muses/union-design/commits/0886ea9c85027e73e1847621ea7c38cf2139880d))
+
+
+### Features
+
+* 🎸 调整form和button的ref引用 ([7e23303](http://10.124.128.2:8888/muses/union-design/commits/7e2330343188c27860d8af0e7834d15d294e3bbe))
+* 🎸 完善table接口 ([906de34](http://10.124.128.2:8888/muses/union-design/commits/906de347e31449ed7c8f1cdc396fe946163d4c34))
+* 🎸 affix 定位修改 ([293f9b4](http://10.124.128.2:8888/muses/union-design/commits/293f9b402449da32ebc340f8e8f852c1d8c982f2))
+* 🎸 casecader,datePicker弹窗使用createPortal ([105021b](http://10.124.128.2:8888/muses/union-design/commits/105021b68ef25303c24e841c50113a9c3b038a9b))
+* 🎸 form error状态管理update ([55d538a](http://10.124.128.2:8888/muses/union-design/commits/55d538a65ce1bad2b29fecd5acaf245ec934385d))
+* 🎸 form getFieldsValue 方法 update ([79d66b4](http://10.124.128.2:8888/muses/union-design/commits/79d66b41c3cb9f99d30549ae322392fcbb9586ac))
+* 🎸 modal 增加destroyOnClose属性，是否销毁子元素 ([7c4cb40](http://10.124.128.2:8888/muses/union-design/commits/7c4cb4011fe1e3c0025fc83de432e64d75518d9d))
+* 🎸 steps 宽度不平均分配，最后一步的宽度由自己决定 ([ea1d376](http://10.124.128.2:8888/muses/union-design/commits/ea1d37673372c2c5de32a6a27218fef8d4fd7fb7))
+* 🎸 steps icon 居中对齐 ([7881124](http://10.124.128.2:8888/muses/union-design/commits/78811245dd56e23204e98572da1a0f050ddf71c5))
+* 🎸 table 增加表头分组功能 ([35d4d4f](http://10.124.128.2:8888/muses/union-design/commits/35d4d4f9cbcfa2ae96ec9c12baaa2b3fbfb4d42c))
+* 🎸 transfer 搜索框位置修改 ([9e29513](http://10.124.128.2:8888/muses/union-design/commits/9e29513d3a3b606381e80899aecfbb9107f1b14d))
+* 🎸 ts 类型检测 ([f0b5898](http://10.124.128.2:8888/muses/union-design/commits/f0b58982d3aa67ce1bbc80f71d35b1e0f2f30cc4))
+
+
+
 ## [1.0.35](http://10.124.128.2:8888/muses/union-design/compare/v1.0.28...v1.0.35) (2022-06-27)
 
 
