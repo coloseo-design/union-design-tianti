@@ -67,8 +67,11 @@ class BackTop extends Component<BackTopProps, BackTopState> {
     });
 
     const handleClick = (e: Event) => {
-      const container = target ? target() : document.getElementsByTagName('body')[0];
-      scrollToTop(target ? target().id : 'body', duration, scrollTop, container);
+      const container = target ? target() : window;
+      container.scrollTo({
+        top: 0,
+        behavior: 'smooth',
+      });
       if (onClick) {
         onClick(e);
       }
