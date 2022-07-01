@@ -138,9 +138,6 @@ const Item: React.FC<FormItemProps> = (props: FormItemProps) => {
         });
       onCollect(composedName, { event: trigger, value: initialValue || value }, true);
     }
-    return () => {
-      onError(composedName, { event: trigger, errors: [] });
-    };
   }, []);
 
   useEffect(() => {
