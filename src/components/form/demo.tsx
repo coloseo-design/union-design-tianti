@@ -42,7 +42,7 @@ const FormDemo = () => {
     },
   };
 
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(true);
   const onValuesChange = (changedValues: FormValues, allValues: FormValues) => {
     console.log('==?changedValues>', changedValues, allValues);
   };
@@ -116,13 +116,13 @@ const FormDemo = () => {
           {...layout}
           name="test"
           initialValues={{
-            username: 'zhansgan',
+            username: 'zhansgan123',
             // password: 'lisi',
             // address: {
             //   province: 'sichuan',
             //   city: 'chengdu',
             // },
-            sex: '男',
+            // sex: '男',
           }}
           onValuesChange={onValuesChange}
           ref={formRef}
@@ -137,7 +137,7 @@ const FormDemo = () => {
             validateFirst
             label="用户名"
             labelAlign="right"
-            // initialValue="zhangsan"
+            initialValue="zhangsan"
             labelStyle={{ marginBottom: 10 }}
             rules={[
               { required: true, message: '请输入用户名' },
@@ -175,6 +175,7 @@ const FormDemo = () => {
           <FormItem
             name="address.province"
             label="省份"
+            initialValue="sswwe3"
             required
           >
             <Input placeholder="请输入省份" style={{ width: '100%' }} />
@@ -182,7 +183,7 @@ const FormDemo = () => {
           {open && (
           <div>
             <FormItem
-              name="address.city"
+              name="city"
               label={<span>地址</span>}
               colon={false}
               required

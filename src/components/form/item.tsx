@@ -136,6 +136,23 @@ const Item: React.FC<FormItemProps> = (props: FormItemProps) => {
         .catch((newErrors) => {
           onError(composedName, { event: trigger, errors: newErrors });
         });
+      onCollect(composedName, { event: trigger, value: initialValue || value }, true);
+    }
+    return () => {
+      onError(composedName, { event: trigger, errors: [] });
+    };
+  }, []);
+
+  useEffect(() => {
+    if (name) {
+      onStatus(composedName, false);
+      validate(value || initialValue)
+        .then((newErrors) => {
+          onError(composedName, { event: trigger, errors: newErrors });
+        })
+        .catch((newErrors) => {
+          onError(composedName, { event: trigger, errors: newErrors });
+        });
       // onCollect(composedName, { event: trigger, value });
     }
     return () => {

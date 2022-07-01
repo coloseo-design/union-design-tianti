@@ -46,8 +46,27 @@ const Form: ForwardRefRenderFunction<FormInstance, FormProps> = (
   const [values, setValues] = useState<FormValues>({ ...initialValues });
   const [errors, setErrors] = useState<FormErrors>({});
   const [status, setStatus] = useState<FormStatus>({});
+  const [itemInitValues, setItemValues] = useState<FormValues>({});
 
-  const onCollect = (fieldName: string, { value }: ValueCollection) => {
+  const loopObj = (obj: FormValues, parent: FormValues) => {
+    for (const key in obj) {
+      if (obj[key]) {
+        if (typeof obj[key] === 'object') {
+          Object.assign(parent, {
+            [key]: {
+              ...obj[key],
+            },
+          });
+        } else {
+          parent && Object.assign(parent, {
+            [key]: obj[key],
+          });
+        }
+      }
+    }
+  };
+
+  const onCollect = (fieldName: string, { value }: ValueCollection, mounted?: boolean) => {
     let changeValue = {};
     const itemName = decomposeFiledName(fieldName);
     const [key, ...prefixs] = [...itemName].reverse();
@@ -65,6 +84,11 @@ const Form: ForwardRefRenderFunction<FormInstance, FormProps> = (
     Object.assign(current, changeValue);
     onValuesChange && onValuesChange(changeValue, values);
     setValues({ ...values });
+    if (mounted) { // 第一次加载完收集 item上initialValue的值
+      const obj = {};
+      loopObj(values, obj);
+      setItemValues({ ...obj });
+    }
   };
 
   const onError = (itemName: string, { errors: _errors }: ErrorCollection) => {
@@ -121,7 +145,8 @@ const Form: ForwardRefRenderFunction<FormInstance, FormProps> = (
   };
 
   const reset = () => {
-    setValues({ ...initialValues });
+    // itemInitValues formItem 上的初始值，initialValues Form上的初始值
+    setValues({ ...initialValues, ...itemInitValues });
     for (const key in status) {
       Object.assign(status, {
         [key]: false,

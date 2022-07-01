@@ -48,7 +48,7 @@ export interface FormContextProps extends FormCommmonProps{
   /** 表单收集的数据集 */
   errors: FormErrors;
   /** 表单数据收集 */
-  onCollect: (name: string, action: any) => void;
+  onCollect: (name: string, action: any, mounted?: boolean) => void;
   /** 表单错误收集 */
   onError: (name: string, action: any) => void;
   /** 表单提交事件 */
