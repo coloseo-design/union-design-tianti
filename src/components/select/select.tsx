@@ -4,7 +4,7 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable max-len */
 import React, {
-  CSSProperties, ReactNode,
+  CSSProperties, ReactNode, createRef,
 } from 'react';
 import classnames from 'classnames';
 import { ConfigConsumer, ConfigConsumerProps } from '../config-provider/context';
@@ -70,6 +70,7 @@ export interface SelectState extends CommonParams {
   top: number,
   width: number | string,
   firstRender?: boolean;
+  isHover?: boolean;
 }
 
 class Select extends React.Component<SelectProps, SelectState> {
@@ -89,6 +90,8 @@ class Select extends React.Component<SelectProps, SelectState> {
   static Option: typeof Option;
 
   node: HTMLSpanElement | undefined;
+
+  private popupRef = createRef<HTMLDivElement>();
 
   constructor(props: SelectProps) {
     super(props);
@@ -110,6 +113,7 @@ class Select extends React.Component<SelectProps, SelectState> {
       top: 0,
       width: 0,
       firstRender: false,
+      isHover: false,
     };
     this.state = stateObj;
   }
@@ -165,7 +169,7 @@ class Select extends React.Component<SelectProps, SelectState> {
   }
 
   componentDidMount() {
-    document.addEventListener('click', this.hideDrop);
+    document.addEventListener('click', this.hideDrop, true);
   }
 
   componentDidUpdate(prevProps: SelectProps) {
@@ -191,7 +195,7 @@ class Select extends React.Component<SelectProps, SelectState> {
   }
 
   componentWillUnmount() {
-    document.removeEventListener('click', this.hideDrop);
+    document.removeEventListener('click', this.hideDrop, true);
   }
 
   getLocation = () => {
@@ -216,8 +220,12 @@ class Select extends React.Component<SelectProps, SelectState> {
     this.node = node;
   };
 
-  hideDrop = () => {
-    this.setState({ showDropdown: false });
+  hideDrop = (e: MouseEvent) => {
+    const inputChild = this.node?.contains(e.target as HTMLDivElement);
+    const popChild = this.popupRef?.current?.contains(e.target as HTMLDivElement);
+    if ((this.node && !inputChild) && (this.popupRef?.current && !popChild)) { // 只有在点击这两个node之外的dom才捕获成
+      this.setState({ showDropdown: false });
+    }
   };
 
   onClick = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
@@ -256,13 +264,22 @@ class Select extends React.Component<SelectProps, SelectState> {
     }
   }
 
-  handleClear = () => {
+  handleClear = (e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
+    e.stopPropagation();
+    e.nativeEvent.stopImmediatePropagation();
+    const { type } = this.props;
+    const mul = type === 'multiple' || type === 'tags';
+    if (mul) {
+      this.setState({ selectedOptions: [] });
+    }
     this.setState({
       renderObj: {
         value: '',
         label: '',
       },
+      isHover: false,
     });
+    this.getLocation();
   }
 
   onSelect = (value: string | string[], label: string) => {
@@ -348,6 +365,7 @@ class Select extends React.Component<SelectProps, SelectState> {
       left,
       top,
       width,
+      isHover,
     } = this.state;
     const prefix = getPrefixCls('select', customizePrefixCls);
     const wrapperClass = classnames(`${prefix}-wrapper`);
@@ -387,6 +405,15 @@ class Select extends React.Component<SelectProps, SelectState> {
             minHeight: type === 'multiple' ? 32 : undefined,
             height: type !== 'multiple' ? 32 : undefined,
             ...style,
+          }}
+          onMouseOver={() => {
+            const mul = type === 'multiple' || type === 'tags';
+            if (allowClear && ((mul && selectedOptions?.length) || (!mul && renderObj?.label))) {
+              this.setState({ isHover: true });
+            }
+          }}
+          onMouseLeave={() => {
+            this.setState({ isHover: false });
           }}
         >
           {type === 'search'
@@ -475,8 +502,8 @@ class Select extends React.Component<SelectProps, SelectState> {
                       : <span className={`${prefix}-value`} title={renderObj?.label || ''} style={{ color: disabled ? 'rgba(0,0,0,0.45)' : undefined }}>{renderObj?.label}</span>
                   )
                   : <span className={`${prefix}-placeholder`}>{placeholder}</span>}
-                {allowClear && renderObj?.label
-                  ? <span className={`${prefix}-iconWrapper`} onClick={this.handleClear}><Icon type="close" /></span>
+                {allowClear && isHover
+                  ? <span className={`${prefix}-iconWrapper`} onClick={this.handleClear}><Icon type="delete" /></span>
                   : <span className={iconStyle}><Icon type={`${showDropdown ? 'up' : 'down'}`} /></span>}
               </>
             )}
@@ -488,6 +515,7 @@ class Select extends React.Component<SelectProps, SelectState> {
             style={{
               left, top, width, ...dropdownStyle,
             }}
+            ref={this.popupRef}
           >
             <SelectContext.Provider
               value={{

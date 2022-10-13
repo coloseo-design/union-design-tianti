@@ -152,6 +152,7 @@ const ModalDemo: React.FC<unknown> = () => {
         bodyStyle={{ height: 500 }}
         confirmLoading={confirmLoading}
         centered
+        destroyOnClose
       >
         <div>
           <Select style={{ marginBottom: 32, width: 200 }}>

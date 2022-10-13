@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React from 'react';
+import React, { createRef } from 'react';
 import classNames from 'classnames';
 import { TreeNodeContext } from './context';
 import Icon from '../icon';
@@ -15,6 +15,8 @@ import {
 
 class TreeSelect extends React.Component<TreeSelectProps, TreeSelectStates> {
   node: HTMLSpanElement | undefined;
+
+  private popupRef = createRef<HTMLDivElement>();
 
   constructor(props: TreeSelectProps) {
     super(props);
@@ -88,7 +90,7 @@ class TreeSelect extends React.Component<TreeSelectProps, TreeSelectStates> {
   }
 
   componentDidMount() {
-    document.addEventListener('click', this.hideDrop, false);
+    document.addEventListener('click', this.hideDrop, true);
   }
 
   componentDidUpdate(prevProps: TreeSelectProps) {
@@ -129,17 +131,19 @@ class TreeSelect extends React.Component<TreeSelectProps, TreeSelectStates> {
   }
 
   componentWillUnmount() {
-    document.removeEventListener('click', this.hideDrop, false);
+    document.removeEventListener('click', this.hideDrop, true);
   }
 
   getNode = (node: HTMLDivElement) => {
     this.node = node;
   };
 
-  hideDrop = () => {
-    this.setState({
-      border: false,
-    });
+  hideDrop = (e: MouseEvent) => {
+    const inputChild = this.node?.contains(e.target as HTMLDivElement);
+    const popChild = this.popupRef?.current?.contains(e.target as HTMLDivElement);
+    if ((this.node && !inputChild) && (this.popupRef?.current && !popChild)) { // 只有在点击这两个node之外的dom才捕获成
+      this.setState({ border: false });
+    }
   };
 
   getLocation = () => {
@@ -431,6 +435,7 @@ class TreeSelect extends React.Component<TreeSelectProps, TreeSelectStates> {
             style={{
               left, top, width, ...dropdownStyle,
             }}
+            ref={this.popupRef}
           >
             {this.renderTreeNode(treeData || childrenList)}
           </div>

@@ -43,6 +43,7 @@ const SelectDemo = () => {
             console.log('--- value ', value, label);
           }
         }
+        allowClear
         getPopupContainer={() => document.querySelector('#select-demo')}
         // disabled
         placeholder="请选择选项"
@@ -61,6 +62,7 @@ const SelectDemo = () => {
             console.log('--- label ', label);
           }
         }
+        allowClear
         placeholder="请选择选项"
         style={{ width: 220 }}
         type="multiple"
@@ -98,6 +100,7 @@ const SelectDemo = () => {
             console.log('--- label ', label);
           }
         }
+        allowClear
         placeholder="请选择选项"
         style={{ width: 220 }}
         type="search"
