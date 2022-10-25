@@ -111,7 +111,7 @@ const ModalDemo: React.FC<unknown> = () => {
         bodyStyle={{ height: 500, overflow: 'auto' }}
         cancelText="取消"
         centered
-        destroyOnClose
+        // destroyOnClose
       >
         <Form name="modelForm">
           <FormItem>

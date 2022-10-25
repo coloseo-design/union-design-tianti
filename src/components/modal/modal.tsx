@@ -48,13 +48,14 @@ export interface ModalState {
   visible?: boolean;
   modalTransition?: boolean;
   idx: number | string;
+  isCurrentUp?: boolean;
 }
 
-export interface MappString {
+export interface MapString {
   [x: string]: string;
 }
 
-const IconMapping: MappString = {
+const IconMapping: MapString = {
   error: 'delete',
   success: 'success',
   warning: 'exclamation-circle',
@@ -79,7 +80,8 @@ class Modal extends React.Component<ModalProps, ModalState, ModalMethodProps> {
     this.state = {
       visible: visible || false,
       modalTransition: false,
-      idx: (Math.random() * 100).toFixed(0),
+      idx: (Math.random() * 10000).toFixed(0),
+      isCurrentUp: false,
     };
   }
 
@@ -153,7 +155,10 @@ class Modal extends React.Component<ModalProps, ModalState, ModalMethodProps> {
   }
 
   handleParent = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    if (e.target === e.currentTarget) {
+    const { isCurrentUp } = this.state;
+    if (isCurrentUp) {
+      this.setState({ isCurrentUp: false });
+    } else if (e.target === e.currentTarget) {
       this.handleMask(e);
     }
   }
@@ -259,6 +264,12 @@ class Modal extends React.Component<ModalProps, ModalState, ModalMethodProps> {
             <div
               className={wrapperContent1}
               style={{ ...style, width }}
+              onMouseDown={() => {
+                this.setState({ isCurrentUp: true });
+              }}
+              onMouseUp={() => {
+                this.setState({ isCurrentUp: false });
+              }}
             >
               {methodType ? methodRender : normalRender}
             </div>
