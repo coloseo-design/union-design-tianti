@@ -20,6 +20,7 @@ const InputNumberDemo = (): React.ReactNode => (
         onChange={handleChange}
         disabled
         value={12}
+        style={{ width: 180 }}
       />
     </span>
     <span>

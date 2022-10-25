@@ -24,7 +24,7 @@ const Slider: React.FC<SliderProps> = (props: SliderProps) => {
   const [width, setWidth] = useState(0);
   const [left, setLeft] = useState(0);
   useEffect(() => {
-    if (valueFromProps) {
+    if (typeof valueFromProps !== 'undefined') {
       setValue(valueFromProps);
     }
   }, [valueFromProps]);

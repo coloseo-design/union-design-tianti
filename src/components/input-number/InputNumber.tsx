@@ -28,7 +28,7 @@ class InputNumber extends React.Component<InputNumberProps, { value: string | nu
   componentDidUpdate(prevProps: InputNumberProps) {
     const { value } = this.props;
     if (value !== prevProps.value) {
-      this.setState({ value: value || '' });
+      this.setState({ value: value || 0 });
     }
   }
 
