@@ -9,12 +9,11 @@
   z-index: @zindex-popover;
   margin: 0;
   padding: 0;
-  animation: fadeout 0.3s linear;
   &-show {
     visibility: visible;
-    animation: fadein 0.3s linear;
   }
   &-content {
+    position: relative;
     &-arrow {
       position: absolute;
       width: 5px;
@@ -103,29 +102,7 @@
       &-btn {
         text-align: right;
         margin-top: 20px;
-        opacity: 0;
-        &-show {
-          opacity: 1;
-        }
       }
     }
   }
 }
-
-@keyframes fadein {
-  0% {
-   opacity: 0.0;
-  }
-  100% {
-   opacity: 1;
-  }
- }
-
- @keyframes fadeout {
-  0% {
-   opacity: 1;
-  }
-  100% {
-   opacity: 0.0;
-  }
- }

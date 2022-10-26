@@ -13,7 +13,6 @@ import {
   changeLeftDir,
   changeBottomDir,
   changeRightDir,
-  uuid,
 } from './utils';
 
 export interface PopProps {
@@ -52,7 +51,7 @@ export interface PopconfirmState {
 class PopComponent extends React.Component<PopProps, PopconfirmState> {
   node: HTMLSpanElement | undefined;
 
-  private tag = uuid();
+  childRef: HTMLElement | null | undefined;
 
   constructor(props: PopProps) {
     super(props);
@@ -66,9 +65,9 @@ class PopComponent extends React.Component<PopProps, PopconfirmState> {
   }
 
   visibleOnClick = (target: HTMLElement) => {
-    if (target.nodeName !== '#document' && target.getAttribute('data-tag') === this.tag) return;
+    if (this.childRef?.contains(target)) return;
     const { onVisibleChange, visible: propsVisisble } = this.props;
-    if (propsVisisble !== undefined) {
+    if (typeof propsVisisble !== 'undefined') {
       onVisibleChange && onVisibleChange(false);
     } else {
       this.setState({ visible: false });
@@ -83,16 +82,15 @@ class PopComponent extends React.Component<PopProps, PopconfirmState> {
 
   componentDidMount = () => {
     const { visible } = this.state;
-    const target: HTMLElement | null = document.getElementById(this.tag);
-    if (target && visible) {
-      this.compute(target, true);
+    if (this.childRef && visible) {
+      this.compute(this.childRef, true);
     }
-    document.addEventListener('click', this.documentBodyOnClick);
+    document.addEventListener('click', this.documentBodyOnClick, true);
   }
 
   componentWillUnmount = () => {
     this.setState({ visible: false });
-    document.removeEventListener('click', this.documentBodyOnClick);
+    document.removeEventListener('click', this.documentBodyOnClick, true);
   }
 
   componentDidUpdate = (prevProps: PopProps) => {
@@ -138,53 +136,54 @@ class PopComponent extends React.Component<PopProps, PopconfirmState> {
           }
         }
       }
+      const space = 10;
       const placementMap = {
         top: {
           x: offsetLeft + (width - contentWidth) / 2,
-          y: offsetTop - contentHeight - 10,
+          y: offsetTop - contentHeight - space,
         },
         topLeft: {
           x: offsetLeft,
-          y: offsetTop - contentHeight - 10,
+          y: offsetTop - contentHeight - space,
         },
         topRight: {
           x: offsetLeft - (contentWidth - width),
-          y: offsetTop - contentHeight - 10,
+          y: offsetTop - contentHeight - space,
         },
         bottom: {
           x: offsetLeft + (width - contentWidth) / 2,
-          y: offsetTop + height + 10,
+          y: offsetTop + height + space,
         },
         bottomRight: {
           x: offsetLeft - (contentWidth - width),
-          y: offsetTop + height + 10,
+          y: offsetTop + height + space,
         },
         bottomLeft: {
           x: offsetLeft,
-          y: offsetTop + height + 10,
+          y: offsetTop + height + space,
         },
         left: {
-          x: offsetLeft - contentWidth - 10,
+          x: offsetLeft - contentWidth - space,
           y: offsetTop + (height - contentHeight) / 2,
         },
         leftTop: {
-          x: offsetLeft - contentWidth - 10,
+          x: offsetLeft - contentWidth - space,
           y: offsetTop,
         },
         leftBottom: {
-          x: offsetLeft - contentWidth - 10,
+          x: offsetLeft - contentWidth - space,
           y: offsetTop - contentHeight + height,
         },
         right: {
-          x: offsetLeft + width + 10,
+          x: offsetLeft + width + space,
           y: offsetTop + (height - contentHeight) / 2,
         },
         rightTop: {
-          x: offsetLeft + width + 10,
+          x: offsetLeft + width + space,
           y: offsetTop,
         },
         rightBottom: {
-          x: offsetLeft + width + 10,
+          x: offsetLeft + width + space,
           y: offsetTop - contentHeight + height,
         },
       };
@@ -194,7 +193,7 @@ class PopComponent extends React.Component<PopProps, PopconfirmState> {
         direction: dT,
       });
       onVisibleChange && onVisibleChange(defaultV || !visible);
-      if (propsVisible === undefined) { // 用户控制visible 必须使用onVisibleChange 或者 传入更新的visible props
+      if (typeof propsVisible === 'undefined') { // 用户控制visible 必须使用onVisibleChange 或者 传入更新的visible props
         this.setState({ visible: defaultV || !visible });
       }
     }
@@ -204,8 +203,8 @@ class PopComponent extends React.Component<PopProps, PopconfirmState> {
     evt.nativeEvent.stopImmediatePropagation();
     evt.stopPropagation();
     const { trigger } = this.props;
-    const target = evt.nativeEvent.target as HTMLSpanElement;
-    if (trigger === 'click' && target) {
+    const target = evt.currentTarget?.firstElementChild as HTMLSpanElement;
+    if (trigger === 'click' && (evt.target === this.childRef || this.childRef?.contains(evt.target as HTMLElement))) {
       this.compute(target);
     }
   };
@@ -213,31 +212,40 @@ class PopComponent extends React.Component<PopProps, PopconfirmState> {
   handleOver = (evt: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
     evt.nativeEvent.stopImmediatePropagation();
     evt.stopPropagation();
+    const target = evt.currentTarget?.firstElementChild as HTMLElement;
     const {
       trigger, mouseEnterDelay = 0,
     } = this.props;
-    const target = evt.nativeEvent.target as HTMLSpanElement;
-    if (trigger === 'hover' && target) {
-      setTimeout(() => {
-        this.compute(target);
-      }, mouseEnterDelay);
+    const { visible } = this.state;
+    if (target && target === this.childRef && trigger === 'hover') {
+      target.onmouseenter = (e: MouseEvent) => {
+        if (!visible) {
+          setTimeout(() => {
+            this.compute(e.target);
+          }, mouseEnterDelay);
+        }
+      };
     }
   };
 
-  handleOut = () => {
+  handleOut = (evt: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
     const {
       mouseLeaveDelay = 0, trigger, onVisibleChange, visible: propsVisible,
     } = this.props;
     const { visible } = this.state;
-    if (trigger === 'hover') {
-      if (visible) {
-        setTimeout(() => {
-          if (propsVisible === undefined) {
-            this.setState({ visible: false });
-          }
-          onVisibleChange && onVisibleChange(false);
-        }, mouseLeaveDelay);
-      }
+    const target = evt.currentTarget?.firstElementChild as HTMLElement;
+    if (target && target === this.childRef && trigger === 'hover') {
+      target.onmouseleave = () => {
+        if (visible) {
+          setTimeout(() => {
+            if (typeof propsVisible === 'undefined') {
+              this.setState({ visible: false });
+            }
+            onVisibleChange && onVisibleChange(false);
+          }, mouseLeaveDelay);
+        }
+        target.onmouseenter = null;
+      };
     }
   };
 
@@ -245,8 +253,8 @@ class PopComponent extends React.Component<PopProps, PopconfirmState> {
     evt.nativeEvent.stopImmediatePropagation();
     evt.stopPropagation();
     const { trigger = 'hover' } = this.props;
-    const target = evt.nativeEvent.target as HTMLSpanElement;
-    if (trigger === 'focus' && target) {
+    const target = evt.currentTarget?.firstElementChild as HTMLSpanElement;
+    if (trigger === 'focus' && (evt.target === this.childRef || this.childRef?.contains(evt.target as HTMLElement))) {
       this.compute(target);
     }
   };
@@ -275,6 +283,10 @@ class PopComponent extends React.Component<PopProps, PopconfirmState> {
     this.node = node;
   }
 
+  getChildRef = (child: HTMLElement) => {
+    this.childRef = child;
+  }
+
   showPop = () => {
     const { trigger = 'hover' } = this.props;
     trigger === 'hover' && this.setState({ visible: true });
@@ -301,6 +313,7 @@ class PopComponent extends React.Component<PopProps, PopconfirmState> {
       overlayStyle = {},
       okButtonProps,
       cancelButtonProps,
+      trigger,
     } = this.props;
     const {
       visible, x, y, direction,
@@ -308,6 +321,7 @@ class PopComponent extends React.Component<PopProps, PopconfirmState> {
     const prefix = getPrefixCls(`${componentType}`, prefixCls);
     const popContainter = classnames(prefix, className, {
       [`${prefix}-show`]: visible,
+      [`${prefix}-show-${direction}`]: visible,
     });
 
     const contentStyle = classnames(`${prefix}-content`);
@@ -315,10 +329,10 @@ class PopComponent extends React.Component<PopProps, PopconfirmState> {
       [`${prefix}-content-arrow-${direction}`]: direction,
     });
 
-    let Tchildren;
+    let TChildren;
     if (React.isValidElement(children)) {
-      Tchildren = React.cloneElement(children, {
-        id: this.tag,
+      TChildren = React.cloneElement(children, {
+        ref: this.getChildRef,
       });
     } else {
       throw new Error(' props children must bu ReactNode');
@@ -335,8 +349,8 @@ class PopComponent extends React.Component<PopProps, PopconfirmState> {
           <div className={`${contentStyle}-inner-title`}>{title}</div>
         </div>
         <div className={btnStyle}>
-          <Button size="small" style={{ marginRight: 8 }} {...cancelButtonProps} onClick={this.handleCancel}>{cancelText}</Button>
-          <Button type={okType} {...okButtonProps} size="small" onClick={this.handleOk}>{okText}</Button>
+          <Button size="small" style={{ marginRight: 8, transition: 'none' }} {...cancelButtonProps} onClick={this.handleCancel}>{cancelText}</Button>
+          <Button type={okType} {...okButtonProps} size="small" style={{ transition: 'none' }} onClick={this.handleOk}>{okText}</Button>
         </div>
       </div>
     );
@@ -354,15 +368,18 @@ class PopComponent extends React.Component<PopProps, PopconfirmState> {
           onMouseOver={this.handleOver}
           onMouseOut={this.handleOut}
           onFocus={this.handleFocus}
-          data-tag={this.tag}
-          id={Tchildren && Tchildren.props && Tchildren.props.id ? undefined : this.tag}
         >
-          {Tchildren}
+          {TChildren}
         </span>
         <Portal {...({ getPopupContainer })}>
           <div
             className={popContainter}
-            style={{ ...overlayStyle, left: x, top: y }}
+            style={{
+              ...overlayStyle,
+              left: x,
+              top: y,
+              transition: trigger === 'hover' ? 'visibility .2s ease-in-out' : undefined,
+            }}
             ref={this.getNode}
             onClick={(e) => {
               e.stopPropagation();

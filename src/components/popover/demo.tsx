@@ -8,13 +8,24 @@ const PopoverDemo = () => (
     <Popover
       content="和哈哈哈哈1"
     >
-      <Button>hover</Button>
+      <div
+        style={{
+          width: 120, height: 120, padding: 24, border: '1px solid red',
+        }}
+        onMouseEnter={() => {
+          console.log('==ernter');
+        }}
+      >
+        <Button>
+          hover
+
+        </Button>
+      </div>
     </Popover>
     <Popover
       title={<div>Title3</div>}
       trigger="click"
       content={<div>和哈哈哈哈3</div>}
-      defaultVisible
       getPopupContainer={() => document.querySelector('#popover-demo')}
     >
       <Button style={{ margin: 24 }}>click</Button>

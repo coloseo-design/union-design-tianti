@@ -56,6 +56,7 @@ const PopconfirmDemo: React.FC<unknown> = () => {
         <div style={{ display: 'inline-block' }}>
           <div>
             <Popconfirm
+              trigger="hover"
               title="你是否确定这是一个气泡确认框？"
               placement="leftTop"
             >
