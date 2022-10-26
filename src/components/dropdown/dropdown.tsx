@@ -31,6 +31,8 @@ class Dropdown extends React.Component<DropdownProps, DropdownState> {
 
   node: HTMLSpanElement | undefined;
 
+  childRef: HTMLElement | undefined;
+
   constructor(props: DropdownProps) {
     super(props);
     const { visible } = props;
@@ -42,7 +44,7 @@ class Dropdown extends React.Component<DropdownProps, DropdownState> {
   }
 
   componentDidMount() {
-    document.addEventListener('click', this.dropHidden);
+    document.addEventListener('click', this.dropHidden, true);
   }
 
   componentDidUpdate(prevProps: DropdownProps) {
@@ -54,12 +56,13 @@ class Dropdown extends React.Component<DropdownProps, DropdownState> {
 
   componentWillUnmount() {
     this.setState({ visible: false });
-    document.removeEventListener('click', this.dropHidden);
+    document.removeEventListener('click', this.dropHidden, true);
   }
 
-  dropHidden = () => {
-    const { onVisibleChange, visible: propsVisisble } = this.props;
-    if (propsVisisble !== undefined) {
+  dropHidden = (evt: MouseEvent) => {
+    const { onVisibleChange, visible: propsVisible } = this.props;
+    if (evt.target && this.childRef?.contains(evt.target as HTMLElement)) return;
+    if (typeof propsVisible !== 'undefined') {
       onVisibleChange && onVisibleChange(false);
     } else {
       this.setState({ visible: false });
@@ -70,19 +73,30 @@ class Dropdown extends React.Component<DropdownProps, DropdownState> {
     this.node = node;
   };
 
+  getChildRef = (child: HTMLElement) => {
+    this.childRef = child;
+  };
+
   over = (evt: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
     const { trigger = ['hover'], disabled } = this.props;
-    if (trigger.indexOf('hover') >= 0 && !disabled) {
-      this.compute(evt);
+    const { visible } = this.state;
+    const target = evt.currentTarget?.firstElementChild as HTMLElement;
+    if ((evt.target === this.childRef || this.childRef?.contains(evt.target as HTMLElement)) && trigger.indexOf('hover') >= 0 && !disabled && !visible) {
+      this.compute(target);
     }
   };
 
-  out = () => {
+  out = (evt: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
     const { trigger = ['hover'], onVisibleChange, visible: propsVisible } = this.props;
     if (trigger.indexOf('hover') >= 0) {
-      onVisibleChange && onVisibleChange(false);
-      if (propsVisible === undefined) {
-        this.setState({ visible: false });
+      const target = evt.currentTarget?.firstElementChild as HTMLElement;
+      if (evt.target === this.childRef || this.childRef?.contains(evt.target as HTMLElement)) {
+        target.onmouseleave = () => {
+          onVisibleChange && onVisibleChange(false);
+          if (typeof propsVisible === 'undefined') {
+            this.setState({ visible: false });
+          }
+        };
       }
     }
   };
@@ -91,28 +105,34 @@ class Dropdown extends React.Component<DropdownProps, DropdownState> {
     const {
       trigger = ['hover'], disabled,
     } = this.props;
+    const target = evt.currentTarget?.firstElementChild as HTMLElement;
     if (trigger.indexOf('click') >= 0 && !disabled) {
-      this.compute(evt);
+      if (evt.target === this.childRef || this.childRef?.contains(evt.target as HTMLElement)) {
+        this.compute(target);
+      }
     }
   };
 
   handleContextMenu = (evt: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
     const { trigger = ['hover'], disabled } = this.props;
+    const target = evt.currentTarget?.firstElementChild as HTMLElement;
     if (trigger.indexOf('contextMenu') >= 0 && !disabled) {
       evt.preventDefault();
-      this.compute(evt);
+      if (evt.target === this.childRef || this.childRef?.contains(evt.target as HTMLElement)) {
+        this.compute(target);
+      }
     }
   };
 
-  compute = (evt: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
-    evt.stopPropagation();
-    evt.nativeEvent.stopImmediatePropagation();
+  compute = (target: HTMLElement) => {
+    // evt.stopPropagation();
+    // evt.nativeEvent.stopImmediatePropagation();
     const { visible } = this.state;
     const { visible: propsVisible } = this.props;
     const {
       placement = 'bottomCenter', arrow = false, onVisibleChange, getPopupContainer,
     } = this.props;
-    const target = evt.nativeEvent.target as HTMLSpanElement;
+    // const target = evt.nativeEvent.target as HTMLSpanElement;
     if (target && this.node) {
       const { height: contentHeight, width: contentWidth } = this.node.getBoundingClientRect();
       const {
@@ -152,7 +172,7 @@ class Dropdown extends React.Component<DropdownProps, DropdownState> {
         y: placementMap[placement].y,
       });
       onVisibleChange && onVisibleChange(!visible);
-      if (propsVisible === undefined) { // 用户控制visible 必须使用onVisibleChange 或者 传入更新的visible props
+      if (typeof propsVisible === 'undefined') { // 用户控制visible 必须使用onVisibleChange 或者 传入更新的visible props
         this.setState({ visible: !visible });
       }
     }
@@ -179,6 +199,16 @@ class Dropdown extends React.Component<DropdownProps, DropdownState> {
     const arrowStyle = classNames(`${prefix}-arrow`, {
       [`${prefix}-arrow-${placement}`]: placement,
     });
+
+    let TChildren;
+    if (React.isValidElement(children)) {
+      TChildren = React.cloneElement(children, {
+        ref: this.getChildRef,
+      });
+    } else {
+      throw new Error(' props children must be ReactNode');
+    }
+
     return (
       <>
         <span
@@ -187,7 +217,7 @@ class Dropdown extends React.Component<DropdownProps, DropdownState> {
           onClick={this.click}
           onContextMenu={this.handleContextMenu}
         >
-          {children}
+          {TChildren}
         </span>
         <Portal {...({ getPopupContainer })}>
           <div

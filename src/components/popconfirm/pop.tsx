@@ -203,8 +203,8 @@ class PopComponent extends React.Component<PopProps, PopconfirmState> {
     evt.nativeEvent.stopImmediatePropagation();
     evt.stopPropagation();
     const { trigger } = this.props;
-    const target = evt.currentTarget?.firstElementChild as HTMLSpanElement;
-    if (trigger === 'click' && (evt.target === this.childRef || this.childRef?.contains(evt.target as HTMLElement))) {
+    const target = evt.currentTarget?.firstElementChild as HTMLElement;
+    if (target && trigger === 'click' && (evt.target === this.childRef || this.childRef?.contains(evt.target as HTMLElement))) {
       this.compute(target);
     }
   };
@@ -217,14 +217,12 @@ class PopComponent extends React.Component<PopProps, PopconfirmState> {
       trigger, mouseEnterDelay = 0,
     } = this.props;
     const { visible } = this.state;
-    if (target && target === this.childRef && trigger === 'hover') {
-      target.onmouseenter = (e: MouseEvent) => {
-        if (!visible) {
-          setTimeout(() => {
-            this.compute(e.target);
-          }, mouseEnterDelay);
-        }
-      };
+    if ((evt.target === this.childRef || this.childRef?.contains(evt.target as HTMLElement)) && trigger === 'hover') {
+      if (!visible) {
+        setTimeout(() => {
+          this.compute(target);
+        }, mouseEnterDelay);
+      }
     }
   };
 
@@ -234,7 +232,7 @@ class PopComponent extends React.Component<PopProps, PopconfirmState> {
     } = this.props;
     const { visible } = this.state;
     const target = evt.currentTarget?.firstElementChild as HTMLElement;
-    if (target && target === this.childRef && trigger === 'hover') {
+    if ((evt.target === this.childRef || this.childRef?.contains(evt.target as HTMLElement)) && trigger === 'hover') {
       target.onmouseleave = () => {
         if (visible) {
           setTimeout(() => {
@@ -244,7 +242,6 @@ class PopComponent extends React.Component<PopProps, PopconfirmState> {
             onVisibleChange && onVisibleChange(false);
           }, mouseLeaveDelay);
         }
-        target.onmouseenter = null;
       };
     }
   };
@@ -335,7 +332,7 @@ class PopComponent extends React.Component<PopProps, PopconfirmState> {
         ref: this.getChildRef,
       });
     } else {
-      throw new Error(' props children must bu ReactNode');
+      throw new Error(' props children must be ReactNode');
     }
 
     const btnStyle = classnames(`${contentStyle}-inner-btn`, {

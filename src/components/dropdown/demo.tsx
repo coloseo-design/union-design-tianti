@@ -42,13 +42,6 @@ const menu = (
 const DropdownDemo = () => {
   const [visible, setVisible] = React.useState(false);
   const [visible1, setVisible1] = React.useState(false);
-  const handleButtonClick = () => {
-    setVisible(!visible);
-  };
-
-  const handleClick = () => {
-    setVisible(false);
-  };
   const test = (
     <div style={{
       width: 160, padding: 12, display: 'flex', justifyContent: 'space-between',
@@ -56,6 +49,15 @@ const DropdownDemo = () => {
     >
       <Button>重置</Button>
       <Button type="primary" onClick={() => setVisible(false)}>关闭</Button>
+    </div>
+  );
+  const test1 = (
+    <div style={{
+      width: 160, padding: 12, display: 'flex', justifyContent: 'space-between',
+    }}
+    >
+      <Button>重置</Button>
+      <Button type="primary" onClick={() => setVisible1(false)}>关闭</Button>
     </div>
   );
 
@@ -103,16 +105,25 @@ const DropdownDemo = () => {
             <Button>右键点击 topRight</Button>
           </Dropdown>
         </div>
-        <div>
-          <Dropdown placement="topCenter" overlay={menu}>
-            <Button>hover topCenter</Button>
-          </Dropdown>
-        </div>
       </div>
-
+      <div>
+        <Dropdown placement="topCenter" overlay={menu}>
+          <div style={{
+            width: 250, height: 250, border: '1px solid red', padding: 24,
+          }}
+          >
+            <div style={{
+              width: 170, height: 150, border: '1px solid black', padding: 24,
+            }}
+            >
+              <Button>hover topCenter</Button>
+            </div>
+          </div>
+        </Dropdown>
+      </div>
       <div style={{ marginTop: 32 }}>
         <Dropdown.Button
-          overlay={menu}
+          overlay={test1}
           type="primary"
           icon={<Icon style={{ fontSize: 14 }} type="zoomout" />}
           trigger={['click']}

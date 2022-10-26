@@ -4,29 +4,28 @@ import './styles/index';
 import '../button/styles/index';
 
 const PopoverDemo = () => (
-  <div id="popover-demo" style={{ paddingTop: 120, position: 'relative' }}>
+  <div style={{ paddingTop: 120, display: 'flex' }} id="testPop">
     <Popover
       content="和哈哈哈哈1"
     >
-      <div
-        style={{
-          width: 120, height: 120, padding: 24, border: '1px solid red',
-        }}
-        onMouseEnter={() => {
-          console.log('==ernter');
-        }}
+      <div style={{
+        width: 250, height: 250, border: '1px solid red', padding: 24,
+      }}
       >
-        <Button>
-          hover
-
-        </Button>
+        <div style={{
+          width: 170, height: 150, border: '1px solid black', padding: 24,
+        }}
+        >
+          <Button>hover</Button>
+        </div>
       </div>
     </Popover>
     <Popover
       title={<div>Title3</div>}
       trigger="click"
+      placement="right"
+      defaultVisible
       content={<div>和哈哈哈哈3</div>}
-      getPopupContainer={() => document.querySelector('#popover-demo')}
     >
       <Button style={{ margin: 24 }}>click</Button>
     </Popover>
