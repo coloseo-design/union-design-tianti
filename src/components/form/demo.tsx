@@ -160,6 +160,7 @@ const FormDemo = () => {
             validateFirst
             // initialValue="lisi"
             rules={[
+              { required: true, message: '请输入密码' },
               {
                 validator: (_, value) => {
                   if (!value || value.length < 2) {

@@ -96,7 +96,9 @@ const Item: React.FC<FormItemProps> = (props: FormItemProps) => {
       const validateTriggers = toArray(aValidateTrigger);
       return validateTriggers.includes(trigger);
     });
-    if (required) {
+
+    const hasMessage = filterRules?.some((i) => i.message);
+    if (required && !hasMessage) {
       filterRules.unshift({ required, message: `${name}不能为空` } as ValidatorRule);
     }
     // 开始过滤数据
