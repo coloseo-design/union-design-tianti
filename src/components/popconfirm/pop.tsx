@@ -66,9 +66,13 @@ class PopComponent extends React.Component<PopProps, PopconfirmState> {
 
   visibleOnClick = (target: HTMLElement) => {
     if (this.childRef?.contains(target)) return;
-    const { onVisibleChange, visible: propsVisisble } = this.props;
+    const { onVisibleChange, visible: propsVisisble, componentType } = this.props;
     if (typeof propsVisisble !== 'undefined') {
-      onVisibleChange && onVisibleChange(false);
+      if (!this.node?.contains(target)) {
+        onVisibleChange?.(false);
+      }
+    } else if (componentType === 'pop-confirm') {
+      if (!this.node?.contains(target)) this.setState({ visible: false });
     } else {
       this.setState({ visible: false });
     }
@@ -264,7 +268,7 @@ class PopComponent extends React.Component<PopProps, PopconfirmState> {
     e.stopPropagation();
     e.nativeEvent.stopImmediatePropagation();
     const { visible, onConfirm, onVisibleChange } = this.props;
-    if (visible === undefined) {
+    if (typeof visible === 'undefined') {
       this.setState({ visible: false });
     }
     onVisibleChange && onVisibleChange(false);

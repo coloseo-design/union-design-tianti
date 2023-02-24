@@ -3,15 +3,13 @@
 
 import React, { Component } from 'react';
 import classnames from 'classnames';
+import omit from 'omit.js';
 import { ConfigConsumer, ConfigConsumerProps } from '../config-provider/context';
 
-let timer: NodeJS.Timeout;
+// let timer: NodeJS.Timeout;
 
-export interface CarouselProps {
-  /* classname 前缀 */
+export interface CarouselProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'afterChange' | 'beforeChange'> {
   prefixCls?: string;
-
-  // children?: React.ReactNode;
   /* 控制面板形状 */
   dotsShape?: 'strip' | 'circle',
   /* 控制面板位置 */
@@ -30,11 +28,12 @@ export interface CarouselProps {
 }
 
 export interface CarouselState {
-  active: number;
-  translateX: number;
+  activeIndex: number;
+  transition: boolean;
   translateY?: string;
   width: number;
   time?: number;
+  timer: NodeJS.Timeout | null;
 }
 
 class Carousel extends Component<CarouselProps, CarouselState> {
@@ -43,45 +42,39 @@ class Carousel extends Component<CarouselProps, CarouselState> {
   constructor(props: CarouselProps) {
     super(props);
     this.state = {
-      active: 0,
-      translateX: 0,
       width: 0,
-      time: 500,
+      activeIndex: 0,
+      timer: null,
+      transition: false,
     };
   }
 
   componentDidMount() {
     if (this.node) {
       const { width } = this.node.getBoundingClientRect();
-      this.setState({
-        width,
-      });
-      const { autoplay, children } = this.props;
+      this.setState({ width });
+      const { autoplay } = this.props;
+      const { timer } = this.state;
       if (autoplay) {
         timer && clearInterval(timer);
-        if (children) {
-          const childrenArray = React.Children.toArray(children);
-          this.anmiateTime(width, 1, childrenArray.length);
-        }
+        this.autoInterval();
       }
     }
   }
 
   componentDidUpdate(preProp: CarouselProps) {
     const { children, autoplay } = this.props;
-    const { width } = this.state;
+    const { timer } = this.state;
     if (children !== preProp.children) {
       if (autoplay) {
         timer && clearInterval(timer);
-        if (children) {
-          const childrenArray = React.Children.toArray(children);
-          this.anmiateTime(width, 1, childrenArray.length);
-        }
+        if (children) this.autoInterval();
       }
     }
   }
 
   componentWillUnmount() {
+    const { timer } = this.state;
     timer && clearInterval(timer);
   }
 
@@ -89,70 +82,52 @@ class Carousel extends Component<CarouselProps, CarouselState> {
     this.node = node;
   }
 
-  anmiateTime = (width: number, next: number, childrenLen: number) => {
-    const { effect = 'scrollx', afterChange, beforeChange } = this.props;
-    let step: number = next;
-    timer = setInterval(() => {
-      if (step <= (effect === 'scrollx' ? childrenLen : childrenLen - 1)) {
-        if (effect === 'scrollx') {
-          this.setState({ translateX: -step * width, active: step });
-        } else {
-          this.setState({ active: step });
-        }
-        afterChange && afterChange(step);
-        beforeChange && beforeChange(step === 0
-          ? step
-          : step - 1, (step === childrenLen ? 0 : step));
-        step = step === childrenLen ? 0 : step + 1;
-      } else {
-        if (effect === 'scrollx') {
-          this.setState({ translateX: 0, active: 0 });
-        } else {
-          this.setState({ active: 0 });
-        }
-        afterChange && afterChange(0);
-        beforeChange && beforeChange(childrenLen - 1, 0);
-        step = 0;
-      }
-    }, 3000);
-  }
-
   handleSwitch = (item: number) => (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     e.preventDefault();
-    const { width, active } = this.state;
-    const {
-      effect = 'scrollx', children, autoplay, afterChange, beforeChange,
-    } = this.props;
-    const childrenArray = React.Children.toArray(children);
-    if (effect === 'scrollx') {
-      this.setState({
-        translateX: -(item) * width,
-      });
-      // if (active === childrenArray.length - 1) {
-      //   this.setState({
-      //     translateX: -(active + 1) * width,
-      //   });
-      //   setTimeout(() => {
-      //     this.setState({ time: 0, translateX: 0 });
-      //     setTimeout(() => {
-      //       this.setState({ time: 500 });
-      //     }, 10);
-      //   }, 500);
-      // } else {
-      //   this.setState({
-      //     translateX: -(item) * width,
-      //   });
-      // }
-    }
+    const { timer, activeIndex } = this.state;
+    const { autoplay } = this.props;
+    this.setState({ activeIndex: item, transition: true });
     if (autoplay) {
-      clearInterval(timer);
-      this.anmiateTime(width, item, childrenArray.length);
-      this.setState({ active: item });
+      timer && clearInterval(timer);
+      this.autoInterval();
     } else {
-      afterChange && setTimeout(() => { afterChange(item); }, 500);
-      beforeChange && beforeChange(active, item);
-      // this.setState({ active: active === childrenArray.length - 1 ? childrenArray.length : item });
-      this.setState({ active: item });
+      this.carouselChange(activeIndex, item);
+    }
+  }
+
+  carouselChange = (before: number, current: number) => {
+    const { afterChange, beforeChange } = this.props;
+    if (afterChange) {
+      const t = setTimeout(() => {
+        clearTimeout(t);
+        afterChange(current);
+      }, 500);
+    }
+    beforeChange && beforeChange(before, current);
+  }
+
+  autoInterval = () => {
+    const timer = setInterval(() => {
+      const { activeIndex } = this.state;
+      const { children } = this.props;
+      const idx = activeIndex >= children.length ? 0 : activeIndex + 1;
+      this.carouselChange(activeIndex, idx);
+      this.setState({
+        transition: true,
+        activeIndex: activeIndex + 1,
+      });
+    }, 3000);
+    this.setState({ timer });
+  }
+
+  onTransitionEnd = () => {
+    const { activeIndex } = this.state;
+    const { children } = this.props;
+    if (activeIndex >= (children || []).length) {
+      this.setState({
+        activeIndex: 0,
+        transition: false,
+      });
     }
   }
 
@@ -164,42 +139,40 @@ class Carousel extends Component<CarouselProps, CarouselState> {
       dotPosition = 'bottom',
       dots = true,
       effect = 'scrollx',
-      autoplay,
+      ...rest
     } = this.props;
-
-    const {
-      active, translateX, width, time,
-    } = this.state;
-
+    const { transition, width, activeIndex } = this.state;
     const wrapper = getPrefixCls('carousel', prefixCls);
     const content = classnames(`${wrapper}-content`);
     const dotStyle = classnames(`${wrapper}-dots`);
-
     const currentDot = classnames(`${wrapper}-dots-${dotsShape}-dot`);
 
     const childrenArray = React.Children.toArray(children);
     const childrenList = effect === 'fade' ? [...childrenArray] : [...childrenArray, childrenArray[0]];
     const dotsList = Array.from(Array(childrenArray.length), (_, k) => k);
 
+    const restProps = omit(rest, ['afterChange', 'beforeChange', 'autoplay']);
+
     return (
-      <div className={wrapper} ref={this.getNode}>
+      <div className={wrapper} ref={this.getNode} {...restProps}>
         <div
           className={content}
           style={{
-            transform: `translate3d(${translateX}px, 0, 0)`,
+            transform: effect === 'scrollx' ? `translate3d(-${activeIndex * width}px, 0, 0)` : 'unset',
             width: width !== 0 ? width * childrenList.length : '100%',
-            transition: effect === 'fade' ? undefined : (autoplay ? `transform ${active === 0 ? '0ms' : '500ms'}` : `transform ${time}ms ease-in-out 0s`),
+            transition: (effect === 'fade' || !transition) ? 'unset' : 'transform 500ms',
           }}
+          onTransitionEnd={this.onTransitionEnd}
         >
           {(childrenList || []).map((item, index) => (
             <div
               key={`${index}-item`}
+              className={classnames(`${content}-item`, {
+                [`${content}-item-fade`]: effect === 'fade',
+              })}
               style={{
                 width: width || '100%',
-                display: 'inline-block',
-                opacity: effect === 'fade' ? (active === index ? 1 : 0) : 1,
-                transition: effect === 'scrollx' ? undefined : 'opacity 500ms ease 0s, visibility 500ms ease 0s',
-                position: effect === 'scrollx' ? undefined : 'relative',
+                opacity: effect === 'fade' ? ((activeIndex === index || activeIndex === childrenList.length) ? 1 : 0) : undefined,
                 left: effect === 'scrollx' ? undefined : -index * width,
               }}
             >
@@ -212,7 +185,9 @@ class Carousel extends Component<CarouselProps, CarouselState> {
           <div>
             {(dotsList || []).map((item: number) => (
               <div
-                className={`${currentDot} ${(active === dotsList.length ? 0 : active) === item ? `${currentDot}-active` : ''}`}
+                className={classnames(currentDot, {
+                  [`${currentDot}-active`]: (activeIndex === dotsList.length ? 0 : activeIndex) === item,
+                })}
                 key={item}
                 onClick={this.handleSwitch(item)}
               />

@@ -109,7 +109,7 @@ const DropdownDemo = () => {
       <div>
         <Dropdown placement="topCenter" overlay={menu}>
           <div style={{
-            width: 250, height: 250, border: '1px solid red', padding: 24,
+            width: 250, height: 250, margin: 32, border: '1px solid red', padding: 24,
           }}
           >
             <div style={{

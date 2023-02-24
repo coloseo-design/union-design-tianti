@@ -63,7 +63,9 @@ class Dropdown extends React.Component<DropdownProps, DropdownState> {
     const { onVisibleChange, visible: propsVisible } = this.props;
     if (evt.target && this.childRef?.contains(evt.target as HTMLElement)) return;
     if (typeof propsVisible !== 'undefined') {
-      onVisibleChange && onVisibleChange(false);
+      if (!this.node?.contains(evt.target as HTMLElement)) {
+        onVisibleChange?.(false);
+      }
     } else {
       this.setState({ visible: false });
     }

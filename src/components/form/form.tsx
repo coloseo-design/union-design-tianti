@@ -54,7 +54,7 @@ const Form: ForwardRefRenderFunction<FormInstance, FormProps> = (
         if (typeof obj[key] === 'object') {
           Object.assign(parent, {
             [key]: {
-              ...obj[key],
+              ...obj[key] as any,
             },
           });
         } else {
