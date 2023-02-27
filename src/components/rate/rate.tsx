@@ -90,8 +90,6 @@ class Rate extends Component<RateProps, RateState> {
       this.setState({ mouseValue: null });
     };
 
-    console.log('mouseValue', mouseValue);
-
     const omitRest = omit(rest, ['value', 'count', 'defaultValue']);
     if (allowHalf) {
       return (
