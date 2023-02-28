@@ -1,31 +1,32 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import React, { createRef, CSSProperties } from 'react';
-import { BaseComponent, BaseProps } from '../common/base-component';
+import { BaseComponent } from '../common/base-component';
 
 export type TypographyLevel = 1 | 2 | 3 | 4 | 5;
 
 export type TypographyType = 'link' | 'success' | 'warning' | 'danger';
 
-export type TypographyProps = {
-    /** 重要程度，相当于 h1、h2、h3、h4、h5 */
-    level?: TypographyLevel;
-    /** 添加删除线样式 */
-    deleteline?: boolean;
-    /** 添加下划线样式 */
-    underline?: boolean;
-    /** 是否加粗 */
-    strong?: boolean;
-    /** 文本类型 */
-    type?: TypographyType;
-    /** type为link 的 链接地址 */
-    href?: string;
-    /** 多少行 */
-    rows?: number;
-    /** css类 */
-    className?: string;
-    /** 行类 style */
-    style?: CSSProperties;
-} & BaseProps;
+export interface TypographyProps extends React.HTMLAttributes<HTMLDivElement> {
+  prefixCls?: string;
+  /** 重要程度，相当于 h1、h2、h3、h4、h5 */
+  level?: TypographyLevel;
+  /** 添加删除线样式 */
+  deleteline?: boolean;
+  /** 添加下划线样式 */
+  underline?: boolean;
+  /** 是否加粗 */
+  strong?: boolean;
+  /** 文本类型 */
+  type?: TypographyType;
+  /** type为link 的 链接地址 */
+  href?: string;
+  /** 多少行 */
+  rows?: number;
+  /** css类 */
+  className?: string;
+  /** 行类 style */
+  style?: CSSProperties;
+}
 
 export default class Typography extends BaseComponent<TypographyProps> {
     public static defaultProps: TypographyProps = {
@@ -47,7 +48,7 @@ export default class Typography extends BaseComponent<TypographyProps> {
 
     protected view = () => {
       const {
-        children, level, underline, deleteline, strong, type, href, className, style,
+        children, level, underline, deleteline, strong, type, href, className, style, ...rest
       } = this.props;
 
       let tag = '';
@@ -72,6 +73,7 @@ export default class Typography extends BaseComponent<TypographyProps> {
       this.handleDescription();
 
       return React.createElement(tag, {
+        ...rest,
         style,
         className: classNames,
         ref: this.ref,

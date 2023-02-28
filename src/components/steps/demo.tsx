@@ -4,7 +4,6 @@ import { Icon, Steps } from '../index';
 import './styles/index';
 import '../icon/styles/index';
 
-const stepsDes = ['继承规划', '规划信息', '项目信息', '投资规模信息', '服务商委托信息'];
 const Demo = () => (
   <div style={{
     minHeight: '40vh', padding: 40, backgroundColor: 'rgb(250, 250, 250)',
@@ -17,18 +16,6 @@ const Demo = () => (
         <Steps.Step title="等待处理" description="这里是描述文案，超出折行显示, 这里是描述文案，超出折行显示" />
         <Steps.Step title="等待处理" description="这里是描述文案，超出折行显示" />
         <Steps.Step title="等待处理" description="这里是描述文案，超出折行显示这里是描述文案，超出折行显示这里是描述文案，超出折行显示这里是描述文案，超出折行显示这里是描述文案，超出折行显示这里是描述文案，超出折行显示这里是描述文案，超出折行显示这里是描述文案，超出折行显示这里是描述文案，超出折行显示" />
-        {/* {(new Array(5).join(',').split(',') || []).map((_, index) => (
-          <Steps.Step
-            key={index}
-            title={stepsDes[index]}
-            description={(
-              <div>
-                <div>姓名</div>
-                <div>2020-12-12 18:30</div>
-              </div>
-            )}
-          />
-        ))} */}
       </Steps>
     </div>
     <div style={{ height: 20 }} />

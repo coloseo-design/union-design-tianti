@@ -44,10 +44,8 @@ class Alert extends React.Component<AlertProps, AlertState> {
     if (closable) {
       this.setState({ close: true });
       onClose && onClose(event);
-      setTimeout(() => {
-        afterClose && afterClose();
-        this.setState({ blockNone: true, close: false });
-      }, 500);
+      afterClose && afterClose();
+      this.setState({ blockNone: true, close: false });
     } else {
       onClose && onClose(event);
     }
@@ -93,8 +91,10 @@ class Alert extends React.Component<AlertProps, AlertState> {
       warning: 'exclamation-circle',
     };
     return (
-      <div className={alert} style={{ ...style, display: blockNone ? 'none' : 'block' }}>
-        {bType === 'info' && show
+      <>
+        {!blockNone && (
+        <div className={alert} style={style}>
+          {bType === 'info' && show
           && (
           <span
             style={{ transform: icon ? 'rotate(0deg)' : 'rotate(-180deg)', top: description ? 18 : 9 }}
@@ -103,7 +103,7 @@ class Alert extends React.Component<AlertProps, AlertState> {
             {icon || <span className={alertIcon}><Icon type="exclamation-circle" style={{ fontSize: description ? 24 : 16 }} /></span>}
           </span>
           )}
-        {bType !== 'info' && show
+          {bType !== 'info' && show
           && (
           <span className={alertIconContent}>
             {icon
@@ -117,12 +117,14 @@ class Alert extends React.Component<AlertProps, AlertState> {
               )}
           </span>
           )}
-        <span className={alertMessage}>{message}</span>
-        <span className={alertDes}>{description}</span>
-        <span className={alertClose} onClick={this.Close}>
-          {closeText || (closable ? <Icon type="close" style={{ fontSize: 12 }} /> : null)}
-        </span>
-      </div>
+          <span className={alertMessage}>{message}</span>
+          <span className={alertDes}>{description}</span>
+          <span className={alertClose} onClick={this.Close}>
+            {closeText || (closable ? <Icon type="close" style={{ fontSize: 12 }} /> : null)}
+          </span>
+        </div>
+        )}
+      </>
     );
   }
 

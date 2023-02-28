@@ -132,7 +132,7 @@ const FormDemo = () => {
           labelAlign="right"
           labelStyle={{ marginBottom: 8 }}
         >
-          <FormItem
+          <Form.Item
             name="username"
             validateFirst
             label="用户名"
@@ -152,7 +152,7 @@ const FormDemo = () => {
             ]}
           >
             <Input placeholder="请输入" />
-          </FormItem>
+          </Form.Item>
           <FormItem
             name="password"
             label="密码"

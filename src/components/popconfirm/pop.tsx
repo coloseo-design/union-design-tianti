@@ -280,7 +280,8 @@ class PopComponent extends React.Component<PopProps, PopconfirmState> {
   }
 
   getChildRef = (child: HTMLElement) => {
-    this.childRef = child;
+    const temp = (child as any)?.ref?.current || child;
+    this.childRef = temp;
   }
 
   showPop = () => {
@@ -336,7 +337,7 @@ class PopComponent extends React.Component<PopProps, PopconfirmState> {
       </span>
     );
     if (React.isValidElement(children)) {
-      TChildren = React.cloneElement(children, {
+      TChildren = React.cloneElement<any>(children, {
         ref: this.getChildRef,
         onClick: (evt: React.MouseEvent<any>) => {
           this.handleClick(evt);

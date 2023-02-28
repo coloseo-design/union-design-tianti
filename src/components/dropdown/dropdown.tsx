@@ -199,7 +199,7 @@ class Dropdown extends React.Component<DropdownProps, DropdownState> {
       </span>
     );
     if (React.isValidElement(children)) {
-      TChildren = React.cloneElement(children, {
+      TChildren = React.cloneElement<any>(children, {
         ref: this.getChildRef,
         onClick: (evt: React.MouseEvent<any>) => {
           this.click(evt);
@@ -238,7 +238,7 @@ class Dropdown extends React.Component<DropdownProps, DropdownState> {
             <div className={containter}>
               {overlay && React.isValidElement(overlay) ? (() => {
                 if ((overlay.type as unknown as Record<string, unknown>).tag === MENU_TAG_MENU) {
-                  return React.cloneElement(overlay, {
+                  return React.cloneElement<any>(overlay, {
                     popupClassName: `${prefix}-menu`,
                   });
                 }
