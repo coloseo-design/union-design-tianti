@@ -31,6 +31,7 @@ export interface RateProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'o
 export interface RateState {
   value?: number;
   arr?: number[];
+  mouseValue?: number;
 }
 
 class Rate extends Component<RateProps, RateState> {
@@ -66,7 +67,7 @@ class Rate extends Component<RateProps, RateState> {
     const {
       forwardedRef, onChange, prefixCls, allowHalf, className, ...rest
     } = this.props;
-    const { value, arr } = this.state;
+    const { value, arr, mouseValue } = this.state;
 
     const prefix = getPrefixCls('rate', prefixCls);
     const mainClass = classNames(prefix, className, {
@@ -81,6 +82,14 @@ class Rate extends Component<RateProps, RateState> {
       }
     };
 
+    const onMouseEnter = (index: number) => {
+      this.setState({ mouseValue: index });
+    };
+
+    const onMouseLeave = () => {
+      this.setState({ mouseValue: null });
+    };
+
     const omitRest = omit(rest, ['value', 'count', 'defaultValue']);
     if (allowHalf) {
       return (
@@ -91,9 +100,11 @@ class Rate extends Component<RateProps, RateState> {
               role="radio"
               aria-name="rate"
               area-type={item % 2 ? 'right' : 'left'}
-              aria-checked={item >= value}
+              aria-checked={(item >= value) && (mouseValue ? index === mouseValue : true)}
               key={item}
               onClick={handleClick.bind(null, index)}
+              onMouseEnter={onMouseEnter.bind(null, index)}
+              onMouseLeave={onMouseLeave}
               style={{
                 width: item % 2 ? '25px' : '5px',
                 paddingRight: item % 2 ? '5px' : 0,
@@ -113,7 +124,15 @@ class Rate extends Component<RateProps, RateState> {
     return (
       <div {...rest} className={mainClass} ref={forwardedRef}>
         {(arr || []).map((item, index) => (
-          <div role="radio" aria-name="rate" aria-checked={item >= value} key={item} onClick={handleClick.bind(null, index)}>
+          <div
+            role="radio"
+            aria-name="rate"
+            aria-checked={(item >= value) && (mouseValue ? index === mouseValue : true)}
+            key={item}
+            onClick={handleClick.bind(null, index)}
+            onMouseEnter={onMouseEnter.bind(null, index)}
+            onMouseLeave={onMouseLeave}
+          >
             <Icon type="favorite" />
           </div>
         ))}
