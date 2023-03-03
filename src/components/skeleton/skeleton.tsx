@@ -33,7 +33,7 @@ interface SkeletonProps extends BaseProps {
   /** 是否显示段落占位图 */
   paragraph?: boolean | SkeletonParagraphProps;
 
-  getPrefixCls?: string;
+  getPrefixCls?: (cls: string, customizePrefix?: string) => string;
 }
 
 @withGlobalConfig
@@ -72,21 +72,21 @@ export default class extends React.Component<SkeletonProps> {
       children,
     } = this.props;
     let { avatar = false } = this.props;
-    const prefx = getPrefixCls?.('skeleton', customizePrefixCls);
-    const containerCls = classnames(prefx, {
-      [`${prefx}-with-avatar`]: avatar,
-      [`${prefx}-status-active`]: active,
+    const prefix = getPrefixCls?.('skeleton', customizePrefixCls);
+    const containerCls = classnames(prefix, {
+      [`${prefix}-with-avatar`]: avatar,
+      [`${prefix}-status-active`]: active,
     });
-    const headerCls = `${prefx}-header`;
-    const contentCls = `${prefx}-content`;
+    const headerCls = `${prefix}-header`;
+    const contentCls = `${prefix}-content`;
 
     // 处理头像样式
     if (avatar === true) {
       avatar = { shape: 'circle' };
     }
-    const avatarCls = classnames(`${prefx}-header-avatar`, {
+    const avatarCls = classnames(`${prefix}-header-avatar`, {
       ...(avatar === false ? {} : {
-        [`${prefx}-header-avatar-${(avatar as SkeletonAvatarProps).shape}`]: (avatar as SkeletonAvatarProps).shape,
+        [`${prefix}-header-avatar-${(avatar as SkeletonAvatarProps).shape}`]: (avatar as SkeletonAvatarProps).shape,
       }),
     });
 

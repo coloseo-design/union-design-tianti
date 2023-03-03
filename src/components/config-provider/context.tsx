@@ -1,4 +1,4 @@
-import React, { createContext } from 'react';
+import React, { ComponentType, createContext } from 'react';
 
 export interface ConfigConsumerProps {
   getPrefixCls: (cls: string, customizePrefix?: string) => string;
@@ -17,12 +17,16 @@ export const ConfigContext = createContext<ConfigConsumerProps>({
 });
 
 export const { Consumer: ConfigConsumer } = ConfigContext;
-/* eslint max-len: 0 */
-/* eslint react/display-name: 0 */
-export const withGlobalConfig = <T extends ConfigConsumerProps>(Component: React.FC<T> | React.Component<T>) => React.forwardRef((props, ref) => (
+export const withGlobalConfig = <T extends ConfigConsumerProps>(Component: ComponentType<T>) => React.forwardRef((props: Exclude<T, 'getPrefixCls'>, ref) => (
   <ConfigConsumer>
     {
-      ({ getPrefixCls }: ConfigConsumerProps) => (<Component {...props} ref={ref} getPrefixCls={getPrefixCls} />)
+      ({ getPrefixCls }: ConfigConsumerProps) => (
+        <Component
+          {...props}
+          ref={ref}
+          getPrefixCls={getPrefixCls}
+        />
+      )
     }
   </ConfigConsumer>
 ));

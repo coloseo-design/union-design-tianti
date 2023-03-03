@@ -52,7 +52,7 @@ export interface FormContextProps extends FormCommmonProps{
   /** 表单错误收集 */
   onError: (name: string, action: any) => void;
   /** 表单提交事件 */
-  onSubmit: () => void;
+  onSubmit: (evt: React.MouseEvent<HTMLElement>) => void;
   /** 表单的校验状态 */
   // isValidating: boolean;
   /** formItem的校验状态 */

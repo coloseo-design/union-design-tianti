@@ -6,7 +6,7 @@ import FormItemError from './form-item-error';
 import {
   composeFieldName,
   defaultGetValueFromEvent,
-  getValueFromKeypaths,
+  getValueFromKeyPaths,
   toArray,
   validateRules,
 } from './util';
@@ -22,8 +22,8 @@ const Item: React.FC<FormItemProps> = (props: FormItemProps) => {
     trigger = 'onChange',
     initialValue,
     prefixCls: customizePrefixCls,
-    labelAlign: lableAlignOfProps,
-    labelCol: labelColfromProps,
+    labelAlign: labelAlignOfProps,
+    labelCol: labelColFromProps,
     wrapperCol: wrapperColFromProps,
     getValueFromEvent, // 自定义从event中获取value
     validateTrigger: validateTriggerFromProps,
@@ -49,7 +49,7 @@ const Item: React.FC<FormItemProps> = (props: FormItemProps) => {
     status,
   } = context;
   const composedName = composeFieldName(formName, name);
-  const value = getValueFromKeypaths(name, values);
+  const value = getValueFromKeyPaths(name, values);
   const error = errors[composedName] || [];
   //  检查当前组件是否为必填
   let isRequired = required;
@@ -66,17 +66,23 @@ const Item: React.FC<FormItemProps> = (props: FormItemProps) => {
   // 布局相关
   const prefix = getPrefixCls('form-item', customizePrefixCls);
   // label布局
-  const labelCol = { ...context.labelCol, ...labelColfromProps };
-  const labelAlign = lableAlignOfProps || context.labelAlign;
+  const {
+    labelCol: labelColFromContext,
+    labelAlign: labelAlignFromContext,
+    wrapperCol: wrapperColFromContext,
+    labelStyle: labelStyleFromContext,
+  } = context;
+  const labelCol = { ...labelColFromContext, ...labelColFromProps };
+  const labelAlign = labelAlignOfProps || labelAlignFromContext;
   const labelClassName = classnames({
     [`${prefix}-label`]: true,
     [`${prefix}-label-left`]: labelAlign === 'left',
     [`${prefix}-label-colon`]: colon,
   });
   // 输入组件布局
-  const wrapperCol = { ...context.wrapperCol, ...wrapperColFromProps };
+  const wrapperCol = { ...wrapperColFromContext, ...wrapperColFromProps };
   const rowCls = classnames(prefix);
-  const controlWraperClassName = classnames({
+  const controlWrapperClassName = classnames({
     [`${prefix}-control-wrapper`]: true,
   });
   const controlInputClassName = classnames(`${prefix}-control`, {
@@ -204,13 +210,13 @@ const Item: React.FC<FormItemProps> = (props: FormItemProps) => {
           <Col
             {...labelCol}
             className={labelClassName}
-            style={labelStyleOfProps || context.labelStyle}
+            style={labelStyleOfProps || labelStyleFromContext}
           >
             <label className={labelCls} title={composedName} htmlFor={composedName}>{label}</label>
           </Col>
         )
       }
-      <Col {...wrapperCol} className={controlWraperClassName}>
+      <Col {...wrapperCol} className={controlWrapperClassName}>
         <div className={controlInputClassName}>
           {cloneElement}
           <FormItemError error={hasError ? error : undefined} />

@@ -116,7 +116,7 @@ export const validateRules = (name: string, value: unknown, rules: ValidatorRule
  * @param name keypath 数组
  * @param values 值
  */
-export const getValueFromKeypaths = (name: string, values: {[key: string]: any}) => {
+export const getValueFromKeyPaths = (name: string, values: {[key: string]: any}) => {
   try {
     const names = name.split('.');
     const [key, ...rest] = [...names].reverse();

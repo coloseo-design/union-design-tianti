@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unknown-property */
 /* eslint-disable jsx-a11y/aria-props */
 /* eslint-disable jsx-a11y/interactive-supports-focus */
 /* eslint-disable no-shadow */
@@ -39,6 +40,7 @@ class Rate extends Component<RateProps, RateState> {
     value: 0,
     onChange: () => {},
     count: 5,
+    defaultValue: 0,
   };
 
   constructor(props: RateProps) {
@@ -67,7 +69,7 @@ class Rate extends Component<RateProps, RateState> {
     const {
       forwardedRef, onChange, prefixCls, allowHalf, className, ...rest
     } = this.props;
-    const { value, arr, mouseValue } = this.state;
+    const { value = 0, arr, mouseValue } = this.state;
 
     const prefix = getPrefixCls('rate', prefixCls);
     const mainClass = classNames(prefix, className, {
