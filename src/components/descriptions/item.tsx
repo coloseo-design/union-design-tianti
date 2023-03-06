@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import classNames from 'classnames';
-import { ConfigConsumer, ConfigConsumerProps } from '../config-provider';
+import { ConfigConsumer, ConfigConsumerProps } from '@union-design/config-provider';
 
 export interface ItemProps extends
 React.HTMLAttributes<HTMLTableDataCellElement | HTMLTableHeaderCellElement> {

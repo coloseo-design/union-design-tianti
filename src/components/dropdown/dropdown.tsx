@@ -1,10 +1,10 @@
 import React, { ReactNode } from 'react';
 import classNames from 'classnames';
 import DropButton from './button';
-import { getOffset } from '../utils/getOffset';
-import Portal from '../common/portal';
-import { ConfigConsumer, ConfigConsumerProps } from '../config-provider';
-import { MENU_TAG_MENU } from '../menu/menu';
+import { getOffset } from '@union-design/utils/getOffset';
+import Portal from '@union-design/portal';
+import { ConfigConsumer, ConfigConsumerProps } from '@union-design/config-provider';
+import { MENU_TAG_MENU } from '@union-design/menu/menu';
 
 export interface DropdownProps {
   getPopupContainer?: () => HTMLElement | null;

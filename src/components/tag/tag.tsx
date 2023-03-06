@@ -1,9 +1,9 @@
 import React from 'react';
 import omit from 'omit.js';
 import classNames from 'classnames';
-import { ConfigContext } from '../config-provider/context';
-import Icon from '../icon';
-import { tuple } from '../utils/type';
+import { ConfigContext } from '@union-design/config-provider/context';
+import Icon from '@union-design/icon';
+import { tuple } from '@union-design/utils/type';
 
 export type ElementOf<T> = T extends (infer E)[] ? E : T extends readonly (infer F)[] ? F : never;
 export type LiteralUnion<T extends U, U> = T | U;

@@ -5,7 +5,7 @@
 /* eslint-disable max-len */
 import React from 'react';
 import Empty from './empty';
-import { ConfigConsumer } from '../config-provider';
+import { ConfigConsumer } from '@union-design/config-provider';
 import { CascaderOptionType, FieldNamesType } from './types/common';
 import { getFieldName } from './utils';
 
@@ -67,7 +67,7 @@ class Result extends React.Component<ResultProps, ResultState> {
     const result: CascaderOptionType[][] = [];
     const labelKeyName = getFieldName('label', this.props.fieldNames);
     flattenOptions?.forEach((flattenOption) => {
-      const hasKeyword = flattenOption.some((obj) => obj[labelKeyName].includes(inputValue));
+      const hasKeyword = flattenOption.some((obj: any) => obj[labelKeyName].includes(inputValue));
       if (hasKeyword) {
         result.push(flattenOption);
       }
@@ -78,7 +78,7 @@ class Result extends React.Component<ResultProps, ResultState> {
           {result.map((arr, index) => {
             const isDisabled = arr.some((obj) => obj.disabled);
             const labels = arr.map((obj) => obj[labelKeyName]);
-            const title = this.displayRender(labels);
+            const title = this.displayRender(labels as string[]);
             return (
               <li
                 key={index}

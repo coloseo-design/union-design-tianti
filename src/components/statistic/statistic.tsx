@@ -1,6 +1,6 @@
 import React, { Component, CSSProperties, ReactNode } from 'react';
 import classNames from 'classnames';
-import { ConfigConsumer, ConfigConsumerProps } from '../config-provider';
+import { ConfigConsumer, ConfigConsumerProps } from '@union-design/config-provider';
 
 function retain(num: number, d: number) {
   return (parseInt(`${num * 100}`, 10) / 100).toFixed(d);

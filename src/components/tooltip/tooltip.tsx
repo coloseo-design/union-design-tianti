@@ -1,9 +1,9 @@
 import React, { ReactNode } from 'react';
 import classnames from 'classnames';
-import Popup from '../common/portal';
-import { getOffset } from '../utils/getOffset';
-import { ConfigConsumer, ConfigConsumerProps } from '../config-provider';
-import { tuple } from '../utils/type';
+import Popup from '@union-design/portal';
+import { getOffset } from '@union-design/utils/getOffset';
+import { ConfigConsumer, ConfigConsumerProps } from '@union-design/config-provider';
+import { tuple } from '@union-design/utils/type';
 
 const PlacementTypes = tuple('top', 'left', 'right', 'bottom');
 const TriggerTypes = tuple('hover', 'focus', 'click');
@@ -20,6 +20,8 @@ export interface TooltipProps {
   placement?: PlacementType;
   /** 触发事件 */
   trigger?: TriggerType;
+
+  position?: { left: number, top: number }
 }
 
 interface TooltipState {
@@ -137,7 +139,7 @@ class Tooltip extends React.Component<TooltipProps, TooltipState> {
         onClick: this.onMouseOver,
       },
       focus: {
-        onFocus: this.onMouseOver,
+        onFocus: this.onMouseOver as any,
       },
     };
     let component = (<span {...normalEventMap[trigger]}>{children}</span>);
@@ -161,7 +163,7 @@ class Tooltip extends React.Component<TooltipProps, TooltipState> {
             children.props.onMouseOver && children.props.onMouseOver(evt);
           },
           onMouseOut: (evt: React.MouseEvent<any>) => {
-            this.onMouseOut(evt);
+            this.onMouseOut();
             children.props.onMouseOut && children.props.onMouseOut(evt);
           },
         },

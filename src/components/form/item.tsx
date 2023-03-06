@@ -1,17 +1,17 @@
 import classnames from 'classnames';
 import React, { useContext, useEffect } from 'react';
-import { Col, Row } from '../grid';
+import { Col, Row } from '@union-design/grid';
 import { FormContextProps, FormItemProps, ValidatorRule } from './type';
 import FormItemError from './form-item-error';
 import {
   composeFieldName,
   defaultGetValueFromEvent,
-  getValueFromKeyPaths,
+  getValueFromKeypaths,
   toArray,
   validateRules,
 } from './util';
 import { FormContext } from './form-context';
-import { ConfigContext } from '../config-provider/context';
+import { ConfigContext } from '@union-design/config-provider/context';
 
 const Item: React.FC<FormItemProps> = (props: FormItemProps) => {
   const {
@@ -22,8 +22,8 @@ const Item: React.FC<FormItemProps> = (props: FormItemProps) => {
     trigger = 'onChange',
     initialValue,
     prefixCls: customizePrefixCls,
-    labelAlign: labelAlignOfProps,
-    labelCol: labelColFromProps,
+    labelAlign: lableAlignOfProps,
+    labelCol: labelColfromProps,
     wrapperCol: wrapperColFromProps,
     getValueFromEvent, // 自定义从event中获取value
     validateTrigger: validateTriggerFromProps,
@@ -49,7 +49,7 @@ const Item: React.FC<FormItemProps> = (props: FormItemProps) => {
     status,
   } = context;
   const composedName = composeFieldName(formName, name);
-  const value = getValueFromKeyPaths(name, values);
+  const value = getValueFromKeypaths(name, values);
   const error = errors[composedName] || [];
   //  检查当前组件是否为必填
   let isRequired = required;
@@ -66,23 +66,17 @@ const Item: React.FC<FormItemProps> = (props: FormItemProps) => {
   // 布局相关
   const prefix = getPrefixCls('form-item', customizePrefixCls);
   // label布局
-  const {
-    labelCol: labelColFromContext,
-    labelAlign: labelAlignFromContext,
-    wrapperCol: wrapperColFromContext,
-    labelStyle: labelStyleFromContext,
-  } = context;
-  const labelCol = { ...labelColFromContext, ...labelColFromProps };
-  const labelAlign = labelAlignOfProps || labelAlignFromContext;
+  const labelCol = { ...context.labelCol, ...labelColfromProps };
+  const labelAlign = lableAlignOfProps || context.labelAlign;
   const labelClassName = classnames({
     [`${prefix}-label`]: true,
     [`${prefix}-label-left`]: labelAlign === 'left',
     [`${prefix}-label-colon`]: colon,
   });
   // 输入组件布局
-  const wrapperCol = { ...wrapperColFromContext, ...wrapperColFromProps };
+  const wrapperCol = { ...context.wrapperCol, ...wrapperColFromProps };
   const rowCls = classnames(prefix);
-  const controlWrapperClassName = classnames({
+  const controlWraperClassName = classnames({
     [`${prefix}-control-wrapper`]: true,
   });
   const controlInputClassName = classnames(`${prefix}-control`, {
@@ -182,7 +176,7 @@ const Item: React.FC<FormItemProps> = (props: FormItemProps) => {
   const cloneElement = React.Children.map(children, (child) => {
     if (React.isValidElement(child)) {
       if (child.props.htmlType === 'submit') {
-        return React.cloneElement(child, {
+        return React.cloneElement(child as any, {
           onClick: onSubmit,
         });
       }
@@ -210,13 +204,13 @@ const Item: React.FC<FormItemProps> = (props: FormItemProps) => {
           <Col
             {...labelCol}
             className={labelClassName}
-            style={labelStyleOfProps || labelStyleFromContext}
+            style={labelStyleOfProps || context.labelStyle}
           >
             <label className={labelCls} title={composedName} htmlFor={composedName}>{label}</label>
           </Col>
         )
       }
-      <Col {...wrapperCol} className={controlWrapperClassName}>
+      <Col {...wrapperCol} className={controlWraperClassName}>
         <div className={controlInputClassName}>
           {cloneElement}
           <FormItemError error={hasError ? error : undefined} />

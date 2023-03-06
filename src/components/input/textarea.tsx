@@ -3,8 +3,8 @@
 /* eslint-disable @typescript-eslint/ban-types */
 import React, { Component } from 'react';
 import classNames from 'classnames';
-import { ConfigConsumer, ConfigConsumerProps } from '../config-provider/context';
-import Icon from '../icon';
+import { ConfigConsumer, ConfigConsumerProps } from '@union-design/config-provider/context';
+import Icon from '@union-design/icon';
 
 export const tuple = <T extends string[]>(...args: T) => args;
 
@@ -122,7 +122,7 @@ class TextArea extends Component<BaseTextAreaProps, TextAreaState> {
         Object.assign(e, {
           target: this.node,
         });
-        (onChange as React.ChangeEventHandler<HTMLTextAreaElement>)(e);
+        (onChange as React.ChangeEventHandler<HTMLTextAreaElement>)(e as any);
       }
       this.node?.focus();
     };

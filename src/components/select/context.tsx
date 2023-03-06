@@ -8,7 +8,7 @@ export interface SelectConsumerProps {
   label?: string,
   multiple?: boolean,
   selectedOptions?: Array<obj>,
-  onSelect: (value: string | string[], label: string | Array<obj>) => void,
+  onSelect: (value: string | string[], label: string) => void,
   renderObj?: obj,
 }
 

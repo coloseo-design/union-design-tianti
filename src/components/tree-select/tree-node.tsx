@@ -2,11 +2,11 @@
 /* eslint-disable operator-linebreak */
 import React from 'react';
 import classNames from 'classnames';
+import Icon from '@union-design/icon';
+import Checkbox from '@union-design/checkbox';
+import { ConfigConsumer, ConfigConsumerProps } from '@union-design/config-provider';
 import { TreeNodeProps } from './type';
 import { TreeNodeContext } from './context';
-import Icon from '../icon';
-import Checkbox from '../checkbox';
-import { ConfigConsumer, ConfigConsumerProps } from '../config-provider';
 
 class TreeNode extends React.Component<TreeNodeProps> {
   handleExpand = (evt: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
@@ -101,7 +101,7 @@ class TreeNode extends React.Component<TreeNodeProps> {
                   width: `calc(100% - ${(treeCheckable && checkable) ? 56 : 24}px)`,
                   marginLeft: treeCheckable ? 8 : 0,
                 }}
-                title={title}
+                title={title as string}
                 onClick={this.handleSelect}
               >
                 {title}

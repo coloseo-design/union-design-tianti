@@ -1,6 +1,7 @@
+
 import React, { PureComponent } from 'react';
 import classNames from 'classnames';
-import { ConfigConsumer, ConfigConsumerProps } from '../config-provider/context';
+import { ConfigConsumer, ConfigConsumerProps } from '@union-design/config-provider/context';
 
 export type BaseProps = {
   prefixCls?: string;
@@ -39,7 +40,7 @@ export abstract class BaseComponent<
 
     const newPrefix = getPrefixCls?.(`${this.classPrefix}-${prefix}`, prefixCls);
     const newClasses = Object.keys(classes).reduce((a, b) => {
-      const temp = { ...a };
+      const temp: any = { ...a };
       temp[`${newPrefix}-${b}`] = classes[b];
       return temp;
     }, {} as { [key: string]: boolean });

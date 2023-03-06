@@ -1,9 +1,9 @@
 import React, {
   useContext, useEffect, useState, createContext, useCallback,
 } from 'react';
+import { ConfigContext } from '@union-design/config-provider/context';
 import classNames from 'classnames';
 import Radio from './radio';
-import { ConfigContext } from '../config-provider/context';
 import { GroupRadioContextProps, RadioGroupProps, RadioOptions } from './type';
 
 export const RadioGroupContext = createContext<GroupRadioContextProps>({});

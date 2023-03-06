@@ -3,8 +3,8 @@
 /* eslint-disable no-shadow */
 import React, { Component } from 'react';
 import classNames from 'classnames';
-import { ConfigConsumer, ConfigConsumerProps } from '../config-provider';
-import { scrollToTop } from '../utils/animation';
+import { ConfigConsumer, ConfigConsumerProps } from '@union-design/config-provider';
+import { scrollToTop } from '@union-design/utils/animation';
 
 const duration = 300;
 interface AnchorState {
@@ -21,7 +21,7 @@ export interface AnchorProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 
   /* 监听锚点链接改变 */
   onChange?: (currentActiveLink: string) => void;
   /* click 事件的 handler */
-  onClick?: (link: { id: string, name: string }, e: Event) => void;
+  onClick?: (link: { id: string, name: string }, e: React.MouseEventHandler<HTMLDivElement>) => void;
   /* 指定滚动的容器 */
   getContainer?: () => HTMLElement | null;
 }
@@ -51,14 +51,14 @@ class Anchor extends Component<AnchorProps, AnchorState> {
     container && container.removeEventListener('scroll', this.scroll);
   }
 
-  scroll = (e) => {
+  scroll = (e: any) => {
     const { isClick, link } = this.state;
     const { options, onChange, getContainer } = this.props;
     this.setState({ scrollTop: e.target.scrollTop });
     if (isClick) return;
     const offsetTop = (document.querySelectorAll('.g-header')[0]?.getBoundingClientRect().height ?? 0);
     const offsetY = getContainer ? 0 : offsetTop;
-    function anchorY(ele, container) {
+    function anchorY(ele: any, container: any) {
       if (container === document) {
         return ele.getBoundingClientRect().y;
       }
@@ -95,27 +95,27 @@ class Anchor extends Component<AnchorProps, AnchorState> {
     let timer: NodeJS.Timeout | null = null;
     let anotherTimer: NodeJS.Timeout | null = null;
 
-    const handleClick = (link: { id: string; name: string; }) => (e) => {
+    const handleClick = (link: { id: string; name: string; }) => (e: any) => {
       this.setState({ isClick: true });
       if (getContainer) {
         const container = getContainer && getContainer();
-        const { offsetTop } = container;
+        const { offsetTop } = container as any;
         const header = document.getElementsByTagName('header');
         const height = (header && header[0] && header[0].getBoundingClientRect().height) || 0;
         const endTop = offsetTop - height;
         if (document.documentElement.scrollTop === endTop) {
-          scrollToTop(link.id, duration, scrollTop || 0.1, container);
+          scrollToTop(link.id, duration, scrollTop || 0.1, container as HTMLElement);
         } else {
-          scrollToTop(container.id, duration);
-          clearTimeout(anotherTimer);
+          scrollToTop((container as any).id, duration);
+          clearTimeout(anotherTimer as any);
           anotherTimer = setTimeout(() => {
-            scrollToTop(link.id, duration, scrollTop || 0.1, container);
+            scrollToTop(link.id, duration, scrollTop || 0.1, container as HTMLElement);
           }, duration);
         }
       } else {
         scrollToTop(link.id, duration);
       }
-      clearTimeout(timer);
+      clearTimeout(timer as any);
       timer = setTimeout(() => {
         this.setState({ isClick: false, link });
       }, duration + 100);
@@ -132,7 +132,7 @@ class Anchor extends Component<AnchorProps, AnchorState> {
     return (
       <div {...rest} className={mainClass}>
         <div className={`${classPrefix}-wrapper`}>
-          {(options || []).map((item, index) => (
+          {(options || []).map((_, index) => (
             <span key={`${index}`} className={`${classPrefix}-ball-gray`} style={{ top: (index * linkElementHeight) + linkElementHeight / 2 - 4 }} />
           ))}
           <span

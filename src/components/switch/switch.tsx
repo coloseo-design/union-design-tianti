@@ -2,8 +2,8 @@
 /* eslint-disable no-nested-ternary */
 import React from 'react';
 import classNames from 'classnames';
-import Icon from '../icon';
-import { ConfigConsumer, ConfigConsumerProps } from '../config-provider/context';
+import Icon from '@union-design/icon';
+import { ConfigConsumer, ConfigConsumerProps } from '@union-design/config-provider/context';
 
 export const tuple = <T extends string[]>(...args: T) => args;
 

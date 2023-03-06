@@ -1,5 +1,5 @@
 import React from 'react';
-import { ConfigConsumer } from '../config-provider';
+import { ConfigConsumer } from '@union-design/config-provider';
 
 export interface EmptyProps {
   prefixCls?: string,

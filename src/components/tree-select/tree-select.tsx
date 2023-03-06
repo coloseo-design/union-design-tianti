@@ -2,13 +2,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { createRef } from 'react';
 import classNames from 'classnames';
+import Icon from '@union-design/icon';
+import TreePopup from '@union-design/portal';
+import { getOffset } from '@union-design/utils/getOffset';
+import { ConfigConsumer, ConfigConsumerProps } from '@union-design/config-provider';
 import { TreeNodeContext } from './context';
-import Icon from '../icon';
 import TreeNode from './tree-node';
-import TreePopup from '../common/portal';
-import { getOffset } from '../utils/getOffset';
 import { TreeSelectProps, TreeSelectStates, TreeSelectData } from './type';
-import { ConfigConsumer, ConfigConsumerProps } from '../config-provider';
 import {
   flattenTree, flatChildrenTree, checkedFun, initValues, translateDataToTree, commonInit,
 } from './utils';
@@ -68,7 +68,7 @@ class TreeSelect extends React.Component<TreeSelectProps, TreeSelectStates> {
       };
     }
     if (children && React.isValidElement(children)) {
-      let sm = [];
+      let sm: any[] = [];
       let childrenList: any[] = [];
       sm = flatChildrenTree(children);
       childrenList = translateDataToTree(sm);

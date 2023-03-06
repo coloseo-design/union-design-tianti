@@ -2,9 +2,9 @@
 import React, { useContext } from 'react';
 import classnames from 'classnames';
 import { RowContenxt } from './context';
-import { breakpoints } from '../utils/responsive-observe';
-import { BaseProps, ResponsiveColProps } from '../utils/type';
-import { ConfigContext } from '../config-provider/context';
+import { breakpoints } from '@union-design/utils/responsive-observe';
+import { BaseProps, ResponsiveColProps } from '@union-design/utils/type';
+import { ConfigContext } from '@union-design/config-provider/context';
 
 interface ResponsiveColComponentProps extends ResponsiveColProps, BaseProps, React.HTMLAttributes<HTMLDivElement> {
 

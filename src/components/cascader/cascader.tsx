@@ -5,12 +5,12 @@
 /* eslint-disable eqeqeq */
 import React from 'react';
 import classNames from 'classnames';
-import Icon from '../icon';
-import { ConfigConsumer, ConfigConsumerProps } from '../config-provider';
+import Icon from '@union-design/icon';
+import { ConfigConsumer, ConfigConsumerProps } from '@union-design/config-provider';
 import Menus from './menus';
 import Result from './result';
-import { getOffset } from '../utils/getOffset';
-import Portal from '../common/portal';
+import { getOffset } from '@union-design/utils/getOffset';
+import Portal from '@union-design/portal';
 import { CascaderOptionType } from './types/common';
 import { CascaderProps } from './types/cascader';
 import { arrayTreeFilter, uuid, getFieldName } from './utils';
@@ -37,11 +37,11 @@ function flattenTree(
   const childrenName = getFieldName('children', props.fieldNames);
   options.forEach((option) => {
     const path = ancestor.concat(option);
-    if (props.changeOnSelect || !option[childrenName] || !option[childrenName].length) {
+    if (props.changeOnSelect || !option[childrenName] || !(option[childrenName] as any).length) {
       flattenOptions.push(path);
     }
     if (option[childrenName]) {
-      flattenOptions = flattenOptions.concat(flattenTree(option[childrenName], props, path));
+      flattenOptions = flattenOptions.concat(flattenTree(option[childrenName] as CascaderOptionType[], props, path));
     }
   });
   return flattenOptions;
@@ -79,7 +79,7 @@ class Cascader extends React.Component<CascaderProps, CascaderState> {
   componentDidUpdate(preProps: CascaderProps) {
     const { value } = this.props;
     if (value != preProps.value) {
-      this.setState({ value });
+      this.setState({ value: value as string[] });
     }
   }
 
@@ -235,7 +235,7 @@ class Cascader extends React.Component<CascaderProps, CascaderState> {
     const childrenKeyName = getFieldName('children', this.props.fieldNames);
     const valueKeyName = getFieldName('value', this.props.fieldNames);
     const { actionValue } = this.state;
-    actionValue[index] = targetOption[valueKeyName];
+    actionValue[index] = targetOption[valueKeyName] as string;
     this.input?.blur();
     this.setState({ actionValue });
     if (!targetOption[childrenKeyName]) {

@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import classnames from 'classnames';
 import { CheckboxGroupContext } from './group';
-import { ConfigContext } from '../config-provider/context';
+import { ConfigContext } from '@union-design/config-provider/context';
 import { CheckboxProps } from './type';
 
 const Checkbox: React.FC<CheckboxProps> = (props: CheckboxProps) => {

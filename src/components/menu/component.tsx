@@ -1,5 +1,5 @@
 import React, { createContext, ReactNode } from 'react';
-import { BaseComponent } from '../common/base-component';
+import { BaseComponent, BaseProps, BaseState } from '@union-design/base-component';
 import { MenuProps, MenuState } from './menu';
 
 export type MenuCtx = MenuProps & MenuState;
@@ -7,8 +7,8 @@ export type MenuCtx = MenuProps & MenuState;
 export const MenuContext = createContext<MenuCtx>({});
 
 export abstract class MenuBase<
-  P = Record<string, unknown>,
-  S = Record<string, unknown>
+  P extends BaseProps = Record<string, unknown>,
+  S extends BaseState = Record<string, unknown>
   > extends BaseComponent<P, S> {
   protected classPrefix = 'menu';
 

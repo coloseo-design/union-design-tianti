@@ -1,8 +1,8 @@
 import dayjs, { Dayjs } from 'dayjs';
 import React, { ReactNode } from 'react';
 
-import { BaseComponent, BaseProps, BaseState } from '../common/base-component';
-import { cacheFunc } from '../utils/cacheFunc';
+import { BaseComponent, BaseProps, BaseState } from '@union-design/base-component';
+import { cacheFunc } from '@union-design/utils/cacheFunc';
 import { ButtonGroup } from './button-group';
 import { Select } from './select';
 

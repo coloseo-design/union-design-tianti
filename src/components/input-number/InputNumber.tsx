@@ -3,9 +3,9 @@
 
 import React from 'react';
 import classNames from 'classnames';
-import { ConfigConsumer } from '../config-provider';
-import Icon from '../icon';
-import getPrefixCls from '../utils/getPrefixCls';
+import { ConfigConsumer } from '@union-design/config-provider';
+import Icon from '@union-design/icon';
+import getPrefixCls from '@union-design/utils/getPrefixCls';
 import { InputNumberProps } from './types';
 
 class InputNumber extends React.Component<InputNumberProps, { value: string | number }> {
@@ -184,4 +184,4 @@ class InputNumber extends React.Component<InputNumberProps, { value: string | nu
   }
 }
 
-export default React.forwardRef((props: InputNumberProps, ref: React.ForwardedRef<HTMLInputElement>) => <InputNumber {...props} ref={ref} />);
+export default React.forwardRef((props: InputNumberProps, ref: React.ForwardedRef<HTMLInputElement>) => <InputNumber {...props} ref={ref as any} />);

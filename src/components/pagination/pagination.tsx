@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import React, { ReactNode } from 'react';
-import { Icon } from '..';
-import { Select, SelectBaseData, SelectProps } from '../calendar/select';
-import { BaseComponent, BaseProps, BaseState } from '../common/base-component';
+import Icon from '@union-design/icon';
+import { Select, SelectBaseData, SelectProps } from '@union-design/calendar/select';
+import { BaseComponent, BaseProps, BaseState } from '@union-design/base-component';
 
 export type PaginationProps = {
   /** 当前页数 */

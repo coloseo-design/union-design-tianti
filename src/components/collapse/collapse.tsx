@@ -1,6 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
-import { ConfigConsumer, ConfigConsumerProps } from '../config-provider/context';
+import { ConfigConsumer, ConfigConsumerProps } from '@union-design/config-provider/context';
 import CollapsePanel from './collapsePanel';
 
 export interface CollapseProps {
@@ -24,14 +24,14 @@ class Collapse extends React.Component<CollapseProps> {
       const newChildren:unknown[] = [];
       React.Children.map(children, (item:unknown) => {
         if (!item) return;
-        const { key } = item;
+        const { key } = item as {key: string};
         const props = {
           k: parseInt(key, 10),
           defaultActiveKey,
           onChange,
           activeKey,
         };
-        newChildren.push(React.cloneElement(item, props));
+        newChildren.push(React.cloneElement(item as any, props));
       });
       return <div className={clazzName} style={{ ...style }}>{newChildren}</div>;
     };

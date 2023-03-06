@@ -5,10 +5,10 @@ import React, {
   useState,
 } from 'react';
 import classNames from 'classnames';
-import { ConfigContext } from '../config-provider/context';
-import Icon from '../icon';
-import { warning } from '../utils/warning';
-import { uuid } from '../utils/uuid';
+import { ConfigContext } from '@union-design/config-provider/context';
+import Icon from '@union-design/icon';
+import { warning } from '@union-design/utils/warning';
+import { uuid } from '@union-design/utils/uuid';
 import Pane from './pane';
 
 export type TabsType = 'line' | 'card' | 'page' | 'plain';
@@ -190,7 +190,7 @@ const Tabs: React.FC<TabsProps> & { Pane: typeof Pane} = (props: TabsProps) => {
               }
             }
             // eslint-disable-next-line max-len
-            return React.isValidElement(item) ? React.cloneElement(item, { active: i === index }) : null;
+            return React.isValidElement(item) ? React.cloneElement((item as any), { active: i === index }) : null;
           }) || []
         }
       </div>

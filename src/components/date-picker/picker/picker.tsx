@@ -3,10 +3,10 @@
 /* eslint-disable max-classes-per-file */
 import dayjs, { Dayjs } from 'dayjs';
 import React, { ReactNode, createRef, RefObject } from 'react';
-import { BaseComponent } from '../../common/base-component';
-import { uuid } from '../../utils/uuid';
-import { getOffset } from '../../utils/getOffset';
-import Portal from '../../common/portal';
+import { BaseComponent } from '@union-design/base-component';
+import { uuid } from '@union-design/utils/uuid';
+import { getOffset } from '@union-design/utils/getOffset';
+import Portal from '@union-design/portal';
 import { InputIcon } from '../components/input';
 import {
   PickerMode,

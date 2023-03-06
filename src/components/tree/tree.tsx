@@ -1,11 +1,12 @@
+/* eslint-disable max-len */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/ban-types */
 import React from 'react';
 import classnames from 'classnames';
-import TreeNode from '../tree-select/tree-node';
+import TreeNode from '@union-design/tree-select/tree-node';
+import { TreeNodeContext } from '@union-design/tree-select/context';
+import { ConfigConsumer, ConfigConsumerProps } from '@union-design/config-provider';
 import { TreeProps, TreeDataType, TreeState } from './type';
-import { TreeNodeContext } from '../tree-select/context';
-import { ConfigConsumer, ConfigConsumerProps } from '../config-provider';
 import {
   flattenTree, flatChildrenTree, initKeys, translateDataToTree, checkedFun,
 } from './utils';
@@ -45,7 +46,7 @@ class Tree extends React.Component<TreeProps, TreeState> {
       const sm = flattenTree(treeData);
       if (smooth && smooth.length === 0) {
         let expand: string[] = [];
-        let finalKeys = [];
+        let finalKeys: any[] = [];
         const mergeKeys = [...(checkedKeys || []), ...(defaultCheckedKeys || [])];
         if (checkable && !checkStrictly) {
           finalKeys = initKeys(mergeKeys, sm);
@@ -69,7 +70,7 @@ class Tree extends React.Component<TreeProps, TreeState> {
       };
     }
     if (children) {
-      let finalKeys = [];
+      let finalKeys: any[] = [];
       let expand = [];
       const sm = flatChildrenTree(children) || [];
       const childrenList = translateDataToTree(sm) || [];
@@ -156,7 +157,7 @@ class Tree extends React.Component<TreeProps, TreeState> {
       ...other,
       node,
       selected,
-      selectedNodes: smooth.filter((i) => lastSelected.indexOf(i.key || i.currentKey) >= 0),
+      selectedNodes: smooth.filter((i) => lastSelected.indexOf((i.key || i.currentKey) as string) >= 0),
     });
     this.setState({ selectedKeys: lastSelected });
   };
@@ -235,7 +236,7 @@ class Tree extends React.Component<TreeProps, TreeState> {
                 : false}
               isSelected={multiple
                 ? (selectedKeys || []).some((i: string) => i === (item.key || item.currentKey))
-                : (selectedKeys || []).indexOf((item.key || item.currentKey)) >= 0}
+                : (selectedKeys || []).indexOf((item.key || item.currentKey) as string) >= 0}
             >
               {(defaultExpandAll
               || expandKeys.some((e) => `${e}` === `${(item.key || item.currentKey)}`))

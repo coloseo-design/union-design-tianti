@@ -2,13 +2,13 @@
 /* eslint-disable no-nested-ternary */
 import React, { ChangeEvent } from 'react';
 import classNames from 'classnames';
-import { ConfigConsumer, ConfigConsumerProps } from '../config-provider/context';
+import Icon from '@union-design/icon';
+import { getOffset } from '@union-design/utils/getOffset';
+import Portal from '@union-design/portal';
+import { ConfigConsumer, ConfigConsumerProps } from '@union-design/config-provider/context';
 import { AutoCompleteProps } from './type';
-import { getOffset } from '../utils/getOffset';
-import Portal from '../common/portal';
 import Option from './option';
 import OptGroup from './opt-group';
-import Icon from '../icon';
 
 const { isValidElement } = React;
 
@@ -205,7 +205,13 @@ class AutoComplete extends React.Component<AutoCompleteProps, autoState> {
           switch (Object.prototype.toString.call(item)) {
             case '[object String]':
               return (
-                <Option value={item} key={item} onClick={this.onSelect}>{item}</Option>
+                <Option
+                  value={item as any}
+                  key={item as any}
+                  onClick={this.onSelect}
+                >
+                  {item}
+                </Option>
               );
             case '[object Object]': {
               const { value: optionValue } = item as DataSourceItemObject;
@@ -244,8 +250,8 @@ class AutoComplete extends React.Component<AutoCompleteProps, autoState> {
           {
           multiInput && (
             <textarea
-              ref={forwardedRef}
-              {...params}
+              ref={forwardedRef as any}
+              {...params as any}
               style={{
                 height: style && style.height ? style.height : rows * 32,
               }}
@@ -255,7 +261,7 @@ class AutoComplete extends React.Component<AutoCompleteProps, autoState> {
           {
           !multiInput && (
             <>
-              <input ref={forwardedRef} {...params} />
+              <input ref={forwardedRef as any} {...params as any} />
               {showSearch && <div className={serachCls} style={{ cursor: disabled ? 'not-allowed' : 'pointer' }}><Icon type="search" /></div>}
             </>
           )
@@ -294,7 +300,15 @@ class AutoComplete extends React.Component<AutoCompleteProps, autoState> {
   }
 }
 // const AutoCompleteRef = React.forwardRef((props: AutoCompleteProps, ref: React.MutableRefObject<HTMLInputElement | HTMLTextAreaElement>) => <AutoComplete {...props} forwardedRef={ref} />);
-const AutoCompleteRef: React.ForwardRefExoticComponent<AutoCompleteProps & React.RefAttributes<HTMLInputElement | HTMLTextAreaElement>> & { Option: any; OptGroup: any; isSelectOptGroup: boolean} = React.forwardRef<HTMLInputElement, AutoCompleteProps>((props: AutoCompleteProps, ref: React.MutableRefObject<HTMLInputElement | HTMLTextAreaElement>) => <AutoComplete {...props} forwardedRef={ref} />);
+// const AutoCompleteRef: React.ForwardRefExoticComponent<AutoCompleteProps & React.RefAttributes<HTMLInputElement | HTMLTextAreaElement>> & { Option: any; OptGroup: any; isSelectOptGroup: boolean} = React.forwardRef<HTMLInputElement, AutoCompleteProps>((props: AutoCompleteProps, ref: React.MutableRefObject<HTMLInputElement | HTMLTextAreaElement>) => <AutoComplete {...props} forwardedRef={ref} />);
+
+const AutoRef = React.forwardRef<HTMLInputElement, AutoCompleteProps>((props: AutoCompleteProps, ref) => <AutoComplete {...props} forwardedRef={ref as any} />);
+const AutoCompleteRef = AutoRef as typeof AutoRef & {
+  Option: typeof Option,
+  OptGroup: typeof OptGroup,
+  isSelectOption: boolean,
+  isSelectOptGroup: boolean,
+};
 
 AutoCompleteRef.Option = Option;
 AutoCompleteRef.Option.isSelectOption = true;

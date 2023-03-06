@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/ban-types */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { ReactText } from 'react';
 
 export interface DataSourceItemObject { value: string; title: string; [x: string]: string }
 export type DataSourceItemType = string | DataSourceItemObject;

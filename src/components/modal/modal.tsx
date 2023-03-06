@@ -1,11 +1,11 @@
 /* eslint-disable no-nested-ternary */
 import React from 'react';
 import classNames from 'classnames';
-import Icon from '../icon';
-import Portal from '../common/portal';
-import { ButtonProps } from '../button/type';
-import { Button } from '../index';
-import { ConfigConsumer, ConfigConsumerProps } from '../config-provider';
+import Icon from '@union-design/icon';
+import Portal from '@union-design/portal';
+import { ButtonProps } from '@union-design/button/type';
+import Button from '@union-design/button';
+import { ConfigConsumer, ConfigConsumerProps } from '@union-design/config-provider';
 import {
   renderMethod, success, error, info, warning, confirm, ModalMethodProps,
 } from './method';

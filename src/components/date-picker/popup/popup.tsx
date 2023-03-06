@@ -6,7 +6,7 @@ import dayjs, { Dayjs, UnitType } from 'dayjs';
 import isSameOrAfter from 'dayjs/plugin/isSameOrAfter';
 import isSameOrBefore from 'dayjs/plugin/isSameOrBefore';
 
-import { BaseComponent } from '../../common/base-component';
+import { BaseComponent } from '@union-design/base-component';
 import { PickerType, PopupData, PopupProps } from '../types';
 
 dayjs.extend(isSameOrAfter);

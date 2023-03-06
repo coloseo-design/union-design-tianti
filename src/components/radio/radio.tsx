@@ -6,7 +6,7 @@ import React, {
   useState,
 } from 'react';
 import classNames from 'classnames';
-import { ConfigContext } from '../config-provider/context';
+import { ConfigContext } from '@union-design/config-provider/context';
 import { RadioProps } from './type';
 import { RadioGroupContext } from './group';
 
@@ -48,7 +48,7 @@ const AnotherRadio: React.FC<RadioProps> = (props: RadioProps) => {
   };
 
   return (
-    <label {...rest as HTMLAttributes<HTMLLabelElement>} className={mainClass}>
+    <label {...rest as unknown as HTMLAttributes<HTMLLabelElement>} className={mainClass}>
       <input
         checked={checked}
         value={value}

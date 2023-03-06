@@ -1,6 +1,6 @@
 import React, { Component, ReactNode } from 'react';
 import classNames from 'classnames';
-import { ConfigConsumer, ConfigConsumerProps } from '../config-provider';
+import { ConfigConsumer, ConfigConsumerProps } from '@union-design/config-provider';
 import Item from './item';
 
 export interface BreadcrumbProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -29,7 +29,7 @@ class Breadcrumb extends Component<BreadcrumbProps> {
     let toArrayChildren = React.Children.toArray(children);
     if (toArrayChildren.length) {
       toArrayChildren = React.Children.map(children,
-        (child) => React.cloneElement(child, { separator }));
+        (child) => React.cloneElement(child as any, { separator })) as any;
     }
 
     return (

@@ -1,7 +1,7 @@
 import React from 'react';
-import Pop, { PopProps } from '../popconfirm/pop';
+import Pop, { PopProps } from '@union-design/popconfirm/pop';
 
-const Popover: React.FC<PopProps> = (props: PopProps) => {
+const PopOver: React.FC<PopProps> = (props: PopProps) => {
   const { trigger = 'hover' } = props;
   return (
     <Pop
@@ -12,4 +12,4 @@ const Popover: React.FC<PopProps> = (props: PopProps) => {
   );
 };
 
-export default Popover;
+export default PopOver;

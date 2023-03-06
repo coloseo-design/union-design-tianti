@@ -1,7 +1,7 @@
 /* eslint-disable no-shadow */
 import React, { createRef, CSSProperties } from 'react';
 import { createPortal } from 'react-dom';
-import { BasePropsV2 } from '../common/base-component';
+import { BasePropsV2 } from '@union-design/base-component';
 import { MenuBase } from './component';
 
 export type MenuPopupData = {
@@ -19,6 +19,7 @@ export type MenuPopupProps = BasePropsV2<{
 
 export type MenuPopupState = BasePropsV2<{
   style?: CSSProperties;
+  timestamp?: number;
 }>;
 
 export class MenuPopup extends MenuBase<MenuPopupProps, MenuPopupState> {

@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
 import classNames from 'classnames';
+import Icon from '@union-design/icon';
+import Dropdown from '@union-design/dropdown';
 import { ColumnsProps } from './type';
-import {
-  Icon,
-  Dropdown,
-} from '..';
 import Filter from './filter';
 import { renderColumns } from './utils';
 
@@ -96,7 +94,7 @@ const TableHeader: React.FC<TableHeaderProps> = (props: TableHeaderProps) => {
                 <Filter
                   prefix={prefixCls}
                   onChange={onChange(key)}
-                  values={filteredValueMap[key]}
+                  values={filteredValueMap[key] as string[]}
                   dataSource={filters}
                   filterMultiple={column.filterMultiple}
                 />

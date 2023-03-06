@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import classNames from 'classnames';
-import { ConfigConsumer, ConfigConsumerProps } from '../config-provider';
-import Icon from '../icon';
-import { scrollToTop } from '../utils/animation';
-import { Omit } from '../utils/type';
+import { ConfigConsumer, ConfigConsumerProps } from '@union-design/config-provider';
+import Icon from '@union-design/icon';
+import { Omit } from '@union-design/utils/type';
 
 export interface BackTopProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onClick'> {
   /* 用户自定义类前缀，默认uni-backTop */
@@ -15,7 +14,7 @@ export interface BackTopProps extends Omit<React.HTMLAttributes<HTMLDivElement>,
   /* 滚动高度达到此参数值才出现 BackTop */
   visibilityHeight?: number;
   /* 点击按钮的回调函数 */
-  onClick?: (e: Event) => void;
+  onClick?: (e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => void;
 }
 
 interface BackTopState {
@@ -47,7 +46,7 @@ class BackTop extends Component<BackTopProps, BackTopState> {
     container && container.removeEventListener('scroll', this.onScroll);
   }
 
-  onScroll = (e) => {
+  onScroll = (e: any) => {
     const { target } = this.props;
     // const { scrollTop } = document.documentElement;
     const scrollTop = target && target() ? e.target.scrollTop : document.documentElement.scrollTop;
@@ -66,9 +65,9 @@ class BackTop extends Component<BackTopProps, BackTopState> {
       // [`${prefix}-has-sider`]: siders.length > 0,
     });
 
-    const handleClick = (e: Event) => {
+    const handleClick = (e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
       const container = target ? target() : window;
-      container.scrollTo({
+      container?.scrollTo({
         top: 0,
         behavior: 'smooth',
       });

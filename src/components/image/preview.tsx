@@ -5,8 +5,8 @@
 /* eslint-disable eqeqeq */
 import React, { Component } from 'react';
 import classNames from 'classnames';
-import { ConfigConsumer, ConfigConsumerProps } from '../config-provider';
-import Icon from '../icon';
+import { ConfigConsumer, ConfigConsumerProps } from '@union-design/config-provider';
+import Icon from '@union-design/icon';
 import { context } from './previewGroup';
 
 export interface PreviewProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -96,7 +96,7 @@ class PreView extends Component<PreviewProps, PreviewState> {
     window.removeEventListener('mousemove', this.onMouseMove, false);
   }
 
-  onMouseMove = (e) => {
+  onMouseMove = (e: MouseEvent) => {
     e.stopPropagation();
     e.preventDefault();
     const { moving, originPositionRef } = this.state;
@@ -110,7 +110,7 @@ class PreView extends Component<PreviewProps, PreviewState> {
     }
   };
 
-  onMouseUp = (e) => {
+  onMouseUp = (e: MouseEvent) => {
     e.stopPropagation();
     e.preventDefault();
     const { moving, originPositionRef } = this.state;
@@ -181,39 +181,47 @@ class PreView extends Component<PreviewProps, PreviewState> {
           canvas.height = image.height;
 
           const context = canvas.getContext('2d');
-          context.drawImage(image, 0, 0, image.width, image.height);
-          const url = canvas.toDataURL('image/png');
-
-          // 生成一个a元素
-          const a = document.createElement('a');
-          // 将a的download属性设置为我们想要下载的图片名称，若name不存在则使用‘下载图片名称’作为默认名称
-          a.download = 'test';
-          // 将生成的URL设置为a.href属性
-          a.href = url;
-          a.click();
+          if (context) {
+            context.drawImage(image, 0, 0, image.width, image.height);
+            const url = canvas.toDataURL('image/png');
+  
+            // 生成一个a元素
+            const a = document.createElement('a');
+            // 将a的download属性设置为我们想要下载的图片名称，若name不存在则使用‘下载图片名称’作为默认名称
+            a.download = 'test';
+            // 将生成的URL设置为a.href属性
+            a.href = url;
+            a.click();
+          }
         };
 
-        image.src = src;
+        (image.src as any) = src;
       }
     };
 
     const onSwitchLeft = (e: { stopPropagation: () => void; }) => {
       e.stopPropagation();
       if (current !== 0) {
-        const index = previewUrls?.findIndex((i) => i === src);
-        this.setState({ src: previewUrls[index - 1], current: index - 1 });
+        const index = previewUrls?.findIndex((i) => i === src) || 1;
+        this.setState({
+          src: previewUrls?.[index - 1] as any,
+          current: index - 1,
+        });
       }
     };
 
     const onSwitchRight = (e: { stopPropagation: () => void; }) => {
       e.stopPropagation();
-      if (current !== previewUrls?.length - 1) {
-        const index = previewUrls?.findIndex((i) => i === src);
-        this.setState({ src: previewUrls[index + 1], current: index + 1 });
+      if (previewUrls && current !== previewUrls?.length - 1) {
+        const index = previewUrls?.findIndex((i) => i === src) || 0;
+        this.setState({
+          src: previewUrls[index + 1] as any,
+          current: index + 1,
+        });
       }
     };
 
-    const onMouseDown = (e) => {
+    const onMouseDown = (e: React.MouseEvent<HTMLImageElement, MouseEvent>) => {
       e.stopPropagation();
       e.preventDefault();
       originPositionRef.deltaX = e.pageX - position.x;
@@ -241,12 +249,12 @@ class PreView extends Component<PreviewProps, PreviewState> {
                 }}
               />
             </div>
-            {isPreviewGroup && previewUrls.length > 1 && (
+            {isPreviewGroup && previewUrls &&  previewUrls.length > 1 && (
               <div className={`${mainClass}-preview-switch-left`} style={{ cursor: current === 0 ? 'not-allowed' : 'pointer', color: current === 0 ? 'hsla(0,0%,100%,.25)' : '#fff' }} onClick={onSwitchLeft}>
                 <Icon type="left-circle" />
               </div>
             )}
-            {isPreviewGroup && previewUrls.length > 1 && (
+            {isPreviewGroup && previewUrls && previewUrls.length > 1 && (
               <div className={`${mainClass}-preview-switch-right`} style={{ cursor: current === previewUrls?.length - 1 ? 'not-allowed' : 'pointer', color: current === previewUrls?.length - 1 ? 'hsla(0,0%,100%,.25)' : '#fff' }} onClick={onSwitchRight}>
                 <Icon type="right-circle" />
               </div>

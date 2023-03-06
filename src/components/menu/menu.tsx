@@ -7,8 +7,8 @@ import React, {
   createRef,
 } from 'react';
 
-import { Icon } from '..';
-import { BasePropsV2, BaseStateV2 } from '../common/base-component';
+import Icon from '@union-design/icon';
+import { BasePropsV2, BaseStateV2 } from '@union-design/base-component';
 import { MenuBase } from './component';
 import { Item, MENU_TAG_ITEM } from './menu-item';
 import { ItemGroup } from './menu-item-group';
@@ -122,8 +122,8 @@ export default class Menu extends MenuBase<MenuProps, MenuState> {
 
   public componentDidUpdate = (preProps: MenuProps) => {
     if (preProps.selectedKeys !== this.props.selectedKeys) {
-      const newSelectedKeyPaths = { [this.props.selectedKeys[this.props.selectedKeys?.length - 1]]: this.props.selectedKeys };
-      this.setState({ selectedKeys: this.props.selectedKeys ?? [], selectedKeyPaths: newSelectedKeyPaths });
+      const newSelectedKeyPaths = { [(this.props.selectedKeys || [])[(this.props.selectedKeys || [])?.length - 1]]: this.props.selectedKeys };
+      this.setState({ selectedKeys: this.props.selectedKeys ?? [], selectedKeyPaths: newSelectedKeyPaths as any });
     }
 
     if (preProps.openKeys !== this.props.openKeys) {
@@ -290,7 +290,7 @@ export default class Menu extends MenuBase<MenuProps, MenuState> {
       if (React.isValidElement(child) && tags.includes(tag)) {
         const key = (child as ReactElement)?.key ?? `${index}`;
 
-        const re = React.cloneElement(child, {
+        const re = React.cloneElement(child as any, {
           _key: key,
           _level: 0,
           _keyPath: [key],
@@ -406,7 +406,7 @@ export default class Menu extends MenuBase<MenuProps, MenuState> {
       }
       this.setState({ selectedKeys: newSelectedKeys, selectedKeyPaths: newSelectedKeyPaths });
     } else {
-      const newSelectedKeys = [];
+      const newSelectedKeys: any[] = [];
       const newSelectedKeyPaths: { [key: string]: string[] } = {};
       newSelectedKeys.push(key);
       newSelectedKeyPaths[key] = keyPath;

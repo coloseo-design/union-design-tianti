@@ -4,9 +4,9 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 import React, { Component } from 'react';
 import classNames from 'classnames';
-import { ConfigConsumer, ConfigConsumerProps } from '../config-provider/context';
+import Icon from '@union-design/icon';
+import { ConfigConsumer, ConfigConsumerProps } from '@union-design/config-provider/context';
 import { BaseInputProps, InputState } from './input';
-import Icon from '../icon';
 
 export const tuple = <T extends string[]>(...args: T) => args;
 
@@ -66,10 +66,10 @@ class Search extends Component<BaseInputProps, InputState> {
 
     const onKeyPress = (e: React.ChangeEvent<HTMLInputElement> | React.MouseEvent<HTMLElement, MouseEvent> | React.KeyboardEvent<HTMLInputElement> | undefined) => {
       let keyCode;
-      if (e && e.which) {
-        keyCode = e.which;
-      } else if (e && e.keyCode) {
-        keyCode = e.keyCode;
+      if (e && (e as any).which) {
+        keyCode = (e as any).which;
+      } else if (e && (e as any).keyCode) {
+        keyCode = (e as any).keyCode;
       }
 
       if (keyCode === 13 && onSearch) {
@@ -86,9 +86,10 @@ class Search extends Component<BaseInputProps, InputState> {
     //   );
     // }
 
+    const res: any = rest;
     return (
       <span className={containerClasses} style={style}>
-        <input {...rest} value={value} style={{ width: '100%' }} className={classes} type="search" ref={forwardedRef} onChange={onchange} onKeyPress={onKeyPress} />
+        <input {...res} value={value} style={{ width: '100%' }} className={classes} type="search" ref={forwardedRef} onChange={onchange} onKeyPress={onKeyPress} />
         <span onClick={onsearch}><Icon type="search" /></span>
       </span>
     );
@@ -103,6 +104,6 @@ class Search extends Component<BaseInputProps, InputState> {
   }
 }
 
-export default React.forwardRef((props: BaseInputProps, ref: React.MutableRefObject<HTMLInputElement>) => (
-  <Search {...props} forwardedRef={ref} />
+export default React.forwardRef((props: BaseInputProps, ref) => (
+  <Search {...props} forwardedRef={ref as any} />
 ));

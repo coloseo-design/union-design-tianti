@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import React, { createRef, CSSProperties } from 'react';
-import { BaseComponent } from '../common/base-component';
+import { BaseComponent } from '@union-design/base-component';
 
 export type TypographyLevel = 1 | 2 | 3 | 4 | 5;
 

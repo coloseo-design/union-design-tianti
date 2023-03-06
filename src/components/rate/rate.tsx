@@ -1,4 +1,3 @@
-/* eslint-disable react/no-unknown-property */
 /* eslint-disable jsx-a11y/aria-props */
 /* eslint-disable jsx-a11y/interactive-supports-focus */
 /* eslint-disable no-shadow */
@@ -8,8 +7,8 @@
 import React, { Component } from 'react';
 import classNames from 'classnames';
 import omit from 'omit.js';
-import { ConfigConsumer, ConfigConsumerProps } from '../config-provider';
-import Icon from '../icon/index';
+import { ConfigConsumer, ConfigConsumerProps } from '@union-design/config-provider';
+import Icon from '@union-design/icon';
 
 export interface RateProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onChange'> {
   // 是否允许半选
@@ -32,7 +31,7 @@ export interface RateProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'o
 export interface RateState {
   value?: number;
   arr?: number[];
-  mouseValue?: number;
+  mouseValue?: number | null;
 }
 
 class Rate extends Component<RateProps, RateState> {
@@ -40,13 +39,12 @@ class Rate extends Component<RateProps, RateState> {
     value: 0,
     onChange: () => {},
     count: 5,
-    defaultValue: 0,
   };
 
   constructor(props: RateProps) {
     super(props);
-    const arr = Array.from(Array(props.allowHalf ? props.count * 2 : props.count), (v, k) => k + 1);
-    const _value = props.allowHalf ? (props.value || props.defaultValue) * 2 : props.value || props.defaultValue;
+    const arr = Array.from(Array(props.allowHalf ? (props.count || 5) * 2 : props.count), (_, k) => k + 1);
+    const _value = props.allowHalf ? (props.value || props.defaultValue || 0) * 2 : props.value || props.defaultValue || 0;
     this.state = {
       arr,
       value: [...arr].reverse()[_value - 1],
@@ -57,8 +55,8 @@ class Rate extends Component<RateProps, RateState> {
     const { value = 0 } = this.props;
     const { props } = this;
     if (value !== prevProps.value) {
-      const arr = Array.from(Array(props.allowHalf ? props.count * 2 : props.count), (v, k) => k + 1);
-      const _value = props.allowHalf ? (props.value) * 2 : props.value;
+      const arr = Array.from(Array(props.allowHalf ? (props.count || 5) * 2 : props.count), (_, k) => k + 1);
+      const _value = props.allowHalf ? (props.value || 0) * 2 : props.value || 0;
       this.setState({
         value: [...arr].reverse()[_value - 1],
       });
@@ -69,7 +67,7 @@ class Rate extends Component<RateProps, RateState> {
     const {
       forwardedRef, onChange, prefixCls, allowHalf, className, ...rest
     } = this.props;
-    const { value = 0, arr, mouseValue } = this.state;
+    const { value, arr = [], mouseValue } = this.state;
 
     const prefix = getPrefixCls('rate', prefixCls);
     const mainClass = classNames(prefix, className, {
@@ -102,7 +100,7 @@ class Rate extends Component<RateProps, RateState> {
               role="radio"
               aria-name="rate"
               area-type={item % 2 ? 'right' : 'left'}
-              aria-checked={(item >= value) && (mouseValue ? index === mouseValue : true)}
+              aria-checked={(item >= (value || 0)) && (mouseValue ? index === mouseValue : true)}
               key={item}
               onClick={handleClick.bind(null, index)}
               onMouseEnter={onMouseEnter.bind(null, index)}
@@ -129,7 +127,7 @@ class Rate extends Component<RateProps, RateState> {
           <div
             role="radio"
             aria-name="rate"
-            aria-checked={(item >= value) && (mouseValue ? index === mouseValue : true)}
+            aria-checked={(item >= (value || 0)) && (mouseValue ? index === mouseValue : true)}
             key={item}
             onClick={handleClick.bind(null, index)}
             onMouseEnter={onMouseEnter.bind(null, index)}
@@ -152,5 +150,5 @@ class Rate extends Component<RateProps, RateState> {
 }
 
 export default React.forwardRef((props: RateProps, ref) => (
-  <Rate {...props} forwardedRef={ref} />
+  <Rate {...props} forwardedRef={ref as React.MutableRefObject<HTMLInputElement> | undefined} />
 ));

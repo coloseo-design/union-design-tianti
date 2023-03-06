@@ -4,7 +4,7 @@
 import React, { Component } from 'react';
 import classnames from 'classnames';
 import omit from 'omit.js';
-import { ConfigConsumer, ConfigConsumerProps } from '../config-provider/context';
+import { ConfigConsumer, ConfigConsumerProps } from '@union-design/config-provider/context';
 
 // let timer: NodeJS.Timeout;
 

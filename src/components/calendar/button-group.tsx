@@ -1,5 +1,5 @@
 import React from 'react';
-import { BaseComponent, BaseProps } from '../common/base-component';
+import { BaseComponent, BaseProps } from '@union-design/base-component';
 import { CalendarMode } from './calendar';
 
 export type ButtonGroupProps = {

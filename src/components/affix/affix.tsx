@@ -2,8 +2,8 @@
 /* eslint-disable max-len */
 import React from 'react';
 import omitProps from 'omit.js';
-import { ConfigConsumer, ConfigConsumerProps } from '../config-provider/context';
-import { Omit } from '../utils/type';
+import { ConfigConsumer, ConfigConsumerProps } from '@union-design/config-provider/context';
+// import { Omit } from '../utils/type';
 
 export interface AffixProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onChange'> {
   prefixCls?: string;
@@ -117,7 +117,6 @@ class Affix extends React.Component<AffixProps, AffixState> {
       const placeholderReact = getTargetRect(this.containterNode);
       const fixedTop = getFixedTop(placeholderReact, targetRect, offsetTop);
       const fixedBottom = getFixedBottom(placeholderReact, targetRect, offsetBottom);
-      console.log('====containercontainer');
       if (fixedTop !== undefined) {
         this.setState({
           fixStyle: {
@@ -167,7 +166,7 @@ class Affix extends React.Component<AffixProps, AffixState> {
       children,
       ...rest
     } = this.props;
-    const restProps = omitProps(rest, ['offsetTop', 'offsetBottom', 'target']) as AffixProps;
+    const restProps = omitProps(rest, ['offsetTop', 'offsetBottom', 'target', 'onChange']) as Omit<AffixProps, 'offsetTop'| 'offsetBottom'| 'target'| 'onChange'>;
     const { fixStyle, containterStyle } = this.state;
     const prefix = getPrefixCls('affix', prefixCls);
     return (

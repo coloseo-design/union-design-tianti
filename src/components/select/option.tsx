@@ -1,8 +1,8 @@
 import React from 'react';
 import classnames from 'classnames';
-import { ConfigConsumer, ConfigConsumerProps } from '../config-provider/context';
+import { ConfigConsumer, ConfigConsumerProps } from '@union-design/config-provider/context';
 import { SelectContext } from './context';
-import Checkbox from '../checkbox';
+import Checkbox from '@union-design/checkbox';
 
 interface commonParams {
   disabled?: boolean,

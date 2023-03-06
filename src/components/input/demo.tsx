@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
-import { Input, Icon } from '../index';
+import Input from './index';
+import Icon from '../icon/index';
 import './styles/index';
 import '../icon/styles/index';
 

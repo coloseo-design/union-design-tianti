@@ -3,7 +3,7 @@
 import { Dayjs } from 'dayjs';
 import { CSSProperties } from 'react';
 
-import { BaseProps, BaseState } from '../common/base-component';
+import { BaseProps, BaseState } from '@union-design/base-component';
 import { PopupHeadProps } from './components/head';
 
 export type PickerMode = 'time-full'

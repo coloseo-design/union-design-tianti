@@ -1,13 +1,11 @@
 /* eslint-disable react/display-name */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
-import {
-  Table,
-} from '../index';
+import Table from './index';
 import './styles/index';
-import '../popconfirm/styles/index';
-import '../tabs/styles/index';
-import '../tooltip/styles/index';
+import '@union-design/popconfirm/styles/index';
+import '@union-design/tabs/styles/index';
+import '@union-design/tooltip/styles/index';
 import { ColumnsProps, TableRowSelectionType, ColumnsAlign } from './type';
 
 const render1 = (k: React.ReactNode, row: any) => (
@@ -275,7 +273,7 @@ const TableDemo: React.FC<unknown> = () => {
     },
   ];
 
-  const dataH = [];
+  const dataH: any[] = [];
   // eslint-disable-next-line no-plusplus
   for (let i = 0; i < 40; i++) {
     dataH.push({

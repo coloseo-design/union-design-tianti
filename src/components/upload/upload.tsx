@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable no-param-reassign */
 import React, { createRef, FC, ReactElement } from 'react';
-import Button from '../button';
-import Icon from '../icon';
-import { BaseComponent, BaseProps } from '../common/base-component';
-import { uuid } from '../utils/uuid';
+import Button from '@union-design/button';
+import Icon from '@union-design/icon';
+import { BaseComponent, BaseProps } from '@union-design/base-component';
+import { uuid } from '@union-design/utils/uuid';
 
 export type UploadMethod = 'POST' | 'PUT' | 'PATCH';
 

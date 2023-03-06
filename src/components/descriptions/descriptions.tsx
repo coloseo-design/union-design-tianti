@@ -2,16 +2,16 @@
 import React, { Component } from 'react';
 import classNames from 'classnames';
 import omit from 'omit.js';
-import { ConfigConsumer, ConfigConsumerProps } from '../config-provider';
+import { ConfigConsumer, ConfigConsumerProps } from '@union-design/config-provider';
 import Item from './item';
 
 function calc(arr: unknown[], spans: number) {
-  return arr.reduce((acc, value) => {
+  return arr.reduce((acc: any, value: any) => {
     const lastItem = acc[acc.length - 1];
     const isInsert = lastItem && (lastItem.reduce((
-      sum: unknown,
+      sum: any,
       item: {
-        props: { span: unknown; };
+        props: { span: any; };
       },
     ) => sum + (item?.props?.span || 1), value?.props?.span || 1) <= spans);
     // 待续
@@ -69,10 +69,10 @@ class Descriptions extends Component<DescriptionsProps, DescriptionsState> {
     } = this.props;
     const { bordered } = this.state;
 
-    let toArrayChildren = React.Children.toArray(children);
+    let toArrayChildren: any = React.Children.toArray(children);
     if (toArrayChildren.length) {
       toArrayChildren = React.Children.map(
-        children, (child) => React.cloneElement(child, { bordered }),
+        children, (child) => React.cloneElement(child as any, { bordered }),
       );
     }
 
@@ -82,12 +82,12 @@ class Descriptions extends Component<DescriptionsProps, DescriptionsState> {
     });
 
     const spans = bordered ? 2 : 3;
-    const refactorChildren = calc(toArrayChildren, spans);
-    let lastItemChildren = refactorChildren[refactorChildren.length - 1];
+    const refactorChildren: any = calc(toArrayChildren, spans);
+    let lastItemChildren: any = refactorChildren[refactorChildren.length - 1];
 
     if (lastItemChildren.length) {
       const spanNum = lastItemChildren.reduce((
-        sum: unknown, item: { props: { span: unknown; }; },
+        sum: any, item: { props: { span: unknown; }; },
       ) => sum + (item?.props?.span || 1), 0);
       const colspan = bordered ? spans * 2 - spanNum : 3 - spanNum + 1;
       lastItemChildren = React.Children.map(
@@ -106,7 +106,7 @@ class Descriptions extends Component<DescriptionsProps, DescriptionsState> {
       <div {...omitRest} className={mainClass}>
         <table>
           <tbody>
-            {(refactorChildren || []).map((item: unknown, index: number) => (
+            {(refactorChildren || []).map((item: any, index: number) => (
               <tr key={`${index}`}>
                 {(item || []).map((element: unknown) => (
                   element

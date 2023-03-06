@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
 import classNames from 'classnames';
-import { ConfigConsumer, ConfigConsumerProps } from '../config-provider/context';
-import Checkbox from '../checkbox';
+import { ConfigConsumer, ConfigConsumerProps } from '@union-design/config-provider/context';
+import Checkbox from '@union-design/checkbox';
 import { TransferItem, TransferDirection } from './type';
 
 interface ItemProps {
-  item: {[key: string] : unknown};
+  item: {[key: string] : any};
   prefixCls?: string,
   onChange?: (direction: TransferDirection, checked: boolean, key: string) => void;
   chDirection: TransferDirection;
   checked: boolean;
   disabled?: boolean;
   // render?: (record: {[key: string] : unknown}) => React.ReactNode;
-  // renderedText?: string | number;
+  renderedText?: string | number;
   renderedEl?: React.ReactNode;
 }
 

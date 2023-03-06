@@ -7,7 +7,7 @@ import { PickerRangeTime, PickerSingleTime } from './picker/time';
 import { PickerRangeDate, PickerSingleDate } from './picker/date';
 import { PickerRangeMonth, PickerSingleMonth } from './picker/month';
 import { PickerRangeYear, PickerSingleYear } from './picker/year';
-import { cacheFunc } from '../utils/cacheFunc';
+import { cacheFunc } from '@union-design/utils/cacheFunc';
 
 const handleSuffixIcon = cacheFunc((mode: PickerMode) => (mode.startsWith('time') ? 'time' : 'schedule-check'));
 
@@ -78,19 +78,19 @@ const DatePicker = React.forwardRef<
     } as PickerProps<'single'>;
 
     if (mode.startsWith('time')) {
-      return <PickerSingleTime {...singleCommon} ref={ref as RefObject<PickerSingleTime>} />;
+      return <PickerSingleTime {...singleCommon} ref={ref as unknown as RefObject<PickerSingleTime>} />;
     }
 
     if (mode.startsWith('year')) {
-      return <PickerSingleYear {...singleCommon} ref={ref as RefObject<PickerSingleYear>} />;
+      return <PickerSingleYear {...singleCommon} ref={ref as unknown as RefObject<PickerSingleYear>} />;
     }
 
     if (mode.startsWith('month')) {
-      return <PickerSingleMonth {...singleCommon} ref={ref as RefObject<PickerSingleMonth>} />;
+      return <PickerSingleMonth {...singleCommon} ref={ref as unknown as RefObject<PickerSingleMonth>} />;
     }
 
     if (mode.startsWith('date')) {
-      return <PickerSingleDate {...singleCommon} ref={ref as RefObject<PickerSingleDate>} />;
+      return <PickerSingleDate {...singleCommon} ref={ref as unknown as RefObject<PickerSingleDate>} />;
     }
   }
 
@@ -102,19 +102,19 @@ const DatePicker = React.forwardRef<
     } as PickerProps<'range'>;
 
     if (mode.startsWith('time')) {
-      return <PickerRangeTime {...rangeCommon} ref={ref as RefObject<PickerRangeTime>} />;
+      return <PickerRangeTime {...rangeCommon} ref={ref as unknown as RefObject<PickerRangeTime>} />;
     }
 
     if (mode.startsWith('year')) {
-      return <PickerRangeYear {...rangeCommon} ref={ref as RefObject<PickerRangeYear>} />;
+      return <PickerRangeYear {...rangeCommon} ref={ref as unknown as RefObject<PickerRangeYear>} />;
     }
 
     if (mode.startsWith('month')) {
-      return <PickerRangeMonth {...rangeCommon} ref={ref as RefObject<PickerRangeMonth>} />;
+      return <PickerRangeMonth {...rangeCommon} ref={ref as unknown as RefObject<PickerRangeMonth>} />;
     }
 
     if (mode.startsWith('date')) {
-      return <PickerRangeDate {...rangeCommon} ref={ref as RefObject<PickerRangeDate>} />;
+      return <PickerRangeDate {...rangeCommon} ref={ref as unknown as RefObject<PickerRangeDate>} />;
     }
   }
 

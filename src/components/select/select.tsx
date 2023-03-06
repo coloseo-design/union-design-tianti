@@ -7,12 +7,12 @@ import React, {
   CSSProperties, ReactNode, createRef,
 } from 'react';
 import classnames from 'classnames';
-import { ConfigConsumer, ConfigConsumerProps } from '../config-provider/context';
-import Icon from '../icon';
+import { ConfigConsumer, ConfigConsumerProps } from '@union-design/config-provider/context';
+import Icon from '@union-design/icon';
+import { getOffset } from '@union-design/utils/getOffset';
+import Portal from '@union-design/portal';
 import Option from './option';
-import { getOffset } from '../utils/getOffset';
 import { SelectContext } from './context';
-import Portal from '../common/portal';
 
 export const tuple = <T extends string[]>(...args: T) => args;
 
@@ -48,8 +48,8 @@ export interface SelectProps extends CommonParams {
   remoteSearch?: boolean,
   maxTagCount?: number,
   maxTagTextLength?: number,
-  onChange?: (value: string | string[], label: string | obj[]) => void,
-  onSelect?: (value: string | string[], label: string | obj[], checked?: boolean) => void,
+  onChange?: (value: string | string[], label: string) => void,
+  onSelect?: (value: string | string[], label: string, checked?: boolean) => void,
   onSearch?: (value: string) => void,
   onClick?: () => void,
   getPopupContainer?: () => HTMLElement | null;
@@ -151,7 +151,7 @@ class Select extends React.Component<SelectProps, SelectState> {
         if (currentLabel) {
           Object.assign(temp, {
             value: defaultValue,
-            label: currentLabel?.props.children,
+            label: (currentLabel as any)?.props?.children,
           });
         }
         return {
@@ -175,7 +175,7 @@ class Select extends React.Component<SelectProps, SelectState> {
   componentDidUpdate(prevProps: SelectProps) {
     const { children, value, type } = this.props;
     if (value !== prevProps.value) {
-      const childrenProps = React.Children.toArray(children).map((i) => i.props);
+      const childrenProps = React.Children.toArray(children).map((i: any) => i.props);
       const currentLabel = (childrenProps || []).find((i) => i.value === value);
       if (type === 'default' || type === 'search') {
         this.setState({
@@ -290,7 +290,7 @@ class Select extends React.Component<SelectProps, SelectState> {
         value,
         label,
       };
-      let arr: Array<obj> | undefined = selectedOptions;
+      let arr: any = selectedOptions;
       if ((arr || []).map((i: any) => i.value).indexOf(value) === -1) {
         arr?.push(optionObj);
       } else {
@@ -300,7 +300,7 @@ class Select extends React.Component<SelectProps, SelectState> {
       this.setState({
         selectedOptions: arr,
       });
-      const valueArr: any[] = (arr || []).map((s) => (s.value));
+      const valueArr: any[] = (arr || []).map((s: any) => (s.value));
       if (onChange) {
         onChange(valueArr, arr);
       }
@@ -327,11 +327,11 @@ class Select extends React.Component<SelectProps, SelectState> {
     e.cancelBubble = true;
     const { onChange } = this.props;
     const { selectedOptions } = this.state;
-    const newOptions: Array<obj> | undefined = selectedOptions?.filter((i) => i.value !== item.value);
+    const newOptions: any = selectedOptions?.filter((i) => i.value !== item.value);
     this.setState({
       selectedOptions: newOptions,
     });
-    const valueArr: any[] = (newOptions || []).map((s) => (s.value));
+    const valueArr: any[] = (newOptions || []).map((s: any) => (s.value));
     if (onChange) {
       onChange(valueArr, newOptions);
     }
@@ -419,7 +419,7 @@ class Select extends React.Component<SelectProps, SelectState> {
           {type === 'search'
             ? (
               <>
-                <input onChange={this.handleInputChange} value={renderObj?.label || ''} className={inputClass} />
+                <input onChange={this.handleInputChange} value={(renderObj?.label || '') as string} className={inputClass} />
                 <span style={{ display: `${renderObj?.label ? 'none' : 'inline-block'}` }} className={`${prefix}-placeholder`}>{placeholder}</span>
                 <span className={iconStyle}><Icon type="search" /></span>
               </>
@@ -434,7 +434,7 @@ class Select extends React.Component<SelectProps, SelectState> {
                           {maxTagCount
                             ? selectedOptions?.slice(0, maxTagCount).map((i, idx) => {
                               let temp = false;
-                              const _label: unknown = i.label;
+                              const _label: any = i.label;
                               if (i.label && _label.length && maxTagTextLength) {
                                 temp = _label.length > maxTagTextLength;
                               }
@@ -475,7 +475,7 @@ class Select extends React.Component<SelectProps, SelectState> {
                                       wordBreak: 'break-all',
                                       color: 'rgba(0,0,0,0.65)',
                                     }}
-                                    title={i.label || ''}
+                                    title={(i.label || '') as string}
                                   >
                                     {i.label}
                                   </span>
@@ -499,7 +499,7 @@ class Select extends React.Component<SelectProps, SelectState> {
                           ) : null}
                         </div>
                       )
-                      : <span className={`${prefix}-value`} title={renderObj?.label || ''} style={{ color: disabled ? 'rgba(0,0,0,0.45)' : undefined }}>{renderObj?.label}</span>
+                      : <span className={`${prefix}-value`} title={(renderObj?.label || '') as string} style={{ color: disabled ? 'rgba(0,0,0,0.45)' : undefined }}>{renderObj?.label}</span>
                   )
                   : <span className={`${prefix}-placeholder`}>{placeholder}</span>}
                 {allowClear && isHover

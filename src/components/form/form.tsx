@@ -9,7 +9,7 @@ import React, {
 } from 'react';
 import classnames from 'classnames';
 import { FormProvider } from './form-context';
-import { ConfigConsumerProps, ConfigContext } from '../config-provider/context';
+import { ConfigConsumerProps, ConfigContext } from '@union-design/config-provider/context';
 import { decomposeFiledName } from './util';
 import {
   ErrorCollection, FormErrors, FormInstance, FormProps, FormValues, ValueCollection, FormStatus,

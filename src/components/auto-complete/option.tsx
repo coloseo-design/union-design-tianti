@@ -2,7 +2,7 @@
 /* eslint-disable max-len */
 import React from 'react';
 import classNames from 'classnames';
-import { ConfigConsumer, ConfigConsumerProps } from '../config-provider/context';
+import { ConfigConsumer, ConfigConsumerProps } from '@union-design/config-provider/context';
 
 export interface OptionProps {
   value: string;

@@ -1,6 +1,6 @@
 import React from 'react';
-import { ConfigConsumerProps } from '../config-provider/context';
-import { tuple, Omit } from '../utils/type';
+import { ConfigConsumerProps } from '@union-design/config-provider/context';
+import { tuple, Omit } from '@union-design/utils/type';
 /**
  * button样式是基于以下一些状态的组合：
  * 5种基础按钮：默认按钮, 主按钮， 虚线按钮，文本按钮，链接按钮

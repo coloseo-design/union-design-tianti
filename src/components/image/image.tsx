@@ -3,10 +3,10 @@
 /* eslint-disable no-shadow */
 import React, { Component, CSSProperties } from 'react';
 import classNames from 'classnames';
-import { ConfigConsumer, ConfigConsumerProps } from '../config-provider';
+import { ConfigConsumer, ConfigConsumerProps } from '@union-design/config-provider';
 import PreviewGroup, { context } from './previewGroup';
 import PreView from './preview';
-import { Omit } from '../utils/type';
+import { Omit } from '@union-design/utils/type';
 
 export interface ImageProps extends Omit<React.HTMLAttributes<HTMLImageElement>, 'placeholder' | 'onError'> {
   /** 图像描述 */
@@ -137,10 +137,13 @@ class Images extends Component<ImageProps, ImageState> {
       }
     };
 
-    const handleError = (e: Event) => {
+    const handleError = (e: any) => {
       const index = previewUrls?.findIndex((i: string | undefined) => i === src);
       previewUrls?.splice(index, 1);
-      this.setState({ error: true, previewUrls });
+      this.setState({
+        error: true,
+        // previewUrls
+      });
 
       if (onError && !error) {
         onError(e);

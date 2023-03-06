@@ -13,13 +13,18 @@
 	"scripts": {
 		"lint": "union-tool run lint source=src/components",
 		"compile": "union-tool run compile source=src/components",
-		"dev": "node injector.js env=development && union-tool run dev",
+		"compile:single": "node --max_old_space_size=8192 compile/run.js task=single",
+    "compile:all": "node --max_old_space_size=8192 compile/run.js task=all",
+		"dev": "export NODE_OPTIONS=--openssl-legacy-provider && node injector.js env=development && union-tool run dev",
 		"commit": "npx git-cz",
 		"init:commit": "npx commitizen init cz-conventional-changelog --yarn --dev --exact",
 		"version": "conventional-changelog -p angular -i CHANGELOG.md -s && git add CHANGELOG.md",
 		"predev": "yarn demo",
 		"demo": "npx gulp md"
 	},
+	"workspaces": [
+		"src/components/*"
+	],
 	"dependencies": {
 		"async-validator": "^3.5.1",
 		"classnames": "^2.2.6",

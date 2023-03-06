@@ -5,11 +5,11 @@
 /* eslint-disable @typescript-eslint/ban-types */
 import React, { Component, ReactNode } from 'react';
 import classNames from 'classnames';
+import Icon from '@union-design/icon';
 import omit from 'omit.js';
-import { ConfigConsumer, ConfigConsumerProps } from '../config-provider/context';
+import { ConfigConsumer, ConfigConsumerProps } from '@union-design/config-provider/context';
 import TextArea from './textarea';
 import Search from './search';
-import Icon from '../icon';
 
 export const tuple = <T extends string[]>(...args: T) => args;
 
@@ -139,7 +139,9 @@ class Input extends Component<BaseInputProps, InputState> {
 
   deletgateRef = (node: HTMLInputElement) => {
     this.node = node;
-    this.props.forwardedRef?.current = node;
+    if (this.props.forwardedRef?.current) {
+      this.props.forwardedRef.current = node;
+    }
   }
 
   renderInput = ({ getPrefixCls }: ConfigConsumerProps) => {
@@ -180,12 +182,12 @@ class Input extends Component<BaseInputProps, InputState> {
           target: this.node,
           currentTarget: this.node,
         });
-        Object.assign(this.node, {
+        Object.assign(this.node as any, {
           value,
         });
         (onChange as React.ChangeEventHandler<HTMLInputElement>)(e as unknown as React.ChangeEvent<HTMLInputElement>);
       }
-      this.node.focus();
+      this.node?.focus();
     };
 
     const cleanButton = (
@@ -220,7 +222,7 @@ class Input extends Component<BaseInputProps, InputState> {
         {addonBefore && <span className="addon">{addonBefore}</span>}
         <span className={inputWrapperClassName} style={{ flex: '1', position: 'relative' }}>
           <input
-            {...rest}
+            {...rest as any}
             value={value}
             className={inputClassName}
             style={{
@@ -249,8 +251,9 @@ class Input extends Component<BaseInputProps, InputState> {
   }
 }
 
-const InputRef: React.ForwardRefExoticComponent<BaseInputProps & React.RefAttributes<HTMLInputElement>> & { TextArea: any; Search: any} = React.forwardRef<HTMLInputElement, BaseInputProps>((props: BaseInputProps, ref: React.MutableRefObject<HTMLInputElement>) => <Input {...props} forwardedRef={ref} />);
+// const InputRef = React.forwardRef<HTMLInputElement, BaseInputProps>((props: BaseInputProps, ref) => <Input {...props} forwardedRef={ref as any} />);
 
+const InputRef: React.ForwardRefExoticComponent<BaseInputProps & React.RefAttributes<HTMLInputElement>> & { TextArea: any; Search: any} = React.forwardRef<HTMLInputElement, BaseInputProps>((props: BaseInputProps, ref: any) => <Input {...props} forwardedRef={ref} />) as any;
 InputRef.TextArea = TextArea;
 InputRef.Search = Search;
 

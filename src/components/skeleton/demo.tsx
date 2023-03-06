@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Button, Skeleton } from '../index';
+import Skeleton from './skeleton';
+import Button from '../button';
 import './styles/index';
 import '../button/styles/index';
 

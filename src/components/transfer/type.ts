@@ -4,7 +4,7 @@ export interface TransferItem {
   name: string | number | boolean | {[key: string]: unknown}
   | React.ReactElement<unknown, string
   | React.JSXElementConstructor<unknown>>
-  | React.ReactNodeArray | React.ReactPortal | null | undefined;
+  | null | undefined;
   key: string;
   title: string;
   description?: string;

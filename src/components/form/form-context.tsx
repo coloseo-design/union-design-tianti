@@ -15,6 +15,8 @@ export const FormContext = React.createContext<FormContextProps>({
   values: {},
   isValidating: false,
   labelAlign: 'right',
+  status: {},
+  onStatus: () => {},
 });
 
 export const { Consumer: FormConsumer, Provider: FormProvider } = FormContext;

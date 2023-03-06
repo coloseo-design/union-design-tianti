@@ -6,7 +6,7 @@
 /* eslint-disable max-len */
 import Schema from 'async-validator';
 import React from 'react';
-import { warning } from '../utils/warning';
+import { warning } from '@union-design/utils/warning';
 import { ValidatorRule } from './type';
 
 export const toArray = (input: string | string[]) => {
@@ -18,13 +18,13 @@ export const toArray = (input: string | string[]) => {
 
 export const validateRule: (name: string, value: unknown, rule: ValidatorRule, messageVariables: Record<string, string>) => Promise<string[]> = async (name, value, rule) => {
   const validator = new Schema({
-    [name]: [rule],
+    [name]: [rule] as any,
   });
   try {
     await validator.validate({ [name]: value });
   } catch ({ errors, fields }) {
     if (errors) {
-      return errors.map((item, index) => {
+      return (errors as any).map((item: { message: {} | null | undefined; }, index: any) => {
         if (React.isValidElement(item.message)) {
           return React.cloneElement(item.message, { key: `error_at_${index}` });
         }
@@ -61,7 +61,7 @@ export const validateRules = (name: string, value: unknown, rules: ValidatorRule
           }
         });
       };
-      const promise = originValidator(rule, value, wrappedCallback);
+      const promise = originValidator(rule, value, wrappedCallback as any);
       hasPromise = (promise && typeof promise.then === 'function' && typeof promise.catch === 'function') as boolean;
       warning(hasPromise, '`callback` is deprecated. Please return a promise instead.');
       if (hasPromise) {
@@ -85,7 +85,7 @@ export const validateRules = (name: string, value: unknown, rules: ValidatorRule
     result = new Promise(async (resolve, reject) => {
       /* eslint-disable no-await-in-loop */
       for (let i = 0; i < filledRules.length; i++) {
-        const errors = await validateRule(name, value, filledRules[i], messageVariables);
+        const errors = await validateRule(name, value, filledRules[i] as any, messageVariables);
         if (errors.length) {
           reject(errors);
           return;
@@ -97,7 +97,7 @@ export const validateRules = (name: string, value: unknown, rules: ValidatorRule
   } else {
     // eslint-disable-next-line no-async-promise-executor
     result = new Promise(async (resolve, reject) => {
-      Promise.all(filledRules.map((item) => validateRule(name, value, item, messageVariables)))
+      Promise.all(filledRules.map((item) => validateRule(name, value, item as any, messageVariables)))
         .then((errors) => {
           const hasError = errors.some((item) => item.length > 0);
           if (!hasError) {
@@ -116,7 +116,7 @@ export const validateRules = (name: string, value: unknown, rules: ValidatorRule
  * @param name keypath 数组
  * @param values 值
  */
-export const getValueFromKeyPaths = (name: string, values: {[key: string]: any}) => {
+export const getValueFromKeypaths = (name: string, values: {[key: string]: any}) => {
   try {
     const names = name.split('.');
     const [key, ...rest] = [...names].reverse();
@@ -151,10 +151,10 @@ export const decomposeFiledName = (fieldName: string) => {
  * @param evts 事件
  * @returns 获取的值
  */
-export const defaultGetValueFromEvent = (valuePropName: string, ...evts: unknown[]) => {
+export const defaultGetValueFromEvent = (valuePropName: string, ...evts: any[]) => {
   const event = evts[0];
   if (event && event.target && valuePropName in event.target) {
-    return (event.target as HTMLInputElement)[valuePropName];
+    return (event.target as any)[valuePropName];
   }
   return event;
 };

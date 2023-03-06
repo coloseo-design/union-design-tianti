@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
-import { Affix, Button } from '../index';
+// import { Affix, Button } from '../index';
+import Affix from './index';
+// import Button from '../button';
+
 import './styles/index';
 import './demo.less';
 
@@ -12,7 +15,8 @@ const AffixDemo = () => {
         <div style={{ height: 700, backgroundColor: '#fff' }}>
           这是开头
           <Affix offsetTop={20}>
-            <Button type="primary">固定页面上方20px</Button>
+            <div>固定页面上方20px</div>
+            {/* <Button type="primary">固定页面上方20px</Button> */}
           </Affix>
           北冥有鱼，其名为鲲。鲲之大，不知其几千里也；化而为鸟，其名为鹏。鹏之背，不知其几千里也；怒而飞，
           其翼若垂天之云。是鸟也，海运则将徙于南冥。南冥者，天池也。《齐谐》者，志怪者也。《谐》之言曰：“鹏之徙于南冥也，
@@ -25,7 +29,8 @@ const AffixDemo = () => {
           此大年也。而彭祖乃今以久特闻，众人匹之，不亦悲乎？
           这是开头2
           <Affix offsetTop={20} target={() => container}>
-            <Button type="primary">固定在容器上方20px</Button>
+            {/* <Button type="primary">固定在容器上方20px</Button> */}
+            <div>固定页面上方20px</div>
           </Affix>
           这是结尾2
           北冥有鱼，其名为鲲。鲲之大，不知其几千里也；化而为鸟，其名为鹏。鹏之背，不知其几千里也；怒而飞，
