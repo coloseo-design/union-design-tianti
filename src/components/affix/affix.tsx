@@ -3,7 +3,6 @@
 import React from 'react';
 import omitProps from 'omit.js';
 import { ConfigConsumer, ConfigConsumerProps } from '@union-design/config-provider/context';
-// import { Omit } from '../utils/type';
 
 export interface AffixProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onChange'> {
   prefixCls?: string;
@@ -67,7 +66,6 @@ class Affix extends React.Component<AffixProps, AffixState> {
     const { target = (() => window) } = this.props;
     if (target) {
       const targetProp = target();
-      console.log('=>targetProp>', targetProp);
       targetProp && targetProp.addEventListener('scroll', this.getScroll);
       window.addEventListener('scroll', this.getScroll);
     }

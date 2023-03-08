@@ -10,7 +10,7 @@
     "es"
   ],
   "scripts": {
-    "dev": "export NODE_OPTIONS=--openssl-legacy-provider && union-tool run dev",
+    "dev": "union-tool run dev",
     "test": "echo Error: no test specified && exit 1"
   },
   "author": "",

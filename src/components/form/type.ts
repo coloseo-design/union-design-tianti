@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
 import React from 'react';
-import { BaseProps, ResponsiveColProps } from '../utils/type';
+import { BaseProps, ResponsiveColProps } from '@union-design/utils/type';
 
 interface FailedResponseType {
   errors: FormErrors;

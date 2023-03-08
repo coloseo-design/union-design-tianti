@@ -4,10 +4,10 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import React, { createRef } from 'react';
 import { BaseComponent } from '@union-design/base-component';
-import { StepProps } from './steps';
 import Icon from '@union-design/icon';
 import Popover from '@union-design/popover';
-import Typography from '@union-design/typography'
+import Typography from '@union-design/typography';
+import { StepProps } from './steps';
 
 export const STEP_NAME = 'UNI_STEP';
 

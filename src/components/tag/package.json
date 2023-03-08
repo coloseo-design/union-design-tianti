@@ -10,15 +10,15 @@
     "es"
   ],
   "scripts": {
-    "dev": "export NODE_OPTIONS=--openssl-legacy-provider && union-tool run dev",
+    "dev": "union-tool run dev",
     "test": "echo Error: no test specified && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@union-design/config-provider": "workspaces/union/*",
-    "@union-design/icon": "workspaces/union/*",
-    "@union-design/utils": "workspaces/union/*",
+    "@union-design/config-provider": "workspaces/src/components/*",
+    "@union-design/icon": "workspaces/src/components/*",
+    "@union-design/utils": "workspaces/src/components/*",
     "classnames": "^2.3.2",
     "omit.js": "^2.0.2",
     "union-tool": "^0.1.1"
