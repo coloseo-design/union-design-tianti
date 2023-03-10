@@ -13,8 +13,8 @@ function md(format, item) {
   return src([
     // path.resolve(currentPath, '*.md'),
     path.join(srcPath, '**/*.md'),
-    `!${path.join(srcPath, 'es/**/*.md')}`,
-    `!${path.join(srcPath, 'lib/**/*.md')}`,
+    `!${path.join(`${srcPath}/**/es`, '**/*.md')}`,
+    `!${path.join(`${srcPath}/**/lib`, '/**/*.md')}`,
     `!${path.join(`${srcPath}/**/node_modules`, '/**/*.md')}`,
   ]).pipe(dest(outputPath));
 }

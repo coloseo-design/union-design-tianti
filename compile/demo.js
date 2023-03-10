@@ -13,9 +13,9 @@ function demo(format, item) {
   const srcPath = item ? currentPath : `${rootPath}/src/components`;
   return src([
     path.join(srcPath, '**/demo.tsx'),
-    `!${path.join(srcPath, 'es/**/demo.tsx')}`,
-    `!${path.join(srcPath, 'lib/**/demo.tsx')}`,
-    `!${path.join(srcPath, 'node_modules/**/demo.tsx')}`,
+    `!${path.join(`${srcPath}/**/es`, '/**/demo.tsx')}`,
+    `!${path.join(`${srcPath}/**/lib`, '/**/demo.tsx')}`,
+    `!${path.join(`${srcPath}/**/node_modules`, '/**/demo.tsx')}`,
   ]).pipe(dest(outputPath));
 }
 

@@ -21,8 +21,8 @@ const srcs = (src) => {
     `!${path.join(src, 'es/**/*.ts')}`,
     `!${path.join(src, 'src/**/*.tsx')}`,
     `!${path.join(src, 'src/**/*.ts')}`,
-    `!${path.join(`${src}/**/node_modules`, '/**/*.ts')}`,
-    `!${path.join(`${src}/**/node_modules`, '/**/*.tsx')}`,
+    `!${path.join(src, 'node_modules', '/**/*.ts')}`,
+    `!${path.join(src, 'node_modules', '/**/*.tsx')}`,
   ];
   return list;
 };
@@ -32,7 +32,7 @@ const allSrcs = (src) => ([
   path.join(src, '/**/*.ts'),
   `!${path.join(src, '**/*/demo.tsx')}`,
   `!${path.join(src, '**/*/demo.ts')}`,
-  `!${path.join(`${src}/**/lib`, '/**/*.tsx')}`,
+  `!${path.join(src, '/**/lib', '/**/*.tsx')}`,
   `!${path.join(`${src}/**/lib`, '/**/*.ts')}`,
   `!${path.join(`${src}/**/es`, '/**/*.tsx')}`,
   `!${path.join(`${src}/**/es`, '/**/*.ts')}`,
@@ -62,6 +62,7 @@ function dts(format, item) {
   const dist = item ? path.resolve(process.cwd(), `src/components/${item}/`) : path.resolve(process.cwd());
   const tsResult = gulp.src(item ? srcs(src) : allSrcs(src))
     .pipe(through2.obj((file, encoding, next) => {
+      console.log('==file', file.path);
       if (file.isBuffer()) {
         const content = file.contents.toString(encoding);
         const transformed = `// @ts-nocheck \n ${content}`;
@@ -76,7 +77,6 @@ function dts(format, item) {
     tsResult.js
       .pipe(babel(getBabelConfig())) // babel
       .pipe(through2.obj(function transformer(file, enc, next) {
-        console.log('==file', file.path);
         Object.assign(file, {
           path: file.path.replace(/\.[jt]sx$/, '.js'),
         });

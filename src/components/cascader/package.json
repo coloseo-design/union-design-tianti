@@ -10,7 +10,7 @@
     "es"
   ],
   "scripts": {
-    "dev": "union-tool run dev",
+    "start": "union-tool run dev",
     "test": "echo Error: no test specified && exit 1"
   },
   "author": "",
@@ -21,12 +21,13 @@
     "union-tool": "^0.1.1"
   },
   "devDependencies": {
-    "@union-design/config-provider": "workspaces/src/components/*",
-    "@union-design/utils": "workspaces/src/components/*",
-    "@union-design/icon": "workspaces/src/components/*",
-    "@union-design/portal": "workspaces/src/components/*",
     "@types/classnames": "^2.3.1",
     "@types/react-dom": "^18.0.11",
+    "@union-design/config-provider": "workspaces/src/components/*",
+    "@union-design/icon": "workspaces/src/components/*",
+    "@union-design/portal": "workspaces/src/components/*",
+    "@union-design/style": "workspaces/src/components/*",
+    "@union-design/utils": "workspaces/src/components/*",
     "react": "^16.8.0",
     "react-dom": "^16.8.0"
   }

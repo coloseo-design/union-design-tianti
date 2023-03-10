@@ -1,4 +1,3 @@
-
 {
   "compilerOptions": {
     "strictNullChecks": true,
@@ -17,14 +16,5 @@
     ],
     "skipLibCheck": true
   },
-  "include": [
-    "src",
-  ],
-  "exclude": [
-    "../node_modules",
-    "lib",
-    "es",
-    "**/__tests__/**"
-  ]
 }
 

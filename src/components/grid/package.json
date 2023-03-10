@@ -10,13 +10,14 @@
     "es"
   ],
   "scripts": {
-    "dev": "union-tool run dev",
+    "start": "union-tool run dev",
     "test": "echo Error: no test specified && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@union-design/config-provider": "workspaces/src/components/*",
+    "@union-design/style": "workspaces/src/components/*",
     "@union-design/utils": "workspaces/src/components/*",
     "classnames": "^2.3.2",
     "enquire.js": "^2.1.6",

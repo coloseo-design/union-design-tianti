@@ -10,7 +10,7 @@
     "es"
   ],
   "scripts": {
-    "dev": "union-tool run dev",
+    "start": "union-tool run dev",
     "test": "echo Error: no test specified && exit 1"
   },
   "author": "",

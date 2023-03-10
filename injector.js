@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 const fs = require('fs');
 const packageConfig = require('./package.json');
 
@@ -13,26 +14,19 @@ const parsedArgs = args.reduce((p, c) => {
 const config = {
   publishConfig: {
     production: 'http://ccp.tianti.tg.unicom.local/artifactory/api/npm/sjxt-npm-virtual/',
-    development: 'https://nexus.coloseo.cn/repository/npm-hosted/',
   },
   npm: {
     filename: '.npmrc',
     content: {
       production: 'registry=http://ccp.tianti.tg.unicom.local/artifactory/api/npm/sjxt-npm-virtual/',
-      development: `registry=https://nexus.coloseo.cn/repository/npm-all/
-email=devops@coloseo.cn
-always-auth=true
-_auth="bnBtOmNvbG9zZW8xMjM="`,
+      development: 'registry=https://npm.coloseo.online/',
     },
   },
   yarn: {
     filename: '.yarnrc',
     content: {
       production: 'registry "http://ccp.tianti.tg.unicom.local/artifactory/api/npm/sjxt-npm-virtual/"',
-      development: `registry "https://nexus.coloseo.cn/repository/npm-all/"
-email "devops@coloseo.cn"
-always-auth true
-_auth "bnBtOmNvbG9zZW8xMjM="`,
+      development: 'registry "https://npm.coloseo.online/"',
     },
   },
 };

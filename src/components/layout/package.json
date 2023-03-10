@@ -10,15 +10,16 @@
     "es"
   ],
   "scripts": {
-    "dev": "union-tool run dev",
+    "start": "union-tool run dev",
     "test": "echo Error: no test specified && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@union-design/config-provider": "workspaces/src/components/*",
-    "@union-design/menu": "workspaces/src/components/*",
     "@union-design/icon": "workspaces/src/components/*",
+    "@union-design/menu": "workspaces/src/components/*",
+    "@union-design/style": "workspaces/src/components/*",
     "classnames": "^2.3.2",
     "omit.js": "^2.0.2",
     "union-tool": "^0.1.1"

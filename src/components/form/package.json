@@ -10,7 +10,7 @@
     "es"
   ],
   "scripts": {
-    "dev": "union-tool run dev",
+    "start": "union-tool run dev",
     "test": "echo Error: no test specified && exit 1"
   },
   "author": "",
@@ -18,9 +18,10 @@
   "dependencies": {
     "@union-design/config-provider": "workspaces/src/components/*",
     "@union-design/grid": "workspaces/src/components/*",
+    "@union-design/style": "workspaces/src/components/*",
+    "async-validator": "^4.2.5",
     "classnames": "^2.3.2",
     "omit.js": "^2.0.2",
-    "async-validator": "^4.2.5",
     "union-tool": "^0.1.1"
   },
   "devDependencies": {

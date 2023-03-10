@@ -14,6 +14,6 @@ _auth="bnBtOmNvbG9zZW8xMjM="`;
     if (fs.existsSync(file)) {
       fs.rmSync(file);
     }
-    fs.writeFileSync(file, content);
+    // fs.writeFileSync(file, content);
   }
 });

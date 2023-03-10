@@ -33,8 +33,8 @@ const lessCompile = (modules, item) => {
   const currentPath = item ? path.resolve(process.cwd(), `src/components/${item}`) : path.resolve(process.cwd(), 'src/components');
   const lessDir = [
     path.join(currentPath, '/**/*.less'),
-    `!${path.join(`${currentPath}**/es`, '/**/*.less')}`,
-    `!${path.join(`${currentPath}**/lib`, '/**/*.less')}`,
+    `!${path.join(`${currentPath}/**/es`, '/**/*.less')}`,
+    `!${path.join(`${currentPath}/**/lib`, '/**/*.less')}`,
   ];
   const dist = item ? currentPath : path.resolve(process.cwd());
   const outputPath = path.resolve(dist, modules);
