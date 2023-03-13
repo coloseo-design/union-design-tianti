@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactIcon, { BaseIconProps } from 'union-icons-react';
+import ReactIcon, { BaseIconProps } from '@uni/icons-react';
 
 export interface TransferLocale {
   icon: string;
