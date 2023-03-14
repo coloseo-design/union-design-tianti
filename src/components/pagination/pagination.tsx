@@ -28,6 +28,8 @@ export type PaginationProps = {
   /** 页码改变的回调，参数是改变后的页码及每页条数 */
   onChange?: (page: number, pageSize: number) => void;
   style?: React.CSSProperties;
+
+  size?: 'large' | 'default';
 } & BaseProps;
 
 export type PaginationState = {
@@ -79,9 +81,10 @@ export default class Pagination extends BaseComponent<PaginationProps, Paginatio
 
   protected view = () => {
     const { current, hoverDoubleLRIcon } = this.state;
+    const { size = 'default' } = this.props;
 
     return (
-      <div className={this.getPrefixClass('wrap')}>
+      <div className={this.classNames(this.getPrefixClass('wrap'), { [`${this.getPrefixClass('wrap')}-large`]: size === 'large' })}>
         {this.viewShowTotal()}
         <div className={this.gpc('icon')} onClick={() => this.iconOnClick('left')}>
           <Icon type="left" />
@@ -128,7 +131,7 @@ export default class Pagination extends BaseComponent<PaginationProps, Paginatio
 
   private viewSizeChanger = () => {
     const {
-      total, showSizeChanger, hideOnSinglePage, pageSizeOptions,
+      total, showSizeChanger, hideOnSinglePage, pageSizeOptions, size = 'default',
     } = this.props;
     const { pageSize } = this.state;
     const totalPage = Math.ceil(total! / pageSize);
@@ -141,6 +144,7 @@ export default class Pagination extends BaseComponent<PaginationProps, Paginatio
         <Select
           onChange={this.selectOnChange}
           value={`${pageSize}条/页`}
+          size={size}
           data={pageSizeOptions?.reduce((a, b) => {
             a.push({
               key: b,

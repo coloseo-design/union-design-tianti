@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import React, { DOMAttributes } from 'react';
 import classnames from 'classnames';
 import Portal from '../common/portal';
@@ -17,6 +18,7 @@ export type SelectProps<T extends SelectBaseData> = {
   value: string;
   onChange?: (item: T) => void;
   getPopupContainer?: () => HTMLElement | null;
+  size?: 'default'|'large',
 } & BaseProps;
 
 export type SelectState = {
@@ -132,7 +134,9 @@ export class Select<T extends SelectBaseData> extends React.Component<SelectProp
   };
 
   renderSelect = ({ getPrefixCls }: ConfigConsumerProps) => {
-    const { data, value, getPopupContainer } = this.props;
+    const {
+      data, value, getPopupContainer, size,
+    } = this.props;
     const {
       popupVisible, left, top, width,
     } = this.state;
@@ -145,6 +149,11 @@ export class Select<T extends SelectBaseData> extends React.Component<SelectProp
         className={classnames(`${prefix}-select`)}
         onClick={this.clickSelect}
         ref={this.getNode1}
+        style={{
+          height: size ? (size === 'default' ? 24 : 32) : undefined,
+          lineHeight: size ? (size === 'default' ? '22px' : '32px') : undefined,
+          background: size ? '#fff' : undefined,
+        }}
       >
         <div className={classnames(`${prefix}-tag-value`)}>
           {value}
@@ -186,7 +195,6 @@ export class Select<T extends SelectBaseData> extends React.Component<SelectProp
 }
 
 const scrollToY = (containerId: string, targetId: string, duration: number) => {
-  console.log('====');
   const target = document.getElementById(targetId);
   const container = document.getElementById(containerId);
   if (!target || !container) return;

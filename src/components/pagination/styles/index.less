@@ -12,47 +12,45 @@
 @pagination-size-changer: ~"@{pagination}-size-changer";
 
 .@{pagination}-wrap {
-    height: 24px;
     color: @pagination-color;
     box-sizing: border-box;
-
+    height: @pagination-item-size;
     & > div {
         display: inline-block;
         vertical-align: top;
     }
 
     & > div + div {
-        margin-left: 4px;
+        margin-left: 8px;
     }
 
     & > .@{pagination-icon},
     & > .@{pagination-item} {
-        width: 24px;
-        height: 24px;
-        line-height: 1.9;
+        width: @pagination-item-size;
+        height: @pagination-item-size;
+        line-height: @pagination-item-size;
         text-align: center;
         user-select: none;
         cursor: pointer;
         font-size: 14px;
         display: inline-block;
         vertical-align: middle;
-    }
-
-    & > .@{pagination-item} {
-        border: 1px solid @pagination-item-border;
+        background-color: #fff;
         border-radius: @border-radius-base;
-        font-size: 12px;
     }
 
-    & > .@{pagination-item-hover}:hover {
+    & > .@{pagination-icon}:hover, & > .@{pagination-item-hover}:hover {
         background-color: @pagination-item-hover-bg;
-        border: 1px solid @pagination-item-hover-border-color;
+    }
+
+    & > .@{pagination-icon}:active, & > .@{pagination-item-hover}:active {
+        background-color: @pagination-item-active-bg;
     }
 
     & > .@{pagination-item-selected} {
         background-color: @pagination-item-selected-bg;
-        border: 1px solid @pagination-item-selected-border-color;
         color: @pagination-item-selected-color;
+        font-weight: @pagination-font-weight-selected;
     }
 
     & > .@{pagination-quick-jumper},
@@ -73,6 +71,20 @@
             outline: none;
             cursor: text;
             text-align: center;
+        }
+    }
+    &-large {
+        height: @pagination-item-size-large;
+        & > .@{pagination-icon},
+        & > .@{pagination-item} {
+            width: @pagination-item-size-large;
+            height: @pagination-item-size-large;
+            line-height: @pagination-item-size-large;  
+        }
+        & > .@{pagination-quick-jumper} {
+            & > input {
+                height: @pagination-item-size-large;
+            }
         }
     }
 }

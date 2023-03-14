@@ -20,8 +20,9 @@
 @normal-color: #d9d9d9;
 @white: #fff;
 @black: #000;
-// input边框颜色
-@border: #ACAFB9;
+
+@border: #CECECE;
+
 // input字体填充颜色
 @value: rgba(0,0,0,.85);
 // input placeHolder颜色
@@ -29,19 +30,19 @@
 // input阴影颜色
 @box-shadow: rgba(179, 0, 0, .2);
 // input不可以编辑背景色
-@disabled-background-color: #E9EBF0;
+
+
+@disabled-background-color: #F7F7F7;
 
 @content-bg: #F9FAFB;
 
-@divider-border-color: rgba(0,0,0,.06);
+@divider-border-color: #e5e5e5;
 
 @image-operation-bg: hsla(0,0%,100%,.25);
 
 @new-primary-red: #E50027;
 
 
-// Color used by default to control hover and active backgrounds and for
-// alert info backgrounds.
 @primary-1: color(~`colorPalette('@{primary-color}', 1) `); // replace tint(@primary-color, 90%)
 @primary-2: color(~`colorPalette('@{primary-color}', 2) `); // replace tint(@primary-color, 80%)
 @primary-3: color(~`colorPalette('@{primary-color}', 3) `); // unused
@@ -60,15 +61,18 @@
 
 // Background color for `<body>`
 @body-background: #fff;
-// Base background color for most components
 @component-background: #fff;
 @font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB',
   'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial, sans-serif, 'Apple Color Emoji',
   'Segoe UI Emoji', 'Segoe UI Symbol';
 @code-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
-@text-color: fade(@black, 85%);
-@secondary-text-color: fade(@black, 65%);
+
+@text-color: #282828; // 一级文字
+
+@secondary-text-color: #595959; // 二级文字
+
 @text-color-secondary: fade(@black, 45%);
+
 @text-color-inverse: @white;
 @icon-color: inherit;
 // @icon-color-hover: fade(@black, 75%);
@@ -87,7 +91,7 @@
 @heading-3-size: ceil(@font-size-base * 1.71);
 @heading-4-size: ceil(@font-size-base * 1.42);
 @line-height-base: 1.5;
-@border-radius-base: 3px;
+@border-radius-base: 4px;
 @border-radius-sm: 2px;
 
 // vertical paddings
@@ -118,7 +122,10 @@
 
 // LINK
 // @link-color: #207EEA;
-@button-link-color: #207EEA;
+// @button-link-color: #207EEA;
+
+@button-link-color: @primary-color;
+
 @link-color: @primary-color;
 @link-hover-color: color(~`colorPalette('@{link-color}', 5) `);
 @link-active-color: color(~`colorPalette('@{link-color}', 7) `);
@@ -156,8 +163,15 @@
 @background-color-base: hsv(0, 0, 96%); // Default grey background color
 
 // Disabled states
-@disabled-color: fade(#000, 45%);
-@disabled-border-color: #C8CAD1;
+// @disabled-color: fade(#000, 45%);
+// @disabled-border-color: #C8CAD1;
+
+/* 新的disabled border color*/
+
+@disabled-color: #969696;
+
+@disabled-border-color: #CECECE;
+
 @disabled-color-dark: fade(#fff, 35%);
 
 // Shadow
@@ -850,19 +864,16 @@
 
 // Pagination
 // ---
-// @pagination-color: #595959;
-@pagination-color: @secondary-text-color;
-@pagination-item-border: @border;
-@pagination-item-hover-bg: rgb(230, 231, 234);
-@pagination-item-hover-border-color: rgb(230, 231, 234);
-@pagination-item-selected-border-color: @border;
-@pagination-item-selected-bg: @border;
-@pagination-item-selected-color: @white;
+
+@pagination-color: @text-color;
+@pagination-item-hover-bg: #F4F4F4;
+@pagination-item-selected-bg: #FFF3F3;
+@pagination-item-selected-color: @primary-color;
+@pagination-item-active-bg: #EAEAEA;
 @pagination-quick-jumper-input-border: @border;
-@pagination-item-size: 32px;
-@pagination-item-size-sm: 24px;
-@pagination-font-family: Arial;
-@pagination-font-weight-active: 500;
+@pagination-item-size-large: 32px;
+@pagination-item-size: 24px;
+@pagination-font-weight-selected: 500;
 
 // PageHeader
 // ---
@@ -874,8 +885,8 @@
 
 // Breadcrumb
 // ---
-@breadcrumb-base-color: @disabled-color;
-@breadcrumb-last-item-color: rgba(0,0,0,0.85);
+@breadcrumb-base-color: #4E5969;
+@breadcrumb-last-item-color: @text-color;
 @breadcrumb-font-size: @font-size-base;
 @breadcrumb-icon-font-size: @font-size-base;
 @breadcrumb-link-color: @disabled-color;

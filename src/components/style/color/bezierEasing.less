@@ -1,110 +1,243 @@
 /* stylelint-disable */
 .bezierEasingMixin() {
-@functions: ~`(function() {
-  var NEWTON_ITERATIONS = 4;
-  var NEWTON_MIN_SLOPE = 0.001;
-  var SUBDIVISION_PRECISION = 0.0000001;
-  var SUBDIVISION_MAX_ITERATIONS = 10;
+  @functions: ~`(function() {
+    var NEWTON_ITERATIONS = 4;
+    var NEWTON_MIN_SLOPE = 0.001;
+    var SUBDIVISION_PRECISION = 0.0000001;
+    var SUBDIVISION_MAX_ITERATIONS = 10;
 
-  var kSplineTableSize = 11;
-  var kSampleStepSize = 1.0 / (kSplineTableSize - 1.0);
+    var kSplineTableSize = 11;
+    var kSampleStepSize = 1.0 / (kSplineTableSize - 1.0);
 
-  var float32ArraySupported = typeof Float32Array === 'function';
+    var float32ArraySupported = typeof Float32Array === 'function';
 
-  function A (aA1, aA2) { return 1.0 - 3.0 * aA2 + 3.0 * aA1; }
-  function B (aA1, aA2) { return 3.0 * aA2 - 6.0 * aA1; }
-  function C (aA1)      { return 3.0 * aA1; }
+    function A (aA1, aA2) { return 1.0 - 3.0 * aA2 + 3.0 * aA1; }
+    function B (aA1, aA2) { return 3.0 * aA2 - 6.0 * aA1; }
+    function C (aA1)      { return 3.0 * aA1; }
 
-  // Returns x(t) given t, x1, and x2, or y(t) given t, y1, and y2.
-  function calcBezier (aT, aA1, aA2) { return ((A(aA1, aA2) * aT + B(aA1, aA2)) * aT + C(aA1)) * aT; }
+    // Returns x(t) given t, x1, and x2, or y(t) given t, y1, and y2.
+    function calcBezier (aT, aA1, aA2) { return ((A(aA1, aA2) * aT + B(aA1, aA2)) * aT + C(aA1)) * aT; }
 
-  // Returns dx/dt given t, x1, and x2, or dy/dt given t, y1, and y2.
-  function getSlope (aT, aA1, aA2) { return 3.0 * A(aA1, aA2) * aT * aT + 2.0 * B(aA1, aA2) * aT + C(aA1); }
+    // Returns dx/dt given t, x1, and x2, or dy/dt given t, y1, and y2.
+    function getSlope (aT, aA1, aA2) { return 3.0 * A(aA1, aA2) * aT * aT + 2.0 * B(aA1, aA2) * aT + C(aA1); }
 
-  function binarySubdivide (aX, aA, aB, mX1, mX2) {
-    var currentX, currentT, i = 0;
-    do {
-      currentT = aA + (aB - aA) / 2.0;
-      currentX = calcBezier(currentT, mX1, mX2) - aX;
-      if (currentX > 0.0) {
-        aB = currentT;
-      } else {
-        aA = currentT;
-      }
-    } while (Math.abs(currentX) > SUBDIVISION_PRECISION && ++i < SUBDIVISION_MAX_ITERATIONS);
-    return currentT;
-  }
+    function binarySubdivide (aX, aA, aB, mX1, mX2) {
+      var currentX, currentT, i = 0;
+      do {
+        currentT = aA + (aB - aA) / 2.0;
+        currentX = calcBezier(currentT, mX1, mX2) - aX;
+        if (currentX > 0.0) {
+          aB = currentT;
+        } else {
+          aA = currentT;
+        }
+      } while (Math.abs(currentX) > SUBDIVISION_PRECISION && ++i < SUBDIVISION_MAX_ITERATIONS);
+      return currentT;
+    }
 
-  function newtonRaphsonIterate (aX, aGuessT, mX1, mX2) {
-   for (var i = 0; i < NEWTON_ITERATIONS; ++i) {
-     var currentSlope = getSlope(aGuessT, mX1, mX2);
-     if (currentSlope === 0.0) {
-       return aGuessT;
+    function newtonRaphsonIterate (aX, aGuessT, mX1, mX2) {
+     for (var i = 0; i < NEWTON_ITERATIONS; ++i) {
+       var currentSlope = getSlope(aGuessT, mX1, mX2);
+       if (currentSlope === 0.0) {
+         return aGuessT;
+       }
+       var currentX = calcBezier(aGuessT, mX1, mX2) - aX;
+       aGuessT -= currentX / currentSlope;
      }
-     var currentX = calcBezier(aGuessT, mX1, mX2) - aX;
-     aGuessT -= currentX / currentSlope;
-   }
-   return aGuessT;
-  }
-
-  var BezierEasing = function (mX1, mY1, mX2, mY2) {
-    if (!(0 <= mX1 && mX1 <= 1 && 0 <= mX2 && mX2 <= 1)) {
-      throw new Error('bezier x values must be in [0, 1] range');
+     return aGuessT;
     }
 
-    // Precompute samples table
-    var sampleValues = float32ArraySupported ? new Float32Array(kSplineTableSize) : new Array(kSplineTableSize);
-    if (mX1 !== mY1 || mX2 !== mY2) {
-      for (var i = 0; i < kSplineTableSize; ++i) {
-        sampleValues[i] = calcBezier(i * kSampleStepSize, mX1, mX2);
+    var BezierEasing = function (mX1, mY1, mX2, mY2) {
+      if (!(0 <= mX1 && mX1 <= 1 && 0 <= mX2 && mX2 <= 1)) {
+        throw new Error('bezier x values must be in [0, 1] range');
       }
-    }
 
-    function getTForX (aX) {
-      var intervalStart = 0.0;
-      var currentSample = 1;
-      var lastSample = kSplineTableSize - 1;
+      // Precompute samples table
+      var sampleValues = float32ArraySupported ? new Float32Array(kSplineTableSize) : new Array(kSplineTableSize);
+      if (mX1 !== mY1 || mX2 !== mY2) {
+        for (var i = 0; i < kSplineTableSize; ++i) {
+          sampleValues[i] = calcBezier(i * kSampleStepSize, mX1, mX2);
+        }
+      }
 
-      for (; currentSample !== lastSample && sampleValues[currentSample] <= aX; ++currentSample) {
-        intervalStart += kSampleStepSize;
-      }
-      --currentSample;
+      function getTForX (aX) {
+        var intervalStart = 0.0;
+        var currentSample = 1;
+        var lastSample = kSplineTableSize - 1;
 
-      // Interpolate to provide an initial guess for t
-      var dist = (aX - sampleValues[currentSample]) / (sampleValues[currentSample + 1] - sampleValues[currentSample]);
-      var guessForT = intervalStart + dist * kSampleStepSize;
+        for (; currentSample !== lastSample && sampleValues[currentSample] <= aX; ++currentSample) {
+          intervalStart += kSampleStepSize;
+        }
+        --currentSample;
 
-      var initialSlope = getSlope(guessForT, mX1, mX2);
-      if (initialSlope >= NEWTON_MIN_SLOPE) {
-        return newtonRaphsonIterate(aX, guessForT, mX1, mX2);
-      } else if (initialSlope === 0.0) {
-        return guessForT;
-      } else {
-        return binarySubdivide(aX, intervalStart, intervalStart + kSampleStepSize, mX1, mX2);
-      }
-    }
+        // Interpolate to provide an initial guess for t
+        var dist = (aX - sampleValues[currentSample]) / (sampleValues[currentSample + 1] - sampleValues[currentSample]);
+        var guessForT = intervalStart + dist * kSampleStepSize;
 
-    return function BezierEasing (x) {
-      if (mX1 === mY1 && mX2 === mY2) {
-        return x; // linear
+        var initialSlope = getSlope(guessForT, mX1, mX2);
+        if (initialSlope >= NEWTON_MIN_SLOPE) {
+          return newtonRaphsonIterate(aX, guessForT, mX1, mX2);
+        } else if (initialSlope === 0.0) {
+          return guessForT;
+        } else {
+          return binarySubdivide(aX, intervalStart, intervalStart + kSampleStepSize, mX1, mX2);
+        }
       }
-      // Because JavaScript number are imprecise, we should guarantee the extremes are right.
-      if (x === 0) {
-        return 0;
-      }
-      if (x === 1) {
-        return 1;
-      }
-      return calcBezier(getTForX(x), mY1, mY2);
+
+      return function BezierEasing (x) {
+        if (mX1 === mY1 && mX2 === mY2) {
+          return x; // linear
+        }
+        // Because JavaScript number are imprecise, we should guarantee the extremes are right.
+        if (x === 0) {
+          return 0;
+        }
+        if (x === 1) {
+          return 1;
+        }
+        return calcBezier(getTForX(x), mY1, mY2);
+      };
     };
-  };
-
-  this.colorEasing = BezierEasing(0.26, 0.09, 0.37, 0.18);
-  // less 3 requires a return
-  return '';
-})()`;
-}
-// It is hacky way to make this function will be compiled preferentially by less
-// resolve error: `ReferenceError: colorPalette is not defined`
-// https://github.com/ant-design/ant-motion/issues/44
-.bezierEasingMixin();
+    // 自定义
+    var defaultCurves = {
+      linear: {
+        name: "linear",
+        formatted_name: "Linear",
+        value: [0.5, 0.5, 0.5, 0.5],
+      },
+      easeInCubic: {
+        name: "easeInCubic",
+        formatted_name: "Cubic - EaseIn",
+        value: [0.55, 0.055, 0.675, 0.19],
+      },
+      easeOutCubic: {
+        name: "easeOutCubic",
+        formatted_name: "Cubic - EaseOut",
+        value: [0.215, 0.61, 0.355, 1],
+      },
+      easeInOutCubic: {
+        name: "easeInOutCubic",
+        formatted_name: "Cubic - EaseInOut",
+        value: [0.645, 0.045, 0.355, 1],
+      },
+      easeInSine: {
+        name: "easeInSine",
+        formatted_name: "Sine - EaseIn",
+        value: [0.47, 0, 0.745, 0.715],
+      },
+      easeOutSine: {
+        name: "easeOutSine",
+        formatted_name: "Sine - EaseOut",
+        value: [0.39, 0.575, 0.565, 1],
+      },
+      easeInOutSine: {
+        name: "easeInOutSine",
+        formatted_name: "Sine - EaseInOut",
+        value: [0.445, 0.05, 0.55, 0.95],
+      },
+      easeInQuad: {
+        name: "easeInQuad",
+        formatted_name: "Quad - EaseIn",
+        value: [0.55, 0.085, 0.68, 0.53],
+      },
+      easeOutQuad: {
+        name: "easeOutQuad",
+        formatted_name: "Quad - EaseOut",
+        value: [0.25, 0.46, 0.45, 0.94],
+      },
+      easeInOutQuad: {
+        name: "easeInOutQuad",
+        formatted_name: "Quad - EaseInOut",
+        value: [0.455, 0.03, 0.515, 0.955],
+      },
+      easeInQuart: {
+        name: "easeInQuart",
+        formatted_name: "Quart - EaseIn",
+        value: [0.895, 0.03, 0.685, 0.22],
+      },
+      easeOutQuart: {
+        name: "easeOutQuart",
+        formatted_name: "Quart - EaseOut",
+        value: [0.165, 0.84, 0.44, 1],
+      },
+      easeInOutQuart: {
+        name: "easeInOutQuart",
+        formatted_name: "Quart - EaseInOut",
+        value: [0.77, 0, 0.175, 1],
+      },
+      easeInQuint: {
+        name: "easeInQuint",
+        formatted_name: "Quint - EaseIn",
+        value: [0.755, 0.05, 0.855, 0.06],
+      },
+      easeOutQuint: {
+        name: "easeOutQuint",
+        formatted_name: "Quint - EaseOut",
+        value: [0.23, 1, 0.32, 1],
+      },
+      easeInOutQuint: {
+        name: "easeInOutQuint",
+        formatted_name: "Quint - EaseInOut",
+        value: [0.86, 0, 0.07, 1],
+      },
+      easeInCirc: {
+        name: "easeInCirc",
+        formatted_name: "Circ - EaseIn",
+        value: [0.6, 0.04, 0.98, 0.335],
+      },
+      easeOutCirc: {
+        name: "easeOutCirc",
+        formatted_name: "Circ - EaseOut",
+        value: [0.075, 0.82, 0.165, 1],
+      },
+      easeInOutCirc: {
+        name: "easeInOutCirc",
+        formatted_name: "Circ - EaseInOut",
+        value: [0.785, 0.135, 0.15, 0.86],
+      },
+      easeInExpo: {
+        name: "easeInExpo",
+        formatted_name: "Expo - EaseIn",
+        value: [0.95, 0.05, 0.795, 0.035],
+      },
+      easeOutExpo: {
+        name: "easeOutExpo",
+        formatted_name: "Expo - EaseOut",
+        value: [0.19, 1, 0.22, 1],
+      },
+      easeInOutExpo: {
+        name: "easeInOutExpo",
+        formatted_name: "Expo - EaseInOut",
+        value: [1, 0, 0, 1],
+      },
+      easeInBack: {
+        name: "easeInBack",
+        formatted_name: "Back - EaseIn",
+        value: [0.6, -0.28, 0.735, 0.045],
+      },
+      easeOutBack: {
+        name: "easeOutBack",
+        formatted_name: "Back - EaseOut",
+        value: [0.175, 0.885, 0.32, 1.275],
+      },
+      easeInOutBack: {
+        name: "easeInOutBack",
+        formatted_name: "Back - EaseInOut",
+        value: [0.68, -0.55, 0.265, 1.55],
+      },
+    };
+    function timingFunction (curve) {
+      var config = defaultCurves[curve];
+      var curve = config.value;
+      return BezierEasing.apply(void 0, curve);
+    }
+    this.transformFunc = timingFunction;
+    this.colorEasing = timingFunction('easeInQuart');  //BezierEasing(0.26, 0.09, 0.37, 0.18);
+    // less 3 requires a return
+    return '';
+  })()`;
+  }
+  // It is hacky way to make this function will be compiled preferentially by less
+  // resolve error: `ReferenceError: generate is not defined`
+  // https://github.com/ant-design/ant-motion/issues/44
+  .bezierEasingMixin();

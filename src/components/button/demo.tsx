@@ -4,8 +4,21 @@ import './styles/index';
 
 const ButtonDemo: React.FC<unknown> = () => (
   <div style={{ margin: 5 }}>
+
+    <div style={{ display: 'flex', justifyContent: 'space-between', margin: '20px 0px' }}>
+      <div className="p1" style={{ width: 100, height: 42 }} />
+      <div className="p2" style={{ width: 100, height: 42 }} />
+      <div className="p3" style={{ width: 100, height: 42 }} />
+      <div className="p4" style={{ width: 100, height: 42 }} />
+      <div className="p5" style={{ width: 100, height: 42 }} />
+      <div className="p6" style={{ width: 100, height: 42 }} />
+      <div className="p7" style={{ width: 100, height: 42 }} />
+      <div className="p8" style={{ width: 100, height: 42 }} />
+      <div className="p9" style={{ width: 100, height: 42 }} />
+      <div className="p10" style={{ width: 100, height: 42 }} />
+    </div>
     <div style={{ marginBottom: 10 }}>
-      <Button type="default" style={{ marginRight: 10 }}>default</Button>
+      <Button type="default" icon="left" style={{ marginRight: 10 }}>default</Button>
       <Button type="primary" style={{ marginRight: 10 }}>primary</Button>
       <Button type="danger" style={{ marginRight: 10 }}>danger</Button>
       <Button type="dashed" style={{ marginRight: 10 }}>dashed</Button>
