@@ -1,4 +1,7 @@
-import React, { Component, ReactNode } from 'react';
+/* eslint-disable max-len */
+import React, {
+  Component, ReactChild, ReactFragment, ReactPortal, ReactNode,
+} from 'react';
 import classNames from 'classnames';
 import { ConfigConsumer, ConfigConsumerProps } from '../config-provider';
 import Item from './item';
@@ -7,12 +10,12 @@ export interface BreadcrumbProps extends React.HTMLAttributes<HTMLDivElement> {
   /* 用户自定义类前缀，默认uni-breadcrumb */
   prefixCls?: string;
   /* 分隔符自定义 */
-  separator?: ReactNode;
+  separator?: 'bias' | 'right' | ReactNode;
 }
 
 class Breadcrumb extends Component<BreadcrumbProps> {
   static defaultProps: BreadcrumbProps = {
-    separator: '>',
+    separator: 'right',
   };
 
   static Item: typeof Item;
@@ -26,10 +29,10 @@ class Breadcrumb extends Component<BreadcrumbProps> {
       // [`${prefix}-has-sider`]: siders.length > 0,
     });
 
-    let toArrayChildren = React.Children.toArray(children);
-    if (toArrayChildren.length) {
+    let toArrayChildren = React.Children.toArray(children) as ((ReactChild | ReactFragment | ReactPortal)[] | undefined | null);
+    if (toArrayChildren && toArrayChildren.length) {
       toArrayChildren = React.Children.map(children,
-        (child) => React.cloneElement(child, { separator }));
+        (child) => React.cloneElement(child as any, { separator }));
     }
 
     return (

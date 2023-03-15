@@ -29,6 +29,9 @@ export type StepsProps = {
     onClick?: (current: number) => void;
     /** 点击详情是否展示popover */
     isShowPop?: boolean;
+    /* 指定内容和步骤条的方向 */
+    contentDirection?: StepsDirection;
+    progressDot?: boolean;
 } & BaseProps;
 
 export type StepProps = {
@@ -57,6 +60,8 @@ export type StepProps = {
     len?: number;
     /* 是否是最后一步 */
     isLast?: boolean;
+    contentDirection?: StepsDirection;
+    progressDot?: boolean;
 } & BaseProps;
 
 export default class Steps extends BaseComponent<StepsProps> {
@@ -67,6 +72,8 @@ export default class Steps extends BaseComponent<StepsProps> {
       initial: 1,
       current: 0,
       isShowPop: true,
+      contentDirection: 'horizontal',
+      direction: 'horizontal',
     };
 
     public static Step = Step;
@@ -101,7 +108,8 @@ export default class Steps extends BaseComponent<StepsProps> {
 
     private handleChildren = () => {
       const {
-        children, initial, size, direction, current, onClick, isShowPop,
+        children, initial, size,
+        direction, current, onClick, isShowPop, contentDirection, progressDot,
       } = this.props;
       let serialNumber = initial!;
       this.stepRefs = [];
@@ -130,6 +138,8 @@ export default class Steps extends BaseComponent<StepsProps> {
           tempWidth: direction === 'horizontal' && index !== React.Children.toArray(children).length - 1 ? tempWidth / (React.Children.toArray(children).length - 1) : undefined,
           len: React.Children.toArray(children).length - 1,
           isLast: index === React.Children.toArray(children).length - 1,
+          contentDirection,
+          progressDot,
         });
 
         serialNumber += 1;

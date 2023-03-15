@@ -12,7 +12,7 @@ const Demo = () => (
       size="large"
     />
     <div style={{ height: 20 }} />
-    <div style={{ marginTop: 320 }}>
+    <div style={{ marginTop: 30 }}>
       <Pagination
         total={137}
         showSizeChanger

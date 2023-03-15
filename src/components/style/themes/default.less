@@ -880,18 +880,20 @@
 @page-header-padding: 24px;
 @page-header-padding-vertical: 16px;
 @page-header-padding-breadcrumb: 12px;
-@page-header-bg: @disabled-background-color;
-@page-header-color: rgba(0,0,0,0.85);
+@page-header-bg: #fff;
+@page-header-title-font-size: 20px;
+@page-header-subtitle-font-size: 18px;
+@page-header-color: @text-color;
 
 // Breadcrumb
 // ---
-@breadcrumb-base-color: #4E5969;
+@breadcrumb-base-color: @secondary-text-color;
 @breadcrumb-last-item-color: @text-color;
 @breadcrumb-font-size: @font-size-base;
 @breadcrumb-icon-font-size: @font-size-base;
 @breadcrumb-link-color: @disabled-color;
 @breadcrumb-link-color-hover: @primary-color;
-@breadcrumb-separator-color: @text-color-secondary;
+@breadcrumb-separator-color: #595959;
 @breadcrumb-separator-margin: 0 @padding-xs;
 
 
@@ -910,7 +912,8 @@
 @calendar-month-cur-color: @secondary-text-color;
 @calendar-month-item-hover-color: @red-1;
 @calendar-month-item-selected-color: @primary-6;
-@calendar-tag-icon-color: @border;
+// @calendar-tag-icon-color: @border;
+@calendar-tag-icon-color: #595959;
 
 // Slider
 // ---
@@ -1112,12 +1115,14 @@
 @tree-select-dropdown-disabled-color: @disabled-color;
 
 // steps
-@steps-step-bg: #D8D8D8;
-@steps-step-tag-icon-wait-color: @border;
+@steps-step-bg: #e5e5e5;
+@steps-step-tag-icon-wait-color: @secondary-text-color;
+@steps-step-tag-icon-wait-bg: #F3F3F3;
+@steps-step-tag-icon-dot-finish-bg: #fff;
+@steps-step-tag-icon-dot-process-bg: @primary-color;
 @steps-step-tag-icon-process-color: @white;
 @steps-step-process-color: @primary-color;
 @steps-step-tag-title-color: rgba(0,0,0,0.85);
 @steps-step-tag-wait-color: @disabled-color;
-@steps-step-tag-finish-color: @secondary-text-color;
-@steps-step-tag-wait-description-color: @disabled-color;
-@steps-step-tag-finish-description-color: @disabled-color;
+@steps-step-tag-finish-color: @text-color;
+@steps-step-tag-description-color: @secondary-text-color;

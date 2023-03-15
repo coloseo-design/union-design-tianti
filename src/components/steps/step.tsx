@@ -20,9 +20,13 @@ export class Step extends BaseComponent<StepProps> {
 
   public containerRef = createRef<HTMLDivElement>();
 
-  public componentDidMount() {
-    this.handleHorizontal();
-  }
+  public descriptionRef = createRef<HTMLDivElement>();
+
+  public iconRef = createRef<HTMLDivElement>();
+
+  // public componentDidMount() {
+  //   this.handleHorizontal();
+  // }
 
   protected view = () => {
     const {
@@ -37,9 +41,12 @@ export class Step extends BaseComponent<StepProps> {
       _onClick,
       isShowPop,
       isLast = false,
+      contentDirection,
+      progressDot,
     } = this.props;
-    const _status = status ?? _defaultStatus;
     this.handleHorizontal();
+    const _status = status ?? _defaultStatus;
+    const dot = progressDot ? <div className={this.classNames(this.gpc('tag-icon-dot'), this.gpc(`tag-icon-dot-${_status}`))} /> : null;
     return (
       <div
         ref={this.containerRef}
@@ -53,14 +60,15 @@ export class Step extends BaseComponent<StepProps> {
           )}
         />
         <div
+          ref={this.iconRef}
           className={this.classNames(
             this.gpc('tag-icon'),
-            this.gpc(`tag-icon-${_size}`),
+            !progressDot && this.gpc(`tag-icon-${_size}`),
           )}
           onClick={() => _onClick?.(_serialNumber!)}
           style={{ verticalAlign: 'middle' }}
         >
-          {icon || (
+          {dot || icon || (
             <>
               {_status === 'wait' && (
                 <div className={this.classNames(
@@ -105,6 +113,7 @@ export class Step extends BaseComponent<StepProps> {
           ref={this.titleRef}
           className={this.classNames(
             this.gpc('tag-title'),
+            this.gpc(`tag-title-${contentDirection}`),
             this.gpc(`tag-title-${_size}`),
             this.gpc(`tag-${_status}`),
           )}
@@ -112,56 +121,65 @@ export class Step extends BaseComponent<StepProps> {
         >
           {title}
         </div>
-        {isShowPop ? (
+        <div
+          ref={this.descriptionRef}
+          className={this.classNames(
+            this.gpc(`tag-${_status}`),
+            this.gpc('tag-description'),
+            this.gpc(`tag-description-${contentDirection}`),
+            this.gpc(`tag-${_size}`),
+            progressDot && this.gpc('tag-description-dot'),
+          )}
+          style={{
+            maxWidth: _direction === 'horizontal' && contentDirection !== 'vertical' ? (isLast ? 240 : '55%') : undefined,
+          }}
+        >
           <Popover
             content={description}
             overlayStyle={{ width: '30%' }}
             trigger="click"
+            visible={(isShowPop || description) ? undefined : false}
           >
             <Typography
               className={this.classNames(
-                this.gpc(`tag-${_status}`),
                 this.gpc('tag-description'),
-                this.gpc(`tag-${_size}`),
               )}
-              style={{
-                maxWidth: _direction === 'horizontal' ? (isLast ? 240 : '55%') : undefined,
-              }}
               rows={3}
             >
               {description}
             </Typography>
           </Popover>
-        ) : (
-          <Typography
-            className={this.classNames(
-              this.gpc(`tag-${_status}`),
-              this.gpc('tag-description'),
-              this.gpc(`tag-${_size}`),
-            )}
-            style={{
-              maxWidth: _direction === 'horizontal' ? (isLast ? 240 : '55%') : undefined,
-            }}
-            rows={3}
-          >
-            {description}
-          </Typography>
-        )}
+        </div>
       </div>
     );
   };
 
   private handleHorizontal = () => {
     if (this.props._direction !== 'horizontal') return;
+    const { contentDirection } = this.props;
     setTimeout(() => {
       if (!this.lineRef.current) return;
       if (!this.titleRef.current) return;
+      if (!this.descriptionRef.current) return;
+      if (!this.iconRef.current) return;
       const tempRight = this.containerRef?.current?.style.marginRight || '-0px';
       const right = tempRight.toString().slice(1, tempRight.toString().length - 2);
-      const width = this.props._size === 'default' ? 24 : 32;
-      const titleWidth = this.titleRef.current.offsetWidth;
-      this.lineRef.current.style.left = `${titleWidth + width}px`;
-      this.lineRef.current.style.right = `${Number(right) + 8}px`;
+      const width = this.props._size === 'default' ? 20 : 28;
+      const titleWidth = contentDirection === 'vertical' ? 0 : this.titleRef.current.offsetWidth;
+      const gap = contentDirection === 'vertical' ? 30 : 12;
+      const descriptionWidth = contentDirection === 'vertical' ? this.descriptionRef.current.offsetWidth : 0;
+      const maxWidth = descriptionWidth > titleWidth ? descriptionWidth : titleWidth;
+      let linLeft = '0px';
+      let lineRight = '0px';
+      linLeft = `${titleWidth + width + gap}px`;
+      lineRight = `${Number(right) + gap}px`;
+      if (contentDirection === 'vertical') {
+        this.iconRef.current.style.marginLeft = `${(maxWidth / 2) - (width / 2)}px`;
+        linLeft = `${titleWidth + (width / 2) + gap + (maxWidth / 2)}px`;
+        lineRight = `${Number(right) + gap - (maxWidth / 2) + (width / 2)}px`;
+      }
+      this.lineRef.current.style.left = linLeft;
+      this.lineRef.current.style.right = lineRight;
     });
   };
 }

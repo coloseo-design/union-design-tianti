@@ -5,6 +5,7 @@
 
 .@{breadcrumb-prefix-cls} {
   color: @breadcrumb-base-color;
+  font-size: 14px;
   &-item {
     a {
       color: @breadcrumb-link-color;
@@ -15,7 +16,11 @@
     }
 
     &-separator {
-      margin: 0 6px;
+      margin: 0 8px 0px 4px;
+      color: @breadcrumb-separator-color;
+      font-size: 12px;
+      display: inline-block;
+      min-width: 6px;
     }
 
     &:last-child {

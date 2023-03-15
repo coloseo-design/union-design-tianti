@@ -1,6 +1,8 @@
+/* eslint-disable no-nested-ternary */
 import React, { Component, ReactNode } from 'react';
 import classNames from 'classnames';
 import { ConfigConsumer, ConfigConsumerProps } from '../config-provider';
+import Icon from '../icon';
 
 export interface ItemProps extends React.HTMLAttributes<HTMLSpanElement> {
   /* 用户自定义类前缀，默认uni-breadcrumb-item */
@@ -10,18 +12,16 @@ export interface ItemProps extends React.HTMLAttributes<HTMLSpanElement> {
   /* 单击事件 */
   onClick?: (e: any) => void;
   /* 分隔符自定义 */
-  separator?: ReactNode;
+  separator?: 'bias' | 'right' | ReactNode;
 }
 
 class Item extends Component<ItemProps> {
   renderItem = ({ getPrefixCls }: ConfigConsumerProps) => {
     const {
-      prefixCls, children, className, separator, href, onClick, ...rest
+      prefixCls, children, className, separator = 'right', href, onClick, ...rest
     } = this.props;
     const prefix = getPrefixCls('breadcrumb-item', prefixCls);
-    const mainClass = classNames(prefix, {
-      // [`${prefix}-has-sider`]: siders.length > 0,
-    }, className);
+    const mainClass = classNames(prefix, className);
 
     const onclick = (e: unknown) => {
       if (onClick) {
@@ -34,7 +34,9 @@ class Item extends Component<ItemProps> {
         <span className={`${prefix}-link`} onClick={onclick}>
           {href ? <a href={href}>{children}</a> : children}
         </span>
-        <span className={`${prefix}-separator`}>{separator}</span>
+        <span className={`${prefix}-separator`}>
+          {React.isValidElement(separator) ? separator : (separator === 'bias' ? '/' : <Icon type={separator as string} />)}
+        </span>
       </span>
     );
   }
