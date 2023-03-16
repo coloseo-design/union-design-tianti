@@ -26,7 +26,7 @@ export interface AlertState {
   blockNone: boolean;
 }
 
-export interface MappString {
+export interface MapString {
   [x: string]: string;
 }
 
@@ -85,7 +85,7 @@ class Alert extends React.Component<AlertProps, AlertState> {
     });
     const alertDes = classNames(`${prefix}-description`);
     const alertClose = classNames(description ? `${prefix}-des-close` : `${prefix}-close`);
-    const typeMapping: MappString = {
+    const typeMapping: MapString = {
       error: 'delete',
       success: 'success',
       warning: 'exclamation-circle',
