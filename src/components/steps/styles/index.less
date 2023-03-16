@@ -10,7 +10,7 @@
 @step-tag-big: ~"@{step}-tag-big";
 @step-tag-description: ~"@{step}-tag-description";
 @step-tag-icon-wait: ~"@{step}-tag-icon-wait";
-@step-tag-icon-dot: ~"@{step}-tag-icon-dot";
+@step-tag-icon-small: ~"@{step}-tag-icon-small";
 @step-tag-icon-process: ~"@{step}-tag-icon-process";
 @step-tag-icon-finish: ~"@{step}-tag-icon-finish";
 @step-tag-icon-error: ~"@{step}-tag-icon-error";
@@ -24,8 +24,9 @@
 @step-tag-finish: ~"@{step}-tag-finish";
 
 .@{steps}-wrap {
-    & > .@{step}-wrap:last-of-type > .@{step-tag-line-vertical},
-    & > .@{step}-wrap:last-of-type > .@{step-tag-line-horizontal} {
+
+    &>.@{step}-wrap:last-of-type>.@{step-tag-line-vertical},
+    &>.@{step}-wrap:last-of-type>.@{step-tag-line-horizontal} {
         height: 0;
         width: 0;
     }
@@ -34,22 +35,30 @@
 .@{steps}-horizontal {
     white-space: nowrap;
     overflow: hidden;
-    & > div {
+
+    &>div {
         display: inline-block;
         vertical-align: top;
     }
 }
 
 .@{steps}-vertical {
-    & > div {
+    &>div {
         display: block;
     }
 
-    & > .@{step}-wrap + .@{step}-wrap{
-        margin-top: 8px;
+    &>.@{step}-wrap-default +.@{step}-wrap-default {
+        margin-top: 12px;
     }
+    &>.@{step}-wrap-big +.@{step}-wrap-big {
+        margin-top: 16px;
+    }
+    &>.@{step}-wrap-small +.@{step}-wrap-small {
+        margin-top: 10px;
+    }
+
     & .@{step-tag-description} {
-        min-height: 100px;
+        min-height: 50px;
     }
 }
 
@@ -57,55 +66,67 @@
     position: relative;
     display: inline-block;
 
-    & > .@{step-tag-line-horizontal},
-    & > .@{step-tag-line-vertical} {
+    &>.@{step-tag-line-horizontal},
+    &>.@{step-tag-line-vertical} {
         position: absolute;
         z-index: 1;
         background-color: @steps-step-bg;
     }
 
-    & > .@{step-tag-line-horizontal} {
+    &>.@{step-tag-line-horizontal} {
         float: right;
         height: 1px;
         left: 0;
         right: 8px;
+
+        &-default {
+            top: 12px;
+        }
+        &-small {
+            top: 12px;
+            &-label-vertical {
+                top: 4px;
+            }
+        }
+        &-big {
+            top: 16px;
+        }
     }
 
-    & > .@{step-tag-line-horizontal}.@{step-tag-default} {
-        top: 12px;
-    }
-
-    & > .@{step-tag-line-horizontal}.@{step-tag-big} {
-        top: 16px;
-    }
-
-    & > .@{step-tag-line-vertical} {
+    &>.@{step-tag-line-vertical} {
         width: 1px;
         bottom: 0;
+
+        &-default {
+            top: 32px;
+            left: 10px;
+        }
+
+        &-big {
+            top: 44px;
+            left: 14px;
+        }
+        &-small {
+            top: 32px;
+            left: 4px;
+        }
     }
 
-    & > .@{step-tag-line-vertical}.@{step-tag-default} {
-        top: 32px;
-        left: 12px;
-    }
-
-    & > .@{step-tag-line-vertical}.@{step-tag-big} {
-        top: 40px;
-        left: 16px;
-    }
-
-    & > .@{step-tag-icon},
-    & > .@{step-tag-title} {
+    &>.@{step-tag-icon},
+    &>.@{step-tag-title} {
         display: inline-block;
         vertical-align: middle;
     }
 
-    & > .@{step-tag-title}-vertical {
-       display: block;
-       margin-top: 8px;
+    &>.@{step-tag-title}-label-vertical {
+        display: block;
+        margin-top: 8px;
+    }
+    &>.@{step-tag-icon}-label-vertical {
+        display: block;
     }
 
-    & > .@{step-tag-icon} {
+    &>.@{step-tag-icon} {
         position: relative;
         box-sizing: border-box;
         text-align: center;
@@ -116,99 +137,94 @@
             font-size: 14px;
         }
 
-        & > .@{step-tag-icon-wait},
-        & > .@{step-tag-icon-process},
-        & > .@{step-tag-icon-finish},
-        & > .@{step-tag-icon-error} {
+        &>.@{step-tag-icon-wait},
+        &>.@{step-tag-icon-process},
+        &>.@{step-tag-icon-finish},
+        &>.@{step-tag-icon-error} {
             width: 100%;
             height: 100%;
             border-radius: 50%;
         }
 
-        & > .@{step-tag-icon-wait} {
+        &>.@{step-tag-icon-wait} {
             color: @steps-step-tag-icon-wait-color;
             background-color: @steps-step-tag-icon-wait-bg;
         }
 
-        & > .@{step-tag-icon-process} {
+        &>.@{step-tag-icon-process} {
             color: @steps-step-tag-icon-process-color;
             background-color: @steps-step-process-color;
         }
 
-        & > .@{step-tag-icon-finish},
-        & > .@{step-tag-icon-error} {
+        &>.@{step-tag-icon-finish},
+        &>.@{step-tag-icon-error} {
             color: @steps-step-process-color;
             border: 1px solid @steps-step-process-color;
 
         }
 
-        & > .@{step-tag-big} {
-            & span {
-                font-size: 16px;
-            }
-        }
-
-        & > .@{step-tag-icon-dot} {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            &-wait {
-                background-color: @steps-step-tag-icon-wait-bg;
-            }
-            &-process {
-                background-color: @steps-step-tag-icon-dot-process-bg;
-            }
-            &-finish {
-                background-color: @steps-step-tag-icon-dot-finish-bg;
-                border: 1px solid @primary-color;
-            }
-        }
     }
 
-    & > .@{step-tag-icon-default} {
+    &>.@{step-tag-icon-default} {
         width: 20px;
         height: 20px;
         line-height: 20px;
     }
 
-    & > .@{step-tag-icon-big} {
+    &>.@{step-tag-icon-big} {
         width: 28px;
         height: 28px;
         line-height: 28px;
-    }
-
-    & > .@{step-tag-title} {
-        font-weight: 500;
-        padding: 0 8px;
-        color: @steps-step-tag-title-color;
-        cursor: pointer;
-        &-vertical {
-            max-width: 112px;
-            padding: 0px;
-            text-align: center;
-            word-break: break-all;
-            white-space: pre-wrap;
+        & span {
+            font-size: 16px;
         }
     }
 
-    & > .@{step-tag-title-default} {
-        font-size: 14px;
-        line-height: 22px;
+    & > .@{step-tag-icon-small} {
+        width: 8px;
+        height: 8px;
+        & > div {
+            border-radius: 50%;
+        }
+        .@{step-tag-icon-small}-wait {
+            height: 100%;
+            background-color: @steps-step-tag-icon-wait-bg;
+        }
+        .@{step-tag-icon-small}-process {
+            height: 100%;
+            background-color: @steps-step-tag-icon-small-process-bg;
+        }
+        .@{step-tag-icon-small}-finish {
+            height: 100%;
+            background-color: @steps-step-tag-icon-small-finish-bg;
+            border: 1px solid @primary-color;
+        }
     }
 
-    & > .@{step-tag-title-big} {
-        font-size: 16px;
-        line-height: 24px;
-    }
-
-    & > .@{step-tag-title}.@{step-tag-wait} {
-        color: @steps-step-tag-wait-color;
+    &>.@{step-tag-title} {
+        margin-left: 8px;
         font-weight: 400;
-    }
+        color: @steps-step-tag-title-color;
+        cursor: pointer;
 
-    & > .@{step-tag-title}.@{step-tag-finish} {
-        color: @steps-step-tag-finish-color;
-        font-weight: 400;
+        &-label-vertical {
+            max-width: 112px;
+            margin-left: 0px;
+            margin-top: 8px;
+            text-align: center;
+            word-break: break-all;
+            white-space: pre-wrap;
+            line-height: 22px;
+        }
+
+        &-default {
+            font-size: 14px;
+            line-height: 22px;
+        }
+
+        &-process {
+            font-weight: 500;
+        }
     }
 
     & .@{step-tag-description} {
@@ -217,23 +233,26 @@
         color: @steps-step-tag-description-color;
         cursor: default;
         white-space: normal;
-    }
 
-    & .@{step-tag-description}.@{step-tag-default} {
-        padding-left: 32px;
-    }
-    & .@{step-tag-description}.@{step-tag-description}-dot {
-        padding-left: 15px;
-    }
+        &-default {
+            padding-left: 28px;
+        }
 
-    & .@{step-tag-description}.@{step-tag-big} {
-        padding-left: 40px;
-    }
-    & .@{step-tag-description}-vertical {
-        padding-left: 0px !important;
-        max-width: 112px;
-        word-break: break-all;
-        white-space: pre-wrap;
-        text-align: center;
+        &-big {
+            padding-left: 36px;
+        }
+
+        &-small {
+            padding-left: 16px;
+        }
+
+        &-label-vertical {
+            padding-left: 0px;
+            max-width: 112px;
+            margin-top: 8px;
+            word-break: break-all;
+            white-space: pre-wrap;
+            text-align: center;
+        }
     }
 }

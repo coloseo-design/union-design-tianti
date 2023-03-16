@@ -15,8 +15,9 @@ subtitle: 步骤条
 | current   | 指定当前步骤，从 0 开始记数。在子 Step 元素中，可以通过 status 属性覆盖状态 | number                     | -            |
 | direction | 指定步骤条方向。目前支持水平（horizontal）和竖直（vertical）两种方向        | 'horizontal' \| 'vertical' | 'horizontal' |
 | initial   | 起始序号                                                                    | number                     | 0            |
-| size      | 大小                                                                        | 'default' \| 'big'         | 'default'    |
+| size      | 大小                                                                        | 'default' \| 'big' \|'small'         | 'default'    |
 | onClick   | 点击步骤时触发                                                              | (current: number) => void  | -            |
+|labelPlacement|内容位置结构|'horizontal' \| 'vertical'|'horizontal'|
 
 ### Step
 

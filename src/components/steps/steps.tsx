@@ -6,7 +6,7 @@ import React, {
 import { BaseComponent, BaseProps } from '../common/base-component';
 import { Step, STEP_NAME } from './step';
 
-export type StepsSize = 'default' | 'big';
+export type StepsSize = 'default' | 'big' | 'small';
 
 export type StepsDirection = 'horizontal' | 'vertical';
 
@@ -30,7 +30,7 @@ export type StepsProps = {
     /** 点击详情是否展示popover */
     isShowPop?: boolean;
     /* 指定内容和步骤条的方向 */
-    contentDirection?: StepsDirection;
+    labelPlacement?: StepsDirection;
     progressDot?: boolean;
 } & BaseProps;
 
@@ -60,7 +60,8 @@ export type StepProps = {
     len?: number;
     /* 是否是最后一步 */
     isLast?: boolean;
-    contentDirection?: StepsDirection;
+    isLastLine?: boolean;
+    labelPlacement?: StepsDirection;
     progressDot?: boolean;
 } & BaseProps;
 
@@ -72,7 +73,7 @@ export default class Steps extends BaseComponent<StepsProps> {
       initial: 1,
       current: 0,
       isShowPop: true,
-      contentDirection: 'horizontal',
+      labelPlacement: 'horizontal',
       direction: 'horizontal',
     };
 
@@ -109,7 +110,7 @@ export default class Steps extends BaseComponent<StepsProps> {
     private handleChildren = () => {
       const {
         children, initial, size,
-        direction, current, onClick, isShowPop, contentDirection, progressDot,
+        direction, current, onClick, isShowPop, labelPlacement, progressDot,
       } = this.props;
       let serialNumber = initial!;
       this.stepRefs = [];
@@ -138,8 +139,9 @@ export default class Steps extends BaseComponent<StepsProps> {
           tempWidth: direction === 'horizontal' && index !== React.Children.toArray(children).length - 1 ? tempWidth / (React.Children.toArray(children).length - 1) : undefined,
           len: React.Children.toArray(children).length - 1,
           isLast: index === React.Children.toArray(children).length - 1,
-          contentDirection,
+          labelPlacement,
           progressDot,
+          isLastLine: index === React.Children.toArray(children).length - 2,
         });
 
         serialNumber += 1;

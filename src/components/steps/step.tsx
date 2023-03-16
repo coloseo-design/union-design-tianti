@@ -41,29 +41,31 @@ export class Step extends BaseComponent<StepProps> {
       _onClick,
       isShowPop,
       isLast = false,
-      contentDirection,
-      progressDot,
+      labelPlacement,
+      maxDescriptionLine = 3,
     } = this.props;
     this.handleHorizontal();
     const _status = status ?? _defaultStatus;
-    const dot = progressDot ? <div className={this.classNames(this.gpc('tag-icon-dot'), this.gpc(`tag-icon-dot-${_status}`))} /> : null;
+    const dot = _size === 'small' ? <div className={this.classNames(this.gpc(`tag-icon-small-${_status}`))} /> : null;
     return (
       <div
         ref={this.containerRef}
-        className={`${this.getPrefixClass('wrap')}`}
+        className={this.classNames(`${this.getPrefixClass('wrap')}`, this.getPrefixClass(`wrap-${_size}`))}
       >
         <div
           ref={this.lineRef}
           className={this.classNames(
             this.gpc(`tag-line-${_direction}`),
-            this.gpc(`tag-${_size}`),
+            this.gpc(`tag-line-${_direction}-${_size}`),
+            labelPlacement === 'vertical' && _size === 'small' && this.gpc(`tag-line-${_direction}-small-label-vertical`),
           )}
         />
         <div
           ref={this.iconRef}
           className={this.classNames(
             this.gpc('tag-icon'),
-            !progressDot && this.gpc(`tag-icon-${_size}`),
+            this.gpc(`tag-icon-${_size}`),
+            labelPlacement === 'vertical' && this.gpc(`tag-icon-label-${labelPlacement}`),
           )}
           onClick={() => _onClick?.(_serialNumber!)}
           style={{ verticalAlign: 'middle' }}
@@ -73,7 +75,7 @@ export class Step extends BaseComponent<StepProps> {
               {_status === 'wait' && (
                 <div className={this.classNames(
                   this.gpc('tag-icon-wait'),
-                  this.gpc(`tag-${_size}`),
+                  this.gpc(`tag-icon-${_size}`),
                 )}
                 >
                   <span>{_serialNumber}</span>
@@ -82,7 +84,7 @@ export class Step extends BaseComponent<StepProps> {
               {_status === 'process' && (
                 <div className={this.classNames(
                   this.gpc('tag-icon-process'),
-                  this.gpc(`tag-${_size}`),
+                  this.gpc(`tag-icon-${_size}`),
                 )}
                 >
                   <span>{_serialNumber}</span>
@@ -91,7 +93,7 @@ export class Step extends BaseComponent<StepProps> {
               {_status === 'finish' && (
                 <div className={this.classNames(
                   this.gpc('tag-icon-finish'),
-                  this.gpc(`tag-${_size}`),
+                  this.gpc(`tag-icon-${_size}`),
                 )}
                 >
                   <Icon type="checkout" />
@@ -100,7 +102,7 @@ export class Step extends BaseComponent<StepProps> {
               {_status === 'error' && (
                 <div className={this.classNames(
                   this.gpc('tag-icon-error'),
-                  this.gpc(`tag-${_size}`),
+                  this.gpc(`tag-icon-${_size}`),
                 )}
                 >
                   <Icon type="close" />
@@ -113,9 +115,9 @@ export class Step extends BaseComponent<StepProps> {
           ref={this.titleRef}
           className={this.classNames(
             this.gpc('tag-title'),
-            this.gpc(`tag-title-${contentDirection}`),
+            this.gpc(`tag-title-label-${labelPlacement}`),
             this.gpc(`tag-title-${_size}`),
-            this.gpc(`tag-${_status}`),
+            this.gpc(`tag-title-${_status}`),
           )}
           onClick={() => _onClick?.(_serialNumber!)}
         >
@@ -126,12 +128,11 @@ export class Step extends BaseComponent<StepProps> {
           className={this.classNames(
             this.gpc(`tag-${_status}`),
             this.gpc('tag-description'),
-            this.gpc(`tag-description-${contentDirection}`),
-            this.gpc(`tag-${_size}`),
-            progressDot && this.gpc('tag-description-dot'),
+            this.gpc(`tag-description-label-${labelPlacement}`),
+            this.gpc(`tag-description-${_size}`),
           )}
           style={{
-            maxWidth: _direction === 'horizontal' && contentDirection !== 'vertical' ? (isLast ? 240 : '55%') : undefined,
+            maxWidth: _direction === 'horizontal' && labelPlacement !== 'vertical' ? (isLast ? 240 : '55%') : undefined,
           }}
         >
           <Popover
@@ -144,7 +145,7 @@ export class Step extends BaseComponent<StepProps> {
               className={this.classNames(
                 this.gpc('tag-description'),
               )}
-              rows={3}
+              rows={maxDescriptionLine}
             >
               {description}
             </Typography>
@@ -154,32 +155,61 @@ export class Step extends BaseComponent<StepProps> {
     );
   };
 
+  private getIconWidth = () => { // 获取icon或者圆点的宽度
+    const { _size, icon } = this.props;
+    if (icon && this.iconRef.current) return this.iconRef.current?.offsetWidth;
+    if (_size === 'small') return 8;
+    if (_size === 'big') return 28;
+    return 20;
+  }
+
+  private getColGap = () => { // 获取不同尺寸样式的间距
+    const { labelPlacement, description } = this.props;
+    if (labelPlacement === 'vertical') return 30;
+    if (description) return 12;
+    return 32;
+  }
+
+  private getRowGap = () => {
+    const { _size } = this.props;
+    if (_size === 'big') return 16;
+    if (_size === 'small') return 10;
+    return 12;
+  }
+
   private handleHorizontal = () => {
-    if (this.props._direction !== 'horizontal') return;
-    const { contentDirection } = this.props;
+    const { labelPlacement, _direction, isLastLine } = this.props;
+    if (_direction !== 'horizontal' && labelPlacement !== 'vertical') return;
     setTimeout(() => {
       if (!this.lineRef.current) return;
       if (!this.titleRef.current) return;
       if (!this.descriptionRef.current) return;
       if (!this.iconRef.current) return;
+      const gap = this.getColGap();
+      const IconWidth = this.getIconWidth();
       const tempRight = this.containerRef?.current?.style.marginRight || '-0px';
       const right = tempRight.toString().slice(1, tempRight.toString().length - 2);
-      const width = this.props._size === 'default' ? 20 : 28;
-      const titleWidth = contentDirection === 'vertical' ? 0 : this.titleRef.current.offsetWidth;
-      const gap = contentDirection === 'vertical' ? 30 : 12;
-      const descriptionWidth = contentDirection === 'vertical' ? this.descriptionRef.current.offsetWidth : 0;
+      const titleWidth = labelPlacement === 'vertical' ? 0 : this.titleRef.current.offsetWidth;
+      const descriptionWidth = labelPlacement === 'vertical' ? this.descriptionRef.current.offsetWidth : 0;
       const maxWidth = descriptionWidth > titleWidth ? descriptionWidth : titleWidth;
-      let linLeft = '0px';
-      let lineRight = '0px';
-      linLeft = `${titleWidth + width + gap}px`;
-      lineRight = `${Number(right) + gap}px`;
-      if (contentDirection === 'vertical') {
-        this.iconRef.current.style.marginLeft = `${(maxWidth / 2) - (width / 2)}px`;
-        linLeft = `${titleWidth + (width / 2) + gap + (maxWidth / 2)}px`;
-        lineRight = `${Number(right) + gap - (maxWidth / 2) + (width / 2)}px`;
+      const titleHeight = this.titleRef.current.offsetHeight;
+      if (_direction === 'horizontal') {
+        let linLeft = '0px';
+        let lineRight = '0px';
+        linLeft = `${titleWidth + IconWidth + gap + 8}px`;
+        lineRight = `${Number(right) + gap}px`;
+        if (labelPlacement === 'vertical') { // 内容水平居中
+          this.iconRef.current.style.marginLeft = `${(maxWidth / 2) - (IconWidth / 2)}px`;
+          linLeft = `${titleWidth + (IconWidth / 2) + gap + (maxWidth / 2)}px`;
+          lineRight = isLastLine ? `${gap}px` : `${Number(right) + gap - (maxWidth / 2) + (IconWidth / 2)}px`;
+        }
+        this.lineRef.current.style.left = linLeft;
+        this.lineRef.current.style.right = lineRight;
+      } else {
+        this.iconRef.current.style.marginLeft = `${(maxWidth / 2) - (IconWidth / 2)}px`;
+        this.lineRef.current.style.left = `${(maxWidth / 2)}px`;
+        this.lineRef.current.style.top = `${IconWidth + titleHeight + this.getRowGap() + 8}px`;
       }
-      this.lineRef.current.style.left = linLeft;
-      this.lineRef.current.style.right = lineRight;
     });
   };
 }
