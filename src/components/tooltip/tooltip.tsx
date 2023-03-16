@@ -5,10 +5,12 @@ import { getOffset } from '../utils/getOffset';
 import { ConfigConsumer, ConfigConsumerProps } from '../config-provider';
 import { tuple } from '../utils/type';
 
-const PlacementTypes = tuple('top', 'left', 'right', 'bottom');
+const PlacementTypes = tuple('top', 'left', 'right', 'bottom', 'topLeft', 'topRight', 'bottomLeft', 'bottomRight');
 const TriggerTypes = tuple('hover', 'focus', 'click');
+const TooltipTypes = tuple('default', 'danger', 'warning', 'success', 'info');
 type PlacementType = (typeof PlacementTypes)[number];
 type TriggerType = (typeof TriggerTypes)[number];
+type TooltipType = (typeof TooltipTypes)[number];
 
 export interface TooltipProps {
   getPopupContainer?: () => HTMLElement | null;
@@ -20,6 +22,12 @@ export interface TooltipProps {
   placement?: PlacementType;
   /** 触发事件 */
   trigger?: TriggerType;
+  /* tooltip 类型 */
+  type?: TooltipType;
+
+  /* 是否展示箭头 */
+  showArrow?: boolean;
+  position?: { left: number, top: number }
 }
 
 interface TooltipState {
@@ -73,12 +81,8 @@ class Tooltip extends React.Component<TooltipProps, TooltipState> {
     if (target && this.node) {
       const { height: contentHeight, width: contentWidth } = this.node.getBoundingClientRect();
       const { width, height } = target.getBoundingClientRect();
-      // const { pageXOffset, pageYOffset } = window;
-      // const { left, top } = target.getBoundingClientRect();
       const container = getPopupContainer && getPopupContainer();
       const { top: offsetTop, left: offsetLeft } = getOffset(target, container);
-      // const offsetLeft = Math.ceil(pageXOffset + left);
-      // const offsetTop = Math.ceil(pageYOffset + top);
       const { placement = 'top' } = this.props;
       const gap = 10;
       const position: {
@@ -88,8 +92,24 @@ class Tooltip extends React.Component<TooltipProps, TooltipState> {
           x: offsetLeft + (width - contentWidth) / 2,
           y: offsetTop - contentHeight - gap,
         },
+        topLeft: {
+          x: offsetLeft,
+          y: offsetTop - contentHeight - gap,
+        },
+        topRight: {
+          x: offsetLeft - (contentWidth - width),
+          y: offsetTop - contentHeight - gap,
+        },
         bottom: {
           x: offsetLeft + (width - contentWidth) / 2,
+          y: offsetTop + height + gap,
+        },
+        bottomRight: {
+          x: offsetLeft - (contentWidth - width),
+          y: offsetTop + height + gap,
+        },
+        bottomLeft: {
+          x: offsetLeft,
           y: offsetTop + height + gap,
         },
         right: {
@@ -117,7 +137,9 @@ class Tooltip extends React.Component<TooltipProps, TooltipState> {
 
   renderTooltip = ({ getPrefixCls }: ConfigConsumerProps) => {
     const {
-      children, message, prefixCls, className, getPopupContainer, placement = 'top', trigger = 'hover', position,
+      children, message, prefixCls, className,
+      getPopupContainer, placement = 'top', trigger = 'hover',
+      position, showArrow = true, type = 'default',
     } = this.props;
     const { visible, x, y } = this.state;
     const prefix = getPrefixCls?.('tooltip', prefixCls);
@@ -126,6 +148,7 @@ class Tooltip extends React.Component<TooltipProps, TooltipState> {
     }, className);
     const arrowCls = classnames(`${prefix}-content-arrow`, {
       [`${prefix}-content-arrow-${placement}`]: !!placement,
+      [`${prefix}-content-arrow-${type}`]: type,
     });
 
     const normalEventMap = {
@@ -140,7 +163,7 @@ class Tooltip extends React.Component<TooltipProps, TooltipState> {
         onFocus: this.onMouseOver,
       },
     };
-    let component = (<span {...normalEventMap[trigger]}>{children}</span>);
+    let component = (<span {...normalEventMap[trigger] as any}>{children}</span>);
     if (React.isValidElement(children)) {
       const delegateEventMap = {
         click: {
@@ -161,7 +184,7 @@ class Tooltip extends React.Component<TooltipProps, TooltipState> {
             children.props.onMouseOver && children.props.onMouseOver(evt);
           },
           onMouseOut: (evt: React.MouseEvent<any>) => {
-            this.onMouseOut(evt);
+            this.onMouseOut();
             children.props.onMouseOut && children.props.onMouseOut(evt);
           },
         },
@@ -188,8 +211,14 @@ class Tooltip extends React.Component<TooltipProps, TooltipState> {
             }}
           >
             <div className={`${prefix}-content`}>
-              <div className={arrowCls} />
-              <div className={`${prefix}-content-inner`}>{message}</div>
+              {showArrow && <div className={arrowCls} />}
+              <div
+                className={classnames(`${prefix}-content-inner`, {
+                  [`${prefix}-content-inner-${type}`]: type,
+                })}
+              >
+                {message}
+              </div>
             </div>
           </div>
         </Popup>

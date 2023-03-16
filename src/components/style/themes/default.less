@@ -1,10 +1,8 @@
 /* stylelint-disable at-rule-empty-line-before,at-rule-name-space-after,at-rule-no-unknown */
 @import '../color/colors';
 
-// The prefix to use on all css classes from ant.
 @uni-prefix: uni;
 
-// An override for the html selector for theme prefixes
 @html-selector: html;
 
 // -------- Colors -----------
@@ -21,18 +19,23 @@
 @white: #fff;
 @black: #000;
 
-@border: #CECECE;
+@first-text-color: #282828; // 一级文字
 
-// input字体填充颜色
-@value: rgba(0,0,0,.85);
-// input placeHolder颜色
-@placeholder: rgba(0,0,0,0.35);
-// input阴影颜色
+@secondary-text-color: #595959; // 二级文字
+
+@third-text-color: #969696; // 三级文字
+
+@border: #CECECE; // border颜色
+
+@disabled-color: @third-text-color; // 禁止样式文字颜色
+
+@disabled-border-color: @border; // 禁止样式border颜色
+
+@placeholder: @third-text-color; // placeholder文字颜色
+
 @box-shadow: rgba(179, 0, 0, .2);
-// input不可以编辑背景色
 
-
-@disabled-background-color: #F7F7F7;
+@disabled-background-color: #F7F7F7; // 禁止样式背景色
 
 @content-bg: #F9FAFB;
 
@@ -43,23 +46,22 @@
 @new-primary-red: #E50027;
 
 
-@primary-1: color(~`colorPalette('@{primary-color}', 1) `); // replace tint(@primary-color, 90%)
-@primary-2: color(~`colorPalette('@{primary-color}', 2) `); // replace tint(@primary-color, 80%)
-@primary-3: color(~`colorPalette('@{primary-color}', 3) `); // unused
-@primary-4: color(~`colorPalette('@{primary-color}', 4) `); // unused
+@primary-1: color(~`colorPalette('@{primary-color}', 1) `);
+@primary-2: color(~`colorPalette('@{primary-color}', 2) `);
+@primary-3: color(~`colorPalette('@{primary-color}', 3) `);
+@primary-4: color(~`colorPalette('@{primary-color}', 4) `);
 @primary-5: color(
   ~`colorPalette('@{primary-color}', 5) `
-); // color used to control the text color in many active and hover states, replace tint(@primary-color, 20%)
-@primary-6: @primary-color; // color used to control the text color of active buttons, don't use, use @primary-color
-@primary-7: color(~`colorPalette('@{primary-color}', 7) `); // replace shade(@primary-color, 5%)
-@primary-8: color(~`colorPalette('@{primary-color}', 8) `); // unused
-@primary-9: color(~`colorPalette('@{primary-color}', 9) `); // unused
-@primary-10: color(~`colorPalette('@{primary-color}', 10) `); // unused
+);
+@primary-6: @primary-color;
+@primary-7: color(~`colorPalette('@{primary-color}', 7) `);
+@primary-8: color(~`colorPalette('@{primary-color}', 8) `);
+@primary-9: color(~`colorPalette('@{primary-color}', 9) `);
+@primary-10: color(~`colorPalette('@{primary-color}', 10) `);
 
 // Base Scaffolding Variables
 // ---
 
-// Background color for `<body>`
 @body-background: #fff;
 @component-background: #fff;
 @font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB',
@@ -67,15 +69,11 @@
   'Segoe UI Emoji', 'Segoe UI Symbol';
 @code-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
 
-@text-color: #282828; // 一级文字
-
-@secondary-text-color: #595959; // 二级文字
 
 @text-color-secondary: fade(@black, 45%);
 
 @text-color-inverse: @white;
 @icon-color: inherit;
-// @icon-color-hover: fade(@black, 75%);
 @heading-color: fade(#000, 85%);
 @heading-color-dark: fade(@white, 100%);
 @text-color-dark: fade(@white, 85%);
@@ -162,17 +160,6 @@
 @background-color-light: hsv(0, 0, 98%); // background of header and selected item
 @background-color-base: hsv(0, 0, 96%); // Default grey background color
 
-// Disabled states
-// @disabled-color: fade(#000, 45%);
-// @disabled-border-color: #C8CAD1;
-
-/* 新的disabled border color*/
-
-@disabled-color: #969696;
-
-@disabled-border-color: #CECECE;
-
-@disabled-color-dark: fade(#fff, 35%);
 
 // Shadow
 @shadow-color: rgba(0, 0, 0, 0.15);
@@ -295,16 +282,8 @@
 @radio-checked-disabled-inner-bg: @disabled-border-color;
 @radio-size: 16px;
 
-// Radio buttons
-// @radio-button-bg: @btn-default-bg;
-// @radio-button-checked-bg: @btn-default-bg;
-// @radio-button-color: @btn-default-color;
-// @radio-button-hover-color: @primary-5;
-// @radio-button-active-color: @primary-7;
 @radio-center-button-width: 8px;
 
-// Media queries breakpoints
-// Extra small screen / phone
 @screen-xs: 480px;
 @screen-xs-min: @screen-xs;
 
@@ -363,7 +342,7 @@
 @layout-zero-trigger-height: 42px;
 // Layout light theme
 
-@layout-trigger-color-light: @text-color;
+@layout-trigger-color-light: @first-text-color;
 
 // z-index list, order by `z-index`
 @zindex-badge: auto;
@@ -468,7 +447,7 @@
 @input-padding-vertical-sm: 1px;
 @input-padding-vertical-lg: 6px;
 @input-placeholder-color: @placeholder;
-@input-color: @text-color;
+@input-color: @first-text-color;
 @input-border-color: @border;
 @input-bg: @component-background;
 @input-addon-bg: @background-color-light;
@@ -493,7 +472,7 @@
 
 
 // InputNumber
-@input-number-text-color: @text-color;
+@input-number-text-color: @first-text-color;
 @input-number-border-color: @border;
 @input-number-disabled-bg: @disabled-background-color;
 @input-number-disabled-border-color: @disabled-border-color;
@@ -525,12 +504,12 @@
 @select-shadow-color: rgba(red(@select-hover-border-color), green(@select-hover-border-color), blue(@select-hover-border-color), 0.2);
 @select-disabled-bg-color: @disabled-background-color;
 @select-disabled-border-color: @disabled-border-color;
-@select-value-color: @text-color;
+@select-value-color: @first-text-color;
 @select-tag-text-color: @secondary-text-color;
 @select-placeholder-color: @placeholder;
 @select-dropdown-box-shadow: 0 3px 6px -4px rgba(0,0,0,.12), 0 6px 16px 0 rgba(0,0,0,.08), 0 9px 28px 8px rgba(0,0,0,.05);
 @select-dropdown-item-hover-bg-color: @red-1;
-@select-dropdown-text-color: @text-color;
+@select-dropdown-text-color: @first-text-color;
 
 // Cascader
 // ----
@@ -563,7 +542,7 @@
 @dpcolor-input-border-focus: #4AA1F7;
 @dpcolor-input-placeholder: @placeholder;
 
-@dpcolor-text-85: @text-color;
+@dpcolor-text-85: @first-text-color;
 @dpcolor-text-65: @secondary-text-color;
 @dpcolor-text-45: @text-color-secondary;
 @dpcolor-text-35: @placeholder;
@@ -598,23 +577,16 @@
 @anchor-ball-width: 8px;
 
 // Image
-@image-mask-bg: @text-color;
+@image-mask-bg: @first-text-color;
 
 // Tooltip
 // ---
-// Tooltip max width
-@tooltip-max-width: 250px;
-// Tooltip text color
 @tooltip-color: #fff;
-// Tooltip background color
-@tooltip-bg: rgba(0, 0, 0, 0.75);
-// Tooltip arrow width
-@tooltip-arrow-width: 5px;
-// Tooltip distance with trigger
-@tooltip-distance: @tooltip-arrow-width - 1px + 4px;
-// Tooltip arrow color
-@tooltip-arrow-color: @tooltip-bg;
-@tooltip-bg-color: @black;
+@tooltip-bg-color: #595959;
+@tooltip-danger-bg: #F53F3F;
+@tooltip-warning-bg: #FF7D00;
+@tooltip-success-bg: #00B42A;
+@tooltip-info-bg: #0060FF;
 
 // Popover
 // ---
@@ -669,7 +641,7 @@
 @menu-dark-color: @disabled-border-color;
 @menu-dark-bg: #2E3343;
 @menu-dark-hover-color: @white;
-@menu-light-color: @text-color;
+@menu-light-color: @first-text-color;
 @menu-light-bg: @disabled-background-color;
 @menu-light-hover-color: @primary-color;
 @menu-horizontal-background-image: linear-gradient(90deg, @primary-color 0%, @new-primary-red 64%, @primary-color 100%);
@@ -683,7 +655,7 @@
 @menu-item-light-icon-color: #444A5E;
 @menu-item-selected-bg: @white;
 @menu-item-selected-right-line-bg: @primary-color;
-@menu-dark-item-selected-color: @text-color;
+@menu-dark-item-selected-color: @first-text-color;
 @menu-dark-item-selected-hover-color: @black;
 @menu-light-submenu-selected-color: @primary-color;
 @menu-dark-submenu-selected-color: @white;
@@ -695,7 +667,7 @@
 @menu-collapsed-width: 80px;
 @menu-bg: @component-background;
 @menu-popup-bg: @component-background;
-@menu-item-color: @text-color;
+@menu-item-color: @first-text-color;
 @menu-highlight-color: @primary-color;
 @menu-item-active-bg: @item-active-bg;
 @menu-item-active-border-width: 3px;
@@ -828,14 +800,14 @@
 @tabs-active-bg: #f9fafb;
 @tabs-border-color: #d8d8d8;
 @tabs-close-icon-color: #444A5E;
-@tabs-title-text-color: @text-color;
+@tabs-title-text-color: @first-text-color;
 @tabs-active-border-color: @tabs-border-color;
 
 // BackTop
 // ---
 @back-top-color: #fff;
 @back-top-bg: @text-color-secondary;
-@back-top-hover-bg: @text-color;
+@back-top-hover-bg: @first-text-color;
 
 // Avatar
 // ---
@@ -865,7 +837,7 @@
 // Pagination
 // ---
 
-@pagination-color: @text-color;
+@pagination-color: @first-text-color;
 @pagination-item-hover-bg: #F4F4F4;
 @pagination-item-selected-bg: #FFF3F3;
 @pagination-item-selected-color: @primary-color;
@@ -883,12 +855,12 @@
 @page-header-bg: #fff;
 @page-header-title-font-size: 20px;
 @page-header-subtitle-font-size: 18px;
-@page-header-color: @text-color;
+@page-header-color: @first-text-color;
 
 // Breadcrumb
 // ---
 @breadcrumb-base-color: @secondary-text-color;
-@breadcrumb-last-item-color: @text-color;
+@breadcrumb-last-item-color: @first-text-color;
 @breadcrumb-font-size: @font-size-base;
 @breadcrumb-icon-font-size: @font-size-base;
 @breadcrumb-link-color: @disabled-color;
@@ -934,7 +906,7 @@
 @slider-disabled-background-color: @component-background;
 @slider-disabled-bg-color: @disabled-background-color;
 @slider-border: @border;
-@slider-mark-item-color: @text-color;
+@slider-mark-item-color: @first-text-color;
 
 // Tree
 // ---
@@ -1000,13 +972,13 @@
 @alert-error-border-color: ~`colorPalette('@{error-color}', 3) `;
 @alert-error-bg-color: ~`colorPalette('@{error-color}', 1) `;
 @alert-error-icon-color: @error-color;
-@alert-message-color: @text-color;
+@alert-message-color: @first-text-color;
 @alert-description-color: @secondary-text-color;
 
 
 // AutoComplete
 
-@auto-complete-text-color: @text-color;
+@auto-complete-text-color: @first-text-color;
 @auto-complete-border-color: @border;
 @auto-complete-border-hover-color: #4AA1F7;
 @auto-complete-placeholer: @placeholder;
@@ -1018,7 +990,7 @@
 @auto-complete-dropdown-bg: @white;
 @auto-complete-dropdown-item-hover-bg: @item-hover-bg;
 @auto-complete-dropdown-item-border: @border;
-@auto-complete-dropdown-color: @text-color;
+@auto-complete-dropdown-color: @first-text-color;
 
 // List
 // ---
@@ -1109,7 +1081,7 @@
 @tree-select-disabled-background-color: @disabled-background-color;
 @tree-select-drop-background-color: @white;
 @tree-select-drop-box-shadow-color: rgba(147,147,147,0.35);
-@tree-select-dropdown-text-color: @text-color;
+@tree-select-dropdown-text-color: @first-text-color;
 @tree-select-node-hover-background-color: @red-1;
 @tree-select-selected-color: @primary-color;
 @tree-select-dropdown-disabled-color: @disabled-color;
@@ -1122,7 +1094,7 @@
 @steps-step-tag-icon-small-process-bg: @primary-color;
 @steps-step-tag-icon-process-color: @white;
 @steps-step-process-color: @primary-color;
-@steps-step-tag-title-color: @text-color;
+@steps-step-tag-title-color: @first-text-color;
 @steps-step-tag-wait-color: @disabled-color;
-@steps-step-tag-finish-color: @text-color;
+@steps-step-tag-finish-color:@first-text-color;
 @steps-step-tag-description-color: @secondary-text-color;

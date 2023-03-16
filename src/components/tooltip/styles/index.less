@@ -12,29 +12,71 @@
     &-inner{
       background-color: @tooltip-bg-color;
       color: @tooltip-color;
-      border-radius: 2px;
-      padding: 6px;
+      border-radius: 4px;
+      padding: 6px 16px;
       min-width: 30px;
       min-height: 32px;
+      font-size: 14px;
+      line-height: 22px;
       text-align: center;
+      &-success {
+        background-color: @tooltip-success-bg;
+      }
+      &-info {
+        background-color: @tooltip-info-bg;
+      }
+      &-danger {
+        background-color: @tooltip-danger-bg;
+      }
+      &-warning {
+        background-color: @tooltip-warning-bg;
+      }
     }
     &-arrow {
-      width: 5px;
-      height: 5px;
+      width: 8px;
+      height: 8px;
       background: @tooltip-bg-color;
       position: absolute;
-      transform: translate(-50%, -2.5px) rotate(45deg);
+      transform: translate(-50%, -4px) rotate(45deg);
+      &-success {
+        background-color: @tooltip-success-bg;
+      }
+      &-info {
+        background-color: @tooltip-info-bg;
+      }
+      &-danger {
+        background-color: @tooltip-danger-bg;
+      }
+      &-warning {
+        background-color: @tooltip-warning-bg;
+      }
     }
     &-arrow-top {
-      bottom: -5px;
+      bottom: -8px;
       left: 50%;
+    }
+    &-arrow-topLeft {
+      left: 16px;
+      bottom: -8px;
+    }
+    &-arrow-topRight {
+      right: 8px;
+      bottom: -8px;
     }
     &-arrow-bottom {
       top: 0px;
       left: 50%;
     }
+    &-arrow-bottomLeft {
+      top: 0px;
+      left: 16px;
+    }
+    &-arrow-bottomRight {
+      top: 0px;
+      right: 8px;
+    }
     &-arrow-left {
-      right: -5px;
+      right: -8px;
       top: 50%;
     }
     &-arrow-right {

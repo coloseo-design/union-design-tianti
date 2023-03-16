@@ -51,14 +51,14 @@ class Anchor extends Component<AnchorProps, AnchorState> {
     container && container.removeEventListener('scroll', this.scroll);
   }
 
-  scroll = (e) => {
+  scroll = (e: Event) => {
     const { isClick, link } = this.state;
     const { options, onChange, getContainer } = this.props;
-    this.setState({ scrollTop: e.target.scrollTop });
+    this.setState({ scrollTop: e.target?.scrollTop });
     if (isClick) return;
     const offsetTop = (document.querySelectorAll('.g-header')[0]?.getBoundingClientRect().height ?? 0);
     const offsetY = getContainer ? 0 : offsetTop;
-    function anchorY(ele, container) {
+    function anchorY(ele: HTMLElement, container: any) {
       if (container === document) {
         return ele.getBoundingClientRect().y;
       }
@@ -67,7 +67,8 @@ class Anchor extends Component<AnchorProps, AnchorState> {
     let activedId = '';
     let activedLink = { id: '', name: '' };
     options.forEach((item) => {
-      if (anchorY(document.getElementById(item.id), e.target) <= offsetY) {
+      const current = document.getElementById(item.id);
+      if (current && anchorY(current, e.target) <= offsetY) {
         activedId = item.id;
         activedLink = { ...item };
       }
@@ -107,7 +108,7 @@ class Anchor extends Component<AnchorProps, AnchorState> {
           scrollToTop(link.id, duration, scrollTop || 0.1, container);
         } else {
           scrollToTop(container.id, duration);
-          clearTimeout(anotherTimer);
+          anotherTimer && clearTimeout(anotherTimer);
           anotherTimer = setTimeout(() => {
             scrollToTop(link.id, duration, scrollTop || 0.1, container);
           }, duration);
@@ -115,7 +116,7 @@ class Anchor extends Component<AnchorProps, AnchorState> {
       } else {
         scrollToTop(link.id, duration);
       }
-      clearTimeout(timer);
+      timer && clearTimeout(timer);
       timer = setTimeout(() => {
         this.setState({ isClick: false, link });
       }, duration + 100);

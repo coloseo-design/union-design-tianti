@@ -33,10 +33,12 @@ title: Tooltip
 | mouseLeaveDelay | 鼠标移出后延时多少才隐藏 Tooltip，单位：秒 | number | 0.1 |
 | overlayClassName | 卡片类名 | string | 无 |
 | overlayStyle | 卡片样式 | object | 无 |
-| placement | 气泡框位置，可选 `top` `left` `right` `bottom` `topLeft` `topRight` `bottomLeft` `bottomRight` `leftTop` `leftBottom` `rightTop` `rightBottom` | string | top |
+| placement | 气泡框位置，可选 `top` `left` `right` `bottom` `topLeft` `topRight` `bottomLeft` `bottomRight` | string | top |
 | trigger | 触发行为，可选 `hover/focus/click/contextMenu` | string | hover |
 | visible | 用于手动控制浮层显隐 | boolean | false |
 | onVisibleChange | 显示隐藏的回调 | (visible) => void | 无 |
+| showArrow | 是否展示箭头 | boolean | true |
+| type | 主题色类型 | 'default', 'danger', 'warning', 'success', 'info' | 'default' |
 | align | 该值将合并到 placement 的配置中，设置参考 [rc-tooltip](https://github.com/react-component/tooltip) | Object | 无 |
 
 ## 注意
