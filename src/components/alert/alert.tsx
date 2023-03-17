@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { HTMLAttributes } from 'react';
 import classNames from 'classnames';
 import { ConfigConsumer, ConfigConsumerProps } from '../config-provider/context';
 import Icon from '../icon';
 
 export type AlertType = 'error' | 'warning' | 'success' | 'info';
 
-export interface AlertProps {
+export interface AlertProps extends HTMLAttributes<HTMLElement> {
   prefixCls?: string;
   type?: AlertType;
   message?: string | React.ReactNode;
@@ -23,7 +23,7 @@ export interface AlertProps {
 
 export interface AlertState {
   close: boolean;
-  blockNone: boolean;
+  // blockNone: boolean;
 }
 
 export interface MapString {
@@ -35,17 +35,15 @@ class Alert extends React.Component<AlertProps, AlertState> {
     super(props);
     this.state = {
       close: false,
-      blockNone: false,
     };
   }
 
   Close = (event: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
     const { afterClose, onClose, closable } = this.props;
     if (closable) {
-      this.setState({ close: true });
       onClose && onClose(event);
       afterClose && afterClose();
-      this.setState({ blockNone: true, close: false });
+      this.setState({ close: true });
     } else {
       onClose && onClose(event);
     }
@@ -61,11 +59,11 @@ class Alert extends React.Component<AlertProps, AlertState> {
       closable,
       showIcon,
       icon,
-      style = {},
       banner,
       className,
+      ...rest
     } = this.props;
-    const { close, blockNone } = this.state;
+    const { close } = this.state;
     const show = banner ? true : showIcon;
     const bType = banner && type === 'info' ? 'warning' : type;
     const prefix = getPrefixCls('alert', prefixCls);
@@ -73,54 +71,49 @@ class Alert extends React.Component<AlertProps, AlertState> {
       [`${prefix}-fadeOut`]: close,
       [`${prefix}-${bType}`]: bType,
       [`${prefix}-banner`]: banner,
-      [`${prefix}-hasDes`]: description && show,
-      [`${prefix}-hasDes-has_no_icon`]: description && !show,
-      [`${prefix}-has_no_icon`]: !show && !description,
+      [`${prefix}-has_icon`]: show,
+      [`${prefix}-hasDes`]: description,
+      [`${prefix}-hasDes_icon`]: description && show,
     });
 
-    const alertIconContent = classNames(description ? `${prefix}-icon-content-hasDes` : `${prefix}-icon-content`);
-    const alertIcon = classNames(`${prefix}-icon-${bType}`);
+    const alertIcon = classNames(`${prefix}-icon`, {
+      [`${prefix}-icon-hasDes`]: description,
+    });
+
+    const alertContent = classNames(`${prefix}-content`, {
+      [`${prefix}-content-hasClose`]: closable || closeText,
+    });
     const alertMessage = classNames(`${prefix}-message`, {
       [`${prefix}-message-hasDes`]: description,
     });
     const alertDes = classNames(`${prefix}-description`);
-    const alertClose = classNames(description ? `${prefix}-des-close` : `${prefix}-close`);
+    const alertClose = classNames(`${prefix}-close`, {
+      [`${prefix}-close-hasDes`]: description,
+    });
     const typeMapping: MapString = {
       error: 'delete',
       success: 'success',
       warning: 'exclamation-circle',
+      info: 'exclamation-circle',
     };
     return (
       <>
-        {!blockNone && (
-        <div className={alert} style={style}>
-          {bType === 'info' && show
-          && (
+        {!close && (
+        <div className={alert} {...rest}>
+          {show && (
           <span
-            style={{ transform: icon ? 'rotate(0deg)' : 'rotate(-180deg)', top: description ? 18 : 9 }}
-            className={alertIconContent}
+            className={alertIcon}
+            style={{ transform: bType === 'info' ? 'rotate(-180deg)' : 'rotate(0deg)' }}
           >
-            {icon || <span className={alertIcon}><Icon type="exclamation-circle" style={{ fontSize: description ? 24 : 16 }} /></span>}
+            {icon || <Icon type={typeMapping[bType]} />}
           </span>
           )}
-          {bType !== 'info' && show
-          && (
-          <span className={alertIconContent}>
-            {icon
-              || (
-                <span className={alertIcon}>
-                  <Icon
-                    type={typeMapping[bType]}
-                    style={{ fontSize: description ? 24 : 16 }}
-                  />
-                </span>
-              )}
-          </span>
-          )}
-          <span className={alertMessage}>{message}</span>
-          <span className={alertDes}>{description}</span>
+          <div className={alertContent}>
+            <span className={alertMessage}>{message}</span>
+            <span className={alertDes}>{description}</span>
+          </div>
           <span className={alertClose} onClick={this.Close}>
-            {closeText || (closable ? <Icon type="close" style={{ fontSize: 12 }} /> : null)}
+            {closeText || (closable ? <Icon type="close" /> : null)}
           </span>
         </div>
         )}

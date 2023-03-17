@@ -96,7 +96,7 @@ const Demo = () => (
         <Steps.Step title="处理完成" description="这里是描述文案" />
         <Steps.Step title="正在处理" description="这里是描述文案" />
         <Steps.Step title="等待处理" description="这里是描述文案" />
-        <Steps.Step title="等待处理" description="这里是描述文案" />
+        <Steps.Step title="等待处理" description="这里是描述文案,这描述文案" />
       </Steps>
     </div>
 

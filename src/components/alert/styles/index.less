@@ -12,19 +12,19 @@
 .@{alert} {
   width: 100%;
   margin: 0;
-  padding: 9px 44px 9px 40px;
+  padding: 10px 16px;
   letter-spacing: 0;
-  line-height: 22px;
+  line-height: 20px;
   position: relative;
-  border-radius: 3px;
-  &-has_no_icon {
-    padding: 9px 44px 9px 20px;
+  border-radius: 4px;
+  &-has_icon {
+    padding: 10px 16px 10px 40px;
   }
   &-hasDes {
-    padding: 16px 64px;
-  }
-  &-hasDes-has_no_icon {
-    padding: 16px 24px;
+    padding: 16px;
+    &_icon {
+      padding: 16px 16px 16px 40px;
+    }
   }
   &-success {
     .borderBg(@alert-success-border-color, @alert-success-bg-color, @alert-success-color);
@@ -43,38 +43,41 @@
     border: none;
     border-radius: 0;
   }
-  &-icon-content-hasDes {
-    position: absolute;
-    top: 16px;
-    left: 26px;
+
+  &-content-hasClose {
+    margin-right: 31px;
   }
-  &-icon-content {
+
+  &-icon {
     position: absolute;
     top: 10px;
     left: 16px;
+    font-size: 16px;
+  }
+  &-icon-hasDes {
+    top: 16px;
   }
   &-message {
+    font-size: 14px;
+    line-height: 1.4px;
     &-hasDes {
-      font-size: 16px;
-      line-height: 24px;
+      font-weight: 500;
+      line-height: 1.4px;
     }
   }
   &-description {
     display: block;
-    margin-top: 4px;
-  }
-  &-des-close {
-    position: absolute;
-    right: 16px;
-    top: 10px;
-    cursor: pointer;
   }
   &-close {
     position: absolute;
     right: 16px;
     top: 50%;
     transform: translateY(-50%);
+    font-size: 12px;
     cursor: pointer;
+    &-hasDes {
+      top: 20px;
+    }
   }
 }
 

@@ -1,3 +1,4 @@
+/* eslint-disable arrow-body-style */
 /* eslint-disable no-nested-ternary */
 /* eslint-disable max-len */
 /* eslint-disable no-underscore-dangle */
@@ -163,18 +164,19 @@ export class Step extends BaseComponent<StepProps> {
     return 20;
   }
 
-  private getColGap = () => { // 获取不同尺寸样式的间距
-    const { labelPlacement, description } = this.props;
-    if (labelPlacement === 'vertical') return 30;
-    if (description) return 12;
+  private getColGap = () => {
+    // 获取不同尺寸样式的间距
+    // const { labelPlacement, description } = this.props;
+    // if (labelPlacement === 'vertical') return 30;
+    // if (description) return 12;
     return 32;
   }
 
   private getRowGap = () => {
-    const { _size } = this.props;
-    if (_size === 'big') return 16;
-    if (_size === 'small') return 10;
-    return 12;
+    // const { _size } = this.props;
+    // if (_size === 'big') return 16;
+    // if (_size === 'small') return 10;
+    return 16;
   }
 
   private handleHorizontal = () => {
