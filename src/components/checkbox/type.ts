@@ -18,6 +18,7 @@ export interface CheckboxGroupProps extends Omit<React.HtmlHTMLAttributes<HTMLIn
   onChange?: (checkedValues: string[]) => void;
   disabled?: boolean;
   prefixCls?: string;
+  direction?: 'vertical' | 'horizontal';
 }
 
 export interface CheckboxProps extends Omit<React.HTMLAttributes<HTMLInputElement>, 'onChange'> {

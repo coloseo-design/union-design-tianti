@@ -10,29 +10,32 @@ export default () => {
   ];
   const [value, setValue] = useState('a');
   return (
-    <div>
-      <Radio checked disabled>A</Radio>
-      <Radio disabled>B</Radio>
-      <Radio onChange={(e) => console.log('c', e, e.target.checked)}>C</Radio>
-      <Radio.Group options={options} defaultValue="Apple" name="radio1" onChange={(e) => { console.log('value', e.target.value); }} />
-      <Radio.Group options={['a', 'b', 'c']} defaultValue="a" value={value} name="radio2" onChange={(e) => { setValue(e.target.value); }} />
+    <div style={{ padding: 20 }}>
+      <h1>基本用法</h1>
+      <div style={{ marginBottom: 24 }}>
+        <Radio>未选中项</Radio>
+        <Radio disabled>未选中失效项</Radio>
+        <Radio checked disabled>选中失效项</Radio>
+        <Radio checked>选中项</Radio>
+      </div>
+      <h1>横向排列</h1>
+      <Radio.Group
+        options={options}
+        defaultValue="Apple"
+        name="radio1"
+        onChange={(e) => { console.log('value', e.target.value); }}
+      />
+      <h1>纵向排列</h1>
       <Radio.Group
         defaultValue="B"
         name="radio2"
         onChange={(e) => console.log('sss', e.target.value)}
+        direction="vertical"
       >
-        <div>
-          <Radio value="A" style={{ display: 'block' }}>A</Radio>
-        </div>
-        <div>
-          <Radio value="B" style={{ display: 'block', marginLeft: 0 }}>B</Radio>
-        </div>
-        <div>
-          <Radio value="C" style={{ display: 'block', marginLeft: 0 }}>C</Radio>
-        </div>
-        <div>
-          <Radio value="D" style={{ display: 'block', marginLeft: 0 }}>D</Radio>
-        </div>
+        <Radio value="A">A</Radio>
+        <Radio value="B">B</Radio>
+        <Radio value="C" disabled>C</Radio>
+        <Radio value="D">D</Radio>
       </Radio.Group>
     </div>
   );

@@ -15,6 +15,7 @@ const Checkbox: React.FC<CheckboxProps> = (props: CheckboxProps) => {
     value,
     onChange,
     indeterminate, // 是否是未确定状态
+    style,
   } = props;
   // eslint-disable-next-line prefer-const
   let [checked, setChecked] = useState(checkFromProps || defaultChecked);
@@ -58,7 +59,7 @@ const Checkbox: React.FC<CheckboxProps> = (props: CheckboxProps) => {
   const innerClass = classnames(`${prefix}-inner`);
   return (
     // eslint-disable-next-line jsx-a11y/label-has-associated-control
-    <label className={wrapperClass}>
+    <label className={wrapperClass} style={style}>
       <span className={mainClass}>
         <input type="checkbox" className={inputClass} onClick={onClick} />
         <span className={innerClass} />

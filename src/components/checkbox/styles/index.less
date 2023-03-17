@@ -20,11 +20,25 @@
   height: 100%;
   cursor: pointer;
   opacity: 0;
+  &:hover:not(&-disabled) {
+    &+span {
+      border: @checkbox-border-width @border-style-base @checkbox-hover-border-color;
+    }
+  }
 }
 
 .@{checkbox-group-cls} {
   .@{checkbox-wrapper-prefix-cls} + .@{checkbox-wrapper-prefix-cls} {
     margin-left: 8px;
+  }
+  &-vertical {
+    .@{checkbox-wrapper-prefix-cls} {
+      display: table;
+    }
+    .@{checkbox-wrapper-prefix-cls} + .@{checkbox-wrapper-prefix-cls} {
+      margin-left: 0px;
+      margin-top: 16px;
+    }
   }
 }
 
@@ -36,7 +50,7 @@
   width: @checkbox-size;
   height: @checkbox-size;
   background-color: @checkbox-bg;
-  border-radius: 2px;
+  border-radius: 4px;
   border-collapse: separate;
   transition: all .3s;
   // checked
@@ -50,7 +64,7 @@
     height: @check-height;
     position: absolute;
     content: '';
-    border: 2px solid @checnbox-after-border;
+    border: 1px solid @checkbox-after-border;
     top: 50%;
     left: 22%;
     transform: rotate(45deg) scale(0) translate(-50%, -50%);
@@ -80,7 +94,7 @@
 
 // 处理禁止文本
 .@{checkbox-prefix-cls}-disabled+span {
-  color: @checkbox-diabled-color;
+  color: @checkbox-disabled-color;
   font-weight: 400;;
 }
 
@@ -117,7 +131,6 @@
 
 .@{checkbox-prefix-cls} {
   font-size: @font-size-base;
-  color: @first-text-color;
   font-size: @font-size-base;
   font-variant: @font-variant-base;
   line-height: 1;
@@ -138,7 +151,7 @@
     .@{checkbox-inner-prefix-cls} {
       cursor: not-allowed;
       background-color: @checked-disabled-bg;
-      border-color: @checkbox-diabled-border-color;
+      border-color: @checkbox-disabled-border-color;
       &::after {
         border-color: @checkbox-disabled-after-border-color;
       }

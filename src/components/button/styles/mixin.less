@@ -48,7 +48,7 @@
   .button-color(@color; @background; @background);
 
   text-shadow: @btn-text-shadow;
-  box-shadow: @btn-primary-shadow;
+  // box-shadow: @btn-primary-shadow;
 
   &:hover,
   &:focus {
@@ -165,7 +165,7 @@
   text-align: center;
   background-image: none;
   border: @btn-border-width @btn-border-style transparent;
-  box-shadow: @btn-shadow;
+  // box-shadow: @btn-shadow;
   cursor: pointer;
   transition: all 0.3s @ease-in-out;
   user-select: none;
@@ -234,7 +234,6 @@
 // link button style
 .btn-link() {
   @link-color: @button-link-color;
-  // .button-variant-other(@link-color, transparent, transparent);
   box-shadow: none;
   .button-color(@link-color; transparent; transparent);
   &:hover,

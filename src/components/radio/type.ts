@@ -41,6 +41,7 @@ export interface RadioGroupProps extends React.HTMLAttributes<HTMLDivElement> {
   name?: string;
   // 禁选所有子单选器
   disabled?: boolean;
+  direction?: 'vertical' | 'horizontal';
 }
 
 export interface GroupRadioContextProps {

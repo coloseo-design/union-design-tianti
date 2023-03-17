@@ -28,6 +28,7 @@ const Group: React.FC<RadioGroupProps> = (props: RadioGroupProps) => {
     className,
     defaultValue,
     value: valueFromProps,
+    direction,
     ...rest
   } = props;
   let { children } = props;
@@ -40,7 +41,9 @@ const Group: React.FC<RadioGroupProps> = (props: RadioGroupProps) => {
 
   const { getPrefixCls } = useContext(ConfigContext);
   const prefix = getPrefixCls('radio-group', prefixCls);
-  const mainClass = classNames(prefix, className);
+  const mainClass = classNames(prefix, {
+    [`${prefix}-vertical`]: direction === 'vertical',
+  }, className);
 
   const onGroupChange = useCallback((e) => {
     setValue(e.target.value);

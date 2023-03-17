@@ -15,6 +15,7 @@ const Group: React.FC<CheckboxGroupProps> = (props: CheckboxGroupProps) => {
     defaultValue,
     onChange,
     prefixCls: customizePrefixCls,
+    direction,
     ...rest
   } = props;
   let { children } = props;
@@ -30,7 +31,9 @@ const Group: React.FC<CheckboxGroupProps> = (props: CheckboxGroupProps) => {
     });
   const { getPrefixCls } = useContext(ConfigContext);
   const prefix = getPrefixCls('checkbox-group', customizePrefixCls);
-  const classString = classnames(prefix, className);
+  const classString = classnames(prefix, {
+    [`${prefix}-vertical`]: direction === 'vertical',
+  }, className);
   const [value, setValue] = useState<Array<string>>(valueFromProps || defaultValue || []);
 
   useEffect(() => {

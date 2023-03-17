@@ -5,13 +5,6 @@ import './styles/index';
 const { Group } = Checkbox;
 
 export default () => {
-  const options = [
-    { label: 'a', value: 'a' },
-    { label: 'b', value: 'b' },
-    { label: 'c', value: 'c' },
-    { label: 'd', value: 'd' },
-  ];
-
   const [checked, setChecked] = useState(false);
   const onChange = (values: string[]) => {
     console.log('values', values);
@@ -20,17 +13,46 @@ export default () => {
     console.log('isChecked', isChecked);
     setChecked(isChecked);
   };
+  const options = [
+    {
+      label: '未选中项', value: 'a1',
+    },
+    {
+      label: '未选悬停项', value: 'a2',
+    },
+    {
+      label: '选中项', value: 'a3',
+    },
+    {
+      label: '未选失效项', value: 'a4', disabled: true,
+    },
+    {
+      label: '选中失效项', value: 'a5', disabled: true,
+    },
+  ];
   return (
-    <>
-      <Checkbox value="hello2" disabled checked>hello2</Checkbox>
-      <Checkbox value="hello2" disabled>hello2</Checkbox>
-      <Group style={{ padding: 20 }} onChange={onChange} value={['a']} options={options} />
-      <Group style={{ padding: 20 }} onChange={onChange} value={['hello', 'hello2']}>
-        <Checkbox value="hello">hello</Checkbox>
-        <Checkbox value="hello2">hello2</Checkbox>
+    <div style={{ padding: 20 }}>
+      <div>
+        <h1>多选基本用法</h1>
+        <Checkbox value="1">未选中项</Checkbox>
+        <Checkbox value="2" style={{ paddingLeft: 64 }}>未选悬停项</Checkbox>
+        <Checkbox value="3" style={{ paddingLeft: 64 }} checked={checked} onChange={onChecked}>选中项</Checkbox>
+        <Checkbox value="3" style={{ paddingLeft: 64 }} disabled>未选失效项</Checkbox>
+        <Checkbox value="3" style={{ paddingLeft: 64 }} disabled checked>选中失效项</Checkbox>
+      </div>
+      <h1 style={{ marginTop: 32 }}>横向排列排列</h1>
+      <Group onChange={onChange} value={['2', '5']}>
+        <Checkbox value="1">未选中项</Checkbox>
+        <Checkbox value="2">未选悬停项</Checkbox>
+        <Checkbox value="3" checked>选中项</Checkbox>
+        <Checkbox value="4" disabled>未选失效项</Checkbox>
+        <Checkbox value="5" disabled checked>选中失效项</Checkbox>
       </Group>
-      <Checkbox onChange={onChecked} checked={checked}>abc</Checkbox>
+
+      <h1 style={{ marginTop: 32 }}>纵向排列</h1>
+      <Group direction="vertical" value={['a3', 'a5']} options={options} />
+      <h1 style={{ marginTop: 32 }}>未全选状态</h1>
       <Checkbox indeterminate>我的选择</Checkbox>
-    </>
+    </div>
   );
 };

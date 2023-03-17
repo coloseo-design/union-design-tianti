@@ -2,6 +2,7 @@
 @import '../../style/mixins/index';
 
 @radio-prefix-cls: ~'@{uni-prefix}-radio';
+@radio-group: ~'@{uni-prefix}-radio-group';
 
 .@{radio-prefix-cls} + .@{radio-prefix-cls} {
   margin-left: 16px;
@@ -20,11 +21,10 @@
     margin-top: -2px;
     margin-bottom: 1px;
     &[disabled]+span {
-      background: @radio-diabled-bg;
-      border-color: @radio-diabled-border-color;;
+      border-color: @radio-disabled-border-color;
     }
     &[disabled]~span:last-child {
-      color: @radio-diabled-text-color;
+      color: @radio-disabled-text-color;
     }
   }
   span:last-child {
@@ -40,23 +40,25 @@
     height: @radio-size;
     border: @border-width-base @border-style-base @radio-border-color;
     border-radius: 50%;
-    &:hover {
-      border: @border-width-base @border-style-base @radio-hover-border-color;
+    background-color: @radio-bg;
+  }
+  &:hover:not(&-disabled) {
+    input+span {
+      border-color: @radio-hover-border-color;
     }
   }
 }
 .@{radio-prefix-cls}-disabled {
   cursor: not-allowed;
+  input + span {
+    background-color: @radio-disabled-bg;
+  }
 }
 // 选中之后的状态
 .@{radio-prefix-cls}-checked {
   input+span {
-    background-color: @radio-checked-bg;
     border: @border-width-base @border-style-base @radio-checked-border-color;
     border-radius: 50%;
-  }
-  input,input:disabled+span {
-    border: @border-width-base @border-style-base @radio-checked-diabled-border-color;
   }
   input + span::after {
     position: absolute;
@@ -66,11 +68,19 @@
     border-radius: 50%;
     top: 3px;
     left: 3px;
-    // top: (@radio-center-button-width - @border-width-base * 2) / 2px;
-    // left: (@radio-center-button-width - @border-width-base * 2) / 2px;
     background-color: @radio-checked-inner-bg;
   }
   input, input:disabled+span::after {
     background-color: @radio-checked-disabled-inner-bg;
+  }
+}
+
+.@{radio-group}-vertical {
+  .@{radio-prefix-cls} {
+    display: table;
+  }
+  .@{radio-prefix-cls} + .@{radio-prefix-cls} {
+    margin-left: 0px;
+    margin-top: 16px;
   }
 }

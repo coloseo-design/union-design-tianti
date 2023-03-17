@@ -704,6 +704,7 @@ const TableDemo: React.FC<unknown> = () => {
                   province: 'e',
                 },
               ]}
+              bordered
               pagination={{
                 current,
                 pageSize,

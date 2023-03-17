@@ -17,13 +17,32 @@ const ButtonDemo: React.FC<unknown> = () => (
       <div className="p9" style={{ width: 100, height: 42 }} />
       <div className="p10" style={{ width: 100, height: 42 }} />
     </div>
-    <div style={{ marginBottom: 10 }}>
-      <Button type="default" icon="left" style={{ marginRight: 10 }}>default</Button>
-      <Button type="primary" style={{ marginRight: 10 }}>primary</Button>
-      <Button type="danger" style={{ marginRight: 10 }}>danger</Button>
-      <Button type="dashed" style={{ marginRight: 10 }}>dashed</Button>
-      <Button type="link" style={{ marginRight: 10 }}>link</Button>
-      <Button type="ghost" style={{ marginRight: 10 }}>ghost</Button>
+    <h1>大按钮</h1>
+    <div style={{ marginBottom: 32 }}>
+      <Button size="large" type="default" icon="left" style={{ marginRight: 22 }}>default</Button>
+      <Button size="large" type="primary" style={{ marginRight: 22 }}>primary</Button>
+      <Button size="large" type="danger" style={{ marginRight: 22 }}>danger</Button>
+      <Button size="large" type="dashed" style={{ marginRight: 22 }}>dashed</Button>
+      <Button size="large" type="link" style={{ marginRight: 22 }}>link</Button>
+      <Button size="large" type="ghost" style={{ marginRight: 22 }}>ghost</Button>
+    </div>
+    <h1>中按钮</h1>
+    <div style={{ marginBottom: 32 }}>
+      <Button type="default" icon="left" style={{ marginRight: 22 }}>default</Button>
+      <Button type="primary" style={{ marginRight: 22 }}>primary</Button>
+      <Button type="danger" style={{ marginRight: 22 }}>danger</Button>
+      <Button type="dashed" style={{ marginRight: 22 }}>dashed</Button>
+      <Button type="link" style={{ marginRight: 22 }}>link</Button>
+      <Button type="ghost" style={{ marginRight: 22 }}>ghost</Button>
+    </div>
+    <h1>小按钮</h1>
+    <div style={{ marginBottom: 32 }}>
+      <Button size="small" type="default" icon="left" style={{ marginRight: 22 }}>default</Button>
+      <Button size="small" type="primary" style={{ marginRight: 22 }}>primary</Button>
+      <Button size="small" type="danger" style={{ marginRight: 22 }}>danger</Button>
+      <Button size="small" type="dashed" style={{ marginRight: 22 }}>dashed</Button>
+      <Button size="small" type="link" style={{ marginRight: 22 }}>link</Button>
+      <Button size="small" type="ghost" style={{ marginRight: 22 }}>ghost</Button>
     </div>
     <div style={{ padding: 10, background: '#acafb9' }}>
       <Button type="ghost" style={{ marginRight: 10 }}>幽灵按钮默认状态</Button>
