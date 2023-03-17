@@ -4,6 +4,28 @@ import { Icon, Steps } from '../index';
 import './styles/index';
 import '../icon/styles/index';
 
+const data = [
+  {
+    title: '处理完成',
+    key: 1,
+    description: '这里是描述文案，超出折行显示, 这里是描述文案，超出折行显示,这里是描述文案，超出折行显示 这里是描述文案，超出折行显示',
+  },
+  {
+    title: '正在处理',
+    key: 2,
+    description: '这里是描述文案，超出折行显示, 这里是描述文案，超出折行显示,这里是描述文案，超出折行显示 这里是描述文案，超出折行显示',
+  },
+  {
+    title: '等待处理',
+    key: 3,
+    description: '这里是描述文案，超出折行显示, 这里是描述文案，超出折行显示,这里是描述文案，超出折行显示 这里是描述文案，超出折行显示',
+  },
+  {
+    title: '等待处理',
+    key: 4,
+    description: '这里是描述文案，超出折行显示, 这里是描述文案，超出折行显示,这里是描述文案，超出折行显示 这里是描述文案，超出折行显示',
+  },
+];
 const Demo = () => (
   <div style={{
     minHeight: '40vh', padding: 40, backgroundColor: 'rgb(250, 250, 250)',
@@ -40,26 +62,25 @@ const Demo = () => (
     <h1>direction=horizontal 带描述</h1>
     <div style={{ margin: '64px auto' }}>
       <Steps current={1} size="big">
-        <Steps.Step title="处理完成" description="这里是描述文案，超出折行显示, 这里是描述文案，超出折行显示,这里是描述文案，超出折行显示 这里是描述文案，超出折行显示" />
-        <Steps.Step title="正在处理" description="这里是描述文案，超出折行显示,这里是描述文案，超出折行显示这里是描述文案，超出折行显示这里是描述文案，超出折行显示" />
-        <Steps.Step title="等到处理" description="这里是描述文案，超出折行显示,这里是描述文案，超出折行显示这里是描述文案，超出折行显示这里是描述文案，超出折行显示" />
-        <Steps.Step title="等到处理" description="这里是描述文案，超出折行显示,这里是描述文案，超出折行显示这里是描述文案，超出折行显示这里是描述文案，超出折行显示" />
+        {data.map((i) => (
+          <Steps.Step key={i.key} title={i.title} description={i.description} />
+        ))}
       </Steps>
     </div>
 
     <div style={{ margin: '64px auto' }}>
       <Steps current={1}>
-        <Steps.Step title="处理完成" description="这里是描述文案，超出折行显示, 这里是描述文案，超出折行显示,这里是描述文案，超出折行显示 这里是描述文案，超出折行显示" />
-        <Steps.Step title="正在处理" description="这里是描述文案，超出折行显示,这里是描述文案，超出折行显示这里是描述文案，超出折行显示这里是描述文案，超出折行显示" />
-        <Steps.Step title="等到处理" description="这里是描述文案，超出折行显示,这里是描述文案，超出折行显示这里是描述文案，超出折行显示这里是描述文案，超出折行显示" />
+        {data.map((i) => (
+          <Steps.Step key={i.key} title={i.title} description={i.description} />
+        ))}
       </Steps>
     </div>
 
     <div style={{ margin: '64px auto' }}>
-      <Steps size="small" current={1}>
-        <Steps.Step title="处理完成" description="这里是描述文案，超出折行显示, 这里是描述文案，超出折行显示,这里是描述文案，超出折行显示 这里是描述文案，超出折行显示" />
-        <Steps.Step title="正在处理" description="这里是描述文案，超出折行显示,这里是描述文案，超出折行显示这里是描述文案，超出折行显示这里是描述文案，超出折行显示" />
-        <Steps.Step title="等到处理" description="这里是描述文案，超出折行显示,这里是描述文案，超出折行显示这里是描述文案，超出折行显示这里是描述文案，超出折行显示" />
+      <Steps current={1} size="small">
+        {data.map((i) => (
+          <Steps.Step key={i.key} title={i.title} description={i.description} />
+        ))}
       </Steps>
     </div>
 

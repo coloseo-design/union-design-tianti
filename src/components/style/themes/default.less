@@ -9,12 +9,12 @@
 // @primary-color: @blue-6;
 // 设置默认主色为新联通品牌色板
 @primary-color: @old_brand_red-6;
-@info-color: @blue-6;
-@success-color: @green-6;
+@info-color: #0060FF;
+@success-color: #00B42A;
 @processing-color: @blue-6;
-@error-color: @red-6;
+@error-color: #F53F3F;
 @highlight-color: @red-6;
-@warning-color: @gold-6;
+@warning-color: #FF7D00;
 @normal-color: #d9d9d9;
 @white: #fff;
 @black: #000;
@@ -249,7 +249,7 @@
 @checkbox-indeterminate-after-bg: @primary-color;
 @checked-disabled-bg: @disabled-background-color;
 @checkbox-disabled-border-color: @disabled-border-color;
-@checkbox-disabled-after-border-color: #969696;
+@checkbox-disabled-after-border-color: @third-text-color;
 @checkbox-size: 16px;
 @checkbox-border-width: @border-width-base;
 
@@ -583,10 +583,10 @@
 // ---
 @tooltip-color: #fff;
 @tooltip-bg-color: #595959;
-@tooltip-danger-bg: #F53F3F;
-@tooltip-warning-bg: #FF7D00;
-@tooltip-success-bg: #00B42A;
-@tooltip-info-bg: #0060FF;
+@tooltip-danger-bg: @error-color;
+@tooltip-warning-bg: @warning-color;
+@tooltip-success-bg: @success-color;
+@tooltip-info-bg: @info-color;
 
 // Popover
 // ---
@@ -960,20 +960,19 @@
 
 // Alert
 // ---
-// @alert-success-border-color: ~`colorPalette('@{success-color}', 3) `;
+
 @alert-success-border-color: #3BDE61;
 @alert-success-bg-color: #EAFEEE;
-// @alert-success-bg-color: ~`colorPalette('@{success-color}', 1) `;
-@alert-success-color: #00B42A;
+@alert-success-color: @success-color;
 @alert-info-border-color: #7BADFF;
 @alert-info-bg-color: #EBF2FF;
-@alert-info-color: #0060FF;
+@alert-info-color: @info-color;
 @alert-warning-border-color: #FFB56E;
 @alert-warning-bg-color:#FFF3E7;
-@alert-warning-color: #FF7D00;
+@alert-warning-color: @warning-color;
 @alert-error-border-color: #FF8383;
 @alert-error-bg-color: #FFECEC;
-@alert-error-color: #F53F3F;
+@alert-error-color: @error-color;
 
 
 // AutoComplete
