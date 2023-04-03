@@ -34,7 +34,7 @@ subtitle: 多选框
 | value | 指定选中的选项 | string[] | - |
 | onChange | 变化时回调函数 | (checkedValues: string[]) => void | - |
 | disabled | 整组失效 | boolean | - |
-|direction|group排列结构|'vertical' \| 'horizontal'|'horizontal|
+|direction(v2.x版本)|group排列结构|'vertical' \| 'horizontal'|'horizontal|
 
 ### CheckboxOption
 

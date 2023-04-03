@@ -32,4 +32,7 @@ export interface InputNumberProps {
   formatter?: (value: string | number) => string;
   // 解析配合formatter
   parser?: (value: string | number) => string;
+  type?: 'both' | 'default';
+  // 保留小数点时是否需要四舍五入
+  isRound?: boolean;
 }

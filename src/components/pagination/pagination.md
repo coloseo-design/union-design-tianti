@@ -21,4 +21,4 @@ subtitle: 分页
 | showTotal        | 用于显示数据总量和当前数据顺序               | (page: number, pageSize: number) => ReactNode | -                   |
 | total            | 数据总数                                     | number                                        | -                   |
 | onChange         | 页码改变的回调，参数是改变后的页码及每页条数 | (page: number, pageSize: number) => void      | -                   |
-|size              | 页面尺寸               | 'default'         | 'default' ,'large'|'default| -|
+|size(v2.x版本)              | 页面尺寸               | 'default'         | 'default' ,'large'|'default| -|

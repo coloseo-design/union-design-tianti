@@ -1,6 +1,5 @@
 /* eslint-disable max-len */
-/* eslint-disable camelcase */
-
+/* eslint-disable no-nested-ternary */
 import React from 'react';
 import classNames from 'classnames';
 import { ConfigConsumer } from '../config-provider';
@@ -18,159 +17,173 @@ class InputNumber extends React.Component<InputNumberProps, { value: string | nu
 
   constructor(props: InputNumberProps) {
     super(props);
-    const { defaultValue, value, formatter } = props;
-    const formaterValue = formatter ? formatter(defaultValue ?? value ?? '') : defaultValue ?? value ?? '';
+    const { defaultValue, value } = props;
     this.state = {
-      value: formaterValue,
+      value: defaultValue ?? value ?? '',
     };
+  }
+
+  componentDidMount() {
+    const { value } = this.state;
+    this.setState({ value: this.getFormatter(value).value });
   }
 
   componentDidUpdate(prevProps: InputNumberProps) {
     const { value } = this.props;
     if (value !== prevProps.value) {
-      this.setState({ value: value || 0 });
+      const temp = this.getFormatter(value);
+      this.setState({ value: temp.value });
     }
   }
 
-  foucs = () => {
-    this.inputNumberRef.current?.focus();
+  getFormatter = (value?: string | number) => {
+    const { formatter, min, max } = this.props;
+    let res = value || 0;
+    if (typeof min !== 'undefined' && res < min) res = min;
+    if (typeof max !== 'undefined' && res > max) res = max;
+    const val = this.handlePrecision(res);
+    if (formatter) {
+      return {
+        value: value === '' ? value : formatter(val || ''),
+        numberValue: value === '' ? value : val,
+      };
+    }
+    return {
+      value: value === '' ? value : val,
+      numberValue: value === '' ? value : val,
+    };
   }
 
   changeNumber = (currentValue: string | number) => {
-    let result;
-    const reg = /\d+(\.\d+)?/g; // 提取数字
-    const numberval = currentValue && currentValue !== '' ? currentValue.toString().match(reg) : undefined;
-    if (numberval) {
-      const str = numberval.join(',');
-      result = str.replace(/,/g, ''); // 去掉逗号
-    }
+    const { parser } = this.props;
+    const value = parser ? parser(`${currentValue}`) : currentValue;
+    const result = typeof value === 'string'
+      ? value.indexOf('.') > -1
+        ? parseFloat(value)
+        : value.replace(/[^-?\d]/g, '')
+      : value;
+
     return result;
   };
 
-  blur = () => {
-    const { onChange, precision } = this.props;
+  handleBlur = () => {
+    const { onChange } = this.props;
     const { value } = this.state;
     const res = this.changeNumber(value);
-    const result = res && precision ? Number(res).toFixed(precision) : res || '';
-    onChange && onChange(result);
-    this.setState({ value: result });
+    const { value: formatterValue, numberValue } = this.getFormatter(res);
+    this.setState({ value: formatterValue });
     this.inputNumberRef.current?.blur();
+    onChange?.(this.handlePrecision(numberValue));
+  }
+
+  handlePrecision = (value: string | number) => {
+    const { precision, step = 1, isRound = true } = this.props;
+    let result: number | string = '';
+    if (!(typeof value === 'string' && !value)) {
+      const precisionT = precision || `${step}`.split('.').slice(1).length;
+      const needDecimal = precision || `${step}`.indexOf('.') > -1;
+      const nD = Number('1'.padEnd((precision || 0) + 1, '0'));
+      const hasPrecision = isRound
+        ? Number(value).toFixed(precisionT)
+        : (Math.floor(+value * nD) / nD).toFixed(precisionT);
+      result = needDecimal ? hasPrecision : Number(value);
+    }
+    return result;
+  }
+
+  handleStep = (key: 'down' | 'up') => {
+    const { value } = this.state;
+    const { step = 1, onStep } = this.props;
+    const current = +(this.changeNumber(value) || 0);
+    const result = key === 'up' ? current + step : current - step;
+    const { value: formatterValue, numberValue } = this.getFormatter(result);
+    this.setState({ value: formatterValue });
+    onStep?.(numberValue as number, { offset: step, type: key });
+  }
+
+  handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { onChange } = this.props;
+    this.setState({ value: event.target.value });
+    onChange?.(event.target.value);
+  }
+
+  handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      const { onChange } = this.props;
+      const { value } = this.state;
+      const val = this.changeNumber(value);
+      const { value: formatterValue, numberValue } = this.getFormatter(val);
+      this.setState({ value: formatterValue });
+      onChange?.(numberValue);
+    }
   }
 
   component = (): React.ReactNode => {
     const {
-      value,
       disabled,
       max,
       min,
-      size, step, className, precision, style, onPressEnter, onChange, onStep, formatter, parser,
+      type = 'default',
+      size,
+      className, style,
     } = this.props;
-    // 将传递给input的属性组合
-    const compse = {
-      disabled, step, max, min,
-    };
-    const { value: val } = this.state;
-    // 自定义高度
-    const prefix: string = getPrefixCls('number');
-    const input_wrap: string = getPrefixCls('number-input-wrap');
-    const handle_wrap: string = getPrefixCls('number-handle-wrap');
-    const size_class = `${prefix}-${size}`;
-    const up_class = getPrefixCls('number-handle-wrap-up');
-    const down_class = getPrefixCls('number-handle-wrap-down');
-    const input_diable: string = classNames('', '', {
-      [`${prefix}-input`]: 'input',
-      [`${prefix}-disable`]: disabled,
+    const { value } = this.state;
+    const prefix = getPrefixCls('number');
+
+    const prefixSize = classNames(prefix, className, {
+      [`${prefix}-${size}`]: size,
+      [`${prefix}-disabled`]: disabled,
+      [`${prefix}-${type}`]: type === 'both',
     });
-    const prefixSize: string = classNames(prefix, className, {
-      [size_class]: !(style && style.height),
-      [`${prefix}-disable`]: disabled,
-    });
-    const input_wrap_size: string = classNames(input_wrap);
-    const handle_wrap_size: string = classNames(handle_wrap);
-    const handleStep = (type: 'up' | 'down'): void => {
-      // step必须是数字且类型为number
-      const isStep: number = step ?? 0;
-      let result = this.changeNumber(val) || 0;
-      result = type === 'up' ? +result + isStep : +result - isStep;
-      if (min && typeof (min) === 'number' && result < min && result >= Number.MIN_SAFE_INTEGER) {
-        result = min;
-      }
-      if (max && typeof (max) === 'number' && result > max && result <= Number.MAX_SAFE_INTEGER) {
-        result = max;
-      }
-      // todo 小数精度问题
-      result = +result.toFixed(precision);
-      this.setState({
-        value: result,
-      });
-      if (onStep) {
-        onStep(result, { offset: isStep, type });
-      }
-      onChange && onChange(result);
-    };
-    /**
-     * 上下箭头， enter
-     * @param event
-     */
-    const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>): void => {
-      const { key } = event;
-      if (key === 'ArrowUp' || key === 'ArrowDown') {
-        handleStep(key === 'ArrowUp' ? 'up' : 'down');
-      }
-      if (key === 'Enter' && onPressEnter) {
-        onPressEnter(event);
-      }
-    };
-    /**
-     * 输入框change
-     * @param event
-     */
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-      this.setState({ value: event.target.value });
-      onChange && onChange(event.target.value);
-    };
-    let last = val;
-    if (parser) {
-      last = parser(last.toString());
-    }
-    if (formatter) {
-      last = formatter(last);
-    }
+
+    const minDisabled = min && this.changeNumber(value) <= min;
+    const maxDisabled = max && this.changeNumber(value) >= max;
+
     return (
-      <div style={style} className={prefixSize}>
-        <div className={input_wrap_size}>
-          <input
-            {...compse}
-            value={last}
-            ref={this.inputNumberRef}
-            onChange={handleChange}
-            onKeyUp={handleKeyPress}
-            className={input_diable}
-            onFocus={this.foucs}
-            onBlur={this.blur}
+      <div className={prefixSize} style={style}>
+        <div className={classNames(`${prefix}-input-wrap`)}>
+          {type === 'both' && (
+          <div
+            onClick={() => { this.handleStep('down'); }}
+            className={classNames(`${prefix}-side`, `${prefix}-side-left`, {
+              [`${prefix}-side-left-disabled`]: minDisabled,
+            })}
           />
-        </div>
-        {
-          disabled
-          || (
-          <div className={handle_wrap_size}>
-            <span
-              style={{ cursor: (max && val === max) ? 'not-allowed' : 'pointer' }}
-              className={up_class}
-              onClick={handleStep.bind(null, 'up')}
+          )}
+          <input
+            value={value}
+            onChange={this.handleChange}
+            onBlur={this.handleBlur}
+            ref={this.inputNumberRef}
+            onKeyDown={this.handleKeyPress}
+          />
+          {type === 'default' && (
+          <div className={classNames(`${prefix}-steps`)}>
+            <div
+              onClick={() => { this.handleStep('up'); }}
+              className={classNames(maxDisabled && `${prefix}-steps-disabled`)}
             >
               <Icon type="up" />
-            </span>
-            <span
-              style={{ cursor: (min && value === min) ? 'not-allowed' : 'pointer' }}
-              className={down_class}
-              onClick={handleStep.bind(null, 'down')}
+            </div>
+            <div
+              onClick={() => { this.handleStep('down'); }}
+              className={classNames(minDisabled && `${prefix}-steps-disabled`)}
             >
               <Icon type="down" />
-            </span>
+            </div>
           </div>
-          )
-        }
+          )}
+          {type === 'both' && (
+          <div
+            onClick={() => { this.handleStep('up'); }}
+            className={classNames(`${prefix}-side`, {
+              [`${prefix}-side-disabled`]: maxDisabled,
+            })}
+          >
+            <Icon type="add" />
+          </div>
+          )}
+        </div>
       </div>
     );
   }
@@ -184,4 +197,4 @@ class InputNumber extends React.Component<InputNumberProps, { value: string | nu
   }
 }
 
-export default React.forwardRef((props: InputNumberProps, ref: React.ForwardedRef<HTMLInputElement>) => <InputNumber {...props} ref={ref} />);
+export default React.forwardRef((props: InputNumberProps, ref: React.ForwardedRef<HTMLInputElement>) => <InputNumber {...props} ref={ref as any} />);

@@ -9,37 +9,56 @@
 // @primary-color: @blue-6;
 // 设置默认主色为新联通品牌色板
 @primary-color: @old_brand_red-6;
-@info-color: #0060FF;
-@success-color: #00B42A;
 @processing-color: @blue-6;
 @error-color: #F53F3F;
 @highlight-color: @red-6;
+
+@hover-gray: #F4F4F4; // 悬停灰
+@active-gray: #EAEAEA; // 点击灰
+@disabled-gray: #F7F7F7; // 不可用灰
+@bg-gray: #F3F3F3; // 背景灰
+@header-gray: #F9F9F9; // 表头灰
+@border-color: #CECECE; // 描边
+@dividing-line: #E5E5E5; // 分割线
+@info-color: #0060FF;
+@help2: #7BADFF; // 帮助2
+@help3: #EBF2FF; // 帮助3
+@success-color: #00B42A;
+@success2: #3BDE61; // 成功2
+@success3: #EAFEEE; // 成功3
 @warning-color: #FF7D00;
+@warning2: #FFB56E; // 警告2
+@warning3: #FFF3E7; // 警告3
+@error1: #FFECEC; // 错误1
+@error2: #FFBFBF; // 错误2
+@error3: #FF9595; // 错误3
+@error4: #FF5656; // 错误4
+@error7: #CF2525; // 错误7
+@link-color: #326EFF; // 超链接
+
 @normal-color: #d9d9d9;
 @white: #fff;
 @black: #000;
-
 @first-text-color: #282828; // 一级文字
-
 @secondary-text-color: #595959; // 二级文字
-
 @third-text-color: #969696; // 三级文字
-
 @border: #CECECE; // border颜色
+@line: #e5e5e5;
 
 @disabled-color: @third-text-color; // 禁止样式文字颜色
-
 @disabled-border-color: @border; // 禁止样式border颜色
-
 @placeholder: @third-text-color; // placeholder文字颜色
+@first-icon-color: @secondary-text-color; // 一级图标色
+@secondary-icon-color: @third-text-color; // 二级图标色
+@disabled-background-color: @disabled-gray; // 禁止样式背景色、
+
 
 @box-shadow: rgba(179, 0, 0, .2);
 
-@disabled-background-color: #F7F7F7; // 禁止样式背景色
 
 @content-bg: #F9FAFB;
 
-@divider-border-color: #e5e5e5;
+@divider-border-color: @line;
 
 @image-operation-bg: hsla(0,0%,100%,.25);
 
@@ -109,18 +128,12 @@
 @margin-xs: 8px; // small items
 @margin-xss: 4px; // more small
 
-// The background colors for active and hover states for things like
-// list items or table cells.
 @item-active-bg: @primary-1;
-// @item-hover-bg: @primary-1;
 @item-hover-bg: @red-1;
 
 // ICONFONT
 @iconfont-css-prefix: uniicon;
 
-// LINK
-// @link-color: #207EEA;
-// @button-link-color: #207EEA;
 
 @button-link-color: @primary-color;
 
@@ -238,7 +251,7 @@
 // Checkbox
 @checkbox-bg: @white;
 @checkbox-hover-border-color: @primary-color;
-@checkbox-text-color: @secondary-text-color;
+@checkbox-text-color: @first-text-color;
 @checkbox-after-border: @white;
 @checkbox-border-color: @border;
 @checkbox-disabled-color: @third-text-color;
@@ -270,7 +283,7 @@
 @empty-font-size: @font-size-base;
 
 // Radio
-@radio-text-color: @secondary-text-color;
+@radio-text-color: @first-text-color;
 @radio-border-color: @border;
 @radio-bg: @white;
 @radio-hover-border-color: @primary-color;
@@ -474,16 +487,12 @@
 // InputNumber
 @input-number-text-color: @first-text-color;
 @input-number-border-color: @border;
+@input-number-bg: @white;
+@input-number-icon-color: @secondary-icon-color;
+@input-number-icon-hover-color: @primary-color;
 @input-number-disabled-bg: @disabled-background-color;
-@input-number-disabled-border-color: @disabled-border-color;
-@input-number-disabled-color: @disabled-color;
-@input-number-hover-border-color: #4AA1F7;
-@input-number-action-border: @gray-6;
-@input-number-action-divider-border: @border;
-@input-number-action-hover-text-color: @primary-color;
-@input-number-handler-active-bg: #f4f4f4;
-@input-number-handler-hover-bg: @primary-5;
-@input-number-handler-bg: @component-background;
+@input-number-disabled-color: @third-text-color;
+@input-number-hover-border-color: @primary-color;
 
 
 // Select
@@ -838,10 +847,10 @@
 // ---
 
 @pagination-color: @first-text-color;
-@pagination-item-hover-bg: #F4F4F4;
+@pagination-item-hover-bg: @hover-gray;
 @pagination-item-selected-bg: #FFF3F3;
 @pagination-item-selected-color: @primary-color;
-@pagination-item-active-bg: #EAEAEA;
+@pagination-item-active-bg: @active-gray;
 @pagination-quick-jumper-input-border: @border;
 @pagination-item-size-large: 32px;
 @pagination-item-size: 24px;
@@ -961,17 +970,17 @@
 // Alert
 // ---
 
-@alert-success-border-color: #3BDE61;
-@alert-success-bg-color: #EAFEEE;
+@alert-success-border-color: @success2;
+@alert-success-bg-color: @success3;
 @alert-success-color: @success-color;
-@alert-info-border-color: #7BADFF;
-@alert-info-bg-color: #EBF2FF;
+@alert-info-border-color: @help2;
+@alert-info-bg-color: @help3;
 @alert-info-color: @info-color;
-@alert-warning-border-color: #FFB56E;
-@alert-warning-bg-color:#FFF3E7;
+@alert-warning-border-color: @warning2;
+@alert-warning-bg-color:@warning3;
 @alert-warning-color: @warning-color;
 @alert-error-border-color: #FF8383;
-@alert-error-bg-color: #FFECEC;
+@alert-error-bg-color: @error1;
 @alert-error-color: @error-color;
 
 

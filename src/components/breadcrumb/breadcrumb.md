@@ -19,7 +19,7 @@ subtitle: 面包屑
 
 | 属性 | 说明 | 类型 | 默认值 |
 | --- | ---  | --- | ---   |
-| separator | 分隔符自定义 | 'bias' ｜ 'right' ｜ ReactNode | 'right' |
+| separator (v2.x才有'bias'\| 'right') | 分隔符自定义 | 'bias'\| 'right' \| ReactNode | 'right' |
 
 ### Breadcrumb.Item
 

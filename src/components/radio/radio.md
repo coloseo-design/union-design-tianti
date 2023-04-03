@@ -31,4 +31,4 @@ subtitle: 单选框
 | defaultValue | 默认选中的值 | any | - |
 | disabled | 禁选所有子单选器 | boolean | false |
 | options | 以配置形式设置子元素 | string[]、Array<{ label: string value: string disabled?: boolean }> | - |
-|direction|group排列结构|'vertical' \| 'horizontal'|'horizontal|
+|direction(v2.x版本)|group排列结构|'vertical' \| 'horizontal'|'horizontal|

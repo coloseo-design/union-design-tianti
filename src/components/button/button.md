@@ -30,5 +30,6 @@ subtitle: 按钮
 | type | 设置按钮类型，可选值为 `primary` `dashed` `danger` `link` 或者不设 | string | - |
 | onClick | 点击按钮时的回调 | (event) => void | - |
 | block | 将按钮宽度调整为其父宽度的选项 | boolean | `false` |
+|suffixIcon(v2.x版本)|设置后缀图标类型|string｜--|
 
 支持原生 button 的其他所有属性。

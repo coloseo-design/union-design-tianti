@@ -13,9 +13,9 @@ subtitle: 数字输入框
 | ------------ | -------------------- | -------------------------------------------------------------------------- | -------|
 | size         | 按钮大小             | string                                                                     | `default` |
 | disabled     | 是否禁用             | boolean                                                                    | `false`   |
-| max          | 最大值               | number                                                                     | 0         |
-| min          | 最小值               | number                                                                     | 0         |
-| step         | 间隔                 | number                                                                     | 0.1       |
+| max          | 最大值               | number                                                                     | -         |
+| min          | 最小值               | number                                                                     | -         |
+| step         | 加减按钮差值                | number                                                                     | 0.1       |
 | defaultValue | 默认值               | number                                                                     | 0.1       |
 | value        | 输入框值             | number                                                                     | 0.1       |
 | precision    | 保留小数位数         | number                                                                     |           |

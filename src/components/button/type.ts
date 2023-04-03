@@ -40,6 +40,7 @@ export interface BaseButtonProps {
    block?: boolean;
    children?: React.ReactNode;
    forwardedRef?: React.ForwardedRef<HTMLAnchorElement | HTMLButtonElement>;
+   suffixIcon?: string;
  }
 
 /**

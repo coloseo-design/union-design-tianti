@@ -5,7 +5,7 @@ import * as DemoComponents from '../demos';
 
 export function element(params: any) {
   if (typeof params === 'string') {
-    return React.createElement('text', null, params);
+    return React.createElement('span', null, params);
   }
   const children = typeof params.children === 'string' ? [params.children] : (params.children || []).map((child: any) => element(child));
   const props = {};

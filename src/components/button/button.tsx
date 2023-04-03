@@ -27,6 +27,7 @@ const Button: ForwardRefRenderFunction<HTMLButtonElement, ButtonProps> = (
     loading = false,
     prefixCls: customizedPrefixCls,
     onClick: clickFromProps,
+    suffixIcon,
     ...rest
   } = props;
 
@@ -84,6 +85,7 @@ const Button: ForwardRefRenderFunction<HTMLButtonElement, ButtonProps> = (
     >
       {iconElement}
       <span>{children}</span>
+      {suffixIcon && <Icon type={suffixIcon} />}
     </button>
   );
 };

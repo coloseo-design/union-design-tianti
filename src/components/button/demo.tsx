@@ -19,8 +19,8 @@ const ButtonDemo: React.FC<unknown> = () => (
     </div>
     <h1>大按钮</h1>
     <div style={{ marginBottom: 32 }}>
-      <Button size="large" type="default" icon="left" style={{ marginRight: 22 }}>default</Button>
-      <Button size="large" type="primary" style={{ marginRight: 22 }}>primary</Button>
+      <Button size="large" type="default" icon="left" style={{ marginRight: 22 }}>默认按钮</Button>
+      <Button size="large" type="primary" suffixIcon="down" style={{ marginRight: 22 }}>主按钮</Button>
       <Button size="large" type="danger" style={{ marginRight: 22 }}>danger</Button>
       <Button size="large" type="dashed" style={{ marginRight: 22 }}>dashed</Button>
       <Button size="large" type="link" style={{ marginRight: 22 }}>link</Button>
@@ -29,7 +29,7 @@ const ButtonDemo: React.FC<unknown> = () => (
     <h1>中按钮</h1>
     <div style={{ marginBottom: 32 }}>
       <Button type="default" icon="left" style={{ marginRight: 22 }}>default</Button>
-      <Button type="primary" style={{ marginRight: 22 }}>primary</Button>
+      <Button type="primary" style={{ marginRight: 22 }} suffixIcon="down">主按钮</Button>
       <Button type="danger" style={{ marginRight: 22 }}>danger</Button>
       <Button type="dashed" style={{ marginRight: 22 }}>dashed</Button>
       <Button type="link" style={{ marginRight: 22 }}>link</Button>

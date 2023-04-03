@@ -146,6 +146,7 @@
 
   .@{iconfont-css-prefix} {
     transition: margin-left 0.3s @ease-in-out;
+    vertical-align: middle;
 
     // Follow icon blur under windows. Change the render.
     // https://github.com/ant-design/ant-design/issues/13924
@@ -186,7 +187,6 @@
     .btn-group(@btn-prefix-cls);
   }
 
-  // http://stackoverflow.com/a/21281554/3040605
   &:focus > span,
   &:active > span {
     position: relative;
