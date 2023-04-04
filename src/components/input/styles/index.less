@@ -1,155 +1,107 @@
 @import '../../style/themes/index';
 @import '../../style/mixins/index';
-@import './mixin';
 
 @input-prefix-cls: ~'@{uni-prefix}-input';
 @textarea-prefix-cls: ~'@{uni-prefix}-textarea';
 @input-container: ~'@{input-prefix-cls}-container';
+@input-wrap: ~'@{input-prefix-cls}-wrap';
 
-.@{input-prefix-cls} {
-  .input(100%);
-}
-
-.@{input-container} {
-  width: 100%;
-}
-
-.@{textarea-prefix-cls} {
-  .input(100%; none);
-  &::placeholder {
-    position: unset;
-    top: unset;
-    transform: unset;
-  }
-}
-
-.@{input-prefix-cls}-search {
-  .input(100%);
-  position: relative;
-  padding: 0;
-  display: inline-block;
-  height: none;
-  border: none;
-  .@{input-prefix-cls}:not(:last-child) {
-    padding-right: 30px;
-    height: 100%;
-  }
-  .uniicon-search {
-    .uniicon();
-  }
-}
-
-.@{input-prefix-cls}-group {
-  position: relative;
-  width: 100%;
-  height: @input-height-base;
+.@{input-wrap} {
+  font-size: @font-size-base;
   display: flex;
-  .@{uni-prefix}-input {
-    flex: auto;
-    -webkit-box-flex: 1;
-    -ms-flex: 1;
-    -webkit-flex: 1;
-    .input(100%, 100%);
-  }
-  >.@{uni-prefix}-input:not(:first-child):not(:last-child) {
-    border-radius: 0;
-  }
-  >.@{uni-prefix}-input:first-child {
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
-  }
-  >.@{uni-prefix}-input:last-child {
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-  }
-  .addon{
-    display: inline-block;
-    font-size: @font-size-base;
+  height: @input-height-base;
+  .@{input-container} {
+    border: @border-width-base @border-style-base @input-border-color;
+    border-radius: @border-radius-base;
     padding: @input-padding-vertical-base @input-padding-horizontal-base;
-    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    transition: all .3s;
+    flex: 1;
+    height: 100%;
+    .@{input-prefix-cls} {
+      border: 0px;
+      outline: none;
+      flex: 1;
+      color: @input-color;
+      padding: 0;
+      &::placeholder {
+        color: @input-placeholder-color;
+      }
+      &[disabled] {
+        cursor: not-allowed;
+        color: @input-disabled-color;
+      }
+      &-allowClear, &-suffix, &-prefix {
+        line-height: 14px;
+        color: @input-icon-color;
+      }
+      &-allowClear {
+        margin-left: @input-padding-horizontal-base;
+        cursor: pointer;
+        &:hover {
+          color: @secondary-text-color;
+        }
+      }
+      &-suffix {
+        margin-left: 4px;
+      }
+      &-prefix {
+        margin-right: 4px;
+      }
+    }
+    &:hover:not(&-disabled) {
+      border-color: @input-hover-border-color;
+    }
+    &-focused {
+      border-color: @input-hover-border-color;
+      box-shadow: @input-box-shadow-base;
+    }
+    &-disabled {
+      cursor: not-allowed;
+      background: @input-disabled-bg;
+      .@{input-prefix-cls}-allowClear {
+        cursor: not-allowed;
+        &:hover {
+          color: @input-icon-color;
+        }
+      }
+    }
+  }
+  &-addonBefore {
+    .@{input-container} {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+  }
+  &-addonAfter {
+    .@{input-container} {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+  }
+  .@{input-prefix-cls}-addonBefore, .@{input-prefix-cls}-addonAfter {
+    padding: @input-padding-vertical-base @input-padding-horizontal-base;
     background: @input-disabled-bg;
+    color: @input-disabled-color;
+    border: @border-width-base @border-style-base @input-border-color;
+    border-radius: @border-radius-base;
     height: 100%;
-    // vertical-align: middle;
-    color: @input-group-addon-color;
-    .uniicon {
-      color: @input-group-addon-icon-color;
-      font-size: 16px;
-    }
   }
-  .addon:first-child {
-    border: @border-width-base @border-style-base @input-group-addon-border-color;
-    border-radius: @border-radius-base 0 0 @border-radius-base;
+  .@{input-prefix-cls}-addonBefore {
     border-right: none;
-  }
-  .addon:last-child {
-    border-radius: 0 @border-radius-base @border-radius-base 0;
-    border: @border-width-base @border-style-base @input-group-addon-border-color;
-    border-left: none;
-  }
-}
-
-.@{input-prefix-cls}-wrapper {
-  display: inline-flex;
-  align-items: center;
-  >.@{uni-prefix}-input:not(:first-child):not(:last-child) {
-    border-radius: 0;
-  }
-  >.@{uni-prefix}-input:first-child {
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
   }
-  >.@{uni-prefix}-input:last-child {
+  .@{input-prefix-cls}-addonAfter {
+    border-left: none;
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
   }
-  .addon{
-    display: inline-block;
-    font-size: @font-size-base;
-    padding: @input-padding-vertical-base @input-padding-horizontal-base;
-    box-sizing: border-box;
-    background: @primary-color;
-    height: 100%;
-    color: @input-addon-color;
-    cursor: pointer;
-    border-radius: 0 @border-radius-base @border-radius-base 0;
-    &:hover,
-    &:hover {
-      background: @input-addon-hover-bg;
+  &-textarea {
+    height: auto;
+    .@{input-container} {
+      padding: 8px 12px;
     }
-
-    &:active,
-    &.active {
-      background: @input-addon-active-bg;
-    }
-  }
-  .@{input-prefix-cls}:not(:last-child) {
-    padding-right: @input-padding-horizontal-base;
-    border-right: none;
-  }
-}
-
-.@{input-prefix-cls}-allowClear {
-  flex: 1;
-  .input(100%);
-  padding: 0;
-  display: inline-block;
-  border: none;
-  position: relative;
-  .uniicon-delete {
-    .uniicon();
-  }
-}
-
-.@{textarea-prefix-cls}-allowClear {
-  position: relative;
-  display: inline-block;
-  box-sizing: border-box;
-  .@{textarea-prefix-cls}:not(:last-child) {
-    padding-right: 30px;
-  }
-  .uniicon-delete {
-    .uniicon();
-    top: @input-padding-vertical-base;
-    transform: translateY(@input-padding-vertical-base);
   }
 }

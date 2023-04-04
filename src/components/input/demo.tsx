@@ -9,13 +9,13 @@ const InputDemo = () => {
   const ref = useRef(null);
   console.log('ref', ref);
   return (
-    <div>
+    <div style={{ padding: 50 }}>
       <Input
         allowClear
         placeholder="基本输入"
-        onChange={({ target: { value } }) => { console.log('value', value); }}
+        onChange={({ target: { value } }) => { console.log('---value', value); }}
         onSearch={(value) => { console.log('searchValue', value); }}
-        ref={ref}
+        // ref={ref}
         style={{ width: 100 }}
         defaultValue="100"
       />
