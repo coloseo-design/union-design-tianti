@@ -2,9 +2,8 @@
 /* eslint-disable no-nested-ternary */
 import React from 'react';
 import classNames from 'classnames';
-import { ConfigConsumer } from '../config-provider';
+import { ConfigConsumer, ConfigConsumerProps } from '../config-provider';
 import Icon from '../icon';
-import getPrefixCls from '../utils/getPrefixCls';
 import { InputNumberProps } from './types';
 
 class InputNumber extends React.Component<InputNumberProps, { value: string | number }> {
@@ -80,7 +79,7 @@ class InputNumber extends React.Component<InputNumberProps, { value: string | nu
     const { precision, step = 1, isRound = true } = this.props;
     let result: number | string = '';
     if (!(typeof value === 'string' && !value)) {
-      const precisionT = precision || `${step}`.split('.').slice(1).length;
+      const precisionT = precision || `${step}`.split('.').slice(1).join('').length;
       const needDecimal = precision || `${step}`.indexOf('.') > -1;
       const nD = Number('1'.padEnd((precision || 0) + 1, '0'));
       const hasPrecision = isRound
@@ -93,12 +92,13 @@ class InputNumber extends React.Component<InputNumberProps, { value: string | nu
 
   handleStep = (key: 'down' | 'up') => {
     const { value } = this.state;
-    const { step = 1, onStep } = this.props;
+    const { step = 1, onStep, onChange } = this.props;
     const current = +(this.changeNumber(value) || 0);
     const result = key === 'up' ? current + step : current - step;
     const { value: formatterValue, numberValue } = this.getFormatter(result);
     this.setState({ value: formatterValue });
     onStep?.(numberValue as number, { offset: step, type: key });
+    onChange?.(numberValue);
   }
 
   handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -109,16 +109,17 @@ class InputNumber extends React.Component<InputNumberProps, { value: string | nu
 
   handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
-      const { onChange } = this.props;
+      const { onChange, onPressEnter } = this.props;
       const { value } = this.state;
       const val = this.changeNumber(value);
       const { value: formatterValue, numberValue } = this.getFormatter(val);
       this.setState({ value: formatterValue });
       onChange?.(numberValue);
+      onPressEnter?.(numberValue);
     }
   }
 
-  component = (): React.ReactNode => {
+  component = ({ getPrefixCls }: ConfigConsumerProps): React.ReactNode => {
     const {
       disabled,
       max,
@@ -146,7 +147,7 @@ class InputNumber extends React.Component<InputNumberProps, { value: string | nu
           <div
             onClick={() => { this.handleStep('down'); }}
             className={classNames(`${prefix}-side`, `${prefix}-side-left`, {
-              [`${prefix}-side-left-disabled`]: minDisabled,
+              [`${prefix}-side-left-disabled`]: minDisabled || disabled,
             })}
           />
           )}
@@ -156,18 +157,19 @@ class InputNumber extends React.Component<InputNumberProps, { value: string | nu
             onBlur={this.handleBlur}
             ref={this.inputNumberRef}
             onKeyDown={this.handleKeyPress}
+            disabled={disabled}
           />
           {type === 'default' && (
           <div className={classNames(`${prefix}-steps`)}>
             <div
               onClick={() => { this.handleStep('up'); }}
-              className={classNames(maxDisabled && `${prefix}-steps-disabled`)}
+              className={classNames((maxDisabled || disabled) && `${prefix}-steps-disabled`)}
             >
               <Icon type="up" />
             </div>
             <div
               onClick={() => { this.handleStep('down'); }}
-              className={classNames(minDisabled && `${prefix}-steps-disabled`)}
+              className={classNames((minDisabled || disabled) && `${prefix}-steps-disabled`)}
             >
               <Icon type="down" />
             </div>
@@ -177,7 +179,7 @@ class InputNumber extends React.Component<InputNumberProps, { value: string | nu
           <div
             onClick={() => { this.handleStep('up'); }}
             className={classNames(`${prefix}-side`, {
-              [`${prefix}-side-disabled`]: maxDisabled,
+              [`${prefix}-side-disabled`]: maxDisabled || disabled,
             })}
           >
             <Icon type="add" />
