@@ -16,7 +16,7 @@ subtitle: 选择框
 |dropdownMatchSelectWidth|下拉框是否与展示框同宽|boolean|true|
 |defaultValue|默认数据|string \| string[]|--|
 |allowClear|是否允许清除|boolean|false|
-|type|default - 基本选择器;search - 可搜索;multiple - 多选;tags - 标签选择器|string|default|
+|type|default - 基本选择器;search - 可搜索;multiple - 多选;|string|default|
 |value|select的值|string \| string[]|--|
 |disabled|是否禁用|boolean|false|
 |dropdownClassName|下拉框类名|string|--|
@@ -29,7 +29,7 @@ subtitle: 选择框
 |onChange|value改变时触发|(value: string \| string[], label: string) => void|--|
 |onSelect|点击选项时触发|(value: string \| string[], label: string) => void|--|
 |onSearch|搜索时触发|(value: string) => void|--|
-| getPopupContainer       | 菜单渲染父节点。默认渲染到 body 上，如果你遇到菜单滚动定位问题，试试修改为滚动的区域，并相对其定位。   | fucntion () => HTMLElement                                                             | document.body |
+| getPopupContainer       | 菜单渲染父节点。默认渲染到 body 上，如果你遇到菜单滚动定位问题，试试修改为滚动的区域，并相对其定位。   | function () => HTMLElement                                                             | document.body |
 
 ### Option
 

@@ -21,12 +21,12 @@
 		"demo": "npx gulp md"
 	},
 	"dependencies": {
+		"@uni/icons-react": "^2.0.0",
 		"async-validator": "^3.5.1",
 		"classnames": "^2.2.6",
 		"dayjs": "^1.10.4",
 		"enquire.js": "^2.1.6",
-		"omit.js": "^1.0.2",
-		"@uni/icons-react": "^0.0.5"
+		"omit.js": "^1.0.2"
 	},
 	"devDependencies": {
 		"@types/classnames": "^2.2.11",
