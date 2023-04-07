@@ -6,7 +6,7 @@ import '../icon/styles/index';
 const { Search, TextArea } = Input;
 
 const InputDemo = () => {
-  const ref = useRef(null);
+  const ref = useRef({ test: '123' });
   console.log('ref', ref);
   return (
     <div style={{ padding: 50 }}>
@@ -15,7 +15,7 @@ const InputDemo = () => {
         placeholder="基本输入"
         onChange={({ target: { value } }) => { console.log('---value', value); }}
         onSearch={(value) => { console.log('searchValue', value); }}
-        // ref={ref}
+        ref={ref}
         style={{ width: 100 }}
         defaultValue="100"
       />
@@ -33,7 +33,7 @@ const InputDemo = () => {
       <Input addonAfter={<Icon type="user" />} />
       <br />
       <br />
-      <Search placeholder="请输入" onSearch={(value: any) => { console.log('searchValue', value); }} />
+      <Search ref={ref} placeholder="请输入" onPressEnter={(value, e) => { console.log('onPressEnter', value, e); }} onSearch={(value: any) => { console.log('searchValue', value); }} onChange={({ target: { value } }) => { console.log('---value', value); }} />
       <br />
       <br />
       <TextArea
