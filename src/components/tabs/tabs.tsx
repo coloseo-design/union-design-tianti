@@ -1,14 +1,15 @@
+/* eslint-disable max-len */
 import React, {
   Key,
   useContext,
   useEffect,
   useState,
+  isValidElement,
 } from 'react';
 import classNames from 'classnames';
 import { ConfigContext } from '../config-provider/context';
 import Icon from '../icon';
 import { warning } from '../utils/warning';
-import { uuid } from '../utils/uuid';
 import Pane from './pane';
 
 export type TabsType = 'line' | 'card' | 'page' | 'plain';
@@ -77,14 +78,7 @@ const Tabs: React.FC<TabsProps> & { Pane: typeof Pane} = (props: TabsProps) => {
         }
       }
     }
-  }, [prefixCls, type]);
-
-  useEffect(() => {
-    if (checkedKey && !titles.find((item) => item.key === checkedKey)) {
-      setCheckedKey(titles[0].key);
-    }
-    setClosed([]);
-  }, [checkedKey, children]);
+  }, [prefixCls, type, closed]);
 
   const changeKey = (key: string, e: React.MouseEvent<HTMLDivElement>): void => {
     const { offsetLeft, offsetWidth } = e.currentTarget;
@@ -98,14 +92,21 @@ const Tabs: React.FC<TabsProps> & { Pane: typeof Pane} = (props: TabsProps) => {
 
   const closeClick = (key: string, e: React.MouseEvent<HTMLSpanElement>): void => {
     e.stopPropagation();
-    closed.push(key);
-    if (closed.length >= titles.length) return;
+    const temp = closed.filter((i) => i !== key);
+    // if (closed.length >= titles.length) return;
     onClose && onClose(key);
-    // if (key === checkedKey) {
-    //   setCheckedKey(titles[0].key);
-    // }
-    // setClosed([...closed]);
+    setClosed([...temp]);
   };
+
+  useEffect(() => {
+    const list: string[] = [];
+    React.Children.forEach(children, (item) => {
+      if (isValidElement(item)) {
+        list.push(item.key as string || '');
+      }
+    });
+    setClosed(list);
+  }, [children]);
 
   const tabNode = (title: TitleType) => (
     !(type === 'page')
@@ -129,9 +130,9 @@ const Tabs: React.FC<TabsProps> & { Pane: typeof Pane} = (props: TabsProps) => {
     className,
   );
   const titles: TitleType[] = React.Children.map(children, (item) => {
-    if (item && typeof item === 'object' && 'props' in item) {
+    if (isValidElement(item)) {
       const { tab, closable = true } = item.props;
-      const key = item.key || uuid();
+      const key = item.key || '';
       warning(!item.key, '必须为pane指定key');
       return {
         text: tab,
@@ -142,12 +143,13 @@ const Tabs: React.FC<TabsProps> & { Pane: typeof Pane} = (props: TabsProps) => {
     return null;
   }) || [];
   const contentClassName = `${prefixCls}-content`;
-  const selectedIndex = titles.filter((item) => closed.indexOf(item.key) === -1)
+  const selectedIndex = titles.filter((item) => closed.indexOf(item.key) > -1)
     .findIndex((item) => item.key === checkedKey);
   const index = selectedIndex >= 0 ? selectedIndex : 0;
   const tabContentStyle = {
     marginLeft: `-${index * 100}%`,
   };
+
   return (
     <div className={tabCls}>
       <div className={`${prefixCls}-nav`} {...others}>
@@ -156,10 +158,19 @@ const Tabs: React.FC<TabsProps> & { Pane: typeof Pane} = (props: TabsProps) => {
         </div>
         <div className={`${prefixCls}-nav-content`} ref={navRef}>
           {
-            titles.filter((item) => closed.indexOf(item.key) === -1).map((title, i) => (
+            titles.filter((item) => closed.indexOf(item.key) > -1).map((title, i) => (
               <div
                 key={title.key}
-                className={classNames({ [`${prefixCls}-tab`]: true, [`${prefixCls}-tab-active`]: (title.key === checkedKey || (!checkedKey && i === 0)) })}
+                className={classNames({
+                  [`${prefixCls}-tab`]: true,
+                  [`${prefixCls}-tab-active`]: (
+                    title.key === checkedKey
+                      || (!checkedKey && i === 0)
+                      || (checkedKey && !titles.find((item) => item.key === checkedKey) && i === 0)
+                      || (checkedKey && !closed.includes(checkedKey) && i === 0)
+                      // checkedKey 没有值默认选择第一个， checkedKey有值 children是循环出来但不再titles里面也默认选择第一个，checkedKey有值children是写死的titles不会变换就用closed判断
+                  ),
+                })}
                 onClick={(e) => changeKey(title.key, e)}
               >
                 {tabNode(title)}
@@ -180,17 +191,17 @@ const Tabs: React.FC<TabsProps> & { Pane: typeof Pane} = (props: TabsProps) => {
         {/* {children} */}
         {
           React.Children.map(children, (item, i) => {
-            if (item && typeof item === 'object' && 'props' in item) {
-              const key = item.key || uuid();
-              if (closed.indexOf(key) >= 0) {
+            if (isValidElement(item)) {
+              const key = item.key || '';
+              if (closed.indexOf(key) === -1) {
                 return null;
               }
               if (type === 'page' && i !== index) {
                 return null;
               }
+              return React.cloneElement(item, { active: i === index });
             }
-            // eslint-disable-next-line max-len
-            return React.isValidElement(item) ? React.cloneElement(item, { active: i === index }) : null;
+            return null;
           }) || []
         }
       </div>
