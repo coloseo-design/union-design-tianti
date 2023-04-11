@@ -1,0 +1,88 @@
+@import "../../style/themes/index";
+@import "../../style/mixins/index";
+
+@menu: ~'@{uni-prefix}-new-menu';
+@menu-vertical: ~'@{menu}-vertical';
+@menu-item: ~'@{menu}-item';
+@submenu: ~'@{menu}-submenu';
+@menu-icon: ~'@{menu}-icon';
+
+.@{menu} {
+  position: relative;
+  background-color: @menu-bg;
+  height: 500px;
+  transition: all 0.1 linear;
+  &-vertical {
+    box-shadow: @menu-box-shadow;
+    padding: 10px 0px;
+    width: 206px;
+  }
+  &-side {
+    z-index: 1;
+    position: absolute;
+    top: 53.3%;
+    width: 33px;
+    height: 50px;
+    right: -33px;
+    border-radius: 0 30px 30px 0;
+    color: @menu-side-icon-color;
+    background-color: #F3F3F3;
+    &-icon {
+      &::before {
+        content: ' ';
+        display: block;
+        position: absolute;
+        top: 5px;
+        left: 0px;
+        height: 40px;
+        width: 29.03px;
+        background: rgba(221, 221, 221, 0.31);
+        border-radius: 0 30px 30px 0;
+      }
+      &::after {
+        content: ' ';
+        display: block;
+        position: absolute;
+        top: 9px;
+        left: 0px;
+        height: 32px;
+        width: 24px;
+        background: #fff;
+        border-radius: 0 30px 30px 0;
+      }
+      .uniicon {
+        position: absolute;
+        font-size: 18px;
+        top: 50%;
+        z-index: 1;
+        transform: translateY(-50%);
+      }
+    }
+  }
+  .@{submenu} {
+    padding: 0px 16px;
+    overflow: hidden;
+    line-height: 40px;
+    cursor: pointer;
+  }
+  .@{menu-icon} {
+    &-left {
+      float: left;
+      font-size: 18px;
+      margin-right: 8px;
+      color: @menu-title-icon-color;
+    }
+    &-right {
+      float: right;
+      font-size: 14px;
+      color: @menu-title-icon-color;
+    }
+  }
+  &-item {
+    padding: 0px 16px;
+    height: 40px;
+    line-height: 40px;
+    color: @menu-title-color;
+    cursor: pointer;
+  }
+}

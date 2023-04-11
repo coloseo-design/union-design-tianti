@@ -48,7 +48,7 @@ export const BasePageComponent: React.FC<PageProps> = (props: PageProps) => {
   const CurrentComponent = DemoComponents[componentName];
   return (
     <div>
-      {element(data.content)}
+      {data?.content && element(data.content)}
       { React.createElement(CurrentComponent, {}, null)}
     </div>
   );

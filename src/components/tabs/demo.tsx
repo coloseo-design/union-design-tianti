@@ -8,6 +8,7 @@ const { Pane } = Tabs;
 const TabsDemo = () => {
   const initialData = Array.from({ length: 5 }, (_, i) => `${i}`);
   const [data, setData] = useState(initialData);
+  const [keys, setKeys] = useState('1');
   return (
     <>
       <div style={{ margin: 20, backgroundColor: '#FFF' }}>
@@ -88,23 +89,23 @@ const TabsDemo = () => {
         </Tabs>
       </div>
       <div style={{ margin: 20 }}>
-        <p>type为page示例</p>
+        <p>type为page示例 循环列表</p>
         <Button onClick={() => {
-          data.push(`${Number(data[data.length - 1]) + 1}`);
+          data.push(`${data.length > 0 ? Number(data[data.length - 1]) + 1 : 0}`);
           setData([...data]);
         }}
         >
           增加tab
         </Button>
         <Tabs
-          defaultActiveKey="1"
+          activeKey={keys}
           type="page"
           onClose={(key) => {
-            const index = data.indexOf(key);
-            data.splice(index, 1);
-            setData([...data]);
+            const t = data.filter((i) => i !== key);
+            setData([...t]);
           }}
         >
+          <Pane key="33333" tab="工作台" closable={false}>工作台</Pane>
           {
             data.map((item) => (
               <Pane key={item} tab={`页签${item}`} closable>
@@ -112,6 +113,20 @@ const TabsDemo = () => {
               </Pane>
             ))
           }
+        </Tabs>
+        <br />
+        <br />
+        <br />
+        <br />
+        <p>type为page示例2</p>
+        <Tabs
+          defaultActiveKey="1"
+          type="page"
+        >
+          <Pane key="1" tab="页面1" closable={false}>页面1</Pane>
+          <Pane key="2" tab="页面2">页面2</Pane>
+          <Pane key="3" tab="页面3">页面3</Pane>
+          <Pane key="4" tab="页面4">页面4</Pane>
         </Tabs>
       </div>
     </>

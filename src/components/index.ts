@@ -77,3 +77,4 @@ export { default as Tree } from './tree';
 export { default as TreeSelect } from './tree-select';
 export { default as Typography } from './typography';
 export { default as Upload } from './upload';
+export { default as NewMenu } from './new-menu';
