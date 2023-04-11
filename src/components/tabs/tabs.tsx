@@ -78,7 +78,7 @@ const Tabs: React.FC<TabsProps> & { Pane: typeof Pane} = (props: TabsProps) => {
         }
       }
     }
-  }, [prefixCls, type]);
+  }, [prefixCls, type, closed]);
 
   const changeKey = (key: string, e: React.MouseEvent<HTMLDivElement>): void => {
     const { offsetLeft, offsetWidth } = e.currentTarget;
@@ -169,6 +169,7 @@ const Tabs: React.FC<TabsProps> & { Pane: typeof Pane} = (props: TabsProps) => {
                     title.key === checkedKey
                     || (!checkedKey && i === 0)
                     || (checkedKey && !titles.find((item) => item.key === checkedKey) && i === 0)
+                    || (checkedKey && !closed.includes(checkedKey) && i === 0)
                     // checkedKey 没有值默认选择第一个， checkedKey有值但不再titles里面也默认选择第一个
                   ),
                 })}
