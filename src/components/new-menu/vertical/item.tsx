@@ -1,28 +1,63 @@
+/* eslint-disable no-nested-ternary */
 import React, { ReactNode, isValidElement } from 'react';
 import classNames from 'classnames';
 import Icon from '../../icon';
+import Tooltip from '../../tooltip';
 import { ConfigConsumerProps, ConfigConsumer } from '../../config-provider/context';
 
 export interface ItemProps {
   icon?: string | ReactNode;
   key: string;
-  title: string;
+  title?: string;
   onClick?: (key: string) => void;
+  openKeys?: string[];
+  selectedKeys?: string[];
+  itemKey?: string;
+  parentIcon?: boolean;
+  level?: number;
+  changeSelectedKeys?: (key: string) => void;
+  hasFirstSelected?: (b: boolean) => void;
+  AllKeys?: string[];
 }
 
 class Item extends React.Component<ItemProps> {
+  handleSelected = () => {
+    const {
+      itemKey = '', changeSelectedKeys, hasFirstSelected, selectedKeys,
+    } = this.props;
+    changeSelectedKeys?.(itemKey);
+    hasFirstSelected?.(selectedKeys?.includes(itemKey) || false);
+  }
+
   renderItem = ({ getPrefixCls }: ConfigConsumerProps) => {
     const prefix = getPrefixCls('new-menu-item');
     const iconPrefix = getPrefixCls('new-menu-icon');
-    const { title, key, icon } = this.props;
+    const titlePrefix = getPrefixCls('new-menu-title');
+    const {
+      title, icon, level = 1, selectedKeys = [], itemKey = '', children,
+    } = this.props;
     return (
-      <div className={prefix}>
+      <div
+        className={classNames(prefix, {
+          [`${prefix}-selected`]: selectedKeys.includes(itemKey),
+          [`${prefix}-selected-bg`]: selectedKeys.includes(itemKey) && level !== 1,
+        })}
+        style={{ paddingLeft: level === 1 ? 16 : level === 2 ? 42 : 42 + (level - 2) * 14 }}
+        onClick={this.handleSelected}
+      >
         {icon && (
         <div className={classNames(`${iconPrefix}-left`)}>
           {isValidElement(icon) ? isValidElement(icon) : <Icon type={icon as string} />}
         </div>
         )}
-        <div>{title}</div>
+        <Tooltip message={title || children} placement="bottom">
+          <div
+            style={{ maxWidth: (level === 1 || level === 2) ? 112 : 112 - (level - 2) * 14 }}
+            className={titlePrefix}
+          >
+            {title || children}
+          </div>
+        </Tooltip>
       </div>
     );
   }

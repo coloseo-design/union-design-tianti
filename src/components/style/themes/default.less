@@ -44,6 +44,7 @@
 @third-text-color: #969696; // 三级文字
 @border: #CECECE; // border颜色
 @line: #e5e5e5;
+@selected-bg: #FFF3F3;
 
 @disabled-color: @third-text-color; // 禁止样式文字颜色
 @disabled-border-color: @border; // 禁止样式border颜色
@@ -703,9 +704,11 @@
 
 @menu-bg: @white;
 @menu-box-shadow: 1px 0px 3px rgba(0, 0, 0, 0.1);
-@menu-side-icon-color: #C20000;
+@menu-side-icon-color: @primary-color;
 @menu-title-color: @first-text-color;
 @menu-title-icon-color: @first-icon-color;
+@menu-selected-color: @primary-color;
+@menu-selected-bg: @selected-bg;
 // Spin
 // ---
 @spin-dot-size-sm: 14px;

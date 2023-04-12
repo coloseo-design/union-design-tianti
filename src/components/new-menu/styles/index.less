@@ -6,20 +6,32 @@
 @menu-item: ~'@{menu}-item';
 @submenu: ~'@{menu}-submenu';
 @menu-icon: ~'@{menu}-icon';
+@menu-title: ~'@{menu}-title';
+@menu-pop: ~'@{menu}-pop';
 
 .@{menu} {
   position: relative;
   background-color: @menu-bg;
-  height: 500px;
-  transition: all 0.1 linear;
   &-vertical {
-    box-shadow: @menu-box-shadow;
-    padding: 10px 0px;
     width: 206px;
+    transition: width 0.2s linear;
+    &-closed {
+      width: 0px;
+    }
+    &-content {
+      box-shadow: @menu-box-shadow;
+      padding: 10px 0px;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      z-index: 3;
+      overflow: hidden;
+    }
   }
   &-side {
     z-index: 1;
     position: absolute;
+    cursor: pointer;
     top: 53.3%;
     width: 33px;
     height: 50px;
@@ -60,10 +72,25 @@
     }
   }
   .@{submenu} {
-    padding: 0px 16px;
-    overflow: hidden;
-    line-height: 40px;
     cursor: pointer;
+    padding: 10px 16px;
+    overflow: hidden;
+    height: 40px;
+    line-height: 20px;
+    &-first-selected {
+      color: @menu-selected-color;
+      .@{menu-icon}-left {
+        color: @menu-selected-color;
+      }
+      .@{menu-icon}-right {
+        color: @menu-selected-color;
+      }
+    }
+    .@{menu-title} {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
   }
   .@{menu-icon} {
     &-left {
@@ -79,10 +106,49 @@
     }
   }
   &-item {
-    padding: 0px 16px;
+    padding: 10px 16px;
     height: 40px;
-    line-height: 40px;
+    line-height: 20px;
     color: @menu-title-color;
     cursor: pointer;
+    &-selected {
+      color: @menu-selected-color;
+      .@{menu-icon}-left {
+        color: @menu-selected-color;
+      }
+      .@{menu-icon}-right {
+        color: @menu-selected-color;
+      }
+      &-bg {
+        background-color: @menu-selected-bg;
+        position: relative;
+        &::after {
+          position: absolute;
+          display: block;
+          top: 0px;
+          right: 0px;
+          content: ' ';
+          height: 100%;
+          width: 4px;
+          background-color: @menu-selected-color;
+        }
+      }
+    }
+    .@{menu-title} {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+
+  .@{menu-pop} {
+    position: absolute;
+    top: 0px;
+    left: 206px;
+    bottom: 0px;
+    min-width: 232px;
+    background-color: #fff;
+    padding: 20px 24px 36px 24px;
+    box-shadow: 0px 2px 5px rgba(147, 147, 147, 0.35);
   }
 }

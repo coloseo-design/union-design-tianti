@@ -5,9 +5,10 @@ import Item from './vertical/item';
 import SubMenu from './vertical/sub-menu';
 import { ConfigConsumerProps, ConfigConsumer } from '../config-provider/context';
 
-export interface MenuProps {
+export interface MenuProps extends React.HTMLAttributes<HTMLDivElement> {
   type?: 'vertical' | 'horizontal' | 'inline';
   className?: string;
+  mode?: 'inline' | 'tile';
   openKeys?: string[];
 }
 

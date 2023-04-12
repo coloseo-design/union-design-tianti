@@ -7,10 +7,32 @@ const NewDemo = () => {
   console.log('=111');
   return (
     <div style={{ padding: 20 }}>
-      <NewMenu>
-        <Item key="2" title="工作台" icon="apps-line" />
+      <NewMenu style={{ height: 500 }}>
+        <Item key="12" icon="home">工作台</Item>
+        <Item key="2" title="一级项八个字符内" icon="apps-line" />
         <SubMenu icon="setting-line" key="1" title="表单页">
-          <Item key="4" title="hh" />
+          <SubMenu key="4" title="二级菜单">
+            <Item key="5" title="三级菜单七个字符" />
+            <SubMenu key="7" title="三级菜单1">
+              <Item key="8" title="四级六个字符吧" />
+            </SubMenu>
+          </SubMenu>
+        </SubMenu>
+        <SubMenu key="55" icon="delete-can" title="删除页">
+          <Item key="81">第一季</Item>
+        </SubMenu>
+      </NewMenu>
+      <NewMenu style={{ marginTop: 40, height: 300 }} mode="tile">
+        <Item key="12" icon="home">工作台</Item>
+        <SubMenu key="55" icon="delete-can" title="删除页">
+          <Item key="81">第一季</Item>
+          <Item key="83">第二季</Item>
+          <SubMenu key="234" title="哈哈哈">
+            <Item key="99">呃呃分</Item>
+          </SubMenu>
+        </SubMenu>
+        <SubMenu key="56" icon="delete-can" title="详情页">
+          <Item key="90">详情页第一季</Item>
         </SubMenu>
       </NewMenu>
     </div>
