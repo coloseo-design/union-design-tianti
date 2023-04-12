@@ -1,5 +1,5 @@
 import React from 'react';
-import { NewMenu } from '..';
+import { NewMenu, Icon } from '..';
 import './styles/index';
 
 const { Item, SubMenu } = NewMenu;
@@ -25,10 +25,14 @@ const NewDemo = () => {
       <NewMenu style={{ marginTop: 40, height: 300 }} mode="tile">
         <Item key="12" icon="home">工作台</Item>
         <SubMenu key="55" icon="delete-can" title="删除页">
-          <Item key="81">第一季</Item>
-          <Item key="83">第二季</Item>
-          <SubMenu key="234" title="哈哈哈">
-            <Item key="99">呃呃分</Item>
+          <SubMenu key="234" title="二级导航">
+            <SubMenu key="235" title="三级导航">
+              <SubMenu key="2366" title="四级导航四级导航四级导航四级导航四级导航四级导航四级导航四级导航四级导航">
+                <Item key="99">五级五级五级五级五级五级五级五级五级五级五级五级五级</Item>
+              </SubMenu>
+            </SubMenu>
+            {/* <Item key="99">第二集</Item> */}
+            {/* <Item key="100">坎坎坷坷</Item> */}
           </SubMenu>
         </SubMenu>
         <SubMenu key="56" icon="delete-can" title="详情页">

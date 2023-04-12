@@ -150,5 +150,33 @@
     background-color: #fff;
     padding: 20px 24px 36px 24px;
     box-shadow: 0px 2px 5px rgba(147, 147, 147, 0.35);
+    line-height: 22px;
+    &-level-4 {
+      min-height: 36px;
+      color: #595959;
+      font-weight: 400;
+      &-title {
+        line-height: 36px;
+        width: 100%;
+      }
+    }
+    &-level-3 {
+      height: 36px;
+      color: @menu-title-color;
+      font-weight: 400;
+      &-title {
+        width: 100%;
+        padding: 7px 8px;
+      }
+    }
+    &-level-2 {
+      color: @menu-selected-color;
+      height: 40px;
+      font-weight: 500;
+      &-title {
+        width: 100%;
+        padding: 9px 8px;
+      }
+    }
   }
 }

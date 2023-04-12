@@ -1,5 +1,6 @@
 /* eslint-disable max-len */
 import React, { Component, isValidElement } from 'react';
+import classNames from 'classnames';
 import { ConfigConsumerProps, ConfigConsumer } from '../../config-provider/context';
 
 export interface PopItemProps {
@@ -10,7 +11,7 @@ export interface PopItemProps {
 
 type PopItemState = {
   contents: any[];
-  parentInfo?: any;
+  // parentInfo?: any;
 }
 
 class PopItem extends Component<PopItemProps, PopItemState> {
@@ -18,7 +19,7 @@ class PopItem extends Component<PopItemProps, PopItemState> {
     super(props);
     this.state = {
       contents: [],
-      parentInfo: {},
+      // parentInfo: {},
     };
   }
 
@@ -30,55 +31,86 @@ class PopItem extends Component<PopItemProps, PopItemState> {
     const { openKeys, allMenu } = this.props;
     if (prevProps.openKeys !== openKeys) {
       this.getData();
-      // const propsData: any[] = (allMenu || []).map((item: any) => item.props);
-      // const currentData = propsData.find((i: any) => openKeys.includes(i.itemKey));
-      // this.setState({ parentInfo: currentData || {} });
-      // if (currentData) {
-      //   const list: any[] = [];
-      //   this.findChildren(currentData.children, list);
-      //   this.setState({ contents: list });
-      // }
     }
     if (prevProps.allMenu !== allMenu) {
       this.getData();
     }
   }
 
+  getArray = (current: any) => {
+    if (Array.isArray(current)) {
+      return current;
+    }
+    return [current];
+  }
+
   getData = () => {
     const { allMenu, openKeys } = this.props;
     const propsData: any[] = (allMenu || []).map((item: any) => item.props);
-    const currentData = propsData.find((i: any) => openKeys.includes(i.itemKey));
-    this.setState({ parentInfo: currentData || {} });
+    const currentData: any = propsData.find((i: any) => openKeys.includes(i.itemKey));
+    // this.setState({ parentInfo: currentData || {} });
     if (currentData) {
       const list: any[] = [];
-      this.findChildren(Array.isArray(currentData.children) ? currentData.children : [currentData.children], list);
-      this.setState({ contents: list });
+      const tempData = this.getArray(currentData.children);
+      const tem = tempData.map((i: any) => ({
+        props: i.props,
+        itemKey: i.key,
+      }));
+      this.findChildren(tem, list, 1, currentData.itemKey);
+      this.setState({ contents: this.formatToTree(list, currentData.itemKey) });
     }
   }
 
-  findChildren = (data: any[] = [], list: any[] = [], level = 1) => {
+  formatToTree = (arr: any[], pid: number) => arr
+    .filter((item) => item.parentKey === pid)
+    .map((item) => {
+      // eslint-disable-next-line no-param-reassign
+      item.children = this.formatToTree(arr, item.itemKey);
+      return item;
+    });
+
+  findChildren = (data: any[] = [], list: any[] = [], level = 1, parentKey: string) => {
     data.forEach((item: any) => {
       list.push({
-        itemKey: item.key,
-        title: item.props.children || item.props.title,
+        itemKey: item?.itemKey || item?.key,
+        title: item?.props.title || item?.props.children,
         level: level + 1,
+        parentKey,
       });
-      if (item.children && (isValidElement(item.children) || Array.isArray(item.children))) {
-        this.findChildren(item.children, list, level + 1);
+      if (item?.props.children && (isValidElement(item?.props.children) || Array.isArray(item?.props.children))) {
+        const t = this.getArray(item?.props.children);
+        this.findChildren(t, list, level + 1, item?.itemKey || item?.key);
       }
     });
   }
 
-  getHeight = () => {
-    console.log('=111');
+  getWidth = () => {
+    const { menuRef } = this.props;
+    console.log('=111', menuRef);
   }
+
+  renderContent = (data: any[], prefix: string) => data.map((item) => (
+    <div
+      key={item.itemKey}
+      className={classNames(`${prefix}-level-${item.level}`)}
+    >
+      <div className={classNames(`${prefix}-level-${item.level}-title`)}>{item.title}</div>
+      {item.children && item.children.length > 0 && (
+        <div>
+          {this.renderContent(item.children, prefix)}
+        </div>
+      )}
+    </div>
+  ))
 
   renderPop = ({ getPrefixCls }: ConfigConsumerProps) => {
     const prefix = getPrefixCls('new-menu-pop');
-    const { contents, parentInfo } = this.state;
+    const { contents } = this.state;
     console.log('=???', contents);
     return (
-      <div className={prefix}>pop</div>
+      <div className={prefix}>
+        {this.renderContent(contents, prefix)}
+      </div>
     );
   }
 
