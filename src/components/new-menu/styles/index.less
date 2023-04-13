@@ -151,30 +151,28 @@
     padding: 20px 24px 36px 24px;
     box-shadow: 0px 2px 5px rgba(147, 147, 147, 0.35);
     line-height: 22px;
-    &-level-4 {
+    &-level {
       min-height: 36px;
-      color: #595959;
+      color: @menu-tile-level-high-color;
       font-weight: 400;
       &-title {
-        line-height: 36px;
+        padding: 7px 8px;
         width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        word-break: break-all;
       }
     }
     &-level-3 {
-      height: 36px;
-      color: @menu-title-color;
-      font-weight: 400;
-      &-title {
-        width: 100%;
-        padding: 7px 8px;
-      }
+      color: @menu-tile-level-3-color;
     }
     &-level-2 {
-      color: @menu-selected-color;
+      color: @menu-tile-level-2-color;
       height: 40px;
       font-weight: 500;
+      max-width: 184px;
       &-title {
-        width: 100%;
         padding: 9px 8px;
       }
     }

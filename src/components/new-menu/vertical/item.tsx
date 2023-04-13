@@ -2,7 +2,7 @@
 import React, { ReactNode, isValidElement } from 'react';
 import classNames from 'classnames';
 import Icon from '../../icon';
-import Tooltip from '../../tooltip';
+// import Tooltip from '../../tooltip';
 import { ConfigConsumerProps, ConfigConsumer } from '../../config-provider/context';
 
 export interface ItemProps {
@@ -15,18 +15,19 @@ export interface ItemProps {
   itemKey?: string;
   parentIcon?: boolean;
   level?: number;
-  changeSelectedKeys?: (key: string) => void;
-  hasFirstSelected?: (b: boolean) => void;
+  changeSelectedKeys?: (key: string, firstK: string) => void;
   AllKeys?: string[];
+  firstKeys?: string[];
 }
 
 class Item extends React.Component<ItemProps> {
   handleSelected = () => {
     const {
-      itemKey = '', changeSelectedKeys, hasFirstSelected, selectedKeys,
+      itemKey = '',
+      changeSelectedKeys,
+      AllKeys = [],
     } = this.props;
-    changeSelectedKeys?.(itemKey);
-    hasFirstSelected?.(selectedKeys?.includes(itemKey) || false);
+    changeSelectedKeys?.(itemKey, AllKeys.length > 0 ? AllKeys[0] : '');
   }
 
   renderItem = ({ getPrefixCls }: ConfigConsumerProps) => {
@@ -50,14 +51,12 @@ class Item extends React.Component<ItemProps> {
           {isValidElement(icon) ? isValidElement(icon) : <Icon type={icon as string} />}
         </div>
         )}
-        <Tooltip message={title || children} placement="bottom">
-          <div
-            style={{ maxWidth: (level === 1 || level === 2) ? 112 : 112 - (level - 2) * 14 }}
-            className={titlePrefix}
-          >
-            {title || children}
-          </div>
-        </Tooltip>
+        <div
+          style={{ maxWidth: (level === 1 || level === 2) ? 112 : 112 - (level - 2) * 14 }}
+          className={titlePrefix}
+        >
+          {title || children}
+        </div>
       </div>
     );
   }

@@ -17,7 +17,7 @@ type VMenuState = {
   visible?: boolean;
   selectedKeys: string[];
   closed: boolean;
-  firstSelected: boolean;
+  firstKeys: string[];
 }
 
 class VerticalMenu extends React.Component<VMenuProps, VMenuState> {
@@ -30,7 +30,7 @@ class VerticalMenu extends React.Component<VMenuProps, VMenuState> {
       openKeys,
       selectedKeys,
       closed: false,
-      firstSelected: false,
+      firstKeys: [],
     };
   }
 
@@ -45,18 +45,21 @@ class VerticalMenu extends React.Component<VMenuProps, VMenuState> {
     }
   }
 
-  hasFirstSelected = (b: boolean) => {
-    this.setState({ firstSelected: b });
-  }
-
-  changeSelectedKeys = (key: string) => {
-    const { selectedKeys } = this.state;
+  changeSelectedKeys = (key: string, firstK: string) => {
+    const { selectedKeys, firstKeys } = this.state;
     const { multiple } = this.props;
     if (selectedKeys?.includes(key)) {
-      this.setState({ selectedKeys: !multiple ? [] : selectedKeys.filter((i) => i !== key) });
+      this.setState({
+        selectedKeys: !multiple ? [] : selectedKeys.filter((i) => i !== key),
+        firstKeys: !multiple ? [] : firstKeys?.filter((i) => i !== firstK),
+      });
     } else {
       selectedKeys.push(key);
-      this.setState({ selectedKeys: !multiple ? [key] : selectedKeys });
+      firstKeys.push(firstK);
+      this.setState({
+        selectedKeys: !multiple ? [key] : selectedKeys,
+        firstKeys: !multiple ? [firstK] : [...firstKeys],
+      });
     }
   }
 
@@ -70,7 +73,7 @@ class VerticalMenu extends React.Component<VMenuProps, VMenuState> {
       prefix, children, isTooltip, mode = 'inline', ...rest
     } = this.props;
     const {
-      openKeys, selectedKeys, closed, firstSelected,
+      openKeys, selectedKeys, closed, firstKeys,
     } = this.state;
     const TChildren = React.Children.map(children, (child: ReactNode) => {
       if (isValidElement(child)) {
@@ -82,8 +85,7 @@ class VerticalMenu extends React.Component<VMenuProps, VMenuState> {
           selectedKeys,
           changeSelectedKeys: this.changeSelectedKeys,
           AllKeys: [child.key],
-          hasFirstSelected: this.hasFirstSelected,
-          firstSelected,
+          firstKeys,
           isTooltip,
           mode,
         });
@@ -107,7 +109,7 @@ class VerticalMenu extends React.Component<VMenuProps, VMenuState> {
         <div className={`${prefix}-vertical-content`}>
           {TChildren}
         </div>
-        {mode === 'tile' && <PopItem menuRef={this.menuRef} allMenu={TChildren} openKeys={openKeys} />}
+        {mode === 'tile' && openKeys.length > 0 && <PopItem menuRef={this.menuRef} allMenu={TChildren} openKeys={openKeys} />}
       </div>
     );
   }

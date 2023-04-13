@@ -7,11 +7,11 @@ export interface PopItemProps {
   menuRef: any;
   allMenu: any;
   openKeys: string[];
+  menuWidth?: number;
 }
 
 type PopItemState = {
   contents: any[];
-  // parentInfo?: any;
 }
 
 class PopItem extends Component<PopItemProps, PopItemState> {
@@ -19,7 +19,6 @@ class PopItem extends Component<PopItemProps, PopItemState> {
     super(props);
     this.state = {
       contents: [],
-      // parentInfo: {},
     };
   }
 
@@ -48,7 +47,6 @@ class PopItem extends Component<PopItemProps, PopItemState> {
     const { allMenu, openKeys } = this.props;
     const propsData: any[] = (allMenu || []).map((item: any) => item.props);
     const currentData: any = propsData.find((i: any) => openKeys.includes(i.itemKey));
-    // this.setState({ parentInfo: currentData || {} });
     if (currentData) {
       const list: any[] = [];
       const tempData = this.getArray(currentData.children);
@@ -84,17 +82,17 @@ class PopItem extends Component<PopItemProps, PopItemState> {
     });
   }
 
-  getWidth = () => {
-    const { menuRef } = this.props;
-    console.log('=111', menuRef);
-  }
+  // getWidth = () => {
+  //   const { menuRef } = this.props;
+  // }
 
   renderContent = (data: any[], prefix: string) => data.map((item) => (
     <div
       key={item.itemKey}
-      className={classNames(`${prefix}-level-${item.level}`)}
+      className={classNames(`${prefix}-level`, `${prefix}-level-${item.level}`)}
+      style={{ paddingLeft: item.level >= 5 ? (item.level - 4) * 14 : 0 }}
     >
-      <div className={classNames(`${prefix}-level-${item.level}-title`)}>{item.title}</div>
+      <div className={classNames(`${prefix}-level-title`)}>{item.title}</div>
       {item.children && item.children.length > 0 && (
         <div>
           {this.renderContent(item.children, prefix)}
@@ -106,7 +104,6 @@ class PopItem extends Component<PopItemProps, PopItemState> {
   renderPop = ({ getPrefixCls }: ConfigConsumerProps) => {
     const prefix = getPrefixCls('new-menu-pop');
     const { contents } = this.state;
-    console.log('=???', contents);
     return (
       <div className={prefix}>
         {this.renderContent(contents, prefix)}
