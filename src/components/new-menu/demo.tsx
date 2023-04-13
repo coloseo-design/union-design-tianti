@@ -11,7 +11,7 @@ const NewDemo = () => {
       <NewMenu style={{ height: 500 }}>
         <Item key="12" icon="home">工作台</Item>
         <Item key="2" title="一级项八个字符内" icon="apps-line" />
-        <SubMenu icon="setting-line" key="1" title="表单页">
+        <SubMenu key="1" title="表单页">
           <SubMenu key="4" title="二级菜单">
             <Item key="5" title="三级菜单七个字符" />
             <SubMenu key="7" title="三级菜单1">
@@ -35,7 +35,21 @@ const NewDemo = () => {
                 <Item key="991">五级五级五级五级五级五</Item>
               </SubMenu>
             </SubMenu>
-            <Item key="114">三级导航2</Item>
+            <SubMenu key="444" title="三级导航2">
+              <Item key="1145">四级导航四级导航四级导航</Item>
+            </SubMenu>
+          </SubMenu>
+          <SubMenu key="2341" title="二级导航1">
+            <SubMenu key="2351" title="三级导航1">
+              <Item key="12341">四级导航四级导航四级导航</Item>
+              <SubMenu key="23661" title="四级导航四级导航四级导航">
+                <Item key="991">五级五级五级五级五级五</Item>
+                <Item key="9911">五级五级五级五级五级五</Item>
+              </SubMenu>
+            </SubMenu>
+            <Item key="114">
+              <span style={{ color: 'green' }}>三级导航3</span>
+            </Item>
           </SubMenu>
         </SubMenu>
         <SubMenu key="56" icon="delete-can" title="详情页">

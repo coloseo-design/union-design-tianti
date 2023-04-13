@@ -35,8 +35,11 @@ class Item extends React.Component<ItemProps> {
     const iconPrefix = getPrefixCls('new-menu-icon');
     const titlePrefix = getPrefixCls('new-menu-title');
     const {
-      title, icon, level = 1, selectedKeys = [], itemKey = '', children,
+      title, icon, level = 1, selectedKeys = [], itemKey = '', children, parentIcon,
     } = this.props;
+
+    const defaultGap = parentIcon ? 112 : 86;
+    const maxWidth = level <= 2 ? defaultGap : defaultGap - (level - 2) * 14;
     return (
       <div
         className={classNames(prefix, {
@@ -52,7 +55,7 @@ class Item extends React.Component<ItemProps> {
         </div>
         )}
         <div
-          style={{ maxWidth: (level === 1 || level === 2) ? 112 : 112 - (level - 2) * 14 }}
+          style={{ maxWidth }}
           className={titlePrefix}
         >
           {title || children}

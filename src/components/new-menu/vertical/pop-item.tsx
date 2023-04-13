@@ -1,10 +1,9 @@
 /* eslint-disable max-len */
-import React, { Component, isValidElement } from 'react';
+import React, { Component, isValidElement, Fragment } from 'react';
 import classNames from 'classnames';
 import { ConfigConsumerProps, ConfigConsumer } from '../../config-provider/context';
 
 export interface PopItemProps {
-  menuRef: any;
   allMenu: any;
   openKeys: string[];
   menuWidth?: number;
@@ -82,23 +81,26 @@ class PopItem extends Component<PopItemProps, PopItemState> {
     });
   }
 
-  // getWidth = () => {
-  //   const { menuRef } = this.props;
-  // }
-
-  renderContent = (data: any[], prefix: string) => data.map((item) => (
-    <div
-      key={item.itemKey}
-      className={classNames(`${prefix}-level`, `${prefix}-level-${item.level}`)}
-      style={{ paddingLeft: item.level >= 5 ? (item.level - 4) * 14 : 0 }}
-    >
-      <div className={classNames(`${prefix}-level-title`)}>{item.title}</div>
-      {item.children && item.children.length > 0 && (
-        <div>
-          {this.renderContent(item.children, prefix)}
+  renderContent = (data: any[], prefix: string): any => data.map((item) => (
+    <Fragment key={item.itemKey}>
+      <div
+        key={item.itemKey}
+        className={classNames(
+          `${prefix}-level`,
+          `${prefix}-level-${item.level}`,
+        )}
+        style={{ paddingLeft: item.level >= 5 ? (item.level - 4) * 14 : 0 }}
+      >
+        <div
+          className={classNames(`${prefix}-level-title`)}
+        >
+          {item.title}
         </div>
+      </div>
+      {item.children && item.children.length > 0 && (
+        this.renderContent(item.children, prefix)
       )}
-    </div>
+    </Fragment>
   ))
 
   renderPop = ({ getPrefixCls }: ConfigConsumerProps) => {

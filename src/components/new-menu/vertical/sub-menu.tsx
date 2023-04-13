@@ -21,6 +21,7 @@ export interface SubMenuProps {
   isTooltip?: boolean;
   menuRef?: any;
   mode?: string;
+  parentIcon?: boolean;
 }
 
 class SubMenu extends React.Component<SubMenuProps> {
@@ -44,6 +45,7 @@ class SubMenu extends React.Component<SubMenuProps> {
       isTooltip,
       mode,
       firstKeys,
+      parentIcon,
     } = this.props;
     const prefix = getPrefixCls('new-menu-submenu');
     const iconPrefix = getPrefixCls('new-menu-icon');
@@ -69,6 +71,8 @@ class SubMenu extends React.Component<SubMenuProps> {
       return null;
     });
 
+    const defaultGap = parentIcon ? 112 : 86;
+    const maxWidth = level <= 2 ? defaultGap : defaultGap - (level - 2) * 14;
     return (
       <>
         <div
@@ -88,7 +92,7 @@ class SubMenu extends React.Component<SubMenuProps> {
           </div>
           <div
             className={titlePrefix}
-            style={{ maxWidth: (level === 1 || level === 2) ? 112 : 112 - (level - 2) * 14 }}
+            style={{ maxWidth }}
           >
             {title}
           </div>

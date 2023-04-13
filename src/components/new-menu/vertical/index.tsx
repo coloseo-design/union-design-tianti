@@ -88,6 +88,7 @@ class VerticalMenu extends React.Component<VMenuProps, VMenuState> {
           firstKeys,
           isTooltip,
           mode,
+          parentIcon: Boolean(child?.props.icon),
         });
       }
       return null;
@@ -109,7 +110,7 @@ class VerticalMenu extends React.Component<VMenuProps, VMenuState> {
         <div className={`${prefix}-vertical-content`}>
           {TChildren}
         </div>
-        {mode === 'tile' && openKeys.length > 0 && <PopItem menuRef={this.menuRef} allMenu={TChildren} openKeys={openKeys} />}
+        {mode === 'tile' && openKeys.length > 0 && !closed && <PopItem allMenu={TChildren} openKeys={openKeys} />}
       </div>
     );
   }
