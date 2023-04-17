@@ -44,7 +44,7 @@ class Item extends React.Component<ItemProps> {
       <div
         className={classNames(prefix, {
           [`${prefix}-selected`]: selectedKeys.includes(itemKey),
-          [`${prefix}-selected-bg`]: selectedKeys.includes(itemKey) && level !== 1,
+          // [`${prefix}-selected-bg`]: selectedKeys.includes(itemKey) && level !== 1,
         })}
         style={{ paddingLeft: level === 1 ? 16 : level === 2 ? 42 : 42 + (level - 2) * 14 }}
         onClick={this.handleSelected}

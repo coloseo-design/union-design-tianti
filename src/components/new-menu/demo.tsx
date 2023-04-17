@@ -10,6 +10,8 @@ const NewDemo = () => {
       <h2>内嵌式</h2>
       <NewMenu style={{ height: 500 }}>
         <Item key="12" icon="home">工作台</Item>
+        <Item key="14442" icon="home">工作台</Item>
+        <Item key="1255" icon="home">工作台</Item>
         <Item key="2" title="一级项八个字符内" icon="apps-line" />
         <SubMenu key="1" title="表单页">
           <SubMenu key="4" title="二级菜单">
@@ -43,12 +45,12 @@ const NewDemo = () => {
             <SubMenu key="2351" title="三级导航1">
               <Item key="12341">四级导航四级导航四级导航</Item>
               <SubMenu key="23661" title="四级导航四级导航四级导航">
-                <Item key="991">五级五级五级五级五级五</Item>
+                <Item key="99123">五级五级五级五级五级五</Item>
                 <Item key="9911">五级五级五级五级五级五</Item>
               </SubMenu>
             </SubMenu>
             <Item key="114">
-              <span style={{ color: 'green' }}>三级导航3</span>
+              <span>三级导航3</span>
             </Item>
           </SubMenu>
         </SubMenu>

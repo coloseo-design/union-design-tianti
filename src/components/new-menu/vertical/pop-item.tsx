@@ -7,10 +7,16 @@ export interface PopItemProps {
   allMenu: any;
   openKeys: string[];
   menuWidth?: number;
+  changePopVisible?: (v: boolean) => void;
+  popRef?: any;
+  selectedKeys: string[];
+  changeSelectedKeys?: (key: string, firstK: string) => void;
+  changeOpenKeys?: (key: string) => void;
 }
 
 type PopItemState = {
   contents: any[];
+  parentInfo: any,
 }
 
 class PopItem extends Component<PopItemProps, PopItemState> {
@@ -18,6 +24,7 @@ class PopItem extends Component<PopItemProps, PopItemState> {
     super(props);
     this.state = {
       contents: [],
+      parentInfo: {},
     };
   }
 
@@ -54,7 +61,7 @@ class PopItem extends Component<PopItemProps, PopItemState> {
         itemKey: i.key,
       }));
       this.findChildren(tem, list, 1, currentData.itemKey);
-      this.setState({ contents: this.formatToTree(list, currentData.itemKey) });
+      this.setState({ contents: this.formatToTree(list, currentData.itemKey), parentInfo: currentData });
     }
   }
 
@@ -81,33 +88,49 @@ class PopItem extends Component<PopItemProps, PopItemState> {
     });
   }
 
-  renderContent = (data: any[], prefix: string): any => data.map((item) => (
-    <Fragment key={item.itemKey}>
-      <div
-        key={item.itemKey}
-        className={classNames(
-          `${prefix}-level`,
-          `${prefix}-level-${item.level}`,
-        )}
-        style={{ paddingLeft: item.level >= 5 ? (item.level - 4) * 14 : 0 }}
-      >
+  renderContent = (data: any[], prefix: string): any => data.map((item) => {
+    const {
+      changeSelectedKeys, selectedKeys, changePopVisible, changeOpenKeys,
+    } = this.props;
+    const { parentInfo } = this.state;
+    return (
+      <Fragment key={item.itemKey}>
         <div
-          className={classNames(`${prefix}-level-title`)}
+          key={item.itemKey}
+          className={classNames(
+            `${prefix}-level`,
+            `${prefix}-level-${item.level}`,
+          )}
+          style={{ paddingLeft: item.level >= 5 ? (item.level - 4) * 14 : 0 }}
         >
-          {item.title}
+          <div
+            className={classNames(`${prefix}-level-title`, {
+              [`${prefix}-level-title-selected`]: selectedKeys.includes(item.itemKey),
+            })}
+            onClick={() => {
+              if ((item?.children && item?.children.length === 0) || isValidElement(item.title)) {
+                changeSelectedKeys?.(item.itemKey, parentInfo.itemKey);
+                changePopVisible?.(false);
+                changeOpenKeys?.(parentInfo.itemKey);
+              }
+            }}
+          >
+            {item.title}
+          </div>
         </div>
-      </div>
-      {item.children && item.children.length > 0 && (
-        this.renderContent(item.children, prefix)
-      )}
-    </Fragment>
-  ))
+        {item.children && item.children.length > 0 && (
+          this.renderContent(item.children, prefix)
+        )}
+      </Fragment>
+    );
+  })
 
   renderPop = ({ getPrefixCls }: ConfigConsumerProps) => {
     const prefix = getPrefixCls('new-menu-pop');
     const { contents } = this.state;
+    const { popRef } = this.props;
     return (
-      <div className={prefix}>
+      <div className={prefix} ref={popRef}>
         {this.renderContent(contents, prefix)}
       </div>
     );

@@ -95,7 +95,7 @@ const Demo = () => {
 
       <Menu
         style={{ height: '40vh', width: 300 }}
-        // onClick={(key) => { console.log('===keys', key); setKeys(['2', '3']); }}
+        onClick={(key, keyPath) => { console.log('===keys', key, keyPath); }}
         theme={theme}
         mode="inline"
         // defaultSelectedKeys={['7', '8']}
