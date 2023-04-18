@@ -9,15 +9,13 @@ const NewDemo = () => {
     <div style={{ padding: 20 }}>
       <h2>内嵌式</h2>
       <NewMenu style={{ height: 500 }}>
-        <Item key="12" icon="home">工作台</Item>
-        <Item key="14442" icon="home">工作台</Item>
-        <Item key="1255" icon="home">工作台</Item>
+        <Item key="12" icon="search">一级项八字符内</Item>
         <Item key="2" title="一级项八个字符内" icon="apps-line" />
-        <SubMenu key="1" title="表单页">
-          <SubMenu key="4" title="二级菜单">
-            <Item key="5" title="三级菜单七个字符" />
-            <SubMenu key="7" title="三级菜单1">
-              <Item key="8" title="四级六个字符吧" />
+        <SubMenu key="1" icon="home" title="一级项八个字符内">
+          <SubMenu key="4" title="二级列表八字符内">
+            <Item key="5" title="三级列表七字符" />
+            <SubMenu key="7" title="三级列表七字符">
+              <Item key="8" title="四级六个字符" />
             </SubMenu>
           </SubMenu>
         </SubMenu>
