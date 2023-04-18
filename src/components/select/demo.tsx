@@ -11,7 +11,7 @@ const SelectDemo = () => {
       label: 'uuu11uu',
     },
     {
-      value: 2,
+      value: '2',
       label: '和哈哈哈哈和哈哈哈哈和哈哈哈',
     },
   ];
@@ -44,17 +44,18 @@ const SelectDemo = () => {
           }
         }
         allowClear
-        getPopupContainer={() => document.querySelector('#select-demo')}
+        // getPopupContainer={() => document.querySelector('#select-demo')}
         // disabled
         placeholder="请选择选项"
         style={{ width: 220 }}
         value="2"
+        icon="time-line"
       >
         {dataT.map((item: any) => (
           <Option value={item.value} key={item.value}>{item.label}</Option>
         ))}
       </Select>
-      <h1>多选框</h1>
+      {/* <h1>多选框</h1>
       <Select
         onChange={
           (value, label) => {
@@ -75,7 +76,7 @@ const SelectDemo = () => {
         <Option key="4" value="4">选项1rt2</Option>
         <Option key="5" value="5">选项12try22</Option>
         <Option key="6" value="6">选项12yhr22</Option>
-      </Select>
+      </Select> */}
       <h1>可搜索选择框</h1>
       <Select
         onSelect={
@@ -87,13 +88,15 @@ const SelectDemo = () => {
         placeholder="请选择选项"
         style={{ width: 220, marginBottom: 36 }}
         type="search"
+        LabelInValue
+        value={{ value: '1', label: '呵呵呵呵' }}
         onSearch={(val) => { console.log('--- val ', val); }}
       >
         <Option key="1" value="1">选项111</Option>
         <Option key="2" value="2">选项1222</Option>
         <Option disabled key="3" value="3">选项33333</Option>
       </Select>
-      <Select
+      {/* <Select
         onSelect={
           (value, label) => {
             console.log('--- value ', value);
@@ -110,7 +113,7 @@ const SelectDemo = () => {
         <Option key="1" value="1">选项111</Option>
         <Option key="2" value="2">选项1222</Option>
         <Option disabled key="3" value="3">选项33333</Option>
-      </Select>
+      </Select> */}
     </div>
   );
 };

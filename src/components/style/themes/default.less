@@ -42,12 +42,11 @@
 @first-text-color: #282828; // 一级文字
 @secondary-text-color: #595959; // 二级文字
 @third-text-color: #969696; // 三级文字
-@border: #CECECE; // border颜色
 @line: #e5e5e5;
 @selected-bg: #FFF3F3;
 
 @disabled-color: @third-text-color; // 禁止样式文字颜色
-@disabled-border-color: @border; // 禁止样式border颜色
+@disabled-border-color: @border-color; // 禁止样式border颜色
 @placeholder: @third-text-color; // placeholder文字颜色
 @first-icon-color: @secondary-text-color; // 一级图标色
 @secondary-icon-color: @third-text-color; // 二级图标色
@@ -199,13 +198,13 @@
 @btn-primary-bg: @primary-color;
 
 @btn-default-color: @secondary-text-color;
-@btn-default-border-color: @border;
+@btn-default-border-color: @border-color;
 @btn-default-bg: @component-background;
 
-@btn-disabled-border-color: @border;
+@btn-disabled-border-color: @border-color;
 
 @btn-dashed-color: @secondary-text-color;
-@btn-dashed-border-color: @border;
+@btn-dashed-border-color: @border-color;
 @btn-dashed-bg: @component-background;
 
 
@@ -254,7 +253,7 @@
 @checkbox-hover-border-color: @primary-color;
 @checkbox-text-color: @first-text-color;
 @checkbox-after-border: @white;
-@checkbox-border-color: @border;
+@checkbox-border-color: @border-color;
 @checkbox-disabled-color: @third-text-color;
 @checkbox-checked-bg: @primary-color;
 @checkbox-checked-border-colors: @primary-color;
@@ -285,14 +284,14 @@
 
 // Radio
 @radio-text-color: @first-text-color;
-@radio-border-color: @border;
+@radio-border-color: @border-color;
 @radio-bg: @white;
 @radio-hover-border-color: @primary-color;
-@radio-disabled-border-color: @border;
+@radio-disabled-border-color: @border-color;
 @radio-disabled-text-color: @third-text-color;
 @radio-checked-border-color: @primary-color;
 @radio-checked-inner-bg: @primary-color;
-@radio-checked-disabled-inner-bg:  @border;
+@radio-checked-disabled-inner-bg:  @border-color;
 @radio-disabled-bg: @disabled-background-color;
 @radio-size: 16px;
 
@@ -392,10 +391,10 @@
 @dropdown-containter-bg: @white;
 @dropdown-boxshadow: rgba(147,147,147,0.35);
 @dropdown-btn-text-color: @secondary-text-color;
-@dropdown-btn-default-border-color: @border;
+@dropdown-btn-default-border-color: @border-color;
 @dropdown-btn-default-hover-border-color: @primary-5;
 @dropdown-btn-default-hover-color: @primary-5;
-@dropdown-btn-dashed-border-color: @border;
+@dropdown-btn-dashed-border-color: @border-color;
 @dropdown-btn-dashed-hover-border-color: @primary-5;
 @dropdown-btn-primary-color: @white;
 @dropdown-btn-primary-hover-color: @white;
@@ -462,7 +461,7 @@
 @input-padding-vertical-lg: 6px;
 @input-placeholder-color: @placeholder;
 @input-color: @first-text-color;
-@input-border-color: @border;
+@input-border-color: @border-color;
 @input-bg: @component-background;
 @input-addon-bg: @background-color-light;
 @input-hover-border-color: @primary-color;
@@ -472,21 +471,21 @@
 @input-width-base: 263px;
 @input-box-shadow-base: 0 0 0 2px @input-focus-border-box-shadow-color;
 @input-group-addon-color: @disabled-color;
-@input-group-addon-border-color: @border;
-@input-group-addon-icon-color: @border;
+@input-group-addon-border-color: @border-color;
+@input-group-addon-icon-color: @border-color;
 @input-addon-color: @white;
 @input-addon-hover-bg: @primary-5;
 @input-addon-active-bg: @primary-7;
 @input-disabled-color: @disabled-color;
 @input-disabled-border-color: @disabled-border-color;
-@input-icon-color: @border;
+@input-icon-color: @border-color;
 @input-icon-hover-color: @gray-7;
-@input-icon-border-color: @border;
+@input-icon-border-color: @border-color;
 
 
 // InputNumber
 @input-number-text-color: @first-text-color;
-@input-number-border-color: @border;
+@input-number-border-color: @border-color;
 @input-number-bg: @white;
 @input-number-icon-color: @secondary-icon-color;
 @input-number-icon-hover-color: @primary-color;
@@ -497,33 +496,42 @@
 
 // Select
 // ---
-@select-item-selected-font-weight: 600;
-@select-dropdown-bg: @component-background;
-@select-dropdown-vertical-padding: @dropdown-vertical-padding;
-@select-dropdown-edge-child-vertical-padding: @dropdown-edge-child-vertical-padding;
-@select-dropdown-font-size: @dropdown-font-size;
-@select-dropdown-line-height: @dropdown-line-height;
-@select-item-selected-bg: @background-color-light;
-@select-item-active-bg: @item-active-bg;
-@select-background: @component-background;
+@select-text-color: @first-text-color;
+@select-border-color: @border-color;
 @select-bg-color: @white;
-@select-border-color: @border;
-@select-disabled-color: @disabled-color;
-@select-hover-border-color: #4AA1F7;
-@select-shadow-color: rgba(red(@select-hover-border-color), green(@select-hover-border-color), blue(@select-hover-border-color), 0.2);
-@select-disabled-bg-color: @disabled-background-color;
-@select-disabled-border-color: @disabled-border-color;
-@select-value-color: @first-text-color;
-@select-tag-text-color: @secondary-text-color;
-@select-placeholder-color: @placeholder;
-@select-dropdown-box-shadow: 0 3px 6px -4px rgba(0,0,0,.12), 0 6px 16px 0 rgba(0,0,0,.08), 0 9px 28px 8px rgba(0,0,0,.05);
-@select-dropdown-item-hover-bg-color: @red-1;
-@select-dropdown-text-color: @first-text-color;
+@select-arrow-color: @secondary-icon-color;
+@select-placeholder-color: @third-text-color;
+@select-drop-bg: @white;
+@select-drop-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.08), 0px 4px 10px rgba(0, 0, 0, 0.06);
+@select-item-selected-bg: @selected-bg;
+@select-item-selected-color: @primary-color;
+// @select-item-selected-font-weight: 600;
+// @select-dropdown-bg: @component-background;
+// @select-dropdown-vertical-padding: @dropdown-vertical-padding;
+// @select-dropdown-edge-child-vertical-padding: @dropdown-edge-child-vertical-padding;
+// @select-dropdown-font-size: @dropdown-font-size;
+// @select-dropdown-line-height: @dropdown-line-height;
+// @select-item-selected-bg: @background-color-light;
+// @select-item-active-bg: @item-active-bg;
+// @select-background: @component-background;
+// @select-bg-color: @white;
+// @select-border-color: @border-color;
+// @select-disabled-color: @disabled-color;
+// @select-hover-border-color: #4AA1F7;
+// @select-shadow-color: rgba(red(@select-hover-border-color), green(@select-hover-border-color), blue(@select-hover-border-color), 0.2);
+// @select-disabled-bg-color: @disabled-background-color;
+// @select-disabled-border-color: @disabled-border-color;
+// @select-value-color: @first-text-color;
+// @select-tag-text-color: @secondary-text-color;
+// @select-placeholder-color: @placeholder;
+// @select-dropdown-box-shadow: 0 3px 6px -4px rgba(0,0,0,.12), 0 6px 16px 0 rgba(0,0,0,.08), 0 9px 28px 8px rgba(0,0,0,.05);
+// @select-dropdown-item-hover-bg-color: @red-1;
+// @select-dropdown-text-color: @first-text-color;
 
 // Cascader
 // ----
 @cascader-bg: #fff;
-@cascader-border-color: @border;
+@cascader-border-color: @border-color;
 @cascader-hover-border-color: #4AA1F7;
 @cascader-focus-border-color: #4AA1F7;
 @cascader-keyword-color: @highlight-color;
@@ -531,11 +539,11 @@
 @cascader-disabled-color: @disabled-color;
 @cascader-disabled-border-color: @disabled-border-color;
 @cascader-placeholder-color: @placeholder;
-@cascader-icon-color: @border;
+@cascader-icon-color: @border-color;
 @cascader-icon-disbled-color: rgba(0,0,0,.45);
 @cascader-dropdwon-boxshadow: @shadow-color;
 @cascader-dropdwon-bg: #fff;
-@cascader-dropdown-border-left-color: @border;
+@cascader-dropdown-border-left-color: @border-color;
 @cascader-dropdown-item-active-bg: @item-active-bg;
 @cascader-dropdown-item-hover-bg: @item-hover-bg;
 @cascader-dropdown-item-diabled-color: @disabled-color;
@@ -546,7 +554,7 @@
 
 // DatePicker
 
-@dpcolor-input-border-normal: @border;
+@dpcolor-input-border-normal: @border-color;
 @dpcolor-input-border-hover: #4AA1F7;
 @dpcolor-input-border-focus: #4AA1F7;
 @dpcolor-input-placeholder: @placeholder;
@@ -581,7 +589,7 @@
 @anchor-border-color: #D8D8D8;
 @anchor-link-color: rgba(0,0,0,0.85);
 @anchor-link-hover-color:@primary-color;
-@anchor-bg: @border;
+@anchor-bg: @border-color;
 @anchor-active-bg: @primary-color;
 @anchor-ball-width: 8px;
 
@@ -628,7 +636,7 @@
 @notification-container-bg: @white;
 @notification-container-boxshadow: @shadow-2;
 @notification-container-text-color: @secondary-text-color;
-@notification-close-color: @border;
+@notification-close-color: @border-color;
 
 
 // Progress
@@ -853,7 +861,7 @@
 @switch-disabled-opacity: 0.4;
 @switch-color: @primary-color;
 @switch-shadow-color: fade(#00230b, 20%);
-@switch-parent-bg-color: @border;
+@switch-parent-bg-color: @border-color;
 @switch-parent-color: @white;
 @switch-round-bg-color: @white;
 @switch-checked-bg-color: @primary-color;
@@ -866,7 +874,7 @@
 @pagination-item-selected-bg: #FFF3F3;
 @pagination-item-selected-color: @primary-color;
 @pagination-item-active-bg: @active-gray;
-@pagination-quick-jumper-input-border: @border;
+@pagination-quick-jumper-input-border: @border-color;
 @pagination-item-size-large: 32px;
 @pagination-item-size: 24px;
 @pagination-font-weight-selected: 500;
@@ -896,7 +904,7 @@
 // Calendar
 
 @calendar-title-bg-color: @disabled-background-color;
-@calendar-line-color: @border;
+@calendar-line-color: @border-color;
 @calendar-head-button-normal-color: rgba(0, 0, 0, 0.85);
 @calendar-head-button-active-color: @primary-color;
 @calendar-year-split-line-color: #D8D8D8;
@@ -929,7 +937,7 @@
 @slider-disabled-color: @disabled-color;
 @slider-disabled-background-color: @component-background;
 @slider-disabled-bg-color: @disabled-background-color;
-@slider-border: @border;
+@slider-border: @border-color;
 @slider-mark-item-color: @first-text-color;
 
 // Tree
@@ -964,7 +972,7 @@
 @transfer-header-height: 40px;
 @transfer-list-height: 200px;
 @transfer-background-color: @white;
-@transfer-list-border-color: @border;
+@transfer-list-border-color: @border-color;
 @transfer-herder-right-text-color: @secondary-text-color;
 @transfer-content-text-color: @secondary-text-color;
 @transfer-list-header-left-color: @placeholder;
@@ -1002,17 +1010,17 @@
 // AutoComplete
 
 @auto-complete-text-color: @first-text-color;
-@auto-complete-border-color: @border;
+@auto-complete-border-color: @border-color;
 @auto-complete-border-hover-color: #4AA1F7;
 @auto-complete-placeholer: @placeholder;
 @auto-complete-disabled-bg: @disabled-background-color;
 @auto-complete-disabled-border: @disabled-border-color;
 @auto-complete-disabled-color: @disabled-color;
-@auto-complete-search-icon-color: @border;
+@auto-complete-search-icon-color: @border-color;
 @auto-complete-dropdwon-boxshdow: @shadow-color;
 @auto-complete-dropdown-bg: @white;
 @auto-complete-dropdown-item-hover-bg: @item-hover-bg;
-@auto-complete-dropdown-item-border: @border;
+@auto-complete-dropdown-item-border: @border-color;
 @auto-complete-dropdown-color: @first-text-color;
 
 // List
@@ -1062,7 +1070,7 @@
 @timeline-line-color: #D8D8D8;
 @timeline-head-border-color: @primary-color;
 @timeline-head-bg-color: @white;
-@timeline-last-border-color: @border;
+@timeline-last-border-color: @border-color;
 @timeline-item-content-color: @secondary-text-color;
 // Typography
 // ---
@@ -1082,7 +1090,7 @@
 // upload
 @upload-error-color: @error-color;
 @upload-progress-background-color: rgba(0,0,0,.06);
-@upload-icon-color: @border;
+@upload-icon-color: @border-color;
 @upload-progress-child-background-color: @link-color;
 @upload-list-picture-card-background-color: @white;
 @upload-list-picture-card-hover-background-color: @placeholder;
@@ -1091,14 +1099,14 @@
 
 // tree-select
 @tree-select-background: #fff;
-@tree-select-border: @border;
+@tree-select-border: @border-color;
 @tree-select-icon-color: #ACAFB9;
 @tree-select-hover-border-color: #4AA1F7;
 @tree-select-placeholder-color: @placeholder;
 @tree-select-tag-background: @disabled-background-color;
 @tree-select-tag-border-color: @disabled-border-color;
 @tree-select-tag-value: @secondary-text-color;
-@tree-select-tag-close: @border;
+@tree-select-tag-close: @border-color;
 @tree-select-disabled-color: @disabled-color;
 @tree-select-disabled-border-color: @disabled-border-color;
 @tree-select-disabled-background-color: @disabled-background-color;

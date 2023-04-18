@@ -4,8 +4,9 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable max-len */
 import React, {
-  CSSProperties, ReactNode, createRef,
+  CSSProperties, Children, ReactNode, createRef,
 } from 'react';
+import omit from 'omit.js';
 import classnames from 'classnames';
 import { ConfigConsumer, ConfigConsumerProps } from '../config-provider/context';
 import Icon from '../icon';
@@ -14,78 +15,267 @@ import { getOffset } from '../utils/getOffset';
 import { SelectContext } from './context';
 import Portal from '../common/portal';
 
-export type SelectType = 'default' | 'search' | 'multiple';
+type SelectType = 'default' | 'search' | 'multiple';
 
-interface CommonParams {
-  placeholder?: string,
-  noContent?: string,
-  dropdownMatchSelectWidth?: boolean,
-  defaultValue?: string | string[],
-  children?: ReactNode,
+export interface OptionType {
+  value: string | string[];
+  label?: string | ReactNode;
+  children?: string | ReactNode;
 }
 
-export interface SelectProps extends CommonParams {
-  prefixCls?: string,
-  type?: SelectType,
-  allowClear?: boolean,
-  value?: string | string[],
-  disabled?: boolean,
+type ValueType = string | string[] | OptionType | OptionType[]
+
+export interface SelectProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onChange'|'onSelect'|'onSearch'|'onClick' | 'defaultValue' | 'value'> {
+  prefixCls?: string;
+  placeholder?: string;
+  noContent?: string;
+  defaultValue?: ValueType;
+  type?: SelectType;
+  allowClear?: boolean;
+  value?: ValueType;
+  disabled?: boolean;
   dropdownClassName?: string,
   dropdownStyle?: CSSProperties,
-  className?: string,
-  style?: CSSProperties,
-  remoteSearch?: boolean,
-  maxTagCount?: number,
+  className?: string;
+  style?: CSSProperties;
+  remoteSearch?: boolean;
+  maxTagCount?: number;
   maxTagTextLength?: number,
-  onChange?: (value: string | string[], label: string | obj[]) => void,
-  onSelect?: (value: string | string[], label: string | obj[], checked?: boolean) => void,
+  onChange?: (value: ValueType) => void,
+  onSelect?: (value: ValueType, checked?: boolean) => void,
   onSearch?: (value: string) => void,
   onClick?: () => void,
   getPopupContainer?: () => HTMLElement | null;
-}
-
-export interface OptionType {
-  value: string | string[] | undefined,
-  label?: string | ReactNode,
+  LabelInValue?: boolean;
+  icon?: string | ReactNode;
+  // children?: ReactNode;
 }
 
 export interface SelectState {
-  showDropdown?: boolean,
-  newChildren?: ReactNode,
-  isSearch?: boolean,
-  left: number,
-  top: number,
-  width?: number | string,
+  visible?: boolean;
+  newChildren?: ReactNode;
+  isSearch?: boolean;
+  left: number;
+  top: number;
+  width?: number | string;
   firstRender?: boolean;
   isHover?: boolean;
-  value?: string | string[],
+  value?: string | string[];
+  valueObj?: OptionType | OptionType[];
+  inputValue?: string;
+  childProps?: OptionType[];
 }
 
 class Select extends React.Component<SelectProps, SelectState> {
   static Option: typeof Option;
 
+  private selectRef = createRef<HTMLDivElement>();
+
+  private selectDropRef = createRef<HTMLDivElement>();
+
   // eslint-disable-next-line no-useless-constructor
   constructor(props: SelectProps) {
     super(props);
-    const { defaultValue, value } = props;
     this.state = {
-      value: value || defaultValue,
       left: 0,
       top: 0,
+      visible: false,
+      valueObj: {} as OptionType | OptionType[],
+      inputValue: '',
+      childProps: [],
+      width: 0,
     };
   }
 
+  componentDidMount(): void {
+    const { defaultValue, value } = this.props;
+    this.getData(value || defaultValue);
+    this.setState({ childProps: this.getChildProps() });
+    document.addEventListener('click', this.bodyClick, true);
+  }
+
+  componentDidUpdate(prevProps: Readonly<SelectProps>): void {
+    const { children } = this.props;
+    if (children !== prevProps.children) {
+      this.setState({
+        childProps: this.getChildProps(),
+      });
+    }
+  }
+
+  componentWillUnmount(): void {
+    document.removeEventListener('click', this.bodyClick, true);
+  }
+
+  bodyClick = (e: Event) => {
+    const dropRef = this.selectDropRef?.current;
+    const target = e.target as HTMLElement;
+    if (dropRef && !dropRef.contains(target)) {
+      this.setState({ visible: false });
+    }
+  }
+
+  handleClick = () => {
+    const { disabled } = this.props;
+    const { visible } = this.state;
+    if (!disabled) {
+      this.setState({ visible: !visible });
+      this.getLocation();
+    }
+  }
+
+  getChildProps = () => {
+    const { children } = this.props;
+    const childProps: OptionType[] = React.Children.toArray(children).map((i: any) => i.props);
+    return childProps;
+  }
+
+  getSingleText = () => {
+    const { childProps, valueObj } = this.state;
+    const current: undefined | OptionType = (childProps || []).find((i) => {
+      if ((valueObj as OptionType)?.value === i.value) {
+        return i;
+      }
+      return null;
+    });
+    return current?.children || current?.label || (valueObj as OptionType)?.label || '';
+  }
+
+  getData = (val?: string | string[] | OptionType | OptionType[]) => {
+    const { type } = this.props;
+    if (val) {
+      let temp: OptionType | OptionType[];
+      if (type === 'multiple') {
+        temp = ((val || []) as string[] | OptionType[]).map((item) => {
+          if (typeof item === 'string') {
+            return {
+              label: '',
+              value: item,
+            };
+          }
+          return item;
+        }) || [];
+      } else {
+        temp = (typeof val === 'string' ? { label: '', value: val } : val) as OptionType;
+
+        if (type === 'search') {
+          this.setState({
+            inputValue: typeof val === 'string' ? '' : (val as OptionType)?.label as string,
+          });
+        }
+      }
+      this.setState({ valueObj: temp });
+    } else {
+      this.setState({ valueObj: type === 'multiple' ? [] : { label: '', value: '' } });
+    }
+  }
+
+  getLocation = () => {
+    const { getPopupContainer } = this.props;
+    setTimeout(() => {
+      if (this.selectRef.current) {
+        const {
+          height, width,
+        } = this.selectRef.current.getBoundingClientRect();
+        console.log('=???this', this.selectRef.current);
+        const container = getPopupContainer && getPopupContainer();
+        const { left: offsetLeft, top: offsetTop } = getOffset(this.selectRef.current, container);
+        this.setState({
+          left: offsetLeft,
+          top: offsetTop + height + 4,
+          width,
+        });
+      }
+    }, 30);
+  };
+
+  handleSelect = (current: OptionType) => {
+    const { type, LabelInValue } = this.props;
+    if (type !== 'multiple') {
+      this.setState({
+        visible: false,
+        valueObj: current,
+        inputValue: (current?.label || '') as string,
+      });
+    }
+  }
+
+  InputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = (e.target as HTMLInputElement)?.value;
+    this.setState({ inputValue: value });
+  }
+
   renderSelect = ({ getPrefixCls }: ConfigConsumerProps) => {
-    const { className, type } = this.props;
-    const { left, top, value } = this.state;
-    const prefix = getPrefixCls('select', className);
-    const wrapper = classnames(`${prefix}-wrapper`);
-    console.log('==??', left, top, value);
+    const {
+      className,
+      type,
+      disabled,
+      icon,
+      placeholder,
+      children,
+      LabelInValue,
+      allowClear,
+      getPopupContainer,
+      ...rest
+    } = this.props;
+    const {
+      left, top, visible, valueObj, inputValue, width,
+    } = this.state;
+    const prefix = getPrefixCls('select');
+    const selectCls = classnames(prefix, {
+      [`${prefix}-${type}`]: type,
+      [`${prefix}-disabled`]: disabled,
+    }, className);
+
+    const wrapper = classnames(`${prefix}-wrap`, {
+      [`${prefix}-wrap-has-icon`]: icon,
+    });
+
+    const restProps = omit(rest, ['value', 'defaultValue', 'onChange', 'onSearch', 'onSelect']);
+
     return (
-      <div className={prefix}>
-        <div className={wrapper}>
-          {type === 'search' ? <input /> : <div />}
+      <div
+        {...restProps}
+        className={selectCls}
+        ref={this.selectRef}
+        onClick={this.handleClick}
+      >
+        {icon && (
+        <div className={`${prefix}-prefix-icon`}>
+          {typeof icon === 'string' ? <Icon type={icon} /> : icon}
         </div>
+        )}
+        <div className={wrapper}>
+          {type === 'search' ? (
+            <input
+              value={inputValue}
+              onChange={this.InputChange}
+              placeholder={placeholder}
+            />
+          ) : (
+            <div>{this.getSingleText()}</div>
+          )}
+        </div>
+        <div className={`${prefix}-suffix-icon`}><Icon type="down" /></div>
+        {visible && (
+        <Portal>
+          <div
+            className={`${prefix}-drop`}
+            style={{ top, left, width }}
+            ref={this.selectDropRef}
+          >
+            <SelectContext.Provider
+              value={{
+                multiple: type === 'multiple',
+                valueObj,
+                onSelect: this.handleSelect,
+              }}
+            >
+              {children}
+            </SelectContext.Provider>
+          </div>
+        </Portal>
+        )}
       </div>
     );
   }

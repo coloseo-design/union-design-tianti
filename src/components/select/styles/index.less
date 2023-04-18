@@ -6,15 +6,89 @@
 @select-item-prefix-cls: ~'@{select-prefix-cls}-item';
 @select-input-prefix-cls: ~'@{select-prefix-cls}-input';
 @select-wrapper-prefix-cls: ~'@{select-prefix-cls}-wrapper';
-@select-dropdown-prefix-cls: ~'@{select-prefix-cls}-dropdown';
-@select-dropdown-show: ~'@{select-dropdown-prefix-cls}-show';
-@select-dropdown-hide: ~'@{select-dropdown-prefix-cls}-hide';
-@select-dropdown-match-select-width: ~'@{select-dropdown-prefix-cls}-match-select-width';
+@select-drop: ~'@{select-prefix-cls}-drop';
+// @select-dropdown-show: ~'@{select-dropdown-prefix-cls}-show';
+// @select-dropdown-hide: ~'@{select-dropdown-prefix-cls}-hide';
+// @select-dropdown-match-select-width: ~'@{select-dropdown-prefix-cls}-match-select-width';
 
 .@{select-prefix-cls} {
   width: 100%;
   display: inline-block;
   height: 32px;
+  border: 1px solid @select-border-color;
+  border-radius: 4px;
+  background-color: @select-bg-color;
+  position: relative;
+  padding: 5px 12px;
+  color: @select-text-color;
+  overflow: hidden;
+  cursor: pointer;
+  &-suffix-icon {
+    position: absolute;
+    top: 50%;
+    right: 12px;
+    transform: translateY(-50%);
+    font-size: 14px;
+    color: @select-arrow-color;
+  }
+  &-prefix-icon {
+    position: absolute;
+    top: 50%;
+    left: 12px;
+    transform: translateY(-50%);
+    font-size: 14px;
+    color: @select-arrow-color;
+  }
+  &-wrap {
+    line-height: 22px;
+    &-has-icon {
+      margin-left: 18px
+    }
+  }
+  input {
+    outline: none;
+    border: none;
+    height: 22px;
+    &::placeholder {
+      color: @select-placeholder-color;
+    }
+  }
+  &-placeholder {
+    color: @select-placeholder-color;
+  }
+}
+
+.@{select-drop} {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: @select-drop-bg;
+  padding: 4px;
+  border-radius: 4px;
+  box-shadow: @select-drop-box-shadow;
+  min-height: 40px;
+  &-item {
+    height: 32px;
+    border-radius: 4px;
+    margin-top: 2px;
+    line-height: 22px;
+    color: @select-text-color;
+    padding: 5px 16px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    cursor: pointer;
+    &:first-child {
+      margin-top: 0px;
+    }
+    &:hover {
+      background-color: @select-item-selected-bg;
+    }
+    &-selected {
+      background-color: @select-item-selected-bg;
+      color: @select-item-selected-color;
+    }
+  }
 }
 
 // .@{select-wrapper-prefix-cls} {
