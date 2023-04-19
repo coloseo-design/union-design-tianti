@@ -2,7 +2,7 @@ import React from 'react';
 import { Select } from '../index';
 import './styles/index';
 
-const { Option } = Select;
+const { Option, OptGroup } = Select;
 
 const SelectDemo = () => {
   const data = [
@@ -15,22 +15,32 @@ const SelectDemo = () => {
       label: '和哈哈哈哈和哈哈哈哈和哈哈哈',
     },
   ];
+  const searchData = [
+    {
+      label: '标签1',
+      value: '1',
+    },
+    {
+      label: '标签4',
+      value: '4',
+    },
+    {
+      label: '标签3',
+      value: '3',
+    },
+    {
+      label: '标签2',
+      value: '2',
+    },
+  ];
+  const [data2, setData2] = React.useState<any[]>([]);
   const [dataT, setData] = React.useState<any[]>([]);
   const [data1, setData1] = React.useState<any[]>([]);
-  const [lastFetchId, setlastFetchId] = React.useState(0);
   React.useEffect(() => {
     setTimeout(() => {
       setData(data);
     }, 2000);
   }, []);
-
-  const fetchUser = (value: any) => {
-    setlastFetchId(lastFetchId + 1);
-    data1.push({
-      value: lastFetchId,
-      label: value,
-    });
-  };
 
   const [value1, setvalue] = React.useState(['1']);
   return (
@@ -44,25 +54,20 @@ const SelectDemo = () => {
           }
         }
         allowClear
-        // getPopupContainer={() => document.querySelector('#select-demo')}
-        // disabled
+        getPopupContainer={() => document.querySelector('#select-demo')}
         placeholder="请选择选项"
         style={{ width: 220 }}
-        value="2"
         icon="time-line"
       >
         {dataT.map((item: any) => (
           <Option value={item.value} key={item.value}>{item.label}</Option>
         ))}
       </Select>
-      {/* <h1>多选框</h1>
+      <h1>多选框</h1>
       <Select
-        onChange={
-          (value, label) => {
-            console.log('--- value ', value);
-            console.log('--- label ', label);
-          }
-        }
+        onChange={(value) => {
+          console.log('==values', value);
+        }}
         allowClear
         placeholder="请选择选项"
         style={{ width: 220 }}
@@ -70,50 +75,45 @@ const SelectDemo = () => {
         value={value1}
         maxTagCount={2}
       >
-        <Option key="1" value="1">这是一个很长的很长的选项111</Option>
+        <Option key="1" value="1">标签</Option>
         <Option key="2" value="2">选项1222</Option>
         <Option disabled key="3" value="3">选项33333</Option>
         <Option key="4" value="4">选项1rt2</Option>
         <Option key="5" value="5">选项12try22</Option>
         <Option key="6" value="6">选项12yhr22</Option>
-      </Select> */}
+      </Select>
       <h1>可搜索选择框</h1>
       <Select
-        onSelect={
-          (value, label) => {
-            console.log('--- value ', value);
-            console.log('--- label ', label);
-          }
-        }
         placeholder="请选择选项"
         style={{ width: 220, marginBottom: 36 }}
         type="search"
         LabelInValue
         value={{ value: '1', label: '呵呵呵呵' }}
-        onSearch={(val) => { console.log('--- val ', val); }}
-      >
-        <Option key="1" value="1">选项111</Option>
-        <Option key="2" value="2">选项1222</Option>
-        <Option disabled key="3" value="3">选项33333</Option>
-      </Select>
-      {/* <Select
-        onSelect={
-          (value, label) => {
-            console.log('--- value ', value);
-            console.log('--- label ', label);
-          }
-        }
+        onSearch={(val) => {
+          const t = searchData.filter((i) => i.label.indexOf(val) > -1);
+          setData2(t);
+        }}
         allowClear
-        placeholder="请选择选项"
-        style={{ width: 220 }}
-        type="search"
-        remoteSearch
-        onSearch={fetchUser}
       >
-        <Option key="1" value="1">选项111</Option>
-        <Option key="2" value="2">选项1222</Option>
-        <Option disabled key="3" value="3">选项33333</Option>
-      </Select> */}
+        {(data2 || []).map((item) => (
+          <Option key={item.value} value={item.value}>{item.label}</Option>
+        ))}
+      </Select>
+      <h1>禁止的</h1>
+      <Select disabled style={{ width: 220 }} defaultValue="1">
+        <Option value="1">hhh </Option>
+      </Select>
+      <h1>分组选择</h1>
+      <Select style={{ width: 220 }}>
+        <OptGroup label="小标题">
+          <Option value="1">下拉选项</Option>
+          <Option value="2">下拉选项</Option>
+        </OptGroup>
+        <OptGroup label="小标题2">
+          <Option value="11">下拉选项</Option>
+          <Option value="22">下拉选项</Option>
+        </OptGroup>
+      </Select>
     </div>
   );
 };

@@ -23,7 +23,6 @@ subtitle: 选择框
 |dropdownStyle|下拉框样式|object|--|
 |className|额外的类名|string|--|
 |style|选择框样式|object|--|
-|remoteSearch|是否拉取服务器数据，如果要，type必须为search|boolean|false|
 |maxTagCount|多选模式下，最多显示的tag数量|number|--|
 |maxTagTextLength|多选模式下，每个tag最多显示的字符数|number|--|
 |onChange|value改变时触发|(value: string \| string[], label: string) => void|--|

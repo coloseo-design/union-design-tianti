@@ -36,16 +36,16 @@ class Option extends React.Component<OptionProps, OptionState> {
     const {
       prefixCls: customizePrefixCls,
     } = this.props;
-    const { valueObj } = this.context;
+    const { valueObj, multiple } = this.context;
     const prefix = getPrefixCls('select', customizePrefixCls);
     const sectionClass = classnames(`${prefix}-drop-item`, {
       [`${prefix}-drop-item-disabled`]: disabled,
-      [`${prefix}-drop-item-selected`]: valueObj.value === value,
+      [`${prefix}-drop-item-selected`]: valueObj.value === value || (multiple && (valueObj as OptionType[])?.map((i) => (i.value)).indexOf(value) !== -1),
     });
 
     return (
       <SelectContext.Consumer>
-        {({ onSelect, multiple }) => (
+        {({ onSelect }) => (
           <div
             onClick={(event) => {
               event.stopPropagation();
@@ -55,13 +55,14 @@ class Option extends React.Component<OptionProps, OptionState> {
             className={`${sectionClass}`}
             title={(children || label) as string}
           >
-            {multiple && (
+            {multiple ? (
               <Checkbox
                 checked={(valueObj as OptionType[])?.map((i) => (i.value)).indexOf(value) !== -1}
                 disabled={disabled}
-              />
-            )}
-            {children || label}
+              >
+                {children || label}
+              </Checkbox>
+            ) : children || label}
           </div>
         )}
       </SelectContext.Consumer>

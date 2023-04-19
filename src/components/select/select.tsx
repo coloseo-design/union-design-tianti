@@ -4,13 +4,14 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable max-len */
 import React, {
-  CSSProperties, Children, ReactNode, createRef,
+  CSSProperties, ReactNode, createRef,
 } from 'react';
 import omit from 'omit.js';
 import classnames from 'classnames';
 import { ConfigConsumer, ConfigConsumerProps } from '../config-provider/context';
 import Icon from '../icon';
 import Option from './option';
+import OptGroup from './opt-group';
 import { getOffset } from '../utils/getOffset';
 import { SelectContext } from './context';
 import Portal from '../common/portal';
@@ -53,21 +54,20 @@ export interface SelectProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 
 
 export interface SelectState {
   visible?: boolean;
-  newChildren?: ReactNode;
-  isSearch?: boolean;
   left: number;
   top: number;
   width?: number | string;
-  firstRender?: boolean;
-  isHover?: boolean;
-  value?: string | string[];
-  valueObj?: OptionType | OptionType[];
+  valueObj?: OptionType | OptionType[] | null;
   inputValue?: string;
   childProps?: OptionType[];
+  isClear?: boolean;
+  initSearchValue?: OptionType;
 }
 
 class Select extends React.Component<SelectProps, SelectState> {
   static Option: typeof Option;
+
+  static OptGroup: typeof OptGroup;
 
   private selectRef = createRef<HTMLDivElement>();
 
@@ -80,18 +80,29 @@ class Select extends React.Component<SelectProps, SelectState> {
       left: 0,
       top: 0,
       visible: false,
-      valueObj: {} as OptionType | OptionType[],
+      valueObj: null as OptionType | OptionType[] | null,
       inputValue: '',
       childProps: [],
       width: 0,
+      isClear: false,
+      initSearchValue: {} as OptionType,
     };
   }
 
   componentDidMount(): void {
-    const { defaultValue, value } = this.props;
-    this.getData(value || defaultValue);
+    const { defaultValue, value, type } = this.props;
+    const val = value || defaultValue;
+    this.getData(val);
     this.setState({ childProps: this.getChildProps() });
     document.addEventListener('click', this.bodyClick, true);
+    if (type === 'search') {
+      this.setState({
+        initSearchValue: {
+          value: (val as OptionType)?.value || '',
+          label: (val as OptionType)?.label || '',
+        },
+      });
+    }
   }
 
   componentDidUpdate(prevProps: Readonly<SelectProps>): void {
@@ -105,6 +116,22 @@ class Select extends React.Component<SelectProps, SelectState> {
 
   componentWillUnmount(): void {
     document.removeEventListener('click', this.bodyClick, true);
+  }
+
+  AllDelete = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    e.stopPropagation();
+    const { type, onChange, LabelInValue } = this.props;
+    let singleValue: string | OptionType = '';
+    if (LabelInValue) {
+      singleValue = { label: '', value: '' };
+    }
+    const v = type === 'multiple' ? [] : singleValue;
+    this.setState({
+      valueObj: type === 'multiple' ? [] : { label: '', value: '' },
+      inputValue: '',
+      visible: false,
+    });
+    onChange?.(v);
   }
 
   bodyClick = (e: Event) => {
@@ -177,7 +204,6 @@ class Select extends React.Component<SelectProps, SelectState> {
         const {
           height, width,
         } = this.selectRef.current.getBoundingClientRect();
-        console.log('=???this', this.selectRef.current);
         const container = getPopupContainer && getPopupContainer();
         const { left: offsetLeft, top: offsetTop } = getOffset(this.selectRef.current, container);
         this.setState({
@@ -189,20 +215,80 @@ class Select extends React.Component<SelectProps, SelectState> {
     }, 30);
   };
 
+  handleDelete = (key: string) => {
+    const { valueObj } = this.state;
+    const { onChange, LabelInValue, disabled } = this.props;
+    if (!disabled) {
+      const val: OptionType[] = (valueObj as OptionType[]).filter((i) => i.value !== key);
+      this.setState({
+        valueObj: val,
+      });
+      onChange?.(LabelInValue ? val : val.map((i) => i.value) as string[]);
+    }
+  };
+
   handleSelect = (current: OptionType) => {
-    const { type, LabelInValue } = this.props;
+    const {
+      type, LabelInValue, onChange, onSelect,
+    } = this.props;
+    const { valueObj } = this.state;
+    let checked = false;
     if (type !== 'multiple') {
       this.setState({
         visible: false,
         valueObj: current,
         inputValue: (current?.label || '') as string,
       });
+      onChange?.(LabelInValue ? current : current?.value);
+      onSelect?.(LabelInValue ? current : current?.value, true);
+    } else {
+      let t = (valueObj || []) as OptionType[];
+      if (t.some((i: OptionType) => i.value === current.value)) {
+        t = t.filter((i) => i.value !== current.value);
+        checked = false;
+      } else {
+        t.push(current);
+        checked = true;
+      }
+      this.setState({ valueObj: [...t] });
+      onChange?.(LabelInValue ? t as OptionType[] : t.map((i) => i.value) as string[]);
+      onSelect?.(LabelInValue ? t as OptionType[] : t.map((i) => i.value) as string[], checked);
+      this.getLocation();
     }
   }
 
   InputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { onSearch, onChange } = this.props;
     const value = (e.target as HTMLInputElement)?.value;
+    onSearch?.(value);
+    onChange?.(value);
     this.setState({ inputValue: value });
+  }
+
+  renderTag = (list: OptionType[] = [], prefix: string) => {
+    const { maxTagCount } = this.props;
+    const { childProps } = this.state;
+    const data = maxTagCount ? list.slice(0, maxTagCount) : list;
+    const tagContain = classnames(`${prefix}-tag-contain`);
+    const tagCls = classnames(`${prefix}-tag`);
+    const count = list.length - (maxTagCount || 0);
+    return (
+      <div className={tagContain}>
+        {(data || []).map((item) => {
+          const tem = childProps?.find((i) => i.value === item.value);
+          return (
+            <div className={tagCls} key={item.value as string}>
+              <span>{tem?.label || tem?.children || item.label || item?.children || ''}</span>
+              <Icon
+                type="close"
+                onClick={() => this.handleDelete((tem?.value || item.value) as string)}
+              />
+            </div>
+          );
+        })}
+        {maxTagCount && count > 0 && <div className={tagCls}>{`+${count}...`}</div>}
+      </div>
+    );
   }
 
   renderSelect = ({ getPrefixCls }: ConfigConsumerProps) => {
@@ -211,15 +297,19 @@ class Select extends React.Component<SelectProps, SelectState> {
       type,
       disabled,
       icon,
-      placeholder,
+      placeholder = '请选择',
       children,
       LabelInValue,
       allowClear,
       getPopupContainer,
+      noContent = '暂无数据',
+      dropdownStyle,
+      dropdownClassName,
+      onChange,
       ...rest
     } = this.props;
     const {
-      left, top, visible, valueObj, inputValue, width,
+      left, top, visible, valueObj, inputValue, width, isClear, initSearchValue,
     } = this.state;
     const prefix = getPrefixCls('select');
     const selectCls = classnames(prefix, {
@@ -227,18 +317,32 @@ class Select extends React.Component<SelectProps, SelectState> {
       [`${prefix}-disabled`]: disabled,
     }, className);
 
+    const restProps = omit(rest, ['value', 'defaultValue', 'onSearch', 'maxTagCount', 'onSelect']);
+    const hasValue = (Array.isArray(valueObj) && valueObj.length > 0)
+      || (valueObj as OptionType)?.value;
+
     const wrapper = classnames(`${prefix}-wrap`, {
       [`${prefix}-wrap-has-icon`]: icon,
+      [`${prefix}-wrap-placeholder`]: !hasValue,
     });
 
-    const restProps = omit(rest, ['value', 'defaultValue', 'onChange', 'onSearch', 'onSelect']);
-
+    const hasNoChildren = React.Children.toArray(children).length === 0;
     return (
       <div
         {...restProps}
         className={selectCls}
         ref={this.selectRef}
         onClick={this.handleClick}
+        onMouseEnter={() => {
+          if (allowClear && hasValue && !disabled) {
+            this.setState({ isClear: true });
+          }
+        }}
+        onMouseLeave={() => {
+          if (isClear) {
+            this.setState({ isClear: false });
+          }
+        }}
       >
         {icon && (
         <div className={`${prefix}-prefix-icon`}>
@@ -251,28 +355,57 @@ class Select extends React.Component<SelectProps, SelectState> {
               value={inputValue}
               onChange={this.InputChange}
               placeholder={placeholder}
+              onBlur={() => {
+                if (hasNoChildren) {
+                  if (LabelInValue) {
+                    this.setState({
+                      inputValue: (initSearchValue?.label || '') as string,
+                      valueObj: initSearchValue || { label: '', value: '' },
+                    });
+                    onChange?.(initSearchValue || { label: '', value: '' });
+                  } else {
+                    this.setState({
+                      inputValue: ((initSearchValue as OptionType)?.label || '') as string,
+                      valueObj: { label: '', value: '' },
+                    });
+                    onChange?.('');
+                  }
+                }
+              }}
             />
           ) : (
-            <div>{this.getSingleText()}</div>
+            <>{ type === 'multiple' ? this.renderTag((valueObj || []) as OptionType[], prefix) : <div>{this.getSingleText() || placeholder}</div>}</>
           )}
         </div>
-        <div className={`${prefix}-suffix-icon`}><Icon type="down" /></div>
+        <div
+          className={`${prefix}-suffix-icon`}
+          style={{ color: isClear ? '#ACAFB9' : undefined }}
+          onClick={this.AllDelete}
+        >
+          <Icon type={isClear ? 'close1-surface' : visible ? 'up' : 'down'} />
+        </div>
         {visible && (
-        <Portal>
+        <Portal {...({ getPopupContainer })}>
           <div
-            className={`${prefix}-drop`}
-            style={{ top, left, width }}
+            className={classnames(`${prefix}-drop`, {
+              [`${prefix}-drop-noContent`]: hasNoChildren,
+            }, dropdownClassName)}
+            style={{
+              top, left, width, ...dropdownStyle,
+            }}
             ref={this.selectDropRef}
           >
-            <SelectContext.Provider
-              value={{
-                multiple: type === 'multiple',
-                valueObj,
-                onSelect: this.handleSelect,
-              }}
-            >
-              {children}
-            </SelectContext.Provider>
+            {hasNoChildren ? noContent : (
+              <SelectContext.Provider
+                value={{
+                  multiple: type === 'multiple',
+                  valueObj,
+                  onSelect: this.handleSelect,
+                }}
+              >
+                {children}
+              </SelectContext.Provider>
+            )}
           </div>
         </Portal>
         )}
@@ -291,6 +424,7 @@ class Select extends React.Component<SelectProps, SelectState> {
 
 const ComposeSelect = Select;
 ComposeSelect.Option = Option;
+ComposeSelect.OptGroup = OptGroup;
 
 export default ComposeSelect;
 

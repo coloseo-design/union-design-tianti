@@ -7,7 +7,7 @@ export interface SelectConsumerProps {
   multiple?: boolean,
   selectedOptions?: Array<OptionType>,
   onSelect: (current: OptionType) => void,
-  valueObj?: OptionType | OptionType[],
+  valueObj?: OptionType | OptionType[] | null,
 }
 
 export const SelectContext = React.createContext<SelectConsumerProps>({
