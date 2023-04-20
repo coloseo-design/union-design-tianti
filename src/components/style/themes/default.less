@@ -60,7 +60,7 @@
 
 @divider-border-color: @line;
 
-@image-operation-bg: hsla(0, 0%, 100%, .25);
+@image-operation-bg: hsla(0,0%,100%,.25);
 
 @new-primary-red: #E50027;
 
@@ -69,7 +69,9 @@
 @primary-2: color(~`colorPalette('@{primary-color}', 2) `);
 @primary-3: color(~`colorPalette('@{primary-color}', 3) `);
 @primary-4: color(~`colorPalette('@{primary-color}', 4) `);
-@primary-5: color(~`colorPalette('@{primary-color}', 5) `);
+@primary-5: color(
+  ~`colorPalette('@{primary-color}', 5) `
+);
 @primary-6: @primary-color;
 @primary-7: color(~`colorPalette('@{primary-color}', 7) `);
 @primary-8: color(~`colorPalette('@{primary-color}', 8) `);
@@ -265,11 +267,11 @@
 @checkbox-border-width: @border-width-base;
 
 // Descriptions
-@descriptions-content: rgba(0, 0, 0, 0.85);
-@descriptions-content-color: rgba(0, 0, 0, 0.85);
+@descriptions-content: rgba(0,0,0,0.85);
+@descriptions-content-color: rgba(0,0,0,0.85);
 @descriptions-content-td-bg: @white;
 @descriptions-label-width: 112px;
-@descriptions-label-color: rgba(0, 0, 0, 0.65);
+@descriptions-label-color:rgba(0,0,0,0.65);
 @descriptions-content-width: 213px;
 @descriptions-border-color: #D0D5DF;
 @descriptions-border-label-bg: #F4F5F7;
@@ -341,7 +343,7 @@
 @layout-sider-background: @layout-header-background;
 
 @layout-sider-light-bg: @disabled-background-color;
-@layout-sider-box-shadow: 2px 0 4px 0 rgba(147, 147, 147, 0.35);
+@layout-sider-box-shadow: 2px 0 4px 0 rgba(147,147,147,0.35);
 @layout-trigger-height: 80px;
 @layout-trigger-width: 16px;
 @layout-trigger-border-radius: 0 10px 10px 0;
@@ -387,7 +389,7 @@
 
 //Dropdown
 @dropdown-containter-bg: @white;
-@dropdown-boxshadow: rgba(147, 147, 147, 0.35);
+@dropdown-boxshadow: rgba(147,147,147,0.35);
 @dropdown-btn-text-color: @secondary-text-color;
 @dropdown-btn-default-border-color: @border-color;
 @dropdown-btn-default-hover-border-color: @primary-5;
@@ -434,7 +436,7 @@
 @form-item-error-box-before-border-color: @red-5;
 @form-item-error-box-after-border-color: @white;
 @form-item-error-box-content-border: @red-5;
-@form-item-error-box-content-boxshadow: rgba(147, 147, 147, 0.35);
+@form-item-error-box-content-boxshadow: rgba(147,147,147,0.35);
 @form-item-haserror-error-color: @red-5;
 @form-warning-input-bg: #fff;
 @form-item-margin-bottom: 24px;
@@ -593,13 +595,13 @@
 // Popover
 // ---
 @popover-bg: @white;
-@popover-boxshadow: rgba(147, 147, 147, 0.35);
-@popover-title-border: #D8D8D8;
+@popover-boxshadow: rgba(147,147,147,0.35);
+@popover-title-border:#D8D8D8;
 @popover-content-inner-content-color: @secondary-text-color;
 // Popconfirm
 
 @popconfirm-bg: @white;
-@popconfirm-boxshadow: rgba(147, 147, 147, 0.35);
+@popconfirm-boxshadow: rgba(147,147,147,0.35);
 @popconfirm-icon-color: @warning-color;
 @popconfirm-content-inner-title: @secondary-text-color;
 // Modal
@@ -613,7 +615,7 @@
 @modal-method-warning-icon-color: @warning-color;
 @modal-mask-bg: fade(@black, 45%);
 @modal-content-bg: @white;
-@modal-content-boxshadow: rgba(0, 0, 0, 0.03), 0 9px 4px 0 rgba(0, 0, 0, 0.05), 0 6px 16px 0 rgba(0, 0, 0, 0.08);
+@modal-content-boxshadow: rgba(0,0,0,0.03), 0 9px 4px 0 rgba(0,0,0,0.05), 0 6px 16px 0 rgba(0,0,0,0.08);
 @modal-content-color: @secondary-text-color;
 
 // Notification
@@ -664,7 +666,7 @@
 @menu-dark-submenu-selected-color: @white;
 @menu-light-item-group-color: @disabled-color;
 @menu-dark-item-group-color: @disabled-border-color;
-@menu-boxshadow: rgba(147, 147, 147, 0.35);
+@menu-boxshadow: rgba(147,147,147,0.35);
 @menu-inline-toplevel-item-height: 40px;
 @menu-item-height: 40px;
 @menu-collapsed-width: 80px;
@@ -733,7 +735,7 @@
 @table-border-color: #e8e8e8;
 @table-bg-color: @white;
 @table-item-fixed-shadow-color: @shadow-color;
-@table-th-color: rgba(0, 0, 0, 0.85);
+@table-th-color: rgba(0,0,0,0.85);
 
 // Tag
 // --
@@ -782,7 +784,7 @@
 
 @result-success-color: #44BF30;
 @result-error-color: @red-6;
-@result-title-color: rgba(0, 0, 0, 0.85);
+@result-title-color: rgba(0,0,0,0.85);
 @result-subtitle-color: @placeholder;
 
 // Card
@@ -793,7 +795,7 @@
 @card-inner-head-padding: 12px;
 @card-padding-base: 24px;
 @card-background: #F9FAFB;
-@card-shadow: rgba(147, 147, 147, 0.35);
+@card-shadow: rgba(147,147,147,0.35);
 @card-radius: @border-radius-sm;
 
 // Comment
@@ -934,7 +936,7 @@
 @tree-node-hover-bg: @red-1;
 @tree-node-selected-bg: @primary-2;
 @tree-background-color: @white;
-@tree-box-shadow-color: rgba(147, 147, 147, 0.35);
+@tree-box-shadow-color: rgba(147,147,147,0.35);
 @tree-node-selected-color: @primary-color;
 @tree-node-disabled-color: @disabled-color;
 
@@ -985,7 +987,7 @@
 @alert-info-bg-color: @help3;
 @alert-info-color: @info-color;
 @alert-warning-border-color: @warning2;
-@alert-warning-bg-color: @warning3;
+@alert-warning-bg-color:@warning3;
 @alert-warning-color: @warning-color;
 @alert-error-border-color: #FF8383;
 @alert-error-bg-color: @error1;
@@ -1010,10 +1012,10 @@
 
 // List
 // ---
-@list-color: rgba(0, 0, 0, 0.85);
+@list-color: rgba(0,0,0,0.85);
 @list-bg: @white;
 @list-item-border: @border-color-split;
-@list-item-meta-title-color: rgba(0, 0, 0, 0.85);
+@list-item-meta-title-color: rgba(0,0,0,0.85);
 @list-item-meta-description-color: @secondary-text-color;
 @list-header-background: transparent;
 @list-footer-background: transparent;
@@ -1035,13 +1037,13 @@
 @statistic-unit-font-size: 16px;
 @statistic-font-family: @font-family;
 @statistic-title-color: @secondary-text-color;
-@statistic-content-color: rgba(0, 0, 0, 0.85);
+@statistic-content-color: rgba(0,0,0,0.85);
 
 // Drawer
 // ---
 @drawer-head-color: @disabled-background-color;
 @drawer-bg-color: @content-bg;
-@drawer-boxshadow: rgba(147, 147, 147, 0.35);
+@drawer-boxshadow: rgba(147,147,147,0.35);
 @drawer-header-padding: 16px 24px;
 @drawer-body-padding: 24px;
 
@@ -1062,8 +1064,8 @@
 @typography-title-font-weight: 600;
 @typography-title-margin-top: 1.2em;
 @typography-title-margin-bottom: 0.5em;
-@typography-level1-color: rgba(0, 0, 0, 0.85);
-@typography-level4-color: rgba(0, 0, 0, 0.65);
+@typography-level1-color: rgba(0,0,0,0.85);
+@typography-level4-color: rgba(0,0,0,0.65);
 @typography-level5-color: @disabled-color;
 @typography-success-color: #44BF30;
 @typography-warning-color: #FAAD14;
@@ -1096,7 +1098,7 @@
 @tree-select-disabled-border-color: @disabled-border-color;
 @tree-select-disabled-background-color: @disabled-background-color;
 @tree-select-drop-background-color: @white;
-@tree-select-drop-box-shadow-color: rgba(147, 147, 147, 0.35);
+@tree-select-drop-box-shadow-color: rgba(147,147,147,0.35);
 @tree-select-dropdown-text-color: @first-text-color;
 @tree-select-node-hover-background-color: @red-1;
 @tree-select-selected-color: @primary-color;
@@ -1112,7 +1114,7 @@
 @steps-step-process-color: @primary-color;
 @steps-step-tag-title-color: @first-text-color;
 @steps-step-tag-wait-color: @disabled-color;
-@steps-step-tag-finish-color: @first-text-color;
+@steps-step-tag-finish-color:@first-text-color;
 @steps-step-tag-description-color: @secondary-text-color;
 
 // side nav
