@@ -1,0 +1,258 @@
+@import "../../style/themes/index";
+@import "../../style/mixins/index";
+
+@sidenav: ~"@{uni-prefix}-sidenav";
+
+@sidenav-width: 206px;
+@sidenav-popup-div-width: 184px;
+
+.@{sidenav} {
+  position: relative;
+  background: rgb(255, 255, 255);
+  width: @sidenav-width;
+
+  &>.@{sidenav}-cao {
+    position: absolute;
+    left: @sidenav-width;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    user-select: none;
+  }
+
+  &>.@{sidenav}-border {
+    position: absolute;
+    background: rgb(255, 255, 255);
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    box-shadow: 1px 0px 3px rgba(0, 0, 0, 0.1);
+  }
+
+  &>.@{sidenav}-body {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: @sidenav-width;
+    padding: 10px 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    & .@{sidenav}-item.@{sidenav}-level1>.@{sidenav}-text {
+      margin-left: 0;
+    }
+
+    & .@{sidenav}-item.@{sidenav}-level2>.@{sidenav}-text {
+      margin-left: 26px;
+    }
+
+    & .@{sidenav}-item.@{sidenav}-level3>.@{sidenav}-text {
+      margin-left: 26px;
+      padding-left: 14px;
+    }
+
+    & .@{sidenav}-item.@{sidenav}-level4>.@{sidenav}-text {
+      margin-left: 26px;
+      padding-left: 28px;
+    }
+
+    & .@{sidenav}-item.@{sidenav}-level5>.@{sidenav}-text {
+      margin-left: 26px;
+      padding-left: 42px;
+    }
+
+    & .@{sidenav}-item {
+      position: relative;
+      width: @sidenav-width;
+      height: 40px;
+      cursor: pointer;
+      user-select: none;
+      display: flex;
+      flex-flow: row nowrap;
+      align-items: center;
+      padding: 0 16px;
+
+      &:hover {
+        background-color: @sidenav-item-hover-bg-color;
+      }
+
+      &:active {
+        background-color: @sidenav-item-bg-click-color;
+      }
+
+      &>.@{sidenav}-icon,
+      &>.@{sidenav}-arrow {
+        color: @sidenav-icon-normal-color;
+      }
+
+      &>.@{sidenav}-icon {
+        width: 18px;
+        height: 18px;
+        margin-right: 8px;
+        font-size: 0;
+      }
+
+      &>.@{sidenav}-text {
+        width: 112px;
+        font-size: 14px;
+        font-weight: 400;
+        color: @sidenav-font-normal-color;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+
+      &>.@{sidenav}-arrow {
+        width: 14px;
+        height: 14px;
+        font-size: 0;
+        margin-left: 22px;
+      }
+    }
+
+    & .@{sidenav}-item.@{sidenav}-active,
+    & .@{sidenav}-item.@{sidenav}-top-active {
+
+      &>.@{sidenav}-icon,
+      &>.@{sidenav}-arrow,
+      &>.@{sidenav}-text {
+        color: @sidenav-item-font-active-color;
+      }
+    }
+
+    & .@{sidenav}-item.@{sidenav}-active {
+      background-color: @sidenav-item-bg-active-color;
+
+      &:after {
+        content: "";
+        background-color: @sidenav-item-font-active-color;
+        position: absolute;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        width: 4px;
+      }
+
+      &:hover {
+        background-color: @sidenav-item-bg-active-color;
+      }
+    }
+
+    & .@{sidenav}-children.@{sidenav}-close {
+      height: 0;
+      overflow: hidden;
+    }
+  }
+}
+
+.@{sidenav}.@{sidenav}-close {
+  width: 0;
+
+  &>.@{sidenav}-cao {
+    left: 0;
+  }
+
+  &>.@{sidenav}-body {
+    width: 0;
+  }
+}
+
+.@{sidenav}.@{sidenav}-expand {
+  &>.@{sidenav}-popup {
+    position: absolute;
+    top: 0;
+    left: 206px;
+    bottom: 0;
+    writing-mode: vertical-lr;
+    background: rgb(255, 255, 255);
+    box-shadow: 0px 2px 5px rgba(147, 147, 147, 0.35);
+    padding: 20px 0 36px 24px;
+
+    &>.@{sidenav}-item+.@{sidenav}-item.@{sidenav}-level2 {
+      margin-top: 16px;
+    }
+
+    &>.@{sidenav}-item.@{sidenav}-level2 {
+      height: 40px;
+
+      &>.@{sidenav}-text {
+        font-weight: 500;
+        color: @sidenav-popup-font-color-level2;
+      }
+    }
+
+    &>.@{sidenav}-item.@{sidenav}-level3 {
+      height: 36px;
+
+      &>.@{sidenav}-text {
+        color: @sidenav-popup-font-color-level3;
+      }
+    }
+
+    &>.@{sidenav}-item.@{sidenav}-level4 {
+      height: 36px;
+
+      &>.@{sidenav}-text {
+        color: @sidenav-popup-font-color-level4;
+      }
+    }
+
+    &>.@{sidenav}-item.@{sidenav}-level5 {
+      height: 36px;
+
+      &>.@{sidenav}-text {
+        padding-left: 22px;
+        color: @sidenav-popup-font-color-level4;
+      }
+    }
+
+    &>.@{sidenav}-item.@{sidenav}-hover {
+      &:hover {
+        cursor: pointer;
+        background-color: @sidenav-item-hover-bg-color;
+      }
+    }
+
+    &>.@{sidenav}-item.@{sidenav}-active.@{sidenav}-hover {
+      background-color: @sidenav-item-bg-active-color;
+
+      &>.@{sidenav}-text {
+        color: @sidenav-item-font-active-color;
+      }
+
+      &:hover {
+        cursor: pointer;
+        background-color: @sidenav-item-bg-active-color;
+      }
+    }
+
+    &>.@{sidenav}-item {
+      display: inline-flex;
+      width: @sidenav-popup-div-width;
+      writing-mode: horizontal-tb;
+      user-select: none;
+      margin-right: 24px;
+      overflow: hidden;
+      flex-flow: row nowrap;
+      align-items: center;
+
+      &>.@{sidenav}-text {
+        box-sizing: border-box;
+        font-size: 14px;
+        font-weight: 400;
+        width: @sidenav-popup-div-width;
+        padding: 0 8px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+    }
+  }
+
+  &>.@{sidenav}-popup.@{sidenav}-close {
+    display: none;
+  }
+}

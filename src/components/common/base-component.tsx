@@ -63,6 +63,11 @@ export abstract class BaseComponent<
     return getPrefixCls?.(`${this.classPrefix}`, prefixCls);
   };
 
+  protected getBindValue = <K extends keyof P>(key: K): P[K] => {
+    const val = (this.props as any)?.[key] ?? (this.state as any)?.[key];
+    return val as P[K];
+  }
+
   protected classNames = (...args: Parameters<typeof classNames>) => classNames(...args);
 
   private init = (config: ConfigConsumerProps) => {
