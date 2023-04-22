@@ -80,3 +80,4 @@ export { default as Upload } from './upload';
 export { default as NewMenu } from './new-menu';
 
 export { default as SideNav } from './side-nav';
+export { default as TopNav } from './top-nav';

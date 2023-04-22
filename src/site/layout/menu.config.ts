@@ -67,6 +67,10 @@ export default [
         key: 'side-nav',
       },
       {
+        title: 'TopNav 顶部导航菜单',
+        key: 'top-nav',
+      },
+      {
         title: 'newMenu 新菜单',
         key: 'new-menu',
       },

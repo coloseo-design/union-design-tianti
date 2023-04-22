@@ -122,7 +122,7 @@ const Demo = () => {
   const [openKeys, setOpenKeys] = useState<string[]>(["1", "12"]);
 
   const [selectedKey, setSelectedKey] = useState<string>("121");
-  console.log("==", openKeys, selectedKey);
+
   return (
     <div style={{ margin: 30 }}>
       <h4>基本 内嵌式导航</h4>
