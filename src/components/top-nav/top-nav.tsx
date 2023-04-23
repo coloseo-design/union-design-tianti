@@ -472,6 +472,30 @@ export default class TopNav<Data> extends BaseComponent<
     }
   };
 
+  private childrenHasKey = (data: any[], key: string): boolean => {
+    const { childrenExtractor, keyExtractor } = this.props;
+    let res = false;
+    for (const item of data) {
+      const curKey = keyExtractor(item);
+      const children = childrenExtractor(item) ?? [];
+
+      if (curKey === key) {
+        res = true;
+        break;
+      }
+
+      if (children.length > 0) {
+        const temp = this.childrenHasKey(children, key);
+        if (temp) {
+          res = temp;
+          break;
+        }
+      }
+    }
+
+    return res;
+  };
+
   private viewItem = (data: any) => {
     const { keyExtractor, nameExtractor, childrenExtractor } = this.props;
     const { openKey } = this.state;
@@ -485,7 +509,9 @@ export default class TopNav<Data> extends BaseComponent<
         key={key}
         className={this.classNames(this.gpc("item"), {
           [this.gpc("active")]:
-            (!openKey && selectedKey === key) || openKey === key,
+            (!openKey && selectedKey === key) ||
+            openKey === key ||
+            (!openKey && this.childrenHasKey(children, selectedKey)),
         })}
         onClick={(e) => this.onClickViewItem(data, e.target as HTMLDivElement)}
       >
