@@ -21,3 +21,4 @@ subtitle: 顶部导航菜单
 | onChangeSelectedKey | 导航当前选择发生变化回调       | (key: string, data: any) => void                             | -          |
 | bgExtractor         | mode 为 expand-img 背景设置    | (data: any) => ReactNode \| null \| undefined                | -          |
 | descExtractor       | mode 为 expand-img 描述设置    | (data: any) => string \| null \| undefined                   | -          |
+| popupZIndex         | 弹窗层级                       | number                                                       | -          |

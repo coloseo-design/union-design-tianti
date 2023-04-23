@@ -41,6 +41,8 @@ export type SideNavProps<Data> = {
   mode: "dropdown" | "expand" | "expand-img";
   /** 当前选择的key */
   selectedKey: string;
+  /** 弹窗层级 */
+  popupZIndex: number;
   /** 导航当前选择发生变化回调 */
   onChangeSelectedKey?: (key: string, data: Data) => void;
   /** mode 为 expand-img 背景设置 */
@@ -230,14 +232,18 @@ export default class TopNav<Data> extends BaseComponent<
   };
 
   private openDropdown = (data: any[], div: HTMLDivElement) => {
-    const { keyExtractor, nameExtractor } = this.props;
+    const { keyExtractor, nameExtractor, popupZIndex } = this.props;
     const { left, top, width, height } = div.getBoundingClientRect();
     const selectedKey = this.getBindValue("selectedKey") ?? "";
 
     const view = (
       <div
         className={this.gpc("dropdown")}
-        style={{ left: left + width / 2, top: top + height + 4 }}
+        style={{
+          left: left + width / 2,
+          top: top + height + 4,
+          zIndex: popupZIndex,
+        }}
       >
         {data.map((i) => {
           const key = keyExtractor(i);
@@ -290,6 +296,7 @@ export default class TopNav<Data> extends BaseComponent<
       nameExtractor,
       childrenExtractor,
       size = "md",
+      popupZIndex,
     } = this.props;
     const selectedKey = this.getBindValue("selectedKey") ?? "";
     const { left, top, width, height } =
@@ -298,7 +305,7 @@ export default class TopNav<Data> extends BaseComponent<
     const view = (
       <div
         className={this.classNames(this.gpc("expand"), this.gpc(size))}
-        style={{ left, top: top + height, width }}
+        style={{ left, top: top + height, width, zIndex: popupZIndex }}
         onClick={(e) => e.nativeEvent.stopImmediatePropagation()}
       >
         {data.map((i) => {
@@ -357,6 +364,7 @@ export default class TopNav<Data> extends BaseComponent<
       bgExtractor,
       descExtractor,
       size = "md",
+      popupZIndex,
     } = this.props;
     const selectedKey = this.getBindValue("selectedKey") ?? "";
     const { left, top, width, height } =
@@ -365,7 +373,7 @@ export default class TopNav<Data> extends BaseComponent<
     const view = (
       <div
         className={this.classNames(this.gpc("expand-img"), this.gpc(size))}
-        style={{ left, top: top + height, width }}
+        style={{ left, top: top + height, width, zIndex: popupZIndex }}
         onClick={(e) => e.nativeEvent.stopImmediatePropagation()}
       >
         <div className={this.gpc("left")}>

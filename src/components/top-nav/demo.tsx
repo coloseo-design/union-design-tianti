@@ -195,6 +195,7 @@ const Demo = () => {
     <div style={{ margin: 30 }}>
       <h4>顶部导航 md 点击模式 dropdown</h4>
       <TopNav
+        popupZIndex={1000}
         data={data}
         mode="dropdown"
         keyExtractor={(i) => `${i.id}`}
