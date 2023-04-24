@@ -330,8 +330,6 @@ export default class SideNav<Data> extends BaseComponent<
     const key = keyExtractor(data);
     const children = childrenExtractor(data) ?? [];
     const hasChildren = children.length > 0;
-    const topActive =
-      level === 1 && this.childrenHasKey(children, selectedKey ?? "");
     let arrowIconType;
     if (openKeys.includes(key)) {
       arrowIconType = "up";
@@ -346,8 +344,10 @@ export default class SideNav<Data> extends BaseComponent<
           this.gpc("item"),
           this.gpc(`level${level}`),
           {
-            [this.gpc("active")]: selectedKey === key,
-            [this.gpc("top-active")]: topActive,
+            [this.gpc("active")]:
+              (level === 1 &&
+                this.childrenHasKey(children, selectedKey ?? "")) ||
+              selectedKey === key,
           }
         )}
         key={key}
@@ -394,7 +394,6 @@ export default class SideNav<Data> extends BaseComponent<
       this.props;
     const openKeys = this.getBindValue("openKeys") ?? [];
     const selectedKey = this.getBindValue("selectedKey");
-    const { openPopup } = this.state;
     const key = keyExtractor(data);
     const children = childrenExtractor(data) ?? [];
     const hasChildren = children.length > 0;
@@ -408,10 +407,9 @@ export default class SideNav<Data> extends BaseComponent<
           this.gpc(`level${level}`),
           {
             [this.gpc("active")]:
-              (level === 1 && selectedKey === key && !openPopup) ||
-              (level !== 1 && selectedKey === key && openPopup),
-            [this.gpc("top-active")]:
-              level === 1 && openKeys.includes(key) && openPopup,
+              this.childrenHasKey(children, selectedKey ?? "") ||
+              openKeys.includes(key) ||
+              selectedKey === key,
           }
         )}
         key={key}

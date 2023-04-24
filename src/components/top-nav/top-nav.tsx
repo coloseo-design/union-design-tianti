@@ -517,9 +517,9 @@ export default class TopNav<Data> extends BaseComponent<
         key={key}
         className={this.classNames(this.gpc("item"), {
           [this.gpc("active")]:
-            (!openKey && selectedKey === key) ||
+            selectedKey === key ||
             openKey === key ||
-            (!openKey && this.childrenHasKey(children, selectedKey)),
+            this.childrenHasKey(children, selectedKey),
         })}
         onClick={(e) => this.onClickViewItem(data, e.target as HTMLDivElement)}
       >
