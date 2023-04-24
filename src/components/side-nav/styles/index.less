@@ -113,8 +113,7 @@
       }
     }
 
-    & .@{sidenav}-item.@{sidenav}-active,
-    & .@{sidenav}-item.@{sidenav}-top-active {
+    & .@{sidenav}-item.@{sidenav}-active {
 
       &>.@{sidenav}-icon,
       &>.@{sidenav}-arrow,
@@ -123,7 +122,7 @@
       }
     }
 
-    & .@{sidenav}-item.@{sidenav}-active {
+    & .@{sidenav}-item.@{sidenav}-active:not(.@{sidenav}-level1) {
       background-color: @sidenav-item-bg-active-color;
 
       &:after {
