@@ -2,7 +2,6 @@ import React, { ReactNode, isValidElement, useContext } from 'react';
 import classNames from 'classnames';
 import TopNav from '../top-nav';
 import { ConfigContext } from '../config-provider/context';
-import { SideNavProps } from '../top-nav/top-nav';
 import Search from './search';
 import Logo from './logo';
 import Logo1 from './logo1';
@@ -29,7 +28,7 @@ const Header: React.FC<HeaderProps> = (props) => {
       <div className={`${prefix}-top-menu`}>
         {(topMenus || []).map((item: Menu | ReactNode, index: number) => (
           <div
-            key={isValidElement(item) ? index : (item as Menu).key}
+            key={index}
             onClick={(e) => {
               (item as Menu)?.onClick?.(e, (item as Menu).key);
             }}
@@ -68,7 +67,7 @@ const Header: React.FC<HeaderProps> = (props) => {
           {(menus || []).map((item: Menu | ReactNode, index: number) => (
             <div
               className={`${prefix}-menu`}
-              key={isValidElement(item) ? index : (item as Menu).key}
+              key={index}
               onClick={(e) => {
                 (item as Menu)?.onClick?.(e, (item as Menu)?.key);
               }}
@@ -84,7 +83,7 @@ const Header: React.FC<HeaderProps> = (props) => {
         </div>
       </div>
 
-      {navProps && <TopNav {...navProps as SideNavProps<any>} size={type === 'business' ? 'md' : 'xl'} />}
+      {navProps && <TopNav {...navProps} size={type === 'business' ? 'md' : 'xl'} />}
     </div>
   );
 };

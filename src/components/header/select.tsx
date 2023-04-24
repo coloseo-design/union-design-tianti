@@ -49,7 +49,7 @@ const SearchSelect: React.FC<{prefix?: string} & SelectProps> = (props) => {
         className={`${prefix}-wrapper-select`}
       >
         <span>{current?.label || ''}</span>
-        <Icon type={visible ? 'up' : 'down'} />
+        <Icon type={visible ? 'up2-line' : 'down2-line'} />
       </span>
     </Dropdown>
   );

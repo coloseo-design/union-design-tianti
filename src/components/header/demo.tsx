@@ -12,7 +12,7 @@ const Demo = () => {
     },
     {
       value: '2',
-      label: '选项一wedded显示出',
+      label: '选项一',
       key: '2',
     },
     {
@@ -22,14 +22,6 @@ const Demo = () => {
     },
   ];
   const menus = [
-    {
-      key: '1',
-      title: '公告',
-      icon: <Icon type="home" />,
-      onClick: (e: any, key: string) => {
-        console.log('==key', key);
-      },
-    },
     {
       key: '2',
       title: '公告',
@@ -46,10 +38,18 @@ const Demo = () => {
         console.log('==key', key);
       },
     },
-    <div key="7">
+    <div
+      key="7"
+      style={{
+        maxWidth: 80, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
+      }}
+    >
       自定义列表
       <Icon type="down" style={{ fontSize: 14 }} />
-      ,
+    </div>,
+    <div key="8" style={{ display: 'flex', alignItems: 'center', whiteSpace: 'nowrap' }}>
+      <Icon type="meeting-surface" style={{ fontSize: 20, marginRight: 8 }} />
+      <span>你好</span>
     </div>,
   ];
 
@@ -76,7 +76,7 @@ const Demo = () => {
         console.log('==key', key);
       },
     },
-    <div key="0">
+    <div key="01">
       自定义列表
       <Icon type="down" style={{ fontSize: 14 }} />
     </div>,
@@ -282,7 +282,7 @@ const Demo = () => {
 
   const navProps = {
     data,
-    mode: 'dropdown',
+    mode: 'dropdown' as any,
     keyExtractor: (i: Data) => `${i.id}`,
     nameExtractor: (i: Data) => i.name,
     childrenExtractor: (i: Data) => i.list,

@@ -1,5 +1,7 @@
-import { ReactNode } from 'react';
+import { CSSProperties, ReactNode } from 'react';
 import { SideNavProps } from '../top-nav/top-nav';
+
+export type HeaderNavProps = SideNavProps<any>;
 
 export interface HeaderProps {
   // type: 业务类business; 宣传类propaganda;综合类comprehensive;
@@ -10,7 +12,7 @@ export interface HeaderProps {
   showNav?: boolean; // 是否需要menu
   showBg?: boolean; // 是否展示背景
   topMenus?: (Menu | ReactNode)[]; // 只有综合类生效
-  navProps?: boolean | SideNavProps<any>; // 两边menu类型不一样
+  navProps?: SideNavProps<any>;
 }
 
 export interface SearchProps {
@@ -18,6 +20,7 @@ export interface SearchProps {
   onChange?: (evt: React.ChangeEvent<HTMLInputElement>) => void
   onSearch?: (value: string) => void;
   select?: boolean | SelectProps;
+  style?: CSSProperties;
   type?: 'primary' | 'default',
 }
 
