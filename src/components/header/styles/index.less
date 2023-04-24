@@ -1,0 +1,270 @@
+@import '../../style/themes/index';
+@import '../../style/mixins/index';
+
+@headers: ~'@{uni-prefix}-header';
+@search: ~'@{headers}-search';
+@headers-content: ~'@{headers}-content';
+@search-wrapper: ~'@{search}-wrapper';
+@search-select: ~'@{search}-wrapper-select';
+@header-menu:  ~'@{headers}-menu';
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-font-smoothing: antialiased;
+}
+
+.@{headers} {
+  color: @header-text-color;
+  width: 100%;
+  &-top-menu {
+    width: 100%;
+    height: 44px;
+    background-color: @header-top-menu-bg;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 0px 64px;
+    & > div {
+      padding: 3px 16px;
+      cursor: pointer;
+      &:nth-of-type(odd) {
+        border-right: 1px solid @header-border-color;
+        border-left: 1px solid @header-border-color;
+      }
+      &:last-child {
+        border-right: none;
+      }
+    }
+  }
+  &-content {
+    height: 56px;
+    background-color: @header-bg-color;
+    width: 100%;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 32px;
+    overflow: hidden;
+    &-no-menu {
+      &::after {
+        position: absolute;
+        left: 0px;
+        bottom: 0px;
+        content: ' ';
+        width: 100%;
+        height: 2px;
+        background-color: @header-primary-border-color;
+      }
+    }
+    &-bg {
+      position: absolute;
+      height: 100%;
+      right: 0px;
+      top: 0px;
+      left: 0px;
+      width: 100%;
+    }
+  }
+  &-left {
+    display: flex;
+    align-items: center;
+    position: relative;
+    &-logo {
+      width: 107px;
+      height: 30px;
+      margin-right: 20px;
+    }
+    &-title {
+      font-size: 18px;
+      font-weight: 500;
+      line-height: 25px;
+    }
+    &-search {
+      margin-left: 32px;
+    }
+  }
+  &-right {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    position: relative;
+    font-size: 14px;
+    .@{header-menu} {
+      display: inherit;
+      align-items: inherit;
+      margin-left: 24px;
+      line-height: 24px;
+      cursor: pointer;
+      &:first-child {
+        margin-left: 0px;
+      }
+      span {
+        display: inline-block;
+        &:last-child {
+          max-width: 128px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+      }
+      &-icon {
+        margin-right: 8px;
+        font-size: 20px;
+      }
+    }
+  }
+  &-search {
+    display: inline-block;
+    width: 220px;
+    height: 32px;
+    &-wrapper {
+      display: table;
+      width: 100%;
+      height: 100%;
+      position: relative;
+      box-sizing: border-box;
+      border-collapse: separate;
+      border-spacing: 0;
+      background-color:  @header-bg-color;
+      input {
+        width: 100%;
+        height: 100%;
+        padding: 4px 12px;
+        display: table-cell;
+        border-radius: 0px;
+        border: 1px solid @header-border-color;
+        border-radius: 4px;
+        outline: none;
+        font-size: 14px;
+        line-height: 22px;
+        &::placeholder {
+          font-size: 14px;
+          color: @header-search-placeholder-color;
+        }
+      }
+      &-select {
+        display: table-cell;
+        min-width: 66px;
+        height: 100%;
+        border: 1px solid @header-border-color;
+        border-top-left-radius: 4px;
+        border-bottom-left-radius: 4px;
+        border-right: none;
+        padding: 4px 8px;
+        position: relative;
+        line-height: 22px;
+        font-size: 14px;
+        color: @header-search-select-color;
+        max-width: 100px;
+        white-space: nowrap;
+        overflow: hidden;
+        cursor: pointer;
+        &::after {
+          content: ' ';
+          position: absolute;
+          top: 8px;
+          bottom: 8px;
+          right: 0px;
+          width: 0px;
+          border-right: 1px solid @header-border-color;
+        }
+        & > span:first-child {
+          display: inline-grid;
+          margin-right: 22px;
+          max-width: 62px;
+          overflow: hidden;
+        }
+        svg {
+          position: absolute;
+          top: 50%;
+          right: 12px;
+          transform: translateY(-50%);
+        }
+        & + input {
+          border-left: none;
+          border-top-left-radius: 0px;
+          border-bottom-left-radius: 0px;
+        }
+      }
+      &-icon {
+        position: absolute;
+        top: 50%;
+        right: 12px;
+        transform: translateY(-50%);
+        font-size: 16px;
+        cursor: pointer;
+        color: @header-search-select-color;
+      }
+      &-suffix {
+        display: table-cell;
+        cursor: pointer;
+        width: 40px;
+        height: 100%;
+        text-align: center;
+        font-size: 16px;
+        color: #fff;
+        background-color: @header-primary-border-color;
+        border-top-right-radius: 4px;
+        border-bottom-right-radius: 4px;
+      }
+    }
+    &-primary {
+      height: 36px;
+      width: 307px;
+      .@{search-wrapper} {
+        input {
+          border-color: @header-primary-border-color;
+          border-top-right-radius: 0px;
+          border-bottom-right-radius: 0px;
+          padding: 6px 16px;
+          color: @header-text-color;
+        }
+        .@{search-select} {
+          border-color: @header-primary-border-color;
+          padding: 6px 12px;
+          color: @header-text-color;
+        }
+        .@{search-select} + input {
+          padding: 6px 12px;
+        }
+      }
+    }
+  }
+  .@{headers-content}-propaganda, .@{headers-content}-comprehensive {
+    height: 88px;
+    .@{headers}-right {
+      font-size: 16px;
+    }
+    .@{headers}-left-logo {
+      width: 143px;
+      height: 40px;
+    }
+  }
+}
+
+.selectDown {
+  & > div:first-child {
+    min-width: 88px;
+    border-radius: 4px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  }
+  &-content {
+    width: 100%;
+    padding: 4px 0px;
+    color: @header-text-color;
+    & > div {
+      cursor: pointer;
+      height: 32px;
+      padding: 6px 16px;
+      line-height: 20px;
+      &:hover:not(.selectDown-content-selected) {
+        background-color: @header-select-hover-color;
+      }
+    }
+    &-selected {
+      background-color: @header-select-active-color;
+      color: @header-selected-color;
+    }
+  }
+}

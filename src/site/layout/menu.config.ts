@@ -43,6 +43,10 @@ export default [
     themeColor: '#AA3FA8',
     children: [
       {
+        title: 'Header 头部',
+        key: 'header',
+      },
+      {
         title: 'Affix 固钉',
         key: 'affix',
       },
