@@ -1,5 +1,5 @@
 import React from 'react';
-import { Select } from '../index';
+import { Select, Icon } from '../index';
 import './styles/index';
 
 const { Option, OptGroup } = Select;
@@ -66,7 +66,7 @@ const SelectDemo = () => {
       <h1>多选框</h1>
       <Select
         onChange={(value) => {
-          console.log('==values', value);
+          // console.log('==values', value);
         }}
         allowClear
         placeholder="请选择选项"
@@ -104,7 +104,7 @@ const SelectDemo = () => {
         <Option value="1">hhh </Option>
       </Select>
       <h1>分组选择</h1>
-      <Select style={{ width: 220 }}>
+      <Select style={{ width: 220 }} defaultValue="1">
         <OptGroup label="小标题">
           <Option value="1">下拉选项</Option>
           <Option value="2">下拉选项</Option>

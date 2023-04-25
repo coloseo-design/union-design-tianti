@@ -25,7 +25,7 @@ const Demo = () => {
     {
       key: '2',
       title: '公告',
-      icon: <Icon type="home" />,
+      icon: <Icon type="rational-surface" />,
       onClick: (e: any, key: string) => {
         console.log('==key', key);
       },
@@ -33,7 +33,7 @@ const Demo = () => {
     {
       key: '4',
       title: '展示岗位名称八个字',
-      icon: <Icon type="user" />,
+      icon: <Icon type="consistent-surface" />,
       onClick: (e: any, key: string) => {
         console.log('==key', key);
       },
@@ -56,6 +56,13 @@ const Demo = () => {
   const topMenus = [
     {
       key: '1',
+      title: '自定义',
+      onClick: (e: any, key: string) => {
+        console.log('==key', key);
+      },
+    },
+    {
+      key: '8',
       title: '自定义',
       onClick: (e: any, key: string) => {
         console.log('==key', key);
@@ -332,7 +339,7 @@ const Demo = () => {
         title="中国联通设计系统"
         type="propaganda"
         search={false}
-        menus={menus}
+        menus={menus.slice(1)}
       />
       <br />
       <br />
@@ -342,7 +349,7 @@ const Demo = () => {
         title="中国联通设计系统"
         search={{ ...inputProps }}
         type="propaganda"
-        menus={menus}
+        menus={menus.slice(1)}
         showBg
       />
       <br />
@@ -359,7 +366,7 @@ const Demo = () => {
           },
         }}
         type="propaganda"
-        menus={menus}
+        menus={menus.slice(1)}
         navProps={navProps}
       />
       <br />
@@ -370,7 +377,7 @@ const Demo = () => {
         title="中国联通设计系统"
         search={{ ...inputProps }}
         type="propaganda"
-        menus={menus}
+        menus={menus.slice(1)}
         navProps={navProps}
         showBg
       />
@@ -383,7 +390,7 @@ const Demo = () => {
         title="中国联通设计系统"
         search={false}
         type="comprehensive"
-        menus={menus}
+        menus={menus.slice(1)}
         topMenus={topMenus}
       />
       <br />
@@ -402,7 +409,7 @@ const Demo = () => {
         }}
         topMenus={topMenus}
         type="comprehensive"
-        menus={menus}
+        menus={menus.slice(1)}
       />
       <br />
       <br />
@@ -419,7 +426,7 @@ const Demo = () => {
         }}
         topMenus={topMenus}
         type="comprehensive"
-        menus={menus}
+        menus={menus.slice(1)}
         navProps={navProps}
       />
       <br />
@@ -437,7 +444,7 @@ const Demo = () => {
         }}
         topMenus={topMenus}
         type="comprehensive"
-        menus={menus}
+        menus={menus.slice(1)}
         navProps={navProps}
         showBg
       />

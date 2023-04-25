@@ -92,6 +92,10 @@
       color: @select-tag-icon-color;
     }
   }
+  &:not(&-disabled):hover, &:not(&-disabled):active {
+    border-color: @select-hover-border-color;
+    box-shadow: @select-box-shadow;
+  }
   &-disabled {
     background-color: @select-disabled-bg;
     color: @select-disabled-text-color;

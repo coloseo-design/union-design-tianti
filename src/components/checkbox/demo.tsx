@@ -5,9 +5,11 @@ import './styles/index';
 const { Group } = Checkbox;
 
 export default () => {
-  const [checked, setChecked] = useState(false);
-  const onChange = (values: string[]) => {
-    console.log('values', values);
+  const [checked1, setChecked] = useState(false);
+  const [values, setValues] = useState(['2', '5']);
+  const onChange = (val: string[]) => {
+    console.log('values123', val);
+    setValues(val);
   };
   const onChecked = (isChecked: boolean) => {
     console.log('isChecked', isChecked);
@@ -36,12 +38,12 @@ export default () => {
         <h1>多选基本用法</h1>
         <Checkbox value="1">未选中项</Checkbox>
         <Checkbox value="2" style={{ paddingLeft: 64 }}>未选悬停项</Checkbox>
-        <Checkbox value="3" style={{ paddingLeft: 64 }} checked={checked} onChange={onChecked}>选中项</Checkbox>
+        <Checkbox value="3" style={{ paddingLeft: 64 }} checked={checked1} onChange={onChecked}>选中项</Checkbox>
         <Checkbox value="3" style={{ paddingLeft: 64 }} disabled>未选失效项</Checkbox>
         <Checkbox value="3" style={{ paddingLeft: 64 }} disabled checked>选中失效项</Checkbox>
       </div>
       <h1 style={{ marginTop: 32 }}>横向排列排列</h1>
-      <Group onChange={onChange} value={['2', '5']}>
+      <Group onChange={onChange} value={values}>
         <Checkbox value="1">未选中项</Checkbox>
         <Checkbox value="2">未选悬停项</Checkbox>
         <Checkbox value="3" checked>选中项</Checkbox>
@@ -50,7 +52,7 @@ export default () => {
       </Group>
 
       <h1 style={{ marginTop: 32 }}>纵向排列</h1>
-      <Group direction="vertical" value={['a3', 'a5']} options={options} />
+      <Group direction="vertical" defaultValue={['a3', 'a5']} options={options} />
       <h1 style={{ marginTop: 32 }}>未全选状态</h1>
       <Checkbox indeterminate>我的选择</Checkbox>
     </div>
