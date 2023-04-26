@@ -24,7 +24,7 @@ export interface OptionType {
   children?: string | ReactNode;
 }
 
-type ValueType = string | string[] | OptionType | OptionType[]
+export type ValueType = string | string[] | OptionType | OptionType[]
 
 export interface SelectProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onChange'|'onSelect'|'onSearch'|'onClick' | 'defaultValue' | 'value'> {
   prefixCls?: string;
@@ -401,7 +401,7 @@ class Select extends React.Component<SelectProps, SelectState> {
         <div
           className={`${prefix}-suffix-icon`}
           style={{ color: isClear ? '#ACAFB9' : undefined }}
-          onClick={this.AllDelete}
+          onClick={() => isClear && this.AllDelete}
         >
           <Icon type={isClear ? 'close1-surface' : visible ? 'up' : 'down'} />
         </div>

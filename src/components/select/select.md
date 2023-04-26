@@ -25,8 +25,8 @@ subtitle: 选择框
 |style|选择框样式|object|--|
 |maxTagCount|多选模式下，最多显示的tag数量|number|--|
 |maxTagTextLength|多选模式下，每个tag最多显示的字符数|number|--|
-|onChange|value改变时触发|(value: string \| string[], label: string) => void|--|
-|onSelect|点击选项时触发|(value: string \| string[], label: string) => void|--|
+|onChange|value改变时触发|(value: string \| string[], {label: string, value: string}\|{label: string, value: string}[]) => void|--|
+|onSelect|点击选项时触发|(value: string \| string[]\|{label: string, value: string}\|{label: string, value: string}[]) => void|--|
 |onSearch|搜索时触发|(value: string) => void|--|
 | getPopupContainer       | 菜单渲染父节点。默认渲染到 body 上，如果你遇到菜单滚动定位问题，试试修改为滚动的区域，并相对其定位。   | function () => HTMLElement                                                             | document.body |
 

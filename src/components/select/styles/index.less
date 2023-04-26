@@ -135,8 +135,8 @@
     &:first-child {
       margin-top: 0px;
     }
-    &:hover:not(&-disabled) {
-      background-color: @select-item-selected-bg;
+    &:hover:not(&-disabled):not(&-selected) {
+      background-color:@select-item-hover-bg;
     }
     &-selected {
       background-color: @select-item-selected-bg;

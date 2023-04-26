@@ -135,7 +135,7 @@ export class Select<T extends SelectBaseData> extends React.Component<SelectProp
 
   renderSelect = ({ getPrefixCls }: ConfigConsumerProps) => {
     const {
-      data, value, getPopupContainer, size,
+      data, value, getPopupContainer,
     } = this.props;
     const {
       popupVisible, left, top, width,
@@ -149,11 +149,6 @@ export class Select<T extends SelectBaseData> extends React.Component<SelectProp
         className={classnames(`${prefix}-select`)}
         onClick={this.clickSelect}
         ref={this.getNode1}
-        style={{
-          height: size ? (size === 'default' ? 24 : 32) : undefined,
-          lineHeight: size ? (size === 'default' ? '22px' : '32px') : undefined,
-          background: size ? '#fff' : undefined,
-        }}
       >
         <div className={classnames(`${prefix}-tag-value`)}>
           {value}

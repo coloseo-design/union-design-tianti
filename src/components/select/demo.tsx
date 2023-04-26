@@ -1,5 +1,6 @@
 import React from 'react';
 import { Select, Icon } from '../index';
+import { ValueType } from './index';
 import './styles/index';
 
 const { Option, OptGroup } = Select;
@@ -48,11 +49,9 @@ const SelectDemo = () => {
       <hr style={{ marginTop: 16 }} />
       <h1>基础选择框</h1>
       <Select
-        onSelect={
-          (value, label) => {
-            console.log('--- value ', value, label);
-          }
-        }
+        onSelect={(val: ValueType) => {
+          console.log('==val', val);
+        }}
         allowClear
         getPopupContainer={() => document.querySelector('#select-demo')}
         placeholder="请选择选项"

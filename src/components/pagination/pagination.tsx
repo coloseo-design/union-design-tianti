@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import React, { ReactNode } from 'react';
 import { Icon } from '..';
-import { Select, SelectBaseData, SelectProps } from '../calendar/select';
 import { BaseComponent, BaseProps, BaseState } from '../common/base-component';
+import Select, { OptionType, ValueType } from '../select';
 
 export type PaginationProps = {
   /** 当前页数 */
@@ -139,20 +139,29 @@ export default class Pagination extends BaseComponent<PaginationProps, Paginatio
     if (!showSizeChanger) return null;
     if (hideOnSinglePage && totalPage === 1) return null;
 
+    const optionsData = pageSizeOptions?.reduce((a, b) => {
+      a.push({
+        value: `${b}`,
+        label: `${b}条/页`,
+      });
+      return a;
+    }, [] as OptionType[]) ?? [];
     return (
       <div className={this.gpc('size-changer')}>
         <Select
+          value={`${pageSize}`}
+          style={{
+            minWidth: 90,
+            height: size === 'default' ? 24 : 32,
+            padding: size === 'default' ? '1px 12px' : undefined,
+          }}
           onChange={this.selectOnChange}
-          value={`${pageSize}条/页`}
-          size={size}
-          data={pageSizeOptions?.reduce((a, b) => {
-            a.push({
-              key: b,
-              value: `${b}条/页`,
-            });
-            return a;
-          }, [] as SelectBaseData[]) ?? []}
-        />
+          dropdownStyle={{ padding: '4px 0px' }}
+        >
+          {(optionsData || []).map((i) => (
+            <Select.Option value={i.value} key={i.value as string}>{i.label}</Select.Option>
+          ))}
+        </Select>
       </div>
     );
   };
@@ -207,15 +216,14 @@ export default class Pagination extends BaseComponent<PaginationProps, Paginatio
     this.setState({ current: result }, this.callPropsOnChange);
   };
 
-  private selectOnChange: SelectProps<SelectBaseData>['onChange'] = (item) => {
-    const pageSize = item.key as number;
+  private selectOnChange = (val: ValueType) => {
+    const pageSize = parseInt(val as string, 10);
     const { total } = this.props;
     let { current } = this.state;
     const totalPage = Math.ceil(total! / pageSize);
-
     if (current > totalPage) current = totalPage;
     this.setState({ pageSize, current }, this.callPropsOnChange);
-  };
+  }
 
   private handleItem = () => {
     const { total } = this.props;
