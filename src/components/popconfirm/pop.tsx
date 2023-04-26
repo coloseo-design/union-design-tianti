@@ -204,8 +204,6 @@ class PopComponent extends React.Component<PopProps, PopconfirmState> {
   }
 
   handleClick = (evt: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
-    evt.nativeEvent.stopImmediatePropagation();
-    evt.stopPropagation();
     const { trigger } = this.props;
     if (trigger === 'click') {
       this.compute(evt.currentTarget);
@@ -213,8 +211,6 @@ class PopComponent extends React.Component<PopProps, PopconfirmState> {
   };
 
   handleOver = (evt: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
-    evt.nativeEvent.stopImmediatePropagation();
-    evt.stopPropagation();
     const target = evt.currentTarget;
     const {
       trigger, mouseEnterDelay = 0,
@@ -247,8 +243,6 @@ class PopComponent extends React.Component<PopProps, PopconfirmState> {
   };
 
   handleFocus = (evt: React.FocusEvent<HTMLSpanElement>) => {
-    evt.nativeEvent.stopImmediatePropagation();
-    evt.stopPropagation();
     const { trigger = 'hover' } = this.props;
     if (trigger === 'focus') {
       this.compute(evt.currentTarget);
@@ -256,8 +250,6 @@ class PopComponent extends React.Component<PopProps, PopconfirmState> {
   };
 
   handleCancel = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
-    e.stopPropagation();
-    e.nativeEvent.stopImmediatePropagation();
     this.setState({ visible: false });
     const { onCancel, onVisibleChange } = this.props;
     onCancel && onCancel(e);
@@ -265,13 +257,11 @@ class PopComponent extends React.Component<PopProps, PopconfirmState> {
   }
 
   handleOk = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
-    e.stopPropagation();
-    e.nativeEvent.stopImmediatePropagation();
     const { visible, onConfirm, onVisibleChange } = this.props;
     if (typeof visible === 'undefined') {
       this.setState({ visible: false });
+      onVisibleChange && onVisibleChange(false);
     }
-    onVisibleChange && onVisibleChange(false);
     onConfirm && onConfirm(e);
   }
 
@@ -285,13 +275,19 @@ class PopComponent extends React.Component<PopProps, PopconfirmState> {
   }
 
   showPop = () => {
-    const { trigger = 'hover' } = this.props;
-    trigger === 'hover' && this.setState({ visible: true });
+    const { trigger = 'hover', onVisibleChange } = this.props;
+    if (trigger === 'hover') {
+      this.setState({ visible: true });
+      onVisibleChange?.(true);
+    }
   };
 
   hidePop = () => {
-    const { trigger = 'hover' } = this.props;
-    trigger === 'hover' && this.setState({ visible: false });
+    const { trigger = 'hover', onVisibleChange } = this.props;
+    if (trigger === 'hover') {
+      this.setState({ visible: false });
+      onVisibleChange?.(false);
+    }
   }
 
   renderPopConfirm = ({ getPrefixCls }: ConfigConsumerProps) => {
@@ -396,10 +392,6 @@ class PopComponent extends React.Component<PopProps, PopconfirmState> {
               transition: trigger === 'hover' ? 'visibility .2s ease-in-out' : undefined,
             }}
             ref={this.getNode}
-            onClick={(e) => {
-              e.stopPropagation();
-              e.nativeEvent.stopImmediatePropagation();
-            }}
             onMouseOver={this.showPop}
             onMouseOut={this.hidePop}
           >

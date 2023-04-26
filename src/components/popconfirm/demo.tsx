@@ -29,17 +29,19 @@ const PopconfirmDemo: React.FC<unknown> = () => {
           getPopupContainer={() => document.getElementById('pop')}
           onConfirm={onConfirm}
           overlayStyle={{ maxWidth: 200 }}
+          onVisibleChange={(v) => setVisible(v)}
           onCancel={() => setVisible(false)}
           okButtonProps={{ loading }}
           visible={visible}
         >
-          <Button onClick={() => setVisible(!visible)}>topLeft</Button>
+          <Button>topLeft</Button>
         </Popconfirm>
         <Popconfirm
           title="你是否确定这是一个气泡确认框"
           placement="top"
           onVisibleChange={(v) => setVisible1(v)}
           getPopupContainer={() => document.getElementById('pop')}
+          onConfirm={() => setVisible1(false)}
           visible={visible1}
         >
           <Button style={{ margin: 24 }}>top</Button>
@@ -47,7 +49,6 @@ const PopconfirmDemo: React.FC<unknown> = () => {
         <Popconfirm
           title="你是否确定这是一个气泡确认框？"
           placement="topRight"
-          // defaultVisible
         >
           <Button style={{ margin: 24 }}>topRight</Button>
         </Popconfirm>

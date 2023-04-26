@@ -301,28 +301,32 @@ class Select extends React.Component<SelectProps, SelectState> {
   }
 
   renderTag = (list: OptionType[] = [], prefix: string) => {
-    const { maxTagCount } = this.props;
+    const { maxTagCount, placeholder } = this.props;
     const { childProps } = this.state;
     const data = maxTagCount ? list.slice(0, maxTagCount) : list;
     const tagContain = classnames(`${prefix}-tag-contain`);
     const tagCls = classnames(`${prefix}-tag`);
     const count = list.length - (maxTagCount || 0);
     return (
-      <div className={tagContain}>
-        {(data || []).map((item) => {
-          const tem = childProps?.find((i) => i.value === item.value);
-          return (
-            <div className={tagCls} key={item.value as string}>
-              <span>{tem?.label || tem?.children || item.label || item?.children || ''}</span>
-              <Icon
-                type="close"
-                onClick={() => this.handleDelete((tem?.value || item.value) as string)}
-              />
-            </div>
-          );
-        })}
-        {maxTagCount && count > 0 && <div className={tagCls}>{`+${count}...`}</div>}
-      </div>
+      <>
+        {list.length === 0 ? placeholder : (
+          <div className={tagContain}>
+            {(data || []).map((item) => {
+              const tem = childProps?.find((i) => i.value === item.value);
+              return (
+                <div className={tagCls} key={item.value as string}>
+                  <span>{tem?.label || tem?.children || item.label || item?.children || ''}</span>
+                  <Icon
+                    type="close"
+                    onClick={() => this.handleDelete((tem?.value || item.value) as string)}
+                  />
+                </div>
+              );
+            })}
+            {maxTagCount && count > 0 && <div className={tagCls}>{`+${count}...`}</div>}
+          </div>
+        )}
+      </>
     );
   }
 

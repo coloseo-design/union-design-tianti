@@ -118,14 +118,11 @@ class Dropdown extends React.Component<DropdownProps, DropdownState> {
   };
 
   compute = (target: HTMLElement) => {
-    // evt.stopPropagation();
-    // evt.nativeEvent.stopImmediatePropagation();
     const { visible } = this.state;
     const { visible: propsVisible } = this.props;
     const {
       placement = 'bottomCenter', arrow = false, onVisibleChange, getPopupContainer,
     } = this.props;
-    // const target = evt.nativeEvent.target as HTMLSpanElement;
     if (target && this.node) {
       const { height: contentHeight, width: contentWidth } = this.node.getBoundingClientRect();
       const {
@@ -181,6 +178,7 @@ class Dropdown extends React.Component<DropdownProps, DropdownState> {
       placement = 'bottomCenter',
       overlay,
       getPopupContainer,
+      onVisibleChange,
       overlayStyle,
       trigger = ['hover'],
     } = this.props;
@@ -194,7 +192,13 @@ class Dropdown extends React.Component<DropdownProps, DropdownState> {
     });
 
     let TChildren = (
-      <span>
+      <span
+        ref={this.getChildRef}
+        onClick={this.click}
+        onMouseOver={this.over}
+        onMouseLeave={this.out}
+        onContextMenu={this.handleContextMenu}
+      >
         {children}
       </span>
     );
@@ -218,8 +222,6 @@ class Dropdown extends React.Component<DropdownProps, DropdownState> {
           children.props.onContextMenu && children.props.onContextMenu(evt);
         },
       });
-    } else {
-      throw new Error(' props children must be ReactNode');
     }
 
     return (
@@ -230,9 +232,18 @@ class Dropdown extends React.Component<DropdownProps, DropdownState> {
             className={dropwrapper}
             style={{ left: x, top: y, ...overlayStyle }}
             ref={this.getNode}
-            onMouseOver={() => trigger.indexOf('hover') >= 0 && this.setState({ visible: true })}
-            onMouseOut={() => trigger.indexOf('hover') >= 0 && this.setState({ visible: false })}
-            onClick={(e) => { e.stopPropagation(); e.nativeEvent.stopImmediatePropagation(); }}
+            onMouseOver={() => {
+              if (trigger.indexOf('hover') >= 0) {
+                this.setState({ visible: true });
+                onVisibleChange?.(true);
+              }
+            }}
+            onMouseOut={() => {
+              if (trigger.indexOf('hover') >= 0) {
+                this.setState({ visible: false });
+                onVisibleChange?.(false);
+              }
+            }}
           >
             {arrow && <div className={arrowStyle} />}
             <div className={containter}>
