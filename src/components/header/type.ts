@@ -40,5 +40,5 @@ export interface Menu {
   key: string;
   title: string | React.ReactNode;
   icon?: React.ReactNode;
-  onClick: (evt: React.MouseEvent<HTMLElement>, key: string) => void;
+  onClick?: (evt: React.MouseEvent<HTMLElement>, key: string) => void;
 }
