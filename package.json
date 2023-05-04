@@ -1,6 +1,6 @@
 {
 	"name": "union-design",
-	"version": "1.0.40",
+	"version": "1.0.41",
 	"license": "MIT",
 	"description": "设计系统本地开发",
 	"files": [
@@ -21,12 +21,12 @@
 		"demo": "npx gulp md"
 	},
 	"dependencies": {
+		"@uni/icons-react": "^2.0.2",
 		"async-validator": "^3.5.1",
 		"classnames": "^2.2.6",
 		"dayjs": "^1.10.4",
 		"enquire.js": "^2.1.6",
-		"omit.js": "^1.0.2",
-		"@uni/icons-react": "^2.0.0"
+		"omit.js": "^1.0.2"
 	},
 	"devDependencies": {
 		"@types/classnames": "^2.2.11",
@@ -45,7 +45,7 @@
 		"react-dom": "^16.8.0",
 		"react-router-dom": "^5.2.0",
 		"through2": "^4.0.2",
-		"union-tool": "^0.1.1"
+		"union-tool": "^0.1.2"
 	},
 	"peerDependencies": {
 		"react": ">=16.8.0",
