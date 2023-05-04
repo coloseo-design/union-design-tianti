@@ -13,7 +13,7 @@
 	"scripts": {
 		"lint": "union-tool run lint source=src/components",
 		"compile": "union-tool run compile source=src/components",
-		"dev": "node injector.js env=development && union-tool run dev",
+		"dev": "export NODE_OPTIONS=--openssl-legacy-provider && node injector.js env=development && union-tool run dev",
 		"commit": "npx git-cz",
 		"init:commit": "npx commitizen init cz-conventional-changelog --yarn --dev --exact",
 		"version": "conventional-changelog -p angular -i CHANGELOG.md -s && git add CHANGELOG.md",
