@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import React, {
   ReactNode, Component, forwardRef, createElement,
 } from 'react';

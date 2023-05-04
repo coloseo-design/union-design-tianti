@@ -81,3 +81,4 @@ export { default as NewMenu } from './new-menu';
 
 export { default as SideNav } from './side-nav';
 export { default as TopNav } from './top-nav';
+export { default as Header } from './header';
