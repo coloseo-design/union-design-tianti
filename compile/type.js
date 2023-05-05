@@ -21,8 +21,8 @@ const srcs = (src) => {
     `!${path.join(src, 'es/**/*.ts')}`,
     `!${path.join(src, 'src/**/*.tsx')}`,
     `!${path.join(src, 'src/**/*.ts')}`,
-    `!${path.join(src, 'node_modules', '/**/*.ts')}`,
-    `!${path.join(src, 'node_modules', '/**/*.tsx')}`,
+    `!${path.join(src, 'node_modules/**/*.ts')}`,
+    `!${path.join(src, 'node_modules/**/*.tsx')}`,
   ];
   return list;
 };

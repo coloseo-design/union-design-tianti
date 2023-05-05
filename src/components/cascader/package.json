@@ -1,6 +1,6 @@
 {
   "name": "@union-design/cascader",
-  "version": "0.0.1",
+  "version": "0.0.4",
   "description": "",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -23,11 +23,11 @@
   "devDependencies": {
     "@types/classnames": "^2.3.1",
     "@types/react-dom": "^18.0.11",
-    "@union-design/config-provider": "workspaces/src/components/*",
-    "@union-design/icon": "workspaces/src/components/*",
-    "@union-design/portal": "workspaces/src/components/*",
-    "@union-design/style": "workspaces/src/components/*",
-    "@union-design/utils": "workspaces/src/components/*",
+    "@union-design/config-provider": "^0.0.4",
+    "@union-design/icon": "^0.0.4",
+    "@union-design/portal": "^0.0.4",
+    "@union-design/style": "^0.0.4",
+    "@union-design/utils": "^0.0.4",
     "react": "^16.8.0",
     "react-dom": "^16.8.0"
   }

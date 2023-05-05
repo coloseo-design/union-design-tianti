@@ -1,6 +1,6 @@
 {
   "name": "@union-design/auto-complete",
-  "version": "0.0.1",
+  "version": "0.0.4",
   "description": "",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -16,10 +16,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@union-design/icon": "workspaces/src/components/*",
-    "@union-design/portal": "workspaces/src/components/*",
-    "@union-design/style": "workspaces/src/components/*",
-    "@union-design/utils": "workspaces/src/components/*",
+    "@union-design/icon": "^0.0.4",
+    "@union-design/portal": "^0.0.4",
+    "@union-design/style": "^0.0.4",
+    "@union-design/utils": "^0.0.4",
     "classnames": "^2.3.2",
     "omit.js": "^2.0.2",
     "union-tool": "^0.1.2"

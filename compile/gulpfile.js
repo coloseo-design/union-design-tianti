@@ -18,6 +18,7 @@ if (taskType === 'single') {
     const dist = path.resolve(process.cwd(), `src/components/${item}`);
     clean(path.resolve(dist, 'es'));
     clean(path.resolve(dist, 'lib'));
+    clean(path.resolve(dist, 'node_modules'));
     const t = series(
       parallel(() => dts('es', item)),
       parallel(() => lessCompile('es', item)),
