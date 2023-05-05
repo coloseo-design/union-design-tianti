@@ -1,1 +1,1 @@
-export { default } from './menu';
+export { default, MENU_TAG_MENU } from './menu';

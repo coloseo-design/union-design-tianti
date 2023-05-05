@@ -1,0 +1,32 @@
+{
+  "name": "@union-design/skeleton",
+  "version": "0.0.1",
+  "description": "",
+  "main": "lib/index.js",
+  "module": "es/index.js",
+  "typings": "lib/index.d.ts",
+  "files": [
+    "lib",
+    "es"
+  ],
+  "scripts": {
+    "start": "export NODE_OPTIONS=--openssl-legacy-provider && union-tool run dev",
+    "test": "echo Error: no test specified && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@union-design/base-component": "workspaces/src/components/*",
+    "@union-design/config-provider": "workspaces/src/components/*",
+    "@union-design/style": "workspaces/src/components/*",
+    "classnames": "^2.3.2",
+    "omit.js": "^2.0.2",
+    "union-tool": "^0.1.2"
+  },
+  "devDependencies": {
+    "@types/classnames": "^2.3.1",
+    "@types/react-dom": "^18.0.11",
+    "react": "^16.8.0",
+    "react-dom": "^16.8.0"
+  }
+}

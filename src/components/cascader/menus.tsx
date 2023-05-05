@@ -4,8 +4,8 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable max-len */
 import React from 'react';
-import { ConfigConsumer } from '../config-provider';
-import Icon from '../icon';
+import { ConfigConsumer } from '@union-design/config-provider';
+import Icon from '@union-design/icon';
 import { CascaderOptionType, FieldNamesType } from './types/common';
 import { arrayTreeFilter, getFieldName } from './utils';
 
@@ -53,7 +53,7 @@ class Menus extends React.Component<MenusProps> {
       .map((activeOption) => activeOption[childrenKeyName])
       .filter((activeOption) => !!activeOption);
     result.unshift(options);
-    return result;
+    return result as CascaderOptionType[][];
   }
 
   getOption = (option: CascaderOptionType, menuIndex: number) => {
@@ -65,16 +65,16 @@ class Menus extends React.Component<MenusProps> {
     const valueKeyName = getFieldName('value', this.props.fieldNames);
     const labelKeyName = getFieldName('label', this.props.fieldNames);
     let expandIconNode = null;
-    const hasChildren = option[childrenKeyName] && option[childrenKeyName].length > 0;
+    const hasChildren = option[childrenKeyName] && (option[childrenKeyName] as any)?.length > 0;
     if (hasChildren) {
       expandIconNode = <Icon type="right" className={menuIconCls} />;
     }
-    const isActive = this.props.activeValue?.includes(option[valueKeyName]);
+    const isActive = this.props.activeValue?.includes(option[valueKeyName] as string);
     return (
       <li
-        key={option[valueKeyName]}
+        key={option[valueKeyName] as string}
         className={isActive ? 'active' : (option.disabled ? 'disabled' : '')}
-        title={option[labelKeyName]}
+        title={option[labelKeyName] as string}
         onClick={onSelect}
         role="menuitem"
         onMouseDown={(e) => e.preventDefault()}

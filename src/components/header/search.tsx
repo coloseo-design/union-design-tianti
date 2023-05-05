@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import classNames from 'classnames';
-import Icon from '../icon';
+import Icon from '@union-design/icon';
 import { SearchProps, SelectProps } from './type';
 import SearchSelect from './select';
 

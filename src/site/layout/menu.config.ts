@@ -75,10 +75,6 @@ export default [
         key: 'top-nav',
       },
       {
-        title: 'newMenu 新菜单',
-        key: 'new-menu',
-      },
-      {
         title: 'Steps 步骤条',
         key: 'steps',
       },

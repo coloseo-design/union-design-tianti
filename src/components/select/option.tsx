@@ -2,9 +2,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React from 'react';
 import classnames from 'classnames';
-import { ConfigConsumer, ConfigConsumerProps } from '../config-provider/context';
+import Checkbox from '@union-design/checkbox';
+import { ConfigConsumer, ConfigConsumerProps } from '@union-design/config-provider';
 import { SelectContext } from './context';
-import Checkbox from '../checkbox';
 import { OptionType } from './select';
 
 interface commonParams {

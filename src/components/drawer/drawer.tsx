@@ -2,9 +2,9 @@
 import React, { createRef, CSSProperties, ReactNode } from 'react';
 import { createPortal } from 'react-dom';
 
-import { BaseComponent, BaseProps, BaseState } from '../common/base-component';
-import { animation } from '../utils/animation';
-import Icon from '../icon';
+import { BaseComponent, BaseProps, BaseState } from '@union-design/base-component';
+import { animation } from '@union-design/utils';
+import Icon from '@union-design/icon';
 
 const DRAWER_NAME = 'UNION_DRAWER';
 
@@ -80,7 +80,7 @@ export default class extends BaseComponent<DrawerProps, DrawerState> {
       document.body.appendChild(this.bodyDrawerNode);
       const {
         whenChildrenOpen, placement, wh,
-      } = this.props as unknown;
+      } = this.props as any;
       if (this.props.visible) {
         if (typeof whenChildrenOpen === 'function') {
           whenChildrenOpen();
@@ -112,7 +112,7 @@ export default class extends BaseComponent<DrawerProps, DrawerState> {
       if (preProps.visible !== this.props.visible) {
         const {
           whenChildrenOpen, whenChildrenClose, placement, wh,
-        } = this.props as unknown;
+        } = this.props as any;
         if (this.props.visible) {
           if (typeof whenChildrenOpen === 'function') {
             whenChildrenOpen();
@@ -201,9 +201,9 @@ export default class extends BaseComponent<DrawerProps, DrawerState> {
               )}
             </div>
             <div className="body" ref={this.bodyRef}>
-              {React.Children.map(children, (child: unknown) => {
+              {React.Children.map(children, (child: any) => {
                 if (child?.type?.tag === DRAWER_NAME) {
-                  return React.cloneElement(child, {
+                  return React.cloneElement(child as any, {
                     whenChildrenOpen: this.whenChildrenOpen,
                     whenChildrenClose: this.whenChildrenClose,
                   });
@@ -271,7 +271,7 @@ export default class extends BaseComponent<DrawerProps, DrawerState> {
     };
 
     private whenChildrenOpen = () => {
-      const { whenChildrenOpen, placement, distance } = this.props as unknown;
+      const { whenChildrenOpen, placement, distance } = this.props as any;
       if (typeof whenChildrenOpen === 'function') {
         whenChildrenOpen();
       }
@@ -285,7 +285,7 @@ export default class extends BaseComponent<DrawerProps, DrawerState> {
     };
 
     private whenChildrenClose = () => {
-      const { whenChildrenClose, placement, distance } = this.props as unknown;
+      const { whenChildrenClose, placement, distance } = this.props as any;
       if (typeof whenChildrenClose === 'function') {
         whenChildrenClose();
       }

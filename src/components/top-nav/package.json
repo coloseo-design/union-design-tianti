@@ -1,0 +1,32 @@
+{
+  "name": "@union-design/top-nav",
+  "version": "0.0.1",
+  "description": "",
+  "main": "lib/index.js",
+  "module": "es/index.js",
+  "typings": "lib/index.d.ts",
+  "files": [
+    "lib",
+    "es"
+  ],
+  "devDependencies": {},
+  "dependencies": {
+    "@union-design/base-component": "workspaces/src/components/*",
+    "@union-design/icon": "workspaces/src/components/*",
+    "@union-design/style": "workspaces/src/components/*",
+    "@union-design/utils": "workspaces/src/components/*",
+    "classnames": "^2.3.2",
+    "omit.js": "^2.0.2",
+    "union-tool": "^0.1.2"
+  },
+  "scripts": {
+    "start": "export NODE_OPTIONS=--openssl-legacy-provider && union-tool run dev",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://gitlab.tianti.tg.unicom.local/muses/union-design.git"
+  },
+  "author": "",
+  "license": "ISC"
+}

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import classNames from 'classnames';
-import Icon from '../icon/index';
-import { ConfigConsumer, ConfigConsumerProps } from '../config-provider';
+import Icon from '@union-design/icon';
+import { ConfigConsumer, ConfigConsumerProps } from '@union-design/config-provider';
 
 export interface SpinProps extends React.HTMLAttributes<HTMLDivElement> {
   /* 用户自定义类前缀，默认uni-input */

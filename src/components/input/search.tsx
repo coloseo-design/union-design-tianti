@@ -1,21 +1,21 @@
 import React, { Component, createRef } from 'react';
+import Icon from '@union-design/icon';
 import Input, { BaseInputProps, InputState } from './input';
-import Icon from '../icon';
 
 class Search extends Component<BaseInputProps, InputState> {
   render(): React.ReactNode {
     const { onSearch, onPressEnter } = this.props;
     const ref = createRef();
-    const handleSearch = (e: Event) => {
-      onSearch && onSearch(ref.current.value, e);
+    const handleSearch = (e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
+      onSearch && onSearch((ref.current as any)?.value, e as any);
     };
 
     const onKeyPress = (e: { key: string; }) => {
       // e.preventDefault();
       // e.stopPropagation();
-      if (e.key === 'Enter') {
-        onSearch && onSearch(ref.current.value, ref.current);
-        onPressEnter && onPressEnter(ref.current.value, ref.current);
+      if (e.key === 'Enter' && ref.current) {
+        onSearch && onSearch((ref.current as any)?.value, ref.current as any);
+        onPressEnter && onPressEnter((ref.current as any)?.value);
       }
     };
 

@@ -1,7 +1,7 @@
 import React, { HTMLAttributes } from 'react';
 import classNames from 'classnames';
-import { ConfigConsumer, ConfigConsumerProps } from '../config-provider/context';
-import Icon from '../icon';
+import { ConfigConsumer, ConfigConsumerProps } from '@union-design/config-provider';
+import Icon from '@union-design/icon';
 
 export type AlertType = 'error' | 'warning' | 'success' | 'info';
 

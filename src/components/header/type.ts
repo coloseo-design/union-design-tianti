@@ -1,5 +1,5 @@
 import { CSSProperties, ReactNode } from 'react';
-import { SideNavProps } from '../top-nav/top-nav';
+import { SideNavProps } from '@union-design/top-nav';
 
 export type HeaderNavProps = SideNavProps<any>;
 

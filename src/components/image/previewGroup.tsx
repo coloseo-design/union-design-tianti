@@ -1,7 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 import React, { Component } from 'react';
 import classNames from 'classnames';
-import { ConfigConsumer, ConfigConsumerProps } from '../config-provider';
+import { ConfigConsumer, ConfigConsumerProps } from '@union-design/config-provider';
 
 export interface PreviewGroupProps extends React.HTMLAttributes<HTMLDivElement> {
   prefixCls?: string;
@@ -9,7 +9,7 @@ export interface PreviewGroupProps extends React.HTMLAttributes<HTMLDivElement> 
 
 export const context = React.createContext({
   isPreviewGroup: false,
-  previewUrls: [],
+  previewUrls: [] as any[],
 });
 
 const { Provider } = context;
@@ -25,12 +25,12 @@ class PreviewGroup extends Component<PreviewGroupProps> {
       // [`${prefix}-error`]: error,
     });
 
-    const previewUrls = React.Children.toArray(children).map((child) => child?.props?.src);
+    const previewUrls: any[] = React.Children.toArray(children).map((child: any) => child?.props?.src);
     const toArrayChildren = React.Children.toArray(children);
     let _children = children;
     if (toArrayChildren.length) {
       _children = React.Children.map(children,
-        (child, index) => React.cloneElement(child, { current: index }));
+        (child: any, index) => React.cloneElement(child, { current: index }));
     }
 
     return (

@@ -1,10 +1,9 @@
 /* eslint-disable max-len */
 import React, { useContext } from 'react';
 import classnames from 'classnames';
+import { breakpoints, BaseProps, ResponsiveColProps } from '@union-design/utils';
+import { ConfigContext } from '@union-design/config-provider';
 import { RowContenxt } from './context';
-import { breakpoints } from '../utils/responsive-observe';
-import { BaseProps, ResponsiveColProps } from '../utils/type';
-import { ConfigContext } from '../config-provider/context';
 
 interface ResponsiveColComponentProps extends ResponsiveColProps, BaseProps, React.HTMLAttributes<HTMLDivElement> {
 

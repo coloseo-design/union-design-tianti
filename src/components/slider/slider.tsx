@@ -3,7 +3,7 @@ import React, {
   useCallback, useContext, useEffect, useState,
 } from 'react';
 import classnames from 'classnames';
-import { ConfigContext } from '../config-provider/context';
+import { ConfigContext } from '@union-design/config-provider';
 import { SliderProps } from './type';
 
 let canDrop = false;

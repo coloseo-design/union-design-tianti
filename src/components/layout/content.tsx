@@ -1,6 +1,6 @@
 import React, { Component, CSSProperties } from 'react';
 import classNames from 'classnames';
-import { ConfigConsumer, ConfigConsumerProps } from '../config-provider';
+import { ConfigConsumer, ConfigConsumerProps } from '@union-design/config-provider';
 
 export interface ContentProps extends React.HTMLAttributes<HTMLElement> {
   /* 用户自定义类前缀，默认uni-layout */

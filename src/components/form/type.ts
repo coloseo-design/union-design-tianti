@@ -1,7 +1,6 @@
 /* eslint-disable max-len */
-import React, { HtmlHTMLAttributes } from 'react';
-import { BaseProps, ResponsiveColProps } from '../utils/type';
-import { ConfigConsumerProps } from '../config-provider';
+import React from 'react';
+import { BaseProps, ResponsiveColProps } from '@union-design/utils';
 
 interface FailedResponseType {
   errors: FormErrors;
@@ -52,13 +51,15 @@ export interface FormContextProps extends FormCommmonProps{
   /** 表单错误收集 */
   onError: (name: string, action: any) => void;
   /** 表单提交事件 */
-  onSubmit: (evt: React.MouseEvent<HTMLElement>) => void;
+  onSubmit: () => void;
   /** 表单的校验状态 */
   // isValidating: boolean;
   /** formItem的校验状态 */
   status: FormStatus;
 
   onStatus: (name: string, s: boolean) => void;
+
+  isValidating?: boolean
 }
 
 // eslint-disable-next-line max-len

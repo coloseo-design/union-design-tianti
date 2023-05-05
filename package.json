@@ -1,6 +1,6 @@
 {
 	"name": "union-design",
-	"version": "1.0.42",
+	"version": "1.0.40",
 	"license": "MIT",
 	"description": "设计系统本地开发",
 	"files": [
@@ -13,6 +13,8 @@
 	"scripts": {
 		"lint": "union-tool run lint source=src/components",
 		"compile": "union-tool run compile source=src/components",
+		"compile:single": "node --max_old_space_size=8192 compile/run.js task=single",
+		"compile:all": "node --max_old_space_size=8192 compile/run.js task=all",
 		"dev": "export NODE_OPTIONS=--openssl-legacy-provider && node injector.js env=development && union-tool run dev",
 		"commit": "npx git-cz",
 		"init:commit": "npx commitizen init cz-conventional-changelog --yarn --dev --exact",
@@ -20,6 +22,10 @@
 		"predev": "yarn demo",
 		"demo": "npx gulp md"
 	},
+	"private": true,
+	"workspaces": [
+		"src/components/*"
+	],
 	"dependencies": {
 		"@uni/icons-react": "^2.0.0",
 		"async-validator": "^3.5.1",
@@ -45,7 +51,7 @@
 		"react-dom": "^16.8.0",
 		"react-router-dom": "^5.2.0",
 		"through2": "^4.0.2",
-		"union-tool": "^0.1.1"
+		"union-tool": "^0.1.2"
 	},
 	"peerDependencies": {
 		"react": ">=16.8.0",

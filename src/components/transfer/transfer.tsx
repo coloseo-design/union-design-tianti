@@ -1,14 +1,14 @@
 import React, { ChangeEvent } from 'react';
 import classNames from 'classnames';
-import { ConfigConsumer, ConfigConsumerProps } from '../config-provider/context';
+import { ConfigConsumer, ConfigConsumerProps } from '@union-design/config-provider';
+import Button from '@union-design/button';
+import Icon from '@union-design/icon';
+import Checkbox from '@union-design/checkbox';
+import Input from '@union-design/input';
 import {
   TransferProps, TransferItem, RenderResultObject, RenderResult, TransferDirection,
 } from './type';
-import Button from '../button';
-import Icon from '../icon';
-import Checkbox from '../checkbox';
 import TItem from './item';
-import Input from '../input';
 
 export interface TransferState {
   targetKeys: string[]; // 右边里面keys的集合
@@ -22,6 +22,7 @@ export interface TransferState {
   allLeftChecked: boolean;
 }
 
+const { Search } = Input;
 const defaultRender = () => null;
 function isRenderResultPlainObject(result: RenderResult) {
   return (
@@ -171,7 +172,7 @@ class Transfer extends React.Component<TransferProps, TransferState> {
     const optionSearchTrue: TransferItem[] = [];
     if (filterOption) { // 自定义搜索
       (dataSource || []).filter((i) => targetKeys.indexOf(i.key) === -1).forEach((j) => {
-        const flag = filterOption(event.target.value, j);
+        const flag = filterOption(event.target.value, j as any);
         flag && optionSearchTrue.push(j);
       });
     }
@@ -195,7 +196,7 @@ class Transfer extends React.Component<TransferProps, TransferState> {
     const optionSearchTrue: TransferItem[] = [];
     if (filterOption) { // 自定义搜索
       (tData || []).forEach((j) => {
-        const flag = filterOption(event.target.value, j);
+        const flag = filterOption(event.target.value, j as any);
         flag && optionSearchTrue.push(j);
       });
     }
@@ -272,7 +273,7 @@ class Transfer extends React.Component<TransferProps, TransferState> {
           </div>
           <div
             className={`${tranList}-header-right`}
-            title={direction === 'left' ? titles[0] : titles[1]}
+            title={(direction === 'left' ? titles[0] : titles[1]) as string}
             style={{ maxWidth: showSearch ? '50%' : '80%' }}
           >
             {direction === 'left' ? titles[0] : titles[1]}
@@ -282,7 +283,7 @@ class Transfer extends React.Component<TransferProps, TransferState> {
           {showSearch
             && (
             <div style={{ padding: '0px 12px' }}>
-              <Input.Search
+              <Search
                 style={{ width: '100%', marginBottom: 4 }}
                 onChange={direction === 'left' ? this.handleLeftSearch : this.handleRightSearch}
                 placeholder="请输入搜索内容"

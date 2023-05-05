@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 import React, { DOMAttributes, InputHTMLAttributes, RefObject } from 'react';
-import { BaseComponent, BaseProps } from '../../common/base-component';
+import { BaseComponent, BaseProps } from '@union-design/base-component';
 
-import Icon from '../../icon';
+import Icon from '@union-design/icon';
 
 export type InputRef = RefObject<HTMLInputElement>;
 

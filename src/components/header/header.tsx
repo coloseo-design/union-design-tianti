@@ -1,7 +1,7 @@
 import React, { ReactNode, isValidElement, useContext } from 'react';
 import classNames from 'classnames';
-import TopNav from '../top-nav';
-import { ConfigContext } from '../config-provider/context';
+import TopNav from '@union-design/top-nav';
+import { ConfigContext } from '@union-design/config-provider';
 import Search from './search';
 import Logo from './logo';
 import Logo1 from './logo1';

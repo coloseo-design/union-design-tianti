@@ -1,9 +1,8 @@
 import React, { ReactNode } from 'react';
 import classnames from 'classnames';
-import Popup from '../common/portal';
-import { getOffset } from '../utils/getOffset';
-import { ConfigConsumer, ConfigConsumerProps } from '../config-provider';
-import { tuple } from '../utils/type';
+import Popup from '@union-design/portal';
+import { getOffset, tuple } from '@union-design/utils';
+import { ConfigConsumer, ConfigConsumerProps } from '@union-design/config-provider';
 
 const PlacementTypes = tuple('top', 'left', 'right', 'bottom', 'topLeft', 'topRight', 'bottomLeft', 'bottomRight');
 const TriggerTypes = tuple('hover', 'focus', 'click');
@@ -160,7 +159,7 @@ class Tooltip extends React.Component<TooltipProps, TooltipState> {
         onClick: this.onMouseOver,
       },
       focus: {
-        onFocus: this.onMouseOver,
+        onFocus: this.onMouseOver as any,
       },
     };
     let component = (<span {...normalEventMap[trigger] as any}>{children}</span>);

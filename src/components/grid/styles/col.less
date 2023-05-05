@@ -24,12 +24,6 @@ each(@med-query-map, {
   }
 });
 
-// base style of col
-// this is a hack for float item without height
-.@{col-cls} {
-  min-height: 1px;
-}
-
 .generate-cols(@class: ~'') {
   each(@cols, {
     @col-width: percentage((@index / @grid-columns));

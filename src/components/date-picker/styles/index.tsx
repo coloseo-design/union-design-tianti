@@ -1,3 +1,4 @@
-import '../../style/index.less';
+import '@union-design/style/index';
+import './common.less';
 import './index.less';
-import '../../button/styles/index.less';
+import '@union-design/button/es/styles/index.less';

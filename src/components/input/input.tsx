@@ -4,8 +4,8 @@ import React, {
 } from 'react';
 import omit from 'omit.js';
 import classNames from 'classnames';
-import { ConfigConsumer, ConfigConsumerProps } from '../config-provider/context';
-import Icon from '../icon';
+import { ConfigConsumer, ConfigConsumerProps } from '@union-design/config-provider';
+import Icon from '@union-design/icon';
 import TextArea from './textarea';
 import Search from './search';
 
@@ -72,7 +72,7 @@ class Input extends Component<BaseInputProps, InputState> {
       [`${prefixCls}-wrap-textarea`]: type === 'textarea',
     });
 
-    const handleDelete = (e: { preventDefault: () => void; }) => {
+    const handleDelete = (e: any) => {
       e.preventDefault();
       this.setState({ value: '' });
       if (onChange) {
@@ -85,29 +85,31 @@ class Input extends Component<BaseInputProps, InputState> {
         });
         onChange(e);
       }
-      this.node.focus();
+      this.node?.focus();
     };
 
-    const onchange = (e: { preventDefault?: () => void; target?: any; }) => {
+    const onchange = (e: any) => {
       this.setState({ value: e.target.value });
       if (onChange) {
         onChange(e);
       }
     };
 
-    const onfocus = (e) => {
+    const onfocus = (e: any) => {
       this.setState({ focus: true });
       onFocus && onFocus(e);
     };
 
-    const onblur = (e) => {
+    const onblur = (e: any) => {
       this.setState({ focus: false });
       onBlur && onBlur(e);
     };
 
     const handleRef = (node: any) => {
       this.node = node;
-      forwardedRef?.current = node;
+      if (forwardedRef?.current) {
+        (forwardedRef.current as any) = node;
+      }
     };
 
     const input = createElement(type, {
@@ -137,8 +139,9 @@ class Input extends Component<BaseInputProps, InputState> {
   }
 }
 
-const InputRef = forwardRef((props, ref) => <Input {...props} forwardedRef={ref} />);
+const InputRef: any = forwardRef((props, ref) => <Input {...props} forwardedRef={ref as any} />);
 
+// const InputRef: React.ForwardRefExoticComponent<BaseInputProps & React.RefAttributes<HTMLInputElement>> & { TextArea: any; Search: any} = React.forwardRef<HTMLInputElement, BaseInputProps>((props: BaseInputProps, ref: any) => <Input {...props} forwardedRef={ref} />) as any;
 InputRef.TextArea = TextArea;
 InputRef.Search = Search;
 

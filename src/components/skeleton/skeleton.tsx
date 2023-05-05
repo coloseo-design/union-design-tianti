@@ -1,8 +1,8 @@
 /* eslint-disable react/no-array-index-key */
 import React from 'react';
 import classnames from 'classnames';
-import { BaseProps } from '../common/base-component';
-import { withGlobalConfig } from '../config-provider/context';
+import { BaseProps } from '@union-design/base-component';
+import { ConfigConsumer, ConfigConsumerProps } from '@union-design/config-provider';
 
 interface SkeletonAvatarProps {
   /** 指定头像的形状 */
@@ -32,11 +32,8 @@ interface SkeletonProps extends BaseProps {
   title?: boolean | SkeletonTitleProps;
   /** 是否显示段落占位图 */
   paragraph?: boolean | SkeletonParagraphProps;
-
-  getPrefixCls?: (cls: string, customizePrefix?: string) => string;
 }
 
-@withGlobalConfig
 export default class extends React.Component<SkeletonProps> {
   composeRowProps = () => {
     let { paragraph = true } = this.props;
@@ -61,32 +58,31 @@ export default class extends React.Component<SkeletonProps> {
     });
   }
 
-  render() {
+  renderSkeleton = ({ getPrefixCls }: ConfigConsumerProps) => {
     const {
       active = false,
       title = true,
       paragraph = true,
       loading = true,
-      getPrefixCls,
       prefixCls: customizePrefixCls,
       children,
     } = this.props;
     let { avatar = false } = this.props;
-    const prefix = getPrefixCls?.('skeleton', customizePrefixCls);
-    const containerCls = classnames(prefix, {
-      [`${prefix}-with-avatar`]: avatar,
-      [`${prefix}-status-active`]: active,
+    const prefx = getPrefixCls?.('skeleton', customizePrefixCls);
+    const containerCls = classnames(prefx, {
+      [`${prefx}-with-avatar`]: avatar,
+      [`${prefx}-status-active`]: active,
     });
-    const headerCls = `${prefix}-header`;
-    const contentCls = `${prefix}-content`;
+    const headerCls = `${prefx}-header`;
+    const contentCls = `${prefx}-content`;
 
     // 处理头像样式
     if (avatar === true) {
       avatar = { shape: 'circle' };
     }
-    const avatarCls = classnames(`${prefix}-header-avatar`, {
+    const avatarCls = classnames(`${prefx}-header-avatar`, {
       ...(avatar === false ? {} : {
-        [`${prefix}-header-avatar-${(avatar as SkeletonAvatarProps).shape}`]: (avatar as SkeletonAvatarProps).shape,
+        [`${prefx}-header-avatar-${(avatar as SkeletonAvatarProps).shape}`]: (avatar as SkeletonAvatarProps).shape,
       }),
     });
 
@@ -125,5 +121,13 @@ export default class extends React.Component<SkeletonProps> {
         </div>
       </div>
     ) : children;
+  }
+
+  render() {
+    return (
+      <ConfigConsumer>
+        {this.renderSkeleton}
+      </ConfigConsumer>
+    );
   }
 }

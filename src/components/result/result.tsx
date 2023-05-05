@@ -1,9 +1,9 @@
 import React from 'react';
 import classNames from 'classnames';
-import Icon from '../icon';
+import Icon from '@union-design/icon';
+import { ConfigConsumer, ConfigConsumerProps } from '@union-design/config-provider';
 import applicationSuccess from './applicationSuccess';
 import applicationError from './applicationError';
-import { ConfigConsumer, ConfigConsumerProps } from '../config-provider/context';
 
 export interface ResultProps {
     extra?:React.ReactNode;

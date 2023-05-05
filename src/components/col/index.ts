@@ -1,3 +1,3 @@
-import { Col } from '../grid';
+import { Col } from '@union-design/grid';
 
 export default Col;

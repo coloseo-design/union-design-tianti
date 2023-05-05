@@ -3,9 +3,9 @@
 import React, { CSSProperties, ReactNode } from 'react';
 import ReactDOM from 'react-dom';
 
-import { BaseComponent, BaseProps } from '../common/base-component';
-import { uuid } from '../cascader/utils';
-import Icon from '../icon';
+import { BaseComponent, BaseProps } from '@union-design/base-component';
+import { uuid } from '@union-design/utils';
+import Icon from '@union-design/icon';
 
 const MESSAGE_NAME = 'UNION_MESSAGE';
 

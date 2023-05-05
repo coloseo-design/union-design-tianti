@@ -4,7 +4,7 @@
 /* eslint-disable max-classes-per-file */
 import dayjs, { UnitType } from 'dayjs';
 import React from 'react';
-import { cacheFunc } from '../../utils/cacheFunc';
+import { cacheFunc } from '@union-design/utils';
 import { PopupHead } from '../components/head';
 import { PickerType, PopupData } from '../types';
 import { Popup } from './popup';

@@ -4,10 +4,10 @@ import React, {
   useCallback, useContext, useEffect, useState,
 } from 'react';
 import classnames from 'classnames';
-import { tuple } from '../utils/type';
+import { tuple } from '@union-design/utils/type';
+import { BreakpointMap, breakpoints, responsiveObserve } from '@union-design/utils';
+import { ConfigContext } from '@union-design/config-provider';
 import { RowProvider } from './context';
-import ResponsiveObserve, { BreakpointMap, breakpoints } from '../utils/responsive-observe';
-import { ConfigContext } from '../config-provider/context';
 
 const AlignValues = tuple('top', 'middle', 'bottom');
 const JustifyValues = tuple('start', 'end', 'center', 'space-around', 'space-between');
@@ -59,9 +59,9 @@ const Row: React.FC<RowProps> = (props: RowProps) => {
   }, []);
 
   useEffect(() => {
-    ResponsiveObserve.subscribe(listener);
+    responsiveObserve.subscribe(listener);
     () => {
-      ResponsiveObserve.unsubscribe(listener);
+      responsiveObserve.unsubscribe(listener);
     };
   }, [listener]);
 

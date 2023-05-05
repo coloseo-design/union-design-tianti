@@ -1,2 +1,2 @@
 /* eslint-disable quotes */
-export { default } from "./top-nav";
+export { default, SideNavProps } from "./top-nav";

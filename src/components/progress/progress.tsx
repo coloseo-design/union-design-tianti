@@ -1,8 +1,8 @@
 /* eslint-disable no-underscore-dangle */
 import React, { Component } from 'react';
 import classNames from 'classnames';
-import Icon from '../icon';
-import { ConfigConsumer, ConfigConsumerProps } from '../config-provider';
+import Icon from '@union-design/icon';
+import { ConfigConsumer, ConfigConsumerProps } from '@union-design/config-provider';
 
 export interface ProgressProps extends React.HTMLAttributes<HTMLDivElement> {
   /** 百分比 */

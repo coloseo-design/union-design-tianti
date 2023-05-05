@@ -15,8 +15,8 @@ import {
   BaseComponent,
   BasePropsV2,
   BaseStateV2,
-} from "../common/base-component";
-import { Icon } from "../index";
+} from "@union-design/base-component";
+import Icon from "@union-design/icon";
 
 export type SideNavProps<Data> = {
   /** 数据 */

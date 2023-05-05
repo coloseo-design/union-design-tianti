@@ -6,11 +6,10 @@
 /* eslint-disable max-classes-per-file */
 import React from 'react';
 import dayjs, { Dayjs, UnitType } from 'dayjs';
+import Button from '@union-design/button';
+import { cacheFunc, animation } from '@union-design/utils';
 import { PickerMode, PickerType, PopupProps } from '../types';
 import { Popup } from './popup';
-import { Button } from '../..';
-import { cacheFunc } from '../../utils/cacheFunc';
-import { animation } from '../../utils/animation';
 
 const handleData = cacheFunc((mode: PickerMode): UnitType[] => {
   if (mode === 'time-full') return ['year', 'month', 'date', 'hour', 'minute', 'second'];

@@ -1,2 +1,2 @@
-import '../../style/index.less';
+import '@union-design/style/index';
 import './index.less';

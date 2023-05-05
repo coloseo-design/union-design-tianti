@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import React from 'react';
-import { ConfigConsumer, ConfigConsumerProps } from '../config-provider';
+import { ConfigConsumer, ConfigConsumerProps } from '@union-design/config-provider';
 
 export interface TabPaneBase extends React.HTMLAttributes<HTMLDivElement> {
   prefixCls?: string;

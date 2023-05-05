@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import classnames from 'classnames';
+import { ConfigContext } from '@union-design/config-provider';
 import Checkbox from './checkbox';
-import { ConfigContext } from '../config-provider/context';
 import { CheckboxGroupProps, CheckboxOption, GroupCheckboxConsumerProps } from './type';
 
 export const CheckboxGroupContext = React.createContext<GroupCheckboxConsumerProps>({});

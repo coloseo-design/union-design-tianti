@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import classNames from 'classnames';
-import { ConfigConsumer, ConfigConsumerProps } from '../config-provider';
+import { ConfigConsumer, ConfigConsumerProps } from '@union-design/config-provider';
 
 export interface MetaProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'title'> {
   /** 列表元素的描述内容 */

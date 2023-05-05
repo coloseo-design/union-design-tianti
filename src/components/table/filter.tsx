@@ -1,9 +1,7 @@
 import React from 'react';
-import {
-  Checkbox,
-  Button,
-  Radio,
-} from '..';
+import Checkbox from '@union-design/checkbox';
+import Button from '@union-design/button';
+import Radio from '@union-design/radio';
 
 export interface FilterProps {
   dataSource: {text: React.ReactNode; value: string}[];
@@ -37,7 +35,7 @@ export default class Filter extends React.Component<FilterProps, FilterState> {
     if (filterMultiple) {
       this.setState({ values: values as string[] });
     } else {
-      const { target: { value } } = (values as React.ChangeEventHandler<HTMLInputElement>);
+      const { target: { value } } = (values as any);
       this.setState({
         values: [value],
       });
@@ -74,8 +72,8 @@ export default class Filter extends React.Component<FilterProps, FilterState> {
         >
           <Group
             style={{ padding: 5 }}
-            onChange={this.onChange}
-            value={filterMultiple ? values : values[0]}
+            onChange={this.onChange as any}
+            value={(filterMultiple ? values : values[0]) as any}
           >
             {
               dataSource.map((item) => (

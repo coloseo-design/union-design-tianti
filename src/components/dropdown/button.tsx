@@ -2,10 +2,10 @@
 /* eslint-disable max-len */
 import React from 'react';
 import classNames from 'classnames';
-import Icon from '../icon';
-import { getOffset } from '../utils/getOffset';
-import Portal from '../common/portal';
-import { ConfigConsumer, ConfigConsumerProps } from '../config-provider';
+import Icon from '@union-design/icon';
+import { getOffset } from '@union-design/utils';
+import Portal from '@union-design/portal';
+import { ConfigConsumer, ConfigConsumerProps } from '@union-design/config-provider';
 
 export interface DropMenuProps {
   prefixCls?: string;
@@ -232,7 +232,7 @@ class DropButton extends React.Component<DropMenuProps, DropMenuState> {
           >
             <div className={containter}>
               {overlay && React.isValidElement(overlay) ? React.cloneElement(
-                overlay,
+                overlay as any,
                 { popupClassName: `${pre}-menu` },
               ) : ''}
             </div>

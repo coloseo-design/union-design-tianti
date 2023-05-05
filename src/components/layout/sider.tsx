@@ -1,9 +1,9 @@
 /* eslint-disable no-underscore-dangle */
 import React, { Component, CSSProperties, ReactElement } from 'react';
 import classNames from 'classnames';
-import { ConfigConsumer, ConfigConsumerProps } from '../config-provider';
-import Icon from '../icon';
-import { MENU_TAG_MENU } from '../menu/menu';
+import { ConfigConsumer, ConfigConsumerProps } from '@union-design/config-provider';
+import Icon from '@union-design/icon';
+import { MENU_TAG_MENU } from '@union-design/menu';
 
 export interface SiderProps extends Omit<React.HTMLAttributes<HTMLElement>, 'collapsed' | 'defaultCollapsed'> {
   /* 用户自定义类前缀，默认uni-layout */
@@ -94,7 +94,7 @@ class Sider extends Component<SiderProps, SiderState> {
             const tag = (type as unknown as { [key: string]: unknown }).tag as string;
 
             if (React.isValidElement(child) && tag === MENU_TAG_MENU) {
-              return React.cloneElement(child, {
+              return React.cloneElement(child as any, {
                 theme,
                 inlineCollapsed: collapsed,
                 inlineCollapsedIcon: false,

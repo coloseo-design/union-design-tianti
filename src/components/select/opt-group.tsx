@@ -1,5 +1,5 @@
 import React, { ReactNode, Component } from 'react';
-import { ConfigConsumer, ConfigConsumerProps } from '../config-provider/context';
+import { ConfigConsumer, ConfigConsumerProps } from '@union-design/config-provider';
 
 type OptGroupType = {
   label: string | ReactNode;

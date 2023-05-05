@@ -1,7 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
+import { ConfigConsumer, ConfigConsumerProps } from '@union-design/config-provider';
 import TimelineItem from './timelineItem';
-import { ConfigConsumer, ConfigConsumerProps } from '../config-provider/context';
 
 export interface TimeLineProps{
     className?: string;

@@ -1,3 +1,4 @@
+import '@union-design/style/index';
 import './index.less';
-import '../../popover/styles/index.less';
-import '../../typography/styles/index.less';
+import '@union-design/popover/es/styles/index.less';
+import '@union-design/typography/es/styles/index.less';

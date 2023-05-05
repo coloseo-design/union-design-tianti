@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import Icon from '../icon';
-import Dropdown from '../dropdown';
+import Icon from '@union-design/icon';
+import Dropdown from '@union-design/dropdown';
 import { SelectProps, Option } from './type';
 
 const SearchSelect: React.FC<{prefix?: string} & SelectProps> = (props) => {

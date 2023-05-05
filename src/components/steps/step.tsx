@@ -4,9 +4,11 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import React, { createRef } from 'react';
-import { BaseComponent } from '../common/base-component';
+import { BaseComponent } from '@union-design/base-component';
+import Icon from '@union-design/icon';
+import Popover from '@union-design/popover';
+import Typography from '@union-design/typography';
 import { StepProps } from './steps';
-import { Icon, Popover, Typography } from '..';
 
 export const STEP_NAME = 'UNI_STEP';
 

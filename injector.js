@@ -14,7 +14,6 @@ const parsedArgs = args.reduce((p, c) => {
 const config = {
   publishConfig: {
     production: 'http://ccp.tianti.tg.unicom.local/artifactory/api/npm/sjxt-npm-virtual/',
-    development: 'https://nexus.coloseo.cn/repository/npm-hosted/',
   },
   npm: {
     filename: '.npmrc',

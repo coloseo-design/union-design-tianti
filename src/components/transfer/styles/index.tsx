@@ -1,5 +1,5 @@
-import '../../style/index.less';
+import '@union-design/style/index';
 import './index.less';
-import '../../checkbox/styles/index.less';
-import '../../input/styles/index.less';
-import '../../button/styles/index.less';
+import '@union-design/checkbox/es/styles/index.less';
+import '@union-design/input/es/styles/index.less';
+import '@union-design/button/es/styles/index.less';

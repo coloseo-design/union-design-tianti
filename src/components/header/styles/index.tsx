@@ -1,3 +1,4 @@
+import '@union-design/style/index';
 import './index.less';
-import '../../dropdown/styles/index.less';
-import '../../top-nav/styles/index.less';
+import '@union-design/dropdown/es/styles/index.less';
+import '@union-design/top-nav/es/styles/index.less';

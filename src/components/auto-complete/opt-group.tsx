@@ -2,7 +2,7 @@
 /* eslint-disable react/sort-comp */
 import React from 'react';
 import classNames from 'classnames';
-import { ConfigConsumer, ConfigConsumerProps } from '../config-provider/context';
+import { ConfigConsumer, ConfigConsumerProps } from '@union-design/config-provider';
 
 export interface OptGroupProps {
   label: React.ReactNode;

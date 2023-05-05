@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import React, { ReactElement } from 'react';
-import { BasePropsV2 } from '../common/base-component';
+import { BasePropsV2 } from '@union-design/base-component';
 import { MenuBase } from './component';
 import { MENU_TAG_ITEM } from './menu-item';
 import { MENU_TAG_SUB_MENU } from './menu-sub-menu';
@@ -58,7 +58,7 @@ export class ItemGroup extends MenuBase<ItemProps> {
       if (React.isValidElement(child) && tags.includes(tag)) {
         const key = child?.key ?? `item-group-${_key}-${index}`;
 
-        const re = React.cloneElement(child, {
+        const re = React.cloneElement(child as any, {
           _level: _level! + 1,
           _inItemGroup: true,
           _key: tag === MENU_TAG_ITEM_GROUP ? _key : key,

@@ -2,8 +2,8 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import React, { createRef, ReactElement, ReactNode } from 'react';
 
-import { Icon } from '..';
-import { BasePropsV2 } from '../common/base-component';
+import Icon from '@union-design/icon';
+import { BasePropsV2 } from '@union-design/base-component';
 import { MenuBase } from './component';
 import { MENU_TAG_ITEM } from './menu-item';
 import { MENU_TAG_ITEM_GROUP } from './menu-item-group';
@@ -33,15 +33,15 @@ export class SubMenu extends MenuBase<SubMenuProps> {
 
   protected getView = () => {
     const {
-      title, icon, _level, _keyPath, _inItemGroup, _key,
+      title, icon, _level, _inItemGroup, _key,
     } = this.props;
     const {
       inlineCollapsed, theme, mode, selectedKeyPaths, handleLevelLeft, menuPopups = [],
       hoverKeyPaths = [], triggerSubMenuAction,
     } = this.menuCtx;
     // const selected = Object.values(selectedKeyPaths!).some((item) => item.join('-').startsWith(_keyPath!.join('-')));
-    const selected = Object.values(selectedKeyPaths!).some((item) => item.includes(_key));
-    const slide = triggerSubMenuAction === 'hover' && menuPopups.length === 0 ? false : hoverKeyPaths.includes(_key);
+    const selected = Object.values(selectedKeyPaths!).some((item) => item.includes(_key as string));
+    const slide = triggerSubMenuAction === 'hover' && menuPopups.length === 0 ? false : hoverKeyPaths.includes(_key as string);
     const inlineCollapsedIcon = this.inlineCollapsedIcon();
 
     return (
@@ -126,7 +126,7 @@ export class SubMenu extends MenuBase<SubMenuProps> {
       if (React.isValidElement(child) && tags.includes(tag)) {
         const key = child?.key ?? `${_key}-${index}`;
 
-        const re = React.cloneElement(child, {
+        const re = React.cloneElement(child as any, {
           _level: _level! + 1,
           _key: tag === MENU_TAG_ITEM_GROUP ? _key : key,
           _keyPath: tag === MENU_TAG_ITEM_GROUP ? _keyPath : [..._keyPath!, key],

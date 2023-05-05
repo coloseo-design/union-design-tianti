@@ -8,8 +8,8 @@ import React, {
   useState,
 } from 'react';
 import classnames from 'classnames';
+import { ConfigConsumerProps, ConfigContext } from '@union-design/config-provider';
 import { FormProvider } from './form-context';
-import { ConfigConsumerProps, ConfigContext } from '../config-provider/context';
 import { decomposeFiledName } from './util';
 import {
   ErrorCollection, FormErrors, FormInstance, FormProps, FormValues, ValueCollection, FormStatus,

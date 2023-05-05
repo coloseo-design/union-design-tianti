@@ -7,9 +7,9 @@ import React, {
   isValidElement,
 } from 'react';
 import classNames from 'classnames';
-import { ConfigContext } from '../config-provider/context';
-import Icon from '../icon';
-import { warning } from '../utils/warning';
+import { ConfigContext } from '@union-design/config-provider';
+import Icon from '@union-design/icon';
+import { warning } from '@union-design/utils';
 import Pane from './pane';
 
 export type TabsType = 'line' | 'card' | 'page' | 'plain';
@@ -201,7 +201,7 @@ const Tabs: React.FC<TabsProps> & { Pane: typeof Pane} = (props: TabsProps) => {
               if (type === 'page' && i !== index) {
                 return null;
               }
-              return React.cloneElement(item, { active: i === index });
+              return React.cloneElement(item as any, { active: i === index });
             }
             return null;
           }) || []

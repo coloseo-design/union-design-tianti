@@ -1,8 +1,8 @@
-import React, { ForwardedRef, ForwardRefRenderFunction, useContext } from 'react';
+import React, { ForwardRefRenderFunction, useContext } from 'react';
 import omit from 'omit.js';
 import classNames from 'classnames';
-import { ConfigContext } from '../config-provider/context';
-import Icon from '../icon';
+import { ConfigContext } from '@union-design/config-provider';
+import Icon from '@union-design/icon';
 import { AnchorButtonProps, ButtonProps, NativeButtonProps } from './type';
 
 const ButtonSizeMap = {
@@ -13,7 +13,7 @@ const ButtonSizeMap = {
 
 const Button: ForwardRefRenderFunction<HTMLButtonElement, ButtonProps> = (
   props: ButtonProps,
-  ref: ForwardedRef<HTMLButtonElement>,
+  ref: React.LegacyRef<HTMLButtonElement>,
 ) => {
   const {
     children,
@@ -64,7 +64,7 @@ const Button: ForwardRefRenderFunction<HTMLButtonElement, ButtonProps> = (
         className={classes}
         href={linkButtonRestProps.href}
         onClick={onClick}
-        ref={ref as React.ForwardedRef<HTMLAnchorElement>}
+        ref={ref as React.LegacyRef<HTMLAnchorElement>}
       >
         {iconElement}
         <span>{children}</span>

@@ -1,3 +1,3 @@
-import '../../style/index.less';
-import '../../tooltip/styles/index.less';
+import '@union-design/style/index';
+import '@union-design/tooltip/es/styles/index.less';
 import './index.less';

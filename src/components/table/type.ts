@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import { PaginationProps } from '../pagination/pagination';
+import { PaginationProps } from '@union-design/pagination/pagination';
 
 export type ColumnsAlign = 'left' | 'right' | 'center';
 export type FixedType = 'left' | 'right';

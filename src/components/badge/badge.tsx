@@ -1,6 +1,6 @@
 import React, { CSSProperties } from 'react';
 import classNames from 'classnames';
-import { ConfigConsumer, ConfigConsumerProps } from '../config-provider/context';
+import { ConfigConsumer, ConfigConsumerProps } from '@union-design/config-provider';
 
 export interface BaseBadgeProps{
   dot?:boolean; // 不展示数字，只有一个小红点 默认false
@@ -29,11 +29,11 @@ class Badge extends React.Component<BaseBadgeProps> {
 
     const clazzName = classNames(prefix, className);
 
-    let node = null;
+    let node: Element | null = null;
     if (dot) {
-      node = <sup className={`${prefix}-dot`} />;
+      node = (<sup className={`${prefix}-dot`} />) as unknown as Element;
     } else if (count || showZero) {
-      node = <sup className={`${clazzName}-content`}>{count > overflowCount ? `${overflowCount}+` : count}</sup>;
+      node = (<sup className={`${clazzName}-content`}>{count > overflowCount ? `${overflowCount}+` : count}</sup>) as unknown as Element;
     }
     return (
       <span className={clazzName} style={{ ...style }}>

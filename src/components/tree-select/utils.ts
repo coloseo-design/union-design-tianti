@@ -56,10 +56,10 @@ export const checkedFun = (
   checkedKeys: string[], // 选择的数据
   backFill: string | undefined, // 回填的形式
 ) => { // 选择父级勾选子级， 子级选满勾选父级 showCheckedStrategy: SHOW_CHILD
-  const temp = smooth.filter((i: any) => values.indexOf(i.value) >= 0);
-  const temChecked = smooth.filter((i: any) => checkedKeys.indexOf(i.value) >= 0);
-  let lastList = [...temChecked];
-  let backFillValues = [...temp];
+  const temp: any[] = smooth.filter((i: any) => values.indexOf(i.value) >= 0);
+  const temChecked: any[] = smooth.filter((i: any) => checkedKeys.indexOf(i.value) >= 0);
+  let lastList: any[] = [...temChecked];
+  let backFillValues: any[] = [...temp];
   const parentChild: any[] = [];
   const parentList: any[] = [];
   const currentSelected = [current.value].concat(checkedKeys);
@@ -109,7 +109,7 @@ export const checkedFun = (
       }
     }
     if (backFill === 'SHOW_CHILD') {
-      const deletePrent = (parentChild || []).filter((i) => !i.children || (i.children && i.children.length === 0)); // 去掉parent
+      const deletePrent: any[] = (parentChild || []).filter((i) => !i.children || (i.children && i.children.length === 0)); // 去掉parent
       backFillValues = temp.concat(deletePrent);
     }
   } else {
@@ -220,8 +220,8 @@ const findChild = (AllData: any[]) => {
 };
 
 export const translateDataToTree = (data: any) => {
-  const parents = data.filter((value: any) => !value.parentValue);
-  const childrens = data.filter((value: any) => value.parentValue);
+  const parents: any[] = data.filter((value: any) => !value.parentValue);
+  const childrens: any[] = data.filter((value: any) => value.parentValue);
   const translator = (parentsT: any[], childrensT: any[]) => {
     parentsT.forEach((parent: any) => {
       childrensT.forEach((current: any, index: number) => {
@@ -248,8 +248,8 @@ export const commonInit = (
   showCheckedStrategy: string,
   sm: any[],
 ) => {
-  let valuesList = [];
-  let selectList = [];
+  let valuesList: any[] = [];
+  let selectList: any[] = [];
   if (multiple || treeCheckable) {
     if ((value && Object.prototype.toString.call(value) !== '[object Array]')
         || (defaultValue && Object.prototype.toString.call(defaultValue) !== '[object Array]')) {

@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { ButtonProps } from '@union-design/button';
 import Modal from './index';
-import { BaseButtonProps } from '../button/type';
 
 export type focusButton = 'ok' | 'cancel';
 
@@ -20,8 +20,8 @@ export interface ModalMethodProps {
   maskClosable?: boolean,
   okType?: 'link' | 'primary' | 'ghost' | 'default' | 'dashed' | 'danger' | undefined,
   zIndex?: number,
-  okButtonProps?: BaseButtonProps,
-  cancelButtonProps?: BaseButtonProps,
+  okButtonProps?: ButtonProps,
+  cancelButtonProps?: ButtonProps,
   centered?: boolean,
   content?: string | React.ReactNode,
   methodType?: string, // 代表modal.method方法（method不需要header)

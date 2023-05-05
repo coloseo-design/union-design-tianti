@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import React, { ReactNode } from 'react';
-import { Icon } from '..';
-import { BasePropsV2 } from '../common/base-component';
+import Icon from '@union-design/icon';
+import { BasePropsV2 } from '@union-design/base-component';
 import { MenuBase } from './component';
 
 export type ItemProps = BasePropsV2<{

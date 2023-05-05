@@ -3,9 +3,9 @@
 import React, { CSSProperties, ReactNode } from 'react';
 
 import ReactDOM from 'react-dom';
-import { Icon } from '..';
-import { BaseComponent, BaseProps } from '../common/base-component';
-import { uuid } from '../utils/uuid';
+import Icon from '@union-design/icon';
+import { BaseComponent, BaseProps } from '@union-design/base-component';
+import { uuid } from '@union-design/utils';
 
 const NOTIFICATION_NAME = 'NOTIFICATION_MESSAGE';
 

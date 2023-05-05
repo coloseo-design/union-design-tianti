@@ -1,12 +1,12 @@
 /* eslint-disable no-nested-ternary */
 import React, { DOMAttributes } from 'react';
 import classnames from 'classnames';
-import Portal from '../common/portal';
-import { BaseProps, BaseState } from '../common/base-component';
-import { animation } from '../utils/animation';
-import { uuid } from '../cascader/utils';
-import Icon from '../icon';
-import { ConfigConsumer, ConfigConsumerProps } from '../config-provider/context';
+import Portal from '@union-design/portal';
+import { BaseProps, BaseState } from '@union-design/base-component';
+import { animation } from '@union-design/utils/animation';
+import { uuid } from '@union-design/cascader/utils';
+import Icon from '@union-design/icon';
+import { ConfigConsumer, ConfigConsumerProps } from '@union-design/config-provider';
 
 export type SelectBaseData = {
   key: string | number;

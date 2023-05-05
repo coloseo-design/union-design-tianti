@@ -3,14 +3,12 @@
 import React from 'react';
 import classnames from 'classnames';
 import omit from 'omit.js';
-import { withGlobalConfig } from '../config-provider';
-import {
-  Icon,
-  Checkbox,
-  Pagination,
-  Radio,
-} from '..';
-import { PaginationProps } from '../pagination/pagination';
+import { ConfigConsumer, ConfigConsumerProps } from '@union-design/config-provider';
+import Checkbox from '@union-design/checkbox';
+import Pagination from '@union-design/pagination';
+import Radio from '@union-design/radio';
+import Icon from '@union-design/icon';
+import { PaginationProps } from '@union-design/pagination/pagination';
 import {
   ColumnsProps,
   FixedType,
@@ -27,7 +25,7 @@ import {
   groupColums, sortColums, flattenColums,
 } from './utils';
 
-@withGlobalConfig
+// @withGlobalConfig
 export default class Table extends React.Component<TableProps, TableState> {
   leftTableBodyRef: React.RefObject<HTMLDivElement>;
 
@@ -91,12 +89,12 @@ export default class Table extends React.Component<TableProps, TableState> {
     const { rowSelection: { selectedRowKeys } = {}, pagination } = this.props;
     if (props.rowSelection && props.rowSelection.selectedRowKeys !== selectedRowKeys) {
       this.setState({
-        selectedRowKeys,
+        selectedRowKeys: selectedRowKeys as any,
       });
     }
     if (props.pagination !== pagination) {
       this.setState({
-        pagination,
+        pagination: pagination as any,
       });
     }
   }
@@ -106,6 +104,7 @@ export default class Table extends React.Component<TableProps, TableState> {
     columns: ColumnsProps[],
     propsColumns: ColumnsProps[],
     // ref: React.LegacyRef<HTMLDivElement> | undefined,
+    prefixCls: string,
     isFixed?: boolean,
   ) => {
     const { filters, theadHeight } = this.state;
@@ -120,7 +119,7 @@ export default class Table extends React.Component<TableProps, TableState> {
     return (
       <TableHeader
         columns={columns}
-        prefixCls={this.getPrefixCls()}
+        prefixCls={prefixCls}
         filteredValueMap={filters}
         onChange={onSubmit}
         propsColumns={propsColumns}
@@ -155,7 +154,7 @@ export default class Table extends React.Component<TableProps, TableState> {
       const values = filters[name];
       let filter = (row: unknown) => (!values.length
         ? true
-        : values.reduce((c, i) => {
+        : (values as string[]).reduce((c, i) => {
           const r = onFilter ? onFilter(i, row) : true;
           return c || r;
         }, false));
@@ -164,7 +163,7 @@ export default class Table extends React.Component<TableProps, TableState> {
       }
       return (value: unknown, ...rest) => filter(value, ...rest) && composed(value, ...rest);
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    }, (value: unknown) => true);
+    }, (_: unknown) => true);
   }
 
   paginateDataSource = (dataSource: unknown[]) => {
@@ -232,13 +231,14 @@ export default class Table extends React.Component<TableProps, TableState> {
   renderBody = (
     columns: ColumnsProps[],
     dataSource: unknown[],
+    prefixCls: string,
   ) => {
     const { selectedRowKey } = this.state;
     const hoverable = columns.filter((column) => !!column.fixed).length > 0;
     const results = this.formateDataSource(dataSource, columns).map((row) => (
       <Row
         key={row.key}
-        prefixCls={this.getPrefixCls()}
+        prefixCls={prefixCls}
         {...(
           hoverable ? { onMouseOver: this.onMouseOver(row.key), onMouseOut: this.onMouseOut } : {}
         )}
@@ -280,7 +280,7 @@ export default class Table extends React.Component<TableProps, TableState> {
       >
         <table className={tableCls} style={tableStyle}>
           <ColGroup columns={columns} />
-          {this.renderHeader(columns, propsColumns, isFixed)}
+          {this.renderHeader(columns, propsColumns, prefix, isFixed)}
         </table>
       </div>
     ) : null;
@@ -315,19 +315,19 @@ export default class Table extends React.Component<TableProps, TableState> {
       getCheckboxProps,
       selectedRowKeys: defaultSelectdRowKeys = [],
       onSelectAll,
-    } = rowSelection;
+    } = rowSelection as TableRowSelectionType;
     // 冻结不可操作的数据
     const disabledKeys = dataSource.filter((item) => {
-      const props = getCheckboxProps(item);
-      return props.disabled && defaultSelectdRowKeys.indexOf(this.rowKey(item)) >= 0;
+      const props = getCheckboxProps?.(item);
+      return props?.disabled && defaultSelectdRowKeys.indexOf(this.rowKey(item)) >= 0;
     }).map(this.rowKey);
     // 检查是否全都选中
     const selectedAll = dataSource.reduce((composed, item) => {
       const key = this.rowKey(item);
-      const props = getCheckboxProps(item);
+      const props = getCheckboxProps?.(item);
       let result = true;
 
-      if (!props.disabled) {
+      if (!props?.disabled) {
         result = selectedRowKeys.indexOf(key) >= 0;
       }
       return result && composed;
@@ -340,8 +340,8 @@ export default class Table extends React.Component<TableProps, TableState> {
         let currentSelectedRowKeys: unknown[] = [];
         if (!selectedAll) {
           const allcheckableKeys = dataSource.filter((item) => {
-            const props = getCheckboxProps(item);
-            return !props.disabled;
+            const props = getCheckboxProps?.(item);
+            return !props?.disabled;
           }).map(this.rowKey);
           currentSelectedRowKeys = allcheckableKeys;
         }
@@ -360,7 +360,7 @@ export default class Table extends React.Component<TableProps, TableState> {
         );
       },
     };
-    return (<Checkbox {...allCheckboxProps} />);
+    return (<Checkbox {...allCheckboxProps as any} />);
   }
 
   /**
@@ -392,7 +392,7 @@ export default class Table extends React.Component<TableProps, TableState> {
         const key = this.rowKey(record);
         const index = selectedRowKeys.indexOf(key);
         const checked = index >= 0;
-        const onCheckboxChange = (isChecked: boolean, ...args) => {
+        const onCheckboxChange = (isChecked: boolean) => {
           const current = dataSource.find((item) => this.rowKey(item) === key);
           onSelect && onSelect(current, isChecked);
           if (!isChecked) {
@@ -404,7 +404,7 @@ export default class Table extends React.Component<TableProps, TableState> {
           this.setState({
             selectedRowKeys: newSelectedRowKeys,
           });
-          onChange(
+          onChange?.(
             newSelectedRowKeys,
             dataSource.filter((item) => newSelectedRowKeys.indexOf(this.rowKey(item)) >= 0),
           );
@@ -415,7 +415,7 @@ export default class Table extends React.Component<TableProps, TableState> {
           this.setState({
             selectedRowKeys: [key],
           });
-          onChange(
+          onChange?.(
             [key],
             dataSource.filter((item) => [key].indexOf(this.rowKey(item)) >= 0),
           );
@@ -423,7 +423,7 @@ export default class Table extends React.Component<TableProps, TableState> {
         Object.assign(props, {
           checked,
         });
-        if (props.disabled) {
+        if ((props as any).disabled) {
           Object.assign(props, {
             checked: defaultSelectdRowKeys.indexOf(key) >= 0,
           });
@@ -445,6 +445,7 @@ export default class Table extends React.Component<TableProps, TableState> {
     position: FixedType,
     dataSource: unknown[],
     ref: React.RefObject<HTMLDivElement>,
+    prefixCls: string,
   ) => {
     const {
       columns,
@@ -454,7 +455,7 @@ export default class Table extends React.Component<TableProps, TableState> {
       rowSelection,
     } = this.props;
     const { flatColums } = this.state;
-    const prefix = this.getPrefixCls();
+    const prefix = prefixCls;
     const filteredColumns = groupColums(flatColums, position);
     const tableOuterCls = classnames(`${prefix}-item`, {
       [`${prefix}-item-fixed-${position}`]: position,
@@ -489,10 +490,10 @@ export default class Table extends React.Component<TableProps, TableState> {
           <table className={tableCls}>
             <ColGroup columns={filteredColumns} />
             {
-              !scroll || scroll.y === 0 ? this.renderHeader(filteredColumns, columns, true) : null
+              !scroll || scroll.y === 0 ? this.renderHeader(filteredColumns, columns, prefix, true) : null
             }
             {
-              this.renderBody(filteredColumns, dataSource)
+              this.renderBody(filteredColumns, dataSource, prefix)
             }
           </table>
         </div>
@@ -501,7 +502,7 @@ export default class Table extends React.Component<TableProps, TableState> {
   }
 
   getPrefixCls = () => {
-    const { getPrefixCls, prefixCls } = this.props;
+    const { getPrefixCls, prefixCls } = this.props as any;
     return getPrefixCls('table', prefixCls);
   };
 
@@ -535,7 +536,7 @@ export default class Table extends React.Component<TableProps, TableState> {
     }
   }
 
-  render() {
+  renderTable = ({ getPrefixCls }: ConfigConsumerProps) => {
     const {
       columns = [],
       dataSource = [],
@@ -543,17 +544,12 @@ export default class Table extends React.Component<TableProps, TableState> {
       scroll,
       bordered,
       rowSelection,
-      getPrefixCls,
       pagination: _page,
+      prefixCls,
       ...rest
     } = this.props;
-    const restParams = omit(rest, [
-      'rowSelection',
-      'getPrefixCls',
-      'pagination',
-      'rowKey',
-    ]);
-    const prefix = this.getPrefixCls();
+    const restParams = omit(rest, ['rowKey']);
+    const prefix = getPrefixCls('table', prefixCls);
     const tableContainerCls = classnames(`${prefix}-spain-container`, {
       [`${prefix}-spain-container-blur`]: loading,
     });
@@ -616,30 +612,31 @@ export default class Table extends React.Component<TableProps, TableState> {
                   <ColGroup columns={this.getMainColums(flatColums)} />
                   {
                     !scroll || scroll.y === 0
-                      ? this.renderHeader(this.getMainColums(flatColums), this.getMainColums(columns))
+                      ? this.renderHeader(this.getMainColums(flatColums), this.getMainColums(columns), prefix)
                       : null
                   }
                   {
                     this.renderBody(
                       this.getMainColums(flatColums),
                       paginateDataSource,
+                      prefix,
                     )
                   }
                 </table>
               </div>
             </div>
             {
-              this.renderSideTable('left', paginateDataSource, this.leftTableBodyRef)
+              this.renderSideTable('left', paginateDataSource, this.leftTableBodyRef, prefix)
             }
             {
-              this.renderSideTable('right', paginateDataSource, this.rightTableBodyRef)
+              this.renderSideTable('right', paginateDataSource, this.rightTableBodyRef, prefix)
             }
           </div>
           {
             pagination && (
-              <div className={`${prefix}-pagination`} style={pagination?.style || {}}>
+              <div className={`${prefix}-pagination`} style={(pagination as any)?.style || {}}>
                 <Pagination
-                  {...pagination}
+                  {...(pagination as PaginationProps)}
                   onChange={this.onPageChange}
                   total={filteredDataSource.length}
                 />
@@ -648,6 +645,14 @@ export default class Table extends React.Component<TableProps, TableState> {
           }
         </div>
       </div>
+    );
+  }
+
+  render() {
+    return (
+      <ConfigConsumer>
+        {this.renderTable}
+      </ConfigConsumer>
     );
   }
 }

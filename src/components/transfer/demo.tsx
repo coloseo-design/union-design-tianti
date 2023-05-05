@@ -4,7 +4,8 @@ import { TransferItem } from './type';
 import './styles/index';
 
 const TransferDemo = () => {
-  const mockData = [];
+  console.log('==Transfer', Transfer);
+  const mockData: TransferItem[] = [];
   for (let i = 0; i < 20; i += 1) {
     mockData.push({
       key: i.toString(),
@@ -39,7 +40,7 @@ const TransferDemo = () => {
           dataSource={mockData}
           targetKeys={Keys}
           titles={['源列表', '目的列表']}
-          // showSearch={true}
+          showSearch
           operations={['to right', 'to left']}
           selectedKeys={['1']}
         />

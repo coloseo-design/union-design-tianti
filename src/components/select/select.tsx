@@ -8,13 +8,13 @@ import React, {
 } from 'react';
 import omit from 'omit.js';
 import classnames from 'classnames';
-import { ConfigConsumer, ConfigConsumerProps } from '../config-provider/context';
-import Icon from '../icon';
+import { ConfigConsumer, ConfigConsumerProps } from '@union-design/config-provider';
+import Icon from '@union-design/icon';
+import { getOffset } from '@union-design/utils/getOffset';
+import Portal from '@union-design/portal';
 import Option from './option';
 import OptGroup from './opt-group';
-import { getOffset } from '../utils/getOffset';
 import { SelectContext } from './context';
-import Portal from '../common/portal';
 
 type SelectType = 'default' | 'search' | 'multiple';
 

@@ -1,4 +1,4 @@
-import '../../style/index.less';
+import '@union-design/style/index';
 import './index.less';
-import '../../checkbox/styles/index.less';
-import '../../tree-select/styles/index.less';
+import '@union-design/checkbox/es/styles/index.less';
+import '@union-design/tree-select/es/styles/index.less';

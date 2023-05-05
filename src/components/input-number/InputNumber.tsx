@@ -2,8 +2,8 @@
 /* eslint-disable no-nested-ternary */
 import React from 'react';
 import classNames from 'classnames';
-import { ConfigConsumer, ConfigConsumerProps } from '../config-provider';
-import Icon from '../icon';
+import { ConfigConsumer, ConfigConsumerProps } from '@union-design/config-provider';
+import Icon from '@union-design/icon';
 import { InputNumberProps } from './types';
 
 class InputNumber extends React.Component<InputNumberProps, { value: string | number }> {
@@ -38,8 +38,8 @@ class InputNumber extends React.Component<InputNumberProps, { value: string | nu
   getFormatter = (value?: string | number) => {
     const { formatter, min, max } = this.props;
     let res = value || 0;
-    if (typeof min !== 'undefined' && res < min) res = min;
-    if (typeof max !== 'undefined' && res > max) res = max;
+    if (typeof min !== 'undefined' && Number(res) < min) res = min;
+    if (typeof max !== 'undefined' && Number(res) > max) res = max;
     const val = this.handlePrecision(res);
     if (formatter) {
       return {
@@ -137,8 +137,8 @@ class InputNumber extends React.Component<InputNumberProps, { value: string | nu
       [`${prefix}-${type}`]: type === 'both',
     });
 
-    const minDisabled = min && this.changeNumber(value) <= min;
-    const maxDisabled = max && this.changeNumber(value) >= max;
+    const minDisabled = min && Number(this.changeNumber(value)) <= min;
+    const maxDisabled = max && Number(this.changeNumber(value)) >= max;
 
     return (
       <div className={prefixSize} style={style}>
