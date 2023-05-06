@@ -41,7 +41,7 @@ const Search: React.FC<{prefix?: string} & SearchProps> = (props) => {
           className={type === 'primary' ? `${prefix}-wrapper-suffix` : `${prefix}-wrapper-icon`}
           onClick={inputSearch}
         >
-          <Icon type="search-line" />
+          <Icon type="search-line" lineWidth={4} />
         </span>
       </span>
     </span>

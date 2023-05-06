@@ -11,6 +11,7 @@ export interface IconProps extends Pick<BaseIconProps, 'onClick'> {
   spin?: boolean;
   style?: React.CSSProperties;
   ref?: React.ForwardedRef<HTMLSpanElement>
+  lineWidth?: number;
 }
 
 const Icon = (props: Omit<IconProps, 'ref'>, ref: React.ForwardedRef<HTMLSpanElement>) => {
