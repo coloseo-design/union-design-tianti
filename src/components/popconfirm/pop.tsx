@@ -71,7 +71,9 @@ class PopComponent extends React.Component<PopProps, PopconfirmState> {
         onVisibleChange?.(false);
       }
     } else if (componentType === 'pop-confirm') {
-      if (!this.node?.contains(target)) this.setState({ visible: false });
+      if (!this.node?.contains(target)) {
+        this.setState({ visible: false });
+      }
     } else {
       this.setState({ visible: false });
       onVisibleChange?.(false);

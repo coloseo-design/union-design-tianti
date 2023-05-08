@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import React, { useState } from 'react';
-import { Popover, Button } from '../index';
+import { Button } from '../index';
+import Popover from './popover';
 import './styles/index';
 import '../button/styles/index';
 

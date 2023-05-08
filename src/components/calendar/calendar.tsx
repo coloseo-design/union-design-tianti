@@ -2,7 +2,7 @@ import dayjs, { Dayjs } from 'dayjs';
 import React, { ReactNode } from 'react';
 
 import { BaseComponent, BaseProps, BaseState } from '@union-design/base-component';
-import { cacheFunc } from '@union-design/utils/cacheFunc';
+import { cacheFunc } from '@union-design/utils';
 import { ButtonGroup } from './button-group';
 import { Select } from './select';
 
@@ -288,7 +288,7 @@ const weeks = [
 ];
 
 const handleYearData = cacheFunc((startYear: number, endYear: number) => {
-  const re = [];
+  const re: any[] = [];
   for (let i = startYear; i < endYear; i += 1) {
     re.push({ key: i, value: `${i}年`.padStart(4, '0') });
   }

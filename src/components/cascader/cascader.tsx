@@ -6,11 +6,11 @@
 import React from 'react';
 import classNames from 'classnames';
 import Icon from '@union-design/icon';
+import { getOffset } from '@union-design/utils';
+import Portal from '@union-design/portal';
 import { ConfigConsumer, ConfigConsumerProps } from '@union-design/config-provider';
 import Menus from './menus';
 import Result from './result';
-import { getOffset } from '@union-design/utils/getOffset';
-import Portal from '@union-design/portal';
 import { CascaderOptionType } from './types/common';
 import { CascaderProps } from './types/cascader';
 import { arrayTreeFilter, uuid, getFieldName } from './utils';

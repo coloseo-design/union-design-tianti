@@ -10,7 +10,7 @@ import omit from 'omit.js';
 import classnames from 'classnames';
 import { ConfigConsumer, ConfigConsumerProps } from '@union-design/config-provider';
 import Icon from '@union-design/icon';
-import { getOffset } from '@union-design/utils/getOffset';
+import { getOffset } from '@union-design/utils';
 import Portal from '@union-design/portal';
 import Option from './option';
 import OptGroup from './opt-group';

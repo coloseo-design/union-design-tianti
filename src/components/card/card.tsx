@@ -1,7 +1,7 @@
 import * as React from 'react';
 import classNames from 'classnames';
 import { ConfigContext } from '@union-design/config-provider';
-import { Omit } from '@union-design/utils/type';
+import { Omit } from '@union-design/utils';
 
 export interface CardProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'title'> {
   prefixCls?: string;

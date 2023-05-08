@@ -1,4 +1,4 @@
-import { tuple } from '@union-design/utils/type';
+import { tuple } from '@union-design/utils';
 
 const PlacementTypes = tuple('top', 'left', 'right', 'bottom', 'topLeft', 'topRight', 'bottomLeft', 'bottomRight', 'leftTop',
   'leftBottom', 'rightTop', 'rightBottom');

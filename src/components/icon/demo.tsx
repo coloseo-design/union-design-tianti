@@ -1,6 +1,6 @@
 import React from 'react';
 import * as icons from '@uni/icons';
-import { Icon } from '../index';
+import Icon from './index';
 import './styles/index';
 import './demo.less';
 

@@ -4,8 +4,9 @@ import React, {
   useCallback, useContext, useEffect, useState,
 } from 'react';
 import classnames from 'classnames';
-import { tuple } from '@union-design/utils/type';
-import { BreakpointMap, breakpoints, responsiveObserve } from '@union-design/utils';
+import {
+  tuple, BreakpointMap, breakpoints, responsiveObserve,
+} from '@union-design/utils';
 import { ConfigContext } from '@union-design/config-provider';
 import { RowProvider } from './context';
 
