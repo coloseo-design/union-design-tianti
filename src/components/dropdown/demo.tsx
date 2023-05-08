@@ -1,8 +1,9 @@
 /* eslint-disable max-len */
 import React from 'react';
 import {
-  Dropdown, Button, Icon, Menu,
+  Button, Icon, Menu,
 } from '../index';
+import Dropdown from './dropdown';
 import './styles/index';
 
 const menu = (
@@ -85,6 +86,9 @@ const DropdownDemo = () => {
             trigger={['click']}
             overlay={menu}
             arrow
+            onVisibleChange={(v) => {
+              console.log('===onVisibleChange', v);
+            }}
             getPopupContainer={() => document.querySelector('#drop-demo')}
           >
             <Button>click bottomCenter</Button>

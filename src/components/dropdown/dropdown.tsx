@@ -69,6 +69,7 @@ class Dropdown extends React.Component<DropdownProps, DropdownState> {
       }
     } else {
       this.setState({ visible: false });
+      onVisibleChange?.(false);
     }
   };
 

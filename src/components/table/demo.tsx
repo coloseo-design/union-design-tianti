@@ -2,10 +2,10 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
 import Table from './index';
-// import './styles/index';
-// import '@union-design/popconfirm/styles/index.less';
-// import '@union-design/tabs/styles/index.less';
-// import '@union-design/tooltip/styles/index.less';
+import './styles/index';
+import '@union-design/popconfirm/styles/index.less';
+import '@union-design/tabs/styles/index.less';
+import '@union-design/tooltip/styles/index.less';
 import { ColumnsProps, TableRowSelectionType, ColumnsAlign } from './type';
 
 const render1 = (k: React.ReactNode, row: any) => (
