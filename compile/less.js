@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 /* eslint-disable @typescript-eslint/no-var-requires */
 const path = require('path');
 const less = require('less');
@@ -40,6 +41,9 @@ const lessCompile = (modules, item) => {
   const outputPath = path.resolve(dist, modules);
   return src(lessDir)
     .pipe(through2.obj(function transformer(file, encoding, next) {
+      const fileString = file.contents.toString(encoding);
+      const res = fileString.replace('../../style', '@union-design/style/es');
+      file.contents = Buffer.from(res);
       this.push(file.clone());
       if (
         file.path.match(/(\/|\\)styles?(\/|\\)index\.less$/)

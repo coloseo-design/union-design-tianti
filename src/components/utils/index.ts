@@ -2,7 +2,8 @@ import { animation, scrollToTop } from './animation';
 import { cacheFunc } from './cacheFunc';
 import { getOffset } from './getOffset';
 import getPrefixCls from './getPrefixCls';
-import responsiveObserve, { breakpoints, responsiveMap, BreakpointMap } from './responsive-observe';
+import responsiveObserve, { breakpoints, responsiveMap } from './responsive-observe';
+import type { BreakpointMap } from './responsive-observe';
 import {
   Omit, ResponsiveColProps, BaseProps, ColProps, tuple,
 } from './type';

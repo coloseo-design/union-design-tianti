@@ -18,6 +18,7 @@ export interface DropdownProps {
   prefixCls?: string;
   overlayClassName?: string;
   arrow?: boolean;
+  children?: any;
 }
 
 export interface DropdownState {
@@ -207,19 +208,19 @@ class Dropdown extends React.Component<DropdownProps, DropdownState> {
         ref: this.getChildRef,
         onClick: (evt: React.MouseEvent<any>) => {
           this.click(evt);
-          children.props.onClick && children.props.onClick(evt);
+          (children.props as any)?.onClick && (children.props as any).onClick?.(evt);
         },
         onMouseOver: (evt: React.MouseEvent<any>) => {
           this.over(evt);
-          children.props.onMouseOver && children.props.onMouseOver(evt);
+          (children.props as any).onMouseOver && (children.props as any).onMouseOver(evt);
         },
         onMouseLeave: (evt: React.MouseEvent<any>) => {
           this.out();
-          children.props.onMouseLeave && children.props.onMouseLeave(evt);
+          (children.props as any).onMouseLeave && (children.props as any).onMouseLeave(evt);
         },
         onContextMenu: (evt: React.MouseEvent<any>) => {
           this.handleContextMenu(evt);
-          children.props.onContextMenu && children.props.onContextMenu(evt);
+          (children.props as any).onContextMenu && (children.props as any).onContextMenu(evt);
         },
       });
     }

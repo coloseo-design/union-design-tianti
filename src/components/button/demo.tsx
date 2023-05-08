@@ -4,19 +4,6 @@ import './styles/index';
 
 const ButtonDemo: React.FC<unknown> = () => (
   <div style={{ margin: 5 }}>
-
-    <div style={{ display: 'flex', justifyContent: 'space-between', margin: '20px 0px' }}>
-      <div className="p1" style={{ width: 100, height: 42 }} />
-      <div className="p2" style={{ width: 100, height: 42 }} />
-      <div className="p3" style={{ width: 100, height: 42 }} />
-      <div className="p4" style={{ width: 100, height: 42 }} />
-      <div className="p5" style={{ width: 100, height: 42 }} />
-      <div className="p6" style={{ width: 100, height: 42 }} />
-      <div className="p7" style={{ width: 100, height: 42 }} />
-      <div className="p8" style={{ width: 100, height: 42 }} />
-      <div className="p9" style={{ width: 100, height: 42 }} />
-      <div className="p10" style={{ width: 100, height: 42 }} />
-    </div>
     <h1>大按钮</h1>
     <div style={{ marginBottom: 32 }}>
       <Button size="large" type="default" icon="left" style={{ marginRight: 22 }}>默认按钮</Button>

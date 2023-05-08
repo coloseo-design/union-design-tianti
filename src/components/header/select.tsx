@@ -19,8 +19,7 @@ const SearchSelect: React.FC<{prefix?: string} & SelectProps> = (props) => {
     setVisible(false);
   };
 
-  const current = (options.find((i) => i.value === value) || {}) as Option;
-
+  const current = (options.find((i) => i.value === value)) as Option || { value: '', label: '全部' };
   const test = (
     <div className="selectDown-content">
       {(options || []).map((item) => (

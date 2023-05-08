@@ -11,20 +11,20 @@ import { HeaderProps, SearchProps, Menu } from './type';
 const Header: React.FC<HeaderProps> = (props) => {
   const {
     title,
-    showNav,
     menus = [],
     search,
     showBg,
-    type = 'business',
+    size = 'md',
     topMenus = [],
     navProps,
+    bordered = true,
   } = props;
   const { getPrefixCls } = useContext(ConfigContext);
   const prefix = getPrefixCls('header');
 
   return (
     <div className={prefix}>
-      {type === 'comprehensive' && (
+      {topMenus.length > 0 && (
       <div className={`${prefix}-top-menu`}>
         {(topMenus || []).map((item: Menu | ReactNode, index: number) => (
           <div
@@ -43,24 +43,26 @@ const Header: React.FC<HeaderProps> = (props) => {
       </div>
       )}
       <div className={classNames(`${prefix}-content`, {
-        [`${prefix}-content-${type}`]: type,
-        [`${prefix}-content-no-menu`]: !showNav,
+        [`${prefix}-content-${size}`]: size,
+        [`${prefix}-content-bordered`]: navProps ? false : bordered,
       })}
       >
-        {showBg && <div className={`${prefix}-content-bg`}><Bg /></div>}
+        {showBg && (
+        <div className={`${prefix}-content-bg`}>
+          {typeof showBg === 'boolean' ? <Bg /> : <img src={showBg} alt="" width="100%" />}
+          <Bg />
+        </div>
+        )}
         <div className={`${prefix}-left`}>
           <div className={`${prefix}-left-logo`}>
-            {type === 'business' ? <Logo1 /> : <Logo />}
+            {size === 'md' ? <Logo1 /> : <Logo />}
           </div>
           <div className={`${prefix}-left-title`}>{title}</div>
           {search && (
-          <div className={`${prefix}-left-search`}>
             <Search
               {...search as SearchProps}
-              type={type === 'business' ? 'default' : 'primary'}
               prefix={prefix}
             />
-          </div>
           )}
         </div>
         <div className={`${prefix}-right`}>
@@ -83,7 +85,7 @@ const Header: React.FC<HeaderProps> = (props) => {
         </div>
       </div>
 
-      {navProps && <TopNav {...navProps} size={type === 'business' ? 'md' : 'xl'} />}
+      {navProps && <TopNav {...navProps} />}
     </div>
   );
 };

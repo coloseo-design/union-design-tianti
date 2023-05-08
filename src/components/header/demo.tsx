@@ -1,9 +1,11 @@
 import React from 'react';
+import Dropdown from '@union-design/dropdown';
 import Icon from '../icon';
 import Header from './header';
 import './styles/index';
 
 const Demo = () => {
+  const [down, setDown1] = React.useState(true);
   const options = [
     {
       value: '1',
@@ -38,15 +40,12 @@ const Demo = () => {
         console.log('==key', key);
       },
     },
-    <div
-      key="7"
-      style={{
-        maxWidth: 80, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
-      }}
-    >
-      自定义列表
-      <Icon type="down" style={{ fontSize: 14 }} />
-    </div>,
+    <Dropdown key="7" overlay={<div style={{ padding: 16 }}>选项卡</div>}>
+      <div>
+        自定义
+        <Icon type="down" style={{ fontSize: 14 }} />
+      </div>
+    </Dropdown>,
     <div key="8" style={{ display: 'flex', alignItems: 'center', whiteSpace: 'nowrap' }}>
       <Icon type="meeting-surface" style={{ fontSize: 20, marginRight: 8 }} />
       <span>你好</span>
@@ -83,10 +82,19 @@ const Demo = () => {
         console.log('==key', key);
       },
     },
-    <div key="01">
-      自定义列表
-      <Icon type="down" style={{ fontSize: 14 }} />
-    </div>,
+    <Dropdown
+      key="drop"
+      overlay={<div style={{ padding: 16 }}>哈哈哈</div>}
+      trigger={['click']}
+      onVisibleChange={(v: boolean) => {
+        setDown1(!v);
+      }}
+    >
+      <div key="01">
+        自定义列表
+        <Icon type={down ? 'down2-line' : 'up2-line'} style={{ fontSize: 14 }} />
+      </div>
+    </Dropdown>,
   ];
 
   const selectChange = (val: string) => {
@@ -337,7 +345,7 @@ const Demo = () => {
       <h2>宣传类纯色背景-无搜索框</h2>
       <Header
         title="中国联通设计系统"
-        type="propaganda"
+        size="lg"
         search={false}
         menus={menus.slice(1)}
       />
@@ -347,8 +355,8 @@ const Demo = () => {
       <h2>宣传类-带背景色</h2>
       <Header
         title="中国联通设计系统"
-        search={{ ...inputProps }}
-        type="propaganda"
+        search={{ ...inputProps, type: 'primary' }}
+        size="lg"
         menus={menus.slice(1)}
         showBg
       />
@@ -360,14 +368,15 @@ const Demo = () => {
         title="中国联通设计系统"
         search={{
           ...inputProps,
+          type: 'primary',
           select: {
             options,
             onChange: selectChange,
           },
         }}
-        type="propaganda"
+        size="lg"
         menus={menus.slice(1)}
-        navProps={navProps}
+        navProps={{ ...navProps, size: 'xl' }}
       />
       <br />
       <br />
@@ -375,10 +384,10 @@ const Demo = () => {
       <h2>宣传类-带导航带背景背景</h2>
       <Header
         title="中国联通设计系统"
-        search={{ ...inputProps }}
-        type="propaganda"
+        search={{ ...inputProps, type: 'primary' }}
+        size="lg"
         menus={menus.slice(1)}
-        navProps={navProps}
+        navProps={{ ...navProps, size: 'xl' }}
         showBg
       />
       <br />
@@ -389,7 +398,7 @@ const Demo = () => {
       <Header
         title="中国联通设计系统"
         search={false}
-        type="comprehensive"
+        size="lg"
         menus={menus.slice(1)}
         topMenus={topMenus}
       />
@@ -402,13 +411,14 @@ const Demo = () => {
         showBg
         search={{
           ...inputProps,
+          type: 'primary',
           select: {
             options,
             onChange: selectChange,
           },
         }}
         topMenus={topMenus}
-        type="comprehensive"
+        size="lg"
         menus={menus.slice(1)}
       />
       <br />
@@ -419,15 +429,16 @@ const Demo = () => {
         title="中国联通设计系统"
         search={{
           ...inputProps,
+          type: 'primary',
           select: {
             options,
             onChange: selectChange,
           },
         }}
         topMenus={topMenus}
-        type="comprehensive"
+        size="lg"
         menus={menus.slice(1)}
-        navProps={navProps}
+        navProps={{ ...navProps, size: 'xl' }}
       />
       <br />
       <br />
@@ -437,15 +448,16 @@ const Demo = () => {
         title="中国联通设计系统"
         search={{
           ...inputProps,
+          type: 'primary',
           select: {
             options,
             onChange: selectChange,
           },
         }}
         topMenus={topMenus}
-        type="comprehensive"
+        size="lg"
         menus={menus.slice(1)}
-        navProps={navProps}
+        navProps={{ ...navProps, size: 'xl' }}
         showBg
       />
     </div>

@@ -62,11 +62,14 @@ function dts(format, item) {
   const dist = item ? path.resolve(process.cwd(), `src/components/${item}/`) : path.resolve(process.cwd());
   const tsResult = gulp.src(item ? srcs(src) : allSrcs(src))
     .pipe(through2.obj((file, encoding, next) => {
-      console.log('==file', file.path);
       if (file.isBuffer()) {
         const content = file.contents.toString(encoding);
-        const transformed = `// @ts-nocheck \n ${content}`;
-        file.contents = Buffer.from(content);
+        let res = content;
+        if (file.path.endsWith('styles/index.tsx') || file.path.endsWith('styles/index.ts')) {
+          res = content.replaceAll('styles/index', 'es/styles/index');
+        }
+        const transformed = `// @ts-nocheck \n ${res}`;
+        file.contents = Buffer.from(res);
         next(null, file);
       } else {
         next(null, file);

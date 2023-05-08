@@ -7,7 +7,7 @@ import SearchSelect from './select';
 const Search: React.FC<{prefix?: string} & SearchProps> = (props) => {
   const {
     placeholder,
-    type,
+    type = 'default',
     select,
     onChange,
     onSearch,
@@ -41,7 +41,7 @@ const Search: React.FC<{prefix?: string} & SearchProps> = (props) => {
           className={type === 'primary' ? `${prefix}-wrapper-suffix` : `${prefix}-wrapper-icon`}
           onClick={inputSearch}
         >
-          <Icon type="search-line" lineWidth={4} />
+          <Icon type="search-line" lineWidth={3.6} />
         </span>
       </span>
     </span>

@@ -1,6 +1,6 @@
 {
   "name": "@union-design/steps",
-  "version": "0.0.4",
+  "version": "0.0.6",
   "description": "",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -23,12 +23,12 @@
   "devDependencies": {
     "@types/classnames": "^2.3.1",
     "@types/react-dom": "^18.0.11",
-    "@union-design/base-component": "^0.0.4",
-    "@union-design/config-provider": "^0.0.4",
-    "@union-design/icon": "^0.0.4",
-    "@union-design/popover": "^0.0.4",
-    "@union-design/style": "^0.0.4",
-    "@union-design/typography": "^0.0.4",
+    "@union-design/base-component": "^0.0.6",
+    "@union-design/config-provider": "^0.0.6",
+    "@union-design/icon": "^0.0.6",
+    "@union-design/popover": "^0.0.6",
+    "@union-design/style": "^0.0.6",
+    "@union-design/typography": "^0.0.6",
     "react": "^16.8.0",
     "react-dom": "^16.8.0"
   }
