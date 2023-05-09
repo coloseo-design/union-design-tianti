@@ -5,10 +5,9 @@ import classnames from 'classnames';
 import omit from 'omit.js';
 import { ConfigConsumer, ConfigConsumerProps } from '@union-design/config-provider';
 import Checkbox from '@union-design/checkbox';
-import Pagination from '@union-design/pagination';
 import Radio from '@union-design/radio';
 import Icon from '@union-design/icon';
-import { PaginationProps } from '@union-design/pagination/pagination';
+import Pagination, { PaginationProps } from '@union-design/pagination';
 import {
   ColumnsProps,
   FixedType,

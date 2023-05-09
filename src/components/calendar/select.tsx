@@ -3,8 +3,7 @@ import React, { DOMAttributes } from 'react';
 import classnames from 'classnames';
 import Portal from '@union-design/portal';
 import { BaseProps, BaseState } from '@union-design/base-component';
-import { animation } from '@union-design/utils/animation';
-import { uuid } from '@union-design/cascader/utils';
+import { animation, uuid } from '@union-design/utils';
 import Icon from '@union-design/icon';
 import { ConfigConsumer, ConfigConsumerProps } from '@union-design/config-provider';
 

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 // import { Affix, Button } from '../index';
 import Affix from './index';
-// import Button from '../button';
+import Button from '../button';
 
 import './styles/index';
 import './demo.less';
@@ -15,8 +15,7 @@ const AffixDemo = () => {
         <div style={{ height: 700, backgroundColor: '#fff' }}>
           这是开头
           <Affix offsetTop={20}>
-            <div>固定页面上方20px</div>
-            {/* <Button type="primary">固定页面上方20px</Button> */}
+            <Button type="primary">固定页面上方20px</Button>
           </Affix>
           北冥有鱼，其名为鲲。鲲之大，不知其几千里也；化而为鸟，其名为鹏。鹏之背，不知其几千里也；怒而飞，
           其翼若垂天之云。是鸟也，海运则将徙于南冥。南冥者，天池也。《齐谐》者，志怪者也。《谐》之言曰：“鹏之徙于南冥也，
@@ -29,8 +28,8 @@ const AffixDemo = () => {
           此大年也。而彭祖乃今以久特闻，众人匹之，不亦悲乎？
           这是开头2
           <Affix offsetTop={20} target={() => container}>
-            {/* <Button type="primary">固定在容器上方20px</Button> */}
-            <div>固定页面上方20px</div>
+            <Button type="primary">固定在容器上方20px</Button>
+            {/* <div>固定页面上方20px</div> */}
           </Affix>
           这是结尾2
           北冥有鱼，其名为鲲。鲲之大，不知其几千里也；化而为鸟，其名为鹏。鹏之背，不知其几千里也；怒而飞，
@@ -42,9 +41,9 @@ const AffixDemo = () => {
           适莽苍者，三餐而反，腹犹果然；适百里者，宿舂粮；适千里者，三月聚粮。之二虫又何知！小知不及大知，小年不及大年。奚以知其然也？
           朝菌不知晦朔，蟪蛄不知春秋，此小年也。楚之南有冥灵者，以五百岁为春，五百岁为秋；上古有大椿者，以八千岁为春，八千岁为秋。
           此大年也。而彭祖乃今以久特闻，众人匹之，不亦悲乎？
-          {/* <Affix offsetBottom={20} target={() => container}>
+          <Affix offsetBottom={20} target={() => container}>
             <Button type="danger">固定在容器下方20px</Button>
-          </Affix> */}
+          </Affix>
         </div>
       </div>
     </div>
