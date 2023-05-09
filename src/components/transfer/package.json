@@ -1,6 +1,6 @@
 {
   "name": "@union-design/transfer",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -16,12 +16,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@union-design/button": "^0.0.7",
-    "@union-design/checkbox": "^0.0.7",
-    "@union-design/config-provider": "^0.0.7",
-    "@union-design/icon": "^0.0.7",
-    "@union-design/input": "^0.0.7",
-    "@union-design/style": "^0.0.7",
+    "@union-design/button": "^0.0.8",
+    "@union-design/checkbox": "^0.0.8",
+    "@union-design/config-provider": "^0.0.8",
+    "@union-design/icon": "^0.0.8",
+    "@union-design/input": "^0.0.8",
+    "@union-design/style": "^0.0.8",
     "classnames": "^2.3.2",
     "omit.js": "^2.0.2",
     "union-tool": "^0.1.2"
