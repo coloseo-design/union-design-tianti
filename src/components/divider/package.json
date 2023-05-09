@@ -1,6 +1,6 @@
 {
   "name": "@union-design/divider",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -16,8 +16,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@union-design/config-provider": "^0.0.6",
-    "@union-design/style": "^0.0.6",
+    "@union-design/config-provider": "^0.0.7",
+    "@union-design/style": "^0.0.7",
     "classnames": "^2.3.2",
     "omit.js": "^2.0.2",
     "union-tool": "^0.1.2"
