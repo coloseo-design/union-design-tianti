@@ -5,7 +5,7 @@
 /* eslint-disable no-shadow */
 /* eslint-disable quotes */
 import React, { useState } from "react";
-import { TopNav } from "../index";
+import TopNav from "./index";
 import "./styles/index";
 
 const Demo = () => {

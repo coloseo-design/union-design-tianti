@@ -3,9 +3,9 @@
 import React from 'react';
 import Table from './index';
 import './styles/index';
-import '@union-design/popconfirm/styles/index.less';
-import '@union-design/tabs/styles/index.less';
-import '@union-design/tooltip/styles/index.less';
+import '../popconfirm/styles/index.less';
+import '../tabs/styles/index.less';
+import '../tooltip/styles/index.less';
 import { ColumnsProps, TableRowSelectionType, ColumnsAlign } from './type';
 
 const render1 = (k: React.ReactNode, row: any) => (
