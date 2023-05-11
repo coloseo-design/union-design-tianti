@@ -36,7 +36,7 @@ const Header: React.FC<HeaderProps> = (props) => {
           >
             {isValidElement(item) ? item : (
               <>
-                <span>{(item as Menu).title}</span>
+                <div>{(item as Menu).title}</div>
               </>
             )}
           </div>
@@ -80,8 +80,8 @@ const Header: React.FC<HeaderProps> = (props) => {
             >
               {isValidElement(item) ? item : (
                 <>
-                  <span className={`${prefix}-menu-icon`}>{(item as Menu).icon}</span>
-                  <span>{(item as Menu).title}</span>
+                  <div className={`${prefix}-menu-icon`}>{(item as Menu).icon}</div>
+                  <div>{(item as Menu).title}</div>
                 </>
               )}
             </div>
