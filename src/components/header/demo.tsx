@@ -1,5 +1,5 @@
 import React from 'react';
-import Dropdown from '@union-design/dropdown';
+import Dropdown from '../dropdown';
 import Icon from '../icon';
 import Header from './header';
 import './styles/index';
