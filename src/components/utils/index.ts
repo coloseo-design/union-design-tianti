@@ -4,9 +4,10 @@ import { getOffset } from './getOffset';
 import getPrefixCls from './getPrefixCls';
 import responsiveObserve, { breakpoints, responsiveMap } from './responsive-observe';
 import type { BreakpointMap } from './responsive-observe';
-import {
-  Omit, ResponsiveColProps, BaseProps, ColProps, tuple,
+import type {
+  Omit, ResponsiveColProps, BaseProps, ColProps,
 } from './type';
+import { tuple } from './type';
 import { uuid } from './uuid';
 import { warning } from './warning';
 
