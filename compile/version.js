@@ -20,7 +20,7 @@ argv.forEach((item) => {
   }
 });
 
-const packages = components ? [components] : packagesAll;
+const packages = components ? [components] : packagesAll.filter((i) => !i.endsWith('.ts') && !i.endsWith('.less'));
 
 packages.forEach((item) => {
   const currentVersion = getPackageJson(item).version;
