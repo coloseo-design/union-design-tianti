@@ -12,6 +12,7 @@ export interface HeaderProps {
   topMenus?: (Menu | ReactNode)[]; // 只有综合类生效
   bordered?: boolean;
   navProps?: SideNavProps<any>; // 顶部导航api
+  onLogoClick?: (evt: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
 }
 
 export interface SearchProps {

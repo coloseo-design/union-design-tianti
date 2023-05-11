@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Icon from '@union-design/icon';
+import classNames from 'classnames';
 import Dropdown from '@union-design/dropdown';
 import { SelectProps, Option } from './type';
 
@@ -34,7 +35,7 @@ const SearchSelect: React.FC<{prefix?: string} & SelectProps> = (props) => {
       ))}
     </div>
   );
-
+  const searchPrefix = classNames(`${prefix}-prefix`);
   return (
     <Dropdown
       visible={visible}
@@ -44,12 +45,12 @@ const SearchSelect: React.FC<{prefix?: string} & SelectProps> = (props) => {
       placement="bottomLeft"
       overlayClassName="selectDown"
     >
-      <span
-        className={`${prefix}-wrapper-select`}
-      >
-        <span>{current?.label || ''}</span>
-        <Icon type={visible ? 'up2-line' : 'down2-line'} />
-      </span>
+      <div className={searchPrefix}>
+        <div className={`${searchPrefix}-head`}>
+          <span>{current?.label || ''}</span>
+          <Icon type={visible ? 'up2-line' : 'down2-line'} />
+        </div>
+      </div>
     </Dropdown>
   );
 };

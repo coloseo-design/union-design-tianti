@@ -18,6 +18,7 @@ const Header: React.FC<HeaderProps> = (props) => {
     topMenus = [],
     navProps,
     bordered = true,
+    onLogoClick,
   } = props;
   const { getPrefixCls } = useContext(ConfigContext);
   const prefix = getPrefixCls('header');
@@ -54,7 +55,10 @@ const Header: React.FC<HeaderProps> = (props) => {
         </div>
         )}
         <div className={`${prefix}-left`}>
-          <div className={`${prefix}-left-logo`}>
+          <div
+            className={`${prefix}-left-logo`}
+            onClick={(e) => onLogoClick?.(e)}
+          >
             {size === 'md' ? <Logo1 /> : <Logo />}
           </div>
           <div className={`${prefix}-left-title`}>{title}</div>

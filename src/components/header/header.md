@@ -16,6 +16,7 @@ subtitle: 头部组件
 |bordered|组件下划线(如果传了navProps默认为false)|boolean|true|
 |showBg|是否展示背景图，可传图片的src|boolean\|string|false|
 |navProps|top-nav组件的api|查看top-nav的api|-|
+|onLogoClick|点击logo事件|(evt: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;｜-｜
 
 ### searchPops
 

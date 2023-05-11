@@ -312,6 +312,9 @@ const Demo = () => {
         title="中国联通设计系统"
         search={false}
         menus={menus}
+        onLogoClick={() => {
+          console.log('=1111');
+        }}
       />
       <br />
       <br />

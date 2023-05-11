@@ -24,27 +24,20 @@ const Search: React.FC<{prefix?: string} & SearchProps> = (props) => {
     onSearch?.(value);
   };
 
+  const suffix = classNames(`${prefix}-suffix`);
+
   return (
-    <span
+    <div
       className={classNames(prefix, {
         [`${prefix}-primary`]: type === 'primary',
       })}
     >
-      <span className={`${prefix}-wrapper`}>
-        {select && <SearchSelect {...select as SelectProps} prefix={prefixCls} />}
-        <input
-          placeholder={placeholder}
-          onChange={inputChange}
-          value={value}
-        />
-        <span
-          className={type === 'primary' ? `${prefix}-wrapper-suffix` : `${prefix}-wrapper-icon`}
-          onClick={inputSearch}
-        >
-          <Icon type="search-line" lineWidth={3.6} />
-        </span>
-      </span>
-    </span>
+      {select && <SearchSelect {...select as SelectProps} prefix={prefixCls} />}
+      <input placeholder={placeholder} onChange={inputChange} value={value} />
+      <div className={suffix} onClick={inputSearch}>
+        <Icon type="search-line" lineWidth={3} />
+      </div>
+    </div>
   );
 };
 
