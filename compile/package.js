@@ -20,7 +20,7 @@ const packagesAll = fs.readdirSync(`${process.cwd()}/src/components`).filter((i)
 
 const packages = components ? [components] : packagesAll;
 
-exports.packages = ['style', ...packages];
+exports.packages = ['style', ...packages.filter((i) => i !== 'col' && i !== 'row')];
 exports.filterPackage = packages;
 exports.packagesAll = packagesAll;
 exports.version = version;
