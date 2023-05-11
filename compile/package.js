@@ -1,12 +1,26 @@
+/* eslint-disable prefer-destructuring */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-var-requires */
 const fs = require('fs');
 
-const currentPackages = process.env.npm_config_packages?.split('-') || [];
-// 单独编译某一个包
+// version=xxx components=xxx
+const argv = process.argv.slice(2) || [];
+
+let components = '';
+let version = '';
+argv.forEach((item) => {
+  const current = item.split('=');
+  if (current.length > 1) {
+    if (current[0] === 'version') version = current[1];
+    if (current[0] === 'components') components = current[1];
+  }
+});
 
 const packagesAll = fs.readdirSync(`${process.cwd()}/src/components`).filter((i) => !(i.endsWith('.ts') || i.endsWith('.less') || i === '.DS_Store'));
 
-const packages = currentPackages.length > 0 ? currentPackages : packagesAll;
+const packages = components ? [components] : packagesAll;
 
-exports.packages = ['style', ...packages.filter((i) => i !== 'col' && i !== 'row')];
+exports.packages = ['style', ...packages];
+exports.filterPackage = packages;
 exports.packagesAll = packagesAll;
+exports.version = version;
