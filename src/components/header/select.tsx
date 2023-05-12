@@ -43,7 +43,7 @@ const SearchSelect: React.FC<{prefix?: string} & SelectProps> = (props) => {
       trigger={['click']}
       overlay={test}
       placement="bottomLeft"
-      overlayClassName="selectDown"
+      overlayClassName="header-selectDown"
     >
       <div className={searchPrefix}>
         <div className={`${searchPrefix}-head`}>

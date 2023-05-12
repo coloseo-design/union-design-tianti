@@ -38,6 +38,7 @@ export interface PopProps {
   className?: string;
   okButtonProps?: BaseButtonProps;
   cancelButtonProps?: BaseButtonProps;
+  children?: any;
 }
 
 export interface PopconfirmState {
@@ -335,24 +336,25 @@ class PopComponent extends React.Component<PopProps, PopconfirmState> {
         {children}
       </span>
     );
+
     if (React.isValidElement(children)) {
       TChildren = React.cloneElement<any>(children, {
         ref: this.getChildRef,
         onClick: (evt: React.MouseEvent<any>) => {
           this.handleClick(evt);
-          children.props.onClick && children.props.onClick(evt);
+          (children.props as any).onClick && (children.props as any).onClick(evt);
         },
         onFocus: (evt: React.FocusEvent<any>) => {
           this.handleFocus(evt);
-          children.props.onFocus && children.props.onFocus(evt);
+          (children.props as any).onFocus && (children.props as any).onFocus(evt);
         },
         onMouseOver: (evt: React.MouseEvent<any>) => {
           this.handleOver(evt);
-          children.props.onMouseOver && children.props.onMouseOver(evt);
+          (children.props as any).onMouseOver && (children.props as any).onMouseOver(evt);
         },
         onMouseLeave: (evt: React.MouseEvent<any>) => {
           this.handleOut();
-          children.props.onMouseLeave && children.props.onMouseLeave(evt);
+          (children.props as any).onMouseLeave && (children.props as any).onMouseLeave(evt);
         },
       });
     }

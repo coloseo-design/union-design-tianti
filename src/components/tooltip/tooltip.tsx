@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React, { ReactNode } from 'react';
 import classnames from 'classnames';
 import Popup from '@union-design/portal';
@@ -71,10 +72,10 @@ class Tooltip extends React.Component<TooltipProps, TooltipState> {
     });
   }
 
-  onMouseOver = (evt: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
+  onMouseOver = (evt: React.MouseEvent<HTMLElement, MouseEvent>) => {
     evt.nativeEvent.stopImmediatePropagation();
     evt.stopPropagation();
-    const target = evt.nativeEvent.target as HTMLSpanElement;
+    const target = (evt.currentTarget || evt.nativeEvent.target) as HTMLElement;
     const { getPopupContainer } = this.props;
     const { visible } = this.state;
     if (target && this.node) {

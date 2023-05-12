@@ -121,6 +121,8 @@ body {
       }
 
       &-icon {
+        display: flex;
+        align-items: center;
         margin-right: 4px;
         font-size: 24px;
       }
@@ -145,7 +147,7 @@ body {
       height: 32px;
       outline: none;
       border-right: none;
-
+      background-color: @header-bg-color;
       &::placeholder {
         color: @header-search-placeholder-color;
       }
@@ -267,7 +269,7 @@ body {
   }
 }
 
-.selectDown {
+.header-selectDown {
   &>div:first-child {
     min-width: 88px;
     border-radius: 4px;
