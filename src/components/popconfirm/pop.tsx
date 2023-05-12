@@ -330,6 +330,7 @@ class PopComponent extends React.Component<PopProps, PopconfirmState> {
         onMouseOver={this.handleOver}
         onMouseLeave={this.handleOut}
         onFocus={this.handleFocus}
+        ref={this.getChildRef}
       >
         {children}
       </span>
@@ -354,8 +355,6 @@ class PopComponent extends React.Component<PopProps, PopconfirmState> {
           children.props.onMouseLeave && children.props.onMouseLeave(evt);
         },
       });
-    } else {
-      throw new Error(' props children must be ReactNode');
     }
 
     const btnStyle = classnames(`${contentStyle}-inner-btn`, {

@@ -13,7 +13,7 @@ const PopoverDemo = () => {
       <Popover
         content="和哈哈哈哈1"
       >
-        <Button>hover</Button>
+        哈哈哈哈哈哈
       </Popover>
       <Popover
         title={<div>Title3</div>}
