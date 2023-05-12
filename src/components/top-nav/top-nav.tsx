@@ -461,20 +461,25 @@ export default class TopNav<Data> extends BaseComponent<
 
   private onClickViewItem = (data: any, div: HTMLDivElement) => {
     const { keyExtractor, childrenExtractor, mode = "dropdown" } = this.props;
+    const { openKey } = this.state;
     const key = keyExtractor(data);
     const children = childrenExtractor(data) ?? [];
 
     if (children.length > 0) {
-      if (mode === "dropdown") {
-        this.openDropdown(children, div);
+      if (openKey === key) {
+        this.setState({ openKey: "" });
+      } else {
+        if (mode === "dropdown") {
+          this.openDropdown(children, div);
+        }
+        if (mode === "expand") {
+          this.openExpand(children, div);
+        }
+        if (mode === "expand-img") {
+          this.openExpandImg(data, children, div);
+        }
+        this.setState({ openKey: key });
       }
-      if (mode === "expand") {
-        this.openExpand(children, div);
-      }
-      if (mode === "expand-img") {
-        this.openExpandImg(data, children, div);
-      }
-      this.setState({ openKey: key });
     } else {
       this.onSelectedKey(key, data);
     }

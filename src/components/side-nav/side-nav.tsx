@@ -369,15 +369,26 @@ export default class SideNav<Data> extends BaseComponent<
     const children = childrenExtractor(data) ?? [];
     const hasChildren = children.length > 0;
     const key = keyExtractor(data);
+    const openKeys = this.getBindValue("openKeys") ?? [];
+
     if (hasChildren) {
-      setTimeout(() => {
-        this.popupshow = true;
-        const openKeys = [key];
+      if (openKeys.includes(key)) {
+        this.popupshow = false;
+        const openKeys = [] as string[];
         this.setState({
-          openPopup: true,
+          openPopup: false,
           openKeys,
         });
-      });
+      } else {
+        setTimeout(() => {
+          this.popupshow = true;
+          const openKeys = [key];
+          this.setState({
+            openPopup: true,
+            openKeys,
+          });
+        });
+      }
     } else {
       this.popupshow = false;
       this.setState({
