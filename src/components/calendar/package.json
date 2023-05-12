@@ -17,7 +17,7 @@
 	"license": "ISC",
 	"dependencies": {
 		"@union-design/base-component": "^0.0.11",
-		"@union-design/cascader": "^0.0.11",
+		"@union-design/cascader": "^0.0.12",
 		"@union-design/config-provider": "^0.0.11",
 		"@union-design/icon": "^0.0.11",
 		"@union-design/portal": "^0.0.11",
