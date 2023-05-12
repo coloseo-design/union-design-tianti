@@ -4,7 +4,8 @@
 /* eslint-disable no-shadow */
 /* eslint-disable quotes */
 import React, { useState } from "react";
-import { SideNav, Icon } from "../index";
+import SideNav from './index';
+import Icon from '../icon';
 import "./styles/index";
 
 const Demo = () => {
