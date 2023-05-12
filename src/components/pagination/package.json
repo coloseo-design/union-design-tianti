@@ -1,6 +1,6 @@
 {
 	"name": "@union-design/pagination",
-	"version": "0.0.10",
+	"version": "0.0.11",
 	"description": "",
 	"main": "lib/index.js",
 	"module": "es/index.js",
@@ -23,11 +23,11 @@
 	"devDependencies": {
 		"@types/classnames": "^2.3.1",
 		"@types/react-dom": "^18.0.11",
-		"@union-design/base-component": "^0.0.10",
-		"@union-design/calendar": "^0.0.10",
-		"@union-design/config-provider": "^0.0.10",
-		"@union-design/icon": "^0.0.10",
-		"@union-design/style": "^0.0.10",
+		"@union-design/base-component": "^0.0.11",
+		"@union-design/calendar": "^0.0.11",
+		"@union-design/config-provider": "^0.0.11",
+		"@union-design/icon": "^0.0.11",
+		"@union-design/style": "^0.0.11",
 		"react": "^16.8.0",
 		"react-dom": "^16.8.0"
 	}

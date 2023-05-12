@@ -1,6 +1,6 @@
 {
 	"name": "@union-design/utils",
-	"version": "0.0.10",
+	"version": "0.0.11",
 	"description": "",
 	"main": "lib/index.js",
 	"module": "es/index.js",
@@ -17,6 +17,7 @@
 	"license": "ISC",
 	"dependencies": {
 		"classnames": "^2.3.2",
+		"enquire.js": "^2.1.6",
 		"omit.js": "^2.0.2",
 		"union-tool": "^0.1.2"
 	},
