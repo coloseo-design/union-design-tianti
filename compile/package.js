@@ -12,7 +12,7 @@ argv.forEach((item) => {
   const current = item.split('=');
   if (current.length > 1) {
     if (current[0] === '--version') version = current[1];
-    if (current[0] === '--components' && current[1] !== 'every' && current[1] === 'one') components = current[1];
+    if (current[0] === '--components' && current[1] !== 'every' && current[1] !== 'one') components = current[1];
   }
 });
 
