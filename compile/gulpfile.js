@@ -9,9 +9,9 @@ const { dts } = require('./type');
 const { clean } = require('./clean');
 
 const tempT = (process.argv[2] || '').split('=') || [];
-const taskType = tempT.length > 1 ? tempT[1] : 'single';
+const taskType = tempT.length > 1 ? tempT[1] : 'every';
 
-if (taskType === 'single') {
+if (taskType !== 'one') {
   const esTasks = [];
   const libTasks = [];
   packages.forEach((item) => {
@@ -34,9 +34,9 @@ if (taskType === 'single') {
     esTasks.push(t);
     libTasks.push(t1);
   });
-  const single = series(...esTasks, ...libTasks);
-  exports.single = single;
-} else {
+  const every = series(...esTasks, ...libTasks);
+  exports[taskType] = every;
+} else if (taskType === 'one') {
   clean(path.resolve(process.cwd(), 'es'));
   clean(path.resolve(process.cwd(), 'lib'));
   const allEsTask = series(
@@ -51,9 +51,9 @@ if (taskType === 'single') {
     parallel(() => md('lib')),
     parallel(() => demo('lib')),
   );
-  const all = series(
+  const one = series(
     allEsTask,
     allLibTask,
   );
-  exports.all = all;
+  exports.one = one;
 }

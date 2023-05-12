@@ -3,7 +3,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const fs = require('fs');
 
-// version=xxx components=xxx
+// --version=xxx --components=xxx
 const argv = process.argv.slice(2) || [];
 
 let components = '';
@@ -11,8 +11,8 @@ let version = '';
 argv.forEach((item) => {
   const current = item.split('=');
   if (current.length > 1) {
-    if (current[0] === 'version') version = current[1];
-    if (current[0] === 'components') components = current[1];
+    if (current[0] === '--version') version = current[1];
+    if (current[0] === '--components' && current[1] !== 'every' && current[1] === 'one') components = current[1];
   }
 });
 
