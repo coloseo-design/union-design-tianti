@@ -35,7 +35,7 @@ const Search: React.FC<{prefix?: string} & SearchProps> = (props) => {
       {select && <SearchSelect {...select as SelectProps} prefix={prefixCls} />}
       <input placeholder={placeholder} onChange={inputChange} value={value} />
       <div className={suffix} onClick={inputSearch}>
-        <Icon type="search-line" lineWidth={3} />
+        <Icon type="search-line" />
       </div>
     </div>
   );
