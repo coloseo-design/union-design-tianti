@@ -26,7 +26,7 @@
 		"@union-design/base-component": "^0.0.11",
 		"@union-design/config-provider": "^0.0.11",
 		"@union-design/icon": "^0.0.11",
-		"@union-design/popover": "^0.0.11",
+		"@union-design/popover": "^0.0.12",
 		"@union-design/style": "^0.0.11",
 		"@union-design/typography": "^0.0.11",
 		"react": "^16.8.0",
