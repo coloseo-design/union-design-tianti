@@ -16,7 +16,7 @@ subtitle: 自动完成
 | defaultValue | 指定默认选中的条目 | string | - |
 | value | 指定当前选中的条目 | string | -|
 | open | 是否展开下拉菜单 | boolean  | false  |
-| defaultOpen | 是否默认展开下拉菜单 | boolean | false |
+| defaultOpen | 是否默认展开下拉菜单(只有在dataSource有值的时候生效) | boolean | false |
 | placeholder | 输入框提示 | string | - |
 | onSearch | 搜索补全项的时候调用 | function(value) | - |
 | onChange | 选中 option，或 input 的 value 变化时，调用此函数  | function(value) | - |
