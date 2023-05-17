@@ -1,4 +1,4 @@
-@import '../../style/index.less';
+@import "../../style/index.less";
 @sidenav: ~"@{uni-prefix}-sidenav";
 
 @sidenav-width: 206px;
@@ -9,7 +9,7 @@
   background: rgb(255, 255, 255);
   width: @sidenav-width;
 
-  &>.@{sidenav}-cao {
+  & > .@{sidenav}-cao {
     position: absolute;
     left: @sidenav-width;
     top: 50%;
@@ -18,7 +18,7 @@
     user-select: none;
   }
 
-  &>.@{sidenav}-border {
+  & > .@{sidenav}-border {
     position: absolute;
     background: rgb(255, 255, 255);
     top: 0;
@@ -28,7 +28,7 @@
     box-shadow: 1px 0px 3px rgba(0, 0, 0, 0.1);
   }
 
-  &>.@{sidenav}-body {
+  & > .@{sidenav}-body {
     position: absolute;
     top: 0;
     left: 0;
@@ -39,25 +39,25 @@
     overflow-y: auto;
     overflow-x: hidden;
 
-    & .@{sidenav}-item.@{sidenav}-level1>.@{sidenav}-text {
+    & .@{sidenav}-item.@{sidenav}-level1 > .@{sidenav}-text {
       margin-left: 0;
     }
 
-    & .@{sidenav}-item.@{sidenav}-level2>.@{sidenav}-text {
+    & .@{sidenav}-item.@{sidenav}-level2 > .@{sidenav}-text {
       margin-left: 26px;
     }
 
-    & .@{sidenav}-item.@{sidenav}-level3>.@{sidenav}-text {
+    & .@{sidenav}-item.@{sidenav}-level3 > .@{sidenav}-text {
       margin-left: 26px;
       padding-left: 14px;
     }
 
-    & .@{sidenav}-item.@{sidenav}-level4>.@{sidenav}-text {
+    & .@{sidenav}-item.@{sidenav}-level4 > .@{sidenav}-text {
       margin-left: 26px;
       padding-left: 28px;
     }
 
-    & .@{sidenav}-item.@{sidenav}-level5>.@{sidenav}-text {
+    & .@{sidenav}-item.@{sidenav}-level5 > .@{sidenav}-text {
       margin-left: 26px;
       padding-left: 42px;
     }
@@ -81,19 +81,19 @@
         background-color: @sidenav-item-bg-click-color;
       }
 
-      &>.@{sidenav}-icon,
-      &>.@{sidenav}-arrow {
+      & > .@{sidenav}-icon,
+      & > .@{sidenav}-arrow {
         color: @sidenav-icon-normal-color;
       }
 
-      &>.@{sidenav}-icon {
+      & > .@{sidenav}-icon {
         width: 18px;
         height: 18px;
         margin-right: 8px;
         font-size: 0;
       }
 
-      &>.@{sidenav}-text {
+      & > .@{sidenav}-text {
         width: 112px;
         font-size: 14px;
         font-weight: 400;
@@ -103,7 +103,7 @@
         text-overflow: ellipsis;
       }
 
-      &>.@{sidenav}-arrow {
+      & > .@{sidenav}-arrow {
         width: 14px;
         height: 14px;
         font-size: 0;
@@ -112,10 +112,9 @@
     }
 
     & .@{sidenav}-item.@{sidenav}-active {
-
-      &>.@{sidenav}-icon,
-      &>.@{sidenav}-arrow,
-      &>.@{sidenav}-text {
+      & > .@{sidenav}-icon,
+      & > .@{sidenav}-arrow,
+      & > .@{sidenav}-text {
         color: @sidenav-item-font-active-color;
       }
     }
@@ -148,17 +147,17 @@
 .@{sidenav}.@{sidenav}-close {
   width: 0;
 
-  &>.@{sidenav}-cao {
+  & > .@{sidenav}-cao {
     left: 0;
   }
 
-  &>.@{sidenav}-body {
+  & > .@{sidenav}-body {
     width: 0;
   }
 }
 
 .@{sidenav}.@{sidenav}-expand {
-  &>.@{sidenav}-popup {
+  & > .@{sidenav}-popup {
     position: absolute;
     top: 0;
     left: 206px;
@@ -168,55 +167,59 @@
     box-shadow: 0px 2px 5px rgba(147, 147, 147, 0.35);
     padding: 20px 0 36px 24px;
 
-    &>.@{sidenav}-item+.@{sidenav}-item.@{sidenav}-level2 {
+    & > .@{sidenav}-item + .@{sidenav}-item.@{sidenav}-level2 {
       margin-top: 16px;
     }
 
-    &>.@{sidenav}-item.@{sidenav}-level2 {
+    & > .@{sidenav}-item.@{sidenav}-level2 {
       height: 40px;
 
-      &>.@{sidenav}-text {
+      & > .@{sidenav}-text {
         font-weight: 500;
         color: @sidenav-popup-font-color-level2;
       }
     }
 
-    &>.@{sidenav}-item.@{sidenav}-level3 {
+    & > .@{sidenav}-item.@{sidenav}-level3 {
       height: 36px;
 
-      &>.@{sidenav}-text {
+      & > .@{sidenav}-text {
         color: @sidenav-popup-font-color-level3;
       }
     }
 
-    &>.@{sidenav}-item.@{sidenav}-level4 {
+    & > .@{sidenav}-item.@{sidenav}-level4 {
       height: 36px;
 
-      &>.@{sidenav}-text {
+      & > .@{sidenav}-text {
         color: @sidenav-popup-font-color-level4;
       }
     }
 
-    &>.@{sidenav}-item.@{sidenav}-level5 {
+    & > .@{sidenav}-item.@{sidenav}-level5 {
       height: 36px;
 
-      &>.@{sidenav}-text {
+      & > .@{sidenav}-text {
         padding-left: 22px;
         color: @sidenav-popup-font-color-level4;
       }
     }
 
-    &>.@{sidenav}-item.@{sidenav}-hover {
+    & > .@{sidenav}-item.@{sidenav}-hover {
       &:hover {
         cursor: pointer;
         background-color: @sidenav-item-hover-bg-color;
       }
+
+      &:active {
+        background-color: @sidenav-item-bg-click-color;
+      }
     }
 
-    &>.@{sidenav}-item.@{sidenav}-active.@{sidenav}-hover {
+    & > .@{sidenav}-item.@{sidenav}-active.@{sidenav}-hover {
       background-color: @sidenav-item-bg-active-color;
 
-      &>.@{sidenav}-text {
+      & > .@{sidenav}-text {
         color: @sidenav-item-font-active-color;
       }
 
@@ -226,7 +229,7 @@
       }
     }
 
-    &>.@{sidenav}-item {
+    & > .@{sidenav}-item {
       display: inline-flex;
       width: @sidenav-popup-div-width;
       writing-mode: horizontal-tb;
@@ -236,7 +239,7 @@
       flex-flow: row nowrap;
       align-items: center;
 
-      &>.@{sidenav}-text {
+      & > .@{sidenav}-text {
         box-sizing: border-box;
         font-size: 14px;
         font-weight: 400;
@@ -249,7 +252,7 @@
     }
   }
 
-  &>.@{sidenav}-popup.@{sidenav}-close {
+  & > .@{sidenav}-popup.@{sidenav}-close {
     display: none;
   }
 }
