@@ -169,6 +169,10 @@
   & > .@{topnav}-item.@{topnav}-active {
     background-color: @topnav-dropdown-item-bg-hover-color;
     color: @topnav-dropdown-font-hover-color;
+
+    &:hover {
+      background-color: @topnav-dropdown-item-bg-hover-color;
+    }
   }
 
   & > .@{topnav}-item {
@@ -184,8 +188,7 @@
     cursor: pointer;
 
     &:hover {
-      background-color: @topnav-dropdown-item-bg-hover-color;
-      color: @topnav-dropdown-font-hover-color;
+      background-color: @sidenav-item-hover-bg-color;
     }
 
     &:active {
@@ -227,7 +230,7 @@
       cursor: pointer;
 
       &:hover {
-        background-color: @topnav-expand-hover-color;
+        background-color: @sidenav-item-hover-bg-color;
       }
 
       &:active {
