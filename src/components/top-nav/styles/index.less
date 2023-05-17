@@ -1,4 +1,4 @@
-@import '../../style/index.less';
+@import "../../style/index.less";
 @topnav: ~"@{uni-prefix}-topnav";
 
 .@{topnav} {
@@ -10,27 +10,27 @@
   color: #fff;
   user-select: none;
 
-  &>.@{topnav}-left {
+  & > .@{topnav}-left {
     justify-content: flex-end;
   }
 
-  &>.@{topnav}-left,
-  &>.@{topnav}-right {
+  & > .@{topnav}-left,
+  & > .@{topnav}-right {
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
     justify-content: center;
 
-    &>* {
+    & > * {
       display: none;
     }
   }
 
-  &>.@{topnav}-left.@{topnav}-scroll,
-  &>.@{topnav}-right.@{topnav}-scroll {
+  & > .@{topnav}-left.@{topnav}-scroll,
+  & > .@{topnav}-right.@{topnav}-scroll {
     cursor: pointer;
 
-    &>* {
+    & > * {
       display: block;
     }
 
@@ -43,7 +43,7 @@
     }
   }
 
-  &>.@{topnav}-body {
+  & > .@{topnav}-body {
     flex: 1;
     display: flex;
     flex-flow: row nowrap;
@@ -55,7 +55,7 @@
       display: none;
     }
 
-    &>.@{topnav}-item.@{topnav}-active {
+    & > .@{topnav}-item.@{topnav}-active {
       background-color: @topnav-item-active-color;
 
       &:hover {
@@ -63,7 +63,7 @@
       }
     }
 
-    &>.@{topnav}-item {
+    & > .@{topnav}-item {
       box-sizing: content-box;
       flex-shrink: 0;
       font-weight: 500;
@@ -72,7 +72,7 @@
       align-items: center;
       cursor: pointer;
 
-      &>* {
+      & > * {
         pointer-events: none;
       }
 
@@ -84,13 +84,13 @@
         background-color: @topnav-item-active-color;
       }
 
-      &>.@{topnav}-text {
+      & > .@{topnav}-text {
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
       }
 
-      &>.@{topnav}-arrow {
+      & > .@{topnav}-arrow {
         font-size: 0;
       }
     }
@@ -100,17 +100,17 @@
 .@{topnav}.@{topnav}-md {
   height: 40px;
 
-  &>.@{topnav}-left,
-  &>.@{topnav}-right {
+  & > .@{topnav}-left,
+  & > .@{topnav}-right {
     width: 40px;
   }
 
-  &>.@{topnav}-body {
-    &>.@{topnav}-item {
+  & > .@{topnav}-body {
+    & > .@{topnav}-item {
       padding: 0 24px;
       font-size: 14px;
 
-      &>.@{topnav}-text {
+      & > .@{topnav}-text {
         max-width: 112px;
       }
     }
@@ -120,36 +120,44 @@
 .@{topnav}.@{topnav}-xl {
   height: 52px;
 
-  &>.@{topnav}-left,
-  &>.@{topnav}-right {
+  & > .@{topnav}-left,
+  & > .@{topnav}-right {
     width: 52px;
   }
 
-  &>.@{topnav}-left {
+  & > .@{topnav}-left {
     margin-left: 154px;
   }
 
-  &>.@{topnav}-right {
+  & > .@{topnav}-right {
     margin-right: 154px;
   }
 
-  &>.@{topnav}-body {
-    &>.@{topnav}-item {
+  & > .@{topnav}-body {
+    & > .@{topnav}-item {
       padding: 0 36px;
       font-size: 16px;
 
-      &>.@{topnav}-text {
+      & > .@{topnav}-text {
         max-width: 128px;
       }
     }
   }
 }
 
+.@{topnav}-dropdown {
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1), 0px 3px 7px rgba(0, 0, 0, 0.05);
+}
+
+.@{topnav}-expand,
+.@{topnav}-expand-img {
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.08), 0px 4px 10px rgba(0, 0, 0, 0.06);
+}
+
 .@{topnav}-dropdown,
 .@{topnav}-expand,
 .@{topnav}-expand-img {
   position: fixed;
-  box-shadow: 0px 1px 4px rgba(148, 148, 148, 0.35);
   background-color: #fff;
 }
 
@@ -158,12 +166,16 @@
   padding: 4px 0;
   transform: translateX(-50%);
 
-  &>.@{topnav}-item.@{topnav}-active {
+  & > .@{topnav}-item.@{topnav}-active {
     background-color: @topnav-dropdown-item-bg-hover-color;
     color: @topnav-dropdown-font-hover-color;
+
+    &:hover {
+      background-color: @topnav-dropdown-item-bg-hover-color;
+    }
   }
 
-  &>.@{topnav}-item {
+  & > .@{topnav}-item {
     height: 32px;
     padding: 0px 16px;
     font-size: 14px;
@@ -176,8 +188,11 @@
     cursor: pointer;
 
     &:hover {
-      background-color: @topnav-dropdown-item-bg-hover-color;
-      color: @topnav-dropdown-font-hover-color;
+      background-color: @sidenav-item-hover-bg-color;
+    }
+
+    &:active {
+      background-color: @sidenav-item-bg-click-color;
     }
   }
 }
@@ -189,42 +204,46 @@
   overflow: hidden;
   overflow-x: auto;
 
-  &>.@{topnav}-col {
+  & > .@{topnav}-col {
     width: 184px;
     flex-shrink: 0;
 
-    &>.@{topnav}-item.@{topnav}-level2 {
+    & > .@{topnav}-item.@{topnav}-level2 {
       height: 40px;
       font-weight: 500;
       color: @topnav-expand-level2;
     }
 
-    &>.@{topnav}-item.@{topnav}-level3 {
+    & > .@{topnav}-item.@{topnav}-level3 {
       color: @topnav-expand-level3;
     }
 
-    &>.@{topnav}-item.@{topnav}-level4 {
+    & > .@{topnav}-item.@{topnav}-level4 {
       color: @topnav-expand-level4;
     }
 
-    &>.@{topnav}-item.@{topnav}-level5 {
+    & > .@{topnav}-item.@{topnav}-level5 {
       color: @topnav-expand-level5;
     }
 
-    &>.@{topnav}-item.@{topnav}-hover {
+    & > .@{topnav}-item.@{topnav}-hover {
       cursor: pointer;
 
       &:hover {
-        background-color: @topnav-expand-hover-color;
+        background-color: @sidenav-item-hover-bg-color;
+      }
+
+      &:active {
+        background-color: @sidenav-item-bg-click-color;
       }
     }
 
-    &>.@{topnav}-item.@{topnav}-hover.@{topnav}-active {
+    & > .@{topnav}-item.@{topnav}-hover.@{topnav}-active {
       color: @topnav-expand-level2;
       background-color: @topnav-expand-hover-color;
     }
 
-    &>.@{topnav}-item {
+    & > .@{topnav}-item {
       display: flex;
       flex-flow: row nowrap;
       align-items: center;
@@ -244,7 +263,7 @@
 .@{topnav}-expand.@{topnav}-md {
   padding: 16px 41px 52px 41px;
 
-  &>.@{topnav}-col+.@{topnav}-col {
+  & > .@{topnav}-col + .@{topnav}-col {
     margin-left: 36px;
   }
 }
@@ -252,12 +271,12 @@
 .@{topnav}-expand.@{topnav}-xl {
   padding: 16px 206px 52px 206px;
 
-  &>.@{topnav}-col+.@{topnav}-col {
+  & > .@{topnav}-col + .@{topnav}-col {
     margin-left: 72px;
   }
 
-  &>.@{topnav}-col {
-    &>.@{topnav}-item.@{topnav}-level2>.@{topnav}-text {
+  & > .@{topnav}-col {
+    & > .@{topnav}-item.@{topnav}-level2 > .@{topnav}-text {
       font-size: 16px;
     }
   }
@@ -268,25 +287,25 @@
   display: flex;
   flex-flow: row nowrap;
 
-  &>.@{topnav}-left {
+  & > .@{topnav}-left {
     flex-shrink: 0;
     position: relative;
     user-select: none;
 
-    &>.@{topnav}-bg,
-    &>.@{topnav}-title,
-    &>.@{topnav}-desc,
-    &>.@{topnav}-btn {
+    & > .@{topnav}-bg,
+    & > .@{topnav}-title,
+    & > .@{topnav}-desc,
+    & > .@{topnav}-btn {
       position: absolute;
     }
 
-    &>.@{topnav}-bg {
+    & > .@{topnav}-bg {
       position: relative;
       width: 100%;
       height: 100%;
     }
 
-    &>.@{topnav}-title {
+    & > .@{topnav}-title {
       top: 42px;
       overflow: hidden;
       white-space: nowrap;
@@ -297,7 +316,7 @@
       color: @topnav-expand-level3;
     }
 
-    &>.@{topnav}-desc {
+    & > .@{topnav}-desc {
       top: 82px;
       font-size: 14px;
       line-height: 20px;
@@ -308,7 +327,7 @@
       height: 60px;
     }
 
-    &>.@{topnav}-btn {
+    & > .@{topnav}-btn {
       top: 162px;
       cursor: pointer;
       height: 26px;
@@ -322,8 +341,7 @@
       color: @topnav-expand-level2;
       height: 26px;
 
-
-      &>.@{topnav}-text {
+      & > .@{topnav}-text {
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
@@ -333,49 +351,53 @@
     }
   }
 
-  &>.@{topnav}-right {
+  & > .@{topnav}-right {
     flex: 1;
     overflow: auto;
     box-sizing: border-box;
     display: flex;
     flex-flow: row nowrap;
 
-    &>.@{topnav}-col {
+    & > .@{topnav}-col {
       width: 184px;
       flex-shrink: 0;
 
-      &>.@{topnav}-item.@{topnav}-level2 {
+      & > .@{topnav}-item.@{topnav}-level2 {
         height: 40px;
         font-weight: 500;
         color: @topnav-expand-level2;
       }
 
-      &>.@{topnav}-item.@{topnav}-level3 {
+      & > .@{topnav}-item.@{topnav}-level3 {
         color: @topnav-expand-level3;
       }
 
-      &>.@{topnav}-item.@{topnav}-level4 {
+      & > .@{topnav}-item.@{topnav}-level4 {
         color: @topnav-expand-level4;
       }
 
-      &>.@{topnav}-item.@{topnav}-level5 {
+      & > .@{topnav}-item.@{topnav}-level5 {
         color: @topnav-expand-level5;
       }
 
-      &>.@{topnav}-item.@{topnav}-hover {
+      & > .@{topnav}-item.@{topnav}-hover {
         cursor: pointer;
 
         &:hover {
           background-color: @topnav-expand-hover-color;
         }
+
+        &:active {
+          background-color: @sidenav-item-bg-click-color;
+        }
       }
 
-      &>.@{topnav}-item.@{topnav}-hover.@{topnav}-active {
+      & > .@{topnav}-item.@{topnav}-hover.@{topnav}-active {
         color: @topnav-expand-level2;
         background-color: @topnav-expand-hover-color;
       }
 
-      &>.@{topnav}-item {
+      & > .@{topnav}-item {
         display: flex;
         flex-flow: row nowrap;
         align-items: center;
@@ -394,47 +416,47 @@
 }
 
 .@{topnav}-expand-img.@{topnav}-md {
-  &>.@{topnav}-left {
+  & > .@{topnav}-left {
     width: 416px;
 
-    &>.@{topnav}-title,
-    &>.@{topnav}-desc,
-    &>.@{topnav}-btn {
+    & > .@{topnav}-title,
+    & > .@{topnav}-desc,
+    & > .@{topnav}-btn {
       left: 34px;
       max-width: 416px - 34px * 2;
     }
   }
 
-  &>.@{topnav}-right {
+  & > .@{topnav}-right {
     padding: 16px 55px 52px 55px;
 
-    &>.@{topnav}-col+.@{topnav}-col {
+    & > .@{topnav}-col + .@{topnav}-col {
       margin-left: 36px;
     }
   }
 }
 
 .@{topnav}-expand-img.@{topnav}-xl {
-  &>.@{topnav}-left {
+  & > .@{topnav}-left {
     width: 456px;
 
-    &>.@{topnav}-title,
-    &>.@{topnav}-desc,
-    &>.@{topnav}-btn {
+    & > .@{topnav}-title,
+    & > .@{topnav}-desc,
+    & > .@{topnav}-btn {
       left: 110px;
       max-width: 456px - 110px * 2;
     }
   }
 
-  &>.@{topnav}-right {
+  & > .@{topnav}-right {
     padding: 16px 72px 48px 72px;
 
-    &>.@{topnav}-col+.@{topnav}-col {
+    & > .@{topnav}-col + .@{topnav}-col {
       margin-left: 72px;
     }
 
-    &>.@{topnav}-col {
-      &>.@{topnav}-item.@{topnav}-level2>.@{topnav}-text {
+    & > .@{topnav}-col {
+      & > .@{topnav}-item.@{topnav}-level2 > .@{topnav}-text {
         font-size: 16px;
       }
     }
