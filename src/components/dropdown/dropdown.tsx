@@ -194,7 +194,13 @@ class Dropdown extends React.Component<DropdownProps, DropdownState> {
     });
 
     let TChildren = (
-      <span>
+      <span
+        onClick={this.click}
+        onMouseOver={this.over}
+        onMouseLeave={this.out}
+        onContextMenu={this.handleContextMenu}
+        ref={this.getChildRef}
+      >
         {children}
       </span>
     );
@@ -218,8 +224,6 @@ class Dropdown extends React.Component<DropdownProps, DropdownState> {
           children.props.onContextMenu && children.props.onContextMenu(evt);
         },
       });
-    } else {
-      throw new Error(' props children must be ReactNode');
     }
 
     return (
