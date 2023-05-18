@@ -136,7 +136,7 @@ body {
       flex: 1;
       width: 100%;
       padding: 5px 12px;
-      border: 1px solid @header-border-color;
+      border: 1px solid #CECECE;
       line-height: 32px;
       border-radius: 4px 0px 0px 4px;
       height: 32px;
@@ -149,7 +149,7 @@ body {
     }
 
     &-prefix {
-      border: 1px solid @header-border-color;
+      border: 1px solid #CECECE;
       border-right: 0;
       border-radius: 4px 0 0 4px;
       height: 32px;
@@ -200,7 +200,7 @@ body {
       padding: 8px 12px 8px 12px;
       font-size: 16px;
       border-radius: 0px 4px 4px 0px;
-      border: 1px solid @header-border-color;
+      border: 1px solid #CECECE;
       border-left: none;
       background-color: @header-bg-color;
     }
@@ -287,6 +287,9 @@ body {
 
       &:hover:not(.selectDown-content-selected) {
         background-color: @header-select-hover-color;
+      }
+      &:active:not(.selectDown-content-selected) {
+        background-color: #EAEAEA;
       }
     }
 
