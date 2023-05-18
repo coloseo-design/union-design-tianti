@@ -51,7 +51,6 @@ const Header: React.FC<HeaderProps> = (props) => {
         {showBg && (
         <div className={`${prefix}-content-bg`}>
           {typeof showBg === 'boolean' ? <Bg /> : <img src={showBg} alt="" width="100%" />}
-          <Bg />
         </div>
         )}
         <div className={`${prefix}-left`}>
@@ -80,8 +79,8 @@ const Header: React.FC<HeaderProps> = (props) => {
             >
               {isValidElement(item) ? item : (
                 <>
-                  <div className={`${prefix}-menu-icon`}>{(item as Menu).icon}</div>
-                  <div>{(item as Menu).title}</div>
+                  {(item as Menu).icon && <div className={`${prefix}-menu-icon`}>{(item as Menu).icon}</div>}
+                  <div className={`${prefix}-menu-title`}>{(item as Menu).title}</div>
                 </>
               )}
             </div>

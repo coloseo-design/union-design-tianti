@@ -133,30 +133,31 @@ class Dropdown extends React.Component<DropdownProps, DropdownState> {
       } = target.getBoundingClientRect();
       const containter = getPopupContainer && getPopupContainer();
       const { top: offsetTop, left: offsetLeft } = getOffset(target, containter);
+      const gap = 4;
       const placementMap = {
         topCenter: {
           x: offsetLeft + (width - contentWidth) / 2,
-          y: offsetTop - contentHeight - 4 - (arrow ? 5 : 0),
+          y: offsetTop - contentHeight - gap - (arrow ? 5 : 0),
         },
         topLeft: {
           x: offsetLeft,
-          y: offsetTop - contentHeight - 4 - (arrow ? 5 : 0),
+          y: offsetTop - contentHeight - gap - (arrow ? 5 : 0),
         },
         topRight: {
           x: offsetLeft - (contentWidth - width),
-          y: offsetTop - contentHeight - 4 - (arrow ? 5 : 0),
+          y: offsetTop - contentHeight - gap - (arrow ? 5 : 0),
         },
         bottomCenter: {
           x: offsetLeft + (width - contentWidth) / 2,
-          y: offsetTop + height + 4 + (arrow ? 5 : 0),
+          y: offsetTop + height + gap + (arrow ? 5 : 0),
         },
         bottomRight: {
           x: offsetLeft - (contentWidth - width),
-          y: offsetTop + height + 4 + (arrow ? 5 : 0),
+          y: offsetTop + height + gap + (arrow ? 5 : 0),
         },
         bottomLeft: {
           x: offsetLeft,
-          y: offsetTop + height + 4 + (arrow ? 5 : 0),
+          y: offsetTop + height + gap + (arrow ? 5 : 0),
         },
       };
       this.setState({
