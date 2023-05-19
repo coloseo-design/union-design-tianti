@@ -1,5 +1,5 @@
 import React from 'react';
-import { PopProps, Pop } from '@union-design/popconfirm';
+import Pop, { PopProps } from '../popconfirm/pop';
 
 const Popover: React.FC<PopProps> = (props: PopProps) => {
   const { trigger = 'hover' } = props;
