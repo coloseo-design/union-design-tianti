@@ -172,7 +172,7 @@ export default class TopNav<Data> extends BaseComponent<
     );
   };
 
-  private onClickLeft = () => {
+  private onClickRight = () => {
     const { hasArrow } = this.state;
     if (!hasArrow || !this.bodyRef.current) return;
     const body = this.bodyRef.current;
@@ -202,7 +202,7 @@ export default class TopNav<Data> extends BaseComponent<
     }
   };
 
-  private onClickRight = () => {
+  private onClickLeft = () => {
     const { hasArrow } = this.state;
     if (!hasArrow || !this.bodyRef.current) return;
     const body = this.bodyRef.current;
