@@ -153,7 +153,7 @@ export default class TopNav<Data> extends BaseComponent<
               [this.gpc("scroll")]: this.state.hasArrow,
             })}
           >
-            <Icon type="left" style={{ fontSize: 14, marginRight: 4 }} />
+            <Icon type="left2-line" style={{ fontSize: 14, marginRight: 4 }} />
           </div>
           <div ref={this.bodyRef} className={this.gpc("body")}>
             {data.map(this.viewItem)}
@@ -164,7 +164,7 @@ export default class TopNav<Data> extends BaseComponent<
               [this.gpc("scroll")]: this.state.hasArrow,
             })}
           >
-            <Icon type="right" style={{ fontSize: 14, marginLeft: 4 }} />
+            <Icon type="right2-line" style={{ fontSize: 14, marginLeft: 4 }} />
           </div>
         </div>
         {portalView && createPortal(portalView, document.body)}
@@ -387,7 +387,7 @@ export default class TopNav<Data> extends BaseComponent<
               {`进入${nameExtractor(title)}`}
             </div>
             <Icon
-              type="right"
+              type="right2-line"
               style={{ fontSize: 14, marginLeft: 4, marginRight: 8 }}
             />
           </div>
@@ -532,7 +532,7 @@ export default class TopNav<Data> extends BaseComponent<
         {children.length > 0 && (
           <div className={this.gpc("arrow")}>
             <Icon
-              type={openKey === key ? "up" : "down"}
+              type={openKey === key ? "up2-line" : "down2-line"}
               style={{ fontSize: 14, marginLeft: 8 }}
             />
           </div>
