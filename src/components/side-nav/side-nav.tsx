@@ -332,9 +332,9 @@ export default class SideNav<Data> extends BaseComponent<
     const hasChildren = children.length > 0;
     let arrowIconType;
     if (openKeys.includes(key)) {
-      arrowIconType = "up";
+      arrowIconType = "up2-line";
     } else {
-      arrowIconType = "down";
+      arrowIconType = "down2-line";
     }
     const icon = level === 1 && iconExtractor(data);
 
@@ -433,7 +433,7 @@ export default class SideNav<Data> extends BaseComponent<
         <div className={this.gpc("text")}>{nameExtractor(data)}</div>
         {level === 1 && hasChildren && (
           <div className={this.gpc("arrow")}>
-            <Icon type="right" style={{ fontSize: 14 }} />
+            <Icon type="right2-line" style={{ fontSize: 14 }} />
           </div>
         )}
       </div>

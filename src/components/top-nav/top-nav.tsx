@@ -153,7 +153,7 @@ export default class TopNav<Data> extends BaseComponent<
               [this.gpc("scroll")]: this.state.hasArrow,
             })}
           >
-            <Icon type="left" style={{ fontSize: 14, marginRight: 4 }} />
+            <Icon type="left2-line" style={{ fontSize: 14, marginRight: 4 }} />
           </div>
           <div ref={this.bodyRef} className={this.gpc("body")}>
             {data.map(this.viewItem)}
@@ -164,15 +164,15 @@ export default class TopNav<Data> extends BaseComponent<
               [this.gpc("scroll")]: this.state.hasArrow,
             })}
           >
-            <Icon type="right" style={{ fontSize: 14, marginLeft: 4 }} />
+            <Icon type="right2-line" style={{ fontSize: 14, marginLeft: 4 }} />
           </div>
+          {portalView}
         </div>
-        {portalView && createPortal(portalView, document.body)}
       </>
     );
   };
 
-  private onClickLeft = () => {
+  private onClickRight = () => {
     const { hasArrow } = this.state;
     if (!hasArrow || !this.bodyRef.current) return;
     const body = this.bodyRef.current;
@@ -202,7 +202,7 @@ export default class TopNav<Data> extends BaseComponent<
     }
   };
 
-  private onClickRight = () => {
+  private onClickLeft = () => {
     const { hasArrow } = this.state;
     if (!hasArrow || !this.bodyRef.current) return;
     const body = this.bodyRef.current;
@@ -233,15 +233,17 @@ export default class TopNav<Data> extends BaseComponent<
 
   private openDropdown = (data: any[], div: HTMLDivElement) => {
     const { keyExtractor, nameExtractor, popupZIndex } = this.props;
-    const { left, top, width, height } = div.getBoundingClientRect();
+    const { offsetWidth: width, offsetLeft: left } = div;
+    const { scrollLeft = 0 } = div?.parentElement ?? {};
     const selectedKey = this.getBindValue("selectedKey") ?? "";
 
     const view = (
       <div
         className={this.gpc("dropdown")}
         style={{
-          left: left + width / 2,
-          top: top + height + 4,
+          left: left + width / 2 - scrollLeft,
+          top: "100%",
+          marginTop: 4,
           zIndex: popupZIndex,
         }}
       >
@@ -290,7 +292,7 @@ export default class TopNav<Data> extends BaseComponent<
     }
   };
 
-  private openExpand = (data: any[], div: HTMLDivElement) => {
+  private openExpand = (data: any[], _div: HTMLDivElement) => {
     const {
       keyExtractor,
       nameExtractor,
@@ -299,13 +301,11 @@ export default class TopNav<Data> extends BaseComponent<
       popupZIndex,
     } = this.props;
     const selectedKey = this.getBindValue("selectedKey") ?? "";
-    const { left, top, width, height } =
-      div.parentElement!.parentElement!.getBoundingClientRect();
 
     const view = (
       <div
         className={this.classNames(this.gpc("expand"), this.gpc(size))}
-        style={{ left, top: top + height, width, zIndex: popupZIndex }}
+        style={{ left: 0, top: "100%", width: "100%", zIndex: popupZIndex }}
         onClick={(e) => e.nativeEvent.stopImmediatePropagation()}
       >
         {data.map((i) => {
@@ -356,7 +356,7 @@ export default class TopNav<Data> extends BaseComponent<
     this.setPopupShow(view);
   };
 
-  private openExpandImg = (title: any, data: any[], div: HTMLDivElement) => {
+  private openExpandImg = (title: any, data: any[], _div: HTMLDivElement) => {
     const {
       keyExtractor,
       nameExtractor,
@@ -367,13 +367,11 @@ export default class TopNav<Data> extends BaseComponent<
       popupZIndex,
     } = this.props;
     const selectedKey = this.getBindValue("selectedKey") ?? "";
-    const { left, top, width, height } =
-      div.parentElement!.parentElement!.getBoundingClientRect();
 
     const view = (
       <div
         className={this.classNames(this.gpc("expand-img"), this.gpc(size))}
-        style={{ left, top: top + height, width, zIndex: popupZIndex }}
+        style={{ left: 0, top: "100%", width: "100%", zIndex: popupZIndex }}
         onClick={(e) => e.nativeEvent.stopImmediatePropagation()}
       >
         <div className={this.gpc("left")}>
@@ -387,7 +385,7 @@ export default class TopNav<Data> extends BaseComponent<
               {`进入${nameExtractor(title)}`}
             </div>
             <Icon
-              type="right"
+              type="right2-line"
               style={{ fontSize: 14, marginLeft: 4, marginRight: 8 }}
             />
           </div>
@@ -532,7 +530,7 @@ export default class TopNav<Data> extends BaseComponent<
         {children.length > 0 && (
           <div className={this.gpc("arrow")}>
             <Icon
-              type={openKey === key ? "up" : "down"}
+              type={openKey === key ? "up2-line" : "down2-line"}
               style={{ fontSize: 14, marginLeft: 8 }}
             />
           </div>
