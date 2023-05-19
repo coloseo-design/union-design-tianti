@@ -1,6 +1,6 @@
 {
 	"name": "@union-design/tooltip",
-	"version": "0.0.12",
+	"version": "0.0.13",
 	"description": "",
 	"main": "lib/index.js",
 	"module": "es/index.js",
@@ -16,10 +16,10 @@
 	"author": "",
 	"license": "ISC",
 	"dependencies": {
-		"@union-design/config-provider": "^0.0.11",
-		"@union-design/portal": "^0.0.11",
-		"@union-design/style": "^0.0.11",
-		"@union-design/utils": "^0.0.11",
+		"@union-design/config-provider": "^0.0.12",
+		"@union-design/portal": "^0.0.12",
+		"@union-design/style": "^0.0.12",
+		"@union-design/utils": "^0.0.12",
 		"classnames": "^2.3.2",
 		"omit.js": "^2.0.2",
 		"union-tool": "^0.1.2"
