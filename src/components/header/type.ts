@@ -28,6 +28,7 @@ export interface SearchProps {
 export interface SelectProps {
   options?: Option[];
   onChange?: (value: string) => void;
+  getPopupContainer?: () => HTMLElement | null;
 }
 
 export interface Option {

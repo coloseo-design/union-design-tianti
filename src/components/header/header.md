@@ -34,6 +34,7 @@ subtitle: 头部组件
 | --- | ---  | --- | ---   |
 | options |下来选项列表 | {key: string; label: string; value: string}[] | - |
 |onChange|选择回调|(value: string) => void;|-|
+|getPopupContainer|菜单渲染父节点。默认渲染到 body 上，如果你遇到弹窗滚动定位问题，试试修改为滚动的区域，并相对其定位。|(triggerNode: HTMLElement) => HTMLElement|() => document.body|
 
 
 ### MenuProps 

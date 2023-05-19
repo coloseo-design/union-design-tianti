@@ -8,6 +8,7 @@ const SearchSelect: React.FC<{prefix?: string} & SelectProps> = (props) => {
   const {
     options = [],
     onChange,
+    getPopupContainer,
     prefix: prefixCls,
   } = props;
   const prefix = `${prefixCls}-search`;
@@ -15,9 +16,9 @@ const SearchSelect: React.FC<{prefix?: string} & SelectProps> = (props) => {
   const [visible, setVisible] = useState(false);
 
   const handleClick = (key: string) => {
+    setVisible(false);
     onChange?.(key);
     setValue(key);
-    setVisible(false);
   };
 
   const current = (options.find((i) => i.value === value)) as Option || { value: '', label: '全部' };
@@ -44,6 +45,7 @@ const SearchSelect: React.FC<{prefix?: string} & SelectProps> = (props) => {
       overlay={test}
       placement="bottomLeft"
       overlayClassName="header-selectDown"
+      getPopupContainer={getPopupContainer}
     >
       <div className={searchPrefix}>
         <div className={`${searchPrefix}-head`}>

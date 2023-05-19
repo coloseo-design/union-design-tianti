@@ -6,18 +6,12 @@
 @search-select: ~'@{search}-wrapper-select';
 @header-menu: ~'@{headers}-menu';
 
-body {
-  -webkit-font-smoothing: antialiased;
-  -moz-font-smoothing: antialiased;
-}
-
 .@{headers} {
   color: @header-text-color;
   width: 100%;
   font-size: 14px;
-
   &-top-menu {
-    width: 100%;
+    overflow: auto;
     height: 44px;
     background-color: @header-top-menu-bg;
     display: flex;
@@ -41,8 +35,8 @@ body {
       }
     }
   }
-
   &-content {
+    width: 100%;
     height: 56px;
     background-color: @header-bg-color;
     width: 100%;
@@ -284,13 +278,21 @@ body {
       height: 32px;
       padding: 6px 16px;
       line-height: 20px;
-
-      &:hover:not(.selectDown-content-selected) {
+      &:hover {
         background-color: @header-select-hover-color;
+        color: #282828;
       }
-      &:active:not(.selectDown-content-selected) {
+      &:active {
         background-color: #EAEAEA;
+        color: #282828;
       }
+
+      // &:hover:not(.selectDown-content-selected) {
+      //   background-color: @header-select-hover-color;
+      // }
+      // &:active:not(.selectDown-content-selected) {
+      //   background-color: #EAEAEA;
+      // }
     }
 
     &-selected {
