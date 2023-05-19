@@ -5,13 +5,15 @@ const path = require('path');
 const { packagesAll } = require('./package');
 
 const cwd = process.cwd();
-function getPackageJson(package) {
-  const packageJson = fs.readFileSync(path.resolve(cwd, `src/components/${package}/package.json`));
+function getPackageJson(package, isRoot) {
+  const packagePath = isRoot ? path.resolve(cwd, 'package.json') : path.resolve(cwd, `src/components/${package}/package.json`);
+  const packageJson = fs.readFileSync(packagePath);
   return JSON.parse(packageJson);
 }
 
-function writeJson(package, content) {
-  fs.writeFileSync(path.resolve(cwd, `src/components/${package}/package.json`), JSON.stringify(content, null, '\t'));
+function writeJson(package, content, isRoot) {
+  const packagePath = isRoot ? path.resolve(cwd, 'package.json') : path.resolve(cwd, `src/components/${package}/package.json`);
+  fs.writeFileSync(packagePath, JSON.stringify(content, null, '\t'));
 }
 
 function writePackageJson(package, wholeVersion) {
@@ -39,3 +41,4 @@ function editImportVersion(package, version) {
 exports.editImportVersion = editImportVersion;
 exports.writePackageJson = writePackageJson;
 exports.getPackageJson = getPackageJson;
+exports.writeJson = writeJson;
