@@ -6,9 +6,9 @@
   box-sizing: border-box;
   display: flex;
   flex-flow: row nowrap;
-  overflow: auto;
   color: #fff;
   user-select: none;
+  position: relative;
 
   & > .@{topnav}-left {
     justify-content: flex-end;
@@ -157,8 +157,9 @@
 .@{topnav}-dropdown,
 .@{topnav}-expand,
 .@{topnav}-expand-img {
-  position: fixed;
+  position: absolute;
   background-color: #fff;
+  z-index: 999;
 }
 
 .@{topnav}-dropdown {

@@ -166,8 +166,8 @@ export default class TopNav<Data> extends BaseComponent<
           >
             <Icon type="right2-line" style={{ fontSize: 14, marginLeft: 4 }} />
           </div>
+          {portalView}
         </div>
-        {portalView && createPortal(portalView, document.body)}
       </>
     );
   };
@@ -233,15 +233,17 @@ export default class TopNav<Data> extends BaseComponent<
 
   private openDropdown = (data: any[], div: HTMLDivElement) => {
     const { keyExtractor, nameExtractor, popupZIndex } = this.props;
-    const { left, top, width, height } = div.getBoundingClientRect();
+    const { offsetWidth: width, offsetLeft: left } = div;
+    const { scrollLeft = 0 } = div?.parentElement ?? {};
     const selectedKey = this.getBindValue("selectedKey") ?? "";
 
     const view = (
       <div
         className={this.gpc("dropdown")}
         style={{
-          left: left + width / 2,
-          top: top + height + 4,
+          left: left + width / 2 - scrollLeft,
+          top: "100%",
+          marginTop: 4,
           zIndex: popupZIndex,
         }}
       >
@@ -290,7 +292,7 @@ export default class TopNav<Data> extends BaseComponent<
     }
   };
 
-  private openExpand = (data: any[], div: HTMLDivElement) => {
+  private openExpand = (data: any[], _div: HTMLDivElement) => {
     const {
       keyExtractor,
       nameExtractor,
@@ -299,13 +301,11 @@ export default class TopNav<Data> extends BaseComponent<
       popupZIndex,
     } = this.props;
     const selectedKey = this.getBindValue("selectedKey") ?? "";
-    const { left, top, width, height } =
-      div.parentElement!.parentElement!.getBoundingClientRect();
 
     const view = (
       <div
         className={this.classNames(this.gpc("expand"), this.gpc(size))}
-        style={{ left, top: top + height, width, zIndex: popupZIndex }}
+        style={{ left: 0, top: "100%", width: "100%", zIndex: popupZIndex }}
         onClick={(e) => e.nativeEvent.stopImmediatePropagation()}
       >
         {data.map((i) => {
@@ -356,7 +356,7 @@ export default class TopNav<Data> extends BaseComponent<
     this.setPopupShow(view);
   };
 
-  private openExpandImg = (title: any, data: any[], div: HTMLDivElement) => {
+  private openExpandImg = (title: any, data: any[], _div: HTMLDivElement) => {
     const {
       keyExtractor,
       nameExtractor,
@@ -367,13 +367,11 @@ export default class TopNav<Data> extends BaseComponent<
       popupZIndex,
     } = this.props;
     const selectedKey = this.getBindValue("selectedKey") ?? "";
-    const { left, top, width, height } =
-      div.parentElement!.parentElement!.getBoundingClientRect();
 
     const view = (
       <div
         className={this.classNames(this.gpc("expand-img"), this.gpc(size))}
-        style={{ left, top: top + height, width, zIndex: popupZIndex }}
+        style={{ left: 0, top: "100%", width: "100%", zIndex: popupZIndex }}
         onClick={(e) => e.nativeEvent.stopImmediatePropagation()}
       >
         <div className={this.gpc("left")}>
