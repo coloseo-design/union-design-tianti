@@ -1,2 +1,2 @@
 import './index.less';
-import '@union-design/calendar/styles/index';
+import '@union-design/select/styles/index';
