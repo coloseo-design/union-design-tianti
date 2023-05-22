@@ -17,6 +17,7 @@
 	"license": "ISC",
 	"dependencies": {
 		"@union-design/config-provider": "^0.0.12",
+		"@union-design/icon": "^0.0.12",
 		"@union-design/style": "^0.0.12",
 		"classnames": "^2.3.2",
 		"omit.js": "^2.0.2",
