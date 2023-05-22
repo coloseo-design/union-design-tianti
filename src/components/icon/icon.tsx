@@ -14,13 +14,13 @@ export interface IconProps extends Pick<BaseIconProps, 'onClick'> {
 }
 
 const Icon = (props: Omit<IconProps, 'ref'>, ref: React.ForwardedRef<HTMLSpanElement>) => {
-  const { type, ...rest } = props;
+  const { type, spin = false, ...rest } = props;
   if (type?.startsWith('loading')) {
     Object.assign(rest, {
       spin: true,
     });
   }
-  return <ReactIcon {...rest} ref={ref} name={type} />;
+  return <ReactIcon {...rest} ref={ref} name={type || 'add'} spin={type?.startsWith('loading') ? true : spin} />;
 };
 
 export default React.forwardRef(Icon);
