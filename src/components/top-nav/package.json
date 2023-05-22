@@ -1,6 +1,6 @@
 {
 	"name": "@union-design/top-nav",
-	"version": "0.0.15",
+	"version": "1.0.0",
 	"description": "",
 	"main": "lib/index.js",
 	"module": "es/index.js",
@@ -11,10 +11,10 @@
 	],
 	"devDependencies": {},
 	"dependencies": {
-		"@union-design/base-component": "^0.0.13",
-		"@union-design/icon": "^0.0.13",
-		"@union-design/style": "^0.0.13",
-		"@union-design/utils": "^0.0.13",
+		"@union-design/base-component": "^1.0.0",
+		"@union-design/icon": "^1.0.0",
+		"@union-design/style": "^1.0.0",
+		"@union-design/utils": "^1.0.0",
 		"classnames": "^2.3.2",
 		"omit.js": "^2.0.2",
 		"union-tool": "^0.1.2"
