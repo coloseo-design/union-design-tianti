@@ -15,6 +15,7 @@ const Search: React.FC<{prefix?: string} & SearchProps> = (props) => {
   } = props;
   const prefix = `${prefixCls}-search`;
   const [value, setValue] = useState('');
+  const [focus, setFocus] = useState(false);
   const inputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value);
     onChange?.(e);
@@ -30,10 +31,18 @@ const Search: React.FC<{prefix?: string} & SearchProps> = (props) => {
     <div
       className={classNames(prefix, {
         [`${prefix}-primary`]: type === 'primary',
+        [`${prefix}-focus`]: focus,
       })}
+      onMouseOut={() => setFocus(false)}
     >
       {select && <SearchSelect {...select as SelectProps} prefix={prefixCls} />}
-      <input placeholder={placeholder} onChange={inputChange} value={value} />
+      <input
+        placeholder={placeholder}
+        onChange={inputChange}
+        value={value}
+        onFocus={() => setFocus(true)}
+        onBlur={() => setFocus(false)}
+      />
       <div className={suffix} onClick={inputSearch}>
         <Icon type="search-line" />
       </div>
