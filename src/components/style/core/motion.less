@@ -1,20 +1,2 @@
 @import '../mixins/motion';
-@import './motion/fade.less';
-@import './motion/move.less';
-@import './motion/other.less';
-@import './motion/slide.less';
-@import './motion/swing.less';
-@import './motion/zoom.less';
 
-// For common/openAnimation
-.uni-motion-collapse-legacy {
-  overflow: hidden;
-  &-active {
-    transition: height 0.15s @ease-in-out, opacity 0.15s @ease-in-out !important;
-  }
-}
-
-.uni-motion-collapse {
-  overflow: hidden;
-  transition: height 0.15s @ease-in-out, opacity 0.15s @ease-in-out !important;
-}

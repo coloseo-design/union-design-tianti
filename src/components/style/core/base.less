@@ -14,6 +14,9 @@ body {
   -moz-font-smoothing: antialiased;
   .square(100%);
 }
+html {
+  --unid-wave-shadow-color: @primary-color;
+}
 
 *,
 *::before,
@@ -180,11 +183,6 @@ textarea {
   overflow: auto; // remove the default vertical scrollbar in IE.
   // Textareas should really only resize vertically so they don't break their (horizontal) containers.
   resize: vertical;
-}
-
-
-progress {
-  vertical-align: baseline; // Add the correct vertical alignment in Chrome, Firefox, and Opera.
 }
 
 // Correct the cursor style of incement and decement buttons in Chrome.
