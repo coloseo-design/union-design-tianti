@@ -9,8 +9,10 @@
   margin: 0;
   padding: 0;
   z-index: @zindex-popover;
+  opacity: 0;
   transition: visibility .3s ease-in-out;
   &-show {
+    opacity: 1;
     visibility: visible;
   }
   &-content {

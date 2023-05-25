@@ -5,8 +5,8 @@ export function getOffset(node: any, containter: any) {
   if (containter) {
     const { left: containterLeft, top: containterTop } = containter.getBoundingClientRect();
     return {
-      left: box.left - containterLeft,
-      top: box.top - containterTop,
+      left: box.left - containterLeft + (containter?.scrollLeft || 0),
+      top: box.top - containterTop + (containter?.scrollTop || 0),
     };
   }
   return {
