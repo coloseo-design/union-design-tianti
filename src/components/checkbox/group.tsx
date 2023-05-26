@@ -34,9 +34,11 @@ const Group: React.FC<CheckboxGroupProps> = (props: CheckboxGroupProps) => {
   const [value, setValue] = useState<Array<string>>(valueFromProps || defaultValue || []);
 
   useEffect(() => {
-    if (valueFromProps) {
-      setValue(valueFromProps);
-    }
+    // if (valueFromProps) {
+    //   setValue(valueFromProps);
+    // }
+    console.log('==valueFromProps', valueFromProps);
+    setValue(valueFromProps || []);
   }, [valueFromProps]);
 
   // 如果包含children
@@ -59,7 +61,7 @@ const Group: React.FC<CheckboxGroupProps> = (props: CheckboxGroupProps) => {
   const onGroupChange = (checkedOption: CheckboxOption) => {
     const { value: _value, label } = checkedOption;
     const valueOfItem = _value || label;
-    const valueOfState = value;
+    const valueOfState = [...value];
     const index = valueOfState.findIndex((item) => item === valueOfItem);
     if (valueOfState.indexOf(valueOfItem) >= 0) {
       valueOfState.splice(index, 1);

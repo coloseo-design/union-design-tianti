@@ -1,18 +1,19 @@
 /* eslint-disable max-len */
 import React, { createRef } from 'react';
+import dayjs from 'dayjs';
 import {
   Form,
   Input,
   Select,
   Button,
   DatePicker,
+  Checkbox,
 } from '../index';
 import '../grid/styles/index';
 import '../button/styles/index';
 import '../input/styles/index';
 import '../select/styles/index';
 import './styles/index';
-import dayjs from 'dayjs';
 import { FormInstance, FormValues } from './type';
 
 const { Item: FormItem } = Form;
@@ -46,7 +47,7 @@ const FormDemo = () => {
 
   const [open, setOpen] = React.useState(true);
   const onValuesChange = (changedValues: FormValues, allValues: FormValues) => {
-    console.log('==?changedValues>', changedValues, allValues);
+    // console.log('==?changedValues>', changedValues, allValues);
   };
 
   React.useEffect(() => {
@@ -134,6 +135,19 @@ const FormDemo = () => {
           labelAlign="right"
           labelStyle={{ marginBottom: 8 }}
         >
+          <FormItem
+            name="checkbox"
+            label="是否满意"
+            initialValue={['2']}
+            rules={[
+              { required: true, message: '请选择' },
+            ]}
+          >
+            <Checkbox.Group onChange={(v) => { console.log('==vv', v); }}>
+              <Checkbox value="1">hello</Checkbox>
+              <Checkbox value="2">hello2</Checkbox>
+            </Checkbox.Group>
+          </FormItem>
           <Form.Item required name="date" label="时间" initialValue={[dayjs(), dayjs()]}>
             <DatePicker mode="time-full" type="range" />
           </Form.Item>
@@ -204,8 +218,9 @@ const FormDemo = () => {
               rules={[
                 { required: true, message: '请选择性别' },
               ]}
+              initialValue={['男']}
             >
-              <Select placeholder="请选择">
+              <Select placeholder="请选择" type="multiple">
                 <Select.Option value="男">男</Select.Option>
                 <Select.Option value="女">女</Select.Option>
               </Select>
