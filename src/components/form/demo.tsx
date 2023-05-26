@@ -51,12 +51,12 @@ const FormDemo = () => {
     // console.log('==?changedValues>', changedValues, allValues);
   };
 
-  React.useEffect(() => {
-    const { current } = formRef;
-    const fileds = current?.getFieldsValue(['username', 'password', 'sex']);
-    const fileds1 = current?.getFieldsValue(true);
-    console.log('==fileds', fileds, fileds1);
-  }, []);
+  // React.useEffect(() => {
+  //   const { current } = formRef;
+  //   const fileds = current?.getFieldsValue(['username', 'password', 'sex']);
+  //   const fileds1 = current?.getFieldsValue(true);
+  //   console.log('==fileds', fileds, fileds1);
+  // }, []);
   return (
     <div>
       {/* <div>
@@ -121,6 +121,7 @@ const FormDemo = () => {
           name="test"
           initialValues={{
             username: 'zhansgan123',
+            birthday: dayjs('1996-12-26'),
             // password: 'lisi',
             // address: {
             //   province: 'sichuan',
@@ -137,9 +138,16 @@ const FormDemo = () => {
           labelStyle={{ marginBottom: 8 }}
         >
           <FormItem
+            name="birthday"
+            label="生日"
+            initialValue={dayjs('1996-12-24')}
+          >
+            <DatePicker style={{ width: '100%' }} />
+          </FormItem>
+          <FormItem
             name="checkbox"
             label="是否满意"
-            // initialValue={['2']}
+            initialValue={['2']}
             rules={[
               { required: true, message: '请选择' },
             ]}

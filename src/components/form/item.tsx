@@ -1,5 +1,6 @@
 import classnames from 'classnames';
 import React, { useContext, useEffect, useRef } from 'react';
+import dayjs from 'dayjs';
 import { Col, Row } from '../grid';
 import { FormContextProps, FormItemProps, ValidatorRule } from './type';
 import FormItemError from './form-item-error';
@@ -146,7 +147,7 @@ const Item: React.FC<FormItemProps> = (props: FormItemProps) => {
         }).finally(() => {
           lock.current = false;
         });
-      onCollect(composedName, { event: trigger, value: initialValue || value }, true);
+      onCollect(composedName, { event: trigger, value: initialValue || value, initialValue }, true);
     }
   }, []);
 

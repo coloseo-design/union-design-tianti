@@ -79,6 +79,7 @@ export interface FormProps extends FormCommmonProps, BaseProps, React.HTMLAttrib
 
 export type ValueCollection = {
   value: unknown;
+  initialValue?: unknown;
   event: string;
 };
 
