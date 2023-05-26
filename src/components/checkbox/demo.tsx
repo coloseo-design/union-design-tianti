@@ -33,7 +33,7 @@ export default () => {
 
   return (
     <>
-      <Checkbox value="hello2" disabled checked>hello2</Checkbox>
+      <Checkbox value="hello2" onChange={() => { console.log('==11111'); }} checked>hello2</Checkbox>
       <Checkbox value="hello2" disabled>hello2</Checkbox>
       <div style={{ margin: 24 }}>
         <Checkbox
@@ -47,7 +47,7 @@ export default () => {
               setGroup([]);
             }
           }}
-          indeterminate={!allC && groupC.length > 0}
+          indeterminate={!allC && (groupC || []).length > 0}
         >
           全选
         </Checkbox>

@@ -1,3 +1,5 @@
+/* eslint-disable react/button-has-type */
+/* eslint-disable max-len */
 import React, { useState } from 'react';
 import { Radio } from '../index';
 import './styles/index';
@@ -9,13 +11,34 @@ export default () => {
     { label: 'Orange', value: 'Orange' },
   ];
   const [value, setValue] = useState('a');
+  const [test, setTest] = useState('');
   return (
     <div>
-      <Radio checked disabled>A</Radio>
+      <Radio checked>A</Radio>
+      <br />
       <Radio disabled>B</Radio>
+      <br />
       <Radio onChange={(e) => console.log('c', e, e.target.checked)}>C</Radio>
-      <Radio.Group options={options} defaultValue="Apple" name="radio1" onChange={(e) => { console.log('value', e.target.value); }} />
+      <br />
+      <button onClick={() => setTest('')}>change</button>
+      <Radio.Group
+        options={options}
+        defaultValue="Apple"
+        name="radio1"
+        value={test}
+        onChange={(e) => {
+          console.log(e.target.value);
+          setTest(e.target.value);
+        }}
+      />
+      <br />
+      <br />
+      <br />
+      <br />
       <Radio.Group options={['a', 'b', 'c']} defaultValue="a" value={value} name="radio2" onChange={(e) => { setValue(e.target.value); }} />
+      <br />
+      <br />
+      <br />
       <Radio.Group
         defaultValue="B"
         name="radio2"

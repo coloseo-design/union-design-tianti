@@ -1,5 +1,5 @@
 import React, {
-  useContext, useEffect, useState, createContext, useCallback,
+  useContext, useEffect, useState, createContext, useCallback, useRef,
 } from 'react';
 import classNames from 'classnames';
 import Radio from './radio';
@@ -32,10 +32,15 @@ const Group: React.FC<RadioGroupProps> = (props: RadioGroupProps) => {
   } = props;
   let { children } = props;
   const [value, setValue] = useState<string>(valueFromProps || defaultValue || '');
+
+  const lock = useRef(0);
   useEffect(() => {
-    if (valueFromProps) {
-      setValue(valueFromProps);
+    if (lock.current === 0) {
+      setValue(valueFromProps || defaultValue || '');
+    } else {
+      setValue(valueFromProps || '');
     }
+    lock.current = 1;
   }, [valueFromProps]);
 
   const { getPrefixCls } = useContext(ConfigContext);
@@ -43,7 +48,9 @@ const Group: React.FC<RadioGroupProps> = (props: RadioGroupProps) => {
   const mainClass = classNames(prefix, className);
 
   const onGroupChange = useCallback((e) => {
-    setValue(e.target.value);
+    if (typeof valueFromProps === 'undefined') {
+      setValue(e.target.value);
+    }
     if (onChange) {
       (onChange as React.ChangeEventHandler<HTMLInputElement>)(e);
     }

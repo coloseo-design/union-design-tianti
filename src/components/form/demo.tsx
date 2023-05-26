@@ -8,6 +8,7 @@ import {
   Button,
   DatePicker,
   Checkbox,
+  Radio,
 } from '../index';
 import '../grid/styles/index';
 import '../button/styles/index';
@@ -138,7 +139,7 @@ const FormDemo = () => {
           <FormItem
             name="checkbox"
             label="是否满意"
-            initialValue={['2']}
+            // initialValue={['2']}
             rules={[
               { required: true, message: '请选择' },
             ]}
@@ -147,6 +148,18 @@ const FormDemo = () => {
               <Checkbox value="1">hello</Checkbox>
               <Checkbox value="2">hello2</Checkbox>
             </Checkbox.Group>
+          </FormItem>
+          <FormItem
+            name="radio"
+            label="是否满意"
+            rules={[
+              { required: true, message: '请选择' },
+            ]}
+          >
+            <Radio.Group onChange={(v) => { console.log('==vv', v); }}>
+              <Radio value="1">hello</Radio>
+              <Radio value="2">hello2</Radio>
+            </Radio.Group>
           </FormItem>
           <Form.Item required name="date" label="时间" initialValue={[dayjs(), dayjs()]}>
             <DatePicker mode="time-full" type="range" />

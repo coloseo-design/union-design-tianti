@@ -1,4 +1,6 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, {
+  useContext, useEffect, useState, useRef,
+} from 'react';
 import classnames from 'classnames';
 import Checkbox from './checkbox';
 import { ConfigContext } from '../config-provider/context';
@@ -33,11 +35,14 @@ const Group: React.FC<CheckboxGroupProps> = (props: CheckboxGroupProps) => {
   const classString = classnames(prefix, className);
   const [value, setValue] = useState<Array<string>>(valueFromProps || defaultValue || []);
 
+  const lock = useRef(0);
   useEffect(() => {
-    // if (valueFromProps) {
-    //   setValue(valueFromProps);
-    // }
-    setValue(valueFromProps || []);
+    if (lock.current === 0) {
+      setValue(valueFromProps || defaultValue || []);
+    } else {
+      setValue(valueFromProps || []);
+    }
+    lock.current = 1;
   }, [valueFromProps]);
 
   // 如果包含children
@@ -67,7 +72,9 @@ const Group: React.FC<CheckboxGroupProps> = (props: CheckboxGroupProps) => {
     } else {
       valueOfState.splice(index, 0, valueOfItem);
     }
-    setValue([...valueOfState]);
+    if (typeof valueFromProps === 'undefined') {
+      setValue([...valueOfState]);
+    }
     onChange && onChange([...valueOfState]);
   };
 
