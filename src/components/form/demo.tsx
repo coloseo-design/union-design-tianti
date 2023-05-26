@@ -5,12 +5,14 @@ import {
   Input,
   Select,
   Button,
+  DatePicker,
 } from '../index';
 import '../grid/styles/index';
 import '../button/styles/index';
 import '../input/styles/index';
 import '../select/styles/index';
 import './styles/index';
+import dayjs from 'dayjs';
 import { FormInstance, FormValues } from './type';
 
 const { Item: FormItem } = Form;
@@ -132,6 +134,9 @@ const FormDemo = () => {
           labelAlign="right"
           labelStyle={{ marginBottom: 8 }}
         >
+          <Form.Item required name="date" label="时间" initialValue={[dayjs(), dayjs()]}>
+            <DatePicker mode="time-full" type="range" />
+          </Form.Item>
           <Form.Item
             name="username"
             validateFirst

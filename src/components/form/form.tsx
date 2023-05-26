@@ -51,7 +51,7 @@ const Form: ForwardRefRenderFunction<FormInstance, FormProps> = (
   const loopObj = (obj: FormValues, parent: FormValues) => {
     for (const key in obj) {
       if (obj[key]) {
-        if (typeof obj[key] === 'object') {
+        if (typeof obj[key] === 'object' && !Array.isArray(obj[key])) {
           Object.assign(parent, {
             [key]: {
               ...obj[key] as any,

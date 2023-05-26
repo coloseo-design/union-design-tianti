@@ -1,5 +1,5 @@
 import classnames from 'classnames';
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useRef } from 'react';
 import { Col, Row } from '../grid';
 import { FormContextProps, FormItemProps, ValidatorRule } from './type';
 import FormItemError from './form-item-error';
@@ -133,7 +133,7 @@ const Item: React.FC<FormItemProps> = (props: FormItemProps) => {
       onCollect(composedName, { event: trigger, value: newValue });
     }
   };
-
+  const lock = useRef(true);
   useEffect(() => {
     if (name) {
       onStatus(composedName, false);
@@ -143,6 +143,8 @@ const Item: React.FC<FormItemProps> = (props: FormItemProps) => {
         })
         .catch((newErrors) => {
           onError(composedName, { event: trigger, errors: newErrors });
+        }).finally(() => {
+          lock.current = false;
         });
       onCollect(composedName, { event: trigger, value: initialValue || value }, true);
     }
@@ -166,8 +168,8 @@ const Item: React.FC<FormItemProps> = (props: FormItemProps) => {
   }, [name]);
 
   useEffect(() => {
-    if (name) {
-      validate(value || initialValue)
+    if (name && !lock.current) {
+      validate(value)
         .then((newErrors) => {
           onError(composedName, { event: trigger, errors: newErrors });
         })
