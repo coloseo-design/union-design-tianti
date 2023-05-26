@@ -37,7 +37,6 @@ const Group: React.FC<CheckboxGroupProps> = (props: CheckboxGroupProps) => {
     // if (valueFromProps) {
     //   setValue(valueFromProps);
     // }
-    console.log('==valueFromProps', valueFromProps);
     setValue(valueFromProps || []);
   }, [valueFromProps]);
 
