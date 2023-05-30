@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React, { CSSProperties, ReactNode } from 'react';
 import { PaginationProps } from '../pagination/pagination';
 
 export type ColumnsAlign = 'left' | 'right' | 'center';
@@ -103,6 +103,9 @@ export interface TableProps extends React.HTMLAttributes<HTMLTableElement> {
     scrollToFirstRowOnChange?: boolean;
   };
   pagination?: boolean | PaginationProps;
+
+  noDataStyle?: CSSProperties;
+  noData?: ReactNode;
 }
 
 export interface TableState {

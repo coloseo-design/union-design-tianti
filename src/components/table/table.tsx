@@ -26,6 +26,7 @@ import TableHeader from './header';
 import {
   groupColums, sortColums, flattenColums,
 } from './utils';
+import NoDataSvg from './no-data';
 
 @withGlobalConfig
 export default class Table extends React.Component<TableProps, TableState> {
@@ -545,6 +546,8 @@ export default class Table extends React.Component<TableProps, TableState> {
       rowSelection,
       getPrefixCls,
       pagination: _page,
+      noDataStyle,
+      noData,
       ...rest
     } = this.props;
     const restParams = omit(rest, [
@@ -577,6 +580,35 @@ export default class Table extends React.Component<TableProps, TableState> {
     // const mainColumns = columns.slice();
     // eslint-disable-next-line no-nested-ternary
     const maxHeight = scroll ? (typeof scroll.y === 'boolean' ? 'auto' : scroll.y) : 'auto';
+    const hasNoData = dataSource.length === 0 || filteredDataSource.length === 0;
+    /*
+    不展示分页器的逻辑
+    1.用户传false
+    2. 用户没传pagination 但 dataSource 或者filteredDataSource为空数组
+    3 用户传了pagination => {
+      3.1:用户传了total，但total 等于 0
+      3.2: 用户没有传total,但 ataSource 或者filteredDataSource为空数组
+    }
+    */
+    const showPagination = () => {
+      if (_page === false) {
+        return false;
+      }
+      if (typeof _page === 'undefined' && hasNoData) {
+        return false;
+      }
+      if (_page) {
+        if (typeof (_page as PaginationProps)?.total !== 'undefined') {
+          if ((_page as PaginationProps)?.total === 0) {
+            return false;
+          }
+        } else if (hasNoData) {
+          return false;
+        }
+      }
+      return true;
+    };
+
     return (
       <div {...restParams} className={`${prefix}-container`}>
         <div className={`${prefix}-container-with-spin`}>
@@ -636,7 +668,19 @@ export default class Table extends React.Component<TableProps, TableState> {
             }
           </div>
           {
-            pagination && (
+            hasNoData && (
+            <div className={classnames(`${prefix}-container-hasNoData`)} style={noDataStyle}>
+              {noData || (
+              <div>
+                <NoDataSvg />
+                <div>暂无数据</div>
+              </div>
+              )}
+            </div>
+            )
+          }
+          {
+            showPagination() && (
               <div className={`${prefix}-pagination`} style={pagination?.style || {}}>
                 <Pagination
                   {...pagination}

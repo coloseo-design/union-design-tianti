@@ -335,9 +335,56 @@ const TableDemo: React.FC<unknown> = () => {
       address: '西湖区湖底公园2号',
     },
   ];
+  const columnsT = [
+    {
+      title: '姓名',
+      dataIndex: 'name',
+      key: 'name',
+      width: 150,
+      className: 'ttt',
+      align: 'right',
+    },
+    {
+      title: '年龄',
+      dataIndex: 'age',
+      key: 'age',
+      width: 150,
+    },
+    {
+      title: '住址',
+      dataIndex: 'address',
+      key: 'address',
+      render: (k: React.ReactNode, row: any) => (
+        <div>
+          {row.name}
+          @
+          {k}
+        </div>
+      ),
+    },
+    {
+      title: '操作',
+      dataIndex: 'op',
+      key: 'op',
+      // align: 'right',
+      width: 150,
+      render: (_: any, r: any, index: number) => (
+        <a className={`delete-${index}`}>删除</a>
+      ),
+    },
+  ];
   return (
     <div style={{ padding: 32, background: '#fff' }}>
       <>
+        <h4>没有数据展示 table</h4>
+        <Table columns={columnsT} bordered dataSource={[]} />
+        <h4 style={{ marginTop: 24 }}>自定义没有数据展示 table</h4>
+        <Table
+          columns={columnsT}
+          bordered
+          dataSource={[]}
+          noData={<div style={{ color: 'red', fontSize: 18 }}>暂无数据 ！！！</div>}
+        />
         <h4>表头分组</h4>
         <Table
           columns={columnsGroup}

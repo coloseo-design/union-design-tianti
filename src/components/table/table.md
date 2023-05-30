@@ -93,6 +93,8 @@ const columns = [
 | render | 生成复杂数据的渲染函数，参数分别为当前行的值，当前行数据，行索引，@return 里面可以设置表格[行/列合并] | function(text, record, index) {} | - |
 | title | 列头显示文字 | ReactNode \| ({ sortOrder, sortColumn, filters }) => ReactNode | - |
 | width | 列宽度 | string \| number | - |
+|noData|自定义没有数据展示|ReactNode|--|
+|noDataStyle|没有数据展示时的style|--|
 
 ### ColumnGroup
 
