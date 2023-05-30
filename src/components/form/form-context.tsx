@@ -11,9 +11,10 @@ export const FormContext = React.createContext<FormContextProps>({
   onCollect: () => {},
   onError: () => {},
   onSubmit: () => {},
+  onStatus: () => {},
   errors: {},
   values: {},
-  isValidating: false,
+  status: {},
   labelAlign: 'right',
 });
 

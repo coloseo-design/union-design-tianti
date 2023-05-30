@@ -1,7 +1,6 @@
 /* eslint-disable max-len */
-import React, { HtmlHTMLAttributes } from 'react';
+import React from 'react';
 import { BaseProps, ResponsiveColProps } from '../utils/type';
-import { ConfigConsumerProps } from '../config-provider';
 
 interface FailedResponseType {
   errors: FormErrors;
@@ -19,7 +18,7 @@ export interface FormStatus {
   [key: string]: boolean;
 }
 
-export interface FormCommmonProps {
+export interface FormCommonProps {
   /** 是否需要冒号 */
   colon?: boolean;
   /** 表单名称 */
@@ -34,7 +33,7 @@ export interface FormCommmonProps {
   labelStyle?: React.CSSProperties;
 }
 
-export interface FormContextProps extends FormCommmonProps{
+export interface FormContextProps extends FormCommonProps{
   /** 是否需要冒号 */
   colon?: boolean;
   /** 表单名称 */
@@ -62,7 +61,7 @@ export interface FormContextProps extends FormCommmonProps{
 }
 
 // eslint-disable-next-line max-len
-export interface FormProps extends FormCommmonProps, BaseProps, React.HTMLAttributes<HTMLFormElement> {
+export interface FormProps extends FormCommonProps, BaseProps, React.HTMLAttributes<HTMLFormElement> {
   /** 表单名称 */
   name: string;
   /** 表单提交回调 */
