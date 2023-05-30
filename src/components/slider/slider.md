@@ -15,10 +15,8 @@ title: Slider
 
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | ---  | ---   |
-| allowClear | 支持清除, 单选模式有效 | boolean | false |
 | defaultValue | 设置初始取值。`number` | number | 0 |
 | disabled | 值为 `true` 时，滑块为禁用状态 | boolean | false |
-| dots | 是否只能拖拽到刻度上 | boolean | false |
 | marks | 刻度标记，key 的类型必须为 `number` 且取值在闭区间 \[min, max] 内，每个标签可以单独设置样式 | object[] | { value: string, label: string\|ReactNode } |
 | max | 最大值 | number | 100 |
 | min | 最小值 | number | 0 |

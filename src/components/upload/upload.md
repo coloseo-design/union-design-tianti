@@ -26,6 +26,9 @@ subtitle: 上传
 | canDrag         | 能否拖拽文件                                                                                                                                                                                             | boolean                                                                                          | false  |
 | renderList      | 自定义文件上传列表                                                                                                                                                                                       | (files:UploadFile[])=> ReactElement                                                              | -      |
 | onRemove        | 点击移除文件时的回调，返回值为 false 时不移除。支持返回一个 Promise 对象，Promise 对象 resolve(false) 或 reject 时不移除                                                                                 | (file:UploadFile)=> boolean \| Promise\<boolean\>                                                | -      |
+|btnDesc|上传额外描述说明|string|--|
+|btnText|上传文字(只有upload.button, upload.text 才有此属性)|string|upload.button (上传文件), upload.card(上传照片)|
+|btnIcon|上传Icon,只能是图标库里面的name|string|folder-upload|
 
 ### UploadFile
 

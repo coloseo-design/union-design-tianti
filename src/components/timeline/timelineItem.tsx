@@ -1,15 +1,15 @@
-import React from 'react';
+import React, { CSSProperties } from 'react';
 import classNames from 'classnames';
 import { ConfigConsumer, ConfigConsumerProps } from '../config-provider/context';
 
 export interface TimelineItemProps {
     className?: string;
     prefixCls?: string;
-    style?: {[key: string]: unknown};
+    style?: CSSProperties;
     label?:React.ReactNode;
 }
 
-class TimelineItem extends React.Component<TimelineItemProps, any> {
+class TimelineItem extends React.Component<TimelineItemProps> {
     renderTimelineItem = ({ getPrefixCls }:ConfigConsumerProps) => {
       const {
         prefixCls, children, className, style, label,

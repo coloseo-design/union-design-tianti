@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { CSSProperties } from 'react';
 import classNames from 'classnames';
 import TimelineItem from './timelineItem';
 import { ConfigConsumer, ConfigConsumerProps } from '../config-provider/context';
@@ -6,11 +6,11 @@ import { ConfigConsumer, ConfigConsumerProps } from '../config-provider/context'
 export interface TimeLineProps{
     className?: string;
     prefixCls?: string;
-    style?: {[key: string]: unknown};
+    style?: CSSProperties;
     reverse?:boolean; // 排序
 }
 
-class Timeline extends React.Component<TimeLineProps, any> {
+class Timeline extends React.Component<TimeLineProps> {
     static Item = TimelineItem;
 
     renderTimeline = ({ getPrefixCls }:ConfigConsumerProps) => {
@@ -47,5 +47,7 @@ class Timeline extends React.Component<TimeLineProps, any> {
       );
     }
 }
+
+Timeline.Item = TimelineItem;
 
 export default Timeline;
