@@ -18,7 +18,7 @@ export interface BaseInputProps {
   allowClear?: boolean; // 可以点击清除图标删除内容
   prefix?: ReactNode, // 带有前缀图标的 input
   suffix?: ReactNode, // 带有后缀图标的 input
-  type?: string,
+  mode?: string,
   forwardedRef?: React.RefObject<HTMLInputElement>,
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
   onFocus?: React.FocusEventHandler<HTMLInputElement>;
@@ -55,7 +55,7 @@ class Input extends Component<BaseInputProps, InputState> {
 
   renderInput = ({ getPrefixCls }: ConfigConsumerProps) => {
     const {
-      disabled, addonAfter, addonBefore, type = 'input', prefix, allowClear, suffix, forwardedRef, onChange, onFocus, onBlur, ..._rest
+      disabled, addonAfter, addonBefore, mode = 'input', prefix, allowClear, suffix, forwardedRef, onChange, onFocus, onBlur, ..._rest
     } = this.props;
     const { focus, value } = this.state;
     const rest = omit(_rest, ['onSearch', 'onPressEnter', 'defaultValue']);
@@ -69,7 +69,7 @@ class Input extends Component<BaseInputProps, InputState> {
     const wrapClass = classNames(`${prefixCls}-wrap`, {
       [`${prefixCls}-wrap-addonAfter`]: addonAfter,
       [`${prefixCls}-wrap-addonBefore`]: addonBefore,
-      [`${prefixCls}-wrap-textarea`]: type === 'textarea',
+      [`${prefixCls}-wrap-textarea`]: mode === 'textarea',
     });
 
     const handleDelete = (e: any) => {
@@ -112,7 +112,7 @@ class Input extends Component<BaseInputProps, InputState> {
       }
     };
 
-    const input = createElement(type, {
+    const input = createElement(mode, {
       ...rest, disabled, value, ref: handleRef, className: prefixCls, onChange: onchange, onFocus: onfocus, onBlur: onblur,
     });
 
