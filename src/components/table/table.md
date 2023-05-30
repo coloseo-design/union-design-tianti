@@ -70,6 +70,8 @@ const columns = [
 | rowSelection | 表格行是否可选择，\[配置项] | object | - |
 | scroll | 表格是否可滚动，也可以指定滚动区域的宽、高，\[配置项] | object | - |
 | size | 表格大小 | `default` \| `middle` \| `small` | default |
+| noData | 自定义没有数据展示 | ReactNode | -- |
+|noDataStyle|没有数据展示样式|CSSProperties|--|
 
 
 ### Column
