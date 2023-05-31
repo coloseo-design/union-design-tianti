@@ -333,9 +333,47 @@ const TableDemo: React.FC<unknown> = () => {
       address: '西湖区湖底公园2号',
     },
   ];
+  const columns1 = [
+    {
+      title: '姓名',
+      dataIndex: 'name',
+      key: 'name',
+      width: 150,
+      className: 'ttt',
+    },
+    {
+      title: '年龄',
+      dataIndex: 'age',
+      key: 'age',
+      width: 150,
+    },
+    {
+      title: '住址',
+      dataIndex: 'address',
+      key: 'address',
+      render: (k: React.ReactNode, row: any) => (
+        <div>
+          {row.name}
+          @
+          {k}
+        </div>
+      ),
+    },
+    {
+      title: '操作',
+      dataIndex: 'op',
+      key: 'op',
+      width: 150,
+      render: (_:any, record:any, index: number) => (
+        <a className={`delete-${index}`}>删除</a>
+      ),
+    },
+  ];
   return (
     <div style={{ padding: 32, background: '#fff' }}>
       <>
+        <h4>没有数据展示</h4>
+        <Table columns={columns1} dataSource={[]} bordered />
         <h4>表头分组</h4>
         <Table
           columns={columnsGroup}
