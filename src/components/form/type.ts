@@ -18,7 +18,7 @@ export interface FormStatus {
   [key: string]: boolean;
 }
 
-export interface FormCommmonProps {
+export interface FormCommonProps {
   /** 是否需要冒号 */
   colon?: boolean;
   /** 表单名称 */
@@ -33,7 +33,7 @@ export interface FormCommmonProps {
   labelStyle?: React.CSSProperties;
 }
 
-export interface FormContextProps extends FormCommmonProps{
+export interface FormContextProps extends FormCommonProps{
   /** 是否需要冒号 */
   colon?: boolean;
   /** 表单名称 */
@@ -51,19 +51,17 @@ export interface FormContextProps extends FormCommmonProps{
   /** 表单错误收集 */
   onError: (name: string, action: any) => void;
   /** 表单提交事件 */
-  onSubmit: () => void;
+  onSubmit: (evt: React.MouseEvent<HTMLElement>) => void;
   /** 表单的校验状态 */
   // isValidating: boolean;
   /** formItem的校验状态 */
   status: FormStatus;
 
   onStatus: (name: string, s: boolean) => void;
-
-  isValidating?: boolean
 }
 
 // eslint-disable-next-line max-len
-export interface FormProps extends FormCommmonProps, BaseProps, React.HTMLAttributes<HTMLFormElement> {
+export interface FormProps extends FormCommonProps, BaseProps, React.HTMLAttributes<HTMLFormElement> {
   /** 表单名称 */
   name: string;
   /** 表单提交回调 */
@@ -80,6 +78,7 @@ export interface FormProps extends FormCommmonProps, BaseProps, React.HTMLAttrib
 
 export type ValueCollection = {
   value: unknown;
+  initialValue?: unknown;
   event: string;
 };
 

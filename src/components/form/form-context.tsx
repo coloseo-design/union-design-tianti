@@ -11,12 +11,11 @@ export const FormContext = React.createContext<FormContextProps>({
   onCollect: () => {},
   onError: () => {},
   onSubmit: () => {},
+  onStatus: () => {},
   errors: {},
   values: {},
-  isValidating: false,
-  labelAlign: 'right',
   status: {},
-  onStatus: () => {},
+  labelAlign: 'right',
 });
 
 export const { Consumer: FormConsumer, Provider: FormProvider } = FormContext;

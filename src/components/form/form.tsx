@@ -48,25 +48,11 @@ const Form: ForwardRefRenderFunction<FormInstance, FormProps> = (
   const [status, setStatus] = useState<FormStatus>({});
   const [itemInitValues, setItemValues] = useState<FormValues>({});
 
-  const loopObj = (obj: FormValues, parent: FormValues) => {
-    for (const key in obj) {
-      if (obj[key]) {
-        if (typeof obj[key] === 'object') {
-          Object.assign(parent, {
-            [key]: {
-              ...obj[key] as any,
-            },
-          });
-        } else {
-          parent && Object.assign(parent, {
-            [key]: obj[key],
-          });
-        }
-      }
-    }
-  };
-
-  const onCollect = (fieldName: string, { value }: ValueCollection, mounted?: boolean) => {
+  const onCollect = (
+    fieldName: string,
+    { value, initialValue }: ValueCollection,
+    mounted?: boolean,
+  ) => {
     let changeValue = {};
     const itemName = decomposeFiledName(fieldName);
     const [key, ...prefixs] = [...itemName].reverse();
@@ -84,10 +70,21 @@ const Form: ForwardRefRenderFunction<FormInstance, FormProps> = (
     Object.assign(current, changeValue);
     onValuesChange && onValuesChange(changeValue, values);
     setValues({ ...values });
-    if (mounted) { // 第一次加载完收集 item上initialValue的值
-      const obj = {};
-      loopObj(values, obj);
-      setItemValues({ ...obj });
+    if (mounted && typeof initialValue !== 'undefined') { // 第一次加载完收集 item上initialValue的值
+      let changeInitValue = {};
+      const currentInitValue = prefixs.reduceRight((composed, prefix) => {
+        if (!composed[prefix]) {
+          Object.assign(composed, {
+            [prefix]: {},
+          });
+        }
+        return composed[prefix] as FormValues;
+      }, itemInitValues);
+      changeInitValue = {
+        [key]: initialValue,
+      };
+      Object.assign(currentInitValue, changeInitValue);
+      setItemValues({ ...itemInitValues });
     }
   };
 
