@@ -1,6 +1,8 @@
-import React, { useContext, useEffect, useState } from 'react';
-import classnames from 'classnames';
+import React, {
+  useContext, useEffect, useState, useRef,
+} from 'react';
 import { ConfigContext } from '@union-design/config-provider';
+import classnames from 'classnames';
 import Checkbox from './checkbox';
 import { CheckboxGroupProps, CheckboxOption, GroupCheckboxConsumerProps } from './type';
 
@@ -14,8 +16,8 @@ const Group: React.FC<CheckboxGroupProps> = (props: CheckboxGroupProps) => {
     value: valueFromProps,
     defaultValue,
     onChange,
-    prefixCls: customizePrefixCls,
     direction,
+    prefixCls: customizePrefixCls,
     ...rest
   } = props;
   let { children } = props;
@@ -36,10 +38,14 @@ const Group: React.FC<CheckboxGroupProps> = (props: CheckboxGroupProps) => {
   }, className);
   const [value, setValue] = useState<Array<string>>(valueFromProps || defaultValue || []);
 
+  const lock = useRef(0);
   useEffect(() => {
-    if (valueFromProps) {
-      setValue(valueFromProps);
+    if (lock.current === 0) {
+      setValue(valueFromProps || defaultValue || []);
+    } else {
+      setValue(valueFromProps || []);
     }
+    lock.current = 1;
   }, [valueFromProps]);
 
   // 如果包含children
@@ -62,14 +68,16 @@ const Group: React.FC<CheckboxGroupProps> = (props: CheckboxGroupProps) => {
   const onGroupChange = (checkedOption: CheckboxOption) => {
     const { value: _value, label } = checkedOption;
     const valueOfItem = _value || label;
-    const valueOfState = value;
+    const valueOfState = [...value];
     const index = valueOfState.findIndex((item) => item === valueOfItem);
     if (valueOfState.indexOf(valueOfItem) >= 0) {
       valueOfState.splice(index, 1);
     } else {
       valueOfState.splice(index, 0, valueOfItem);
     }
-    setValue([...valueOfState]);
+    if (typeof valueFromProps === 'undefined') {
+      setValue([...valueOfState]);
+    }
     onChange && onChange([...valueOfState]);
   };
 

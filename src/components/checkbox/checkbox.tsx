@@ -6,7 +6,7 @@ import { CheckboxProps } from './type';
 
 const Checkbox: React.FC<CheckboxProps> = (props: CheckboxProps) => {
   const {
-    checked: checkFromProps = false,
+    checked: checkFromProps,
     defaultChecked = false,
     children,
     prefixCls: customizePrefixCls,
@@ -15,12 +15,11 @@ const Checkbox: React.FC<CheckboxProps> = (props: CheckboxProps) => {
     value,
     onChange,
     indeterminate, // 是否是未确定状态
-    style,
   } = props;
   // eslint-disable-next-line prefer-const
   let [checked, setChecked] = useState(checkFromProps || defaultChecked);
   useEffect(() => {
-    setChecked(checkFromProps);
+    setChecked(checkFromProps || false);
   }, [checkFromProps]);
   const { getPrefixCls } = useContext(ConfigContext);
 
@@ -47,19 +46,21 @@ const Checkbox: React.FC<CheckboxProps> = (props: CheckboxProps) => {
 
   const onClick = () => {
     if (disabled) return;
+    const checkedC = !checked;
+    if (typeof checkFromProps === 'undefined') {
+      setChecked(checkedC);
+    }
     onGroupChange && onGroupChange({
       label: children as string,
       value: composedValue as string,
     });
-    const checkedC = !checked;
-    setChecked(checkedC);
     onChange && onChange(checkedC);
   };
 
   const innerClass = classnames(`${prefix}-inner`);
   return (
     // eslint-disable-next-line jsx-a11y/label-has-associated-control
-    <label className={wrapperClass} style={style}>
+    <label className={wrapperClass}>
       <span className={mainClass}>
         <input type="checkbox" className={inputClass} onClick={onClick} />
         <span className={innerClass} />
