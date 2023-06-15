@@ -14,7 +14,6 @@
 /* eslint-disable operator-linebreak */
 /* eslint-disable quotes */
 import React, { CSSProperties, ReactNode, createRef } from "react";
-import { createPortal } from "react-dom";
 import {
   BaseComponent,
   BasePropsV2,
@@ -292,15 +291,85 @@ export default class TopNav<Data> extends BaseComponent<
     }
   };
 
-  private openExpand = (data: any[], _div: HTMLDivElement) => {
+  private getContentData = (data: any[]) => {
     const {
       keyExtractor,
       nameExtractor,
       childrenExtractor,
       size = "md",
-      popupZIndex,
+      mode = "expand",
     } = this.props;
     const selectedKey = this.getBindValue("selectedKey") ?? "";
+
+    const temp = data.map((i) => {
+      const children = childrenExtractor(i) ?? [];
+
+      return (
+        <div key={keyExtractor(i)} className={this.gpc("col")}>
+          <div
+            className={this.classNames(this.gpc("item"), this.gpc("level2"), {
+              [this.gpc("hover")]: (childrenExtractor(i) ?? []).length === 0,
+              [this.gpc("active")]: selectedKey === keyExtractor(i),
+            })}
+            onClick={() => this.onClickExpand(i)}
+          >
+            <div className={this.gpc("text")}>{nameExtractor(i)}</div>
+          </div>
+          {this.flatChildren(children, 3).map((ii) => (
+            <div
+              key={keyExtractor(ii.data)}
+              className={this.classNames(
+                this.gpc("item"),
+                this.gpc(`level${ii.level}`),
+                {
+                  [this.gpc("hover")]:
+                    (childrenExtractor(ii.data) ?? []).length === 0,
+                  [this.gpc("active")]: selectedKey === keyExtractor(ii.data),
+                }
+              )}
+              onClick={() => this.onClickExpand(ii.data)}
+            >
+              <div className={this.gpc("text")}>{nameExtractor(ii.data)}</div>
+            </div>
+          ))}
+        </div>
+      );
+    });
+
+    let col = 0;
+    if (size === "md" && mode === "expand") col = 6;
+    if (size === "md" && mode === "expand-img") col = 4;
+    if (size === "xl" && mode === "expand") col = 4;
+    if (size === "xl" && mode === "expand-img") col = 3;
+
+    const res = [] as any[];
+    const num = new Array(col).fill(0);
+
+    for (let i = 0; i < temp.length; i++) {
+      const count = React.Children.count(temp[i].props.children);
+
+      let minNum = num[0] ?? 0;
+      let minNumIndex = 0;
+      for (let ii = 0; ii < num.length; ii++) {
+        const tNum = num[ii] ?? 0;
+        if (tNum < minNum) {
+          minNum = tNum;
+          minNumIndex = ii;
+        }
+      }
+
+      num[minNumIndex] ??= 0;
+      num[minNumIndex] += count;
+      res[minNumIndex] ??= [];
+      res[minNumIndex].push(temp[i]);
+    }
+    console.log(res);
+
+    return res;
+  };
+
+  private openExpand = (data: any[], _div: HTMLDivElement) => {
+    const { size = "md", popupZIndex } = this.props;
 
     const view = (
       <div
@@ -308,48 +377,11 @@ export default class TopNav<Data> extends BaseComponent<
         style={{ left: 0, top: "100%", width: "100%", zIndex: popupZIndex }}
         onClick={(e) => e.nativeEvent.stopImmediatePropagation()}
       >
-        {data.map((i) => {
-          const children = childrenExtractor(i) ?? [];
-
-          return (
-            <div key={keyExtractor(i)} className={this.gpc("col")}>
-              <div
-                className={this.classNames(
-                  this.gpc("item"),
-                  this.gpc("level2"),
-                  {
-                    [this.gpc("hover")]:
-                      (childrenExtractor(i) ?? []).length === 0,
-                    [this.gpc("active")]: selectedKey === keyExtractor(i),
-                  }
-                )}
-                onClick={() => this.onClickExpand(i)}
-              >
-                <div className={this.gpc("text")}>{nameExtractor(i)}</div>
-              </div>
-              {this.flatChildren(children, 3).map((ii) => (
-                <div
-                  key={keyExtractor(ii.data)}
-                  className={this.classNames(
-                    this.gpc("item"),
-                    this.gpc(`level${ii.level}`),
-                    {
-                      [this.gpc("hover")]:
-                        (childrenExtractor(ii.data) ?? []).length === 0,
-                      [this.gpc("active")]:
-                        selectedKey === keyExtractor(ii.data),
-                    }
-                  )}
-                  onClick={() => this.onClickExpand(ii.data)}
-                >
-                  <div className={this.gpc("text")}>
-                    {nameExtractor(ii.data)}
-                  </div>
-                </div>
-              ))}
-            </div>
-          );
-        })}
+        {this.getContentData(data).map((i, index) => (
+          <div key={index} className={this.gpc("block")}>
+            {i.map((i: any) => i)}
+          </div>
+        ))}
       </div>
     );
 
@@ -358,15 +390,12 @@ export default class TopNav<Data> extends BaseComponent<
 
   private openExpandImg = (title: any, data: any[], _div: HTMLDivElement) => {
     const {
-      keyExtractor,
       nameExtractor,
-      childrenExtractor,
       bgExtractor,
       descExtractor,
       size = "md",
       popupZIndex,
     } = this.props;
-    const selectedKey = this.getBindValue("selectedKey") ?? "";
 
     const view = (
       <div
@@ -391,48 +420,11 @@ export default class TopNav<Data> extends BaseComponent<
           </div>
         </div>
         <div className={this.gpc("right")}>
-          {data.map((i) => {
-            const children = childrenExtractor(i) ?? [];
-
-            return (
-              <div key={keyExtractor(i)} className={this.gpc("col")}>
-                <div
-                  className={this.classNames(
-                    this.gpc("item"),
-                    this.gpc("level2"),
-                    {
-                      [this.gpc("hover")]:
-                        (childrenExtractor(i) ?? []).length === 0,
-                      [this.gpc("active")]: selectedKey === keyExtractor(i),
-                    }
-                  )}
-                  onClick={() => this.onClickExpand(i)}
-                >
-                  <div className={this.gpc("text")}>{nameExtractor(i)}</div>
-                </div>
-                {this.flatChildren(children, 3).map((ii) => (
-                  <div
-                    key={keyExtractor(ii.data)}
-                    className={this.classNames(
-                      this.gpc("item"),
-                      this.gpc(`level${ii.level}`),
-                      {
-                        [this.gpc("hover")]:
-                          (childrenExtractor(ii.data) ?? []).length === 0,
-                        [this.gpc("active")]:
-                          selectedKey === keyExtractor(ii.data),
-                      }
-                    )}
-                    onClick={() => this.onClickExpand(ii.data)}
-                  >
-                    <div className={this.gpc("text")}>
-                      {nameExtractor(ii.data)}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            );
-          })}
+          {this.getContentData(data).map((i, index) => (
+            <div key={index} className={this.gpc("block")}>
+              {i.map((i: any) => i)}
+            </div>
+          ))}
         </div>
       </div>
     );

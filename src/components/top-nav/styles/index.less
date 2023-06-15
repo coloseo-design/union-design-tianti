@@ -145,15 +145,6 @@
   }
 }
 
-.@{topnav}-dropdown {
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1), 0px 3px 7px rgba(0, 0, 0, 0.05);
-}
-
-.@{topnav}-expand,
-.@{topnav}-expand-img {
-  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.08), 0px 4px 10px rgba(0, 0, 0, 0.06);
-}
-
 .@{topnav}-dropdown,
 .@{topnav}-expand,
 .@{topnav}-expand-img {
@@ -166,6 +157,7 @@
   border-radius: 4px;
   padding: 4px 0;
   transform: translateX(-50%);
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1), 0px 3px 7px rgba(0, 0, 0, 0.05);
 
   & > .@{topnav}-item.@{topnav}-active {
     background-color: @topnav-dropdown-item-bg-hover-color;
@@ -198,16 +190,27 @@
   }
 }
 
-.@{topnav}-expand {
+.@{topnav}-expand,
+.@{topnav}-expand-img {
+  max-height: 54vh;
+  overflow-x: hidden;
+  overflow-y: auto;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.08), 0px 4px 10px rgba(0, 0, 0, 0.06);
   box-sizing: border-box;
   display: flex;
   flex-flow: row nowrap;
-  overflow: hidden;
-  overflow-x: auto;
 
-  & > .@{topnav}-col {
-    width: 184px;
+  & .@{topnav}-block{
+    flex: 1;
+    width: 0;
+    position: relative;
+  }
+
+  & .@{topnav}-col {
+    width: 100%;
+    overflow: hidden;
     flex-shrink: 0;
+    white-space: nowrap;
 
     & > .@{topnav}-item.@{topnav}-level2 {
       height: 40px;
@@ -252,29 +255,26 @@
       user-select: none;
       font-weight: 400;
       padding: 0 8px;
+      overflow: hidden;
 
-      &.@{topnav}-text {
+      & > .@{topnav}-text {
         font-size: 14px;
-        width: 168px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
       }
     }
   }
 }
 
 .@{topnav}-expand.@{topnav}-md {
-  padding: 16px 41px 52px 41px;
-
-  & > .@{topnav}-col + .@{topnav}-col {
-    margin-left: 36px;
-  }
+  padding: 16px 41px 48px 41px;
+  gap: 36px;
 }
 
 .@{topnav}-expand.@{topnav}-xl {
-  padding: 16px 206px 52px 206px;
-
-  & > .@{topnav}-col + .@{topnav}-col {
-    margin-left: 72px;
-  }
+  padding: 16px 206px 48px 206px;
+  gap: 72px;
 
   & > .@{topnav}-col {
     & > .@{topnav}-item.@{topnav}-level2 > .@{topnav}-text {
@@ -284,10 +284,6 @@
 }
 
 .@{topnav}-expand-img {
-  height: 252px;
-  display: flex;
-  flex-flow: row nowrap;
-
   & > .@{topnav}-left {
     flex-shrink: 0;
     position: relative;
@@ -354,71 +350,17 @@
 
   & > .@{topnav}-right {
     flex: 1;
-    overflow: auto;
     box-sizing: border-box;
     display: flex;
     flex-flow: row nowrap;
-
-    & > .@{topnav}-col {
-      width: 184px;
-      flex-shrink: 0;
-
-      & > .@{topnav}-item.@{topnav}-level2 {
-        height: 40px;
-        font-weight: 600;
-        color: @topnav-expand-level2;
-      }
-
-      & > .@{topnav}-item.@{topnav}-level3 {
-        color: @topnav-expand-level3;
-      }
-
-      & > .@{topnav}-item.@{topnav}-level4 {
-        color: @topnav-expand-level4;
-      }
-
-      & > .@{topnav}-item.@{topnav}-level5 {
-        color: @topnav-expand-level5;
-      }
-
-      & > .@{topnav}-item.@{topnav}-hover {
-        cursor: pointer;
-
-        &:hover {
-          background-color: @sidenav-item-hover-bg-color;
-        }
-
-        &:active {
-          background-color: @sidenav-item-bg-click-color;
-        }
-      }
-
-      & > .@{topnav}-item.@{topnav}-hover.@{topnav}-active {
-        color: @topnav-expand-level2;
-        background-color: @topnav-expand-hover-color;
-      }
-
-      & > .@{topnav}-item {
-        display: flex;
-        flex-flow: row nowrap;
-        align-items: center;
-        height: 36px;
-        user-select: none;
-        font-weight: 400;
-        padding: 0 8px;
-
-        &.@{topnav}-text {
-          font-size: 14px;
-          width: 168px;
-        }
-      }
-    }
+    overflow: hidden;
   }
 }
 
 .@{topnav}-expand-img.@{topnav}-md {
   & > .@{topnav}-left {
     width: 416px;
+    min-height: 248px;
 
     & > .@{topnav}-title,
     & > .@{topnav}-desc,
@@ -430,16 +372,14 @@
 
   & > .@{topnav}-right {
     padding: 16px 55px 52px 55px;
-
-    & > .@{topnav}-col + .@{topnav}-col {
-      margin-left: 36px;
-    }
+    gap: 36px;
   }
 }
 
 .@{topnav}-expand-img.@{topnav}-xl {
   & > .@{topnav}-left {
     width: 456px;
+    min-height: 252px;
 
     & > .@{topnav}-title,
     & > .@{topnav}-desc,
@@ -451,10 +391,7 @@
 
   & > .@{topnav}-right {
     padding: 16px 72px 48px 72px;
-
-    & > .@{topnav}-col + .@{topnav}-col {
-      margin-left: 72px;
-    }
+    gap: 72px;
 
     & > .@{topnav}-col {
       & > .@{topnav}-item.@{topnav}-level2 > .@{topnav}-text {
