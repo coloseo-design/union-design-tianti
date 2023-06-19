@@ -3,6 +3,7 @@
 import React from 'react';
 import {
   Table,
+  Popconfirm,
 } from '../index';
 import './styles/index';
 import '../popconfirm/styles/index';
@@ -62,7 +63,7 @@ const columns: ColumnsProps[] = [
     title: '住址',
     dataIndex: 'address',
     key: 'address',
-    filteredValue: ['No. 1'],
+    // filteredValue: ['No. 1'],
     filters: [
       {
         text: 'Jim family',
@@ -373,8 +374,59 @@ const TableDemo: React.FC<unknown> = () => {
       ),
     },
   ];
+  const columnsExpand = [
+    {
+      title: '名字',
+      dataIndex: 'name',
+      key: 'name',
+    },
+    {
+      title: '电话',
+      dataIndex: 'phone',
+      key: 'phone',
+    },
+    {
+      title: '年龄',
+      dataIndex: 'age',
+      key: 'age',
+    },
+    {
+      title: '地址',
+      dataIndex: 'address',
+      key: 'address',
+    },
+  ];
+  const expandData: any[] = [
+    {
+      name: '张三',
+      age: 24,
+      key: '1',
+      address: '成都市锦江区某某地1',
+      phone: '152xxxxxxx',
+      expandRowData: {
+        name: '张三商铺',
+        address: '成都市锦江区某某地1',
+      },
+    },
+    {
+      name: '李四',
+      key: '2',
+      age: 24,
+      address: '成都市锦江区某某地1',
+      phone: '152xxxxxxx',
+      expandRowData: {
+        name: '李四商铺',
+        address: '成都市锦江区某某地1',
+      },
+    },
+  ];
   return (
     <div style={{ padding: 32, background: '#fff' }}>
+      <h4>展开行测试</h4>
+      <Table
+        columns={columnsExpand}
+        dataSource={expandData}
+      />
       <>
         <h4>没有数据展示 table</h4>
         <Table columns={columnsT} bordered dataSource={[]} />
@@ -432,7 +484,9 @@ const TableDemo: React.FC<unknown> = () => {
                   // align: 'right',
                   width: 150,
                   render: (_, record, index) => (
-                    <a className={`delete-${index}`}>删除</a>
+                    <Popconfirm title="哈哈哈哈哈">
+                      <a className={`delete-${index}`}>删除</a>
+                    </Popconfirm>
                   ),
                 },
               ]}
@@ -772,7 +826,7 @@ const TableDemo: React.FC<unknown> = () => {
               rowSelection={rowSelection}
               columns={columns}
               pagination={{
-                // pageSize: 2,
+                pageSize: 3,
                 style: { marginTop: 8 },
               }}
               dataSource={[
@@ -814,6 +868,24 @@ const TableDemo: React.FC<unknown> = () => {
                 },
                 {
                   key: '5',
+                  name: 'Jake White',
+                  age: 18,
+                  tel: '0575-22098909',
+                  phone: 18900010002,
+                  address: 'Dublin No. 2 Lake Park',
+                  province: 'e',
+                },
+                {
+                  key: '6',
+                  name: 'Jake White',
+                  age: 18,
+                  tel: '0575-22098909',
+                  phone: 18900010002,
+                  address: 'Dublin No. 2 Lake Park',
+                  province: 'e',
+                },
+                {
+                  key: '7',
                   name: 'Jake White',
                   age: 18,
                   tel: '0575-22098909',

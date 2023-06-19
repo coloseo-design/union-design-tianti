@@ -3,7 +3,7 @@
 import React from 'react';
 import classnames from 'classnames';
 import omit from 'omit.js';
-import { withGlobalConfig } from '../config-provider';
+import { ConfigConsumer, ConfigConsumerProps } from '../config-provider';
 import {
   Icon,
   Checkbox,
@@ -28,7 +28,7 @@ import {
 } from './utils';
 import NoDataSvg from './no-data';
 
-@withGlobalConfig
+// @withGlobalConfig
 export default class Table extends React.Component<TableProps, TableState> {
   leftTableBodyRef: React.RefObject<HTMLDivElement>;
 
@@ -37,6 +37,8 @@ export default class Table extends React.Component<TableProps, TableState> {
   mainTableHeaderRef: React.RefObject<HTMLDivElement>;
 
   mainTableBodyRef: React.RefObject<HTMLDivElement>;
+
+  mainTableRef: React.RefObject<HTMLTableElement>;
 
   static defaultProps = {
     rowKey: 'key',
@@ -48,6 +50,7 @@ export default class Table extends React.Component<TableProps, TableState> {
     this.rightTableBodyRef = React.createRef<HTMLDivElement>();
     this.mainTableHeaderRef = React.createRef<HTMLDivElement>();
     this.mainTableBodyRef = React.createRef<HTMLDivElement>();
+    this.mainTableRef = React.createRef<HTMLTableElement>();
     const { rowSelection: { selectedRowKeys, defaultSelectedRowKeys } = {}, columns } = props;
     const flatColums: ColumnsProps[] = flattenColums(columns || []);
     const filters = flatColums.reduce<{[key: string]: string[]}>((c, i) => {
@@ -65,11 +68,13 @@ export default class Table extends React.Component<TableProps, TableState> {
       pagination: props.pagination === undefined ? { current: 1, pageSize: 10 } : props.pagination,
       flatColums,
       theadHeight: undefined,
+      observer: null,
+      trHeights: [],
     };
   }
 
   componentDidMount() {
-    const { scroll } = this.props;
+    const { scroll, columns } = this.props;
     const bodyRef = this.mainTableBodyRef;
     const mainRef = this.mainTableHeaderRef;
     if (bodyRef.current && (!scroll || scroll.y === 0)) {
@@ -85,6 +90,45 @@ export default class Table extends React.Component<TableProps, TableState> {
         const { offsetHeight } = thead;
         this.setState({ theadHeight: offsetHeight });
       }
+    }
+
+    if (this.mainTableRef && this.mainTableRef.current && columns.some((i) => i.fixed)) {
+      const t: number[] = [];
+      const tbody = (
+        this.mainTableRef.current as HTMLElement
+      )?.getElementsByTagName('tbody')[0];
+      if (tbody && tbody.childNodes && [...tbody.childNodes as any]) {
+        [...tbody.childNodes as any].forEach((i) => {
+          if (i) {
+            t.push((i as HTMLElement).getBoundingClientRect().height);
+          }
+        });
+      }
+      if (t.length) { // 第一次mounted的时候
+        this.setState({ trHeights: t });
+      }
+      const config = {
+        childList: true,
+        subtree: true,
+        characterData: true,
+      };
+      const callback = (mutation: any) => { // 监听table得变化，获取tr的高度
+        const tem: number[] = [];
+        (mutation || []).forEach((i: any) => {
+          if (i.type === 'childList') {
+            const tr = i.addedNodes && i.addedNodes.length > 0 ? i.addedNodes[0] : null;
+            if (tr && tr.localName === 'tr') {
+              tem.push((tr as HTMLElement).getBoundingClientRect().height);
+            }
+          }
+        });
+        if (tem) {
+          this.setState({ trHeights: tem });
+        }
+      };
+      const ob = new MutationObserver(callback);
+      this.setState({ observer: ob });
+      ob.observe(this.mainTableRef.current as HTMLElement, config);
     }
   }
 
@@ -102,8 +146,16 @@ export default class Table extends React.Component<TableProps, TableState> {
     }
   }
 
+  componentWillUnmount(): void {
+    const { observer } = this.state;
+    if (observer) {
+      observer.disconnect();
+    }
+  }
+
   // 渲染表头
   renderHeader = (
+    prefixCls: string,
     columns: ColumnsProps[],
     propsColumns: ColumnsProps[],
     // ref: React.LegacyRef<HTMLDivElement> | undefined,
@@ -121,7 +173,7 @@ export default class Table extends React.Component<TableProps, TableState> {
     return (
       <TableHeader
         columns={columns}
-        prefixCls={this.getPrefixCls()}
+        prefixCls={prefixCls}
         filteredValueMap={filters}
         onChange={onSubmit}
         propsColumns={propsColumns}
@@ -182,13 +234,14 @@ export default class Table extends React.Component<TableProps, TableState> {
 
   formateDataSource = (dataSource: unknown[], columns: ColumnsProps[]): RowProps[] => {
     const transformData = dataSource
-      .map((data, index) => {
+      .map((data: any, index: number) => {
         const cols = columns.map((column) => {
           const {
             align = 'left',
             render,
             dataIndex,
             key: columnKey,
+            fixed,
           } = column;
           let rendered: React.ReactNode | string = '';
           if (dataIndex) {
@@ -210,9 +263,14 @@ export default class Table extends React.Component<TableProps, TableState> {
             align,
             key: columnKey || dataIndex,
             props: ext,
+            fixed,
           };
         });
-        return { key: this.rowKey(data), children: cols } as RowProps;
+        return {
+          key: this.rowKey(data),
+          expandRowData: data.expandRowData,
+          children: cols,
+        } as RowProps;
       });
     return transformData;
   }
@@ -233,23 +291,26 @@ export default class Table extends React.Component<TableProps, TableState> {
   renderBody = (
     columns: ColumnsProps[],
     dataSource: unknown[],
+    prefixCls: string,
+    isFixedBody?: boolean,
   ) => {
-    const { selectedRowKey } = this.state;
+    const { selectedRowKey, trHeights } = this.state;
     const hoverable = columns.filter((column) => !!column.fixed).length > 0;
-    const results = this.formateDataSource(dataSource, columns).map((row) => (
+    const results = this.formateDataSource(dataSource, columns).map((row, index) => (
       <Row
         key={row.key}
-        prefixCls={this.getPrefixCls()}
+        prefixCls={prefixCls}
         {...(
-          hoverable ? { onMouseOver: this.onMouseOver(row.key), onMouseOut: this.onMouseOut } : {}
-        )}
-        // onMouseOver={this.onMouseOver(row.key)}
-        // onMouseOut={this.onMouseOut}
+            hoverable ? { onMouseOver: this.onMouseOver(row.key), onMouseOut: this.onMouseOut } : {}
+          )}
         rowKey={row.key}
         columns={row.children}
+        style={{ height: isFixedBody && trHeights.length > 0 ? trHeights[index] : undefined }}
+        isFixedBody={isFixedBody}
         hover={row.key === selectedRowKey}
       />
     ));
+
     return (
       <tbody>
         {results}
@@ -281,7 +342,7 @@ export default class Table extends React.Component<TableProps, TableState> {
       >
         <table className={tableCls} style={tableStyle}>
           <ColGroup columns={columns} />
-          {this.renderHeader(columns, propsColumns, isFixed)}
+          {this.renderHeader(prefix, columns, propsColumns, isFixed)}
         </table>
       </div>
     ) : null;
@@ -316,19 +377,19 @@ export default class Table extends React.Component<TableProps, TableState> {
       getCheckboxProps,
       selectedRowKeys: defaultSelectdRowKeys = [],
       onSelectAll,
-    } = rowSelection;
+    } = rowSelection as TableRowSelectionType;
     // 冻结不可操作的数据
     const disabledKeys = dataSource.filter((item) => {
-      const props = getCheckboxProps(item);
-      return props.disabled && defaultSelectdRowKeys.indexOf(this.rowKey(item)) >= 0;
+      const props = getCheckboxProps?.(item);
+      return props && props.disabled && defaultSelectdRowKeys.indexOf(this.rowKey(item)) >= 0;
     }).map(this.rowKey);
     // 检查是否全都选中
     const selectedAll = dataSource.reduce((composed, item) => {
       const key = this.rowKey(item);
-      const props = getCheckboxProps(item);
+      const props = getCheckboxProps?.(item);
       let result = true;
 
-      if (!props.disabled) {
+      if (props && !props.disabled) {
         result = selectedRowKeys.indexOf(key) >= 0;
       }
       return result && composed;
@@ -336,13 +397,13 @@ export default class Table extends React.Component<TableProps, TableState> {
     const someoneChecked = selectedRowKeys.length > defaultSelectdRowKeys.length;
     const allCheckboxProps = {
       indeterminate: someoneChecked && !selectedAll,
-      checked: selectedAll,
+      checked: selectedAll as boolean,
       onChange: (checked: boolean) => {
         let currentSelectedRowKeys: unknown[] = [];
         if (!selectedAll) {
           const allcheckableKeys = dataSource.filter((item) => {
-            const props = getCheckboxProps(item);
-            return !props.disabled;
+            const props = getCheckboxProps?.(item);
+            return props && !props.disabled;
           }).map(this.rowKey);
           currentSelectedRowKeys = allcheckableKeys;
         }
@@ -386,7 +447,7 @@ export default class Table extends React.Component<TableProps, TableState> {
       key: 'selected',
       width: columnWidth || 45,
       render: (_: unknown, record: unknown) => {
-        const props = {};
+        const props: any = {};
         if (getCheckboxProps) {
           Object.assign(props, getCheckboxProps(record));
         }
@@ -405,7 +466,7 @@ export default class Table extends React.Component<TableProps, TableState> {
           this.setState({
             selectedRowKeys: newSelectedRowKeys,
           });
-          onChange(
+          onChange?.(
             newSelectedRowKeys,
             dataSource.filter((item) => newSelectedRowKeys.indexOf(this.rowKey(item)) >= 0),
           );
@@ -416,7 +477,7 @@ export default class Table extends React.Component<TableProps, TableState> {
           this.setState({
             selectedRowKeys: [key],
           });
-          onChange(
+          onChange?.(
             [key],
             dataSource.filter((item) => [key].indexOf(this.rowKey(item)) >= 0),
           );
@@ -446,6 +507,7 @@ export default class Table extends React.Component<TableProps, TableState> {
     position: FixedType,
     dataSource: unknown[],
     ref: React.RefObject<HTMLDivElement>,
+    prefixCls: string,
   ) => {
     const {
       columns,
@@ -455,7 +517,7 @@ export default class Table extends React.Component<TableProps, TableState> {
       rowSelection,
     } = this.props;
     const { flatColums } = this.state;
-    const prefix = this.getPrefixCls();
+    const prefix = prefixCls;
     const filteredColumns = groupColums(flatColums, position);
     const tableOuterCls = classnames(`${prefix}-item`, {
       [`${prefix}-item-fixed-${position}`]: position,
@@ -490,21 +552,16 @@ export default class Table extends React.Component<TableProps, TableState> {
           <table className={tableCls}>
             <ColGroup columns={filteredColumns} />
             {
-              !scroll || scroll.y === 0 ? this.renderHeader(filteredColumns, columns, true) : null
+              !scroll || scroll.y === 0 ? this.renderHeader(prefix, filteredColumns, columns, true) : null
             }
             {
-              this.renderBody(filteredColumns, dataSource)
+              this.renderBody(filteredColumns, dataSource, prefixCls, true)
             }
           </table>
         </div>
       </div>
     );
   }
-
-  getPrefixCls = () => {
-    const { getPrefixCls, prefixCls } = this.props;
-    return getPrefixCls('table', prefixCls);
-  };
 
   /**
    * 对内容标的列进行排序
@@ -536,27 +593,21 @@ export default class Table extends React.Component<TableProps, TableState> {
     }
   }
 
-  render() {
+  renderTable = ({ getPrefixCls }: ConfigConsumerProps) => {
     const {
       columns = [],
       dataSource = [],
       loading = false,
       scroll,
       bordered,
-      rowSelection,
-      getPrefixCls,
+      prefixCls,
       pagination: _page,
       noDataStyle,
       noData,
       ...rest
     } = this.props;
-    const restParams = omit(rest, [
-      'rowSelection',
-      'getPrefixCls',
-      'pagination',
-      'rowKey',
-    ]);
-    const prefix = this.getPrefixCls();
+    const restParams = omit(rest, ['rowKey', 'rowSelection']);
+    const prefix = getPrefixCls('table', prefixCls);
     const tableContainerCls = classnames(`${prefix}-spain-container`, {
       [`${prefix}-spain-container-blur`]: loading,
     });
@@ -566,7 +617,7 @@ export default class Table extends React.Component<TableProps, TableState> {
     } = this.state;
     const tableStyle = {};
     if (scroll && scroll.x) {
-      Object.assign(tableStyle, { width: scroll.x });
+      Object.assign(tableStyle, { minWidth: scroll.x });
     }
     const scrollTableCls = classnames(`${prefix}-item`);
     const tableCls = classnames(prefix, {
@@ -644,27 +695,32 @@ export default class Table extends React.Component<TableProps, TableState> {
                 onScroll={this.onScroll}
                 ref={this.mainTableBodyRef}
               >
-                <table className={tableCls} style={tableStyle}>
+                <table
+                  className={tableCls}
+                  style={tableStyle}
+                  ref={this.mainTableRef}
+                >
                   <ColGroup columns={this.getMainColums(flatColums)} />
                   {
                     !scroll || scroll.y === 0
-                      ? this.renderHeader(this.getMainColums(flatColums), this.getMainColums(columns))
+                      ? this.renderHeader(prefix, this.getMainColums(flatColums), this.getMainColums(columns))
                       : null
                   }
                   {
                     this.renderBody(
                       this.getMainColums(flatColums),
                       paginateDataSource,
+                      prefix,
                     )
                   }
                 </table>
               </div>
             </div>
             {
-              this.renderSideTable('left', paginateDataSource, this.leftTableBodyRef)
+              this.renderSideTable('left', paginateDataSource, this.leftTableBodyRef, prefix)
             }
             {
-              this.renderSideTable('right', paginateDataSource, this.rightTableBodyRef)
+              this.renderSideTable('right', paginateDataSource, this.rightTableBodyRef, prefix)
             }
           </div>
           {
@@ -692,6 +748,14 @@ export default class Table extends React.Component<TableProps, TableState> {
           }
         </div>
       </div>
+    );
+  }
+
+  render() {
+    return (
+      <ConfigConsumer>
+        {this.renderTable}
+      </ConfigConsumer>
     );
   }
 }

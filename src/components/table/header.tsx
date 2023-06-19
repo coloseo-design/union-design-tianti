@@ -83,7 +83,7 @@ const TableHeader: React.FC<TableHeaderProps> = (props: TableHeaderProps) => {
         rowSpan={rowSpan}
       >
         <span>
-          {column.title}
+          {!isFixed && column.fixed ? '' : column.title}
           { column.filters && column.filters?.length > 0 ? (
             <Dropdown
               placement="bottomCenter"

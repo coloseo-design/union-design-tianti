@@ -121,7 +121,9 @@ export interface TableState {
   }
   pagination: boolean | PaginationProps;
   flatColums: ColumnsProps[];
-  theadHeight: number | undefined,
+  theadHeight: number | undefined;
+  observer: null | MutationObserver;
+  trHeights: number[];
 }
 
 export interface ColProps {
@@ -134,9 +136,11 @@ export interface ColProps {
     /** 行合并 */
     rowSpan: number;
   };
+  fixed?: boolean | string;
 }
 
 export interface RowProps {
   key: string;
   children: ColProps[];
+  expandRowData?: any[];
 }

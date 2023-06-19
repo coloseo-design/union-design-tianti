@@ -1,5 +1,5 @@
 /* eslint-disable react/require-default-props */
-import React from 'react';
+import React, { CSSProperties } from 'react';
 import classnames from 'classnames';
 import { ColProps } from './type';
 
@@ -9,6 +9,8 @@ interface TableRowProps {
   hover: boolean;
   prefixCls: string;
   className?: string;
+  style?: CSSProperties;
+  isFixedBody?: boolean;
 }
 
 const Row: React.FC<TableRowProps> = (fcProps) => {
@@ -18,6 +20,7 @@ const Row: React.FC<TableRowProps> = (fcProps) => {
     prefixCls: prefix,
     hover = false,
     className,
+    isFixedBody,
     ...rest
   } = fcProps;
   return (
@@ -43,7 +46,9 @@ const Row: React.FC<TableRowProps> = (fcProps) => {
             return null;
           }
           return (
-            <td data-td-key={key} key={key} className={tdCls} {...props}>{children}</td>
+            <td data-td-key={key} key={key} className={tdCls} {...props}>
+              {!isFixedBody && col.fixed ? '' : children}
+            </td>
           );
         })
       }
