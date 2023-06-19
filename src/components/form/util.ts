@@ -97,7 +97,9 @@ export const validateRules = (name: string, value: unknown, rules: ValidatorRule
   } else {
     // eslint-disable-next-line no-async-promise-executor
     result = new Promise(async (resolve, reject) => {
-      Promise.all(filledRules.map((item) => validateRule(name, value, item as any, messageVariables)))
+      Promise.all(
+        filledRules.map((item) => validateRule(name, value, item as any, messageVariables)),
+      )
         .then((errors) => {
           const hasError = errors.some((item) => item.length > 0);
           if (!hasError) {

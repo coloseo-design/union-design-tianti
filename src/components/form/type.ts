@@ -33,7 +33,7 @@ export interface FormCommonProps {
   labelStyle?: React.CSSProperties;
 }
 
-export interface FormContextProps extends FormCommonProps{
+export interface FormContextProps extends FormCommonProps {
   /** 是否需要冒号 */
   colon?: boolean;
   /** 表单名称 */
@@ -51,7 +51,7 @@ export interface FormContextProps extends FormCommonProps{
   /** 表单错误收集 */
   onError: (name: string, action: any) => void;
   /** 表单提交事件 */
-  onSubmit: (evt: React.MouseEvent<HTMLElement>) => void;
+  onSubmit: (evt?: any) => void;
   /** 表单的校验状态 */
   // isValidating: boolean;
   /** formItem的校验状态 */

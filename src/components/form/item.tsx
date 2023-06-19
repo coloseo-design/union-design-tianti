@@ -184,8 +184,10 @@ const Item: React.FC<FormItemProps> = (props: FormItemProps) => {
   const cloneElement = React.Children.map(children, (child) => {
     if (React.isValidElement(child)) {
       if (child.props.htmlType === 'submit') {
-        return React.cloneElement(child, {
-          onClick: onSubmit,
+        return React.cloneElement(child as any, {
+          onClick: (e) => {
+            onSubmit(e);
+          },
         });
       }
       const extProps: { [key: string]: unknown } = {
