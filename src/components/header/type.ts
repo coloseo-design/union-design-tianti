@@ -1,9 +1,9 @@
-import { CSSProperties, ReactNode } from 'react';
+import { CSSProperties, HTMLAttributes, ReactNode } from 'react';
 import { SideNavProps } from '@union-design/top-nav';
 
 export type HeaderNavProps = SideNavProps<any>;
 
-export interface HeaderProps {
+export interface HeaderProps extends HTMLAttributes<HTMLDivElement> {
   size?: 'md' | 'lg';
   title?: string;
   search?: boolean | SearchProps; // 如果false则不展示search, 否则传入配置

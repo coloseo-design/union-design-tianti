@@ -19,12 +19,14 @@ const Header: React.FC<HeaderProps> = (props) => {
     navProps,
     bordered = true,
     onLogoClick,
+    className,
+    ...rest
   } = props;
   const { getPrefixCls } = useContext(ConfigContext);
   const prefix = getPrefixCls('header');
 
   return (
-    <div className={prefix}>
+    <div {...rest} className={classNames(prefix, className)}>
       {topMenus.length > 0 && (
       <div className={`${prefix}-top-menu`}>
         {(topMenus || []).map((item: Menu | ReactNode, index: number) => (

@@ -305,13 +305,14 @@ const Demo = () => {
   };
 
   return (
-    <div style={{ paddingBottom: 150 }}>
+    <div style={{ padding: '32px' }}>
       <h1>业务类</h1>
       <h2>基础头部</h2>
       <Header
         title="中国联通设计系统"
         search={false}
         menus={menus}
+        className="test"
         onLogoClick={() => {
           console.log('=1111');
         }}

@@ -16,14 +16,14 @@ subtitle: 头部组件
 |bordered|组件下划线(如果传了navProps默认为false)|boolean|true|
 |showBg|是否展示背景图，可传图片的src|boolean\|string|false|
 |navProps|top-nav组件的api|查看top-nav的api|-|
-|onLogoClick|点击logo事件|(evt: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;｜-｜
+|onLogoClick|点击logo事件|(evt: React.MouseEvent) => void;｜-｜
 
 ### searchPops
 
 | 属性 | 说明 | 类型 | 默认值 |
 | --- | ---  | --- | ---   |
 | placeholder | input placeholder | string | - |
-| onChange | 输入框变化的回调 | (evt: React.ChangeEvent<HTMLInputElement>) => void | - |
+| onChange | 输入框变化的回调 | (evt: React.ChangeEvent) => void | - |
 | onSearch | 点击搜索图标的回调 | (value: string) => void | - |
 | select | 下来选项属性 | selectProps | - |
 | style | 搜索框style | CSSProperties | - |
@@ -40,7 +40,7 @@ subtitle: 头部组件
 ### MenuProps 
 | 属性 | 说明 | 类型 | 默认值 |
 | --- | ---  | --- | ---   |
-| onClick |列表点击回调 | (evt: React.MouseEvent<HTMLElement>, key: string) => void | - |
+| onClick |列表点击回调 | (evt: React.MouseEvent, key: string) => void | - |
 |title|每列文案|string\|ReactNode|-|
 |key| 唯一值|string|-|
 |icon| 图标|ReactNode|-|

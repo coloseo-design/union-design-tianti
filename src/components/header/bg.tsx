@@ -1,7 +1,7 @@
 import React from 'react';
 
 const HeaderBg = () => (
-  <svg width="1448.289062" height="88.000000" viewBox="0 0 1448.29 88" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <svg width="100%" height="88.000000" fill="none" xmlns="http://www.w3.org/2000/svg">
     <desc>
       Created with Pixso.
     </desc>
