@@ -70,7 +70,12 @@ const columns = [
 | rowSelection | 表格行是否可选择，\[配置项] | object | - |
 | scroll | 表格是否可滚动，也可以指定滚动区域的宽、高，\[配置项] | object | - |
 | size | 表格大小 | `default` \| `middle` \| `small` | default |
-
+|noData|自定义没有数据展示|ReactNode|--|
+|noDataStyle|没有数据展示时的style|--|
+|expandedRowRender|展开行内容展示,返回null 不展示展开箭头|(record) => ReactNode | string | null;|--|
+|expandedRowStyle|展开行样式|CSSProperties|--|
+|isSingleCol|展开icon是否独占一列, 不独占一列就放在第一列的前面|boolean|true|
+|onExpand|点击展开行触发|(record) => void|--|
 
 ### Column
 
@@ -93,8 +98,6 @@ const columns = [
 | render | 生成复杂数据的渲染函数，参数分别为当前行的值，当前行数据，行索引，@return 里面可以设置表格[行/列合并] | function(text, record, index) {} | - |
 | title | 列头显示文字 | ReactNode \| ({ sortOrder, sortColumn, filters }) => ReactNode | - |
 | width | 列宽度 | string \| number | - |
-|noData|自定义没有数据展示|ReactNode|--|
-|noDataStyle|没有数据展示时的style|--|
 
 ### ColumnGroup
 

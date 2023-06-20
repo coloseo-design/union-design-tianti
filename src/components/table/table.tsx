@@ -70,6 +70,7 @@ export default class Table extends React.Component<TableProps, TableState> {
       theadHeight: undefined,
       observer: null,
       trHeights: [],
+      openKeys: [],
     };
   }
 
@@ -136,12 +137,12 @@ export default class Table extends React.Component<TableProps, TableState> {
     const { rowSelection: { selectedRowKeys } = {}, pagination } = this.props;
     if (props.rowSelection && props.rowSelection.selectedRowKeys !== selectedRowKeys) {
       this.setState({
-        selectedRowKeys,
+        selectedRowKeys: selectedRowKeys as any,
       });
     }
     if (props.pagination !== pagination) {
       this.setState({
-        pagination,
+        pagination: pagination as any,
       });
     }
   }
@@ -208,7 +209,7 @@ export default class Table extends React.Component<TableProps, TableState> {
       const values = filters[name];
       let filter = (row: unknown) => (!values.length
         ? true
-        : values.reduce((c, i) => {
+        : (values as any[]).reduce((c, i) => {
           const r = onFilter ? onFilter(i, row) : true;
           return c || r;
         }, false));
@@ -268,7 +269,7 @@ export default class Table extends React.Component<TableProps, TableState> {
         });
         return {
           key: this.rowKey(data),
-          expandRowData: data.expandRowData,
+          record: data,
           children: cols,
         } as RowProps;
       });
@@ -287,6 +288,10 @@ export default class Table extends React.Component<TableProps, TableState> {
     });
   }
 
+  changeOpenKeys = (keys: unknown[]) => {
+    this.setState({ openKeys: keys });
+  }
+
   // 渲染表内容
   renderBody = (
     columns: ColumnsProps[],
@@ -294,20 +299,31 @@ export default class Table extends React.Component<TableProps, TableState> {
     prefixCls: string,
     isFixedBody?: boolean,
   ) => {
-    const { selectedRowKey, trHeights } = this.state;
+    const {
+      expandedRowRender, rowSelection, isSingleCol = true, onExpand, expandedRowStyle,
+    } = this.props;
+    const { selectedRowKey, trHeights, openKeys } = this.state;
     const hoverable = columns.filter((column) => !!column.fixed).length > 0;
     const results = this.formateDataSource(dataSource, columns).map((row, index) => (
       <Row
         key={row.key}
         prefixCls={prefixCls}
         {...(
-            hoverable ? { onMouseOver: this.onMouseOver(row.key), onMouseOut: this.onMouseOut } : {}
-          )}
+          hoverable ? { onMouseOver: this.onMouseOver(row.key), onMouseOut: this.onMouseOut } : {}
+        )}
         rowKey={row.key}
         columns={row.children}
         style={{ height: isFixedBody && trHeights.length > 0 ? trHeights[index] : undefined }}
         isFixedBody={isFixedBody}
         hover={row.key === selectedRowKey}
+        openKeys={openKeys}
+        currentRecord={row.record}
+        rowSelection={rowSelection}
+        isSingleCol={isSingleCol}
+        handleExpand={onExpand}
+        expandedRowRender={expandedRowRender}
+        changeOpenKeys={this.changeOpenKeys}
+        expandedRowStyle={expandedRowStyle}
       />
     ));
 
@@ -380,20 +396,21 @@ export default class Table extends React.Component<TableProps, TableState> {
     } = rowSelection as TableRowSelectionType;
     // 冻结不可操作的数据
     const disabledKeys = dataSource.filter((item) => {
-      const props = getCheckboxProps?.(item);
-      return props && props.disabled && defaultSelectdRowKeys.indexOf(this.rowKey(item)) >= 0;
+      const props = getCheckboxProps?.(item) || {};
+      return props.disabled && defaultSelectdRowKeys.indexOf(this.rowKey(item)) >= 0;
     }).map(this.rowKey);
     // 检查是否全都选中
     const selectedAll = dataSource.reduce((composed, item) => {
       const key = this.rowKey(item);
-      const props = getCheckboxProps?.(item);
+      const props = getCheckboxProps?.(item) || {};
       let result = true;
 
-      if (props && !props.disabled) {
+      if (!props.disabled) {
         result = selectedRowKeys.indexOf(key) >= 0;
       }
       return result && composed;
     }, true);
+
     const someoneChecked = selectedRowKeys.length > defaultSelectdRowKeys.length;
     const allCheckboxProps = {
       indeterminate: someoneChecked && !selectedAll,
@@ -402,8 +419,8 @@ export default class Table extends React.Component<TableProps, TableState> {
         let currentSelectedRowKeys: unknown[] = [];
         if (!selectedAll) {
           const allcheckableKeys = dataSource.filter((item) => {
-            const props = getCheckboxProps?.(item);
-            return props && !props.disabled;
+            const props = getCheckboxProps?.(item) || {};
+            return !props.disabled;
           }).map(this.rowKey);
           currentSelectedRowKeys = allcheckableKeys;
         }
@@ -454,7 +471,7 @@ export default class Table extends React.Component<TableProps, TableState> {
         const key = this.rowKey(record);
         const index = selectedRowKeys.indexOf(key);
         const checked = index >= 0;
-        const onCheckboxChange = (isChecked: boolean, ...args) => {
+        const onCheckboxChange = (isChecked: boolean) => {
           const current = dataSource.find((item) => this.rowKey(item) === key);
           onSelect && onSelect(current, isChecked);
           if (!isChecked) {
@@ -515,6 +532,8 @@ export default class Table extends React.Component<TableProps, TableState> {
       // dataSource,
       bordered,
       rowSelection,
+      isSingleCol = true,
+      expandedRowRender,
     } = this.props;
     const { flatColums } = this.state;
     const prefix = prefixCls;
@@ -532,6 +551,14 @@ export default class Table extends React.Component<TableProps, TableState> {
     const maxHeight = scroll ? (typeof scroll.y === 'boolean' ? 'auto' : scroll.y) : 'auto';
     if (rowSelection && position === 'left' && filteredColumns.length) {
       filteredColumns.unshift(this.selectionColumn());
+    }
+    if (isSingleCol && expandedRowRender && filteredColumns.length) {
+      filteredColumns.unshift({
+        title: '',
+        key: 'expandRowKey',
+        dataIndex: 'expandRowKey',
+        width: 45,
+      });
     }
     if (!filteredColumns.length) return null;
     return (
@@ -570,9 +597,17 @@ export default class Table extends React.Component<TableProps, TableState> {
    */
   getMainColums = (columns: ColumnsProps[]) => {
     const sortedColumns = sortColums(columns);
-    const { rowSelection } = this.props;
+    const { rowSelection, isSingleCol = true, expandedRowRender } = this.props;
     if (rowSelection) {
       sortedColumns.unshift(this.selectionColumn());
+    }
+    if (isSingleCol && expandedRowRender) {
+      sortedColumns.unshift({
+        title: '',
+        key: 'expandRowKey',
+        dataIndex: 'expandRowKey',
+        width: 45,
+      });
     }
     return sortedColumns;
   }
@@ -606,7 +641,7 @@ export default class Table extends React.Component<TableProps, TableState> {
       noData,
       ...rest
     } = this.props;
-    const restParams = omit(rest, ['rowKey', 'rowSelection']);
+    const restParams = omit(rest, ['rowKey', 'rowSelection', 'isSingleCol', 'expandedRowRender', 'onExpand', 'expandedRowStyle']);
     const prefix = getPrefixCls('table', prefixCls);
     const tableContainerCls = classnames(`${prefix}-spain-container`, {
       [`${prefix}-spain-container-blur`]: loading,
@@ -737,9 +772,9 @@ export default class Table extends React.Component<TableProps, TableState> {
           }
           {
             showPagination() && (
-              <div className={`${prefix}-pagination`} style={pagination?.style || {}}>
+              <div className={`${prefix}-pagination`} style={(pagination as PaginationProps)?.style || {}}>
                 <Pagination
-                  {...pagination}
+                  {...pagination as PaginationProps}
                   onChange={this.onPageChange}
                   total={filteredDataSource.length}
                 />

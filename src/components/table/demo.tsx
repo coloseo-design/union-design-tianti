@@ -396,36 +396,51 @@ const TableDemo: React.FC<unknown> = () => {
       key: 'address',
     },
   ];
-  const expandData: any[] = [
-    {
-      name: '张三',
-      age: 24,
-      key: '1',
-      address: '成都市锦江区某某地1',
-      phone: '152xxxxxxx',
-      expandRowData: {
-        name: '张三商铺',
-        address: '成都市锦江区某某地1',
-      },
-    },
-    {
-      name: '李四',
-      key: '2',
-      age: 24,
-      address: '成都市锦江区某某地1',
-      phone: '152xxxxxxx',
-      expandRowData: {
-        name: '李四商铺',
-        address: '成都市锦江区某某地1',
-      },
-    },
-  ];
+  const expandData = Array.from({ length: 5 }).map((_, k) => ({
+    name: `张三${k + 1}`,
+    age: 24,
+    id: `${k + 1}`,
+    address: '成都市锦江区某某地',
+    phone: '152xxxxxxx',
+    description: `张三商铺分店${k + 1}`,
+  }));
   return (
     <div style={{ padding: 32, background: '#fff' }}>
-      <h4>展开行测试</h4>
+      <h4>展开行测试1</h4>
       <Table
         columns={columnsExpand}
         dataSource={expandData}
+        expandedRowRender={(record) => <p style={{ margin: 0 }}>{record.description}</p>}
+        rowSelection={{}}
+        onExpand={(record) => {
+          console.log('==record', record);
+        }}
+        rowKey="id"
+      />
+      <h4>展开行测试2</h4>
+      <Table
+        columns={columnsExpand}
+        dataSource={expandData}
+        expandedRowRender={(record) => <p style={{ margin: 0 }}>{record.description}</p>}
+        rowSelection={{}}
+        rowKey="id"
+        isSingleCol={false}
+      />
+      <h4>展开行测试3</h4>
+      <Table
+        columns={columnsExpand}
+        dataSource={expandData}
+        rowKey="id"
+        expandedRowRender={(record) => <p style={{ margin: 0 }}>{record.description}</p>}
+        isSingleCol={false}
+      />
+      <h4>展开行测试4 自定义展开行样式</h4>
+      <Table
+        columns={columnsExpand}
+        rowKey="id"
+        dataSource={expandData}
+        expandedRowRender={(record) => <p style={{ margin: 0 }}>{record.description}</p>}
+        expandedRowStyle={{ paddingLeft: 12, background: '#e8e8e8' }}
       />
       <>
         <h4>没有数据展示 table</h4>

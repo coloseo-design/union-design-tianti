@@ -121,8 +121,11 @@
   td {
     transition: all 0.3s, border 0s;
   }
-  tr:hover>td, .@{table-prefix-cls}-row-hover>td {
+  tr:not(.@{table-prefix-cls}-extraRow):hover>td, .@{table-prefix-cls}-row-hover>td {
     background: @red-1;
+  }
+  &-extraRow {
+    background-color: @table-selected-row-bg;
   }
   each(@td-aligns, {
     &-td-@{value} {

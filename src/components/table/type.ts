@@ -104,8 +104,19 @@ export interface TableProps extends React.HTMLAttributes<HTMLTableElement> {
   };
   pagination?: boolean | PaginationProps;
 
+  // 没有数据是的style
   noDataStyle?: CSSProperties;
+  // 自定义没有数据展示
   noData?: ReactNode;
+  // 展开行展示内容
+  expandedRowRender?: (record: any) => ReactNode | string | null;
+  // 展开图标是否独占一列，设为false则放在第一列数据的前面
+  isSingleCol?: boolean;
+  // 点击图标事件
+  onExpand?: (record: any) => void;
+
+  // 展开行样式
+  expandedRowStyle?: CSSProperties;
 }
 
 export interface TableState {
@@ -124,6 +135,7 @@ export interface TableState {
   theadHeight: number | undefined;
   observer: null | MutationObserver;
   trHeights: number[];
+  openKeys: unknown[];
 }
 
 export interface ColProps {
@@ -142,5 +154,5 @@ export interface ColProps {
 export interface RowProps {
   key: string;
   children: ColProps[];
-  expandRowData?: any[];
+  record: any;
 }
