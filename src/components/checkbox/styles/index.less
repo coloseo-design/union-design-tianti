@@ -142,7 +142,16 @@
       border-color: @checkbox-diabled-border-color;
       &::after {
         border-color: @checkbox-disabled-after-border-color;
+        // background-color: @checkbox-disabled-after-border-color;
       }
+    }
+  }
+}
+
+.@{checkbox-prefix-cls}-indeterminate {
+  .@{checkbox-input-prefix-cls}-disabled + .@{checkbox-inner-prefix-cls} {
+    &::after {
+      background-color: @checkbox-disabled-after-border-color;
     }
   }
 }

@@ -67,7 +67,7 @@ export default () => {
         <Checkbox value="hello21">hello2</Checkbox>
       </Group>
       <Checkbox onChange={onChecked} checked={checked}>abc</Checkbox>
-      <Checkbox indeterminate>我的选择</Checkbox>
+      <Checkbox indeterminate disabled>我的选择</Checkbox>
     </>
   );
 };
