@@ -4,6 +4,8 @@ import React from 'react';
 import {
   Table,
   Popconfirm,
+  Row,
+  Col,
 } from '../index';
 import './styles/index';
 import '../popconfirm/styles/index';
@@ -395,6 +397,12 @@ const TableDemo: React.FC<unknown> = () => {
       dataIndex: 'address',
       key: 'address',
     },
+    {
+      title: '操作',
+      dataIndex: 'ope',
+      key: 'ope',
+      render: (_: any, record: any, index: number, level: number) => <a>{level === 1 ? '编辑' : '删除'}</a>,
+    },
   ];
   const expandData = Array.from({ length: 5 }).map((_, k) => ({
     name: `张三${k + 1}`,
@@ -404,55 +412,112 @@ const TableDemo: React.FC<unknown> = () => {
     phone: '152xxxxxxx',
     description: `张三商铺分店${k + 1}`,
   }));
+
+  const treeData = [
+    {
+      key: '1',
+      id: '1id',
+      name: '李四',
+      age: 32,
+      address: '春熙路xxx号',
+      phone: '123xxxxxxx',
+      children: [
+        {
+          key: '11',
+          id: '11id',
+          name: '李四1223',
+          age: 32,
+          address: '某某某xxx号',
+          phone: '14444xxxxxxx',
+        },
+        {
+          key: '222',
+          id: '222id',
+          name: '王武',
+          age: 32,
+          address: '某某某aaaa号',
+          phone: '14444xxxxxxx',
+          children: [
+            {
+              key: '33322',
+              id: '33322id',
+              name: 'hhh',
+              age: 32,
+              address: '某某某mmm号',
+              phone: '14444xxxxxxx',
+              children: [
+                {
+                  key: '1133322',
+                  id: '1133322id',
+                  name: '哈哈哈哈',
+                  age: 32,
+                  address: '某某某yyyy号',
+                  phone: '14444xxxxxxx',
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+    {
+      key: '12',
+      id: '12id',
+      name: '章三',
+      age: 32,
+      address: '春熙路xxx号',
+      phone: '123xxxxxxx',
+      children: [
+        {
+          key: '145',
+          id: '145id',
+          name: '张三1223',
+          age: 32,
+          address: '春熙路xxx号',
+          phone: '14444xxxxxxx',
+        },
+      ],
+    },
+  ];
   return (
     <div style={{ padding: 32, background: '#fff' }}>
-      <h4>展开行测试1</h4>
-      <Table
-        columns={columnsExpand}
-        dataSource={expandData}
-        expandedRowRender={(record) => <p style={{ margin: 0 }}>{record.description}</p>}
-        rowSelection={{}}
-        onExpand={(record) => {
-          console.log('==record', record);
-        }}
-        rowKey="id"
-      />
-      <h4>展开行测试2</h4>
-      <Table
-        columns={columnsExpand}
-        dataSource={expandData}
-        expandedRowRender={(record) => <p style={{ margin: 0 }}>{record.description}</p>}
-        rowSelection={{}}
-        rowKey="id"
-        isSingleCol={false}
-      />
-      <h4>展开行测试3</h4>
-      <Table
-        columns={columnsExpand}
-        dataSource={expandData}
-        rowKey="id"
-        expandedRowRender={(record) => <p style={{ margin: 0 }}>{record.description}</p>}
-        isSingleCol={false}
-      />
-      <h4>展开行测试4 自定义展开行样式</h4>
-      <Table
-        columns={columnsExpand}
-        rowKey="id"
-        dataSource={expandData}
-        expandedRowRender={(record) => <p style={{ margin: 0 }}>{record.description}</p>}
-        expandedRowStyle={{ paddingLeft: 12, background: '#e8e8e8' }}
-      />
+      <h3>树形结构表格测试1</h3>
+      <Table columns={columnsExpand} dataSource={treeData} bordered />
+      <h3>树形结构表格测试2</h3>
+      <Table columns={columnsExpand} dataSource={treeData} rowKey="id" bordered rowSelection={rowSelection} />
       <>
-        <h4>没有数据展示 table</h4>
+        <h3>展开行测试1</h3>
+        <Table
+          columns={columnsExpand}
+          dataSource={expandData}
+          expandedRowRender={(record) => <p style={{ margin: 0 }}>{record.description}</p>}
+          rowSelection={{}}
+          onExpand={(record) => {
+            console.log('==record', record);
+          }}
+          rowKey="id"
+        />
+        <h3>展开行测试2</h3>
+        <Table
+          columns={columnsExpand}
+          dataSource={expandData}
+          expandedRowRender={(record) => <p style={{ margin: 0 }}>{record.description}</p>}
+          rowSelection={{}}
+          rowKey="id"
+          isSingleCol={false}
+        />
+      </>
+      <>
+        <h3>没有数据展示 table</h3>
         <Table columns={columnsT} bordered dataSource={[]} />
-        <h4 style={{ marginTop: 24 }}>自定义没有数据展示 table</h4>
+        <h3 style={{ marginTop: 24 }}>自定义没有数据展示 table</h3>
         <Table
           columns={columnsT}
           bordered
           dataSource={[]}
           noData={<div style={{ color: 'red', fontSize: 18 }}>暂无数据 ！！！</div>}
         />
-        <h4>表头分组</h4>
+        <h3>表头分组</h3>
         <Table
           columns={columnsGroup}
           rowSelection={rowSelection}
@@ -461,7 +526,7 @@ const TableDemo: React.FC<unknown> = () => {
           scroll={{ x: 1500, y: 300 }}
         />
         <div>
-          <h4>基础表格</h4>
+          <h3>基础表格</h3>
           <div>
             <Table
               dataSource={data2}
@@ -511,7 +576,7 @@ const TableDemo: React.FC<unknown> = () => {
           </div>
         </div>
         <div>
-          <h4>固定列表格</h4>
+          <h3>固定列表格</h3>
           <div>
             <Table
               dataSource={data2}
@@ -555,7 +620,7 @@ const TableDemo: React.FC<unknown> = () => {
           </div>
         </div>
         <div>
-          <h4>合并行列</h4>
+          <h3>合并行列</h3>
           <div>
             <Table
               columns={spanColumns}
@@ -611,7 +676,7 @@ const TableDemo: React.FC<unknown> = () => {
           </div>
         </div>
         <div>
-          <h4>可选择行</h4>
+          <h3>可选择行</h3>
           <div>
             <Table
               rowSelection={rowSelection}
@@ -691,7 +756,7 @@ const TableDemo: React.FC<unknown> = () => {
           </div>
         </div>
         <div>
-          <h4>可选择行 radio</h4>
+          <h3>可选择行 radio</h3>
           <div>
             <Table
               rowSelection={rowSelection1}
@@ -835,7 +900,7 @@ const TableDemo: React.FC<unknown> = () => {
           </div>
         </div>
         <div>
-          <h4>可筛选过滤</h4>
+          <h3>可筛选过滤</h3>
           <div>
             <Table
               rowSelection={rowSelection}

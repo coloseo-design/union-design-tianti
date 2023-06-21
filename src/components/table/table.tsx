@@ -1,6 +1,6 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable max-len */
-import React from 'react';
+import React, { Fragment } from 'react';
 import classnames from 'classnames';
 import omit from 'omit.js';
 import { ConfigConsumer, ConfigConsumerProps } from '../config-provider';
@@ -42,6 +42,8 @@ export default class Table extends React.Component<TableProps, TableState> {
 
   static defaultProps = {
     rowKey: 'key',
+    isSingleCol: true,
+    childrenColumnName: 'children',
   }
 
   constructor(props: TableProps) {
@@ -71,11 +73,12 @@ export default class Table extends React.Component<TableProps, TableState> {
       observer: null,
       trHeights: [],
       openKeys: [],
+      childrenData: [],
     };
   }
 
   componentDidMount() {
-    const { scroll, columns } = this.props;
+    const { scroll, columns, dataSource } = this.props;
     const bodyRef = this.mainTableBodyRef;
     const mainRef = this.mainTableHeaderRef;
     if (bodyRef.current && (!scroll || scroll.y === 0)) {
@@ -131,10 +134,13 @@ export default class Table extends React.Component<TableProps, TableState> {
       this.setState({ observer: ob });
       ob.observe(this.mainTableRef.current as HTMLElement, config);
     }
+
+    const childData = this.getChildrenData(dataSource);
+    this.setState({ childrenData: childData });
   }
 
   componentDidUpdate(props: TableProps) {
-    const { rowSelection: { selectedRowKeys } = {}, pagination } = this.props;
+    const { rowSelection: { selectedRowKeys } = {}, pagination, dataSource } = this.props;
     if (props.rowSelection && props.rowSelection.selectedRowKeys !== selectedRowKeys) {
       this.setState({
         selectedRowKeys: selectedRowKeys as any,
@@ -144,6 +150,9 @@ export default class Table extends React.Component<TableProps, TableState> {
       this.setState({
         pagination: pagination as any,
       });
+    }
+    if (props.dataSource !== dataSource) {
+      this.setState({ childrenData: this.getChildrenData(dataSource || []) });
     }
   }
 
@@ -196,6 +205,25 @@ export default class Table extends React.Component<TableProps, TableState> {
     return key;
   }
 
+  getChildrenData = (pData: any[]) => {
+    const tempList: any[] = [];
+    const { childrenColumnName } = this.props;
+    const loopChild = (data: any[], level: number, parent: string[]) => data.forEach((item) => {
+      const tem = { ...item, dataLevel: level, dataParent: parent };
+      if (level > 1) {
+        tempList.push(tem);
+      }
+      if (item[childrenColumnName as string] && item[childrenColumnName as string].length > 0) {
+        loopChild(item[childrenColumnName as string] || [], level + 1, [
+          ...parent,
+          this.rowKey(item),
+        ]);
+      }
+    });
+    loopChild(pData, 1, []);
+    return tempList;
+  }
+
   /**
    * 构造筛选器
    * @returns
@@ -233,7 +261,8 @@ export default class Table extends React.Component<TableProps, TableState> {
     return paginatedData;
   };
 
-  formateDataSource = (dataSource: unknown[], columns: ColumnsProps[]): RowProps[] => {
+  formateDataSource = (dataSource: unknown[], columns: ColumnsProps[], level = 1): RowProps[] => {
+    // level 主要用于树形结构的层级
     const transformData = dataSource
       .map((data: any, index: number) => {
         const cols = columns.map((column) => {
@@ -250,7 +279,7 @@ export default class Table extends React.Component<TableProps, TableState> {
             rendered = (data as ({[key: string]: unknown}))[dataIndex] as string;
           }
           if (render) {
-            rendered = render(rendered as React.ReactNode, data, index);
+            rendered = render(rendered as React.ReactNode, data, index, level);
           }
           const objectRendered = rendered as RenderReturnObjectType;
           let ext = {};
@@ -300,33 +329,46 @@ export default class Table extends React.Component<TableProps, TableState> {
     isFixedBody?: boolean,
   ) => {
     const {
-      expandedRowRender, rowSelection, isSingleCol = true, onExpand, expandedRowStyle,
+      expandedRowRender,
+      rowSelection,
+      isSingleCol,
+      onExpand,
+      expandedRowStyle,
+      childrenColumnName,
     } = this.props;
-    const { selectedRowKey, trHeights, openKeys } = this.state;
+    const {
+      selectedRowKey, trHeights, openKeys,
+    } = this.state;
     const hoverable = columns.filter((column) => !!column.fixed).length > 0;
-    const results = this.formateDataSource(dataSource, columns).map((row, index) => (
-      <Row
-        key={row.key}
-        prefixCls={prefixCls}
-        {...(
-          hoverable ? { onMouseOver: this.onMouseOver(row.key), onMouseOut: this.onMouseOut } : {}
-        )}
-        rowKey={row.key}
-        columns={row.children}
-        style={{ height: isFixedBody && trHeights.length > 0 ? trHeights[index] : undefined }}
-        isFixedBody={isFixedBody}
-        hover={row.key === selectedRowKey}
-        openKeys={openKeys}
-        currentRecord={row.record}
-        rowSelection={rowSelection}
-        isSingleCol={isSingleCol}
-        handleExpand={onExpand}
-        expandedRowRender={expandedRowRender}
-        changeOpenKeys={this.changeOpenKeys}
-        expandedRowStyle={expandedRowStyle}
-      />
+    const getRow = (data: RowProps[], level: number) => data.map((row: any, index) => (
+      <Fragment key={row.key}>
+        <Row
+          key={row.key}
+          prefixCls={prefixCls}
+          {...(
+            hoverable && level === 1 ? { onMouseOver: this.onMouseOver(row.key), onMouseOut: this.onMouseOut } : {}
+          )}
+          rowKey={row.key}
+          columns={row.children}
+          style={{ height: isFixedBody && trHeights.length > 0 ? trHeights[index] : undefined }}
+          isFixedBody={isFixedBody}
+          hover={row.key === selectedRowKey}
+          openKeys={openKeys}
+          currentRecord={row.record}
+          rowSelection={rowSelection}
+          isSingleCol={isSingleCol}
+          handleExpand={onExpand}
+          expandedRowRender={expandedRowRender}
+          changeOpenKeys={this.changeOpenKeys}
+          expandedRowStyle={expandedRowStyle}
+          childrenColumnName={childrenColumnName}
+          level={level}
+          className={level > 1 ? `${prefixCls}-extraRow` : undefined}
+        />
+        {openKeys.includes(row.key) && row.record?.[childrenColumnName as string] && getRow(this.formateDataSource(row.record?.[childrenColumnName as string], columns, level + 1), level + 1)}
+      </Fragment>
     ));
-
+    const results = getRow(this.formateDataSource(dataSource, columns, 1), 1);
     return (
       <tbody>
         {results}
@@ -384,10 +426,10 @@ export default class Table extends React.Component<TableProps, TableState> {
 
   selectAllCheckbox = () => {
     const {
-      dataSource,
+      dataSource = [],
       rowSelection,
     } = this.props;
-    const { selectedRowKeys } = this.state;
+    const { selectedRowKeys, childrenData = [] } = this.state;
     const {
       onChange,
       getCheckboxProps,
@@ -400,7 +442,7 @@ export default class Table extends React.Component<TableProps, TableState> {
       return props.disabled && defaultSelectdRowKeys.indexOf(this.rowKey(item)) >= 0;
     }).map(this.rowKey);
     // 检查是否全都选中
-    const selectedAll = dataSource.reduce((composed, item) => {
+    const selectedAll = [...dataSource, ...childrenData].reduce((composed, item) => {
       const key = this.rowKey(item);
       const props = getCheckboxProps?.(item) || {};
       let result = true;
@@ -418,7 +460,7 @@ export default class Table extends React.Component<TableProps, TableState> {
       onChange: (checked: boolean) => {
         let currentSelectedRowKeys: unknown[] = [];
         if (!selectedAll) {
-          const allcheckableKeys = dataSource.filter((item) => {
+          const allcheckableKeys = [...dataSource, ...childrenData].filter((item) => {
             const props = getCheckboxProps?.(item) || {};
             return !props.disabled;
           }).map(this.rowKey);
@@ -429,7 +471,7 @@ export default class Table extends React.Component<TableProps, TableState> {
           selectedRowKeys: [...currentSelectedRowKeys, ...disabledKeys],
         };
         this.setState(newState);
-        const data = dataSource.filter(
+        const data = [...dataSource, ...childrenData].filter(
           (item) => newState.selectedRowKeys.indexOf(this.rowKey(item)) >= 0,
         );
         onSelectAll && onSelectAll(data, checked);
@@ -448,7 +490,7 @@ export default class Table extends React.Component<TableProps, TableState> {
    */
   selectionColumn = () => {
     const { rowSelection = {}, dataSource } = this.props;
-    const { selectedRowKeys } = this.state;
+    const { selectedRowKeys, childrenData = [] } = this.state;
     const {
       getCheckboxProps,
       columnTitle,
@@ -472,20 +514,25 @@ export default class Table extends React.Component<TableProps, TableState> {
         const index = selectedRowKeys.indexOf(key);
         const checked = index >= 0;
         const onCheckboxChange = (isChecked: boolean) => {
-          const current = dataSource.find((item) => this.rowKey(item) === key);
+          const current = [...dataSource, ...childrenData].find((item) => this.rowKey(item) === key);
+          let temK = [...selectedRowKeys];
+          const childKey = childrenData.filter((i: any) => i.dataParent?.includes(key)).map((j) => this.rowKey(j));
           onSelect && onSelect(current, isChecked);
           if (!isChecked) {
-            (checked && selectedRowKeys.splice(index, 1));
+            if (checked) {
+              temK = selectedRowKeys.filter((i) => ![...childKey, key].includes(i as string));
+            }
           } else {
-            (!checked && selectedRowKeys.push(key));
+            !checked && temK.push(key);
+            !checked && temK.push(...childKey);
           }
-          const newSelectedRowKeys = [...selectedRowKeys];
+          const newSelectedRowKeys = [...temK];
           this.setState({
             selectedRowKeys: newSelectedRowKeys,
           });
           onChange?.(
             newSelectedRowKeys,
-            dataSource.filter((item) => newSelectedRowKeys.indexOf(this.rowKey(item)) >= 0),
+            [...dataSource, ...childrenData].filter((item) => newSelectedRowKeys.indexOf(this.rowKey(item)) >= 0),
           );
         };
         const onRadioChange = (e: { target: { checked: boolean; }; }) => {
@@ -532,10 +579,10 @@ export default class Table extends React.Component<TableProps, TableState> {
       // dataSource,
       bordered,
       rowSelection,
-      isSingleCol = true,
+      isSingleCol,
       expandedRowRender,
     } = this.props;
-    const { flatColums } = this.state;
+    const { flatColums, childrenData } = this.state;
     const prefix = prefixCls;
     const filteredColumns = groupColums(flatColums, position);
     const tableOuterCls = classnames(`${prefix}-item`, {
@@ -557,6 +604,14 @@ export default class Table extends React.Component<TableProps, TableState> {
         title: '',
         key: 'expandRowKey',
         dataIndex: 'expandRowKey',
+        width: 45,
+      });
+    }
+    if (childrenData.length && filteredColumns.length) {
+      filteredColumns.unshift({
+        title: '',
+        key: 'childrenRowKey',
+        dataIndex: 'childrenRowKey',
         width: 45,
       });
     }
@@ -597,15 +652,24 @@ export default class Table extends React.Component<TableProps, TableState> {
    */
   getMainColums = (columns: ColumnsProps[]) => {
     const sortedColumns = sortColums(columns);
-    const { rowSelection, isSingleCol = true, expandedRowRender } = this.props;
+    const { rowSelection, isSingleCol, expandedRowRender } = this.props;
+    const { childrenData } = this.state;
     if (rowSelection) {
       sortedColumns.unshift(this.selectionColumn());
     }
-    if (isSingleCol && expandedRowRender) {
+    if (isSingleCol && expandedRowRender) { // 展开行箭头
       sortedColumns.unshift({
         title: '',
         key: 'expandRowKey',
         dataIndex: 'expandRowKey',
+        width: 45,
+      });
+    }
+    if (childrenData.length) { // 树形结构箭头
+      sortedColumns.unshift({
+        title: '',
+        key: 'childrenRowKey',
+        dataIndex: 'childrenRowKey',
         width: 45,
       });
     }
@@ -641,7 +705,15 @@ export default class Table extends React.Component<TableProps, TableState> {
       noData,
       ...rest
     } = this.props;
-    const restParams = omit(rest, ['rowKey', 'rowSelection', 'isSingleCol', 'expandedRowRender', 'onExpand', 'expandedRowStyle']);
+    const restParams = omit(rest, [
+      'rowKey',
+      'rowSelection',
+      'isSingleCol',
+      'expandedRowRender',
+      'onExpand',
+      'expandedRowStyle',
+      'childrenColumnName',
+    ]);
     const prefix = getPrefixCls('table', prefixCls);
     const tableContainerCls = classnames(`${prefix}-spain-container`, {
       [`${prefix}-spain-container-blur`]: loading,

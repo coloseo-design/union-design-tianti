@@ -31,7 +31,7 @@ export interface ColumnsProps {
   key?: string;
   /** 列渲染函数 */
   // eslint-disable-next-line max-len
-  render?: (text: React.ReactNode | string, record: unknown, index: number) => React.ReactNode | RenderReturnObjectType;
+  render?: (text: React.ReactNode | string, record: unknown, index: number, level: number) => React.ReactNode | RenderReturnObjectType;
   /** 标题 */
   title: React.ReactNode;
   /** 宽度 */
@@ -117,6 +117,9 @@ export interface TableProps extends React.HTMLAttributes<HTMLTableElement> {
 
   // 展开行样式
   expandedRowStyle?: CSSProperties;
+
+  // 指定树形结构的列名
+  childrenColumnName?: string;
 }
 
 export interface TableState {
@@ -136,6 +139,7 @@ export interface TableState {
   observer: null | MutationObserver;
   trHeights: number[];
   openKeys: unknown[];
+  childrenData: any[];
 }
 
 export interface ColProps {
