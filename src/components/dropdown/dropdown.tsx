@@ -18,6 +18,7 @@ export interface DropdownProps {
   prefixCls?: string;
   overlayClassName?: string;
   arrow?: boolean;
+  children?: any;
 }
 
 export interface DropdownState {
@@ -134,30 +135,31 @@ class Dropdown extends React.Component<DropdownProps, DropdownState> {
       } = target.getBoundingClientRect();
       const containter = getPopupContainer && getPopupContainer();
       const { top: offsetTop, left: offsetLeft } = getOffset(target, containter);
+      const gap = 4;
       const placementMap = {
         topCenter: {
           x: offsetLeft + (width - contentWidth) / 2,
-          y: offsetTop - contentHeight - 4 - (arrow ? 5 : 0),
+          y: offsetTop - contentHeight - gap - (arrow ? 5 : 0),
         },
         topLeft: {
           x: offsetLeft,
-          y: offsetTop - contentHeight - 4 - (arrow ? 5 : 0),
+          y: offsetTop - contentHeight - gap - (arrow ? 5 : 0),
         },
         topRight: {
           x: offsetLeft - (contentWidth - width),
-          y: offsetTop - contentHeight - 4 - (arrow ? 5 : 0),
+          y: offsetTop - contentHeight - gap - (arrow ? 5 : 0),
         },
         bottomCenter: {
           x: offsetLeft + (width - contentWidth) / 2,
-          y: offsetTop + height + 4 + (arrow ? 5 : 0),
+          y: offsetTop + height + gap + (arrow ? 5 : 0),
         },
         bottomRight: {
           x: offsetLeft - (contentWidth - width),
-          y: offsetTop + height + 4 + (arrow ? 5 : 0),
+          y: offsetTop + height + gap + (arrow ? 5 : 0),
         },
         bottomLeft: {
           x: offsetLeft,
-          y: offsetTop + height + 4 + (arrow ? 5 : 0),
+          y: offsetTop + height + gap + (arrow ? 5 : 0),
         },
       };
       this.setState({
@@ -185,9 +187,9 @@ class Dropdown extends React.Component<DropdownProps, DropdownState> {
       trigger = ['hover'],
     } = this.props;
     const prefix = getPrefixCls('drop-down', prefixCls);
-    const dropwrapper = classNames(prefix, overlayClassName, {
+    const dropWrapper = classNames(prefix, {
       [`${prefix}-show`]: visible,
-    });
+    }, overlayClassName);
     const containter = classNames(`${prefix}-containter`);
     const arrowStyle = classNames(`${prefix}-arrow`, {
       [`${prefix}-arrow-${placement}`]: placement,
@@ -209,19 +211,19 @@ class Dropdown extends React.Component<DropdownProps, DropdownState> {
         ref: this.getChildRef,
         onClick: (evt: React.MouseEvent<any>) => {
           this.click(evt);
-          children.props.onClick && children.props.onClick(evt);
+          (children.props as any)?.onClick && (children.props as any)?.onClick(evt);
         },
         onMouseOver: (evt: React.MouseEvent<any>) => {
           this.over(evt);
-          children.props.onMouseOver && children.props.onMouseOver(evt);
+          (children.props as any)?.onMouseOver && (children.props as any)?.onMouseOver(evt);
         },
         onMouseLeave: (evt: React.MouseEvent<any>) => {
           this.out();
-          children.props.onMouseLeave && children.props.onMouseLeave(evt);
+          (children.props as any)?.onMouseLeave && (children.props as any)?.onMouseLeave(evt);
         },
         onContextMenu: (evt: React.MouseEvent<any>) => {
           this.handleContextMenu(evt);
-          children.props.onContextMenu && children.props.onContextMenu(evt);
+          (children.props as any)?.onContextMenu && (children.props as any)?.onContextMenu(evt);
         },
       });
     }
@@ -231,7 +233,7 @@ class Dropdown extends React.Component<DropdownProps, DropdownState> {
         {TChildren}
         <Portal {...({ getPopupContainer })}>
           <div
-            className={dropwrapper}
+            className={dropWrapper}
             style={{ left: x, top: y, ...overlayStyle }}
             ref={this.getNode}
             onMouseOver={() => trigger.indexOf('hover') >= 0 && this.setState({ visible: true })}

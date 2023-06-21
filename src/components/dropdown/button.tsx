@@ -21,6 +21,7 @@ export interface DropMenuProps {
   onClick?: React.MouseEventHandler<HTMLElement>;
   onVisibleChange?: (visible: boolean) => void;
   getPopupContainer?: () => HTMLElement | null;
+  children?: any;
 }
 
 export interface DropMenuState {
@@ -49,7 +50,7 @@ class DropButton extends React.Component<DropMenuProps, DropMenuState> {
     if (visible) {
       this.compute();
     }
-    document.addEventListener('click', this.dropHidden);
+    document.addEventListener('click', this.dropHidden, true);
   }
 
   componentDidUpdate(prevProps: DropMenuProps) {
@@ -63,13 +64,16 @@ class DropButton extends React.Component<DropMenuProps, DropMenuState> {
   }
 
   componentWillUnmount() {
-    document.removeEventListener('click', this.dropHidden);
+    document.removeEventListener('click', this.dropHidden, true);
   }
 
-  dropHidden = () => {
-    const { onVisibleChange, visible: propsVisisble } = this.props;
-    if (propsVisisble !== undefined) {
-      onVisibleChange && onVisibleChange(false);
+  dropHidden = (evt: MouseEvent) => {
+    const { onVisibleChange, visible: propsVisible } = this.props;
+    if (evt.target && this.nodeB?.contains(evt.target as HTMLElement)) return;
+    if (typeof propsVisible !== 'undefined') {
+      if (!this.nodeC?.contains(evt.target as HTMLElement)) {
+        onVisibleChange?.(false);
+      }
     } else {
       this.setState({ visible: false });
     }
@@ -83,10 +87,10 @@ class DropButton extends React.Component<DropMenuProps, DropMenuState> {
     this.nodeB = nodeB;
   }
 
-  over = (evt: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
+  over = () => {
     const { trigger = ['hover'], disabled } = this.props;
     if (trigger.indexOf('hover') >= 0 && !disabled) {
-      this.compute(evt);
+      this.compute();
     }
   };
 
@@ -100,10 +104,10 @@ class DropButton extends React.Component<DropMenuProps, DropMenuState> {
     }
   };
 
-  click = (evt: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
+  click = () => {
     const { trigger = ['hover'], disabled } = this.props;
     if (trigger.indexOf('click') >= 0 && !disabled) {
-      this.compute(evt);
+      this.compute();
     }
   };
 
@@ -111,7 +115,7 @@ class DropButton extends React.Component<DropMenuProps, DropMenuState> {
     const { trigger = ['hover'], disabled } = this.props;
     if (trigger.indexOf('contextMenu') >= 0 && !disabled) {
       evt.preventDefault();
-      this.compute(evt);
+      this.compute();
     }
   };
 
@@ -120,9 +124,7 @@ class DropButton extends React.Component<DropMenuProps, DropMenuState> {
     onClick && onClick(evt);
   };
 
-  compute = (evt?: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
-    evt && evt.stopPropagation();
-    evt?.nativeEvent.stopImmediatePropagation();
+  compute = () => {
     const { visible } = this.state;
     const {
       placement = 'bottomRight', onVisibleChange, visible: propsVisible, getPopupContainer,
@@ -135,30 +137,31 @@ class DropButton extends React.Component<DropMenuProps, DropMenuState> {
       } = this.nodeB.getBoundingClientRect();
       const containter = getPopupContainer && getPopupContainer();
       const { top: offsetTop, left: offsetLeft } = getOffset(this.nodeB, containter);
+      const gap = 4;
       const placementMap = {
         topCenter: {
           x: offsetLeft + (width - contentWidth) / 2,
-          y: offsetTop - contentHeight - 4,
+          y: offsetTop - contentHeight - gap,
         },
         topLeft: {
           x: offsetLeft,
-          y: offsetTop - contentHeight - 4,
+          y: offsetTop - contentHeight - gap,
         },
         topRight: {
           x: offsetLeft - (contentWidth - width),
-          y: offsetTop - contentHeight - 4,
+          y: offsetTop - contentHeight - gap,
         },
         bottomCenter: {
           x: offsetLeft + (width - contentWidth) / 2,
-          y: offsetTop + height + 4,
+          y: offsetTop + height + gap,
         },
         bottomRight: {
           x: offsetLeft - (contentWidth - width),
-          y: offsetTop + height + 4,
+          y: offsetTop + height + gap,
         },
         bottomLeft: {
           x: offsetLeft,
-          y: offsetTop + height + 4,
+          y: offsetTop + height + gap,
         },
       };
       this.setState({
@@ -206,7 +209,11 @@ class DropButton extends React.Component<DropMenuProps, DropMenuState> {
     return (
       <>
         <div className={dropGroupStyle}>
-          <button className={buttonStyle} type="button" onClick={this.handleClick}>
+          <button
+            className={buttonStyle}
+            type="button"
+            onClick={this.handleClick}
+          >
             {children}
           </button>
           <button
@@ -231,7 +238,7 @@ class DropButton extends React.Component<DropMenuProps, DropMenuState> {
             onClick={(e) => { e.stopPropagation(); e.nativeEvent.stopImmediatePropagation(); }}
           >
             <div className={containter}>
-              {overlay && React.isValidElement(overlay) ? React.cloneElement(
+              {overlay && React.isValidElement(overlay) ? React.cloneElement<any>(
                 overlay,
                 { popupClassName: `${pre}-menu` },
               ) : ''}

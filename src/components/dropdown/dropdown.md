@@ -17,7 +17,7 @@ subtitle: 下拉菜单
 |overlay|菜单|	Menu | -|
 |overlayClassName|下拉根元素的类名称|string|-|
 |overlayStyle|下拉根元素的样式|CSSProperties|-|
-|placement|菜单弹出位置：bottomLeft bottomCenter bottomRight topLeft topCenter topRight|string|bottomLeft|
+|placement|菜单弹出位置：bottomLeft bottomCenter bottomRight topLeft topCenter topRight|string|bottomCenter|
 |trigger|触发下拉的行为|Array<click｜hover｜contextMenu>|\['hover'\]|
 |visible|菜单是否显示|boolean|--|
 |onVisibleChange|菜单显示状态改变时调用，参数为 visible|(visible: boolean) => void|-|
