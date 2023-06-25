@@ -1,3 +1,4 @@
+/* eslint-disable no-plusplus */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable no-useless-return */
 /* eslint-disable react/no-string-refs */
@@ -28,7 +29,7 @@ export type SideNavProps<Data> = {
   /** 每条数据的唯一key */
   keyExtractor: (data: Data) => string;
   /** 每条数据用来做导航每项的Name */
-  nameExtractor: (data: Data) => string;
+  nameExtractor: (data: Data) => string | ReactNode;
   /** 每条数据用来做导航每项子菜单的 */
   childrenExtractor: (data: Data) => Data[] | null | undefined;
 } & BasePropsV2<{
@@ -363,7 +364,6 @@ export default class TopNav<Data> extends BaseComponent<
       res[minNumIndex] ??= [];
       res[minNumIndex].push(temp[i]);
     }
-    console.log(res);
 
     return res;
   };
@@ -379,7 +379,7 @@ export default class TopNav<Data> extends BaseComponent<
       >
         {this.getContentData(data).map((i, index) => (
           <div key={index} className={this.gpc("block")}>
-            {i.map((i: any) => i)}
+            {i.map((j: any) => j)}
           </div>
         ))}
       </div>

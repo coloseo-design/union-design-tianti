@@ -6,6 +6,7 @@
 /* eslint-disable quotes */
 import React, { useState } from "react";
 import TopNav from "./index";
+import { Tooltip } from "..";
 import "./styles/index";
 
 const Demo = () => {
@@ -195,7 +196,7 @@ const Demo = () => {
     <div style={{ margin: 30 }}>
       <h4>顶部导航 md 点击模式 dropdown</h4>
       <TopNav
-        popupZIndex={1000}
+        // popupZIndex={1000}
         data={data}
         mode="dropdown"
         keyExtractor={(i) => `${i.id}`}
@@ -292,7 +293,7 @@ const Demo = () => {
         mode="expand"
         selectedKey={selectedKey}
         keyExtractor={(i) => `${i.id}`}
-        nameExtractor={(i) => i.name}
+        nameExtractor={(i) => <Tooltip message={<div>哈哈哈哈哈</div>}>{i.name}</Tooltip>}
         childrenExtractor={(i) => i.list}
         onChangeSelectedKey={(key, data) => {
           setSelectedKey(key);
