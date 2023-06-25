@@ -422,7 +422,7 @@ export default class TopNav<Data> extends BaseComponent<
         <div className={this.gpc("right")}>
           {this.getContentData(data).map((i, index) => (
             <div key={index} className={this.gpc("block")}>
-              {i.map((i: any) => i)}
+              {i.map((j: any) => j)}
             </div>
           ))}
         </div>
