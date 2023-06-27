@@ -1,3 +1,7 @@
+## [1.0.46-beta.3](https://github.com/coloseo-design/union-design-tianti/compare/v1.0.46-beta.2...v1.0.46-beta.3) (2023-06-27)
+
+
+
 ## [1.0.46-beta.2](https://github.com/coloseo-design/union-design-tianti/compare/v1.0.46-beta.1...v1.0.46-beta.2) (2023-06-21)
 
 
