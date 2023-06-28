@@ -137,7 +137,7 @@ const Item: React.FC<FormItemProps> = (props: FormItemProps) => {
   useEffect(() => {
     if (name) {
       onStatus(composedName, false);
-      validate(value || initialValue)
+      validate(value ?? initialValue)
         .then((newErrors) => {
           onError(composedName, { event: trigger, errors: newErrors });
         })
@@ -146,14 +146,14 @@ const Item: React.FC<FormItemProps> = (props: FormItemProps) => {
         }).finally(() => {
           lock.current = false;
         });
-      onCollect(composedName, { event: trigger, value: initialValue || value, initialValue }, true);
+      onCollect(composedName, { event: trigger, value: initialValue ?? value, initialValue }, true);
     }
   }, []);
 
   useEffect(() => {
     if (name) {
       onStatus(composedName, false);
-      validate(value || initialValue)
+      validate(value ?? initialValue)
         .then((newErrors) => {
           onError(composedName, { event: trigger, errors: newErrors });
         })
@@ -198,7 +198,7 @@ const Item: React.FC<FormItemProps> = (props: FormItemProps) => {
           }
           collectValue(...args);
         },
-        defaultValue: value || initialValue,
+        defaultValue: value ?? initialValue,
         name,
       };
       return React.cloneElement(child, extProps);

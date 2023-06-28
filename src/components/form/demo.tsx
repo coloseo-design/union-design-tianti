@@ -9,6 +9,7 @@ import {
   DatePicker,
   Checkbox,
   Radio,
+  InputNumber,
 } from '../index';
 import '../grid/styles/index';
 import '../button/styles/index';
@@ -122,6 +123,7 @@ const FormDemo = () => {
           initialValues={{
             username: 'zhansgan123',
             birthday: dayjs('1996-12-26'),
+            InputNumber: 0,
             // password: 'lisi',
             // address: {
             //   province: 'sichuan',
@@ -137,6 +139,9 @@ const FormDemo = () => {
           labelAlign="right"
           labelStyle={{ marginBottom: 8 }}
         >
+          <FormItem name="InputNumber" label="年龄">
+            <InputNumber />
+          </FormItem>
           <FormItem
             name="birthday"
             label="生日"
