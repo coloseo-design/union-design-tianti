@@ -155,13 +155,15 @@ const TreeSelectDEmo = () => {
 
       <div style={{ width: 320, marginTop: 32 }}>
         <h1>可勾选的, SHOW_ALL</h1>
-        <TreeSelect
-          treeData={data}
-          dropdownStyle={{ maxHeight: 150, overflow: 'auto' }}
-          treeCheckable
-          showCheckedStrategy="SHOW_ALL"
-          maxTagCount={3}
-        />
+        <div>
+          <TreeSelect
+            treeData={data}
+            dropdownStyle={{ maxHeight: 150, overflow: 'auto' }}
+            treeCheckable
+            showCheckedStrategy="SHOW_ALL"
+            maxTagCount={3}
+          />
+        </div>
       </div>
     </div>
   );

@@ -11,31 +11,17 @@
 @select-dropdown-hide: ~'@{select-dropdown-prefix-cls}-hide';
 @select-dropdown-match-select-width: ~'@{select-dropdown-prefix-cls}-match-select-width';
 
-.@{select-wrapper-prefix-cls} {
-  position: relative;
-  width: inherit;
-  font-size: @font-size-base;
-  &::after {
-    content: '.';
-    display: block;
-    clear: both;
-    visibility: hidden;
-    font-size: 0;
-    height: 0;
-  }
-  *zoom: 1;
-}
-
 .@{select-prefix-cls} {
   position: relative;
   box-sizing: border-box;
-  width: inherit;
+  width: 100%;
   cursor: pointer;
   background-color: @select-bg-color;
   border: @border-width-base @border-style-base @select-border-color;
   padding: 3px 12px;
   border-radius: @border-radius-base;
   user-select: none;
+  display: inline-block;
   &-single {
     overflow: hidden;
     padding: 5px 12px;

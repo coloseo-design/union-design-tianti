@@ -368,7 +368,6 @@ class Select extends React.Component<SelectProps, SelectState> {
       isHover,
     } = this.state;
     const prefix = getPrefixCls('select', customizePrefixCls);
-    const wrapperClass = classnames(`${prefix}-wrapper`);
     const mainClass = classnames(`${prefix}`, {
       [`${prefix}-disabled`]: disabled,
       [`${prefix}-active`]: showDropdown,
@@ -396,7 +395,7 @@ class Select extends React.Component<SelectProps, SelectState> {
     }
 
     return (
-      <div className={wrapperClass}>
+      <>
         <div
           onClick={!disabled ? this.onClick : () => {}}
           className={mainClass}
@@ -546,7 +545,7 @@ class Select extends React.Component<SelectProps, SelectState> {
           </div>
         </Portal>
         )}
-      </div>
+      </>
     );
   }
 

@@ -403,12 +403,12 @@ class TreeSelect extends React.Component<TreeSelectProps, TreeSelectStates> {
                     {!multiple ? <span>{this.tags(values[0], treeSelect, true)}</span>
                       : (
                         <>
-                          <span style={{ marginRight: 24, display: 'inline-block' }}>
+                          <span style={{ marginRight: maxTagCount && multiple && values.length > maxTagCount ? 0 : 24, display: 'inline-block' }}>
                             <span>{values.slice(0, maxTagCount).map((item: string) => this.tags(item, treeSelect, false))}</span>
                           </span>
                           <>
                             {maxTagCount && multiple && values.length > maxTagCount && (
-                            <span className={`${treeSelect}-selection-tag`}>
+                            <span className={`${treeSelect}-selection-tag`} style={{ marginRight: 24 }}>
                               <span className={`${treeSelect}-selection-tag-add`}>+</span>
                               <span className={`${treeSelect}-selection-tag-num`}>
                                 {values.length - maxTagCount}

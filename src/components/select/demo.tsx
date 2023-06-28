@@ -85,27 +85,9 @@ const SelectDemo = () => {
           }
         }
         placeholder="请选择选项"
-        style={{ width: 220, marginBottom: 36 }}
-        type="search"
-        onSearch={(val) => { console.log('--- val ', val); }}
-      >
-        <Option key="1" value="1">选项111</Option>
-        <Option key="2" value="2">选项1222</Option>
-        <Option disabled key="3" value="3">选项33333</Option>
-      </Select>
-      <Select
-        onSelect={
-          (value, label) => {
-            console.log('--- value ', value);
-            console.log('--- label ', label);
-          }
-        }
-        allowClear
-        placeholder="请选择选项"
         style={{ width: 220 }}
         type="search"
-        remoteSearch
-        onSearch={fetchUser}
+        onSearch={(val) => { console.log('--- val ', val); }}
       >
         <Option key="1" value="1">选项111</Option>
         <Option key="2" value="2">选项1222</Option>
