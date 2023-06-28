@@ -1,6 +1,7 @@
 import classnames from 'classnames';
 import React, { useContext, useEffect, useRef } from 'react';
 import { Col, Row } from '@union-design/grid';
+import { ConfigContext } from '@union-design/config-provider';
 import { FormContextProps, FormItemProps, ValidatorRule } from './type';
 import FormItemError from './form-item-error';
 import {
@@ -11,7 +12,6 @@ import {
   validateRules,
 } from './util';
 import { FormContext } from './form-context';
-import { ConfigContext } from '../config-provider/context';
 
 const Item: React.FC<FormItemProps> = (props: FormItemProps) => {
   const {

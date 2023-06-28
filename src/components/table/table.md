@@ -70,9 +70,13 @@ const columns = [
 | rowSelection | 表格行是否可选择，\[配置项] | object | - |
 | scroll | 表格是否可滚动，也可以指定滚动区域的宽、高，\[配置项] | object | - |
 | size | 表格大小 | `default` \| `middle` \| `small` | default |
-| noData | 自定义没有数据展示 | ReactNode | -- |
-|noDataStyle|没有数据展示样式|CSSProperties|--|
-
+|noData|自定义没有数据展示|ReactNode|--|
+|noDataStyle|没有数据展示时的style|--|
+|expandedRowRender|展开行内容展示,返回null 不展示展开箭头|(record) => ReactNode \| string \| null|--|
+|expandedRowStyle|展开行样式|CSSProperties|--|
+|isSingleCol|展开icon是否独占一列, 不独占一列就放在第一列的前面|boolean|true|
+|onExpand|点击展开图标触发|(record) => void|--|
+|childrenColumnName|指定树形结构的列名(childrenColumnName不配置时，有children自动形成树形结构形式)|string|children|
 
 ### Column
 
@@ -92,7 +96,7 @@ const columns = [
 | filters | 表头的筛选菜单项 | object\[] | - |
 | fixed | 列是否固定，可选 true (等效于 left) `left` `right` | boolean \| string | false |
 | key | React 需要的 key，如果已经设置了唯一的 `dataIndex`，可以忽略这个属性 | string | - |
-| render | 生成复杂数据的渲染函数，参数分别为当前行的值，当前行数据，行索引，@return 里面可以设置表格[行/列合并] | function(text, record, index) {} | - |
+| render | 生成复杂数据的渲染函数，参数分别为当前行的值，当前行数据，行索引，当前数据的层级,@return 里面可以设置表格[行/列合并] | function(text, record, index, level) {} | - |
 | title | 列头显示文字 | ReactNode \| ({ sortOrder, sortColumn, filters }) => ReactNode | - |
 | width | 列宽度 | string \| number | - |
 

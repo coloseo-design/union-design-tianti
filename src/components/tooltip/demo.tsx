@@ -18,7 +18,7 @@ const TooltipDemo = () => (
     </div>
     <h2>顶部出现</h2>
     <div style={{ marginBottom: 20 }}>
-      <Tooltip message="悬浮出现的气泡" placement="top" trigger="hover">
+      <Tooltip message="悬浮出现的气泡" placement="top">
         <Button>顶部出现</Button>
       </Tooltip>
       <Tooltip message="悬浮出现的气泡" placement="topLeft" trigger="hover">

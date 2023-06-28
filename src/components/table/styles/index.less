@@ -1,8 +1,10 @@
-@import '../../style/index.less';
+@import '../../style/themes/index';
+@import '../../style/mixins/index';
 @import '../../dropdown/styles/index.less';
 @import '../../checkbox/styles/index.less';
 @import '../../pagination/styles/index.less';
 @import '../../radio/styles/index.less';
+
 @table-prefix-cls: ~'@{uni-prefix}-table';
 
 @td-aligns: left, right, center;
@@ -25,6 +27,7 @@
   pointer-events: none;
 }
 
+
 .@{table-prefix-cls}-container {
   &::before, &::after {
     content: ' ';
@@ -34,7 +37,6 @@
     clear: both;
   }
 }
-
 .@{table-prefix-cls}-container-hasNoData {
   font-size: 12px;
   width: 100%;
@@ -42,7 +44,6 @@
   padding: 32px 0px;
   color: rgba(0, 0, 0, 0.35);
 }
-
 
 .@{table-prefix-cls}-item-fixed {
   position: absolute;
@@ -101,9 +102,6 @@
 
 
 // 表格基础样式
-table {
-  border-collapse: collapse;
-}
 .@{table-prefix-cls} {
   width: 100%;
   background-color: #fff;
@@ -128,8 +126,11 @@ table {
   td {
     transition: all 0.3s, border 0s;
   }
-  tr:hover>td, .@{table-prefix-cls}-row-hover>td {
+  tr:not(.@{table-prefix-cls}-extraRow):hover>td, .@{table-prefix-cls}-row-hover>td {
     background: @red-1;
+  }
+  &-extraRow {
+    background-color: @table-selected-row-bg;
   }
   each(@td-aligns, {
     &-td-@{value} {
@@ -177,4 +178,7 @@ table {
   cursor: pointer;
 }
 
-
+// table 默认样式
+.@{table-prefix-cls}-container table {
+  border-collapse: collapse;
+}

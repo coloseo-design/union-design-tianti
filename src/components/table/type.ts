@@ -31,7 +31,7 @@ export interface ColumnsProps {
   key?: string;
   /** 列渲染函数 */
   // eslint-disable-next-line max-len
-  render?: (text: React.ReactNode | string, record: unknown, index: number) => React.ReactNode | RenderReturnObjectType;
+  render?: (text: React.ReactNode | string, record: unknown, index: number, level: number) => React.ReactNode | RenderReturnObjectType;
   /** 标题 */
   title: React.ReactNode;
   /** 宽度 */
@@ -103,8 +103,23 @@ export interface TableProps extends React.HTMLAttributes<HTMLTableElement> {
     scrollToFirstRowOnChange?: boolean;
   };
   pagination?: boolean | PaginationProps;
-  noData?: ReactNode;
+
+  // 没有数据是的style
   noDataStyle?: CSSProperties;
+  // 自定义没有数据展示
+  noData?: ReactNode;
+  // 展开行展示内容
+  expandedRowRender?: (record: any) => ReactNode | string | null;
+  // 展开图标是否独占一列，设为false则放在第一列数据的前面
+  isSingleCol?: boolean;
+  // 点击图标事件
+  onExpand?: (record: any) => void;
+
+  // 展开行样式
+  expandedRowStyle?: CSSProperties;
+
+  // 指定树形结构的列名
+  childrenColumnName?: string;
 }
 
 export interface TableState {
@@ -120,7 +135,11 @@ export interface TableState {
   }
   pagination: boolean | PaginationProps;
   flatColums: ColumnsProps[];
-  theadHeight: number | undefined,
+  theadHeight: number | undefined;
+  observer: null | MutationObserver;
+  trHeights: number[];
+  openKeys: unknown[];
+  childrenData: any[];
 }
 
 export interface ColProps {
@@ -133,9 +152,11 @@ export interface ColProps {
     /** 行合并 */
     rowSpan: number;
   };
+  fixed?: boolean | string;
 }
 
 export interface RowProps {
   key: string;
   children: ColProps[];
+  record: any;
 }

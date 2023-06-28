@@ -1,11 +1,14 @@
 /* eslint-disable react/display-name */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
+import {
+  Popconfirm,
+} from '../index';
 import Table from './index';
 import './styles/index';
-import '../popconfirm/styles/index.less';
-import '../tabs/styles/index.less';
-import '../tooltip/styles/index.less';
+import '../popconfirm/styles/index';
+import '../tabs/styles/index';
+import '../tooltip/styles/index';
 import { ColumnsProps, TableRowSelectionType, ColumnsAlign } from './type';
 
 const render1 = (k: React.ReactNode, row: any) => (
@@ -60,7 +63,7 @@ const columns: ColumnsProps[] = [
     title: '住址',
     dataIndex: 'address',
     key: 'address',
-    filteredValue: ['No. 1'],
+    // filteredValue: ['No. 1'],
     filters: [
       {
         text: 'Jim family',
@@ -273,7 +276,7 @@ const TableDemo: React.FC<unknown> = () => {
     },
   ];
 
-  const dataH: any[] = [];
+  const dataH = [];
   // eslint-disable-next-line no-plusplus
   for (let i = 0; i < 40; i++) {
     dataH.push({
@@ -333,13 +336,14 @@ const TableDemo: React.FC<unknown> = () => {
       address: '西湖区湖底公园2号',
     },
   ];
-  const columns1 = [
+  const columnsT = [
     {
       title: '姓名',
       dataIndex: 'name',
       key: 'name',
       width: 150,
       className: 'ttt',
+      align: 'right',
     },
     {
       title: '年龄',
@@ -363,18 +367,155 @@ const TableDemo: React.FC<unknown> = () => {
       title: '操作',
       dataIndex: 'op',
       key: 'op',
+      // align: 'right',
       width: 150,
-      render: (_:any, record:any, index: number) => (
+      render: (_: any, r: any, index: number) => (
         <a className={`delete-${index}`}>删除</a>
       ),
     },
   ];
+  const columnsExpand = [
+    {
+      title: '名字',
+      dataIndex: 'name',
+      key: 'name',
+    },
+    {
+      title: '电话',
+      dataIndex: 'phone',
+      key: 'phone',
+    },
+    {
+      title: '年龄',
+      dataIndex: 'age',
+      key: 'age',
+    },
+    {
+      title: '地址',
+      dataIndex: 'address',
+      key: 'address',
+    },
+    {
+      title: '操作',
+      dataIndex: 'ope',
+      key: 'ope',
+      render: (_: any, record: any, index: number, level: number) => <a>{level === 1 ? '编辑' : '删除'}</a>,
+    },
+  ];
+  const expandData = Array.from({ length: 5 }).map((_, k) => ({
+    name: `张三${k + 1}`,
+    age: 24,
+    id: `${k + 1}`,
+    address: '成都市锦江区某某地',
+    phone: '152xxxxxxx',
+    description: `张三商铺分店${k + 1}`,
+  }));
+
+  const treeData = [
+    {
+      key: '1',
+      id: '1id',
+      name: '李四',
+      age: 32,
+      address: '春熙路xxx号',
+      phone: '123xxxxxxx',
+      children: [
+        {
+          key: '11',
+          id: '11id',
+          name: '李四1223',
+          age: 32,
+          address: '某某某xxx号',
+          phone: '14444xxxxxxx',
+        },
+        {
+          key: '222',
+          id: '222id',
+          name: '王武',
+          age: 32,
+          address: '某某某aaaa号',
+          phone: '14444xxxxxxx',
+          children: [
+            {
+              key: '33322',
+              id: '33322id',
+              name: 'hhh',
+              age: 32,
+              address: '某某某mmm号',
+              phone: '14444xxxxxxx',
+              children: [
+                {
+                  key: '1133322',
+                  id: '1133322id',
+                  name: '哈哈哈哈',
+                  age: 32,
+                  address: '某某某yyyy号',
+                  phone: '14444xxxxxxx',
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+    {
+      key: '12',
+      id: '12id',
+      name: '章三',
+      age: 32,
+      address: '春熙路xxx号',
+      phone: '123xxxxxxx',
+      children: [
+        {
+          key: '145',
+          id: '145id',
+          name: '张三1223',
+          age: 32,
+          address: '春熙路xxx号',
+          phone: '14444xxxxxxx',
+        },
+      ],
+    },
+  ];
   return (
     <div style={{ padding: 32, background: '#fff' }}>
+      <h3>树形结构表格测试1</h3>
+      <Table columns={columnsExpand} dataSource={treeData} bordered />
+      <h3>树形结构表格测试2</h3>
+      <Table columns={columnsExpand} dataSource={treeData} rowKey="id" bordered rowSelection={rowSelection} />
       <>
-        <h4>没有数据展示</h4>
-        <Table columns={columns1} dataSource={[]} bordered />
-        <h4>表头分组</h4>
+        <h3>展开行测试1</h3>
+        <Table
+          columns={columnsExpand}
+          dataSource={expandData}
+          expandedRowRender={(record) => <p style={{ margin: 0 }}>{record.description}</p>}
+          rowSelection={{}}
+          onExpand={(record) => {
+            console.log('==record', record);
+          }}
+          rowKey="id"
+        />
+        <h3>展开行测试2</h3>
+        <Table
+          columns={columnsExpand}
+          dataSource={expandData}
+          expandedRowRender={(record) => <p style={{ margin: 0 }}>{record.description}</p>}
+          rowSelection={{}}
+          rowKey="id"
+          isSingleCol={false}
+        />
+      </>
+      <>
+        <h3>没有数据展示 table</h3>
+        <Table columns={columnsT} bordered dataSource={[]} />
+        <h3 style={{ marginTop: 24 }}>自定义没有数据展示 table</h3>
+        <Table
+          columns={columnsT}
+          bordered
+          dataSource={[]}
+          noData={<div style={{ color: 'red', fontSize: 18 }}>暂无数据 ！！！</div>}
+        />
+        <h3>表头分组</h3>
         <Table
           columns={columnsGroup}
           rowSelection={rowSelection}
@@ -383,7 +524,7 @@ const TableDemo: React.FC<unknown> = () => {
           scroll={{ x: 1500, y: 300 }}
         />
         <div>
-          <h4>基础表格</h4>
+          <h3>基础表格</h3>
           <div>
             <Table
               dataSource={data2}
@@ -421,7 +562,9 @@ const TableDemo: React.FC<unknown> = () => {
                   // align: 'right',
                   width: 150,
                   render: (_, record, index) => (
-                    <a className={`delete-${index}`}>删除</a>
+                    <Popconfirm title="哈哈哈哈哈">
+                      <a className={`delete-${index}`}>删除</a>
+                    </Popconfirm>
                   ),
                 },
               ]}
@@ -431,7 +574,7 @@ const TableDemo: React.FC<unknown> = () => {
           </div>
         </div>
         <div>
-          <h4>固定列表格</h4>
+          <h3>固定列表格</h3>
           <div>
             <Table
               dataSource={data2}
@@ -475,7 +618,7 @@ const TableDemo: React.FC<unknown> = () => {
           </div>
         </div>
         <div>
-          <h4>合并行列</h4>
+          <h3>合并行列</h3>
           <div>
             <Table
               columns={spanColumns}
@@ -531,7 +674,7 @@ const TableDemo: React.FC<unknown> = () => {
           </div>
         </div>
         <div>
-          <h4>可选择行</h4>
+          <h3>可选择行</h3>
           <div>
             <Table
               rowSelection={rowSelection}
@@ -611,7 +754,7 @@ const TableDemo: React.FC<unknown> = () => {
           </div>
         </div>
         <div>
-          <h4>可选择行 radio</h4>
+          <h3>可选择行 radio</h3>
           <div>
             <Table
               rowSelection={rowSelection1}
@@ -740,7 +883,6 @@ const TableDemo: React.FC<unknown> = () => {
                   province: 'e',
                 },
               ]}
-              bordered
               pagination={{
                 current,
                 pageSize,
@@ -756,13 +898,13 @@ const TableDemo: React.FC<unknown> = () => {
           </div>
         </div>
         <div>
-          <h4>可筛选过滤</h4>
+          <h3>可筛选过滤</h3>
           <div>
             <Table
               rowSelection={rowSelection}
               columns={columns}
               pagination={{
-                // pageSize: 2,
+                pageSize: 3,
                 style: { marginTop: 8 },
               }}
               dataSource={[
@@ -804,6 +946,24 @@ const TableDemo: React.FC<unknown> = () => {
                 },
                 {
                   key: '5',
+                  name: 'Jake White',
+                  age: 18,
+                  tel: '0575-22098909',
+                  phone: 18900010002,
+                  address: 'Dublin No. 2 Lake Park',
+                  province: 'e',
+                },
+                {
+                  key: '6',
+                  name: 'Jake White',
+                  age: 18,
+                  tel: '0575-22098909',
+                  phone: 18900010002,
+                  address: 'Dublin No. 2 Lake Park',
+                  province: 'e',
+                },
+                {
+                  key: '7',
                   name: 'Jake White',
                   age: 18,
                   tel: '0575-22098909',
