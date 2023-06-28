@@ -20,18 +20,18 @@ const AnotherRadio: React.FC<RadioProps> = (props: RadioProps) => {
     defaultChecked = false,
     className,
     value,
-    checked: checkedFromProps = false,
+    checked: checkedFromProps,
     ...rest
   } = props;
   // eslint-disable-next-line prefer-const
   let [checked, setChecked] = useState(checkedFromProps || defaultChecked);
   useEffect(() => {
-    setChecked(checkedFromProps);
+    setChecked(checkedFromProps || false);
   }, [checkedFromProps]);
   const { getPrefixCls } = useContext(ConfigContext);
   const prefix = getPrefixCls('radio', prefixCls);
   const { onGroupChange, value: valueFromContext } = useContext(RadioGroupContext);
-  if (valueFromContext) {
+  if (typeof valueFromContext !== 'undefined') {
     checked = valueFromContext === value;
   }
   const mainClass = classNames(prefix, {
@@ -41,7 +41,9 @@ const AnotherRadio: React.FC<RadioProps> = (props: RadioProps) => {
 
   const onchange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
     onGroupChange && onGroupChange(e);
-    setChecked(e.target.checked);
+    if (typeof checkedFromProps === 'undefined') {
+      setChecked(e.target.checked);
+    }
     if (onChange) {
       (onChange as React.ChangeEventHandler<HTMLInputElement>)(e);
     }

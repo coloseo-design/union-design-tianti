@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Radio } from '../index';
+import Radio from './index';
 import './styles/index';
 
 export default () => {
@@ -8,7 +8,6 @@ export default () => {
     { label: 'Pear', value: 'Pear' },
     { label: 'Orange', value: 'Orange' },
   ];
-  const [value, setValue] = useState('a');
   return (
     <div style={{ padding: 20 }}>
       <h1>基本用法</h1>
