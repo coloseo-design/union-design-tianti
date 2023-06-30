@@ -84,25 +84,42 @@
     }
     &-inner {
       background: @popconfirm-bg;
-      border-radius: 2px;
-      padding: 16px 8px;
+      border-radius: 4px;
+      padding: 24px 32px;
       min-width: 120px;
       min-height: 90px;
-      box-shadow: 0 1px 4px 1px @popconfirm-boxshadow;
+      max-width: 384px;
+      box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1),0px 3px 7px rgba(0, 0, 0, 0.05);
       &-title {
-        padding-left: 24px;
         color: @popconfirm-content-inner-title;
+        font-weight: 600;
+        font-size: 16px;
+      }
+      &-description {
+        color: @popconfirm-content-inner-description;
+        line-height: 20px;
+        margin-top: 8px;
+        font-size: 14px;
       }
       &-icon {
-        position: absolute;
-        margin-top: -3px;
-        color: @popconfirm-icon-color;
         font-size: 16px;
-        margin-right: 8px;
+        position: absolute;
+        &-info {
+          color: @popconfirm-icon-info-color;
+        }
+        &-help {
+          color: @popconfirm-icon-help-color;
+        }
+        &-error {
+          color: @popconfirm-icon-error-color;
+        }
+        &-success {
+          color: @popconfirm-icon-success-color;
+        }
       }
       &-btn {
         text-align: right;
-        margin-top: 20px;
+        margin-top: 16px;
       }
     }
   }

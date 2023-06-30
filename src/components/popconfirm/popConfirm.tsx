@@ -1,7 +1,7 @@
 import React from 'react';
 import Pop, { PopProps } from './pop';
 
-const PopConfim: React.FC<PopProps> = (props: PopProps) => {
+const PopConfirm: React.FC<PopProps> = (props: PopProps) => {
   const { trigger = 'click', ...rest } = props;
   return (
     <Pop
@@ -12,4 +12,4 @@ const PopConfim: React.FC<PopProps> = (props: PopProps) => {
   );
 };
 
-export default PopConfim;
+export default PopConfirm;

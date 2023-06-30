@@ -20,7 +20,7 @@
 @header-gray: #F9F9F9; // 表头灰
 @border-color: #CECECE; // 描边
 @dividing-line: #E5E5E5; // 分割线
-@info-color: #0060FF;
+@help1: #0060FF;  // 语义色-帮助1
 @help2: #7BADFF; // 帮助2
 @help3: #EBF2FF; // 帮助3
 @success-color: #00B42A;
@@ -612,7 +612,7 @@
 @tooltip-danger-bg: @error-color;
 @tooltip-warning-bg: @warning-color;
 @tooltip-success-bg: @success-color;
-@tooltip-info-bg: @info-color;
+@tooltip-info-bg: @help1;
 
 // Popover
 // ---
@@ -625,7 +625,14 @@
 @popconfirm-bg: @white;
 @popconfirm-boxshadow: rgba(147,147,147,0.35);
 @popconfirm-icon-color: @warning-color;
-@popconfirm-content-inner-title: @secondary-text-color;
+@popconfirm-content-inner-title: @first-text-color;
+@popconfirm-content-inner-description: @secondary-text-color;
+@popconfirm-icon-info-color: @warning-color;
+@popconfirm-icon-help-color: @help1;
+@popconfirm-icon-success-color: @success-color;
+@popconfirm-icon-error-color: @error-color;
+
+
 // Modal
 // --
 @modal-body-padding: 24px;
@@ -633,7 +640,7 @@
 @modal-heading-color: @heading-color;
 @modal-method-success-icon-color: @success-color;
 @modal-method-error-icon-color: @error-color;
-@modal-method-info-icon-color: @info-color;
+@modal-method-info-icon-color: @help1;
 @modal-method-warning-icon-color: @warning-color;
 @modal-mask-bg: fade(@black, 45%);
 @modal-content-bg: @white;
@@ -1007,7 +1014,7 @@
 @alert-success-color: @success-color;
 @alert-info-border-color: @help2;
 @alert-info-bg-color: @help3;
-@alert-info-color: @info-color;
+@alert-info-color: @help1;
 @alert-warning-border-color: @warning2;
 @alert-warning-bg-color:@warning3;
 @alert-warning-color: @warning-color;

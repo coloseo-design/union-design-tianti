@@ -1,5 +1,6 @@
 import React from 'react';
-import { Popconfirm, Button } from '../index';
+import { Button, Icon } from '../index';
+import Popconfirm from './index';
 import './styles/index';
 import '../button/styles/index';
 
@@ -21,10 +22,10 @@ const PopconfirmDemo: React.FC<unknown> = () => {
         <Popconfirm
           title={(
             <div>
-              你是否确定这是一个气泡确认框kkk
-              你是否确定这是一个气泡确认框？你是否确定这是一个气泡确认框？
+              你是否确定这是一个气泡确认框
             </div>
 )}
+          description="你是否确定这是一个气泡确认框？你是否确定这是一个气泡确认框？"
           placement="topLeft"
           getPopupContainer={() => document.getElementById('pop')}
           onConfirm={onConfirm}
@@ -38,6 +39,9 @@ const PopconfirmDemo: React.FC<unknown> = () => {
         </Popconfirm>
         <Popconfirm
           title="你是否确定这是一个气泡确认框"
+          showIcon
+          icon="error"
+          description="你是否确定这是一个气泡确认框？你是否确定这是一个气泡确认框？"
           placement="top"
           onVisibleChange={(v) => setVisible1(v)}
           getPopupContainer={() => document.getElementById('pop')}

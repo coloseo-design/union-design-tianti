@@ -18,10 +18,13 @@ popConfirm的属性说明如下：
 | cancelText | 取消按钮文字 | string | 取消 |  |
 | okText | 确认按钮文字 | string | 确定 |  |
 | okType | 确认按钮类型  | string | primary |  |
-| title  | 确认框的描述 | string| ReactNode| 无 |
+| title  | 确认框的标题 | string| ReactNode| 无 |
+| description  | 确认框的描述内容 | string| ReactNode| 无 |
 | onCancel | 点击取消的回调 | function(e) | 无 |  |
 | onConfirm | 点击确认的回调 | function(e)| 无 |  |
-| icon | 自定义弹出气泡 Icon 图标 | ReactNode | <Icon type="exclamation-circle" /> |  |
+| showIcon | 是否展示title前面的icon | boolean| false |  |
+| showArrow | 是否展示三角肩头 | boolean| true |  |
+| icon | 自定义弹出气泡 Icon 图标和图标类型 | 'help' \| 'success' \|'info' \|'error'ReactNode | 'info' |  |
 | getPopupContainer | 菜单渲染父节点。默认渲染到 body 上，如果你遇到弹窗滚动定位问题，试试修改为滚动的区域，并相对其定位。 | Function(triggerNode)  | () => document.body  |
 | mouseEnterDelay | 鼠标移入后延时多少才显示 Tooltip，单位：秒 | number | - |  |
 | mouseLeaveDelay | 鼠标移出后延时多少才隐藏 Tooltip，单位：秒 | number | - |  |

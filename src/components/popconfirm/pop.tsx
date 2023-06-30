@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-import React from 'react';
+import React, { ReactNode } from 'react';
 import classnames from 'classnames';
 import Icon from '@union-design/icon';
 import Portal from '@union-design/portal';
@@ -25,7 +25,8 @@ export interface PopProps {
   onCancel?: (e: React.MouseEvent<HTMLElement, MouseEvent>) => void;
   onConfirm?: (e: React.MouseEvent<HTMLElement, MouseEvent>) => void;
   getPopupContainer?: () => HTMLElement | null;
-  icon?: React.ReactNode;
+  icon?: 'help' | 'success' |'info' |'error' | React.ReactNode;
+  showIcon?: boolean;
   autoAdjustOverflow?: boolean;
   componentType?: 'pop-over' | 'pop-confirm';
   trigger?: string;
@@ -38,7 +39,9 @@ export interface PopProps {
   className?: string;
   okButtonProps?: BaseButtonProps;
   cancelButtonProps?: BaseButtonProps;
+  description?: string | ReactNode;
   children?: any;
+  showArrow?: boolean;
 }
 
 export interface PopconfirmState {
@@ -298,7 +301,7 @@ class PopComponent extends React.Component<PopProps, PopconfirmState> {
       prefixCls,
       children,
       getPopupContainer,
-      icon,
+      icon = 'info',
       title,
       okText = '确定',
       cancelText = '取消',
@@ -310,6 +313,9 @@ class PopComponent extends React.Component<PopProps, PopconfirmState> {
       okButtonProps,
       cancelButtonProps,
       trigger,
+      description,
+      showIcon,
+      showArrow = true,
     } = this.props;
     const {
       visible, x, y, direction,
@@ -363,15 +369,32 @@ class PopComponent extends React.Component<PopProps, PopconfirmState> {
       [`${contentStyle}-inner-btn-show`]: visible,
     });
 
+    const IconTypeMap: {[x: string]: string} = {
+      info: 'attention1-surface',
+      success: 'check1-surface',
+      error: 'close1-surface',
+      help: 'info-surface',
+    };
+
     const confirmContent = (
       <div className={`${contentStyle}-inner`}>
         <div>
-          <div className={`${contentStyle}-inner-icon`}>{icon || <Icon type="exclamation-circle" />}</div>
-          <div className={`${contentStyle}-inner-title`}>{title}</div>
+          {showIcon && (
+          <div className={classnames(`${contentStyle}-inner-icon`, {
+            [`${contentStyle}-inner-icon-${icon}`]: typeof icon === 'string',
+          })}
+          >
+            {React.isValidElement(icon) ? icon : <Icon type={IconTypeMap[icon as any] || 'attention1-surface'} />}
+          </div>
+          )}
+          <div style={{ paddingLeft: 20 }}>
+            <div className={`${contentStyle}-inner-title`}>{title}</div>
+            <div className={`${contentStyle}-inner-description`}>{description}</div>
+          </div>
         </div>
         <div className={btnStyle}>
-          <Button size="small" style={{ marginRight: 8, transition: 'none' }} {...cancelButtonProps} onClick={this.handleCancel}>{cancelText}</Button>
-          <Button type={okType} {...okButtonProps} size="small" style={{ transition: 'none' }} onClick={this.handleOk}>{okText}</Button>
+          <Button style={{ marginRight: 8, transition: 'none' }} {...cancelButtonProps} onClick={this.handleCancel}>{cancelText}</Button>
+          <Button type={okType} {...okButtonProps} style={{ transition: 'none' }} onClick={this.handleOk}>{okText}</Button>
         </div>
       </div>
     );
@@ -399,7 +422,7 @@ class PopComponent extends React.Component<PopProps, PopconfirmState> {
             onMouseOut={this.hidePop}
           >
             <div className={contentStyle}>
-              <div className={arrow} />
+              {showArrow && <div className={arrow} />}
               {componentType === 'pop-confirm' && confirmContent}
               {componentType === 'pop-over' && overContent}
             </div>
