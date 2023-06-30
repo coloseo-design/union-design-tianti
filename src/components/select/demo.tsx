@@ -1,6 +1,5 @@
 import React from 'react';
-import { Select, Icon } from '../index';
-import { ValueType } from './index';
+import Select, { ValueType } from './index';
 import './styles/index';
 
 const { Option, OptGroup } = Select;
@@ -62,6 +61,16 @@ const SelectDemo = () => {
           <Option value={item.value} key={item.value}>{item.label}</Option>
         ))}
       </Select>
+      <h1>基本用法，使用LabelInValue为true 可以传值一个对象 </h1>
+      <Select
+        LabelInValue
+        defaultValue={{ label: 'uuu11uu', value: '1' }}
+        style={{ width: 220 }}
+      >
+        {data.map((item: any) => (
+          <Option value={item.value} key={item.value}>{item.label}</Option>
+        ))}
+      </Select>
       <h1>多选框</h1>
       <Select
         onChange={(value) => {
@@ -102,7 +111,7 @@ const SelectDemo = () => {
       <Select disabled style={{ width: 220 }} defaultValue="1">
         <Option value="1">hhh </Option>
       </Select>
-      <h1>分组选择</h1>
+      <h1>分组选择器</h1>
       <Select style={{ width: 220 }} defaultValue="1">
         <OptGroup label="小标题">
           <Option value="1">下拉选项</Option>
@@ -112,6 +121,13 @@ const SelectDemo = () => {
           <Option value="11">下拉选项</Option>
           <Option value="22">下拉选项</Option>
         </OptGroup>
+      </Select>
+      <h1>注释选择器</h1>
+      <Select style={{ width: 220 }}>
+        <Option value="1" note="注释内容" description="内容内容内容内容内容内容">下拉选项1</Option>
+        <Option value="2" note="注释内容" description="内容内容内容内容内容内容">下拉选项2</Option>
+        <Option value="3" note="注释内容" description="内容内容内容内容内容内容">下拉选项3</Option>
+        <Option value="4" note="注释内容" description="内容内容内容内容内容内容">下拉选项4</Option>
       </Select>
     </div>
   );

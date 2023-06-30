@@ -18,6 +18,7 @@ subtitle: 选择框
 |allowClear|是否允许清除|boolean|false|
 |type|default - 基本选择器;search - 可搜索;multiple - 多选;|string|default|
 |value|select的值|string \| string[]|--|
+|LabelInValue|是否把每个选项的 label 包装到 value 中，会把 Select 的 value 类型从 string 变为 { value: string, label: string } 的格式| boolean|false|
 |disabled|是否禁用|boolean|false|
 |dropdownClassName|下拉框类名|string|--|
 |dropdownStyle|下拉框样式|object|--|

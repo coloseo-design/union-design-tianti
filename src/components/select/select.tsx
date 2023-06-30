@@ -153,7 +153,6 @@ class Select extends React.Component<SelectProps, SelectState> {
 
   loopChild = (data: any[], list: OptionType[]) => {
     data.forEach((item) => {
-      // console.log
       if (item?.props && item?.type?.isOption) {
         list.push(item?.props);
       }
@@ -213,8 +212,8 @@ class Select extends React.Component<SelectProps, SelectState> {
   }
 
   getLocation = () => {
-    const { getPopupContainer } = this.props;
-    setTimeout(() => {
+    const { getPopupContainer, type } = this.props;
+    const temp = () => {
       if (this.selectRef.current) {
         const {
           height, width,
@@ -227,7 +226,16 @@ class Select extends React.Component<SelectProps, SelectState> {
           width,
         });
       }
-    }, 30);
+    };
+
+    if (type === 'multiple') {
+      const time = setTimeout(() => {
+        clearTimeout(time);
+        temp();
+      }, 0);
+    } else {
+      temp();
+    }
   };
 
   handleDelete = (key: string) => {

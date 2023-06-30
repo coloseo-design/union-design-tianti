@@ -12,31 +12,20 @@ interface commonParams {
   value: string | string[],
   children: string | React.ReactNode;
   label?: string | React.ReactNode;
+  note?: string | React.ReactNode;
+  description?: string | React.ReactNode;
 }
 export interface OptionProps extends commonParams{
   prefixCls?: string,
 }
-export type OptionState = commonParams
-class Option extends React.Component<OptionProps, OptionState> {
-  static isOption = true;
 
-  constructor(props: OptionProps) {
-    super(props);
-    const {
-      value, disabled, children, label,
-    } = props;
-    this.state = {
-      value,
-      disabled,
-      children,
-      label,
-    };
-  }
+class Option extends React.Component<OptionProps> {
+  static isOption = true;
 
   renderOption = ({ getPrefixCls }: ConfigConsumerProps) => {
     const {
-      disabled, value, children, label,
-    } = this.state;
+      disabled, value, children, label, note, description,
+    } = this.props;
     const {
       prefixCls: customizePrefixCls,
     } = this.props;
@@ -56,13 +45,21 @@ class Option extends React.Component<OptionProps, OptionState> {
             onClick={(event) => {
               event.stopPropagation();
               event.nativeEvent.stopImmediatePropagation();
-              !disabled && onSelect({ value, label: children || label });
+              !disabled && onSelect({ value, label: label || children });
             }}
             className={`${sectionClass}`}
-            title={(children || label) as string}
           >
-            {multiple && <Checkbox checked={selected} disabled={disabled} />}
-            <span style={{ paddingLeft: multiple ? 8 : 0 }}>{children || label}</span>
+            <div
+              className={classnames(`${prefix}-drop-item-title`, {
+                [`${prefix}-drop-item-hasNote`]: note,
+              })}
+              title={(label || children) as string}
+            >
+              {multiple && <Checkbox checked={selected} disabled={disabled} />}
+              <span style={{ paddingLeft: multiple ? 8 : 0 }}>{label || children}</span>
+              {note && <span className={`${prefix}-drop-item-note`}>{note}</span>}
+            </div>
+            {description && <div className={`${prefix}-drop-item-description`}>{description}</div>}
           </div>
         )}
       </SelectContext.Consumer>
