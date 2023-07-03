@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { AutoComplete } from '../index';
+import AutoComplete from './index';
 import './styles/index';
 
 const { Option, OptGroup } = AutoComplete;
@@ -85,7 +85,7 @@ export default () => {
       ))}
     </OptGroup>
   )).concat([
-    <Option disabled key="all" className="show-all">
+    <Option value="extra" disabled key="all" className="show-all">
       <a href="https://www.google.com/search?q=antd" target="_blank" rel="noopener noreferrer">
         View all results
       </a>
@@ -101,7 +101,7 @@ export default () => {
   return (
     <div id="autoplate" style={{ position: 'relative' }}>
       <h2>基本的</h2>
-      <div style={{ width: 256, margin: 32 }}>
+      <div style={{ width: 256 }}>
         <AutoComplete
           placeholder="请输入"
           onSearch={handleSearch}
@@ -109,6 +109,13 @@ export default () => {
           onFocus={handleFocus}
           onBlur={handleBlur}
           getPopupContainer={() => document.querySelector('#autoplate')}
+        />
+        <h2>Group</h2>
+        <AutoComplete
+          placeholder="请输入"
+        // onSearch={handleSearch}
+          style={{ marginTop: 32, width: 256 }}
+          dataSource={options}
         />
       </div>
       <h2>多行的</h2>
@@ -144,13 +151,6 @@ export default () => {
         ]}
         disabled
         showSearch
-      />
-
-      <AutoComplete
-        placeholder="请输入"
-        // onSearch={handleSearch}
-        style={{ margin: 32, width: 256 }}
-        dataSource={options}
       />
     </div>
   );

@@ -8,7 +8,7 @@ export interface OptGroupProps {
   label: React.ReactNode;
   children: any;
   prefixCls?: string | undefined;
-  onClick: (value: string, option: any, evt?: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
+  onClick?: (value: string, option: any, evt?: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
 }
 
 class OptGroup extends React.Component<OptGroupProps> {

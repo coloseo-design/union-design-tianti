@@ -1,8 +1,8 @@
 /* eslint-disable max-len */
 /* eslint-disable no-nested-ternary */
-import React, { ChangeEvent } from 'react';
+import React, { ChangeEvent, createRef } from 'react';
 import classNames from 'classnames';
-import Icon from '@union-design/icon';
+import Input from '@union-design/input';
 import { getOffset } from '@union-design/utils';
 import Portal from '@union-design/portal';
 import { ConfigConsumer, ConfigConsumerProps } from '@union-design/config-provider';
@@ -12,6 +12,7 @@ import OptGroup from './opt-group';
 
 const { isValidElement } = React;
 
+const { Search, TextArea } = Input;
 export interface DataSourceItemObject {
   value: string;
   label: string | React.ReactNode;
@@ -37,6 +38,8 @@ class AutoComplete extends React.Component<AutoCompleteProps, autoState> {
 
   node: HTMLSpanElement | undefined;
 
+  popRef = createRef<HTMLDivElement>();
+
   constructor(props: AutoCompleteProps) {
     super(props);
     const {
@@ -58,7 +61,7 @@ class AutoComplete extends React.Component<AutoCompleteProps, autoState> {
     if (open || defaultOpen) {
       this.getLocation();
     }
-    document.addEventListener('click', this.documentBodyOnClick);
+    document.addEventListener('click', this.documentBodyOnClick, true);
   };
 
   componentDidUpdate(prevProps: AutoCompleteProps) {
@@ -69,7 +72,7 @@ class AutoComplete extends React.Component<AutoCompleteProps, autoState> {
   }
 
   componentWillUnmount = () => {
-    document.removeEventListener('click', this.documentBodyOnClick);
+    document.removeEventListener('click', this.documentBodyOnClick, true);
   }
 
   onChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -114,8 +117,12 @@ class AutoComplete extends React.Component<AutoCompleteProps, autoState> {
     });
   };
 
-  documentBodyOnClick = () => {
-    this.setState({ showAutoDrop: false });
+  documentBodyOnClick = (e: Event) => {
+    const target = e.target as HTMLElement;
+    const popRef = this.popRef?.current as HTMLElement;
+    if (!(popRef && popRef.contains(target))) {
+      this.setState({ showAutoDrop: false });
+    }
   }
 
   handleClick = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
@@ -134,32 +141,18 @@ class AutoComplete extends React.Component<AutoCompleteProps, autoState> {
 
   getLocation = () => {
     const { getPopupContainer } = this.props;
-    // if (this.node) {
-    //   const {
-    //     height, width,
-    //   } = this.node.getBoundingClientRect();
-    //   const containter = getPopupContainer && getPopupContainer();
-    //   const { top: offsetTop, left: offsetLeft } = getOffset(this.node, containter);
-    //   this.setState({
-    //     left: offsetLeft,
-    //     top: offsetTop + height + 4,
-    //     width,
-    //   });
-    // }
-    setTimeout(() => {
-      if (this.node) {
-        const {
-          height, width,
-        } = this.node.getBoundingClientRect();
-        const containter = getPopupContainer && getPopupContainer();
-        const { left: offsetLeft, top: offsetTop } = getOffset(this.node, containter);
-        this.setState({
-          left: offsetLeft,
-          top: offsetTop + height + 4,
-          width,
-        });
-      }
-    }, 30);
+    if (this.node) {
+      const {
+        height, width,
+      } = this.node.getBoundingClientRect();
+      const container = getPopupContainer && getPopupContainer();
+      const { left: offsetLeft, top: offsetTop } = getOffset(this.node, container);
+      this.setState({
+        left: offsetLeft,
+        top: offsetTop + height + 4,
+        width,
+      });
+    }
   };
 
   renderAuto = ({ getPrefixCls }: ConfigConsumerProps) => {
@@ -184,14 +177,8 @@ class AutoComplete extends React.Component<AutoCompleteProps, autoState> {
 
     /*  =====  className  */
     const prefix = getPrefixCls('auto-complete', prefixCls);
-    const serachCls = classNames(`${prefix}-input-search`);
     const wrapperContainer = classNames(`${prefix}-wrapper`, className);
-    const inputClass = classNames(multiInput ? `${prefix}-textarea` : `${prefix}-input`, {
-      [`${prefix}-disabled`]: disabled,
-      [`${prefix}-active`]: autoFocus,
-    });
-
-    const dropSelect = classNames(multiInput ? `${prefix}-select-textarea` : `${prefix}-select`);
+    const dropSelect = classNames(`${prefix}-select`);
 
     /*  =====  children dataSource  */
     let optionChildren: React.ReactNode[];
@@ -236,51 +223,40 @@ class AutoComplete extends React.Component<AutoCompleteProps, autoState> {
       onChange: this.onChange,
       onFocus: this.onFocus,
       value: inputValue,
-      className: inputClass,
       onBlur: handleBlur,
       disabled,
+      autoFocus,
     };
 
+    const Tag = multiInput ? TextArea : showSearch ? Search : Input;
     return (
       <div
         className={wrapperContainer}
         style={style}
+        ref={this.getNode}
+        onClick={this.handleClick}
       >
-        <div onClick={this.handleClick} ref={this.getNode}>
-          {
-          multiInput && (
-            <textarea
-              ref={forwardedRef as any}
-              {...params as any}
-              style={{
-                height: style && style.height ? style.height : rows * 32,
-              }}
-            />
-          )
-        }
-          {
-          !multiInput && (
-            <>
-              <input ref={forwardedRef as any} {...params as any} />
-              {showSearch && <div className={serachCls} style={{ cursor: disabled ? 'not-allowed' : 'pointer' }}><Icon type="search" /></div>}
-            </>
-          )
-        }
-        </div>
+        {multiInput ? (
+          <Tag
+            ref={forwardedRef as any}
+            {...params as any}
+            style={{
+              height: style && style.height ? style.height : rows * 32,
+            }}
+          />
+        )
+          : <Tag ref={forwardedRef as any} {...params as any} />}
 
         {showAutoDrop && optionChildren && optionChildren.length > 0 && (
         <Portal {...({ getPopupContainer })}>
           <div
             className={dropSelect}
+            ref={this.popRef}
             style={{
               ...dropdownMenuStyle,
               top,
               left,
               width,
-            }}
-            onClick={(e) => {
-              e.stopPropagation();
-              e.nativeEvent.stopImmediatePropagation();
             }}
           >
             {optionChildren}
@@ -299,8 +275,6 @@ class AutoComplete extends React.Component<AutoCompleteProps, autoState> {
     );
   }
 }
-// const AutoCompleteRef = React.forwardRef((props: AutoCompleteProps, ref: React.MutableRefObject<HTMLInputElement | HTMLTextAreaElement>) => <AutoComplete {...props} forwardedRef={ref} />);
-// const AutoCompleteRef: React.ForwardRefExoticComponent<AutoCompleteProps & React.RefAttributes<HTMLInputElement | HTMLTextAreaElement>> & { Option: any; OptGroup: any; isSelectOptGroup: boolean} = React.forwardRef<HTMLInputElement, AutoCompleteProps>((props: AutoCompleteProps, ref: React.MutableRefObject<HTMLInputElement | HTMLTextAreaElement>) => <AutoComplete {...props} forwardedRef={ref} />);
 
 const AutoRef = React.forwardRef<HTMLInputElement, AutoCompleteProps>((props: AutoCompleteProps, ref) => <AutoComplete {...props} forwardedRef={ref as any} />);
 const AutoCompleteRef = AutoRef as typeof AutoRef & {

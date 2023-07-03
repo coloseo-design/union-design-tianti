@@ -8,8 +8,10 @@ export interface OptionProps {
   value: string;
   key: string | number;
   children?: any;
-  onClick: (value: string, option: any, evt?: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
+  onClick?: (value: string, option: any, evt?: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
   prefixCls?: string | undefined;
+  disabled?: boolean;
+  className?: string;
 
 }
 
@@ -28,7 +30,10 @@ class Option extends React.Component<OptionProps> {
       prefixCls,
     } = this.props;
     const prefix = getPrefixCls('auto-complete', prefixCls);
-    const itemclass = classNames(`${prefix}-select-item`);
+    const itemclass = classNames(`${prefix}-select-item`, {
+      // [`${prefix}-select-item-selected`]: value === children,
+    });
+
     return (
       <div
         onClick={this.handleClick(value, children)}
