@@ -12,3 +12,4 @@ subtitle: 分割线
 | orientation | 分割线标题的位置 | `left` \| `right` \| `center` | `center` |
 | dashed | 是否虚线 | boolean | - |
 | className | 分割线样式类 | string | - |
+|direction|分割线方向|'vertical'\|'horizontal'|'horizontal'|

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Divider } from '../index';
+import Divider from './index';
 import './styles/index';
 
 const DividerDemo = () => (
@@ -34,6 +34,16 @@ const DividerDemo = () => (
       Sed nonne merninisti licere mihi ista probare, quae sunt a te dicta? Refert tamen, quo modo.`}
     </p>
     <Divider orientation="right">right</Divider>
+
+    <h2>垂直分割线不可带文字</h2>
+    <div>
+      哈哈哈
+      <Divider direction="vertical" />
+      呵呵呵
+      <Divider direction="vertical" />
+      嘿嘿嘿
+    </div>
+
   </div>
 );
 

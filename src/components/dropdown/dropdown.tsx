@@ -17,7 +17,7 @@ export interface DropdownProps {
   disabled?: boolean;
   prefixCls?: string;
   overlayClassName?: string;
-  arrow?: boolean;
+  // arrow?: boolean;
   children?: any;
 }
 
@@ -123,8 +123,12 @@ class Dropdown extends React.Component<DropdownProps, DropdownState> {
     const { visible } = this.state;
     const { visible: propsVisible } = this.props;
     const {
-      placement = 'bottomCenter', arrow = false, onVisibleChange, getPopupContainer,
+      placement = 'bottomCenter',
+      // arrow = false,
+      onVisibleChange,
+      getPopupContainer,
     } = this.props;
+    const arrow = false;
     if (target && this.node) {
       const { height: contentHeight, width: contentWidth } = this.node.getBoundingClientRect();
       const {
@@ -177,7 +181,7 @@ class Dropdown extends React.Component<DropdownProps, DropdownState> {
       children,
       prefixCls,
       overlayClassName,
-      arrow,
+      // arrow,
       placement = 'bottomCenter',
       overlay,
       getPopupContainer,
@@ -248,7 +252,7 @@ class Dropdown extends React.Component<DropdownProps, DropdownState> {
               }
             }}
           >
-            {arrow && <div className={arrowStyle} />}
+            {/* {arrow && <div className={arrowStyle} />} */}
             <div className={containter}>
               {overlay && React.isValidElement(overlay) ? (() => {
                 if ((overlay.type as unknown as Record<string, unknown>).tag === MENU_TAG_MENU) {
