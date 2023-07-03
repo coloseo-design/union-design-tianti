@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import Input from './index';
 import Icon from '../icon/index';
 import './styles/index';
@@ -8,18 +8,31 @@ const { Search, TextArea } = Input;
 
 const InputDemo = () => {
   const ref = useRef({ test: '123' });
-  console.log('ref', ref);
+  const [value, $value] = useState('【同意】');
+
   return (
     <div style={{ padding: 50 }}>
-      <Input
-        allowClear
-        placeholder="基本输入"
-        onChange={({ target: { value } }) => { console.log('---value', value); }}
-        onSearch={(value) => { console.log('searchValue', value); }}
-        ref={ref}
-        style={{ width: 100 }}
-        defaultValue="100"
-      />
+      <div style={{ width: '100%', height: '100%', position: 'relative' }}>
+        <div style={{
+          position: 'absolute', color: '#969696', fontSize: 14, top: 9, left: 12, background: '#fff',
+        }}
+        >
+          【同意】
+        </div>
+        <TextArea
+          allowClear
+          onChange={(e) => {
+            const v = e.target.value;
+            if (value.indexOf('【同意】') === 0) {
+              $value(v);
+            } else {
+              $value(`【同意】${v}`);
+            }
+          }}
+          value={value}
+          style={{ width: 500 }}
+        />
+      </div>
       <br />
       <br />
       <Input disabled placeholder="不可编辑" />

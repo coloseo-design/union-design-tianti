@@ -28,7 +28,7 @@ export type SideNavProps<Data> = {
   /** 每条数据的唯一key */
   keyExtractor: (data: Data) => string;
   /** 每条数据用来做导航每项的Name */
-  nameExtractor: (data: Data) => string;
+  nameExtractor: (data: Data) => string | ReactNode;
   /** 每条数据用来做导航每项子菜单的 */
   childrenExtractor: (data: Data) => Data[] | null | undefined;
 } & BasePropsV2<{

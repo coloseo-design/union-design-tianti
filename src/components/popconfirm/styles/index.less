@@ -17,69 +17,78 @@
     position: relative;
     &-arrow {
       position: absolute;
-      width: 5px;
-      height: 5px;
-      background: @popconfirm-bg;
-      box-shadow: 0 1px 4px -1px @popconfirm-boxshadow;
-      &-top {
-        bottom: -5px;
-        transform: translate(-50%, -2.5px) rotate(45deg);
+      &::before {
+        position: absolute;
+        content: '';
+        width: 30px;
+        height: 10px;
+        background: @popconfirm-bg;
+        z-index: 1;
+      }
+      &::after {
+        position: absolute;
+        content: '';
+        width: 10px;
+        height: 10px;
+        background: @popconfirm-bg;
+        box-shadow: @popconfirm-box-shadow;
+        transform: translate(0%, -50%) rotate(45deg);
+      }
+      &-top, &-bottom {
         left: 50%;
       }
-      &-topLeft {
-        bottom: -5px;
-        left: 10%;
-        transform: translate(-10%, -2.5px) rotate(45deg);
+      &-topLeft, &-bottomLeft {
+        left: 32px;
+        &::after {
+          left: 0px;
+        }
       }
-      &-topRight {
-        bottom: -5px;
-        right: 10%;
-        transform: translate(-10%, -2.5px) rotate(45deg);
+      &-topRight, &-bottomRight {
+        right: 32px;
+        &::after {
+          right: 0px;
+        }
       }
-      &-bottom {
-        left: 50%;
-        transform: translate(-50%, -2.5px) rotate(45deg);
-        top: 0;
+      &-top, &-topLeft, &-topRight {
+        bottom: 0px;
+        &::before {
+          bottom: 0px;
+          transform: translateX(-50%);
+        }
       }
-      &-bottomLeft {
-        left: 10%;
-        transform: translate(-10%, -2.5px) rotate(45deg);
-        top: 0;
+      &-bottom, &-bottomRight, &-bottomLeft {
+        top: 0px;
+        &::before {
+          top: 0px;
+          transform: translateX(-50%);
+        }
       }
-      &-bottomRight {
-        right: 10%;
-        transform: translate(-10%, -2.5px) rotate(45deg);
-        top: 0;
-      }
-      &-left {
+      &-left, &-right {
         top: 50%;
-        transform: translate(-2.5px, -50%) rotate(45deg);
-        right: -5px;
       }
-      &-leftTop {
-        top: 10%;
-        transform: translate(-2.5px, -10%) rotate(45deg);
-        right: -5px;
+      &-leftTop, &-rightTop {
+        top: 32px;
       }
-      &-leftBottom {
-        bottom: 10%;
-        transform: translate(-2.5px, -10%) rotate(45deg);
-        right: -5px;
+      &-leftBottom, &-rightBottom {
+        bottom: 32px;
       }
-      &-right {
-        top: 50%;
-        transform: translate(-2.5px, -50%) rotate(45deg);
+      &-left, &-leftTop, &-leftBottom, &-right, &-rightTop, &-rightBottom{
+        right: 0px;
+        &::before {
+          right: 0px;
+          width: 10px;
+          height: 30px;
+          transform: translate(0%, -50%);
+        }
+        &::after {
+          transform: translate(-50%, -50%) rotate(-45deg);
+        }
+      }
+      &-right, &-rightTop, &-rightBottom {
         left: 0px;
-      }
-      &-rightTop {
-        top: 10%;
-        transform: translate(-2.5px, -10%) rotate(45deg);
-        left: 0px;
-      }
-      &-rightBottom {
-        bottom: 10%;
-        transform: translate(-2.5px, -10%) rotate(45deg);
-        left: 0px;
+        &::before {
+          left: 0px;
+        }
       }
     }
     &-inner {
@@ -89,7 +98,7 @@
       min-width: 120px;
       min-height: 90px;
       max-width: 384px;
-      box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1),0px 3px 7px rgba(0, 0, 0, 0.05);
+      box-shadow: @popconfirm-box-shadow;
       &-title {
         color: @popconfirm-content-inner-title;
         font-weight: 600;
@@ -124,3 +133,5 @@
     }
   }
 }
+
+

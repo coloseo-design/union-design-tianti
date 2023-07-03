@@ -387,7 +387,7 @@ class PopComponent extends React.Component<PopProps, PopconfirmState> {
             {React.isValidElement(icon) ? icon : <Icon type={IconTypeMap[icon as any] || 'attention1-surface'} />}
           </div>
           )}
-          <div style={{ paddingLeft: 20 }}>
+          <div style={{ paddingLeft: showIcon ? 20 : 0 }}>
             <div className={`${contentStyle}-inner-title`}>{title}</div>
             <div className={`${contentStyle}-inner-description`}>{description}</div>
           </div>
