@@ -17,7 +17,8 @@ export default () => {
   };
   const children = data.map((email) => <Option key={email} value={email}>{email}</Option>);
   const dataSource = ['Burns Bay Road', 'Downing Street', 'Wall Street'];
-  const searchChild = dataSource.map((item) => <Option key={item} value={item}>{item}</Option>);
+  const [test, $test] = useState(dataSource);
+  // const searchChild = dataSource.map((item) => <Option key={item} value={item}>{item}</Option>);
   const dataSource1 = [
     {
       title: 'Libraries',
@@ -36,11 +37,11 @@ export default () => {
       title: 'Solutions',
       children: [
         {
-          title: 'AntDesign UI',
+          title: 'AntDesign UI1',
           count: 60100,
         },
         {
-          title: 'AntDesign',
+          title: 'AntDesign1',
           count: 30010,
         },
       ],
@@ -75,11 +76,11 @@ export default () => {
     <OptGroup key={group.title} label={renderTitle(group.title)}>
       {group.children.map((opt) => (
         <Option key={opt.title} value={opt.title}>
-          {opt.title}
           <span className="certain-search-item-count">
             {opt.count}
             {' '}
             people
+            {opt.title}
           </span>
         </Option>
       ))}
@@ -91,12 +92,6 @@ export default () => {
       </a>
     </Option>,
   ]);
-  const handleFocus = () => {
-    console.log('---11');
-  };
-  const handleBlur = () => {
-    console.log('---blur');
-  };
 
   return (
     <div id="autoplate" style={{ position: 'relative' }}>
@@ -106,14 +101,11 @@ export default () => {
           placeholder="请输入"
           onSearch={handleSearch}
           dataSource={children}
-          onFocus={handleFocus}
-          onBlur={handleBlur}
           getPopupContainer={() => document.querySelector('#autoplate')}
         />
         <h2>Group</h2>
         <AutoComplete
           placeholder="请输入"
-        // onSearch={handleSearch}
           style={{ marginTop: 32, width: 256 }}
           dataSource={options}
         />
@@ -131,10 +123,17 @@ export default () => {
       <h2>可搜索的</h2>
       <AutoComplete
         placeholder="请输入"
-        onSearch={handleSearch}
+        onSearch={(v) => {
+          if (v) {
+            const t = dataSource.filter((i) => i.toUpperCase().indexOf(v.toUpperCase()) >= 0);
+            $test(t);
+          } else {
+            $test(dataSource);
+          }
+        }}
         style={{ margin: 32, width: 256 }}
         showSearch
-        dataSource={searchChild}
+        dataSource={test}
       />
       <AutoComplete
         placeholder="请输入"
@@ -142,7 +141,7 @@ export default () => {
         dataSource={[
           {
             value: 1,
-            label: 'glyphicon',
+            label: <div style={{ color: 'green' }}>glyphicon</div>,
           },
           {
             value: 2,

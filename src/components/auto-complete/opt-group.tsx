@@ -9,6 +9,7 @@ export interface OptGroupProps {
   children: any;
   prefixCls?: string | undefined;
   onClick?: (value: string, option: any, evt?: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
+  inputValue?: any;
 }
 
 class OptGroup extends React.Component<OptGroupProps> {
@@ -17,19 +18,20 @@ class OptGroup extends React.Component<OptGroupProps> {
       label,
       children,
       prefixCls,
+      inputValue,
       onClick,
     } = this.props;
     const prefix = getPrefixCls('auto-complete', prefixCls);
-    const itemclass = classNames(`${prefix}-select-group`);
+    const itemClass = classNames(`${prefix}-select-group`);
     return (
       <div
-        className={itemclass}
+        className={itemClass}
       >
-        <div className={`${itemclass}-label`}>
+        <div className={`${itemClass}-label`}>
           <span>{label}</span>
         </div>
         {
-          React.Children.map(children, (child) => React.cloneElement(child, { onClick }))
+          React.Children.map(children, (child) => React.cloneElement(child, { onClick, inputValue }))
         }
       </div>
     );

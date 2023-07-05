@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable max-len */
 /* eslint-disable no-nested-ternary */
 import React, { ChangeEvent, createRef } from 'react';
@@ -17,12 +18,11 @@ export interface DataSourceItemObject {
   value: string;
   label: string | React.ReactNode;
 }
+
 export type DataSourceItemType = DataSourceItemObject | React.ReactNode;
 interface autoState {
   showAutoDrop?: boolean;
   inputValue: unknown;
-  isSearch?: boolean;
-  searchData?: DataSourceItemType;
   dropStyleP?: React.CSSProperties;
   left: number,
   top: number,
@@ -48,8 +48,6 @@ class AutoComplete extends React.Component<AutoCompleteProps, autoState> {
     this.state = {
       showAutoDrop: open || defaultOpen || false,
       inputValue: value || defaultValue || '',
-      searchData: [],
-      isSearch: false,
       left: 0,
       top: 0,
       width: 0,
@@ -75,45 +73,21 @@ class AutoComplete extends React.Component<AutoCompleteProps, autoState> {
     document.removeEventListener('click', this.documentBodyOnClick, true);
   }
 
-  onChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const {
-      onChange, onSearch, showSearch, dataSource,
-    } = this.props;
-    onChange && onChange(e.target.value);
-    onSearch && onSearch(e.target.value);
-    this.setState({
-      inputValue: e.target.value,
-      showAutoDrop: e.target.value !== '',
-    });
-    if (showSearch) {
-      if (e.target.value !== '') {
-        const data = (dataSource || []).filter((i: any) => {
-          const flag = i.props ? (Object.prototype.toString.call(i.props.children) !== '[object Object]' && i.props.children.indexOf(e.target.value) >= 0)
-            : typeof i === 'string' ? i.indexOf(e.target.value) >= 0 : i.label && i.label.indexOf(e.target.value) >= 0;
-          return flag;
-        });
-        this.setState({ isSearch: true, searchData: data });
-      } else {
-        this.setState({ isSearch: false });
-      }
-    }
+  handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { onChange, onSearch } = this.props;
+    const val = e.target.value;
+    onChange?.(val);
+    onSearch?.(val);
+    this.setState({ inputValue: val });
   };
 
-  onFocus = () => {
-    const { onFocus } = this.props;
-    onFocus && onFocus();
-  };
-
-  onSelect = (value: string, option: any) => {
+  handleSelect = (value: string, option: any) => {
     const { onSelect, onChange } = this.props;
-    onSelect && onSelect(value, option);
-    onChange && onChange(Object.prototype.toString.call(option) === '[object String]' ? option
-      : Object.prototype.toString.call(option) === '[object Array]' ? option[0] : value);
+    onSelect?.(value, option);
+    onChange?.(value);
     this.setState({
-      inputValue: Object.prototype.toString.call(option) === '[object String]' ? option
-        : Object.prototype.toString.call(option) === '[object Array]' ? option[0] : value,
+      inputValue: typeof option === 'string' ? option : value,
       showAutoDrop: false,
-      isSearch: false,
     });
   };
 
@@ -125,9 +99,7 @@ class AutoComplete extends React.Component<AutoCompleteProps, autoState> {
     }
   }
 
-  handleClick = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    event.stopPropagation();
-    event.nativeEvent.stopImmediatePropagation();
+  handleClick = () => {
     const { disabled } = this.props;
     if (!disabled) {
       this.setState({ showAutoDrop: true });
@@ -142,9 +114,7 @@ class AutoComplete extends React.Component<AutoCompleteProps, autoState> {
   getLocation = () => {
     const { getPopupContainer } = this.props;
     if (this.node) {
-      const {
-        height, width,
-      } = this.node.getBoundingClientRect();
+      const { height, width } = this.node.getBoundingClientRect();
       const container = getPopupContainer && getPopupContainer();
       const { left: offsetLeft, top: offsetTop } = getOffset(this.node, container);
       this.setState({
@@ -170,9 +140,11 @@ class AutoComplete extends React.Component<AutoCompleteProps, autoState> {
       rows = 2,
       dropdownMenuStyle = {},
       getPopupContainer,
+      onFocus,
+      onBlur,
     } = this.props;
     const {
-      showAutoDrop, inputValue, isSearch, searchData, left, top, width,
+      showAutoDrop, inputValue, left, top, width,
     } = this.state;
 
     /*  =====  className  */
@@ -182,20 +154,20 @@ class AutoComplete extends React.Component<AutoCompleteProps, autoState> {
 
     /*  =====  children dataSource  */
     let optionChildren: React.ReactNode[];
-    const data = isSearch ? searchData : dataSource;
 
     if (dataSource && dataSource.length && isValidElement(dataSource[0])) {
-      optionChildren = React.Children.map(data, (child) => React.cloneElement(child, { onClick: this.onSelect }));
+      optionChildren = React.Children.map(dataSource, (child) => React.cloneElement(child, { onClick: this.handleSelect, inputValue }));
     } else {
-      optionChildren = data
-        ? data.map((item: string | DataSourceItemObject) => {
+      optionChildren = dataSource
+        ? dataSource.map((item: string | DataSourceItemObject) => {
           switch (Object.prototype.toString.call(item)) {
             case '[object String]':
               return (
                 <Option
                   value={item as any}
                   key={item as any}
-                  onClick={this.onSelect}
+                  onClick={this.handleSelect}
+                  inputValue={inputValue}
                 >
                   {item}
                 </Option>
@@ -203,7 +175,12 @@ class AutoComplete extends React.Component<AutoCompleteProps, autoState> {
             case '[object Object]': {
               const { value: optionValue } = item as DataSourceItemObject;
               return (
-                <Option key={optionValue} value={optionValue} onClick={this.onSelect}>
+                <Option
+                  key={optionValue}
+                  value={optionValue}
+                  onClick={this.handleSelect}
+                  inputValue={inputValue}
+                >
                   {(item as DataSourceItemObject).label}
                 </Option>
               );
@@ -214,16 +191,13 @@ class AutoComplete extends React.Component<AutoCompleteProps, autoState> {
         })
         : [];
     }
-    const handleBlur = () => {
-      const { onBlur } = this.props;
-      onBlur && onBlur();
-    };
+
     const params = {
       placeholder,
-      onChange: this.onChange,
-      onFocus: this.onFocus,
+      onChange: this.handleChange,
+      onFocus,
       value: inputValue,
-      onBlur: handleBlur,
+      onBlur,
       disabled,
       autoFocus,
     };
