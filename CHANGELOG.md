@@ -1,3 +1,7 @@
+# [1.0.0-beta.1](https://github.com/coloseo-design/union-design-tianti/compare/v1.0.42...v1.0.0-beta.1) (2023-07-05)
+
+
+
 ## [0.0.4](http://gitlab.tianti.tg.unicom.local/muses/union-design/compare/v1.0.42...v0.0.4) (2023-05-04)
 
 
