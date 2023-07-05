@@ -4,14 +4,17 @@
 @sidenav-width: 206px;
 @sidenav-popup-div-width: 184px;
 
+@sidenav-bg: #fff;
+
 .@{sidenav} {
   position: relative;
-  background: rgb(255, 255, 255);
+  background: @sidenav-bg;
   width: @sidenav-width;
 
   & > .@{sidenav}-cao {
     position: absolute;
-    left: @sidenav-width;
+    // left: @sidenav-width;
+    left: 100%;
     top: 50%;
     cursor: pointer;
     user-select: none;
@@ -19,7 +22,7 @@
 
   & > .@{sidenav}-border {
     position: absolute;
-    background: rgb(255, 255, 255);
+    background: @sidenav-bg;
     top: 0;
     left: 0;
     right: 0;
@@ -33,10 +36,21 @@
     left: 0;
     right: 0;
     bottom: 0;
-    width: @sidenav-width;
+    // width: @sidenav-width;
     padding: 10px 0;
     overflow-y: auto;
     overflow-x: hidden;
+    scrollbar-width: thin;
+    scrollbar-color: rgb(206, 206, 206) #fff;
+    &::-webkit-scrollbar {
+      width: 9px;
+    }
+    &::-webkit-scrollbar-thumb {
+        background-clip: padding-box;
+        background-color: rgb(206, 206, 206);
+        border-radius: 4px;
+        box-shadow: inset -4px 0 #fff;
+    }
 
     & .@{sidenav}-item.@{sidenav}-level1 > .@{sidenav}-text {
       margin-left: 0;
@@ -63,7 +77,8 @@
 
     & .@{sidenav}-item {
       position: relative;
-      width: @sidenav-width;
+      // width: @sidenav-width;
+      width: 100%;
       height: 40px;
       cursor: pointer;
       user-select: none;
