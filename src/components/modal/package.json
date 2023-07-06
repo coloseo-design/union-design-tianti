@@ -22,13 +22,13 @@
 		"@union-design/portal": "^1.0.1",
 		"@union-design/style": "^1.0.1",
 		"classnames": "^2.3.2",
-		"omit.js": "^2.0.2",
-		"union-tool": "^0.1.2"
+		"omit.js": "^2.0.2"
 	},
 	"devDependencies": {
 		"@types/classnames": "^2.3.1",
 		"@types/react-dom": "^18.0.11",
 		"react": "^16.8.0",
-		"react-dom": "^16.8.0"
+		"react-dom": "^16.8.0",
+		"union-tool": "^0.1.2"
 	}
 }

@@ -84,13 +84,13 @@ const SelectDemo = () => {
           value={value1}
           maxTagCount={2}
         >
-        <Option key="1" value="1">标签</Option>
-        <Option key="2" value="2">选项1222</Option>
-        <Option disabled key="3" value="3">选项33333</Option>
-        <Option key="4" value="4">选项1rt2</Option>
-        <Option key="5" value="5">选项12try22</Option>
-        <Option key="6" value="6">选项12yhr22</Option>
-      </Select>
+          <Option key="1" value="1">标签</Option>
+          <Option key="2" value="2">选项1222</Option>
+          <Option disabled key="3" value="3">选项33333</Option>
+          <Option key="4" value="4">选项1rt2</Option>
+          <Option key="5" value="5">选项12try22</Option>
+          <Option key="6" value="6">选项12yhr22</Option>
+        </Select>
       </div>
       <h1>可搜索选择框</h1>
       <Select
