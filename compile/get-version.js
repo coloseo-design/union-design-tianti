@@ -8,7 +8,10 @@ const cwd = process.cwd();
 function getPackageJson(package, isRoot) {
   const packagePath = isRoot ? path.resolve(cwd, 'package.json') : path.resolve(cwd, `src/components/${package}/package.json`);
   const packageJson = fs.readFileSync(packagePath);
-  return JSON.parse(packageJson);
+  if (packagePath) {
+    return JSON.parse(packageJson);
+  }
+  return {};
 }
 
 function writeJson(package, content, isRoot) {
