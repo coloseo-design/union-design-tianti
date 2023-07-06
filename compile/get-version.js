@@ -36,7 +36,7 @@ function editVersion(package, replacePackage, version) {
 }
 
 function editImportVersion(package, version) {
-  packagesAll.forEach((item) => {
+  packagesAll.filter((i) => !i.endsWith('.less') && !i.endsWith('ts')).forEach((item) => {
     editVersion(item, package, version);
   });
 }
