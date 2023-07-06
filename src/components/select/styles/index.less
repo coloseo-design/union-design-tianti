@@ -16,6 +16,7 @@
   padding: 5px 12px;
   color: @select-text-color;
   overflow: hidden;
+  vertical-align: middle;
   cursor: pointer;
   &-multiple {
     height: auto;
@@ -70,7 +71,7 @@
     max-width: 100px;
     min-width: 54px;
     height: 20px;
-    line-height: 20px;
+    // line-height: 20px;
     overflow: hidden;
     border: 1px solid @select-tag-border-color;
     background-color: @select-tag-bg;
@@ -79,8 +80,9 @@
     font-size: 12px;
     color: @select-tag-color;
     margin: 1px 4px 1px 0px;
-    & > div {
-      width: 80%;
+    & > span:first-child {
+      display: inline-block;
+      max-width: 80%;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
@@ -88,10 +90,13 @@
     .uniicon {
       font-size: 12px;
       margin-left: 4px;
+      display: inline-block;
+      line-height: 20px;
+      vertical-align: text-bottom;
       color: @select-tag-icon-color;
     }
   }
-  &:not(&-disabled):hover, &:not(&-disabled):active {
+  &:not(&-disabled):hover, &:not(&-disabled):active, &-focus:not(&-disabled) {
     border-color: @select-hover-border-color;
     box-shadow: @select-box-shadow;
   }

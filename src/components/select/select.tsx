@@ -62,6 +62,7 @@ export interface SelectState {
   childProps?: OptionType[];
   isClear?: boolean;
   initSearchValue?: OptionType;
+  focus?: boolean;
 }
 
 class Select extends React.Component<SelectProps, SelectState> {
@@ -86,6 +87,7 @@ class Select extends React.Component<SelectProps, SelectState> {
       width: 0,
       isClear: false,
       initSearchValue: {} as OptionType,
+      focus: false,
     };
   }
 
@@ -140,13 +142,14 @@ class Select extends React.Component<SelectProps, SelectState> {
     if (dropRef && !dropRef.contains(target)) {
       this.setState({ visible: false });
     }
+    this.setState({ focus: false });
   }
 
   handleClick = () => {
     const { disabled } = this.props;
     const { visible } = this.state;
     if (!disabled) {
-      this.setState({ visible: !visible });
+      this.setState({ visible: !visible, focus: true });
       this.getLocation();
     }
   }
@@ -278,6 +281,7 @@ class Select extends React.Component<SelectProps, SelectState> {
       onSelect?.(LabelInValue ? t as OptionType[] : t.map((i) => i.value) as string[], checked);
       this.getLocation();
     }
+    this.setState({ focus: true });
   }
 
   InputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -354,12 +358,13 @@ class Select extends React.Component<SelectProps, SelectState> {
       ...rest
     } = this.props;
     const {
-      left, top, visible, valueObj, inputValue, width, isClear,
+      left, top, visible, valueObj, inputValue, width, isClear, focus,
     } = this.state;
     const prefix = getPrefixCls('select');
     const selectCls = classnames(prefix, {
       [`${prefix}-${type}`]: type,
       [`${prefix}-disabled`]: disabled,
+      [`${prefix}-focus`]: focus,
     }, className);
 
     const restProps = omit(rest, ['value', 'defaultValue', 'onSearch', 'maxTagCount', 'onSelect', 'LabelInValue', 'onChange']);
@@ -409,7 +414,9 @@ class Select extends React.Component<SelectProps, SelectState> {
         <div
           className={`${prefix}-suffix-icon`}
           style={{ color: isClear ? '#ACAFB9' : undefined }}
-          onClick={() => isClear && this.AllDelete}
+          onClick={(e) => {
+            isClear && this.AllDelete(e);
+          }}
         >
           <Icon type={isClear ? 'close1-surface' : visible ? 'up' : 'down'} />
         </div>

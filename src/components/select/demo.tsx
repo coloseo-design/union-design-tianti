@@ -72,17 +72,18 @@ const SelectDemo = () => {
         ))}
       </Select>
       <h1>多选框</h1>
-      <Select
-        onChange={(value) => {
-          // console.log('==values', value);
-        }}
-        allowClear
-        placeholder="请选择选项"
-        style={{ width: 220 }}
-        type="multiple"
-        value={value1}
-        maxTagCount={2}
-      >
+      <div>
+        <Select
+          onChange={(value) => {
+            // console.log('==values', value);
+          }}
+          allowClear
+          placeholder="请选择选项"
+          style={{ width: 220 }}
+          type="multiple"
+          value={value1}
+          maxTagCount={2}
+        >
         <Option key="1" value="1">标签</Option>
         <Option key="2" value="2">选项1222</Option>
         <Option disabled key="3" value="3">选项33333</Option>
@@ -90,6 +91,7 @@ const SelectDemo = () => {
         <Option key="5" value="5">选项12try22</Option>
         <Option key="6" value="6">选项12yhr22</Option>
       </Select>
+      </div>
       <h1>可搜索选择框</h1>
       <Select
         placeholder="请选择选项"
