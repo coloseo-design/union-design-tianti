@@ -1,6 +1,6 @@
 {
-	"name": "union-design",
-	"version": "1.0.40",
+	"name": "union-design-test",
+	"version": "1.0.0-beta.2",
 	"license": "MIT",
 	"description": "设计系统本地开发",
 	"files": [
@@ -30,11 +30,6 @@
 	],
 	"dependencies": {
 		"@uni/icons-react": "^2.0.0",
-		"async-validator": "^3.5.1",
-		"classnames": "^2.2.6",
-		"dayjs": "^1.10.4",
-		"enquire.js": "^2.1.6",
-		"omit.js": "^1.0.2",
 		"@union-design/affix": "^1.0.1",
 		"@union-design/alert": "^1.0.1",
 		"@union-design/anchor": "^1.0.1",
@@ -100,7 +95,12 @@
 		"@union-design/tree-select": "^1.0.1",
 		"@union-design/typography": "^1.0.1",
 		"@union-design/upload": "^1.0.1",
-		"@union-design/utils": "^1.0.1"
+		"@union-design/utils": "^1.0.1",
+		"async-validator": "^3.5.1",
+		"classnames": "^2.2.6",
+		"dayjs": "^1.10.4",
+		"enquire.js": "^2.1.6",
+		"omit.js": "^1.0.2"
 	},
 	"devDependencies": {
 		"@types/classnames": "^2.2.11",
