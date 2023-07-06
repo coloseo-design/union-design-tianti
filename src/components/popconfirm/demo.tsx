@@ -1,8 +1,8 @@
 import React from 'react';
 import { Button, Icon } from '../index';
 import Popconfirm from './index';
-import './styles/index';
-import '../button/styles/index';
+// import './styles/index';
+// import '../button/styles/index';
 
 const PopconfirmDemo: React.FC<unknown> = () => {
   const [loading, setLoading] = React.useState(false);

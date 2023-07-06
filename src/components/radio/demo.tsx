@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Radio from './index';
-import './styles/index';
+// import './styles/index';
 
 export default () => {
   const options = [

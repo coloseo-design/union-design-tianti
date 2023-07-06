@@ -4,7 +4,7 @@ import { Dayjs } from 'dayjs';
 
 import { DatePicker } from '../index';
 import { PickerSize } from './types';
-import './styles/index';
+// import './styles/index';
 
 const DatePickerDemo = () => {
   const [size, setSize] = React.useState<PickerSize>('middle');

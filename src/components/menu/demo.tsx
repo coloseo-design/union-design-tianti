@@ -1,8 +1,8 @@
 /* eslint-disable no-confusing-arrow */
 import React, { useState } from 'react';
 import { Menu, Switch } from '../index';
-import './styles/index';
-import '../switch/styles/index';
+// import './styles/index';
+// import '../switch/styles/index';
 
 const Demo = () => {
   const [theme, setTheme] = useState<'light' | 'dark'>('light');

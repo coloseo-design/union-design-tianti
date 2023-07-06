@@ -1,6 +1,6 @@
 import React from 'react';
 import { Cascader } from '../index';
-import './styles/index';
+// import './styles/index';
 
 const marginBottomStyle = {
   marginBottom: 16,

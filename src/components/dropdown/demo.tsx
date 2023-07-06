@@ -4,7 +4,7 @@ import {
   Button, Icon, Menu,
 } from '../index';
 import Dropdown from './dropdown';
-import './styles/index';
+// import './styles/index';
 
 const menu = (
   <Menu>

@@ -10,11 +10,11 @@ import {
 } from '../index';
 import Form from './index';
 import Radio from '../radio/index';
-import '../grid/styles/index';
-import '../button/styles/index';
-import '../input/styles/index';
-import '../select/styles/index';
-import './styles/index';
+// import '../grid/styles/index';
+// import '../button/styles/index';
+// import '../input/styles/index';
+// import '../select/styles/index';
+// import './styles/index';
 import { FormInstance, FormValues } from './type';
 
 const { Item: FormItem } = Form;

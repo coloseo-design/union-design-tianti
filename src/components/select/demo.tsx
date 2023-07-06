@@ -1,6 +1,6 @@
 import React from 'react';
 import Select, { ValueType } from './index';
-import './styles/index';
+// import './styles/index';
 
 const { Option, OptGroup } = Select;
 

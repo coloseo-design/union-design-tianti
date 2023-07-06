@@ -1,6 +1,6 @@
 import React from 'react';
 import { Rate } from '../index';
-import './styles/index';
+// import './styles/index';
 
 const RateDemo = () => (
   <div>

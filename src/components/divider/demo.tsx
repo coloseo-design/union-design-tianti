@@ -1,6 +1,6 @@
 import React from 'react';
 import Divider from './index';
-import './styles/index';
+// import './styles/index';
 
 const DividerDemo = () => (
   <div style={{ padding: 100, width: 900, border: '1px solid blue' }}>

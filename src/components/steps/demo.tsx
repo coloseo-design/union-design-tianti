@@ -1,8 +1,8 @@
 /* eslint-disable max-len */
 import React from 'react';
 import { Icon, Steps } from '../index';
-import './styles/index';
-import '../icon/styles/index';
+// import './styles/index';
+// import '../icon/styles/index';
 
 const data = [
   {

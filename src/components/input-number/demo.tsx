@@ -1,7 +1,7 @@
 /* eslint-disable react/button-has-type */
 import React from 'react';
 import { InputNumber } from '../index';
-import './styles/index';
+// import './styles/index';
 
 const handleChange = (value: string | number) => {
   console.log('--value', value);

@@ -1,6 +1,6 @@
 import React from 'react';
 import Button from './index';
-import './styles/index';
+// import './styles/index';
 
 const ButtonDemo: React.FC<unknown> = () => (
   <div style={{ margin: 5 }}>

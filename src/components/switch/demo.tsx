@@ -2,7 +2,7 @@
 /* eslint-disable react/state-in-constructor */
 import React from 'react';
 import Switch from './index';
-import './styles/index';
+// import './styles/index';
 
 export default class demo extends React.Component {
   state = {

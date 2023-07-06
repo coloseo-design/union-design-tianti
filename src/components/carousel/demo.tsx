@@ -1,7 +1,7 @@
 import React from 'react';
 // import { Carousel } from '../index';
 import { Carousel } from '../index';
-import './styles/index';
+// import './styles/index';
 
 const CarouselDemo = () => {
   const beforeChange1 = (from: number, to: number) => {

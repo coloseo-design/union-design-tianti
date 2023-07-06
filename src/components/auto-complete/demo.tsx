@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import AutoComplete from './index';
-import './styles/index';
+// import './styles/index';
 
 const { Option, OptGroup } = AutoComplete;
 export default () => {

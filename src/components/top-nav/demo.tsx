@@ -7,7 +7,7 @@
 import React, { useState } from "react";
 import TopNav from "./index";
 import { Tooltip } from "..";
-import "./styles/index";
+// import "./styles/index";
 
 const Demo = () => {
   type Data = { id: string; name: string; desc?: string; list?: Data[] };

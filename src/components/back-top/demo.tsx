@@ -1,6 +1,6 @@
 import React from 'react';
 import { BackTop } from '../index';
-import './styles/index';
+// import './styles/index';
 
 const BackTopDemo = () => (
   <div style={{ position: 'relative' }}>

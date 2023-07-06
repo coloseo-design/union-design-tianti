@@ -1,6 +1,6 @@
 import React from 'react';
 import { Alert } from '../index';
-import './styles/index';
+// import './styles/index';
 
 const handleClose = (e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
   console.log('00000', e);

@@ -2,7 +2,7 @@ import React from 'react';
 import Dropdown from '../dropdown';
 import Icon from '../icon';
 import Header from './header';
-import './styles/index';
+// import './styles/index';
 
 const Demo = () => {
   const [down, setDown1] = React.useState(true);

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Message, Button } from '../index';
-import './styles/index';
-import '../button/styles/index';
+// import './styles/index';
+// import '../button/styles/index';
 
 Message.config = {
   zIndex: 3200,

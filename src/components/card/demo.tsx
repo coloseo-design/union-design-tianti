@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, Icon } from '../index';
-import './styles/index';
+// import './styles/index';
 
 const CardDemo = () => (
   <>

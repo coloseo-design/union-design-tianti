@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import Affix from './index';
 import Button from '../button';
 
-import './styles/index';
+// import './styles/index';
 import './demo.less';
 
 const AffixDemo = () => {

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Image, Button } from '../index';
-import './styles/index';
-import '../button/styles';
+// import './styles/index';
+// import '../button/styles';
 
 const ImageDemo = () => {
   const [random, setRandom] = React.useState<number>();

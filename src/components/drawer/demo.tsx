@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from 'react';
 import { Drawer } from '../index';
 import { DrawerPlacement } from './drawer';
-import './styles/index';
+// import './styles/index';
 
 const DrawerDemo = () => {
   const [drawerVisible1, setDrawerVisible1] = useState(false);

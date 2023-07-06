@@ -1,7 +1,7 @@
 import React from 'react';
 import { Statistic, Icon } from '../index';
-import './styles/index';
-import '../icon/styles/index';
+// import './styles/index';
+// import '../icon/styles/index';
 
 const StatisticDemo = () => (
   <div>

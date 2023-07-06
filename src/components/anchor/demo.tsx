@@ -1,6 +1,6 @@
 import React from 'react';
 import { Anchor } from '../index';
-import './styles/index';
+// import './styles/index';
 
 const AnchorDemo = () => (
   <div

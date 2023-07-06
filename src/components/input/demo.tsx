@@ -1,8 +1,8 @@
 import React, { useRef, useState } from 'react';
 import Input from './index';
 import Icon from '../icon/index';
-import './styles/index';
-import '../icon/styles/index';
+// import './styles/index';
+// import '../icon/styles/index';
 
 const { Search, TextArea } = Input;
 

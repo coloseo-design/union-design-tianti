@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import {
   Modal, Button, Select, TreeSelect, Form, Input,
 } from '../index';
-import './styles/index';
-import '../button/styles/index';
-import '../select/styles/index';
-import '../tree-select/styles/index';
+// import './styles/index';
+// import '../button/styles/index';
+// import '../select/styles/index';
+// import '../tree-select/styles/index';
 
 const { Option } = Select;
 const { TreeNode } = TreeSelect;

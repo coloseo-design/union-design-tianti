@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import Skeleton from './skeleton';
 import Button from '../button';
-import './styles/index';
-import '../button/styles/index';
+// import './styles/index';
+// import '../button/styles/index';
 
 const SkeletonDemo = () => {
   const [show, setShow] = useState(false);

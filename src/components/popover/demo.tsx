@@ -2,8 +2,8 @@
 import React, { useState } from 'react';
 import { Button } from '../index';
 import Popover from './popover';
-import './styles/index';
-import '../button/styles/index';
+// import './styles/index';
+// import '../button/styles/index';
 
 const arr = Array.from({ length: 20 }).map((_, index) => index);
 const PopoverDemo = () => {

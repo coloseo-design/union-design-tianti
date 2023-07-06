@@ -6,7 +6,7 @@
 import React, { useState } from "react";
 import SideNav from './index';
 import Icon from '../icon';
-import "./styles/index";
+// import "./styles/index";
 
 const Demo = () => {
   const data = [

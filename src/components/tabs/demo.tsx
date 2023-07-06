@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Tabs, Icon, Button } from '../index';
-import './styles/index';
-import '../icon/styles/index';
+// import './styles/index';
+// import '../icon/styles/index';
 
 const { Pane } = Tabs;
 

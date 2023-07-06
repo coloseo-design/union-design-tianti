@@ -5,10 +5,10 @@ import {
   Popconfirm,
 } from '../index';
 import Table from './index';
-import './styles/index';
-import '../popconfirm/styles/index';
-import '../tabs/styles/index';
-import '../tooltip/styles/index';
+// import './styles/index';
+// import '../popconfirm/styles/index';
+// import '../tabs/styles/index';
+// import '../tooltip/styles/index';
 import { ColumnsProps, TableRowSelectionType, ColumnsAlign } from './type';
 
 const render1 = (k: React.ReactNode, row: any) => (

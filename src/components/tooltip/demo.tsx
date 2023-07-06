@@ -1,8 +1,8 @@
 import React from 'react';
 import { Button } from '../index';
 import Tooltip from './index';
-import './styles/index';
-import '../button/styles/index';
+// import './styles/index';
+// import '../button/styles/index';
 
 const TooltipDemo = () => (
   <div style={{ padding: 20, position: 'relative' }} id="toolTip-demo">

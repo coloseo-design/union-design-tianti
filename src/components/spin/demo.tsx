@@ -1,6 +1,6 @@
 import React from 'react';
 import { Spin } from '../index';
-import './styles/index';
+// import './styles/index';
 
 const SpinDemo = () => (
   <div>

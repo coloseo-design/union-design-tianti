@@ -1,6 +1,6 @@
 import React from 'react';
 import { Timeline } from '../index';
-import './styles/index';
+// import './styles/index';
 
 const TimelineDemo: React.FC<unknown> = () => (
   <div style={{ padding: 100 }}>

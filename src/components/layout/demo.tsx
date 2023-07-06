@@ -1,7 +1,7 @@
 import React from 'react';
 import { Layout, Menu } from '../index';
 import './styles/index';
-import '../menu/styles/index';
+// import '../menu/styles/index';
 
 const {
   Header, Footer, Sider, Content,
