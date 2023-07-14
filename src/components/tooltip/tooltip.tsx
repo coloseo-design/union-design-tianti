@@ -20,6 +20,7 @@ export interface TooltipProps {
   placement?: PlacementType;
   /** 触发事件 */
   trigger?: TriggerType;
+  zIndex?: number;
 }
 
 interface TooltipState {
@@ -117,7 +118,7 @@ class Tooltip extends React.Component<TooltipProps, TooltipState> {
 
   renderTooltip = ({ getPrefixCls }: ConfigConsumerProps) => {
     const {
-      children, message, prefixCls, className, getPopupContainer, placement = 'top', trigger = 'hover', position,
+      children, message, prefixCls, className, getPopupContainer, placement = 'top', trigger = 'hover', zIndex,
     } = this.props;
     const { visible, x, y } = this.state;
     const prefix = getPrefixCls?.('tooltip', prefixCls);
@@ -174,7 +175,7 @@ class Tooltip extends React.Component<TooltipProps, TooltipState> {
         <Popup {...({ getPopupContainer })}>
           <div
             className={wrapperCls}
-            style={position || { left: x, top: y }}
+            style={{ left: x, top: y, zIndex, }}
             ref={this.getNode}
             onClick={(e) => {
               e.stopPropagation();

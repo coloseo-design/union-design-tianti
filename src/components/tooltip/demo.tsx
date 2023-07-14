@@ -21,7 +21,7 @@ const TooltipDemo = () => (
       </Tooltip>
     </div>
     <div>
-      <Tooltip message="hi billy" placement="left" trigger="click">
+      <Tooltip message="hi billy" zIndex={1200} placement="left" trigger="click">
         <Button>clickMe</Button>
       </Tooltip>
     </div>
