@@ -162,7 +162,7 @@ class Tooltip extends React.Component<TooltipProps, TooltipState> {
             children.props.onMouseOver && children.props.onMouseOver(evt);
           },
           onMouseOut: (evt: React.MouseEvent<any>) => {
-            this.onMouseOut(evt);
+            this.onMouseOut();
             children.props.onMouseOut && children.props.onMouseOut(evt);
           },
         },
@@ -175,7 +175,7 @@ class Tooltip extends React.Component<TooltipProps, TooltipState> {
         <Popup {...({ getPopupContainer })}>
           <div
             className={wrapperCls}
-            style={{ left: x, top: y, zIndex, }}
+            style={{ left: x, top: y, zIndex }}
             ref={this.getNode}
             onClick={(e) => {
               e.stopPropagation();
