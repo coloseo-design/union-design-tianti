@@ -83,3 +83,10 @@ yarn commit
 
 v1分支更改，合并到tianti分支
 
+
+
+
+发布分包版本 
+npm  publish -workspace=src/components  发布所有的分包
+npm  publish -workspace=src/components/xxx  发布某一个分包
+
