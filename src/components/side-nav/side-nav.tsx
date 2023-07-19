@@ -109,18 +109,24 @@ export default class SideNav<Data> extends BaseComponent<
     prevState: Readonly<SideNavState>,
     _snapshot?: any
   ): void {
-    if (this.state.selectedKey !== prevState.selectedKey) {
-      this.props.onChangeSelectedKey?.(
-        this.state.selectedKey ?? "",
-        this.state.selectedData
-      );
+    const { openKeys, selectedKey } = this.props;
+    if (openKeys !== _prevProps.openKeys) {
+      this.setState({ openKeys });
     }
-
-    if (
-      !isContainEqualItems(this.state.openKeys ?? [], prevState.openKeys ?? [])
-    ) {
-      this.props.onChangeOpenKeys?.(this.state.openKeys ?? []);
+    if (selectedKey !== _prevProps.selectedKey) {
+      this.setState({ selectedKey });
     }
+    // if (this.state.selectedKey !== prevState.selectedKey) {
+    //   this.props.onChangeSelectedKey?.(
+    //     this.state.selectedKey ?? "",
+    //     this.state.selectedData
+    //   );
+    // }
+    // if (
+    //   !isContainEqualItems(this.state.openKeys ?? [], prevState.openKeys ?? [])
+    // ) {
+    //   this.props.onChangeOpenKeys?.(this.state.openKeys ?? []);
+    // }
 
     if (this.state.isClose !== prevState.isClose) {
       this.props.onChangeVisible?.(!(this.state.isClose ?? false));
@@ -129,12 +135,14 @@ export default class SideNav<Data> extends BaseComponent<
 
   private closePopup = () => {
     this.popupshow = false;
+    const { onChangeOpenKeys } = this.props;
     setTimeout(() => {
       if (!this.popupshow) {
         this.setState({
           openPopup: false,
           openKeys: [],
         });
+        onChangeOpenKeys?.([]);
       }
     });
   };
@@ -301,7 +309,7 @@ export default class SideNav<Data> extends BaseComponent<
   };
 
   private onClickViewItemInline = (data: any) => {
-    const { childrenExtractor, keyExtractor } = this.props;
+    const { childrenExtractor, keyExtractor, onChangeOpenKeys, onChangeSelectedKey } = this.props;
     const openKeys = this.getBindValue("openKeys") ?? [];
     const children = childrenExtractor(data) ?? [];
     const hasChildren = children.length > 0;
@@ -312,13 +320,16 @@ export default class SideNav<Data> extends BaseComponent<
         this.setState({
           openKeys: openKeys.filter((i) => i !== key),
         });
+        onChangeOpenKeys?.(openKeys.filter((i) => i !== key));
       } else {
         this.setState({
           openKeys: [...openKeys, key],
         });
+        onChangeOpenKeys?.([...openKeys, key]);
       }
     } else {
       this.setState({ selectedKey: key, selectedData: data });
+      onChangeSelectedKey?.(key, data);
     }
   };
 
@@ -365,7 +376,7 @@ export default class SideNav<Data> extends BaseComponent<
   };
 
   private onClickViewItemExpand = (data: any) => {
-    const { childrenExtractor, keyExtractor } = this.props;
+    const { childrenExtractor, keyExtractor, onChangeOpenKeys, onChangeSelectedKey } = this.props;
     const children = childrenExtractor(data) ?? [];
     const hasChildren = children.length > 0;
     const key = keyExtractor(data);
@@ -374,19 +385,21 @@ export default class SideNav<Data> extends BaseComponent<
     if (hasChildren) {
       if (openKeys.includes(key)) {
         this.popupshow = false;
-        const openKeys = [] as string[];
+        const openKeys1 = [] as string[];
         this.setState({
           openPopup: false,
-          openKeys,
+          openKeys: openKeys1,
         });
+        onChangeOpenKeys?.(openKeys1);
       } else {
         setTimeout(() => {
           this.popupshow = true;
-          const openKeys = [key];
+          const openKeys1 = [key];
           this.setState({
             openPopup: true,
-            openKeys,
+            openKeys: openKeys1,
           });
+          onChangeOpenKeys?.(openKeys1);
         });
       }
     } else {
@@ -397,6 +410,8 @@ export default class SideNav<Data> extends BaseComponent<
         openPopup: false,
         openKeys: [],
       });
+      onChangeSelectedKey?.(key, data);
+      onChangeOpenKeys?.([]);
     }
   };
 

@@ -6,6 +6,7 @@
 import React, { useState } from "react";
 import SideNav from './index';
 import Icon from '../icon';
+import Button from '../button';
 // import "./styles/index";
 
 const Demo = () => {
@@ -120,27 +121,46 @@ const Demo = () => {
     7: <Icon type="plugin" style={{ fontSize: 18 }} />,
   };
 
-  const [openKeys, setOpenKeys] = useState<string[]>(["1", "12"]);
+  const [openKeys, setOpenKeys] = useState<string[]>([]);
 
   const [selectedKey, setSelectedKey] = useState<string>("121");
+  const [selectedKey1, setSelectedKey1] = useState<string>('');
 
+  console.log('=selectedKey1', selectedKey1, openKeys);
   return (
     <div style={{ margin: 30 }}>
       <h4>基本 内嵌式导航</h4>
+      <Button onClick={() => {
+        setSelectedKey1('32');
+      }}
+      >
+        改变selectKey
+
+      </Button>
       <SideNav
         style={{ height: 400 }}
         mode="inline"
         data={data}
+        openKeys={openKeys}
+        selectedKey={selectedKey1}
         keyExtractor={(i) => `${i.id}`}
         nameExtractor={(i) => i.name}
         childrenExtractor={(i) => i.list}
         iconExtractor={(i) => (iconMap as any)[i.id]}
-        onChangeSelectedKey={(key, data) =>
-          console.log("sidenav inline onChangeSelectedKeys:", key, data)
-        }
-        onChangeOpenKeys={(key) =>
-          console.log("sidenav inline onChangeOpenKeys:", key)
-        }
+        onChangeSelectedKey={(key, data) => {
+          console.log('pppp', data);
+          setSelectedKey1(key);
+          console.log("sidenav inline onChangeSelectedKeys:", key, data);
+        }}
+        onChangeOpenKeys={(keys) => {
+          const last = keys[keys.length - 1];
+          if (data.map((i) => i.id).includes(last) && last) {
+            setOpenKeys([...keys.filter((j) => !data.map((i) => i.id).includes(j)), last]);
+          } else {
+            setOpenKeys(keys);
+          }
+          console.log('=onChangeOpenKeys');
+        }}
         onChangeVisible={(visible) =>
           console.log("sidenav inline onChangeVisible:", visible)
         }
@@ -196,7 +216,7 @@ const Demo = () => {
         style={{ height: 400 }}
         mode="inline"
         data={data}
-        openKeys={openKeys}
+        // openKeys={openKeys}
         selectedKey={selectedKey}
         keyExtractor={(i) => `${i.id}`}
         nameExtractor={(i) => i.name}
