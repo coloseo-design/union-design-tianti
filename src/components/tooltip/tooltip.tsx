@@ -199,9 +199,9 @@ class Tooltip extends React.Component<TooltipProps, TooltipState> {
             className={wrapperCls}
             style={position || { left: x, top: y }}
             ref={this.getNode}
-            onClick={(e) => {
+            onClick={(e: React.MouseEvent<any>) => {
               e.stopPropagation();
-              e.nativeEvent.stopPropagation();
+              e.nativeEvent.stopImmediatePropagation();
             }}
             onMouseOver={() => {
               trigger === 'hover' && this.showTooltip();
