@@ -7,6 +7,7 @@ import React, { useState } from "react";
 import SideNav from './index';
 import Icon from '../icon';
 import Button from '../button';
+import Tooltip from "../tooltip/tooltip";
 // import "./styles/index";
 
 const Demo = () => {
@@ -144,7 +145,7 @@ const Demo = () => {
         openKeys={openKeys}
         selectedKey={selectedKey1}
         keyExtractor={(i) => `${i.id}`}
-        nameExtractor={(i) => i.name}
+        nameExtractor={(i) => (['12221', '12222', '12223'].includes(i.id) ? <Tooltip message={i.name} placement="bottom">{i.name}</Tooltip> : i.name)}
         childrenExtractor={(i) => i.list}
         iconExtractor={(i) => (iconMap as any)[i.id]}
         onChangeSelectedKey={(key, data) => {

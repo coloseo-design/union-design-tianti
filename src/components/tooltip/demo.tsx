@@ -7,7 +7,7 @@ import Tooltip from './index';
 const TooltipDemo = () => (
   <div style={{ padding: 20, position: 'relative' }} id="toolTip-demo">
     <div style={{ marginBottom: 20 }}>
-      <Tooltip message="悬浮出现的气泡" placement="top" trigger="hover">
+      <Tooltip message="悬浮出现的气泡" zIndex={1200} placement="top" trigger="hover">
         <span>带箭头文字提示</span>
       </Tooltip>
     </div>

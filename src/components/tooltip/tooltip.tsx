@@ -27,7 +27,9 @@ export interface TooltipProps {
 
   /* 是否展示箭头 */
   showArrow?: boolean;
-  position?: { left: number, top: number }
+  position?: { left: number, top: number };
+  children?: any;
+  zIndex?: number;
 }
 
 interface TooltipState {
@@ -139,7 +141,7 @@ class Tooltip extends React.Component<TooltipProps, TooltipState> {
     const {
       children, message, prefixCls, className,
       getPopupContainer, placement = 'top', trigger = 'hover',
-      position, showArrow = true, type = 'default',
+      showArrow = true, type = 'default', zIndex,
     } = this.props;
     const { visible, x, y } = this.state;
     const prefix = getPrefixCls?.('tooltip', prefixCls);
@@ -169,23 +171,23 @@ class Tooltip extends React.Component<TooltipProps, TooltipState> {
         click: {
           onClick: (evt: React.MouseEvent<any>) => {
             this.onMouseOver(evt);
-            children.props.onClick && children.props.onClick(evt);
+            (children.props as any)?.onClick && (children.props as any).onClick(evt);
           },
         },
         focus: {
           onFocus: (evt: React.MouseEvent<any>) => {
             this.onMouseOver(evt);
-            children.props.onFocus && children.props.onFocus(evt);
+            (children.props as any)?.onFocus && (children.props as any).onFocus(evt);
           },
         },
         hover: {
           onMouseOver: (evt: React.MouseEvent<any>) => {
             this.onMouseOver(evt);
-            children.props.onMouseOver && children.props.onMouseOver(evt);
+            (children.props as any)?.onMouseOver && (children.props as any).onMouseOver(evt);
           },
           onMouseOut: (evt: React.MouseEvent<any>) => {
             this.onMouseOut();
-            children.props.onMouseOut && children.props.onMouseOut(evt);
+            (children.props as any)?.onMouseOut && (children.props as any).onMouseOut(evt);
           },
         },
       };
@@ -197,7 +199,7 @@ class Tooltip extends React.Component<TooltipProps, TooltipState> {
         <Popup {...({ getPopupContainer })}>
           <div
             className={wrapperCls}
-            style={position || { left: x, top: y }}
+            style={{ left: x, top: y, zIndex }}
             ref={this.getNode}
             onClick={(e: React.MouseEvent<any>) => {
               e.stopPropagation();

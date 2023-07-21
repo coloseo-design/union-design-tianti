@@ -40,6 +40,7 @@ title: Tooltip
 | showArrow | 是否展示箭头 | boolean | true |
 | type | 主题色类型 | 'default', 'danger', 'warning', 'success', 'info' | 'default' |
 | align | 该值将合并到 placement 的配置中，设置参考 [rc-tooltip](https://github.com/react-component/tooltip) | Object | 无 |
+|zIndex|弹窗层级|number|1030|
 
 ## 注意
 
