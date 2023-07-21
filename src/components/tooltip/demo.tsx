@@ -14,10 +14,10 @@ const TooltipDemo = () => (
       <Tooltip
         message="hi billy"
         placement="top"
-        trigger="click"
+        type="danger"
         getPopupContainer={() => document.querySelector('#toolTip-demo')}
       >
-        <Button onClick={() => console.log('accc')}>clickMe</Button>
+        <Button onClick={() => console.log('accc')}>hover me</Button>
       </Tooltip>
     </div>
     <div>

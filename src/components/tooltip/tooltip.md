@@ -38,7 +38,8 @@ title: Tooltip
 | visible | 用于手动控制浮层显隐 | boolean | false |
 | onVisibleChange | 显示隐藏的回调 | (visible) => void | 无 |
 | align | 该值将合并到 placement 的配置中，设置参考 [rc-tooltip](https://github.com/react-component/tooltip) | Object | 无 |
-|zIndex|弹窗层级|number|1050|
+|zIndex|弹窗层级|number|1030|
+|type|主题色类型｜'default', 'danger', 'warning', 'success', 'info'|'default'|
 
 ## 注意
 
