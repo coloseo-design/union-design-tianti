@@ -1,6 +1,6 @@
 {
 	"name": "@union-design/top-nav",
-	"version": "1.0.3",
+	"version": "1.0.4",
 	"description": "",
 	"main": "lib/index.js",
 	"module": "es/index.js",
@@ -11,15 +11,14 @@
 	],
 	"devDependencies": {},
 	"dependencies": {
-		"@union-design/base-component": "^1.0.1",
-		"@union-design/icon": "^1.0.1",
-		"@union-design/style": "^1.0.1",
-		"@union-design/utils": "^1.0.1",
+		"@union-design/base-component": "^1.0.2",
+		"@union-design/icon": "^1.0.2",
+		"@union-design/style": "^1.0.2",
+		"@union-design/utils": "^1.0.2",
 		"classnames": "^2.3.2",
 		"omit.js": "^2.0.2"
 	},
 	"scripts": {
-		"start": "export NODE_OPTIONS=--openssl-legacy-provider && union-tool run dev",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"repository": {
