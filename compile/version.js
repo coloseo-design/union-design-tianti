@@ -14,7 +14,9 @@ const rootPackage = getPackageJson('', true);
 
 // 在命令行后面加 --components=xxx 表示只修改这个包的version， 加 --version=xxx 表示修改版本好为xxx
 
-filterPackage.forEach((item, index) => {
+const allP = [...filterPackage, 'row', 'col'];
+
+allP.forEach((item, index) => {
   const currentVersion = getPackageJson(item).version;
   const vs = currentVersion.split('.');
   const last = vs.pop();
@@ -27,7 +29,7 @@ filterPackage.forEach((item, index) => {
       [`@union-design/${item}`]: `^${lastVersion}`,
     });
   }
-  if (index === (filterPackage || []).length - 1) {
+  if (index === (allP || []).length - 1) {
     writeJson('', rootPackage, true);
   }
 });
