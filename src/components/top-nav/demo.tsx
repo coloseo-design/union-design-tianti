@@ -296,8 +296,13 @@ const Demo = () => {
         nameExtractor={(i) => <Tooltip message={<div>哈哈哈哈哈</div>}>{i.name}</Tooltip>}
         childrenExtractor={(i) => i.list}
         onChangeSelectedKey={(key, data) => {
-          setSelectedKey(key);
-          console.log("topnav md onChangeSelectedKeys:", key, data);
+          // setSelectedKey(key);
+          // console.log("topnav md onChangeSelectedKeys:", key, data);
+
+          setTimeout(() => {
+            setSelectedKey(key);
+            console.log("topnav md onChangeSelectedKeys:", key, data);
+          }, 1000);
         }}
       />
       <div style={{ height: 200 }} />

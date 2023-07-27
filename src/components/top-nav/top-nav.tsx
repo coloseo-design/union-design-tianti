@@ -90,12 +90,16 @@ export default class TopNav<Data> extends BaseComponent<
     _snapshot?: any
   ): void {
     this.caclbase();
-    if (this.state.selectedKey !== prevState.selectedKey) {
-      this.props.onChangeSelectedKey?.(
-        this.state.selectedKey ?? "",
-        this.state.selectedData
-      );
+    const { selectedKey } = this.props;
+    if (selectedKey !== _prevProps.selectedKey) {
+      this.setState({ selectedKey });
     }
+    // if (this.state.selectedKey !== prevState.selectedKey) {
+    //   this.props.onChangeSelectedKey?.(
+    //     this.state.selectedKey ?? "",
+    //     this.state.selectedData
+    //   );
+    // }
   }
 
   componentWillUnmount(): void {
@@ -440,6 +444,7 @@ export default class TopNav<Data> extends BaseComponent<
   };
 
   private onSelectedKey = (key: string, data: any) => {
+    const { onChangeSelectedKey } = this.props;
     this.popupshow = false;
     this.setState({
       selectedKey: key,
@@ -447,6 +452,7 @@ export default class TopNav<Data> extends BaseComponent<
       openKey: "",
       portalView: null,
     });
+    onChangeSelectedKey && onChangeSelectedKey(key, data);
   };
 
   private onClickViewItem = (data: any, div: HTMLDivElement) => {
