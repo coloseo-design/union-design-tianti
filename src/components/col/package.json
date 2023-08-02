@@ -1,6 +1,6 @@
 {
 	"name": "@union-design/col",
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"description": "",
 	"main": "lib/index.js",
 	"module": "es/index.js",
@@ -15,8 +15,8 @@
 	"author": "",
 	"license": "ISC",
 	"dependencies": {
-		"@union-design/grid": "^1.0.2",
-		"@union-design/style": "^1.0.2",
+		"@union-design/grid": "^1.0.3",
+		"@union-design/style": "^1.0.3",
 		"classnames": "^2.3.2",
 		"omit.js": "^2.0.2"
 	},

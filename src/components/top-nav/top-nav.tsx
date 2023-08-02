@@ -22,6 +22,7 @@ import {
 } from "@union-design/base-component";
 import Icon from "@union-design/icon";
 import { animation } from "@union-design/utils";
+import ResizeObserver from 'resize-observer-polyfill';
 
 export type SideNavProps<Data> = {
   /** 数据 */

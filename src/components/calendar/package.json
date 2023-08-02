@@ -1,6 +1,6 @@
 {
 	"name": "@union-design/calendar",
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"description": "",
 	"main": "lib/index.js",
 	"module": "es/index.js",
@@ -15,13 +15,13 @@
 	"author": "",
 	"license": "ISC",
 	"dependencies": {
-		"@union-design/base-component": "^1.0.2",
-		"@union-design/cascader": "^1.0.2",
-		"@union-design/config-provider": "^1.0.2",
-		"@union-design/icon": "^1.0.2",
-		"@union-design/portal": "^1.0.2",
-		"@union-design/style": "^1.0.2",
-		"@union-design/utils": "^1.0.2",
+		"@union-design/base-component": "^1.0.3",
+		"@union-design/cascader": "^1.0.3",
+		"@union-design/config-provider": "^1.0.3",
+		"@union-design/icon": "^1.0.3",
+		"@union-design/portal": "^1.0.3",
+		"@union-design/style": "^1.0.3",
+		"@union-design/utils": "^1.0.3",
 		"classnames": "^2.3.2",
 		"dayjs": "^1.11.7",
 		"omit.js": "^2.0.2"

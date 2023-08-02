@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable @typescript-eslint/no-var-requires */
-const gulp = require('gulp');
 const path = require('path');
+const gulp = require('gulp');
 const babel = require('gulp-babel');
 const through2 = require('through2');
 const ts = require('gulp-typescript');
@@ -47,6 +47,7 @@ const tsCompileConfig = (rootDir) => ({
   noUnusedLocals: false,
   strictNullChecks: false,
   skipDefaultLibCheck: true,
+  skipLibCheck: true,
   strict: false,
   target: 'es6',
   jsx: 'preserve',

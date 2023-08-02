@@ -1,1 +1,1 @@
-import '@union-design/grid/styles/index';
+import './index.less';
