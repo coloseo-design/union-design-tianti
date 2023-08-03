@@ -1,6 +1,6 @@
 {
 	"name": "@union-design/image",
-	"version": "1.0.3",
+	"version": "1.0.4",
 	"description": "",
 	"main": "lib/index.js",
 	"module": "es/index.js",
@@ -15,10 +15,10 @@
 	"author": "",
 	"license": "ISC",
 	"dependencies": {
-		"@union-design/config-provider": "^1.0.3",
-		"@union-design/icon": "^1.0.3",
-		"@union-design/style": "^1.0.3",
-		"@union-design/utils": "^1.0.3",
+		"@union-design/config-provider": "^1.0.4",
+		"@union-design/icon": "^1.0.4",
+		"@union-design/style": "^1.0.4",
+		"@union-design/utils": "^1.0.4",
 		"classnames": "^2.3.2",
 		"omit.js": "^2.0.2"
 	},

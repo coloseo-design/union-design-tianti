@@ -1,6 +1,6 @@
 {
 	"name": "@union-design/header",
-	"version": "1.0.6",
+	"version": "1.0.7",
 	"description": "",
 	"main": "lib/index.js",
 	"module": "es/index.js",
@@ -15,12 +15,12 @@
 	"author": "",
 	"license": "ISC",
 	"dependencies": {
-		"@union-design/config-provider": "^1.0.3",
-		"@union-design/style": "^1.0.3",
-		"@union-design/utils": "^1.0.3",
-		"@union-design/top-nav": "^1.0.6",
-		"@union-design/icon": "^1.0.3",
-		"@union-design/dropdown": "^1.0.3",
+		"@union-design/config-provider": "^1.0.4",
+		"@union-design/style": "^1.0.4",
+		"@union-design/utils": "^1.0.4",
+		"@union-design/top-nav": "^1.0.7",
+		"@union-design/icon": "^1.0.4",
+		"@union-design/dropdown": "^1.0.4",
 		"classnames": "^2.3.2",
 		"enquire.js": "^2.1.6",
 		"omit.js": "^2.0.2"
