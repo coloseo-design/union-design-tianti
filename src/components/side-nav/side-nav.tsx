@@ -447,10 +447,7 @@ export default class SideNav<Data> extends BaseComponent<
         }
       >
         {icon && <div className={this.gpc("icon")}>{icon}</div>}
-        <div className={this.gpc("text")}>
-          {level === 4 ? '- ' : null}
-          {nameExtractor(data)}
-        </div>
+        <div className={this.gpc("text")}>{nameExtractor(data)}</div>
         {level === 1 && hasChildren && (
           <div className={this.gpc("arrow")}>
             <Icon type="right2-line" style={{ fontSize: 14 }} />
