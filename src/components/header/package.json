@@ -18,7 +18,7 @@
 		"@union-design/config-provider": "^1.0.4",
 		"@union-design/style": "^1.0.4",
 		"@union-design/utils": "^1.0.4",
-		"@union-design/top-nav": "^1.0.7",
+		"@union-design/top-nav": "^1.0.8",
 		"@union-design/icon": "^1.0.4",
 		"@union-design/dropdown": "^1.0.4",
 		"classnames": "^2.3.2",
