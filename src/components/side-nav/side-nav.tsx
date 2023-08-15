@@ -436,7 +436,7 @@ export default class SideNav<Data> extends BaseComponent<
           {
             [this.gpc("active")]:
               this.childrenHasKey(children, selectedKey ?? "") ||
-              openKeys.includes(key) ||
+              // openKeys.includes(key) ||
               selectedKey === key,
           }
         )}
