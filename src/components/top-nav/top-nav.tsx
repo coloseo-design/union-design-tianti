@@ -158,7 +158,7 @@ export default class TopNav<Data> extends BaseComponent<
               [this.gpc("scroll")]: this.state.hasArrow,
             })}
           >
-            <Icon type="left2-line" style={{ fontSize: 14, marginRight: 4 }} />
+            <Icon type="left2-line" style={{ fontSize: 14 }} />
           </div>
           <div ref={this.bodyRef} className={this.gpc("body")}>
             {data.map(this.viewItem)}
@@ -169,7 +169,7 @@ export default class TopNav<Data> extends BaseComponent<
               [this.gpc("scroll")]: this.state.hasArrow,
             })}
           >
-            <Icon type="right2-line" style={{ fontSize: 14, marginLeft: 4 }} />
+            <Icon type="right2-line" style={{ fontSize: 14 }} />
           </div>
           {portalView}
         </div>
