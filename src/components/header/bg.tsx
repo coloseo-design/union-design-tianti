@@ -5,7 +5,7 @@ const HeaderBg = () => (
     <desc>
       Created with Pixso.
     </desc>
-    <rect id="导航底纹@2x" width="1448.289185" height="88.000000" fill="url(#pattern_300_203490)" />
+    <rect id="导航底纹@2x" width="100%" height="88.000000" fill="url(#pattern_300_203490)" />
     <defs>
       <pattern id="pattern_300_203490" patternContentUnits="objectBoundingBox" width="1.000000" height="1.000000">
         <use xlinkHref="#image300_20349_0" transform="matrix(0.000347,0,0,0.005715,0,-0.002878)" />
