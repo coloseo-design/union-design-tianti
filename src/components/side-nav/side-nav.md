@@ -11,10 +11,10 @@ subtitle: 侧部导航菜单
 | :------------------ | :----------------------------- | :-------------------------------------------- | :----- |
 | data                | 数据                           | any[]                                         | 必填   |
 | mode                | 模式 inline 内嵌 expand 展开   | "inline" \| "expand"                          | 必填   |
-| iconExtractor       | 一级图标                       | (data: any) => ReactNode \| null \| undefined | 必填   |
+| iconExtractor       | 一级图标                       | (data: any) => ReactNode \| null | 必填   |
 | keyExtractor        | 每条数据的唯一 key             | (data: any) => string                         | 必填   |
-| nameExtractor       | 每条数据用来做导航每项的 Name  | (data: any) => string                         | 必填   |
-| childrenExtractor   | 每条数据用来做导航每项子菜单的 | (data: any) => any[] \| null \| undefined     | 必填   |
+| nameExtractor       | 每条数据用来做导航每项的 Name  | (data: any) => string \|ReactNode                        | 必填   |
+| childrenExtractor   | 每条数据用来做导航每项子菜单的 | (data: any) => any[] \| null     | 必填   |
 | style               | 样式                           | CSSProperties                                 | -      |
 | className           | 样式                           | string                                        | -      |
 | openKeys            | 打开子菜单的 keys              | string[]                                      | -      |

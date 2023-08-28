@@ -11,12 +11,12 @@ subtitle: 头部组件
 | size | 组件大小 | 'md'\| 'lg' | 'md' |
 | title | 描述 | string|--|
 | search | 搜索属性 | searchPops\|false | false |
-| menus | 组件右侧列表 | (ReactNode \|MenuProps)[]| | - |
-| topMenus | 组件顶部列表 | (ReactNode \|MenuProps)[]| | - |
+| menus | 组件右侧列表 | (ReactNode \|MenuProps)[]| --|
+| topMenus | 组件顶部列表 | (ReactNode \|MenuProps)[]|-- |
 |bordered|组件下划线(如果传了navProps默认为false)|boolean|true|
 |showBg|是否展示背景图，可传图片的src|boolean\|string|false|
 |navProps|top-nav组件的api|查看top-nav的api|-|
-|onLogoClick|点击logo事件|(evt: React.MouseEvent) => void;｜-｜
+|onLogoClick|点击logo事件|(evt: React.MouseEvent) => void;|-|
 
 ### searchPops
 
