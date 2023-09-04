@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable no-console */
 /* eslint-disable react/jsx-curly-newline */
 /* eslint-disable implicit-arrow-linebreak */
@@ -112,7 +113,7 @@ const Demo = () => {
         },
         {
           id: "13",
-          name: "二级菜单3",
+          name: "二级菜单3二级菜单3",
         },
       ],
     },
@@ -189,7 +190,12 @@ const Demo = () => {
         openKeys={openKeys}
         selectedKey={selectedKey1}
         keyExtractor={(i) => `${i.id}`}
-        nameExtractor={(i) => (['12221', '12222', '12223'].includes(i.id) ? <Tooltip message={i.name} placement="bottom">{i.name}</Tooltip> : i.name)}
+        nameExtractor={(i, level) => {
+          if (((level === 1 || level === 2) && i.name.length > 8) || (level === 3 && i.name.length > 7) || (level === 4 && i.name.length > 6) || (level === 5 && i.name.length > 5)) {
+            return <Tooltip message={i.name} placement="bottom">{i.name}</Tooltip>;
+          }
+          return i.name;
+        }}
         childrenExtractor={(i) => i.list}
         iconExtractor={(i) => (iconMap as any)[i.id]}
         onChangeSelectedKey={(key, data) => {

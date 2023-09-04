@@ -28,7 +28,7 @@ export type SideNavProps<Data> = {
   /** 每条数据的唯一key */
   keyExtractor: (data: Data) => string;
   /** 每条数据用来做导航每项的Name */
-  nameExtractor: (data: Data) => string | ReactNode;
+  nameExtractor: (data: Data, level: number) => string | ReactNode;
   /** 每条数据用来做导航每项子菜单的 */
   childrenExtractor: (data: Data) => Data[] | null | undefined;
 } & BasePropsV2<{
@@ -366,7 +366,7 @@ export default class SideNav<Data> extends BaseComponent<
       >
         {icon && <div className={this.gpc("icon")}>{icon}</div>}
         <div className={this.gpc("text")}>
-          {nameExtractor(data)}
+          {nameExtractor(data, level)}
         </div>
         {hasChildren && (
           <div className={this.gpc("arrow")}>
@@ -447,7 +447,7 @@ export default class SideNav<Data> extends BaseComponent<
         }
       >
         {icon && <div className={this.gpc("icon")}>{icon}</div>}
-        <div className={this.gpc("text")}>{nameExtractor(data)}</div>
+        <div className={this.gpc("text")}>{nameExtractor(data, level)}</div>
         {level === 1 && hasChildren && (
           <div className={this.gpc("arrow")}>
             <Icon type="right2-line" style={{ fontSize: 14 }} />
