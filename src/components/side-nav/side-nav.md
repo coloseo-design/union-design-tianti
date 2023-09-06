@@ -24,3 +24,5 @@ subtitle: 侧部导航菜单
 | onChangeVisible     | 导航是否可见回调               | (visible: boolean) => void                    | -      |
 | onChangeSelectedKey | 导航当前选择发生变化回调       | (key: string, data: any) => void              | -      |
 | onChangeOpenKeys    | 导航当前打开子菜单变化回调     | (key: string[]) => void                       | -      |
+| close    | 是否收起菜单     | boolean                     | false     |
+| defaultClose    | 默认是否收起菜单     | boolean                     | false     |

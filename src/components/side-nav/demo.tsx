@@ -11,6 +11,19 @@ import Button from '../button';
 import Tooltip from "../tooltip/tooltip";
 // import "./styles/index";
 
+const list: any[] = [];
+Array.from({ length: 300 }).map((_, k) => k + 1).forEach((item) => {
+  list.push({
+    id: item,
+    name: "工作台工作",
+    list: [
+      {
+        id: `${item}-children`,
+        name: "工作台工-child",
+      },
+    ],
+  });
+});
 const Demo = () => {
   const data = [
     {
@@ -172,17 +185,32 @@ const Demo = () => {
   const [selectedKey, setSelectedKey] = useState<string>("121");
   const [selectedKey1, setSelectedKey1] = useState<string>('');
 
-  console.log('=selectedKey1', selectedKey1, openKeys);
+  const [close, setClose] = useState(true);
+
   return (
     <div style={{ margin: 30 }}>
-      <h4>基本 内嵌式导航</h4>
       <Button onClick={() => {
-        setSelectedKey1('32');
+        setClose(!close);
       }}
       >
-        改变selectKey
+        改变isClose
 
       </Button>
+      <h4>测试</h4>
+      <SideNav
+        close={close}
+        style={{ height: 400 }}
+        mode="inline"
+        data={[{ id: 'home', name: '首页' }, ...list]}
+        keyExtractor={(i) => `${i.id}`}
+        nameExtractor={(i) => i.name}
+        childrenExtractor={(i) => i.list}
+        iconExtractor={(i) => <Icon type="menu" style={{ fontSize: 18 }} />}
+        onChangeVisible={(v) => {
+          setClose(v);
+        }}
+      />
+      <h4>基本用法 inline</h4>
       <SideNav
         style={{ height: 400 }}
         mode="inline"
@@ -197,7 +225,7 @@ const Demo = () => {
           return i.name;
         }}
         childrenExtractor={(i) => i.list}
-        iconExtractor={(i) => (iconMap as any)[i.id]}
+        iconExtractor={(i) => <Icon type="menu" style={{ fontSize: 18 }} />}
         onChangeSelectedKey={(key, data) => {
           console.log('pppp', data);
           setSelectedKey1(key);
@@ -212,11 +240,7 @@ const Demo = () => {
           }
           console.log('=onChangeOpenKeys');
         }}
-        onChangeVisible={(visible) =>
-          console.log("sidenav inline onChangeVisible:", visible)
-        }
       />
-
       <div style={{ height: 20 }} />
       <h4>基本 展开式导航</h4>
       <SideNav

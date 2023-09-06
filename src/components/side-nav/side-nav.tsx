@@ -42,6 +42,10 @@ export type SideNavProps<Data> = {
   selectedKey: string;
   /** 初始选择的key */
   defaultSelectedKey: string;
+  // 默认是否收起菜单
+  defaultClose?: boolean;
+  // 是否收起菜单
+  close?: boolean;
   /** 导航是否可见回调 */
   onChangeVisible?: (visible: boolean) => void;
   /** 导航当前选择发生变化回调 */
@@ -82,10 +86,10 @@ export default class SideNav<Data> extends BaseComponent<
 
   constructor(props: SideNavProps<Data>) {
     super(props);
-    const { defaultOpenKeys, defaultSelectedKey, openKeys, selectedKey } =
+    const { defaultOpenKeys, defaultSelectedKey, openKeys, selectedKey, close, defaultClose } =
       props;
     this.state = {
-      isClose: false,
+      isClose: defaultClose ?? close ?? false,
       openKeys: openKeys ?? defaultOpenKeys ?? [],
       selectedKey: selectedKey ?? defaultSelectedKey ?? "",
       openPopup: false,
@@ -106,15 +110,18 @@ export default class SideNav<Data> extends BaseComponent<
 
   componentDidUpdate(
     _prevProps: Readonly<SideNavProps<Data>>,
-    prevState: Readonly<SideNavState>,
-    _snapshot?: any
+    // prevState: Readonly<SideNavState>,
+    // _snapshot?: any
   ): void {
-    const { openKeys, selectedKey } = this.props;
+    const { openKeys, selectedKey, close } = this.props;
     if (openKeys !== _prevProps.openKeys) {
       this.setState({ openKeys });
     }
     if (selectedKey !== _prevProps.selectedKey) {
       this.setState({ selectedKey });
+    }
+    if (close !== _prevProps.close) {
+      this.setState({ isClose: close });
     }
     // if (this.state.selectedKey !== prevState.selectedKey) {
     //   this.props.onChangeSelectedKey?.(
@@ -128,9 +135,9 @@ export default class SideNav<Data> extends BaseComponent<
     //   this.props.onChangeOpenKeys?.(this.state.openKeys ?? []);
     // }
 
-    if (this.state.isClose !== prevState.isClose) {
-      this.props.onChangeVisible?.(!(this.state.isClose ?? false));
-    }
+    // if (this.state.isClose !== prevState.isClose) {
+    //   this.props.onChangeVisible?.(!(this.state.isClose ?? false));
+    // }
   }
 
   private closePopup = () => {
@@ -182,12 +189,18 @@ export default class SideNav<Data> extends BaseComponent<
 
   private viewCloseAndOpen = () => {
     const { isClose = false } = this.state;
+    const { close, onChangeVisible } = this.props;
 
     return (
       <div
         className={this.gpc("cao")}
         dangerouslySetInnerHTML={{ __html: isClose ? openIcon : closeIcon }}
-        onClick={() => this.setState({ isClose: !isClose })}
+        onClick={() => {
+          if (typeof close === 'undefined') {
+            this.setState({ isClose: !isClose });
+          }
+          onChangeVisible?.(!isClose);
+        }}
       />
     );
   };
