@@ -20,7 +20,7 @@ argv.forEach((item) => {
 });
 
 const packagesAll = fs.readdirSync(`${process.cwd()}/src/components`).filter((i) => i !== '.DS_Store');
-const subPackage = packagesAll.filter((i) => !i.endsWith('.ts') && !i.endsWith('.less') && i !== 'col' && i !== 'row');
+const subPackage = packagesAll.filter((i) => !i.endsWith('.ts') && !i.endsWith('.less'));
 
 const packages = components ? [components] : subPackage;
 
