@@ -65,10 +65,6 @@ function dts(format, item) {
     .pipe(through2.obj((file, encoding, next) => {
       if (file.isBuffer()) {
         const content = file.contents.toString(encoding);
-        // let res = content;
-        // if (file.path.endsWith('styles/index.tsx') || file.path.endsWith('styles/index.ts')) {
-        //   res = content.replaceAll('styles/index', 'es/styles/index');
-        // }
         const transformed = `// @ts-nocheck \n ${content}`;
         file.contents = Buffer.from(content);
         next(null, file);

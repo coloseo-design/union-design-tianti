@@ -12,10 +12,9 @@
 	"typings": "lib/index.d.ts",
 	"scripts": {
 		"lint": "union-tool run lint source=src/components",
-		"compile": "yarn compile:every && yarn compile:one",
+		"compile": "node compile/run.js",
 		"compile:every": "node --max_old_space_size=8192 compile/run.js --components=every",
-		"compile:one": "node --max_old_space_size=8192 compile/run.js --components=one",
-		"compile:single": "node compile/run.js",
+		"compile:one": "node compile/run.js --components=one",
 		"dev": "node injector.js env=development && union-tool run dev",
 		"commit": "npx git-cz",
 		"init:commit": "npx commitizen init cz-conventional-changelog --yarn --dev --exact",

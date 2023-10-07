@@ -12,7 +12,7 @@ const { filterPackage, version } = require('./package');
 
 const rootPackage = getPackageJson('', true);
 
-// 在命令行后面加 --components=xxx 表示只修改这个包的version， 加 --version=xxx 表示修改版本好为xxx
+// 在命令行后面加 --components=xxx 表示只修改这个包的version， 加 --version=xxx 表示修改版本号为xxx
 
 const allP = [...filterPackage, 'row', 'col'];
 

@@ -68,7 +68,8 @@ yarn commit
 
 ## 编译代码
 执行 yarn compile 编译所有的分包和总包
-
+执行 yarn compile:one 编译总包
+执行 yarn compile:every 编译所有的分包
 执行 yarn compile --components=xxx 编辑xxx包
 
 
