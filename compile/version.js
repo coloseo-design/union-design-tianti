@@ -20,8 +20,8 @@ filterPackage.forEach((item, index) => {
   const last = vs.pop();
   const temVersion = [...vs, Number(last) + 1];
   const lastVersion = version || `${temVersion.join('.')}`;
-  writePackageJson(item, lastVersion);
-  editImportVersion(item, lastVersion);
+  writePackageJson(item, lastVersion); // 修改自己的version
+  editImportVersion(item, lastVersion); // 修改引入当前组件version
   if (rootPackage && rootPackage.dependencies[`@union-design/${item}`]) {
     Object.assign(rootPackage.dependencies, {
       [`@union-design/${item}`]: `^${lastVersion}`,
