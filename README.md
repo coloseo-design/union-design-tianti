@@ -67,18 +67,21 @@ yarn commit
 
 
 ## 编译代码
+```
 执行 yarn compile 编译所有的分包和总包
 执行 yarn compile:one 编译总包
 执行 yarn compile:every 编译所有的分包
-执行 yarn compile --components=xxx 编辑xxx包
+执行 yarn compile --components=xxx 编译xxx包
+```
 
 
 ## 修改版本
-
+```
 执行 yarn  dev:version 所有包的版本增加0.0.1
 执行yarn dev:version --version=xxx 所有的包的版本更改为xxx
 执行 yarn dev:version --components=yyy 'yyy'包的版本增加0.0.1
 执行 yarn dev:version --components=yyy --version=xxx 'yyy'包的版本变为xxx
+```
 
 
 
@@ -88,6 +91,7 @@ v1分支更改，合并到tianti分支
 
 
 ## 发布分包版本 
+```
 
 npm publish 发布总包
 
@@ -98,4 +102,6 @@ yarn publish  发布所有的分包
 npm  publish -workspace=src/components/xxx  发布某一个分包
 // 或者
 yarn publish --components=xxx 发布某一个分包
+
+```
 
