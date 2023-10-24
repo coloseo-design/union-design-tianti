@@ -46,6 +46,8 @@ export type SideNavProps<Data> = {
   defaultClose?: boolean;
   // 是否收起菜单
   close?: boolean;
+  // 是否一次性加载所有的dom
+  showAllDom?: boolean;
   /** 导航是否可见回调 */
   onChangeVisible?: (visible: boolean) => void;
   /** 导航当前选择发生变化回调 */
@@ -54,19 +56,19 @@ export type SideNavProps<Data> = {
   onChangeOpenKeys?: (key: string[]) => void;
 }>;
 
-function isContainEqualItems(arr1: any[], arr2: any[]) {
-  if (arr1.length !== arr2.length) {
-    return false;
-  }
-  const sortedArr1 = arr1.sort();
-  const sortedArr2 = arr2.sort();
-  for (let i = 0; i < sortedArr1.length; i += 1) {
-    if (sortedArr1[i] !== sortedArr2[i]) {
-      return false;
-    }
-  }
-  return true;
-}
+// function isContainEqualItems(arr1: any[], arr2: any[]) {
+//   if (arr1.length !== arr2.length) {
+//     return false;
+//   }
+//   const sortedArr1 = arr1.sort();
+//   const sortedArr2 = arr2.sort();
+//   for (let i = 0; i < sortedArr1.length; i += 1) {
+//     if (sortedArr1[i] !== sortedArr2[i]) {
+//       return false;
+//     }
+//   }
+//   return true;
+// }
 
 export type SideNavState = BaseStateV2<{
   isClose: boolean;
@@ -272,7 +274,7 @@ export default class SideNav<Data> extends BaseComponent<
   };
 
   private viewInline = (data: any[], level: number) => {
-    const { childrenExtractor, keyExtractor } = this.props;
+    const { childrenExtractor, keyExtractor, showAllDom = true } = this.props;
     const openKeys = this.getBindValue("openKeys") ?? [];
     const res: ReactNode[] = [];
     for (const item of data) {
@@ -280,7 +282,8 @@ export default class SideNav<Data> extends BaseComponent<
 
       res.push(this.viewItemInline(item, level));
       const children = childrenExtractor(item) ?? [];
-      if (children.length > 0) {
+      const flag = !showAllDom ? openKeys.includes(key) : true;
+      if (children.length > 0 && flag) {
         res.push(
           <div
             key={`${key}-children`}

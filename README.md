@@ -21,7 +21,7 @@ yarn add union-design
     tsconfig.json  * 官网代码ts配置文件
 ```
 
-## 操作步骤 
+<!-- ## 操作步骤 
 ```
 编译打包依赖union-tool工具，具体命令参见package.json中的scripts字段
 
@@ -36,7 +36,7 @@ yarn add union-design
     npm publish
 4,  发布官网
     yarn build
-```
+``` -->
 
 ## ts/tsx规范
 - 规范继承自'plugin:react/recommended', 'airbnb'已经在项目里面通过lint进行检测

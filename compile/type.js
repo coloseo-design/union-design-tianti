@@ -13,16 +13,12 @@ const srcs = (src) => {
   const list = [
     path.join(src, '/**/*.tsx'),
     path.join(src, '/**/*.ts'),
+    `!${path.join(src, 'es/**')}`,
+    `!${path.join(src, 'lib/**')}`,
+    `!${path.join(src, 'src/**')}`,
+    `!${path.join(src, 'node_modules/**')}`,
     `!${path.join(src, '/demo.tsx')}`,
     `!${path.join(src, '/demo.ts')}`,
-    `!${path.join(src, 'lib/**/*.tsx')}`,
-    `!${path.join(src, 'lib/**/*.ts')}`,
-    `!${path.join(src, 'es/**/*.tsx')}`,
-    `!${path.join(src, 'es/**/*.ts')}`,
-    `!${path.join(src, 'src/**/*.tsx')}`,
-    `!${path.join(src, 'src/**/*.ts')}`,
-    `!${path.join(src, 'node_modules/**/*.ts')}`,
-    `!${path.join(src, 'node_modules/**/*.tsx')}`,
   ];
   return list;
 };
@@ -32,14 +28,10 @@ const allSrcs = (src) => ([
   path.join(src, '/**/*.ts'),
   `!${path.join(src, '**/*/demo.tsx')}`,
   `!${path.join(src, '**/*/demo.ts')}`,
-  `!${path.join(src, '/**/lib', '/**/*.tsx')}`,
-  `!${path.join(`${src}/**/lib`, '/**/*.ts')}`,
-  `!${path.join(`${src}/**/es`, '/**/*.tsx')}`,
-  `!${path.join(`${src}/**/es`, '/**/*.ts')}`,
-  `!${path.join(`${src}/**/src`, '/**/*.tsx')}`,
-  `!${path.join(`${src}/**/src`, '/**/*.ts')}`,
-  `!${path.join(`${src}/**/node_modules`, '/**/*.ts')}`,
-  `!${path.join(`${src}/**/node_modules`, '/**/*.tsx')}`,
+  `!${path.join(`${src}/**/es/**`)}`,
+  `!${path.join(`${src}/**/lib/**`)}`,
+  `!${path.join(`${src}/**/src/**`)}`,
+  `!${path.join(`${src}/**/node_modules/**`)}`,
 ]);
 
 const tsCompileConfig = (rootDir) => ({

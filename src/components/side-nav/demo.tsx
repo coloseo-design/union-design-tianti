@@ -198,7 +198,8 @@ const Demo = () => {
       </Button>
       <h4>测试</h4>
       <SideNav
-        close={close}
+        // close={close}
+        showAllDom={false}
         style={{ height: 400 }}
         mode="inline"
         data={[{ id: 'home', name: '首页' }, ...list]}

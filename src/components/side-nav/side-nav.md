@@ -26,3 +26,4 @@ subtitle: 侧部导航菜单
 | onChangeOpenKeys    | 导航当前打开子菜单变化回调     | (key: string[]) => void                       | -      |
 | close    | 是否收起菜单     | boolean                     | false     |
 | defaultClose    | 默认是否收起菜单     | boolean                     | false     |
+| showAllDom    | 是否一次性加载所有的dom     | boolean                     | true     |
