@@ -24,7 +24,6 @@
 		"predev": "yarn demo",
 		"demo": "npx gulp md"
 	},
-	"private": true,
 	"workspaces": [
 		"src/components/*"
 	],
@@ -76,7 +75,7 @@
 		"@union-design/result": "^1.0.4",
 		"@union-design/row": "^1.0.5",
 		"@union-design/select": "^1.0.4",
-		"@union-design/side-nav": "^1.0.13",
+		"@union-design/side-nav": "^1.0.14",
 		"@union-design/skeleton": "^1.0.4",
 		"@union-design/slider": "^1.0.4",
 		"@union-design/spin": "^1.0.4",
