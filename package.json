@@ -15,7 +15,7 @@
 		"compile": "node compile/run.js",
 		"compile:every": "node --max_old_space_size=8192 compile/run.js --components=every",
 		"compile:one": "node compile/run.js --components=one",
-		"publish": "node compile/publish.js",
+		"publish_sin": "node compile/publish.js",
 		"dev": "node injector.js env=development && union-tool run dev",
 		"commit": "npx git-cz",
 		"init:commit": "npx commitizen init cz-conventional-changelog --yarn --dev --exact",
