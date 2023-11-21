@@ -22,6 +22,13 @@ export interface SearchProps {
   select?: boolean | SelectProps;
   style?: CSSProperties;
   type?: 'primary' | 'default',
+  advanced?: boolean | AdvancedSearchProps; // 高级搜索
+}
+
+export interface AdvancedSearchProps {
+  title: ReactNode; // 高级搜索按钮
+  onClick: (evt: React.MouseEvent<HTMLDivElement, MouseEvent>) => void; // 高级搜索按钮点击事件
+  tip?: ReactNode;
 }
 
 // select

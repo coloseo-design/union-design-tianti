@@ -12,7 +12,7 @@ const Header: React.FC<HeaderProps> = (props) => {
   const {
     title,
     menus = [],
-    search,
+    search = false,
     showBg,
     size = 'md',
     topMenus = [],

@@ -1,4 +1,5 @@
 {
+  "private": true,
 	"name": "union-design",
 	"version": "1.0.40",
 	"license": "MIT",
@@ -73,7 +74,7 @@
 		"@union-design/radio": "^1.0.4",
 		"@union-design/rate": "^1.0.4",
 		"@union-design/result": "^1.0.4",
-		"@union-design/row": "^1.0.5",
+		"@union-design/row": "^1.0.4",
 		"@union-design/select": "^1.0.4",
 		"@union-design/side-nav": "^1.0.14",
 		"@union-design/skeleton": "^1.0.4",

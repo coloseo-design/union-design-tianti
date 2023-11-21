@@ -2,6 +2,7 @@ import React from 'react';
 import Dropdown from '../dropdown';
 import Icon from '../icon';
 import Header from './header';
+import { AdvancedSearchProps } from './type';
 // import './styles/index';
 
 const Demo = () => {
@@ -438,6 +439,20 @@ const Demo = () => {
             options,
             onChange: selectChange,
           },
+          advanced: {
+            title: '高级搜索',
+            tip: (<div>
+              <span>推荐商品:</span>
+              <a href="http://www.baidu.com" style={{ marginLeft: 4, color: '#595959' }}>某某某</a>
+              <a href="http://www.baidu.com" style={{ marginLeft: 4, color: '#595959' }}>某某某</a>
+              <a href="http://www.baidu.com" style={{ marginLeft: 4, color: '#595959' }}>某某某</a>
+              <a href="http://www.baidu.com" style={{ marginLeft: 4, color: '#595959' }}>某某某</a>
+              <a href="http://www.baidu.com" style={{ marginLeft: 4, color: '#595959' }}>某某某</a>
+              <a href="http://www.baidu.com" style={{ marginLeft: 4, color: '#595959' }}>某某某</a>
+              <a href="http://www.baidu.com" style={{ marginLeft: 4, color: '#595959' }}>某某某</a>
+              <a href="http://www.baidu.com" style={{ marginLeft: 4, color: '#595959' }}>某某某</a>
+            </div>),
+          } as AdvancedSearchProps,
         }}
         topMenus={topMenus}
         size="lg"
