@@ -19,12 +19,11 @@ argv.forEach((item) => {
   }
 });
 
-const packagesAll = fs.readdirSync(`${process.cwd()}/src/components`).filter((i) => i !== '.DS_Store');
-const subPackage = packagesAll.filter((i) => !i.endsWith('.ts') && !i.endsWith('.less'));
+const packagesAll = fs.readdirSync(`${process.cwd()}/src/components`).filter((i) => i !== '.DS_Store' && !i.endsWith('.ts') && !i.endsWith('.less'));
 
-const packages = components ? [components] : subPackage;
+const packages = components ? [components] : packagesAll;
 
-exports.packages = ['style', ...packages];
+exports.packages = packages;
 exports.filterPackage = packages;
 exports.packagesAll = packagesAll;
 exports.version = version;

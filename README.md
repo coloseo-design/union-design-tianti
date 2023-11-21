@@ -95,13 +95,16 @@ v1分支更改，合并到tianti分支
 
 npm publish 发布总包
 
-npm  publish -workspace=src/components  发布所有的分包
-// 或者
 yarn publish_sin  发布所有的分包
-
-npm  publish -workspace=src/components/xxx  发布某一个分包
 // 或者
+npm  publish -workspace=src/components  发布所有的分包
+
+
 yarn publish_sin --components=xxx 发布某一个分包
+// 或者
+npm  publish -workspace=src/components/xxx  发布某一个分包
+
+
 
 ```
 
