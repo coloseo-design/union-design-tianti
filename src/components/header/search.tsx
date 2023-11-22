@@ -51,7 +51,7 @@ const Search: React.FC<{ prefix?: string } & SearchProps> = (props) => {
           </div>
         </div>
         {
-          advanced && (<div className={`${advancedPrefix}-btn`}>{(advanced as AdvancedSearchProps).title}</div>)
+          advanced && (<div className={`${advancedPrefix}-btn`} onClick={(advanced as AdvancedSearchProps).onClick}>{(advanced as AdvancedSearchProps).title}</div>)
         }
       </div>
       {

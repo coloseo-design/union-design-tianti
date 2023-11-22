@@ -441,17 +441,22 @@ const Demo = () => {
           },
           advanced: {
             title: '高级搜索',
-            tip: (<div>
-              <span>推荐商品:</span>
-              <a href="http://www.baidu.com" style={{ marginLeft: 4, color: '#595959' }}>某某某</a>
-              <a href="http://www.baidu.com" style={{ marginLeft: 4, color: '#595959' }}>某某某</a>
-              <a href="http://www.baidu.com" style={{ marginLeft: 4, color: '#595959' }}>某某某</a>
-              <a href="http://www.baidu.com" style={{ marginLeft: 4, color: '#595959' }}>某某某</a>
-              <a href="http://www.baidu.com" style={{ marginLeft: 4, color: '#595959' }}>某某某</a>
-              <a href="http://www.baidu.com" style={{ marginLeft: 4, color: '#595959' }}>某某某</a>
-              <a href="http://www.baidu.com" style={{ marginLeft: 4, color: '#595959' }}>某某某</a>
-              <a href="http://www.baidu.com" style={{ marginLeft: 4, color: '#595959' }}>某某某</a>
-            </div>),
+            onClick() {
+              console.log('高级搜索点击');
+            },
+            tip: (
+              <div>
+                <span>推荐商品:</span>
+                <a href="http://www.baidu.com" style={{ marginLeft: 4, color: '#595959' }}>某某某</a>
+                <a href="http://www.baidu.com" style={{ marginLeft: 4, color: '#595959' }}>某某某</a>
+                <a href="http://www.baidu.com" style={{ marginLeft: 4, color: '#595959' }}>某某某</a>
+                <a href="http://www.baidu.com" style={{ marginLeft: 4, color: '#595959' }}>某某某</a>
+                <a href="http://www.baidu.com" style={{ marginLeft: 4, color: '#595959' }}>某某某</a>
+                <a href="http://www.baidu.com" style={{ marginLeft: 4, color: '#595959' }}>某某某</a>
+                <a href="http://www.baidu.com" style={{ marginLeft: 4, color: '#595959' }}>某某某</a>
+                <a href="http://www.baidu.com" style={{ marginLeft: 4, color: '#595959' }}>某某某</a>
+              </div>
+            ),
           } as AdvancedSearchProps,
         }}
         topMenus={topMenus}
