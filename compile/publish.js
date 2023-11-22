@@ -46,7 +46,14 @@ filterPackage.forEach((item) => {
   const { version } = packageJson;
   const packageName = `@union-design%2F${item}`;
   getVersion(packageName, version).then(() => {
-    const pd = spawn('npm', ['publish', `-workspace=src/components/${item}`]);
+    const lint = ['publish', `-workspace=src/components/${item}`];
+    if (version.indexOf('beta') > -1) {
+      lint.splice(1, 0, '--tag beta');
+    }
+    if (version.indexOf('alpha') > -1) {
+      lint.splice(1, 0, '--tag alpha');
+    }
+    const pd = spawn('npm', lint);
     pd.stdout.on('data', (data) => {
       console.log(data.toString());
     });

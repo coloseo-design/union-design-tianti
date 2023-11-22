@@ -1,6 +1,6 @@
 {
 	"name": "@union-design/header",
-	"version": "1.0.10.alpha.1",
+	"version": "1.0.10-alpha.1",
 	"description": "",
 	"main": "lib/index.js",
 	"module": "es/index.js",
