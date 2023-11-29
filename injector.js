@@ -42,8 +42,8 @@ Object.assign(packageConfig, {
   },
 });
 // fs.writeFileSync('package.json', JSON.stringify(packageConfig));
-try {
-  fs.unlinkSync('yarn.lock');
-  fs.unlinkSync('package-lock.json');
-} catch (e) {
-}
+// try {
+//   // fs.unlinkSync('yarn.lock');
+//   // fs.unlinkSync('package-lock.json');
+// } catch (e) {
+// }
