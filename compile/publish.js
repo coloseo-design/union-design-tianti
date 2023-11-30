@@ -8,8 +8,7 @@ const { filterPackage } = require('./package');
 const { getPackageJson } = require('./get-version');
 
 const npm = fs.readFileSync('.npmrc', 'utf-8');
-
-const registry = npm.indexOf('https://') ? 'https://npm.coloseo.online/' : 'http://ccp.tianti.tg.unicom.local/artifactory/api/npm/sjxt-npm-virtual/';
+const registry = npm.indexOf('https://') > -1 ? 'https://npm.coloseo.online/' : 'http://ccp.tianti.tg.unicom.local/artifactory/api/npm/sjxt-npm-virtual/';
 
 const getVersion = (packageName, version) => {
   const url = `${registry}-/package/${packageName}/dist-tags`;
