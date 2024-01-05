@@ -34,6 +34,8 @@ interface SkeletonProps extends BaseProps {
   paragraph?: boolean | SkeletonParagraphProps;
 
   getPrefixCls?: (cls: string, customizePrefix?: string) => string;
+
+  children?: any;
 }
 
 @withGlobalConfig

@@ -10,6 +10,7 @@ export interface BaseBadgeProps{
   className?: string;
   prefixCls?: string;
   style?: CSSProperties;
+  children?: any;
 }
 
 class Badge extends React.Component<BaseBadgeProps> {

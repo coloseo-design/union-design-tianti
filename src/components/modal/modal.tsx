@@ -43,6 +43,8 @@ export interface ModalProps {
   icon?: string| React.ReactNode,
   okCancel?: boolean, // modal提示框不需要展示 OK按钮
   destroyOnClose?: boolean, // 关闭提示框是否销毁子元素
+
+  children?: any;
 }
 export interface ModalState {
   visible?: boolean;
