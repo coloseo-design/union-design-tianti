@@ -6,6 +6,13 @@
 
 @sidenav-bg: #fff;
 
+@-moz-document url-prefix(){
+  .@{sidenav} > .@{sidenav}-body {
+    scrollbar-width: thin;
+    scrollbar-color: rgb(206, 206, 206) #fff;
+  }
+}
+
 .@{sidenav} {
   position: relative;
   background: @sidenav-bg;
@@ -40,8 +47,6 @@
     padding: 10px 0;
     overflow-y: auto;
     overflow-x: hidden;
-    scrollbar-width: thin;
-    scrollbar-color: rgb(206, 206, 206) #fff;
     &::-webkit-scrollbar {
       width: 9px;
     }
